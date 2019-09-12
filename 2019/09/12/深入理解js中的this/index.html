@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="深入理解this学过javascript的同学想必都听过对this指向的描述，谁调用就指向谁，但究竟是怎么回事，欢迎往下看。 先来看看以下例子： 12345678var obj = &amp;#123;    bar:1,    foo:function()&amp;#123;console.log(this.bar);&amp;#125;&amp;#125;;var foo = obj.foo;var bar = 2;cons">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解js中的this">
+<meta property="og:url" content="http://yoursite.com/2019/09/12/深入理解js中的this/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="深入理解this学过javascript的同学想必都听过对this指向的描述，谁调用就指向谁，但究竟是怎么回事，欢迎往下看。 先来看看以下例子： 12345678var obj = &amp;#123;    bar:1,    foo:function()&amp;#123;console.log(this.bar);&amp;#125;&amp;#125;;var foo = obj.foo;var bar = 2;cons">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201806/bg2018061803.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201806/bg2018061805.png">
+<meta property="og:updated_time" content="2019-09-12T12:41:34.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解js中的this">
+<meta name="twitter:description" content="深入理解this学过javascript的同学想必都听过对this指向的描述，谁调用就指向谁，但究竟是怎么回事，欢迎往下看。 先来看看以下例子： 12345678var obj = &amp;#123;    bar:1,    foo:function()&amp;#123;console.log(this.bar);&amp;#125;&amp;#125;;var foo = obj.foo;var bar = 2;cons">
+<meta name="twitter:image" content="https://www.wangbase.com/blogimg/asset/201806/bg2018061803.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>深入理解js中的this | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-深入理解js中的this" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/12/深入理解js中的this/" class="article-date">
+      <time datetime="2019-09-12T12:41:06.000Z" itemprop="datePublished">2019-09-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解js中的this
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="深入理解this"><a href="#深入理解this" class="headerlink" title="深入理解this"></a>深入理解this</h2><p>学过javascript的同学想必都听过对this指向的描述，<strong>谁调用就指向谁</strong>，但究竟是怎么回事，欢迎往下看。</p>
+<p>先来看看以下例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    bar:1,</span><br><span class="line">    foo:function()&#123;console.log(this.bar);&#125;</span><br><span class="line">&#125;;</span><br><span class="line">var foo = obj.foo;</span><br><span class="line">var bar = 2;</span><br><span class="line">console.log(obj.foo()); //1</span><br><span class="line">console.log(foo()); //2</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<p><strong>obj.foo（）</strong>摆明了是obj调用其属性对象foo，所以里面的this指向的就是obj这个对象。</p>
+<p>对于<strong>foo（）</strong>来说，等价于window.foo()。我们习惯性将全局变量window的属性直接以属性名展现。</p>
+<p>JavaScript语言之所以有this的设计，跟内存里面的数据结果有关。</p>
+<h4 id="内存的数据结构"><a href="#内存的数据结构" class="headerlink" title="内存的数据结构"></a>内存的数据结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;foo : 5&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码将一个对象赋值给变量<code>obj</code>。js引擎会先在内存里面生成一个对象<strong>{foo：5}</strong>，然后把这个对象的内存地址赋值给变量<code>obj</code>。</p>
+<p>也就是说，变量<code>obj</code>是一个地址（reference）。后面如果要读取<code>obj.foo</code>，引擎先从<code>obj</code>拿到内存地址，然后再从该地址读出原始的对象，返回它的<code>foo</code>属性。</p>
+<p>原始的对象以字典结构保存，每一个属性名都对应一个属性描述对象。举例来说，上面例子的<code>foo</code>属性，实际上是以下面的形式保存的。</p>
+<p><img src="https://www.wangbase.com/blogimg/asset/201806/bg2018061803.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  foo: &#123;</span><br><span class="line">    [[value]]: 5</span><br><span class="line">    [[writable]]: true</span><br><span class="line">    [[enumerable]]: true</span><br><span class="line">    [[configurable]]: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<code>foo</code>属性的值保存在属性描述对象<code>value</code>属性里。</p>
+<h6 id="若属性的值是一个函数呢"><a href="#若属性的值是一个函数呢" class="headerlink" title="若属性的值是一个函数呢"></a>若属性的值是一个函数呢</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; foo: function () &#123;&#125; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这时，引擎会将函数单独保存在内存中，然后再将函数的地址赋值给<code>foo</code>属性的<code>value</code>属性。</p>
+<p>由于函数是一个单独的值，所以它可以在不同的环境（上下文）执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var f = function () &#123;console.log(this);&#125;;</span><br><span class="line">var obj = &#123; f: f &#125;;</span><br><span class="line"></span><br><span class="line">// 单独执行，相当于Window.f()</span><br><span class="line">f()		//Window</span><br><span class="line"></span><br><span class="line">// obj 环境执行</span><br><span class="line">obj.f()		//obj</span><br></pre></td></tr></table></figure>
+
+<p>js 允许在函数体内部，引用当前环境的其他变量。</p>
+<p>而<code>this</code>的设计目的就是在函数体内部，指代函数当前的运行环境。</p>
+<p><img src="https://www.wangbase.com/blogimg/asset/201806/bg2018061805.png" alt="img"></p>
+<h4 id="this的实例讲解"><a href="#this的实例讲解" class="headerlink" title="this的实例讲解"></a>this的实例讲解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;</span><br><span class="line">    a:10,</span><br><span class="line">    b:&#123;</span><br><span class="line">        a:12,</span><br><span class="line">        fn:function()&#123;</span><br><span class="line">            console.log(this.a);  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    fn:function()&#123;</span><br><span class="line">        console.log(this.a);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn(); 	//12</span><br><span class="line">o.fn(); 	//10</span><br></pre></td></tr></table></figure>
+
+<p>o.b.fn（）因为函数fn（）是被b调用，所以this指向b，this.a的值自然是b.a</p>
+<p>由此我们可以总结出几种情况：</p>
+<p>　情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。</p>
+<p>　情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<p>　情况3：如果一个函数中有this，<strong>这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;</span><br><span class="line">    a:10,</span><br><span class="line">    b:&#123;</span><br><span class="line">        // a:12,</span><br><span class="line">        fn:function()&#123;</span><br><span class="line">            console.log(this.a); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn(); 	//undefined</span><br></pre></td></tr></table></figure>
+
+<p>尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。</p>
+<p><strong>还有一种比较特殊的情况</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;</span><br><span class="line">    a:10,</span><br><span class="line">    b:&#123;</span><br><span class="line">        a:12,</span><br><span class="line">        fn:function()&#123;</span><br><span class="line">            console.log(this.a); //undefined</span><br><span class="line">            console.log(this); //window</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var j = o.b.fn;</span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
+
+<p>这里this指向的是window，是不是有些蒙了？其实是因为你没有理解一句话，这句话同样至关重要。</p>
+<p>this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，例子中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window。</p>
+<p><strong>构造函数版this</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function Fn()&#123;</span><br><span class="line">    this.user = &quot;nikita&quot;;</span><br><span class="line">&#125;</span><br><span class="line">var a = new Fn();</span><br><span class="line">console.log(a.user); //nikita</span><br></pre></td></tr></table></figure>
+
+<p>　　这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象a中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+<h6 id="当this遇上return时"><a href="#当this遇上return时" class="headerlink" title="当this遇上return时"></a>当this遇上return时</h6><p>先对比一下几个例子：</p>
+<p>返回值是一个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fn()  </span><br><span class="line">&#123;  </span><br><span class="line">    this.user = &apos;nikita&apos;;  </span><br><span class="line">    return &#123;&#125;;  </span><br><span class="line">&#125;</span><br><span class="line">var a = new fn;  </span><br><span class="line">console.log(a.user); //undefined</span><br></pre></td></tr></table></figure>
+
+<p>返回一个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fn()  </span><br><span class="line">&#123;  </span><br><span class="line">    this.user = &apos;nikita&apos;;  </span><br><span class="line">    return function()&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">var a = new fn;  </span><br><span class="line">console.log(a.user); //undefined</span><br></pre></td></tr></table></figure>
+
+<p>返回普通值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function fn()  </span><br><span class="line">&#123;  </span><br><span class="line">    this.user = &apos;nikita&apos;;  </span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line">var a = new fn;  </span><br><span class="line">console.log(a.user); //nikita</span><br><span class="line"></span><br><span class="line">function fn()  </span><br><span class="line">&#123;  </span><br><span class="line">    this.user = &apos;nikita&apos;;  </span><br><span class="line">    return undefined;</span><br><span class="line">&#125;</span><br><span class="line">var a = new fn;  </span><br><span class="line">console.log(a.user); //nikita</span><br></pre></td></tr></table></figure>
+
+<p>由此可知：</p>
+<p>　<strong>如果返回值是一个对象/函数，那么this指向的就是那个返回的对象/函数，如果返回值不是一个对象/函数那么this还是指向函数的实例。</strong></p>
+<p>不过有一点需要注意就是：</p>
+<p><strong>虽然null也是对象，但this还是指向那个函数的实例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fn()  </span><br><span class="line">&#123;  </span><br><span class="line">    this.user = &apos;nikita&apos;;  </span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line">var a = new fn;  </span><br><span class="line">console.log(a.user); //nikita</span><br></pre></td></tr></table></figure>
+
+<p><strong>知识点补充：</strong></p>
+<p>　　1.在严格版中的默认的this不再是window，而是undefined。</p>
+<p>　　2.new操作符会改变函数this的指向问题，虽然我们上面讲解过了，但是并没有深入的讨论这个问题，网上也很少说，所以在这里有必要说一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var num = 1;</span><br><span class="line">function fn()&#123;</span><br><span class="line">    this.num = 2;</span><br><span class="line">&#125;</span><br><span class="line">var a = new fn();</span><br><span class="line">console.log(a.num); //2</span><br></pre></td></tr></table></figure>
+
+<p>　为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代。</p>
+<p>我们来看看new时发生的4个阶段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Func = function()&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><h6 id="创建一个空对象"><a href="#创建一个空对象" class="headerlink" title="创建一个空对象"></a>创建一个空对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = new Func();</span><br></pre></td></tr></table></figure>
+</li>
+<li><h6 id="设置原型链"><a href="#设置原型链" class="headerlink" title="设置原型链"></a>设置原型链</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj._proto_ = Func.prototype;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h6 id="让Func中的this指向obj，并执行Func的函数体。"><a href="#让Func中的this指向obj，并执行Func的函数体。" class="headerlink" title="让Func中的this指向obj，并执行Func的函数体。"></a>让Func中的this指向obj，并执行Func的函数体。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var res = Func.call(obj);</span><br></pre></td></tr></table></figure>
+</li>
+<li><h6 id="判断Func的返回值类型"><a href="#判断Func的返回值类型" class="headerlink" title="判断Func的返回值类型"></a>判断Func的返回值类型</h6><p>如果是值类型，返回obj。如果是引用类型，就返回这个引用类型的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (typeof(result) == &quot;object&quot;)&#123;</span><br><span class="line">  func=result;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    func=obj;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2019-09-12, 20:41:06</p>
+        <p><span>最后更新:</span>2019-09-12, 20:41:34</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/12/深入理解js中的this/" title="深入理解js中的this">http://yoursite.com/2019/09/12/深入理解js中的this/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/12/深入理解js中的this/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/12/相对全面的数组去重/">
+                    相对全面的数组去重
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解this"><span class="toc-number">1.</span> <span class="toc-text">深入理解this</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内存的数据结构"><span class="toc-number">1.0.1.</span> <span class="toc-text">内存的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#若属性的值是一个函数呢"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">若属性的值是一个函数呢</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this的实例讲解"><span class="toc-number">1.0.2.</span> <span class="toc-text">this的实例讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#当this遇上return时"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">当this遇上return时</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#创建一个空对象"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">创建一个空对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置原型链"><span class="toc-number">1.0.2.0.3.</span> <span class="toc-text">设置原型链</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#让Func中的this指向obj，并执行Func的函数体。"><span class="toc-number">1.0.2.0.4.</span> <span class="toc-text">让Func中的this指向obj，并执行Func的函数体。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#判断Func的返回值类型"><span class="toc-number">1.0.2.0.5.</span> <span class="toc-text">判断Func的返回值类型</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"深入理解js中的this　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/09/12/相对全面的数组去重/" title="下一篇: 相对全面的数组去重">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
