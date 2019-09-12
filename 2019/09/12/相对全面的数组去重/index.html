@@ -14,21 +14,19 @@
 <meta name="author" content="陈楚吟">
 
 
-    
-    
 
-
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="数组去重的方法 遍历数组法最简单的去重方法，实现思路：新建一新数组，遍历传入数组，值不在新数组就加入该新数组；注意：判断值是否在数组的方法“indexOf”是ECMAScript5方法中，IE8以下不支持需多写一些兼容低版本浏览器代码，源码如下：       123456789101112131415161718192021222324252627282930//最简单数组去重法function">
 <meta name="keywords" content="write myBlog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nikita">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相对全面的数组去重">
+<meta property="og:url" content="http://yoursite.com/2019/09/12/相对全面的数组去重/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="数组去重的方法 遍历数组法最简单的去重方法，实现思路：新建一新数组，遍历传入数组，值不在新数组就加入该新数组；注意：判断值是否在数组的方法“indexOf”是ECMAScript5方法中，IE8以下不支持需多写一些兼容低版本浏览器代码，源码如下：       123456789101112131415161718192021222324252627282930//最简单数组去重法function">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-12T09:26:12.710Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nikita">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:title" content="相对全面的数组去重">
+<meta name="twitter:description" content="数组去重的方法 遍历数组法最简单的去重方法，实现思路：新建一新数组，遍历传入数组，值不在新数组就加入该新数组；注意：判断值是否在数组的方法“indexOf”是ECMAScript5方法中，IE8以下不支持需多写一些兼容低版本浏览器代码，源码如下：       123456789101112131415161718192021222324252627282930//最简单数组去重法function">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -56,13 +54,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Nikita</title>
+<title>相对全面的数组去重 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -71,8 +67,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -266,9 +262,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-相对全面的数组去重" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-相对全面的数组去重" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2019/09/12/相对全面的数组去重/" class="article-date">
@@ -286,12 +280,19 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a>
+    <h1 class="article-title" itemprop="name">
+      相对全面的数组去重
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -352,269 +353,85 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-css盒模型集锦" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/11/css盒模型集锦/" class="article-date">
-      <time datetime="2019-09-11T10:48:31.000Z" itemprop="datePublished">2019-09-11</time>
-</a>
-
-
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2019-09-12, 17:25:13</p>
+        <p><span>最后更新:</span>2019-09-12, 17:26:12</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/12/相对全面的数组去重/" title="相对全面的数组去重">http://yoursite.com/2019/09/12/相对全面的数组去重/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/12/相对全面的数组去重/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+
+
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>第一次写博文，先来说说css中的盒子模型吧！</p>
-<h2 id="css盒子模型"><a href="#css盒子模型" class="headerlink" title="css盒子模型"></a>css盒子模型</h2><p>所有HTML元素可以看作盒子，在CSS中，”box model”这一术语是用来设计和布局时使用。</p>
-<p>CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。</p>
-<p>盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。</p>
-<p><img src="https://7n.w3cschool.cn/statics/images/course/box-model.gif" alt="CSS box-model"></p>
-<p>在页面设计中有4个常见属性：content（内容）、padding（内边距）、border（边框）和margin（外边距），我们把这4部分转化成日常生活的盒子来理解，所以称为盒子模型。</p>
-<p>content（内容）就是盒子里装的东西，padding（内边距）就是怕盒子里装的东西损坏而添加的泡沫或者其他抗震防挤压的辅料，border（边框）就是盒子本身了，margin（外边距）则说明盒子摆放的时候不能全部堆在一起，要留一定空隙。</p>
-<p>在网页设计中，content常指文字、图片等元素，但是也可以是小盒子（DIV嵌套），padding只有宽度属性，可以理解为真实盒子中抗震辅料的厚度，而border有大小和颜色之分，又可以理解为真实盒子的厚度以及这个盒子的颜色或材料，margin就是该盒子与其他东西要保留多大距离。</p>
-<hr>
-<p>了解完盒子模型就不得不说元素的宽度和高度了。</p>
-<h4 id="W3C标准盒模型-box-sizing：content-box；"><a href="#W3C标准盒模型-box-sizing：content-box；" class="headerlink" title="W3C标准盒模型(box-sizing：content-box；)"></a>W3C标准盒模型(box-sizing：content-box；)</h4><p><strong>一般元素默认使用标准盒模型</strong>，<strong>元素实际宽</strong> = content内容宽（设置的width值）+ padding-left（左内边距）+ padding-right（右内边距）+border-left（左边宽）+border-right（右边宽）+margin-left（左边距）+margin-right（右边距）；</p>
-<p><strong>元素实际宽</strong> = content内容高（设置的height值）+ padding-top（上内边距）+ padding-bottom（下内边距）+border-top（上边宽）+border-bottom（下边宽）+margin-top（上边距）+margin-bottom（下边距）；</p>
-<p><strong>注意</strong>：我们通过javascript代码获取某一个元素的大小时，其实指的是content的大小，即我们设置width的值。</p>
-<p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line"></span><br><span class="line">width: 200px;</span><br><span class="line"></span><br><span class="line">height: 180px;</span><br><span class="line"></span><br><span class="line">padding: 10px;</span><br><span class="line"></span><br><span class="line">border: 1px solid black;</span><br><span class="line"></span><br><span class="line">margin: 5px; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>盒子实际尺寸</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">宽度 = margin.left + border.left + padding.left + content.width + padding.right + border.right + margin.right</span><br><span class="line">	= 5 + 1 + 10 + 200 + 10 + 1 + 5</span><br><span class="line">	= 232</span><br><span class="line">高度 = margin.top + border.top + padding.top + content.height + padding.bottom + border.bottom + margin.bottom</span><br><span class="line">	= 5 + 1 + 10 + 180 + 10 + 1 + 5</span><br><span class="line">	= 212</span><br></pre></td></tr></table></figure>
-
-<h4 id="IE模型-box-sizing：border-box"><a href="#IE模型-box-sizing：border-box" class="headerlink" title="IE模型(box-sizing：border-box;)"></a>IE模型(box-sizing：border-box;)</h4><p>如果想在非IE浏览器使用该模型，只需设置 <kbd><strong>box-sizing：border-box；</strong></kbd>即可</p>
-<p>盒子实际宽度 = 内容宽（width 的值）+ margin-left + margin-right；</p>
-<p>上面例子中的盒子实际尺寸</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">宽度 = margin.left + width + margin.right</span><br><span class="line">	= 5 + 200 + 5</span><br><span class="line">	= 210</span><br><span class="line">高度 = margin.top + height + margin.bottom</span><br><span class="line">	= 5 + 180 +  5</span><br><span class="line">	= 190</span><br></pre></td></tr></table></figure>
-
-<p>这是因为IE模型中的width默认包括<strong>content，padding和border</strong>的值。</p>
-<h4 id="弹性盒子flexbox"><a href="#弹性盒子flexbox" class="headerlink" title="弹性盒子flexbox"></a>弹性盒子flexbox</h4><p>Flexbox布局的最大特性就是让Flex项目可伸缩，也就是让Flex项目的宽度和高度可以自动填充Flex容器剩余的空间或者缩小Flex项目适配Flex容器不足的宽度。而这一切都是依赖于Flexbox属性中的<code>flex</code>属性来完成。</p>
-<p>弹性盒子是一种当页面需要适应不同屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式</p>
-<p>引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间</p>
-<p>弹性盒子由弹性容器(Flex container)和弹性子元素(Flex item)组成。弹性容器通过设置 display 属性的值为 flex 或 inline-flex将其定义为弹性容器。弹性容器内包含了一个或多个弹性子元素。</p>
-<p><strong>注意：</strong> 弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。</p>
-<p><img src="https://www.w3cplus.com/sites/default/files/blogs/2018/1811/flex-1.png" alt="img"></p>
-<h6 id="1-指定弹性子元素在父容器中的位置flex-direction"><a href="#1-指定弹性子元素在父容器中的位置flex-direction" class="headerlink" title="1.指定弹性子元素在父容器中的位置flex-direction"></a>1.指定弹性子元素在父容器中的位置flex-direction</h6><ul>
-<li>flex-direction 属性规定灵活项目的方向。</li>
-<li><strong>当你调转行和列的方向时，flex-start和flex-end对应的方向也被调转</strong>；</li>
-<li>当flex以列为方向时，<code>justify-content</code>控制纵向对齐，<code>align-items</code>控制横向对齐。</li>
-<li>flex-direction: row|row-reverse|column|column-reverse|initial|inherit;</li>
-</ul>
-<h6 id="2-内容（横轴上）对齐justify-content属性"><a href="#2-内容（横轴上）对齐justify-content属性" class="headerlink" title="2.内容（横轴上）对齐justify-content属性"></a>2.内容（横轴上）对齐justify-content属性</h6><ul>
-<li><p><strong>内容对齐justify-content属性应用在弹性容器上</strong>，把弹性项沿着弹性容器的主轴线（main axis）对齐。</p>
-</li>
-<li><p>justify-content 用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式。</p>
-</li>
-<li><p>justify-content: flex-start | flex-end | center | space-between | space-around；</p>
-<ul>
-<li><p>flex-start：</p>
-<p>弹性项目向行头紧挨着填充。这个是默认值。第一个弹性项的main-start外边距边线被放置在该行的main-start边线，而后续弹性项依次平齐摆放。</p>
-</li>
-<li><p>flex-end：</p>
-<p>弹性项目向行尾紧挨着填充。第一个弹性项的main-end外边距边线被放置在该行的main-end边线，而后续弹性项依次平齐摆放。</p>
-</li>
-<li><p>center：</p>
-<p>弹性项目居中紧挨着填充。（如果剩余的自由空间是负的，则弹性项目将在两个方向上同时溢出）。</p>
-</li>
-<li><p>space-between：</p>
-<p>弹性项目平均分布在该行上。如果剩余空间为负或者只有一个弹性项，则该值等同于flex-start。否则，第1个弹性项的外边距和行的main-start边线对齐，而最后1个弹性项的外边距和行的main-end边线对齐，然后剩余的弹性项分布在该行上，相邻项目的间隔相等。</p>
-</li>
-<li><p>space-around：</p>
-<p>弹性项目平均分布在该行上，两边留有一半的间隔空间。如果剩余空间为负或者只有一个弹性项，则该值等同于center。否则，弹性项目沿该行分布，且彼此间隔相等（比如是20px），同时首尾两边和弹性容器之间留有一半的间隔（1/2*20px=10px）。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://7n.w3cschool.cn/attachments/day_161125/201611251344358256.jpg" alt="img"></p>
-<h6 id="3-侧轴方向上的对齐方式align-items"><a href="#3-侧轴方向上的对齐方式align-items" class="headerlink" title="3.侧轴方向上的对齐方式align-items"></a>3.侧轴方向上的对齐方式align-items</h6><ul>
-<li><code>align-items</code> 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。</li>
-<li>align-items: flex-start | flex-end | center | baseline | stretch<ul>
-<li>flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。</li>
-<li>flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。</li>
-<li>center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。</li>
-<li>baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与’flex-start’等效。其它情况下，该值将参与基线对齐。</li>
-<li>stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。</li>
-</ul>
-</li>
-</ul>
-<h6 id="4-弹性盒子子元素换行方式flex-wrap"><a href="#4-弹性盒子子元素换行方式flex-wrap" class="headerlink" title="4.弹性盒子子元素换行方式flex-wrap"></a>4.弹性盒子子元素换行方式flex-wrap</h6><ul>
-<li>flex-wrap 属性规定flex容器是单行或者多行，同时横轴的方向决定了新行堆叠的方向。</li>
-<li>flex-wrap ：normal | wrap | wrap-reverse | initial |inherit ;</li>
-</ul>
-<h6 id="5-设置各个行（垂直方向）的对齐aign-content"><a href="#5-设置各个行（垂直方向）的对齐aign-content" class="headerlink" title="5.设置各个行（垂直方向）的对齐aign-content"></a>5.设置各个行（垂直方向）的对齐aign-content</h6><ul>
-<li>设置行与行之间的距离</li>
-<li>align-content属性在弹性容器内的各项没有占用交叉轴上所有可用空间时对齐容器内的各项（只在垂直方向上，都是单独占据一行）</li>
-<li>align-content: flex-start | flex-end | center | space-between | space-around | stretch<ul>
-<li><code>stretch</code> - 默认。各行将会伸展以占用剩余的空间。</li>
-<li><code>flex-start</code> - 各行向弹性盒容器的起始位置堆叠。</li>
-<li><code>flex-end</code> - 各行向弹性盒容器的结束位置堆叠。</li>
-<li><code>center</code> -各行向弹性盒容器的中间位置堆叠。</li>
-<li><code>space-between</code> -各行在弹性盒容器中平均分布。</li>
-<li><code>space-around</code> - 各行在弹性盒容器中平均分布，两端保留子元素与子元素之间间距大小的一半。</li>
-</ul>
-</li>
-</ul>
-<h6 id="6-排列弹性子元素order"><a href="#6-排列弹性子元素order" class="headerlink" title="6.排列弹性子元素order"></a>6.排列弹性子元素order</h6><ul>
-<li>用整数来定义排列顺序，数值小的排在前面，可为负值。 设置或检索弹性盒模型对象的<strong>子元素</strong>出现的順序。</li>
-<li>order: <em>number</em>|initial|inherit;</li>
-</ul>
-<h6 id="7-完美居中margin：auto；"><a href="#7-完美居中margin：auto；" class="headerlink" title="7.完美居中margin：auto；"></a>7.完美居中margin：auto；</h6><ul>
-<li>使用弹性盒子，只需设置margin：auto；可使得弹性子元素在两上轴方向上完全居中</li>
-</ul>
-<h6 id="8-设置弹性元素自身在侧轴方向上的对齐方式align-self"><a href="#8-设置弹性元素自身在侧轴方向上的对齐方式align-self" class="headerlink" title="8.设置弹性元素自身在侧轴方向上的对齐方式align-self"></a>8.设置弹性元素自身在侧轴方向上的对齐方式align-self</h6><ul>
-<li><p>align-self:auto | flex-start | flex-end | center | baseline | stretch</p>
-<ul>
-<li><p>auto：如果’align-self’的值为’auto’，则其计算值为元素的父元素的’align-items’值，如果其没有父元素，则计算值为’stretch’。</p>
-</li>
-<li><p>flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。</p>
-</li>
-<li><p>flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。</p>
-</li>
-<li><p>center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。</p>
-</li>
-<li><p>baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与’flex-start’等效。其它情况下，该值将参与基线对齐。</p>
-</li>
-<li><h6 id="stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min-max-width-height’属性的限制。"><a href="#stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min-max-width-height’属性的限制。" class="headerlink" title="stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。"></a>stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。</h6></li>
-<li><p>align-self 属性可重写灵活容器的 align-items 属性。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="9-指定子元素如何分配空间flex"><a href="#9-指定子元素如何分配空间flex" class="headerlink" title="9.指定子元素如何分配空间flex"></a>9.指定子元素如何分配空间flex</h5><ul>
-<li>flex属性用于设置和检索弹性盒模型对象的子元素如何分配空间</li>
-<li>flex属性是flex-grow，flex-shrink和flex-basis属性的简写属性</li>
-<li><strong>注意：</strong>如果元素不是弹性盒模型对象的子元素，则 flex 属性不起作用。</li>
-<li>flex: <em>flex-grow</em>  <em>flex-shrink</em>  <em>flex-basis</em> | auto | initial | inherit;</li>
-</ul>
-<h6 id="10-设置flex容器的对齐方式align-items"><a href="#10-设置flex容器的对齐方式align-items" class="headerlink" title="10.设置flex容器的对齐方式align-items"></a>10.设置flex容器的对齐方式align-items</h6><ul>
-<li>使用每个flex对象元素的 align-self 属性可重写 align-items 属性。</li>
-<li>align-items： stretch | center | flex-start | flex-end | baseline | initial | inherit;</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/07/hello-world/" class="article-date">
-      <time datetime="2019-09-07T06:38:46.384Z" itemprop="datePublished">2019-09-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/07/hello-world/">Hello World</a>
-    </h1>
-  
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/11/css盒模型集锦/">
+                    css盒模型集锦
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组去重的方法"><span class="toc-number">1.</span> <span class="toc-text">数组去重的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#遍历数组法"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">遍历数组法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#对象键值对法"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">对象键值对法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数组下标法"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">数组下标法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#排序后相邻去除法"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">排序后相邻去除法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#优化遍历数组法"><span class="toc-number">1.0.0.0.5.</span> <span class="toc-text">优化遍历数组法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#在Array的原型上实现去重"><span class="toc-number">1.0.0.0.6.</span> <span class="toc-text">在Array的原型上实现去重</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#利用ES6中的Set-Array-from去重"><span class="toc-number">1.0.0.0.7.</span> <span class="toc-text">利用ES6中的Set + Array.from去重</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#双层循环和splice去重"><span class="toc-number">1.0.0.0.8.</span> <span class="toc-text">双层循环和splice去重</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#利用includes去重"><span class="toc-number">1.0.0.0.9.</span> <span class="toc-text">利用includes去重</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"相对全面的数组去重　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -622,9 +439,33 @@
 
 
 
+    
 
-  
-  
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/09/11/css盒模型集锦/" title="下一篇: css盒模型集锦">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
