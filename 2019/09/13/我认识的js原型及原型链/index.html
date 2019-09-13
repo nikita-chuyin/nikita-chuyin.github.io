@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="JavaScript原型在讲js原型之前，必须先了解Object和Function。 Object和Function作为js自带的函数，Object继承自己，Function继承自己，Object和Function互相继承对方，也就是说Object和Function都既是函数也是对象。 1234Function instanceof Object;	//trueObject instanceof">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/09/07/hello-world/index.html">
+<meta property="og:title" content="我认识的js原型及原型链">
+<meta property="og:url" content="http://yoursite.com/2019/09/13/我认识的js原型及原型链/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="JavaScript原型在讲js原型之前，必须先了解Object和Function。 Object和Function作为js自带的函数，Object继承自己，Function继承自己，Object和Function互相继承对方，也就是说Object和Function都既是函数也是对象。 1234Function instanceof Object;	//trueObject instanceof">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-07T06:38:46.384Z">
+<meta property="og:image" content="https://files.jb51.net/file_images/article/201702/2017215100629240.jpg?201711510636">
+<meta property="og:updated_time" content="2019-09-13T10:31:36.885Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="我认识的js原型及原型链">
+<meta name="twitter:description" content="JavaScript原型在讲js原型之前，必须先了解Object和Function。 Object和Function作为js自带的函数，Object继承自己，Function继承自己，Object和Function互相继承对方，也就是说Object和Function都既是函数也是对象。 1234Function instanceof Object;	//trueObject instanceof">
+<meta name="twitter:image" content="https://files.jb51.net/file_images/article/201702/2017215100629240.jpg?201711510636">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hello World | Nikita</title>
+<title>我认识的js原型及原型链 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +264,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-我认识的js原型及原型链" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/09/07/hello-world/" class="article-date">
-      <time datetime="2019-09-07T06:38:46.384Z" itemprop="datePublished">2019-09-07</time>
+      <a href="/2019/09/13/我认识的js原型及原型链/" class="article-date">
+      <time datetime="2019-09-13T10:31:13.000Z" itemprop="datePublished">2019-09-13</time>
 </a>
 
 
@@ -281,7 +283,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      我认识的js原型及原型链
     </h1>
   
 
@@ -298,19 +300,36 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="JavaScript原型"><a href="#JavaScript原型" class="headerlink" title="JavaScript原型"></a>JavaScript原型</h2><p>在讲js原型之前，必须先了解Object和Function。</p>
+<p>Object和Function作为js自带的函数，Object继承自己，Function继承自己，Object和Function互相继承对方，也就是说Object和Function都既是函数也是对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Function instanceof Object;	//true</span><br><span class="line">Object instanceof Function;	//true</span><br><span class="line">Function.prototype	//f()&#123; [native code]&#125;</span><br><span class="line">Object.prototype	//Object</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="普通对象和函数对象"><a href="#普通对象和函数对象" class="headerlink" title="普通对象和函数对象"></a>普通对象和函数对象</h4><p>在Javascript的世界里，全都是对象，而对象之间也是存在区别，我们首先区分一下普通对象和函数对象，如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;&#125;;</span><br><span class="line">var f2 = function()&#123;&#125;;</span><br><span class="line">var f3 = new function()&#123;&#125;;</span><br><span class="line"> </span><br><span class="line">var o1 = &#123;&#125;;</span><br><span class="line">var o2 = new Object();</span><br><span class="line">var o3 = new f1();</span><br><span class="line"> </span><br><span class="line">console.log(typeof Object); //function</span><br><span class="line">console.log(typeof Function);//function</span><br><span class="line">console.log(typeof f1) //function</span><br><span class="line">console.log(typeof f2) // function</span><br><span class="line">console.log(typeof f3) //function</span><br><span class="line">console.log(typeof o1) //object</span><br><span class="line">console.log(typeof o2) //object</span><br><span class="line">console.log(typeof o3)// object</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中可以看出，f1、f2和f3都是函数对象，而o1，o2和o3都是object对象，也就是普通对象，函数对象本质就是由new function（）构造而来，其他的都是普通对象；函数对象可以创建普通对象，普通对象没法创建函数对象。</p>
+<p><strong>注意：</strong></p>
+<p>1、每一个函数对象都有一个prototype属性，但是普通对象是没有的；</p>
+<p>　 prototype下面又有个construetor，指向这个函数。</p>
+<p>2、每个对象都有一个名为<code>__proto__</code>的内部属性，指向它所对应的构造函数的原型对象，原型链基于<code>__proto__</code>;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;&#125;;</span><br><span class="line">o.prototype;	//undefined</span><br><span class="line">o instanceof Object;	//true</span><br><span class="line">o._proto_ === Object.prototype;		//true</span><br><span class="line">Object === Object.prototype.constructor;	//true</span><br><span class="line">Object.prototype.constructor;	//function Object()&#123; [native code]&#125;</span><br><span class="line">Object.prototype.__proto__;		//null</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>在js中，原型也是一个对象，其作用则是实现对象的继承。</p>
+<p>在js的所有函数对象中都存在一个属性prototype，该属性对应当前对象的原型。</p>
+<p>而所有js对象都存在一个<code>__proto__</code>属性（由于<code>__proto__</code>是一个非标准属性，因此只有火狐和谷歌两个浏览器支持，标准方法是Object.getPrototypeOf())，<code>__proto__</code>属性指向实例对象的构造函数的原型，理解起来就是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var p = new Person();</span><br><span class="line">p.__proto__ === Person.prototype;		//true</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>从上面代码中，p是实例对象，Person是p的构造函数，可看出p的<code>__proto__</code>属性指向构造函数Person的原型。</p>
+<p>请看一下例子加深理解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var parent = function(name)&#123;</span><br><span class="line"> this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">parent.prototype.getName = function()&#123;</span><br><span class="line"> return this.name;</span><br><span class="line">&#125;</span><br><span class="line">var son = new parent(&quot;huahua&quot;);</span><br><span class="line"> </span><br><span class="line">console.log(son.getName());//&apos;huahua&apos;</span><br></pre></td></tr></table></figure>
+
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>除开Object的prototype的原型是null以外，所有的对象和原型都有自己的原型，对象的原型指向原型对象。</p>
+<p>在层级多的关系中，多个原型层层相连则构成了原型链。</p>
+<p>在查找一个对象的属性时，倘若在当前对象找不到该属性，则会沿着原型链一直往上查找，知道找到为止，如果到了原型链顶端，还没找到，则返回undefined。</p>
+<p><img src="https://files.jb51.net/file_images/article/201702/2017215100629240.jpg?201711510636" alt="img"></p>
+<p><strong>JS中所有的东西都是对象,所有的东西都由Object衍生而来, 即所有东西原型链的终点指向null</strong></p>
+<h4 id="构造器constructor"><a href="#构造器constructor" class="headerlink" title="构造器constructor"></a>构造器constructor</h4><p>constructor是构造函数创建的实例的属性，该属性的作用是指向创建当前对象的构造函数。</p>
+<p>例如，son.constructor == parent;//true</p>
 
       
     </div>
@@ -319,13 +338,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/09/07/hello-world/">Hello World</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-09-07, 14:38:46</p>
-        <p><span>最后更新:</span>2019-09-07, 14:38:46</p>
+        <p><span>发布时间:</span>2019-09-13, 18:31:13</p>
+        <p><span>最后更新:</span>2019-09-13, 18:31:36</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/09/07/hello-world/" title="Hello World">http://yoursite.com/2019/09/07/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/07/hello-world/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/13/我认识的js原型及原型链/" title="我认识的js原型及原型链">http://yoursite.com/2019/09/13/我认识的js原型及原型链/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/13/我认识的js原型及原型链/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -337,12 +356,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/09/11/css盒模型集锦/">
-                    css盒模型集锦
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/12/深入理解js中的this/">
+                    深入理解js中的this
                 </a>
             </div>
-        
         
     </nav>
 
@@ -352,7 +371,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript原型"><span class="toc-number">1.</span> <span class="toc-text">JavaScript原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通对象和函数对象"><span class="toc-number">1.0.1.</span> <span class="toc-text">普通对象和函数对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型"><span class="toc-number">1.0.2.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型链"><span class="toc-number">1.0.3.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造器constructor"><span class="toc-number">1.0.4.</span> <span class="toc-text">构造器constructor</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -388,7 +407,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Hello World　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"我认识的js原型及原型链　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -408,15 +427,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/09/11/css盒模型集锦/" title="上一篇: css盒模型集锦">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/09/12/深入理解js中的this/" title="下一篇: 深入理解js中的this">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
