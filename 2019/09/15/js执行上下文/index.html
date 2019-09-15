@@ -15,23 +15,18 @@
 
 
 
-<meta name="description" content="理解浏览器的工作原理前言​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。 浏览器组成 主要组件包括：  用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。 浏览器引擎——用来查询及操作">
+<meta name="description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针只想这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="了解浏览器">
-<meta property="og:url" content="http://yoursite.com/2019/09/14/了解浏览器/index.html">
+<meta property="og:title" content="js执行上下文">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/js执行上下文/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="理解浏览器的工作原理前言​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。 浏览器组成 主要组件包括：  用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。 浏览器引擎——用来查询及操作">
+<meta property="og:description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针只想这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pic.xiaohuochai.site/blog/browserRender1.png">
-<meta property="og:image" content="https://pic.xiaohuochai.site/blog/chrome1.jpeg">
-<meta property="og:image" content="https://pic.xiaohuochai.site/blog/chrome4.jpeg">
-<meta property="og:image" content="https://pic.xiaohuochai.site/blog/chrome2.jpeg">
-<meta property="og:updated_time" content="2019-09-14T03:20:15.941Z">
+<meta property="og:updated_time" content="2019-09-15T13:05:22.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="了解浏览器">
-<meta name="twitter:description" content="理解浏览器的工作原理前言​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。 浏览器组成 主要组件包括：  用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。 浏览器引擎——用来查询及操作">
-<meta name="twitter:image" content="https://pic.xiaohuochai.site/blog/browserRender1.png">
+<meta name="twitter:title" content="js执行上下文">
+<meta name="twitter:description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针只想这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -63,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>了解浏览器 | Nikita</title>
+<title>js执行上下文 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -267,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-了解浏览器" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/09/14/了解浏览器/" class="article-date">
-      <time datetime="2019-09-14T03:07:43.000Z" itemprop="datePublished">2019-09-14</time>
+      <a href="/2019/09/15/js执行上下文/" class="article-date">
+      <time datetime="2019-09-15T12:36:10.000Z" itemprop="datePublished">2019-09-15</time>
 </a>
 
 
@@ -286,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      了解浏览器
+      js执行上下文
     </h1>
   
 
@@ -303,44 +298,65 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="理解浏览器的工作原理"><a href="#理解浏览器的工作原理" class="headerlink" title="理解浏览器的工作原理"></a>理解浏览器的工作原理</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。</p>
-<h4 id="浏览器组成"><a href="#浏览器组成" class="headerlink" title="浏览器组成"></a>浏览器组成</h4><p><img src="https://pic.xiaohuochai.site/blog/browserRender1.png" alt="browser"></p>
-<p>主要组件包括：</p>
+        <h2 id="js的执行上下文"><a href="#js的执行上下文" class="headerlink" title="js的执行上下文"></a>js的执行上下文</h2><p>执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。</p>
+<h4 id="执行上下文的的三种类型"><a href="#执行上下文的的三种类型" class="headerlink" title="执行上下文的的三种类型"></a>执行上下文的的三种类型</h4><p><strong>全局执行上下文</strong>：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：</p>
+<ul>
+<li>创建一个全局对象，在浏览器中这个全局对象就是window对象。</li>
+<li>将this指针只想这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
+</ul>
+<p><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在被调用时才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，她都会按照特定的顺序执行一系列步骤。</p>
+<p><strong>Eval函数执行上下文</strong>：运行在eval函数中的代码也获得自己的执行上下文。</p>
+<h4 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h4><p>执行上下文的生命周期包括三个阶段：<strong>创建阶段——执行阶段——回收阶段</strong></p>
+<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>当函数被调用时，但未被执行其内部任意代码前，会做以下三件事：</p>
 <ol>
-<li>用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。</li>
-<li>浏览器引擎——用来查询及操作渲染引擎的接口。</li>
-<li>渲染引擎——用来显示请求的内容，如：如果请求内容为html，他负责解析html及css，并将解析后的结果显示在页面。</li>
-<li>网络——用来完成网络调用，如：http请求，它具有平台无关的接口，可以在不同平台上工作。</li>
-<li>UI后端——用来绘制类似组合选择框及对话框等基本组件，具有不特定与某个平台的通用接口，顶层使用操作系统的用户接口。</li>
-<li>JS解释器——用来执行JS代码。</li>
-<li>数据存储——属于持久层，浏览器需要在硬盘中保存类似cookie的各种数据，HTML5定义了web database技术，这是一种轻量级完整的客户端存储技术。</li>
+<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
+<li>创建作用域链（scope chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，js始终从代码嵌套的最内层开始，如果最内层没有该变量，就往上一层父级作用域中找，直到找到变量。</li>
+<li>确定this指向</li>
 </ol>
-<h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h4><p>浏览器分为两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源并解析排版并呈现给用户。</p>
-<p>默认情况下，渲染引擎可以显示html，xml文档及图片，他可以借助插件显示其他类型数据，例如使用PDF阅读器插件，可以显示PDF格式。</p>
-<h6 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h6><p>firefox使用gecko引擎</p>
-<p>IE使用Trident引擎，2015年微软推出自己新的浏览器，原名叫斯巴达，后改名edge，使用edge引擎</p>
-<p>opera最早使用Presto引擎，后来弃用</p>
-<p>chrome\safari\opera使用webkit引擎，13年chrome和opera开始使用Blink引擎</p>
-<p>UC使用U3引擎</p>
-<p>QQ浏览器和微信内核使用X5引擎，16年开始使用Blink引擎</p>
-<h6 id="js引擎"><a href="#js引擎" class="headerlink" title="js引擎"></a>js引擎</h6><p>老版本IE使用Jscript引擎，IE9之后使用Chakra引擎，edge浏览器仍然使用Chakra引擎</p>
-<p>firefox使用monkey系列引擎</p>
-<p>safari使用的SquirrelFish系列引擎</p>
-<p>Opera使用Carakan引擎</p>
-<p>chrome使用V8引擎。nodeJs其实就是封装了V8引擎</p>
-<h6 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h6><p>　　从资源的下载到最终的页面展现，渲染流程可简单地理解成一个线性串联的变换过程的组合，原始输入为URL地址，最终输出为页面Bitmap，中间依次经过了Loader、Parser、Layout和Paint模块</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome1.jpeg" alt="chrome1"></p>
-<p>　渲染引擎的核心流程如下所示</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome4.jpeg" alt="chrome"></p>
-<h6 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h6><p>Loader模块负责处理所有的HTTP请求以及网络资源的缓存，相当于是从URL输入到Page Resource输出的变换过程。HTML页面中通常由JS/CSS/Image资源，为了不阻塞后续解析过程，一般会有两个IO管道同时存在，一个负责主页面下载，一个负责各种外链接资源的下载。</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome2.jpeg" alt="chrome"></p>
-<p><strong>注意：</strong>虽然大部分情况下不同资源都是并发下载异步解析（如图片资源可以在主页面解析显示完成后再被显示），但JS脚本可能会要求改变页面，因此有时保持执行顺序和下载管道后续处理的阻塞是不可避免的。</p>
-<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>缓存在浏览器中也得到广泛的应用，对提高用户体验起到重要的作用。在浏览器中，主要存在三种类型的缓存：Page Cache，Memory Cache，Disk Cacche。这三类Cache的容量都是额可以配置的，比如限制Memory Cache最大不超过30M，Page Cache缓存的页面数量不超过5个等。</p>
-<p><code>Page Cache</code>：即页面缓存。用来缓存用户访问过的网页DOM树、Render树等数据。设计页面缓存的意图在于提供流畅的页面前进、后退浏览体验。几乎所有的现代浏览器都支持页面缓存功能</p>
-<p><code>Memory Cache</code>：浏览器内部的缓存机制，对于相同的url的资源直接从缓存中获取，不需要重新下载。在使用浏览器浏览网页时，尤其是浏览一个大型网站的不同页面时，经常会遇到网页中包含相同资源的情况，应用Memory Cache可以显著提高浏览器的用户体验，减少无谓的内存、时间以及网络带宽开销。</p>
-<p><code>Disk Cache</code>：资源加载缓存和服务器进行交互，服务器端可以通过HTTP头信息设置网页要不要加载；</p>
-<p>转自：</p>
-<p><a href="https://www.cnblogs.com/itplay/p/10475368.html" target="_blank" rel="noopener">https://www.cnblogs.com/itplay/p/10475368.html </a> </p>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
+<p>以上过程实则为代码的预处理阶段，详细过程如下：</p>
+<ol>
+<li>读取分析整个源代码</li>
+<li>先扫描函数声明，之后扫描变量（var声明）<ul>
+<li>处理函数声明时有冲突，会覆盖。</li>
+<li>处理变量声明有冲突，会忽略。</li>
+</ul>
+</li>
+<li>将扫描到的函数和变量保存到一个对象中（全局的会保存在window对象中）</li>
+<li>变量的值是undefined，函数的值则是指向该函数（是一个函数字符串）<ul>
+<li>形式如：window = { x : undefined , f : ‘function(){console.log(1);}’ }</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>执行变量赋值、代码执行。</p>
+<p>该过程为：</p>
+<ol>
+<li><p>将变量的值从undefined改为给定值。</p>
+</li>
+<li><p>调用函数f（），以便函数得到执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">上面函数(f)内，代码的处理过程：</span><br><span class="line"></span><br><span class="line">    1、预处理阶段</span><br><span class="line"></span><br><span class="line">        a、将函数的参数添加到一个对象（暂定为：词法对象）</span><br><span class="line"></span><br><span class="line">        b、扫描函数声明，之后扫描变量(var声明)</span><br><span class="line"></span><br><span class="line">        d、将扫描到的函数和方法添加到词法对象里面</span><br><span class="line"></span><br><span class="line">        c、变量的值是undefined，函数的值则指向该函数（与全局的一样）</span><br><span class="line"></span><br><span class="line">    2、运行阶段</span><br><span class="line"></span><br><span class="line">        与全局的的运行原理一样</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h4><p>执行上下文出栈等待虚拟机回收执行上下文</p>
+<p>看看一下例子就知道变量提升是怎么回事了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    var arg = &apos;hello&apos;; // 3.var arg 变量声明被忽略， arg = &apos;hello&apos;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">	console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line">test(&apos;hi&apos;);</span><br><span class="line">/* 输出：</span><br><span class="line">function arg()&#123;</span><br><span class="line">    console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">hello </span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
+<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。<strong>可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则</strong>。</p>
+<p>我们需要记住几个关键点：</p>
+<ul>
+<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
+<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
+<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
+<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
+<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
+</ul>
+<p>推荐：</p>
+<p><a href="https://www.cnblogs.com/lark-/p/7954047.html" target="_blank" rel="noopener">https://www.cnblogs.com/lark-/p/7954047.html</a></p>
 
       
     </div>
@@ -349,13 +365,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/09/14/了解浏览器/">了解浏览器</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/15/js执行上下文/">js执行上下文</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-09-14, 11:07:43</p>
-        <p><span>最后更新:</span>2019-09-14, 11:20:15</p>
+        <p><span>发布时间:</span>2019-09-15, 20:36:10</p>
+        <p><span>最后更新:</span>2019-09-15, 21:05:22</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/09/14/了解浏览器/" title="了解浏览器">http://yoursite.com/2019/09/14/了解浏览器/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/14/了解浏览器/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/15/js执行上下文/" title="js执行上下文">http://yoursite.com/2019/09/15/js执行上下文/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/15/js执行上下文/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -367,16 +383,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/09/14/js中的闭包/">
-                    js中的闭包
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/09/13/我认识的js原型及原型链/">
-                    我认识的js原型及原型链
+                <a href="/2019/09/15/js中的立即执行函数/">
+                    js中的立即执行函数
                 </a>
             </div>
         
@@ -388,7 +398,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解浏览器的工作原理"><span class="toc-number">1.</span> <span class="toc-text">理解浏览器的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-number">1.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浏览器组成"><span class="toc-number">1.0.2.</span> <span class="toc-text">浏览器组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内核"><span class="toc-number">1.0.3.</span> <span class="toc-text">内核</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#渲染引擎"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">渲染引擎</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#js引擎"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">js引擎</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#渲染流程"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">渲染流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Loader"><span class="toc-number">1.0.3.0.4.</span> <span class="toc-text">Loader</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缓存"><span class="toc-number">1.0.4.</span> <span class="toc-text">缓存</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js的执行上下文"><span class="toc-number">1.</span> <span class="toc-text">js的执行上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文的的三种类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">执行上下文的的三种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文的生命周期"><span class="toc-number">1.0.2.</span> <span class="toc-text">执行上下文的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建阶段"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">创建阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行阶段"><span class="toc-number">1.0.3.</span> <span class="toc-text">执行阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回收阶段"><span class="toc-number">1.0.4.</span> <span class="toc-text">回收阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文栈"><span class="toc-number">1.0.5.</span> <span class="toc-text">执行上下文栈</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -424,7 +434,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"了解浏览器　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"js执行上下文　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -444,15 +454,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/09/14/js中的闭包/" title="上一篇: js中的闭包">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/09/13/我认识的js原型及原型链/" title="下一篇: 我认识的js原型及原型链">
+            <a href="/2019/09/15/js中的立即执行函数/" title="下一篇: js中的立即执行函数">
                 <i class="fa fa-angle-right"></i>
             </a>
         
