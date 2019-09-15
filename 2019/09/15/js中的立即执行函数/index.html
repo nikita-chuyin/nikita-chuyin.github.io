@@ -15,17 +15,18 @@
 
 
 
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="js中的立即执行函数立即执行函数是一种语法模式，可以让你的函数在定义后立即执行。本质是一个表达式，使用运算符将函数声明转换为函数表达式之后就可达到立即执行效果 这样，使得页面加载完成后只执行一次设置的函数。且因将设置函数中的变量包裹在局部变量中，不会泄露成全局变量。 立即执行函数的写法 匿名函数不能单独定义，必须赋值操作或立即执行，否则会被JS引擎定义为语法错误。 12function()&amp;#12">
 <meta name="keywords" content="write myBlog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nikita">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的立即执行函数">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/js中的立即执行函数/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="js中的立即执行函数立即执行函数是一种语法模式，可以让你的函数在定义后立即执行。本质是一个表达式，使用运算符将函数声明转换为函数表达式之后就可达到立即执行效果 这样，使得页面加载完成后只执行一次设置的函数。且因将设置函数中的变量包裹在局部变量中，不会泄露成全局变量。 立即执行函数的写法 匿名函数不能单独定义，必须赋值操作或立即执行，否则会被JS引擎定义为语法错误。 12function()&amp;#12">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-15T02:07:35.574Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nikita">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:title" content="js中的立即执行函数">
+<meta name="twitter:description" content="js中的立即执行函数立即执行函数是一种语法模式，可以让你的函数在定义后立即执行。本质是一个表达式，使用运算符将函数声明转换为函数表达式之后就可达到立即执行效果 这样，使得页面加载完成后只执行一次设置的函数。且因将设置函数中的变量包裹在局部变量中，不会泄露成全局变量。 立即执行函数的写法 匿名函数不能单独定义，必须赋值操作或立即执行，否则会被JS引擎定义为语法错误。 12function()&amp;#12">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -57,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2019 | Nikita</title>
+<title>js中的立即执行函数 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,8 +68,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -261,255 +262,180 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-js中的立即执行函数" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2019/09/15/js中的立即执行函数/" class="article-date">
+      <time datetime="2019-09-15T02:07:11.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+
+
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js中的立即执行函数
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/15/js中的立即执行函数/" class="archive-article-date">
-      <time datetime="2019-09-15T02:07:11.000Z" itemprop="datePublished">09-15</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
+        <h2 id="js中的立即执行函数"><a href="#js中的立即执行函数" class="headerlink" title="js中的立即执行函数"></a>js中的立即执行函数</h2><p>立即执行函数是一种语法模式，可以让你的函数在定义后立即执行。本质是一个表达式，使用运算符将函数声明转换为函数表达式之后就可达到立即执行效果</p>
+<p>这样，使得页面加载完成后只执行一次设置的函数。且因将设置函数中的变量包裹在局部变量中，不会泄露成全局变量。</p>
+<h6 id="立即执行函数的写法"><a href="#立即执行函数的写法" class="headerlink" title="立即执行函数的写法"></a>立即执行函数的写法</h6><ol>
+<li><p>匿名函数不能单独定义，必须赋值操作或立即执行，否则会被JS引擎定义为语法错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;alert(dada);&#125;</span><br><span class="line">VM229:1 Uncaught SyntaxError: Unexpected token</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在函数体后面加括号就能立即调用，这个函数形式必须是函数表达式，不能是函数声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;alert(123);&#125;();</span><br><span class="line">VM265:1 Uncaught SyntaxError: Unexpected token (</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在函数前面加符号，或者用括号将函数包住来消除函数声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;alert(123);&#125;)();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消除函数声明最安全的做法是加括号，因为运算符号还会和函数的返回值进行运算，造成不必要麻烦。</p>
+</li>
+<li><p>包住函数表达式的括号可以括住参数，也可以不括住，效果是一样的。</p>
+</li>
+</ol>
+<p>通常，全局变量被作为一个参数传递给立即执行函数参数，这样她在函数内部不使用window就可以访问到全局变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function (global)&#123;</span><br><span class="line">	console.log(global);</span><br><span class="line">&#125;)(this);</span><br></pre></td></tr></table></figure>
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<p>通过定义一个匿名函数，创建了一个新的函数作用域，相当于创建了一个“私有”的命名空间，该命名空间的变量和方法，不会破坏污染全局的命名空间。此时若是想访问全局对象，将全局对象以参数形式传进去即可，如jQuery代码结构。</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2019-09-15, 10:07:11</p>
+        <p><span>最后更新:</span>2019-09-15, 10:07:35</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/15/js中的立即执行函数/" title="js中的立即执行函数">http://yoursite.com/2019/09/15/js中的立即执行函数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/15/js中的立即执行函数/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/14/js中的闭包/">
+                    js中的闭包
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/14/js中的闭包/" class="archive-article-date">
-      <time datetime="2019-09-14T14:50:11.000Z" itemprop="datePublished">09-14</time>
-</a>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js中的立即执行函数"><span class="toc-number">1.</span> <span class="toc-text">js中的立即执行函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#立即执行函数的写法"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">立即执行函数的写法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/js中的闭包/">js中的闭包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"js中的立即执行函数　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
     
+
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/14/了解浏览器/" class="archive-article-date">
-      <time datetime="2019-09-14T03:07:43.000Z" itemprop="datePublished">09-14</time>
-</a>
+</div>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/了解浏览器/">了解浏览器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/13/我认识的js原型及原型链/" class="archive-article-date">
-      <time datetime="2019-09-13T10:31:13.000Z" itemprop="datePublished">09-13</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/12/深入理解js中的this/" class="archive-article-date">
-      <time datetime="2019-09-12T12:41:06.000Z" itemprop="datePublished">09-12</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/12/相对全面的数组去重/" class="archive-article-date">
-      <time datetime="2019-09-12T09:25:13.000Z" itemprop="datePublished">09-12</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/11/css盒模型集锦/" class="archive-article-date">
-      <time datetime="2019-09-11T10:48:31.000Z" itemprop="datePublished">09-11</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2019/09/07/hello-world/" class="archive-article-date">
-      <time datetime="2019-09-07T06:38:46.384Z" itemprop="datePublished">09-07</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/09/14/js中的闭包/" title="下一篇: js中的闭包">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
