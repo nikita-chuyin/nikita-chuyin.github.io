@@ -268,6 +268,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-MVVC模型架构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/17/MVVC模型架构/" class="article-date">
+      <time datetime="2019-09-17T11:57:30.000Z" itemprop="datePublished">2019-09-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="理解MVVC架构模式"><a href="#理解MVVC架构模式" class="headerlink" title="理解MVVC架构模式"></a>理解MVVC架构模式</h2><h4 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h4><p><strong>Model（模型）：数据层，负责存储数据。</strong></p>
+<p><strong>View(视图)：展现层，用户所看到的页面。</strong></p>
+<p><strong>Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。</strong></p>
+<p>Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于这两者之间的协调者。</p>
+<p><img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg" alt="img"></p>
+<p>MVC是过去常用的架构模式，随着App的发展，界面的多沿海，显然再使用MVC模式的会导致ViewController代码不断增多，更容易造成一些冗余的代码，如果作为迭代项目更不易维护。从而诞生了MVVC的架构模式。</p>
+<h4 id="MVVC"><a href="#MVVC" class="headerlink" title="MVVC"></a>MVVC</h4><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="无标题"></p>
+<p>M -Model</p>
+<p>V - View</p>
+<p>VM - ViewModel</p>
+<p>MVVM是将“数据模型数据双向绑定”的思想作为核心，因此在View和Model之间没有联系，通过ViewModel进行交互，而且Model和ViewModel之间的交互是双喜那个的，因此试图的数据的变化会同事修改数据源，而数据源数据的变化也会立即反应到View上。</p>
+<h4 id="MVVC优点"><a href="#MVVC优点" class="headerlink" title="MVVC优点"></a>MVVC优点</h4><p><strong>1. 低耦合</strong>。视图（View）可以独立于Model变化和修改，一个ViewModel可以绑定到不同的”View”上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。</p>
+<p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
+<p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
+<p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
