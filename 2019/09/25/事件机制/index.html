@@ -15,21 +15,18 @@
 
 
 
-<meta name="description" content="理解MVVC架构模式MVC架构Model（模型）：数据层，负责存储数据。 View(视图)：展现层，用户所看到的页面。 Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。 Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于">
+<meta name="description" content="事件机制之冒泡、传播、委托DOM事件流（event flow）存在三个阶段：事件捕获阶段，处于目标阶段，事件冒泡阶段。 事件捕获阶段（event  capuring）通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点由外往内进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。 事件冒泡（dubbed bubbling）与事件捕获相反，事件">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVVC模型架构">
-<meta property="og:url" content="http://yoursite.com/2019/09/17/MVVC模型架构/index.html">
+<meta property="og:title" content="事件机制">
+<meta property="og:url" content="http://yoursite.com/2019/09/25/事件机制/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="理解MVVC架构模式MVC架构Model（模型）：数据层，负责存储数据。 View(视图)：展现层，用户所看到的页面。 Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。 Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于">
+<meta property="og:description" content="事件机制之冒泡、传播、委托DOM事件流（event flow）存在三个阶段：事件捕获阶段，处于目标阶段，事件冒泡阶段。 事件捕获阶段（event  capuring）通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点由外往内进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。 事件冒泡（dubbed bubbling）与事件捕获相反，事件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg">
-<meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E6%97%A0%E6%A0%87%E9%A2%98.png">
-<meta property="og:updated_time" content="2019-09-17T11:58:03.273Z">
+<meta property="og:updated_time" content="2019-09-25T13:25:37.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MVVC模型架构">
-<meta name="twitter:description" content="理解MVVC架构模式MVC架构Model（模型）：数据层，负责存储数据。 View(视图)：展现层，用户所看到的页面。 Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。 Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于">
-<meta name="twitter:image" content="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg">
+<meta name="twitter:title" content="事件机制">
+<meta name="twitter:description" content="事件机制之冒泡、传播、委托DOM事件流（event flow）存在三个阶段：事件捕获阶段，处于目标阶段，事件冒泡阶段。 事件捕获阶段（event  capuring）通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点由外往内进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。 事件冒泡（dubbed bubbling）与事件捕获相反，事件">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -61,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>MVVC模型架构 | Nikita</title>
+<title>事件机制 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-MVVC模型架构" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-事件机制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/09/17/MVVC模型架构/" class="article-date">
-      <time datetime="2019-09-17T11:57:30.000Z" itemprop="datePublished">2019-09-17</time>
+      <a href="/2019/09/25/事件机制/" class="article-date">
+      <time datetime="2019-09-25T13:25:10.000Z" itemprop="datePublished">2019-09-25</time>
 </a>
 
 
@@ -284,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MVVC模型架构
+      事件机制
     </h1>
   
 
@@ -301,21 +298,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="理解MVVC架构模式"><a href="#理解MVVC架构模式" class="headerlink" title="理解MVVC架构模式"></a>理解MVVC架构模式</h2><h4 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h4><p><strong>Model（模型）：数据层，负责存储数据。</strong></p>
-<p><strong>View(视图)：展现层，用户所看到的页面。</strong></p>
-<p><strong>Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。</strong></p>
-<p>Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于这两者之间的协调者。</p>
-<p><img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg" alt="img"></p>
-<p>MVC是过去常用的架构模式，随着App的发展，界面的多沿海，显然再使用MVC模式的会导致ViewController代码不断增多，更容易造成一些冗余的代码，如果作为迭代项目更不易维护。从而诞生了MVVC的架构模式。</p>
-<h4 id="MVVC"><a href="#MVVC" class="headerlink" title="MVVC"></a>MVVC</h4><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="无标题"></p>
-<p>M -Model</p>
-<p>V - View</p>
-<p>VM - ViewModel</p>
-<p>MVVM是将“数据模型数据双向绑定”的思想作为核心，因此在View和Model之间没有联系，通过ViewModel进行交互，而且Model和ViewModel之间的交互是双喜那个的，因此试图的数据的变化会同事修改数据源，而数据源数据的变化也会立即反应到View上。</p>
-<h4 id="MVVC优点"><a href="#MVVC优点" class="headerlink" title="MVVC优点"></a>MVVC优点</h4><p><strong>1. 低耦合</strong>。视图（View）可以独立于Model变化和修改，一个ViewModel可以绑定到不同的”View”上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。</p>
-<p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
-<p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
-<p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+        <h2 id="事件机制之冒泡、传播、委托"><a href="#事件机制之冒泡、传播、委托" class="headerlink" title="事件机制之冒泡、传播、委托"></a>事件机制之冒泡、传播、委托</h2><p>DOM事件流（event flow）存在三个阶段：<strong>事件捕获阶段，处于目标阶段，事件冒泡阶段</strong>。</p>
+<h5 id="事件捕获阶段（event-capuring）"><a href="#事件捕获阶段（event-capuring）" class="headerlink" title="事件捕获阶段（event  capuring）"></a>事件捕获阶段（event  capuring）</h5><p>通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点<strong>由外往内</strong>进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。</p>
+<h5 id="事件冒泡（dubbed-bubbling）"><a href="#事件冒泡（dubbed-bubbling）" class="headerlink" title="事件冒泡（dubbed bubbling）"></a>事件冒泡（dubbed bubbling）</h5><p>与事件捕获相反，事件冒泡是从目标元素<strong>由内往外</strong>进行事件传播，直到根节点。</p>
+<p>无论是事件冒泡还是事件捕获，都有一个共同点就是事件传播，她就像一根引线，只有通过引线才能将绑在引线上的鞭炮（事件监听器）引爆，试想一下，如果引线不导火了，那鞭炮就只有一响了！</p>
+<p>dom事件标准事件流的触发先后顺序是：<strong>先捕获后冒泡</strong>，即当触发dom事件时，会进行事件捕获，捕获到事件源后通过事件传播进行事件冒泡。不同浏览器对此有不同的实现，IE10及以下不支持捕获型事件，所以就少了一个时间捕获阶段，IE11,Chrome，Firefox，Safari等浏览器则同时存在。</p>
+<h5 id="事件绑定的方法"><a href="#事件绑定的方法" class="headerlink" title="事件绑定的方法"></a>事件绑定的方法</h5><h6 id="addEventlistener-event-listener-useCapture"><a href="#addEventlistener-event-listener-useCapture" class="headerlink" title="addEventlistener(event,listener,useCapture)"></a>addEventlistener(event,listener,useCapture)</h6><p>参数定义：event——（事件名称：如click，不带on）</p>
+<p>listener——事件监听函数，</p>
+<p>useCapture——是否采用事件捕获进行事件捕获，默认为false，即采用事件冒泡方式。</p>
+<p>addEventListener在IE11，Chrome，Firefox，Safari等浏览器都得到支持。</p>
+<h6 id="attachEvent（event，listener）"><a href="#attachEvent（event，listener）" class="headerlink" title="attachEvent（event，listener）"></a>attachEvent（event，listener）</h6><p>参数定义：event—（事件名称，如onclick，带on），</p>
+<p>listener—事件监听函数。</p>
+<p>attachEvent主要用于IE浏览器，并且仅在IE10及以下才支持，IE11已经废了这个方法了</p>
+<h6 id="事件冒泡例子"><a href="#事件冒泡例子" class="headerlink" title="事件冒泡例子"></a>事件冒泡例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,false);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,false);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;);</span><br><span class="line">    //event.stopProparation;</span><br><span class="line">    //可停止事件传播&#125;,false);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当点击子盒子时，打印结果依次为children——parent——body</p>
+<p>事件触发的顺序是由内到外的，这就是事件冒泡，虽然只点击了子元素，但是他的父元素也会触发相应的事件，其实这也是合理的，因为父元素里面，点击了子元素不就相当于变相的点击了父元素。</p>
+<p>若不想触发父元素可停止事件传播只需在子元素中添加<strong>event.stopProparation;</strong>即可。</p>
+<h6 id="事件捕获例子"><a href="#事件捕获例子" class="headerlink" title="事件捕获例子"></a>事件捕获例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    body&#123;background: green;&#125;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,true);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,true);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;)&#125;,true);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>点击children方块，打印body——parent——childre</p>
+<p>点击parent方块，打印body——parent</p>
+<p>点击body区域，打印body</p>
+<p>事件通过事件捕获的方式注册了click事件，所以在事件捕获阶段就会触发，先是触发最外围注册了事件捕获的body，而后触发事件捕获的parent，最后触发事件源。这就是事件的时间流程。</p>
 
       
     </div>
@@ -324,13 +329,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/25/事件机制/">事件机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-09-17, 19:57:30</p>
-        <p><span>最后更新:</span>2019-09-17, 19:58:03</p>
+        <p><span>发布时间:</span>2019-09-25, 21:25:10</p>
+        <p><span>最后更新:</span>2019-09-25, 21:25:37</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/09/17/MVVC模型架构/" title="MVVC模型架构">http://yoursite.com/2019/09/17/MVVC模型架构/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/17/MVVC模型架构/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/25/事件机制/" title="事件机制">http://yoursite.com/2019/09/25/事件机制/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/25/事件机制/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -342,16 +347,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/09/25/事件机制/">
-                    事件机制
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/09/15/js执行上下文/">
-                    js执行上下文
+                <a href="/2019/09/17/MVVC模型架构/">
+                    MVVC模型架构
                 </a>
             </div>
         
@@ -363,7 +362,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解MVVC架构模式"><span class="toc-number">1.</span> <span class="toc-text">理解MVVC架构模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC架构"><span class="toc-number">1.0.1.</span> <span class="toc-text">MVC架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MVVC"><span class="toc-number">1.0.2.</span> <span class="toc-text">MVVC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MVVC优点"><span class="toc-number">1.0.3.</span> <span class="toc-text">MVVC优点</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件机制之冒泡、传播、委托"><span class="toc-number">1.</span> <span class="toc-text">事件机制之冒泡、传播、委托</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#事件捕获阶段（event-capuring）"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">事件捕获阶段（event  capuring）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#事件冒泡（dubbed-bubbling）"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">事件冒泡（dubbed bubbling）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#事件绑定的方法"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">事件绑定的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#addEventlistener-event-listener-useCapture"><span class="toc-number">1.0.0.3.1.</span> <span class="toc-text">addEventlistener(event,listener,useCapture)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#attachEvent（event，listener）"><span class="toc-number">1.0.0.3.2.</span> <span class="toc-text">attachEvent（event，listener）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#事件冒泡例子"><span class="toc-number">1.0.0.3.3.</span> <span class="toc-text">事件冒泡例子</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#事件捕获例子"><span class="toc-number">1.0.0.3.4.</span> <span class="toc-text">事件捕获例子</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -399,7 +398,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"MVVC模型架构　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"事件机制　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -419,15 +418,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/09/25/事件机制/" title="上一篇: 事件机制">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/09/15/js执行上下文/" title="下一篇: js执行上下文">
+            <a href="/2019/09/17/MVVC模型架构/" title="下一篇: MVVC模型架构">
                 <i class="fa fa-angle-right"></i>
             </a>
         
