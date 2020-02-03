@@ -18,17 +18,17 @@
 <meta name="description" content="独立构建VS运行时构建 两者区别，独立构建包含模板编译器。模板编译是将编译vue模板字符串成纯js渲染函数，若想用template，则需要编译。  独立构建 独立构建包含模板编译器并支持template选项。他也依赖于浏览器接口的存在，所以你不能用其来为服务器渲染。  运行时构建 运行时构建不包含模板编译器，只能用render选项但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue学习">
-<meta property="og:url" content="http://yoursite.com/2019/12/25/vue学习/index.html">
+<meta property="og:title" content="vue进阶">
+<meta property="og:url" content="http://yoursite.com/2020/02/03/vue进阶/index.html">
 <meta property="og:site_name" content="Nikita">
 <meta property="og:description" content="独立构建VS运行时构建 两者区别，独立构建包含模板编译器。模板编译是将编译vue模板字符串成纯js渲染函数，若想用template，则需要编译。  独立构建 独立构建包含模板编译器并支持template选项。他也依赖于浏览器接口的存在，所以你不能用其来为服务器渲染。  运行时构建 运行时构建不包含模板编译器，只能用render选项但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://segmentfault.com/img/bVBQYu?w=730&h=390">
 <meta property="og:image" content="https://segmentfault.com/img/bVBQY3?w=625&h=259">
 <meta property="og:image" content="https://atts.w3cschool.cn/attachments/day_190316/201903161724311621.png">
-<meta property="og:updated_time" content="2019-12-25T12:48:40.916Z">
+<meta property="og:updated_time" content="2020-02-03T08:25:30.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue学习">
+<meta name="twitter:title" content="vue进阶">
 <meta name="twitter:description" content="独立构建VS运行时构建 两者区别，独立构建包含模板编译器。模板编译是将编译vue模板字符串成纯js渲染函数，若想用template，则需要编译。  独立构建 独立构建包含模板编译器并支持template选项。他也依赖于浏览器接口的存在，所以你不能用其来为服务器渲染。  运行时构建 运行时构建不包含模板编译器，只能用render选项但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件">
 <meta name="twitter:image" content="https://segmentfault.com/img/bVBQYu?w=730&h=390">
 
@@ -62,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>vue学习 | Nikita</title>
+<title>vue进阶 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -266,11 +266,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-vue学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-vue进阶" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/12/25/vue学习/" class="article-date">
-      <time datetime="2019-12-25T12:48:24.000Z" itemprop="datePublished">2019-12-25</time>
+      <a href="/2020/02/03/vue进阶/" class="article-date">
+      <time datetime="2020-02-03T08:25:10.000Z" itemprop="datePublished">2020-02-03</time>
 </a>
 
 
@@ -285,7 +285,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vue学习
+      vue进阶
     </h1>
   
 
@@ -497,8 +497,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let vm = new Vue(&#123;</span><br><span class="line">	el: &apos;#app&apos;,</span><br><span class="line">	data:&#123;&#125;,</span><br><span class="line">	methods:&#123;&#125;,</span><br><span class="line">	render:function(createElements)&#123;</span><br><span class="line">		return createElements(login);</span><br><span class="line">		//注：这里的login会替换掉页面中的el指定的那个容器</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">//简写</span><br><span class="line">render: c =&gt; c(login)</span><br></pre></td></tr></table></figure>
 
-<p>总结：webpack中使用vue</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装 vue 包，cnpm i vue -S</span><br><span class="line">2.由于在webpack中推荐使用vue组件模板文件定义组件，故需要安装能解析这种文件的loader    cnpm i vue-loader vue-template-compiler -D</span><br><span class="line">3.在main.js中导入vue模块， import Vue from &apos;vue&apos;</span><br><span class="line">4.定义.vue结尾的组件，由三部分组成：template script  style</span><br><span class="line">5.使用import login from &apos;./login.vue&apos;导入这个组件</span><br><span class="line">6.创建vm实例 let vm = new Vue(&#123; el: &apos;#app&apos;, render: c =&gt; c(login) &#125;)</span><br><span class="line">7.在页面创建一个id为app的div元素，作为我们vm实例要控制的区域；</span><br></pre></td></tr></table></figure>
+<h6 id="webpack中使用vue"><a href="#webpack中使用vue" class="headerlink" title="webpack中使用vue"></a>webpack中使用vue</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装 vue 包，cnpm i vue -S</span><br><span class="line">2.由于在webpack中推荐使用vue组件模板文件定义组件，故需要安装能解析这种文件的loader    cnpm i vue-loader vue-template-compiler -D</span><br><span class="line">3.在main.js中导入vue模块， import Vue from &apos;vue&apos;</span><br><span class="line">4.定义.vue结尾的组件，由三部分组成：template script  style</span><br><span class="line">5.使用import login from &apos;./login.vue&apos;导入这个组件</span><br><span class="line">6.创建vm实例 let vm = new Vue(&#123; el: &apos;#app&apos;, render: c =&gt; c(login) &#125;)</span><br><span class="line">7.在页面创建一个id为app的div元素，作为我们vm实例要控制的区域；</span><br></pre></td></tr></table></figure>
 
 <p>注意：App这个组件是通过vm实例的render函数渲染出来的，render函数如果要渲染组件，渲染出来的组件只能放到el：‘#app’ 所指定的元素中。</p>
 <p>Account和Goodlist组件是通过路由配置监听到的，所以这两个组件只能展示到属于路由的<router-view></router-view>中去。</p>
@@ -508,6 +507,55 @@
 <li>获取到的数据保存到data身上。</li>
 <li>使用v-for循环渲染到每个item项。</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">cnpm i vue-resource -D</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource);</span><br><span class="line"></span><br><span class="line">//组件文件，vue</span><br><span class="line">import &#123; Toast &#125; from &apos;mint-ui&apos;;</span><br><span class="line"></span><br><span class="line">  methods:&#123;</span><br><span class="line">        getLunBotu()&#123;</span><br><span class="line">            this.$http.get(&apos;https://api.dujin.org/pic/&apos;).then(res =&gt; &#123;</span><br><span class="line">               </span><br><span class="line">                if(res.status == 200)&#123;</span><br><span class="line">                     this.lunbotulist = res.body[0];</span><br><span class="line">                     console.log(this.lunbotulist);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    Toast(&apos;加载失败&apos;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">        this.getLunBotu();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"> //解决页面切换动画问题</span><br><span class="line"> &lt;transition&gt;</span><br><span class="line"> 	&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line"> &lt;/transition&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	 .app-container&#123;</span><br><span class="line">        padding-top: 40px;</span><br><span class="line">		overflow-x: hidden;  //只能将x超出部分隐藏，若将y的也隐藏，则页面不可进行上下滑动</span><br><span class="line">    &#125; </span><br><span class="line">	.v-enter&#123;    //离开和进入需分开写，确保动画都是往左走</span><br><span class="line">		opacity: 0;</span><br><span class="line">		transform: translateX(100%); </span><br><span class="line">	&#125;</span><br><span class="line">	.v-leave-to&#123; </span><br><span class="line">		opacity: 0;</span><br><span class="line">		transform: translateX(-100%); </span><br><span class="line">		position: absolute;  //解决动画切换时，内容是从下到上替换</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	.v-leave-active,</span><br><span class="line">	.v-enter-active&#123;</span><br><span class="line">		transition: all 0.5s ease; </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Promise使用"><a href="#Promise使用" class="headerlink" title="Promise使用"></a>Promise使用</h6><ul>
+<li>promise本质就是解决回调地狱问题。</li>
+</ul>
+<ol>
+<li>Promise是一个构造函数，故可通过 new Promise() 方法得到一个 Promise的实例。</li>
+<li>Promise表示一个异步操作，每当我们 new 一个Promise 实例，就表示一个具体的异步操作。故内部拿到操作结果后，无法使用 return 把操作结果返回给调用者，只能通过回调函数将成功和失败结果返回给调用者。</li>
+</ol>
+<p><strong>普通读取文件方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">fs.readFile(path.join(__dirname,&apos;./files/1.txt&apos;),&apos;utf-8&apos;,(err, dataStr) =&gt; &#123;</span><br><span class="line">	if(err) throw err;</span><br><span class="line">	console.log(dataStr);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="导入时间插件"><a href="#导入时间插件" class="headerlink" title="导入时间插件"></a>导入时间插件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cnpm i moment -S</span><br><span class="line"></span><br><span class="line">//导入格式化的插件</span><br><span class="line">import moment from &apos;moment&apos;;</span><br><span class="line">//定义全局的过滤器</span><br><span class="line">Vue.filter(&apos;dateFormat&apos;,function(dataStr,pattern = &quot;YYYY-MM-DD HH:mm:ss&quot;)&#123;</span><br><span class="line">	return moment(dataStr).format(pattern);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="vue-resource请求数据"><a href="#vue-resource请求数据" class="headerlink" title="vue-resource请求数据"></a>vue-resource请求数据</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//设置请求的根路径</span><br><span class="line">Vue.http.options.root = &apos;http://****.com&apos;;</span><br><span class="line">//全局设置post 时的表单数据格式组织形式  application/x-www-form-urlencoded</span><br><span class="line">Vue.http.options.emulateJSON = true;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//post请求内容及拼接数据</span><br><span class="line">this.$http.post(&quot;api/postcomment/&quot; + this.$route.params.id,&#123;</span><br><span class="line">	content: this.msg.trim()</span><br><span class="line">&#125;).then(function(result)&#123;</span><br><span class="line">	if(result.body.status === 0)&#123;</span><br><span class="line">		//拼接出一个对象·</span><br><span class="line">		let cmt = &#123;</span><br><span class="line">			user_name: &apos;匿名用户&apos;，</span><br><span class="line">			add_time: Date.now(),</span><br><span class="line">			content: this.msg.trim()</span><br><span class="line">		&#125;;</span><br><span class="line">		this.comments.unshift(cmt);</span><br><span class="line">		this.msg = &quot;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="制作顶部滑动条"><a href="#制作顶部滑动条" class="headerlink" title="制作顶部滑动条"></a>制作顶部滑动条</h6><ol>
+<li><p>需要借助于 MUI 中的 tab-top-webview-main.html</p>
+</li>
+<li><p>需要把slider 区域 mui-fullscreen 类去掉</p>
+</li>
+<li><p>滑动条无法正常触发滑动，通过检查官方文档，发现这是 js 组件，需要初始化一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.导入mui.js文件</span><br><span class="line">2.调用官方提供的方式去初始化</span><br><span class="line">mounted()&#123;  //调用时机会重要</span><br><span class="line">	mui(&apos;.mui-scroll-wrapper&apos;).scroll(&#123;</span><br><span class="line">	deceleration: 0.0005  </span><br><span class="line">        //flick减速系数，系数越大，滚动速度越慢，滚动距离越小，默认为0.0006</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们在初始化 滑动条时，导入的 mui.js ，但是控制台报错：因webpack打包好的bundle.js文件默认启用严格模式，故无法解析mui.js文件里的一些属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">解决方法：remove &quot;use strict&quot; directive </span><br><span class="line">cnpm i babel-plugin-transform-remove-strict-mode -D</span><br><span class="line">//在 .babelrc文件中</span><br><span class="line">&#123;</span><br><span class="line">	&quot;plugins&quot;:[&quot;transform-remove-strict-mode&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h6 id="动画transition"><a href="#动画transition" class="headerlink" title="动画transition"></a>动画transition</h6><p>当插入或删除包含在transition组件中的元素，Vue将会做以下处理</p>
+<ol>
+<li>自动嗅探目标元素是否应用了css过渡或动画，如果是在恰当的时机添加/删除css类名。</li>
+<li>如果过渡组件提供了js钩子函数，这些钩子函数将在恰当时机被调用。</li>
+<li>如果没有找到js钩子并且没有检测到css过渡/动画，DOM操作*（插入/删除）在下一帧中立即执行。（注意：此指浏览器逐帧动画机制，和Vue的nextTick概念不同）</li>
+</ol>
+<h6 id="用手机调试项目"><a href="#用手机调试项目" class="headerlink" title="用手机调试项目"></a>用手机调试项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;dev&quot;: &quot;webpack-dev-server --open --port 3000 --hot --host 172.23.232.1&quot;   连接上电脑主机</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>保证手机可正常运行；</li>
+<li>要保证手机于开发项目的电脑处于同一个WIFI环境中，也就是说手机可以访问到 电脑的 IP</li>
+<li>打开自己项目的package.json文件，添加 –host指令，把当前电脑的WIFI IP地址设置为 –host 的指令值<ol>
+<li>通过cmd终端运行 ‘ipconfig’ ,乍看 无线网的 ip 地址。</li>
+</ol>
+</li>
+</ol>
+<h6 id="使用邮箱发送短信"><a href="#使用邮箱发送短信" class="headerlink" title="使用邮箱发送短信"></a>使用邮箱发送短信</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">cnpm i nodemailer -D</span><br><span class="line"></span><br><span class="line">const nodemailer = require(&apos;nodemailer&apos;);</span><br><span class="line">async function main()&#123;</span><br><span class="line">	let testAccount = await nodemailer.createTestAcount();</span><br><span class="line">	let transporter = nodemailer.createTransport(&#123;</span><br><span class="line">		host: &quot;smtp.qq.com&quot;,   //在node_modues-&gt; lib -&gt; well-known -&gt; services.json 中找</span><br><span class="line">		port: 465,</span><br><span class="line">		secure:true,</span><br><span class="line">		auth: &#123;</span><br><span class="line">			auth: &#123;</span><br><span class="line">              user: &apos;3511564414@qq.com&apos;, // 发送给哪个邮箱</span><br><span class="line">              pass: &apos;kzqknaxbiearcife&apos; // 在qq邮箱中 -&gt; 设置 -&gt; 账户 -&gt;  开启POP3/SMTP服务</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	  let sendObj = &#123;</span><br><span class="line">        from: &apos;&quot;Fred Foo 👻&quot; &lt;3511564414@qq.com&gt;&apos;, // sender address</span><br><span class="line">        to: &quot;3511564414@qq.com&quot;, // list of receivers</span><br><span class="line">        subject: &quot;Hello ✔&quot;, // Subject line</span><br><span class="line">        text: &quot;Hello world?&quot;, // plain text body</span><br><span class="line">        // html: &quot;&lt;b&gt;Hello world?&lt;/b&gt;&quot; // html body</span><br><span class="line">      &#125;;</span><br><span class="line">      let info = await transporter.sendMail(sendObj);</span><br><span class="line">&#125;</span><br><span class="line">main().catch(console.error);</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -516,13 +564,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/12/25/vue学习/">vue学习</a></p>
+        <p><span>本文标题:</span><a href="/2020/02/03/vue进阶/">vue进阶</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-12-25, 20:48:24</p>
-        <p><span>最后更新:</span>2019-12-25, 20:48:40</p>
+        <p><span>发布时间:</span>2020-02-03, 16:25:10</p>
+        <p><span>最后更新:</span>2020-02-03, 16:25:30</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/12/25/vue学习/" title="vue学习">http://yoursite.com/2019/12/25/vue学习/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/25/vue学习/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/03/vue进阶/" title="vue进阶">http://yoursite.com/2020/02/03/vue进阶/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/03/vue进阶/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -534,16 +582,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/12/27/webpack学习/">
-                    webpack学习
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/11/15/攻克object对象/">
-                    攻克object对象
+                <a href="/2019/12/27/webpack学习/">
+                    webpack学习
                 </a>
             </div>
         
@@ -555,7 +597,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#独立构建VS运行时构建"><span class="toc-number">1.</span> <span class="toc-text">独立构建VS运行时构建</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#独立构建"><span class="toc-number">1.0.1.</span> <span class="toc-text">独立构建</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#运行时构建"><span class="toc-number">1.0.2.</span> <span class="toc-text">运行时构建</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据劫持"><span class="toc-number">2.</span> <span class="toc-text">数据劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据绑定"><span class="toc-number">2.0.1.</span> <span class="toc-text">数据绑定</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#实现编译"><span class="toc-number">2.0.2.</span> <span class="toc-text">实现编译</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#introction"><span class="toc-number">3.</span> <span class="toc-text">introction</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#v-if-VS-v-show"><span class="toc-number">3.0.1.</span> <span class="toc-text">v-if    VS  v-show</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#修饰符"><span class="toc-number">3.0.2.</span> <span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#组件"><span class="toc-number">3.0.3.</span> <span class="toc-text">组件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#深入响应式原理"><span class="toc-number">4.</span> <span class="toc-text">深入响应式原理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如何跟踪变化"><span class="toc-number">4.0.1.</span> <span class="toc-text">如何跟踪变化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#变化检测问题"><span class="toc-number">4.0.2.</span> <span class="toc-text">变化检测问题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#异步更新队列"><span class="toc-number">4.0.3.</span> <span class="toc-text">异步更新队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#过渡效果"><span class="toc-number">5.</span> <span class="toc-text">过渡效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组件传值"><span class="toc-number">6.</span> <span class="toc-text">组件传值</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#非父子组件间传值"><span class="toc-number">6.0.1.</span> <span class="toc-text">非父子组件间传值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#父子组件"><span class="toc-number">6.0.2.</span> <span class="toc-text">父子组件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#props"><span class="toc-number">6.0.3.</span> <span class="toc-text">props</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vue路由配置"><span class="toc-number">7.</span> <span class="toc-text">vue路由配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-config配置"><span class="toc-number">8.</span> <span class="toc-text">webpack.config配置</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#语法转换（高-——-gt-低）"><span class="toc-number">8.0.1.</span> <span class="toc-text">语法转换（高  ——&gt; 低）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#包查找规则"><span class="toc-number">8.0.2.</span> <span class="toc-text">包查找规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#渲染组件"><span class="toc-number">9.</span> <span class="toc-text">渲染组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加载轮播图"><span class="toc-number">10.</span> <span class="toc-text">加载轮播图</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#独立构建VS运行时构建"><span class="toc-number">1.</span> <span class="toc-text">独立构建VS运行时构建</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#独立构建"><span class="toc-number">1.0.1.</span> <span class="toc-text">独立构建</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#运行时构建"><span class="toc-number">1.0.2.</span> <span class="toc-text">运行时构建</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据劫持"><span class="toc-number">2.</span> <span class="toc-text">数据劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据绑定"><span class="toc-number">2.0.1.</span> <span class="toc-text">数据绑定</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#实现编译"><span class="toc-number">2.0.2.</span> <span class="toc-text">实现编译</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#introction"><span class="toc-number">3.</span> <span class="toc-text">introction</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#v-if-VS-v-show"><span class="toc-number">3.0.1.</span> <span class="toc-text">v-if    VS  v-show</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#修饰符"><span class="toc-number">3.0.2.</span> <span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#组件"><span class="toc-number">3.0.3.</span> <span class="toc-text">组件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#深入响应式原理"><span class="toc-number">4.</span> <span class="toc-text">深入响应式原理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如何跟踪变化"><span class="toc-number">4.0.1.</span> <span class="toc-text">如何跟踪变化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#变化检测问题"><span class="toc-number">4.0.2.</span> <span class="toc-text">变化检测问题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#异步更新队列"><span class="toc-number">4.0.3.</span> <span class="toc-text">异步更新队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#过渡效果"><span class="toc-number">5.</span> <span class="toc-text">过渡效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组件传值"><span class="toc-number">6.</span> <span class="toc-text">组件传值</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#非父子组件间传值"><span class="toc-number">6.0.1.</span> <span class="toc-text">非父子组件间传值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#父子组件"><span class="toc-number">6.0.2.</span> <span class="toc-text">父子组件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#props"><span class="toc-number">6.0.3.</span> <span class="toc-text">props</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vue路由配置"><span class="toc-number">7.</span> <span class="toc-text">vue路由配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-config配置"><span class="toc-number">8.</span> <span class="toc-text">webpack.config配置</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#语法转换（高-——-gt-低）"><span class="toc-number">8.0.1.</span> <span class="toc-text">语法转换（高  ——&gt; 低）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#包查找规则"><span class="toc-number">8.0.2.</span> <span class="toc-text">包查找规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#渲染组件"><span class="toc-number">9.</span> <span class="toc-text">渲染组件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#webpack中使用vue"><span class="toc-number">9.0.1.</span> <span class="toc-text">webpack中使用vue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加载轮播图"><span class="toc-number">10.</span> <span class="toc-text">加载轮播图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Promise使用"><span class="toc-number">10.0.1.</span> <span class="toc-text">Promise使用</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#导入时间插件"><span class="toc-number">10.0.2.</span> <span class="toc-text">导入时间插件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#vue-resource请求数据"><span class="toc-number">10.0.3.</span> <span class="toc-text">vue-resource请求数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#制作顶部滑动条"><span class="toc-number">10.0.4.</span> <span class="toc-text">制作顶部滑动条</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#动画transition"><span class="toc-number">10.0.5.</span> <span class="toc-text">动画transition</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#用手机调试项目"><span class="toc-number">10.0.6.</span> <span class="toc-text">用手机调试项目</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用邮箱发送短信"><span class="toc-number">10.0.7.</span> <span class="toc-text">使用邮箱发送短信</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -591,7 +633,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"vue学习　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"vue进阶　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -611,15 +653,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/12/27/webpack学习/" title="上一篇: webpack学习">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/11/15/攻克object对象/" title="下一篇: 攻克object对象">
+            <a href="/2019/12/27/webpack学习/" title="下一篇: webpack学习">
                 <i class="fa fa-angle-right"></i>
             </a>
         

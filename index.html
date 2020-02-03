@@ -268,6 +268,315 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-vue进阶" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/03/vue进阶/" class="article-date">
+      <time datetime="2020-02-03T08:25:10.000Z" itemprop="datePublished">2020-02-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/03/vue进阶/">vue进阶</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="独立构建VS运行时构建"><a href="#独立构建VS运行时构建" class="headerlink" title="独立构建VS运行时构建"></a>独立构建VS运行时构建</h4><ul>
+<li>两者区别，独立构建包含模板编译器。模板编译是将编译vue模板字符串成纯js渲染函数，若想用template，则需要编译。</li>
+</ul>
+<h6 id="独立构建"><a href="#独立构建" class="headerlink" title="独立构建"></a>独立构建</h6><ul>
+<li>独立构建包含模板编译器并支持template选项。他也依赖于浏览器接口的存在，所以你不能用其来为服务器渲染。</li>
+</ul>
+<h6 id="运行时构建"><a href="#运行时构建" class="headerlink" title="运行时构建"></a>运行时构建</h6><ul>
+<li><p>运行时构建不包含模板编译器，只能用render选项但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件的模板会在构建时预编译为render函数。运行时构建要比独立构建轻量30%；</p>
+</li>
+<li><p>默认npm导出的包是<strong>运行时构建</strong>。为使用独立构建在webpack配置中添加以下别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve:&#123;</span><br><span class="line">	alias:&#123;</span><br><span class="line">		&apos;vue$&apos;:&apos;vue/dist/vue.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要用import Vue from ‘vue/dist/vue.js’-用一些工具或第三方工具库引入Vue，这可能导致应用程序在同一加载运行时和独立构建并造成错误。</p>
+</li>
+</ul>
+<h4 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h4><ul>
+<li>核心方法是通过Object.definedProperty()来实现对属性进行劫持，达到监听数据变动的目的。</li>
+</ul>
+<h6 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h6><ul>
+<li>实现mvvm双向绑定需实现以下几点：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.实现一个数据监听器Observer，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者。</span><br><span class="line">2.实现一个指令解析器Compile，对每个元素节点进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</span><br><span class="line">3.实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的响应回调函数，从而更新视图。</span><br><span class="line">4.mvvm入口函数，整合以上三者。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://segmentfault.com/img/bVBQYu?w=730&h=390" alt="图片描述"></p>
+<ul>
+<li>我们知道可以利用<code>Obeject.defineProperty()</code>来监听属性变动<br>那么将需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上 <code>setter</code>和<code>getter</code><br>这样的话，给这个对象的某个值赋值，就会触发<code>setter</code>，那么就能监听到了数据变化。。相关代码可以是这样：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">let data = &#123;name: &apos;kindom&apos;&#125;;</span><br><span class="line">observer(data);</span><br><span class="line">data.name = &apos;queue&apos;;</span><br><span class="line"></span><br><span class="line">function observer(data)&#123;</span><br><span class="line">	if(!data || typeof data!== &apos;object&apos;)&#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	//取出所有属性的遍历</span><br><span class="line">	Object.keys(data).forEach(function(key)&#123;</span><br><span class="line">		defineReactive(data,key,data[key]);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">function defineReactive(data,key,val)&#123;</span><br><span class="line">	orserver(val);  //监听子属性</span><br><span class="line">	Object.defineProperty(data,key,&#123;</span><br><span class="line">		enumerable: true,  //可枚举</span><br><span class="line">		configurable: false,  //不可再定义</span><br><span class="line">		get: function()&#123;</span><br><span class="line">			return val;</span><br><span class="line">		&#125;,</span><br><span class="line">		set:functiion(newVal)&#123;</span><br><span class="line">			val = newVal;</span><br><span class="line">			dep.notify();  //通知所有的订阅者</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">functiion Dep()&#123;</span><br><span class="line">	this.subs = [];</span><br><span class="line">&#125;</span><br><span class="line">Dep.prototype = &#123;</span><br><span class="line">	addSub: function(sub)&#123;</span><br><span class="line">		this.subs.push(sub);</span><br><span class="line">	&#125;,</span><br><span class="line">	notify: function()&#123;</span><br><span class="line">		this.subs.forEach(function(sub)&#123;</span><br><span class="line">			sub.update();</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="实现编译"><a href="#实现编译" class="headerlink" title="实现编译"></a>实现编译</h6><ul>
+<li>compile主要的工作是解析模板指令，将模板指令替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知更新视图。</li>
+</ul>
+<p><img src="https://segmentfault.com/img/bVBQY3?w=625&h=259" alt="图片描述"></p>
+<h4 id="introction"><a href="#introction" class="headerlink" title="introction"></a>introction</h4><ul>
+<li>vue是一套构建用户的渐进式框架。与其他重量级框架不同，vue采用自底向上增量开发的设计。</li>
+<li>指令带有v-，以表示它们是Vue.js提供的特殊属性，他们会在渲染过的DOM上应用特殊的响应式行为。</li>
+<li>计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ，且计算属性是基于他的依赖缓存的。</li>
+</ul>
+<h6 id="v-if-VS-v-show"><a href="#v-if-VS-v-show" class="headerlink" title="v-if    VS  v-show"></a>v-if    VS  v-show</h6><ul>
+<li>v-if是真实的条件渲染，因为他会确保条件快在切换当中适当的销毁与重建。若初始条件为假时，则什么也不会做，仅在第一次变为真时才开始局部编译（编译会被缓存起来）。</li>
+<li>相比之下， v-show 简单得多——元素始终被编译并保留，只是简单地基于 CSS 切换。</li>
+<li>一般来说， v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换使用 v-show 较好，如果在运行时条件不大可能改变则使用 v-if 较好。</li>
+</ul>
+<h6 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h6><ul>
+<li>.lazy:默认情况下，v-model在input事件中的同步框的值和数据，但你可以添加一个修饰符lazy，从而转变在change事件中同步。</li>
+<li>.number</li>
+<li>.trim</li>
+</ul>
+<h6 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h6><ul>
+<li><p>Vue.component(tagName,options)</p>
+</li>
+<li><p>DOM模板解析说明:当DOM作为模板时，会受到一些HTML的一些限制，因为在Vue只有在浏览器解析和标准化HTML后才能获取模板内容。即table的子标签只能是tr，故需要is来指定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;tr is=&quot;my-row&quot;&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组件中的data必须是一个函数使每个组件中的数据引用都有一个自己的作用域，不会互相影响。</p>
+</li>
+<li><p>父传子：使用props传递数据。组件实例的作用域是孤立的即子组件的模版内不能直接引用父组件的数据。</p>
+</li>
+<li><p>子传父：通过自定义事件$emit</p>
+</li>
+<li><p>非父子组件通信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var bus = new Vue()</span><br><span class="line">// 触发组件 A 中的事件</span><br><span class="line">bus.$emit(&apos;id-selected&apos;, 1)</span><br><span class="line">// 在组件 B 创建的钩子中监听事件</span><br><span class="line">bus.$on(&apos;id-selected&apos;, function (id) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="深入响应式原理"><a href="#深入响应式原理" class="headerlink" title="深入响应式原理"></a>深入响应式原理</h4><h6 id="如何跟踪变化"><a href="#如何跟踪变化" class="headerlink" title="如何跟踪变化"></a>如何跟踪变化</h6><ul>
+<li><p>把一个普通js对象传给Vue实例来作为他的data选项，Vue将遍历它的属性，用Object.defineProperty将它们转为getting/setting。这是ES5的特性，不能打补丁实现，这便是为什么Vue不支持IE8及以下版本的原因。</p>
+</li>
+<li><p>用户看不到getting/setting，但在内部它们让Vue追踪依赖，在属性被访问和修改时通知变化。这里需要注意的是浏览器控制台在打印对象时getting/setting的格式化并不同，可通过vue-devtools</p>
+<p>来获取更加友好地检查接口。</p>
+</li>
+<li><p>每个组件实例都有watcher程序实例，他会在渲染的过程中把属性记录为依赖，之后当依赖项的setting被调用时，就会通知watcher重新计算，从而使和它相关联的组件得以更新。</p>
+</li>
+</ul>
+<p><img src="https://atts.w3cschool.cn/attachments/day_190316/201903161724311621.png" alt="data"></p>
+<h6 id="变化检测问题"><a href="#变化检测问题" class="headerlink" title="变化检测问题"></a>变化检测问题</h6><ul>
+<li><p>受现在的js影响，<strong>vue不能检测到对象的属性的添加或删除</strong>。因为Vue在初始化实例时将属性转为getting/setting，所以必须在data对象上在能让Vue转换它，这样才能是响应的。那种`vm.a=2’不是响应式的，因为js边解释边执行，不可能在初始化时将2付给a</p>
+</li>
+<li><p><strong>Vue 不允许在已经创建的实例上动态添加新的根级响应式属性（root-level reactive properties）</strong>。然而它可以使用 Vue.set(object, key, value) 方法将响应属性添加到嵌套的对象上：</p>
+</li>
+<li><p>您还可以使用 vm.$set 实例方法，这也是全局 Vue.set 方法的别名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.set(vm.someObject, &apos;b&apos;, 2)</span><br><span class="line"></span><br><span class="line">this.$set(this.someObject,&apos;b&apos;,2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有时你想向已有对象上添加一些属性，例如使用Object.assign()或_.extend()方法来添加属性。但是，新添加到对象上的新属性不会被触发更新，这种情况下可可创建一个新的对象，让它包含原对象的属性和新对象属性。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//代替Object.assign(this.somObject,&#123;a:1,b:2&#125;)</span><br><span class="line">this.someObject = Object.assign(&#123;&#125;,this.someObject,&#123;c:5&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果不在data中声明message，则message不是一个响应式的，同时Vue将发出警告表明你的渲染方法正试图访问一个不存在的属性。因为在依赖项跟踪系统中，他消除了一类边界情况，也使Vue实例在检查系统的帮助下运行的更高效。在代码可维护方面上这一点很重要：data对象就像组件状态的模式，在它上面声明的所有属性让组织代码更易于被其他开发者或是自己回头重新阅读加速理解。</li>
+</ul>
+<h6 id="异步更新队列"><a href="#异步更新队列" class="headerlink" title="异步更新队列"></a>异步更新队列</h6><ul>
+<li>Vue执行DOM更新是异步的，只要观察到数据变化，Vue就开始一个队列，将同一事件循环内的所有的数据变化缓存起来。如果watch被多次触发，只会推入一次到队列中。然后再接下来循环中，Vue刷新队列并仅执行必要的DOM更新。</li>
+</ul>
+<h4 id="过渡效果"><a href="#过渡效果" class="headerlink" title="过渡效果"></a>过渡效果</h4><ul>
+<li>元素封装成过渡组件后，在遇到删除或添加时，Vue将<ul>
+<li>自动嗅探到目标元素是否有CSS过渡或动画，并在合适时添加或删除CSS类名。</li>
+<li>如果过渡组件设置了过渡的js钩子函数会在相应的阶段调用钩子函数。</li>
+<li>如果没有找到js钩子也无css动画，DOM操作在下一帧立即执行。（注：此指浏览器逐帧动画机制，与Vue及其nextTick概念不同）</li>
+</ul>
+</li>
+<li>当只用js过渡时，在enter和leave中，回调函数done是必须的。否则，他们会被同步调用，过渡立即完成。推荐对于仅使用js过渡的元素添加<code>:css=&quot;false&quot;</code>,Vue会跳过CSS的检测，这也是避免过渡过程中CSS的影响。</li>
+</ul>
+<h4 id="组件传值"><a href="#组件传值" class="headerlink" title="组件传值"></a>组件传值</h4><h6 id="非父子组件间传值"><a href="#非父子组件间传值" class="headerlink" title="非父子组件间传值"></a>非父子组件间传值</h6><ul>
+<li>新建一个js文件，然后引入vue，实例化vue，最后暴露该实例。</li>
+<li>在要广播的地方引入定义好的实例。</li>
+<li>通过ViewEvent.$emit(‘名称’,’数据’)</li>
+<li>在要接收的地方通过ViewEvent.on(‘名称’，function（）{})</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//新建ViewEvent.js文件</span><br><span class="line">import Vue from &apos;Vue&apos;;</span><br><span class="line">let ViewEvent = new Vue();</span><br><span class="line">export default ViewEvent;</span><br><span class="line"></span><br><span class="line">//app.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	  &lt;home&gt;&lt;/home&gt;</span><br><span class="line">	  &lt;news&gt;&lt;/news&gt;</span><br><span class="line">	 &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">//home.vue</span><br><span class="line">import ViewEvent from &apos;ViewEvent&apos;;</span><br><span class="line">ViewEvent.$emit(&apos;test&apos;,&apos;123&apos;);</span><br><span class="line"></span><br><span class="line">//news.vue</span><br><span class="line">import ViewEvent from &apos;ViewEvent&apos;;</span><br><span class="line">ViewEvent.$on(&apos;test&apos;,function(data)&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="父子组件"><a href="#父子组件" class="headerlink" title="父子组件"></a>父子组件</h6><ul>
+<li>利用在父组件中的html标签中定义ref属性，通过$refs获取子组件的dom节点进行操作。</li>
+<li>利用$parents获取父组件的数据。</li>
+</ul>
+<h6 id="props"><a href="#props" class="headerlink" title="props"></a>props</h6><ul>
+<li>除了自定义数据可传外，还可将this或方法（不可加括号）</li>
+</ul>
+<h4 id="vue路由配置"><a href="#vue路由配置" class="headerlink" title="vue路由配置"></a>vue路由配置</h4><ol>
+<li><p>安装</p>
+<p><code>npm install vue-router --save</code>   /    <code>cnpm install vue-router --save</code></p>
+</li>
+<li><p>在main.js文件中引入并使用VueRouter</p>
+<p><code>import  VueRouter  from vue-router</code></p>
+<p><code>Vue.use(VueRouter)</code></p>
+</li>
+<li><p>配置路由</p>
+<ol>
+<li><p>创建组件，引入组件</p>
+</li>
+<li><p>定义路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const routes = &#123;</span><br><span class="line">	&#123;path: &apos;/bar&apos;,component: Bar&#125;,</span><br><span class="line">	&#123;path: &apos;/foo&apos;,component: Foo&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例化VueRouter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line"> 	routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    router</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在跟组件中加<code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="webpack-config配置"><a href="#webpack-config配置" class="headerlink" title="webpack.config配置"></a>webpack.config配置</h4><ul>
+<li><p>当以命令行形式命令运行webpack或webpack-dev-server时，工具会发现我们并没有提供要打包的文件的入口和出口文件，此时他会检查项目根目录中的配置文件并读取这个文件就拿到了导出的这个配置对象，然后根据这个对象，进行打包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//在内存中，根据指定的模板页面生成一份内存中的首页，同时把自动打包好的bundle.js文件注入到页面底部</span><br><span class="line">const htmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">//在输出对象中的plugins（是webpack插件的配置节点）数组中配置节点</span><br><span class="line">plugins:[</span><br><span class="line">	new htmlWebpackPlugin(&#123;</span><br><span class="line">	template:path.join(__dirname,&apos;./src/index.html&apos;), //指定模板文件路径</span><br><span class="line">	  filename:&apos;index.html&apos; //设置生成的内存页面的名称</span><br><span class="line">	&#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置第三方loader模块</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//下载相应的包</span><br><span class="line">cnpm i style-loader css-loader -D</span><br><span class="line">cnpm i less-loader less -D</span><br><span class="line">cnpm i sass-loader node-sass -D</span><br><span class="line">//webpack.config.js文件中</span><br><span class="line">//在输出对象，与plugins平齐的地方配置模块中</span><br><span class="line">module:&#123;</span><br><span class="line">	rules:[</span><br><span class="line">	 &#123; test: /\.css$/, use: [&apos;style-loader&apos;, &apos;css-loader&apos;] &#125;,  //处理css文件的loader</span><br><span class="line">	 &#123; test: /\.less$/, use: [&apos;style-loader&apos;, &apos;css-loader&apos;, &apos;less-loader&apos;] &#125;, //处理less文件的loader</span><br><span class="line">	 &#123; test: /\.scss$/, use: [&apos;style-loader&apos;, &apos;css-loader&apos;, &apos;sass-loader&apos;] &#125;, //处理less文件的loader</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br><span class="line">//在main.js文件中导入样式文件</span><br><span class="line">import &apos;./css/index.scss&apos;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认情况下，webpack无法处理css文件中的url地址，不管是图片还是字体库，只要是url地址都处理不了。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cnpm i url-loader file-loader -D</span><br><span class="line">//在webpack.config.js文件中配置</span><br><span class="line">         &#123; test: /\.(jpg|png|gif|bmp|jpeg)$/, use: &apos;url-loader&apos; &#125; //处理文件路径</span><br><span class="line">         //若想不使用默认的base64格式，则可用与url地址传参一样</span><br><span class="line">         &#123; test: /\.(jpg|png|gif|bmp|jpeg)$/, use: &apos;url-loader?limit=100&apos;&#125;  //当图片大小大于100字节时会被转为base64格式，小于等于100子节时为普通图片</span><br></pre></td></tr></table></figure>
+
+<h6 id="语法转换（高-——-gt-低）"><a href="#语法转换（高-——-gt-低）" class="headerlink" title="语法转换（高  ——&gt; 低）"></a>语法转换（高  ——&gt; 低）</h6><ul>
+<li><p>在webpack中。默认只能处理一部分ES6新语法，一些更高级ES6语法或ES7语法，webpack是处理不了的，这时就需要借助第三方loader来帮助webpack处理这些高级语法，当第三方loader把高级语法转为低级语法后，会将结果交给webpack去打包到main.js中。</p>
+</li>
+<li><p>通过Babel，可将高级语法转为低级语法</p>
+<ol>
+<li>安装包</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm i babel-core babel-loader babel-plugin-transform-runtime -D</span><br><span class="line">cnpm i babel-preset-env babel-preset-stage-0 -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>打开webpack的配置文件，在module节点下的rules数组中添加一个新的匹配规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; test: /\.js$/, use:&apos;babel-loader&apos;,exclude:/node_modules/&#125;</span><br><span class="line">注意：在配置babel的loader规则时，必须通过exclude选项将node_modules目录排除在外，原因有两：</span><br><span class="line">1.不排除node_modules时，Babel会将node_modules中的所有第三方js文件都打包编译，这样非常消耗内存，同时，打包速度也非常慢。</span><br><span class="line">2.哪怕最终Babel将所有node_modules中的js文件转换完毕，项目也无法正常进行。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目根目录中新建一个叫做babelrc的Babel配置文件，这个配置文件属于JSON格式，故不可加注释，字符串需用双引号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在babelrc写如下配置：preset可翻译为【语法】</span><br><span class="line">&#123;</span><br><span class="line">	&quot;preset&quot;: &#123;&quot;env&quot;:&quot;stage-0&quot;&#125;,</span><br><span class="line">	&quot;plugins&quot;: [&quot;transform-runtime&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<h6 id="包查找规则"><a href="#包查找规则" class="headerlink" title="包查找规则"></a>包查找规则</h6><ul>
+<li>在webpack中尝试使用vue，即使用<code>import Vue from &#39;vue&#39;导入的Vue构造函数，功能不完整，只提供了runtime-only的方式，并没有提供像网页那样的使用方式。</code>可使用<code>import Vue from &#39;../node_modules/vue/dist/vue.js&#39;</code></li>
+<li>包的使用规则</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.找项目的根目录中是否有node_modules文件夹</span><br><span class="line">2.在node_modules中根据包名找相应的vue文件夹</span><br><span class="line">3.在vue文件夹中找一个package.json的包配置属性</span><br><span class="line">4.在package.json文件中查找一个main属性【main属性指定了这个包在被加载时的入口文件】</span><br></pre></td></tr></table></figure>
+
+<h4 id="渲染组件"><a href="#渲染组件" class="headerlink" title="渲染组件"></a>渲染组件</h4><ul>
+<li>默认 webpack 无法打包 vue文件，需要安装相关的loader</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cnpm i vue-loader vue-template-compler -D</span><br><span class="line">//在配置文件中，新增loader配置项</span><br><span class="line">&#123; test:/\.vue$/, use: &apos;vue-loader&apos; &#125;</span><br><span class="line">//导入login组件</span><br><span class="line">import login from &apos;./login.vue&apos;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在webpack中，如果想要通过 vue ，把一个组件渲染到页面中去展示vm实例中的render函数可实现。</li>
+<li>createElements是一个方法，调用它可将指定的组件模板渲染为html结构。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let vm = new Vue(&#123;</span><br><span class="line">	el: &apos;#app&apos;,</span><br><span class="line">	data:&#123;&#125;,</span><br><span class="line">	methods:&#123;&#125;,</span><br><span class="line">	render:function(createElements)&#123;</span><br><span class="line">		return createElements(login);</span><br><span class="line">		//注：这里的login会替换掉页面中的el指定的那个容器</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">//简写</span><br><span class="line">render: c =&gt; c(login)</span><br></pre></td></tr></table></figure>
+
+<h6 id="webpack中使用vue"><a href="#webpack中使用vue" class="headerlink" title="webpack中使用vue"></a>webpack中使用vue</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装 vue 包，cnpm i vue -S</span><br><span class="line">2.由于在webpack中推荐使用vue组件模板文件定义组件，故需要安装能解析这种文件的loader    cnpm i vue-loader vue-template-compiler -D</span><br><span class="line">3.在main.js中导入vue模块， import Vue from &apos;vue&apos;</span><br><span class="line">4.定义.vue结尾的组件，由三部分组成：template script  style</span><br><span class="line">5.使用import login from &apos;./login.vue&apos;导入这个组件</span><br><span class="line">6.创建vm实例 let vm = new Vue(&#123; el: &apos;#app&apos;, render: c =&gt; c(login) &#125;)</span><br><span class="line">7.在页面创建一个id为app的div元素，作为我们vm实例要控制的区域；</span><br></pre></td></tr></table></figure>
+
+<p>注意：App这个组件是通过vm实例的render函数渲染出来的，render函数如果要渲染组件，渲染出来的组件只能放到el：‘#app’ 所指定的元素中。</p>
+<p>Account和Goodlist组件是通过路由配置监听到的，所以这两个组件只能展示到属于路由的<router-view></router-view>中去。</p>
+<h4 id="加载轮播图"><a href="#加载轮播图" class="headerlink" title="加载轮播图"></a>加载轮播图</h4><ol>
+<li>使用vue-resource获取数据。</li>
+<li>使用vue-resource的this.$http.get获取数据</li>
+<li>获取到的数据保存到data身上。</li>
+<li>使用v-for循环渲染到每个item项。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">cnpm i vue-resource -D</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource);</span><br><span class="line"></span><br><span class="line">//组件文件，vue</span><br><span class="line">import &#123; Toast &#125; from &apos;mint-ui&apos;;</span><br><span class="line"></span><br><span class="line">  methods:&#123;</span><br><span class="line">        getLunBotu()&#123;</span><br><span class="line">            this.$http.get(&apos;https://api.dujin.org/pic/&apos;).then(res =&gt; &#123;</span><br><span class="line">               </span><br><span class="line">                if(res.status == 200)&#123;</span><br><span class="line">                     this.lunbotulist = res.body[0];</span><br><span class="line">                     console.log(this.lunbotulist);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    Toast(&apos;加载失败&apos;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">        this.getLunBotu();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"> //解决页面切换动画问题</span><br><span class="line"> &lt;transition&gt;</span><br><span class="line"> 	&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line"> &lt;/transition&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	 .app-container&#123;</span><br><span class="line">        padding-top: 40px;</span><br><span class="line">		overflow-x: hidden;  //只能将x超出部分隐藏，若将y的也隐藏，则页面不可进行上下滑动</span><br><span class="line">    &#125; </span><br><span class="line">	.v-enter&#123;    //离开和进入需分开写，确保动画都是往左走</span><br><span class="line">		opacity: 0;</span><br><span class="line">		transform: translateX(100%); </span><br><span class="line">	&#125;</span><br><span class="line">	.v-leave-to&#123; </span><br><span class="line">		opacity: 0;</span><br><span class="line">		transform: translateX(-100%); </span><br><span class="line">		position: absolute;  //解决动画切换时，内容是从下到上替换</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	.v-leave-active,</span><br><span class="line">	.v-enter-active&#123;</span><br><span class="line">		transition: all 0.5s ease; </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Promise使用"><a href="#Promise使用" class="headerlink" title="Promise使用"></a>Promise使用</h6><ul>
+<li>promise本质就是解决回调地狱问题。</li>
+</ul>
+<ol>
+<li>Promise是一个构造函数，故可通过 new Promise() 方法得到一个 Promise的实例。</li>
+<li>Promise表示一个异步操作，每当我们 new 一个Promise 实例，就表示一个具体的异步操作。故内部拿到操作结果后，无法使用 return 把操作结果返回给调用者，只能通过回调函数将成功和失败结果返回给调用者。</li>
+</ol>
+<p><strong>普通读取文件方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">fs.readFile(path.join(__dirname,&apos;./files/1.txt&apos;),&apos;utf-8&apos;,(err, dataStr) =&gt; &#123;</span><br><span class="line">	if(err) throw err;</span><br><span class="line">	console.log(dataStr);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="导入时间插件"><a href="#导入时间插件" class="headerlink" title="导入时间插件"></a>导入时间插件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cnpm i moment -S</span><br><span class="line"></span><br><span class="line">//导入格式化的插件</span><br><span class="line">import moment from &apos;moment&apos;;</span><br><span class="line">//定义全局的过滤器</span><br><span class="line">Vue.filter(&apos;dateFormat&apos;,function(dataStr,pattern = &quot;YYYY-MM-DD HH:mm:ss&quot;)&#123;</span><br><span class="line">	return moment(dataStr).format(pattern);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="vue-resource请求数据"><a href="#vue-resource请求数据" class="headerlink" title="vue-resource请求数据"></a>vue-resource请求数据</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//设置请求的根路径</span><br><span class="line">Vue.http.options.root = &apos;http://****.com&apos;;</span><br><span class="line">//全局设置post 时的表单数据格式组织形式  application/x-www-form-urlencoded</span><br><span class="line">Vue.http.options.emulateJSON = true;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//post请求内容及拼接数据</span><br><span class="line">this.$http.post(&quot;api/postcomment/&quot; + this.$route.params.id,&#123;</span><br><span class="line">	content: this.msg.trim()</span><br><span class="line">&#125;).then(function(result)&#123;</span><br><span class="line">	if(result.body.status === 0)&#123;</span><br><span class="line">		//拼接出一个对象·</span><br><span class="line">		let cmt = &#123;</span><br><span class="line">			user_name: &apos;匿名用户&apos;，</span><br><span class="line">			add_time: Date.now(),</span><br><span class="line">			content: this.msg.trim()</span><br><span class="line">		&#125;;</span><br><span class="line">		this.comments.unshift(cmt);</span><br><span class="line">		this.msg = &quot;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="制作顶部滑动条"><a href="#制作顶部滑动条" class="headerlink" title="制作顶部滑动条"></a>制作顶部滑动条</h6><ol>
+<li><p>需要借助于 MUI 中的 tab-top-webview-main.html</p>
+</li>
+<li><p>需要把slider 区域 mui-fullscreen 类去掉</p>
+</li>
+<li><p>滑动条无法正常触发滑动，通过检查官方文档，发现这是 js 组件，需要初始化一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.导入mui.js文件</span><br><span class="line">2.调用官方提供的方式去初始化</span><br><span class="line">mounted()&#123;  //调用时机会重要</span><br><span class="line">	mui(&apos;.mui-scroll-wrapper&apos;).scroll(&#123;</span><br><span class="line">	deceleration: 0.0005  </span><br><span class="line">        //flick减速系数，系数越大，滚动速度越慢，滚动距离越小，默认为0.0006</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们在初始化 滑动条时，导入的 mui.js ，但是控制台报错：因webpack打包好的bundle.js文件默认启用严格模式，故无法解析mui.js文件里的一些属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">解决方法：remove &quot;use strict&quot; directive </span><br><span class="line">cnpm i babel-plugin-transform-remove-strict-mode -D</span><br><span class="line">//在 .babelrc文件中</span><br><span class="line">&#123;</span><br><span class="line">	&quot;plugins&quot;:[&quot;transform-remove-strict-mode&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h6 id="动画transition"><a href="#动画transition" class="headerlink" title="动画transition"></a>动画transition</h6><p>当插入或删除包含在transition组件中的元素，Vue将会做以下处理</p>
+<ol>
+<li>自动嗅探目标元素是否应用了css过渡或动画，如果是在恰当的时机添加/删除css类名。</li>
+<li>如果过渡组件提供了js钩子函数，这些钩子函数将在恰当时机被调用。</li>
+<li>如果没有找到js钩子并且没有检测到css过渡/动画，DOM操作*（插入/删除）在下一帧中立即执行。（注意：此指浏览器逐帧动画机制，和Vue的nextTick概念不同）</li>
+</ol>
+<h6 id="用手机调试项目"><a href="#用手机调试项目" class="headerlink" title="用手机调试项目"></a>用手机调试项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;dev&quot;: &quot;webpack-dev-server --open --port 3000 --hot --host 172.23.232.1&quot;   连接上电脑主机</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>保证手机可正常运行；</li>
+<li>要保证手机于开发项目的电脑处于同一个WIFI环境中，也就是说手机可以访问到 电脑的 IP</li>
+<li>打开自己项目的package.json文件，添加 –host指令，把当前电脑的WIFI IP地址设置为 –host 的指令值<ol>
+<li>通过cmd终端运行 ‘ipconfig’ ,乍看 无线网的 ip 地址。</li>
+</ol>
+</li>
+</ol>
+<h6 id="使用邮箱发送短信"><a href="#使用邮箱发送短信" class="headerlink" title="使用邮箱发送短信"></a>使用邮箱发送短信</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">cnpm i nodemailer -D</span><br><span class="line"></span><br><span class="line">const nodemailer = require(&apos;nodemailer&apos;);</span><br><span class="line">async function main()&#123;</span><br><span class="line">	let testAccount = await nodemailer.createTestAcount();</span><br><span class="line">	let transporter = nodemailer.createTransport(&#123;</span><br><span class="line">		host: &quot;smtp.qq.com&quot;,   //在node_modues-&gt; lib -&gt; well-known -&gt; services.json 中找</span><br><span class="line">		port: 465,</span><br><span class="line">		secure:true,</span><br><span class="line">		auth: &#123;</span><br><span class="line">			auth: &#123;</span><br><span class="line">              user: &apos;3511564414@qq.com&apos;, // 发送给哪个邮箱</span><br><span class="line">              pass: &apos;kzqknaxbiearcife&apos; // 在qq邮箱中 -&gt; 设置 -&gt; 账户 -&gt;  开启POP3/SMTP服务</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	  let sendObj = &#123;</span><br><span class="line">        from: &apos;&quot;Fred Foo 👻&quot; &lt;3511564414@qq.com&gt;&apos;, // sender address</span><br><span class="line">        to: &quot;3511564414@qq.com&quot;, // list of receivers</span><br><span class="line">        subject: &quot;Hello ✔&quot;, // Subject line</span><br><span class="line">        text: &quot;Hello world?&quot;, // plain text body</span><br><span class="line">        // html: &quot;&lt;b&gt;Hello world?&lt;/b&gt;&quot; // html body</span><br><span class="line">      &#125;;</span><br><span class="line">      let info = await transporter.sendMail(sendObj);</span><br><span class="line">&#125;</span><br><span class="line">main().catch(console.error);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-webpack学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -297,7 +606,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="运行cnpm-run-dev自动打开"><a href="#运行cnpm-run-dev自动打开" class="headerlink" title="运行cnpm run dev自动打开"></a><strong>运行cnpm run dev自动打开</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//package.json文件</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">	&quot;dev&quot;: &quot;webpack-dev-server --open --port 3000 --hot&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="npm相关"><a href="#npm相关" class="headerlink" title="npm相关"></a>npm相关</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack --save-dev      开发环境下的依赖</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行cnpm-run-dev自动打开"><a href="#运行cnpm-run-dev自动打开" class="headerlink" title="运行cnpm run dev自动打开"></a>运行cnpm run dev自动打开</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//package.json文件</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">	&quot;dev&quot;: &quot;webpack-dev-server --open --port 3000 --hot&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;webpack&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
@@ -310,11 +621,17 @@
 <li>代码校验</li>
 <li>自动发布</li>
 </ul>
+<h6 id="loader功能"><a href="#loader功能" class="headerlink" title="loader功能"></a>loader功能</h6><p>loader让webpack能够去处理那些非js文件，（webpack自身只能理解js）。loader能让所有类型的文件转换为webpack能够处理的有效模块，然后就可利用webpack的打包能力对其进行处理。</p>
+<p>loader的两大目标：</p>
+<ol>
+<li>test属性，用于标识出应该被对应的loader进行转换的某个文件。</li>
+<li>use属性，表示在转换时，应使用哪个loader。</li>
+</ol>
 <h4 id="webpack使用"><a href="#webpack使用" class="headerlink" title="webpack使用"></a>webpack使用</h4><ul>
 <li>webpack默认只支持js文件</li>
 <li>node webpack</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//安装本地的webpack</span><br><span class="line">cnpm i webpack webpack-cli -D</span><br><span class="line">//在命令行上输入webpack即可将入口文件打包</span><br><span class="line">//webpack可以进行0配置</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//安装本地的webpack</span><br><span class="line">cnpm i webpack webpack-cli -D</span><br><span class="line">//表示开发依赖</span><br><span class="line">//在命令行上输入webpack即可将入口文件打包</span><br><span class="line">//webpack可以进行0配置</span><br></pre></td></tr></table></figure>
 
 <h6 id="手动配置webpack文件"><a href="#手动配置webpack文件" class="headerlink" title="手动配置webpack文件"></a>手动配置webpack文件</h6><p>webpack配置文件<strong>webpack.config.js</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	mode: &apos;development&apos;,//模式默认两种，production  development</span><br><span class="line">	entry: path.join(__dirname,&apos;./src/main.js&apos;),</span><br><span class="line">	output: &#123;</span><br><span class="line">		path: path.resolve(__dirname,&apos;dist&apos;),//路径必须是一个绝对路径</span><br><span class="line">		filename: &apos;bundle.js&apos;,//打包后的文件名</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -327,7 +644,11 @@
 
 <h6 id="webpack解析html模块"><a href="#webpack解析html模块" class="headerlink" title="webpack解析html模块"></a>webpack解析html模块</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">cnpm i html-webpack-plugin -D</span><br><span class="line">//webpack.config.js</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	output: &#123;</span><br><span class="line">		path: path.resove(__dirname,&apos;./dist&apos;),</span><br><span class="line">		filename: &apos;bundle.[hash].js&apos;,  //每次输出的文件都不同</span><br><span class="line">		//filename: &apos;bundle.[hash:8].js&apos;,  只显示8位hash值 </span><br><span class="line">	&#125;</span><br><span class="line">	plugins: [  //数组 放着所有的webpack插件</span><br><span class="line">		new HtmlWebpackPlugin(&#123;</span><br><span class="line">			template: &apos;./src/index.html&apos;  //以index.html文件为模板</span><br><span class="line">			filename: &apos;index.html&apos;, //打包后的文件名</span><br><span class="line">			minify: &#123;</span><br><span class="line">				removeAttributeQuotes:true,  //压缩时，删除属性中的双引号</span><br><span class="line">				collapseWhiteSpace: true,  //折叠空行，将html文件打包成一行</span><br><span class="line">				</span><br><span class="line">			&#125;,</span><br><span class="line">			hash: true,  //添加哈希戳</span><br><span class="line">		&#125;)</span><br><span class="line">	</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h6 id="webpack解析css模块"><a href="#webpack解析css模块" class="headerlink" title="webpack解析css模块"></a>webpack解析css模块</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">cnpm i style-loader css-loader -D  //处理css文件</span><br><span class="line">cnpm i less less-loader -D   //less-loader会调用less进行解析</span><br><span class="line">cnpm i node-sass sass-loader -D   //处理sass文件</span><br><span class="line">cnpm i stylus stylus-loader -D   //处理stylus文件</span><br><span class="line"></span><br><span class="line">//main.js文件导入css文件</span><br><span class="line">require(&apos;./index.css&apos;);</span><br><span class="line"></span><br><span class="line">//webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	module: &#123; //模块</span><br><span class="line">		rules: [  //规则  css-loader 处理@import这种语法的，将多个css文件合并为一个css文件</span><br><span class="line">		  //style-loader 他是把css插入到head的标签中</span><br><span class="line">		  //loader特点：希望一个loader处理一个功能</span><br><span class="line">		  //只用一个loader用字符串，多个loader用数组,当有参数时可写成对象方式</span><br><span class="line">		  //loader顺序:默认从右向左执行</span><br><span class="line">		  &#123; </span><br><span class="line">		      test: /\.css$/,</span><br><span class="line">              use: [</span><br><span class="line">               &#123;</span><br><span class="line">		  		 loader:&apos;style-loader&apos;,</span><br><span class="line">		  		 options: &#123;</span><br><span class="line">		  		 	insertAt: &apos;top&apos;  //将样式插到head顶部</span><br><span class="line">		  		 &#125;</span><br><span class="line">		 	   &#125;,</span><br><span class="line">		 	   &apos;css-loader&apos;</span><br><span class="line">		 	  ]</span><br><span class="line">		 &#125;,</span><br><span class="line">		 &#123; test: /\.less$/, use: [&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;] &#125;</span><br><span class="line">		]</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="webpack解析css模块"><a href="#webpack解析css模块" class="headerlink" title="webpack解析css模块"></a>webpack解析css模块</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">cnpm i style-loader css-loader -D  //处理css文件</span><br><span class="line">cnpm i less less-loader -D   //less-loader会调用less进行解析</span><br><span class="line">cnpm i node-sass sass-loader -D   //处理sass和scss文件</span><br><span class="line">cnpm i stylus stylus-loader -D   //处理stylus文件</span><br><span class="line"></span><br><span class="line">//main.js文件导入css文件</span><br><span class="line">require(&apos;./index.css&apos;);</span><br><span class="line"></span><br><span class="line">//webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	module: &#123; //模块</span><br><span class="line">		rules: [  //规则  css-loader 处理@import这种语法的，将多个css文件合并为一个css文件</span><br><span class="line">		  //style-loader 他是把css插入到head的标签中</span><br><span class="line">		  //loader特点：希望一个loader处理一个功能</span><br><span class="line">		  //只用一个loader用字符串，多个loader用数组,当有参数时可写成对象方式</span><br><span class="line">		  //loader顺序:默认从右向左执行</span><br><span class="line">		  &#123; </span><br><span class="line">		      test: /\.css$/,</span><br><span class="line">              use: [</span><br><span class="line">               &#123;</span><br><span class="line">		  		 loader:&apos;style-loader&apos;,</span><br><span class="line">		  		 options: &#123;</span><br><span class="line">		  		 	insertAt: &apos;top&apos;  //将样式插到head顶部</span><br><span class="line">		  		 &#125;</span><br><span class="line">		 	   &#125;,</span><br><span class="line">		 	   &apos;css-loader&apos;</span><br><span class="line">		 	  ]</span><br><span class="line">		 &#125;,</span><br><span class="line">		 &#123; test: /\.less$/, use: [&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;] &#125;</span><br><span class="line">		]</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="抽离文件的插件"><a href="#抽离文件的插件" class="headerlink" title="抽离文件的插件"></a>抽离文件的插件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">cnpm i mini-css-extract-plugin -D</span><br><span class="line">//专门用于抽离css样式的插件</span><br><span class="line"></span><br><span class="line">//webpack.config.js</span><br><span class="line">let MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;);</span><br><span class="line">plugins: [</span><br><span class="line">	new HtmlWebpackPlugin(&#123;</span><br><span class="line">		template: &apos;./src/index.html&apos;,</span><br><span class="line">		filename: &apos;index.html&apos;</span><br><span class="line">	&#125;),</span><br><span class="line">	new MiniCssExtractPlugin(&#123;</span><br><span class="line">		filenmae: &apos;main.css&apos;   //抽离出的名字叫main.css</span><br><span class="line">	&#125;)</span><br><span class="line">],</span><br><span class="line">module: &#123;</span><br><span class="line">	rules:[</span><br><span class="line">		&#123;</span><br><span class="line">		  test:/\.css$/,</span><br><span class="line">		  use: [</span><br><span class="line">		    MiniCssExtractPlugin.loader,</span><br><span class="line">		    &apos;css-loader&apos;    //先解析成css样式，然后使用MiniCssExtractPlugin这个插件的加载器将样式分离成一个main.css文件</span><br><span class="line">		  ]</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="自动加前缀的插件"><a href="#自动加前缀的插件" class="headerlink" title="自动加前缀的插件"></a>自动加前缀的插件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cnpm i postcss-loader autoprefixer </span><br><span class="line"></span><br><span class="line">module: &#123;</span><br><span class="line">	rules: [</span><br><span class="line">		&#123;</span><br><span class="line">            test: /\.less$/,</span><br><span class="line">            use:[</span><br><span class="line">				MiniCssExtractPlugin.loader,</span><br><span class="line">				&apos;css-loader&apos;,</span><br><span class="line">				&apos;postcss-loader&apos;,</span><br><span class="line">				&apos;less-loader&apos;</span><br><span class="line">            ]</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//新建一个postcss.config.js文件</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	plugins: [require(&apos;autoprefixer&apos;)]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h6 id="webpack中处理js模块"><a href="#webpack中处理js模块" class="headerlink" title="webpack中处理js模块"></a>webpack中处理js模块</h6><ul>
 <li>将es6转为es5</li>
@@ -404,6 +725,29 @@
 <h6 id="Tapable"><a href="#Tapable" class="headerlink" title="Tapable"></a>Tapable</h6><ul>
 <li>webpack本质上是一种事件流机制，它的工作流程是将各个插件串联起来，而实现这一切的核心是Tapable，Tapable是有点类似于nodeJs的events库，核心原理也是依赖于发布订阅模式。</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="webpack中使用vue"><a href="#webpack中使用vue" class="headerlink" title="webpack中使用vue"></a>webpack中使用vue</h6><p><strong>在普通网页中使用vue</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//1.使用script标签，引入vue的包   (此包功能较全)</span><br><span class="line">&lt;scrpit src=&quot;./lib/vue.js&quot;&gt;&lt;/srcipt&gt;</span><br><span class="line"></span><br><span class="line">//2.在index页面中，创建一个id为app的div容器</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">//3.通过new Vue得到一个vm实例</span><br><span class="line">let vm = new Vue(&#123;</span><br><span class="line">	el: &apos;#app&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>在webpack中尝试使用vue</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//注意：在webpack中，使用import Vue from &apos;vue&apos; 导入的Vue构造函数功能不完整，只提供了runtime-only的形式，并无提供像网页中那样的使用方式；</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line"></span><br><span class="line">let vm = new Vue(&#123;</span><br><span class="line">	el: &apos;#app&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">解决：指定完整vue.js文件的路径</span><br><span class="line">方式一：import Vue from &apos;./node_modules/vue/dist/vue.js&apos;;</span><br><span class="line">方式二：import vue from &apos;vue&apos;</span><br><span class="line">在webpack.config.js文件中</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	resolve: &#123;</span><br><span class="line">		alias: &#123;  //修改vue时被导入时包的路径</span><br><span class="line">			&quot;vue$&quot;: &quot;vue/dist/vue.js&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">cnpm i vue -S</span><br><span class="line">cnpm i vue-loader vue-template-compiler -D</span><br><span class="line"></span><br><span class="line">//webpack.config.js文件</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">const VueLoaderPlugin = require(&apos;vue-loader/lib/plugin&apos;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &quot;development&quot;,</span><br><span class="line">    entry: &apos;./src/index.js&apos;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname,&apos;./dist&apos;),</span><br><span class="line">        filename: &apos;bundle.js&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &apos;./src/index.html&apos;,</span><br><span class="line">            filename: &apos;index.html&apos;</span><br><span class="line">        &#125;),</span><br><span class="line">        new VueLoaderPlugin()</span><br><span class="line">    ],</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123; test: /\.css/, use: [&apos;style-loader&apos;,&apos;css-loader&apos;] &#125;,</span><br><span class="line">            &#123; test: /\.vue/, use: &apos;vue-loader&apos; &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装 vue 包，cnpm i vue -S</span><br><span class="line">2.由于在webpack中推荐使用vue组件模板文件定义组件，故需要安装能解析这种文件的loader    cnpm i vue-loader vue-template-compiler -D</span><br><span class="line">3.在main.js中导入vue模块， import Vue from &apos;vue&apos;</span><br><span class="line">4.定义.vue结尾的组件，由三部分组成：template script  style</span><br><span class="line">5.使用import login from &apos;./login.vue&apos;导入这个组件</span><br><span class="line">6.创建vm实例 let vm = new Vue(&#123; el: &apos;#app&apos;, render: c =&gt; c(login) &#125;)</span><br><span class="line">7.在页面创建一个id为app的div元素，作为我们vm实例要控制的区域；</span><br></pre></td></tr></table></figure>
+
+<p>注意：App这个组件是通过vm实例的render函数渲染出来的，render函数如果要渲染组件，渲染出来的组件只能放到el：‘#app’ 所指定的元素中。</p>
+<p>Account和Goodlist组件是通过路由配置监听到的，所以这两个组件只能展示到属于路由的<router-view></router-view>中去。</p>
+<h6 id="包的查找规则"><a href="#包的查找规则" class="headerlink" title="包的查找规则"></a>包的查找规则</h6><p><strong>找vue文件</strong></p>
+<ol>
+<li>找项目根目录中有没有 node_modules 的文件夹</li>
+<li>在node_modules中根据包名找对应的vue文件夹</li>
+<li>在vue文件夹中，找一个叫package.json 的包配置文件</li>
+<li>在 package.json 文件中，查找一个main 属性【main属性指定了这个包在被加载时的入口文件】</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//sf-pack.js文件</span><br><span class="line">//需要找到当前执行命令的路径，拿到webpack.config.json</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">//config配置文件</span><br><span class="line">let config = require(path.resolve(&apos;webpack.config.js&apos;));</span><br><span class="line"></span><br><span class="line">let Compiler = require(&apos;../lib/Compiler.js&apos;);</span><br><span class="line">let compiler = new Compiler(config);</span><br><span class="line">//标识运行编译</span><br><span class="line">compiler.run();</span><br><span class="line"></span><br><span class="line">//Compiler.js文件</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line">class Compiler&#123;</span><br><span class="line">	constructor(config)&#123;</span><br><span class="line">		//entry  output</span><br><span class="line">		this.config = config;</span><br><span class="line">		//需要保存入口文件的路径</span><br><span class="line">		this.entryId;    //&apos;./src/index.js&apos;</span><br><span class="line">		//需要保存所有模块依赖</span><br><span class="line">		this.modules = &#123;&#125;;</span><br><span class="line">		this.entry = config.entry;  //入口路径</span><br><span class="line">		//工作路径</span><br><span class="line">		this.root = process.cwd();</span><br><span class="line">	&#125;</span><br><span class="line">	getSource(modulePath)&#123;</span><br><span class="line">		let content = fs.readFileSync(modulePath,&apos;utf-8&apos;);</span><br><span class="line">		return content;</span><br><span class="line">	&#125;</span><br><span class="line">	//构建模块</span><br><span class="line">	buildModule(modulePath,isEntry)&#123;</span><br><span class="line">		//拿到模块内容</span><br><span class="line">		let source = this.getSource(modulePath);</span><br><span class="line">		//模块id  modulePath = modulePath - this.root;</span><br><span class="line">		let modulePath = &apos;./&apos; +  path.relative(this.root,modulePath);</span><br><span class="line">	&#125;</span><br><span class="line">	run()&#123;</span><br><span class="line">		//执行并且创建模块的依赖关系</span><br><span class="line">		this.buildModule(path.resolve(this.root,this.entry),true);</span><br><span class="line">		//true表示为主模块</span><br><span class="line">		//发射一个文件，该文件即为打包后的文件</span><br><span class="line">		this.emitFile();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">module.exports = Compiler</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1451,120 +1795,6 @@
 <p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
 <p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
 <p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/15/js执行上下文/" class="article-date">
-      <time datetime="2019-09-15T12:36:10.000Z" itemprop="datePublished">2019-09-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/js执行上下文/">js执行上下文</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="js的执行上下文"><a href="#js的执行上下文" class="headerlink" title="js的执行上下文"></a>js的执行上下文</h2><p>执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。</p>
-<h4 id="执行上下文的的三种类型"><a href="#执行上下文的的三种类型" class="headerlink" title="执行上下文的的三种类型"></a>执行上下文的的三种类型</h4><p><strong>全局执行上下文</strong>：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：</p>
-<ul>
-<li>创建一个全局对象，在浏览器中这个全局对象就是window对象。</li>
-<li>将this指针只想这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
-</ul>
-<p><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在被调用时才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，她都会按照特定的顺序执行一系列步骤。</p>
-<p><strong>Eval函数执行上下文</strong>：运行在eval函数中的代码也获得自己的执行上下文。</p>
-<h4 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h4><p>执行上下文的生命周期包括三个阶段：<strong>创建阶段——执行阶段——回收阶段</strong></p>
-<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>当函数被调用时，但未被执行其内部任意代码前，会做以下三件事：</p>
-<ol>
-<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
-<li>创建作用域链（scope chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，js始终从代码嵌套的最内层开始，如果最内层没有该变量，就往上一层父级作用域中找，直到找到变量。</li>
-<li>确定this指向</li>
-</ol>
-<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
-<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
-<p>以上过程实则为代码的预处理阶段，详细过程如下：</p>
-<ol>
-<li>读取分析整个源代码</li>
-<li>先扫描函数声明，之后扫描变量（var声明）<ul>
-<li>处理函数声明时有冲突，会覆盖。</li>
-<li>处理变量声明有冲突，会忽略。</li>
-</ul>
-</li>
-<li>将扫描到的函数和变量保存到一个对象中（全局的会保存在window对象中）</li>
-<li>变量的值是undefined，函数的值则是指向该函数（是一个函数字符串）<ul>
-<li>形式如：window = { x : undefined , f : ‘function(){console.log(1);}’ }</li>
-</ul>
-</li>
-</ol>
-<p><strong>注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
-<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
-<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>执行变量赋值、代码执行。</p>
-<p>该过程为：</p>
-<ol>
-<li><p>将变量的值从undefined改为给定值。</p>
-</li>
-<li><p>调用函数f（），以便函数得到执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">上面函数(f)内，代码的处理过程：</span><br><span class="line"></span><br><span class="line">    1、预处理阶段</span><br><span class="line"></span><br><span class="line">        a、将函数的参数添加到一个对象（暂定为：词法对象）</span><br><span class="line"></span><br><span class="line">        b、扫描函数声明，之后扫描变量(var声明)</span><br><span class="line"></span><br><span class="line">        d、将扫描到的函数和方法添加到词法对象里面</span><br><span class="line"></span><br><span class="line">        c、变量的值是undefined，函数的值则指向该函数（与全局的一样）</span><br><span class="line"></span><br><span class="line">    2、运行阶段</span><br><span class="line"></span><br><span class="line">        与全局的的运行原理一样</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h4><p>执行上下文出栈等待虚拟机回收执行上下文</p>
-<p>看看一下例子就知道变量提升是怎么回事了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    var arg = &apos;hello&apos;; // 3.var arg 变量声明被忽略， arg = &apos;hello&apos;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">	console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line">test(&apos;hi&apos;);</span><br><span class="line">/* 输出：</span><br><span class="line">function arg()&#123;</span><br><span class="line">    console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">hello </span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
-<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
-<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。<strong>可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则</strong>。</p>
-<p>我们需要记住几个关键点：</p>
-<ul>
-<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
-<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
-<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
-<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
-<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
-</ul>
-<p>推荐：</p>
-<p><a href="https://www.cnblogs.com/lark-/p/7954047.html" target="_blank" rel="noopener">https://www.cnblogs.com/lark-/p/7954047.html</a></p>
 
       
     </div>
