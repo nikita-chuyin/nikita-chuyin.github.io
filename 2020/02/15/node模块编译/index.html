@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="类的prototype属性和__proto__属性 每个对象都有__proto__属性，指向对应的构造函数的prototype属性。 子类的__proto__属性表示构造函数的继承，总是指向父类。 子类的prototype属性的__proto__属性表示方法的继承，总是指向父类的prototype属性。  123456789101112131415class A&amp;#123;&amp;#125;class">
+<meta name="description" content="模块编译在Node中，每个文件模块都是一个对象，它的定义如下： 1234567891011function Module(id, parent)&amp;#123;	this.id = id;	this.exports = &amp;#123;&amp;#125;;	this.parent = parent;	if(parent &amp;amp;&amp;amp; parent.children)&amp;#123;		parent.chil">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="proto">
-<meta property="og:url" content="http://yoursite.com/2019/10/27/proto/index.html">
+<meta property="og:title" content="node模块编译">
+<meta property="og:url" content="http://yoursite.com/2020/02/15/node模块编译/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="类的prototype属性和__proto__属性 每个对象都有__proto__属性，指向对应的构造函数的prototype属性。 子类的__proto__属性表示构造函数的继承，总是指向父类。 子类的prototype属性的__proto__属性表示方法的继承，总是指向父类的prototype属性。  123456789101112131415class A&amp;#123;&amp;#125;class">
+<meta property="og:description" content="模块编译在Node中，每个文件模块都是一个对象，它的定义如下： 1234567891011function Module(id, parent)&amp;#123;	this.id = id;	this.exports = &amp;#123;&amp;#125;;	this.parent = parent;	if(parent &amp;amp;&amp;amp; parent.children)&amp;#123;		parent.chil">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-27T06:02:55.882Z">
+<meta property="og:updated_time" content="2020-02-15T04:17:41.815Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="proto">
-<meta name="twitter:description" content="类的prototype属性和__proto__属性 每个对象都有__proto__属性，指向对应的构造函数的prototype属性。 子类的__proto__属性表示构造函数的继承，总是指向父类。 子类的prototype属性的__proto__属性表示方法的继承，总是指向父类的prototype属性。  123456789101112131415class A&amp;#123;&amp;#125;class">
+<meta name="twitter:title" content="node模块编译">
+<meta name="twitter:description" content="模块编译在Node中，每个文件模块都是一个对象，它的定义如下： 1234567891011function Module(id, parent)&amp;#123;	this.id = id;	this.exports = &amp;#123;&amp;#125;;	this.parent = parent;	if(parent &amp;amp;&amp;amp; parent.children)&amp;#123;		parent.chil">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>proto | Nikita</title>
+<title>node模块编译 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-proto" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-node模块编译" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/10/27/proto/" class="article-date">
-      <time datetime="2019-10-27T05:45:18.000Z" itemprop="datePublished">2019-10-27</time>
+      <a href="/2020/02/15/node模块编译/" class="article-date">
+      <time datetime="2020-02-15T04:17:19.000Z" itemprop="datePublished">2020-02-15</time>
 </a>
 
 
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      proto
+      node模块编译
     </h1>
   
 
@@ -298,45 +298,32 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="类的prototype属性和-proto-属性"><a href="#类的prototype属性和-proto-属性" class="headerlink" title="类的prototype属性和__proto__属性"></a>类的prototype属性和<code>__proto__</code>属性</h4><ul>
-<li>每个对象都有<code>__proto__</code>属性，指向对应的构造函数的prototype属性。</li>
-<li><strong>子类的<code>__proto__</code>属性表示构造函数的继承，总是指向父类。</strong></li>
-<li><strong>子类的prototype属性的<code>__proto__</code>属性表示方法的继承，总是指向父类的prototype属性。</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">class B extends A&#123;&#125;</span><br><span class="line">B.__proto__ === A  //true</span><br><span class="line">B.prototype.__proto__  === A.prototype  //true</span><br><span class="line"></span><br><span class="line">//B的实例继承A的实例</span><br><span class="line">Object.setPrototypeOf(B.prototype,A.prototype);</span><br><span class="line">//B继承A的静态属性</span><br><span class="line">Object.setPrototypeOf(B,A);</span><br><span class="line"></span><br><span class="line">//Object.setPrototypeOf方法实现</span><br><span class="line">Object.setPrototypeOf = function(obj,proto)&#123;</span><br><span class="line">	obj.__proto__ = proto;</span><br><span class="line">	return obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="模块编译"><a href="#模块编译" class="headerlink" title="模块编译"></a>模块编译</h4><p>在Node中，每个文件模块都是一个对象，它的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Module(id, parent)&#123;</span><br><span class="line">	this.id = id;</span><br><span class="line">	this.exports = &#123;&#125;;</span><br><span class="line">	this.parent = parent;</span><br><span class="line">	if(parent &amp;&amp; parent.children)&#123;</span><br><span class="line">		parent.children.push(this);</span><br><span class="line">	&#125;</span><br><span class="line">	this.filename = null;</span><br><span class="line">	this.loaded = false;</span><br><span class="line">	this.children = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这两条继承链，可以这样理解：作为一个对象，子类（<code>B</code>）的原型（<code>__proto__</code>属性）是父类（<code>A</code>）；作为一个构造函数，子类（<code>B</code>）的原型对象（<code>prototype</code>属性）是父类的原型对象（<code>prototype</code>属性）的实例。</p>
-<p>上面代码的<code>A</code>，只要是一个有<code>prototype</code>属性的函数，就能被<code>B</code>继承。由于函数都有<code>prototype</code>属性（除了<code>Function.prototype</code>函数），因此<code>A</code>可以是任意函数。</p>
-<h6 id="以下两种特殊情况"><a href="#以下两种特殊情况" class="headerlink" title="以下两种特殊情况"></a>以下两种特殊情况</h6><ul>
-<li>子类继承Object类</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class A extends Object&#123;&#125;</span><br><span class="line">A.__proto__ === Object  //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype  //true</span><br><span class="line">//A其实就是构造函数Object的复制，A的实例就是Object的实例</span><br></pre></td></tr></table></figure>
+<p>编译和执行是引入文件模块的最后一个阶段。定位到具体文件后，Node会新建一个模块对象，然后通过路径载入并编译。对于不同的文件扩展名，其载入的方式也有所不同，具体如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.js文件。通过fs模块同步读取文件后编译执行。</span><br><span class="line"></span><br><span class="line">.node文件。这是用C/C++编写的扩展文件，通过dlopen()方法加载最后的编译生成的文件。</span><br><span class="line"></span><br><span class="line">.json文件。通过fs模块同步读取文件后，用JSON.parse()解析返回结果。</span><br><span class="line"></span><br><span class="line">其余扩展名文件。它们都被当作.js文件解析。(因为node只能解析js文件，其他文件最后都会被转化成js文件，故当其余扩展名文件出现时，node无法识别，故将其认为是默认扩展名进行解析，即.js)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>不存在任何继承</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">A.__proto__ === Function.prototype   //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype   //true</span><br></pre></td></tr></table></figure>
+<p>每一个编译成功的模块都会将文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能。</p>
+<p>根据不同文件扩展名，node会调用不同的读取方式，如：.json文件调用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Module._extensions[&apos;.json&apos;] = function(module,filename)&#123;</span><br><span class="line">	var content = NativeModule.require(&apos;fs&apos;).readFileSync(filename,&apos;utf8&apos;);</span><br><span class="line">	try&#123;</span><br><span class="line">		module.exports = JSON.parse(strinpBOM(cntent));</span><br><span class="line">	&#125;catch(err)&#123;</span><br><span class="line">		err.message = filename + &apos;:&apos; + err.message;</span><br><span class="line">		throw err;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>A作为一个基类，即不存在任何继承，就是一个普通函数，所以直接继承Function.prototype。但是，A调用后返回一个空对象即object实例，所以<code>A.prototype.__proto__</code>指向构造函数Object的prototype属性。</p>
-<h6 id="实例的-proto-属性"><a href="#实例的-proto-属性" class="headerlink" title="实例的 proto 属性"></a>实例的 <strong>proto</strong> 属性</h6><p>子类实例的<code>__proto__</code>属性的<code>__proto__</code>属性，指向父类实例的<code>__proto__</code>属性。也就是说，子类的原型的原型，是父类的原型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123; /* ... */ &#125;</span><br><span class="line">class ColorPoint extends Point &#123;</span><br><span class="line">  constructor(x, y, color) &#123;</span><br><span class="line">    super(x, y); // 调用父类的constructor(x, y)</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  toString() &#123;</span><br><span class="line">    return this.color + &apos; &apos; + super.toString(); // 调用父类的toString()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new Point(2, 3);</span><br><span class="line">var p2 = new ColorPoint(2, 3, &apos;red&apos;);</span><br><span class="line"></span><br><span class="line">p2.__proto__ === p1.__proto__ // false</span><br><span class="line">p2.__proto__.__proto__ === p1.__proto__ // true</span><br></pre></td></tr></table></figure>
+<p>其中，Module._extensions会被赋值给 require() 的extensions属性，所以通过在代码中访问require.extensions可知道系统中已有的加载方式。编写代码测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//新建index.js文件</span><br><span class="line">console.log(require.extensions);</span><br><span class="line">//运行node index.js,输出</span><br><span class="line">//[Object: null prototype] &#123; &apos;.js&apos;: [Function], &apos;.json&apos;: [Function], &apos;.node&apos;: [Function] &#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面代码中，<code>ColorPoint</code>继承了<code>Point</code>，导致前者原型的原型是后者的原型。</p>
-<p>因此，通过子类实例的<code>__proto__.__proto__</code>属性，可以修改父类实例的行为。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p2.__proto__.__proto__.printName = function () &#123;</span><br><span class="line">  console.log(&apos;Ha&apos;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">p1.printName() // &quot;Ha&quot;</span><br></pre></td></tr></table></figure>
+<p>如果想对自定义的扩展名进行特殊的加载，可以通过类似require.extensions[‘.ext’]的方式实现。早期的CoffeeScript文件就是通过添加require.extensions[‘.coffee’]扩展方式来加载的。但是从v0.10.6版本开始，官方不鼓励通过这种方式进行自定义扩展名的加载，而是期望先将其它语言或文件先编译成js文件后再进行加载，这样做的好处是不将繁琐的编译加载等过程引入node的执行过程。</p>
+<p>在确定文件的扩展名后，node将调用具体的编译方式来将文件执行后返回给调用者。</p>
+<p>注：我们都知道CommonJS模块规范中，每个模块文件都存在<code>require、exports、module、_filename、_dirname</code>这5个变量却不知其从何而来。若是把直接定义模块的过程放在浏览器端，势必会存在污染全局变量的情况，故其不可能。</p>
+<p>事实上，在编译过程中，node会对获取的js文件内容进行包装，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function(require、exports、module、_filename、_dirname)&#123;</span><br><span class="line">	var math = require(&apos;math&apos;);</span><br><span class="line">	exports.area = function(radius)&#123;</span><br><span class="line">		return Math.PI * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h6 id="原生构造函数的继承"><a href="#原生构造函数的继承" class="headerlink" title="原生构造函数的继承"></a>原生构造函数的继承</h6><ul>
-<li><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。一般不能继承，有以下九种：</p>
-<p><code>Boolean(),Number(),String(),Array(),Date(),Function(),RegExp(),Error(),Object()</code></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function MyArray() &#123;</span><br><span class="line">  Array.apply(this, arguments);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyArray.prototype = Object.create(Array.prototype, &#123;</span><br><span class="line">  constructor: &#123;</span><br><span class="line">    value: MyArray,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true,</span><br><span class="line">    enumerable: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var colors = new MyArray();</span><br><span class="line">colors[0] = &quot;red&quot;;</span><br><span class="line">colors.length  // 0</span><br><span class="line"></span><br><span class="line">colors.length = 0;</span><br><span class="line">colors[0]  // &quot;red&quot;</span><br></pre></td></tr></table></figure>
-
-<p>之所以会发生这种情况，是因为子类无法获得原生构造函数的内部属性，通过<code>Array.apply()</code>或者分配给原型对象都不行。原生构造函数会忽略<code>apply</code>方法传入的<code>this</code>，也就是说，原生构造函数的<code>this</code>无法绑定，导致拿不到内部属性。</p>
-<p>ES5 是先新建子类的实例对象<code>this</code>，再将父类的属性添加到子类上，由于父类的内部属性无法获取，导致无法继承原生的构造函数。比如，<code>Array</code>构造函数有一个内部属性<code>[[DefineOwnProperty]]</code>，用来定义新属性时，更新<code>length</code>属性，这个内部属性无法在子类获取，导致子类的<code>length</code>属性行为不正常。</p>
-<p>ES6 允许继承原生构造函数定义子类，因为 ES6 是先新建父类的实例对象<code>this</code>，然后再用子类的构造函数修饰<code>this</code>，使得父类的所有行为都可以继承。下面是一个继承<code>Array</code>的例子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class MyArray extends Array &#123;</span><br><span class="line">  constructor(...args) &#123;</span><br><span class="line">    super(...args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = new MyArray();</span><br><span class="line">arr[0] = 12;</span><br><span class="line">arr.length // 1</span><br><span class="line"></span><br><span class="line">arr.length = 0;</span><br><span class="line">arr[0] // undefined</span><br></pre></td></tr></table></figure>
-
+<p>这样每个模块文件之间都进行了作用于隔离。包装之后的代码会通过vm原生模块的runInThisContext() 方法执行，类似于eval，只是具有明确上下文，不污染全局，返回一个体的function对象。最后，将当前模块对象的exports属性，require()方法，module(模块对象本身)，以及在文件定位中得到的完整文件路径和文件目录作为参数传递给这个function()执行。</p>
+<p>这就是为什么这些变量并没有在每个模块声明却可以使用的原因。在执行后，模块的exports属性被返回给了调用方。exports属性上的任何方法都可以被外部调用到，但是模块中的其余变量和属性则不可直接被调用。</p>
+<p>至此，require、exports、module的流程已经完整，这就是Node对CommonJS模块规范的实现。</p>
+<p><strong>JSON文件的编译</strong></p>
+<p>json文件的编译是三种编译方式中最简单的。Node利用fs模块同步读取JSON文件的内容之后，调用JSON.parse（）方法得到对象，然后将它赋给模块对象的exports，以供外部调用。</p>
+<p>JSON文件在用作项目的配置文件时比较有用。如果你定义了JSON文件作为配置，那就不用调用fs模块去异步读取和解析，直接调用require（）引入即可。此外，你还可以享受到模块缓存的便利，并且二次引入时也没有性能影响。</p>
+<p>这里我们提到的模块编译都是指文件编译，即用户自己编写的模块。</p>
 
       
     </div>
@@ -345,13 +332,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/10/27/proto/">proto</a></p>
+        <p><span>本文标题:</span><a href="/2020/02/15/node模块编译/">node模块编译</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-10-27, 13:45:18</p>
-        <p><span>最后更新:</span>2019-10-27, 14:02:55</p>
+        <p><span>发布时间:</span>2020-02-15, 12:17:19</p>
+        <p><span>最后更新:</span>2020-02-15, 12:17:41</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/10/27/proto/" title="proto">http://yoursite.com/2019/10/27/proto/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/27/proto/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/15/node模块编译/" title="node模块编译">http://yoursite.com/2020/02/15/node模块编译/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/15/node模块编译/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,15 +351,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/15/test/">
-                    test
+                <a href="/2020/02/15/JS中外部文件的优势-1/">
+                    JS中外部文件的优势
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/09/26/项目开发流程/">
-                    项目开发流程
+                <a href="/2020/02/03/vue进阶/">
+                    vue进阶
                 </a>
             </div>
         
@@ -384,7 +371,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#类的prototype属性和-proto-属性"><span class="toc-number">1.</span> <span class="toc-text">类的prototype属性和__proto__属性</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#以下两种特殊情况"><span class="toc-number">1.0.1.</span> <span class="toc-text">以下两种特殊情况</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#实例的-proto-属性"><span class="toc-number">1.0.2.</span> <span class="toc-text">实例的 proto 属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#原生构造函数的继承"><span class="toc-number">1.0.3.</span> <span class="toc-text">原生构造函数的继承</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#模块编译"><span class="toc-number">1.</span> <span class="toc-text">模块编译</span></a></li></ol>
         
     </div>
     <style>
@@ -420,7 +407,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"proto　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"node模块编译　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -440,7 +427,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/15/test/" title="上一篇: test">
+            <a href="/2020/02/15/JS中外部文件的优势-1/" title="上一篇: JS中外部文件的优势">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -448,7 +435,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/09/26/项目开发流程/" title="下一篇: 项目开发流程">
+            <a href="/2020/02/03/vue进阶/" title="下一篇: vue进阶">
                 <i class="fa fa-angle-right"></i>
             </a>
         

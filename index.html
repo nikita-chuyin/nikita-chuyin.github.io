@@ -268,6 +268,157 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-JS中外部文件的优势-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/15/JS中外部文件的优势-1/" class="article-date">
+      <time datetime="2020-02-15T04:19:45.000Z" itemprop="datePublished">2020-02-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="JS中外部文件的优势"><a href="#JS中外部文件的优势" class="headerlink" title="JS中外部文件的优势"></a>JS中外部文件的优势</h4><p>在HTML中嵌入js代码虽然没有问题，但一般认为最好使用外部文件来包含代码。不过，并不存在必须使用外部文件的硬性要求，但支持使用外部文件的人多会强调如下优点：</p>
+<ol>
+<li>可维护性：遍及不同HTML页面的js代码会造成维护问题，但把所有js文件放在一个文件夹中，维护起来就轻松多了。而且开发人员也可在不触及HTML标记的情况下，集中精力编辑js代码。</li>
+<li>可缓存性：浏览器能够根据具体的缓存链接到所有的外部文件。也就是说，如果有两个页面都是使用同一个文件，那么这个文件只需下载一次。因此，最终结果就是能够加快页面加载的速度。</li>
+<li>适应未来：通过外部文件来包含js无需使用前面提到的XHTML或注释hack。HTML和XHTM包含外部文件的语法是相同的。</li>
+</ol>
+<p>把JavaScript插入到HTML页面中要使用<code>&lt;script&gt;</code>元素。使用这个元素可以把JavaScript嵌入到HTML页面中，让脚本与标记混合在一起；也可以包含外部的JavaScript文件。而我们需要注意的地方有：</p>
+<ol>
+<li>在包含外部JavaScript文件时，必须将src属性设置为指向文件的 url 。而这个文件可以是与包含它的页面位于同一服务器上的文件，也可以是其他文件域中的文件。</li>
+<li>所有<code>&lt;script&gt;</code>元素都会按照它们在页面中出现的先后顺序依次被解析。在不使用defer，async属性的情况下，只有解析完前面<code>&lt;script&gt;</code>代码后才会开始解析后面的<code>&lt;/script&gt;</code>元素中的代码。</li>
+<li>由于浏览器会先解析完不使用defer属性的<code>&lt;script&gt;</code>元素中的代码，然后再解析后面的内容，所以一般应该把<code>&lt;script&gt;</code>元素放在页面最后，及主要内容的后面，<code>&lt;/body&gt;</code>标签前面。</li>
+<li>使用defer属性可以让脚本在文档完全呈现之后再执行。延迟脚本总是按照它们指定的顺序执行。</li>
+<li>使用ansyc属性可以表示当前脚本不必等待其他脚本，也不必阻塞文档呈现。不能保证异步脚本按照它们在页面中出现的顺序执行。</li>
+<li>另外，使用<code>&lt;noscript&gt;</code>元素可以指定在不支持脚本的浏览器中显示的替代内容。但在启动了脚本的情况下，浏览器不会显示<code>&lt;noscript&gt;</code>元素中的任何内容。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-node模块编译" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/15/node模块编译/" class="article-date">
+      <time datetime="2020-02-15T04:17:19.000Z" itemprop="datePublished">2020-02-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/15/node模块编译/">node模块编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="模块编译"><a href="#模块编译" class="headerlink" title="模块编译"></a>模块编译</h4><p>在Node中，每个文件模块都是一个对象，它的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Module(id, parent)&#123;</span><br><span class="line">	this.id = id;</span><br><span class="line">	this.exports = &#123;&#125;;</span><br><span class="line">	this.parent = parent;</span><br><span class="line">	if(parent &amp;&amp; parent.children)&#123;</span><br><span class="line">		parent.children.push(this);</span><br><span class="line">	&#125;</span><br><span class="line">	this.filename = null;</span><br><span class="line">	this.loaded = false;</span><br><span class="line">	this.children = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译和执行是引入文件模块的最后一个阶段。定位到具体文件后，Node会新建一个模块对象，然后通过路径载入并编译。对于不同的文件扩展名，其载入的方式也有所不同，具体如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.js文件。通过fs模块同步读取文件后编译执行。</span><br><span class="line"></span><br><span class="line">.node文件。这是用C/C++编写的扩展文件，通过dlopen()方法加载最后的编译生成的文件。</span><br><span class="line"></span><br><span class="line">.json文件。通过fs模块同步读取文件后，用JSON.parse()解析返回结果。</span><br><span class="line"></span><br><span class="line">其余扩展名文件。它们都被当作.js文件解析。(因为node只能解析js文件，其他文件最后都会被转化成js文件，故当其余扩展名文件出现时，node无法识别，故将其认为是默认扩展名进行解析，即.js)</span><br></pre></td></tr></table></figure>
+
+<p>每一个编译成功的模块都会将文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能。</p>
+<p>根据不同文件扩展名，node会调用不同的读取方式，如：.json文件调用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Module._extensions[&apos;.json&apos;] = function(module,filename)&#123;</span><br><span class="line">	var content = NativeModule.require(&apos;fs&apos;).readFileSync(filename,&apos;utf8&apos;);</span><br><span class="line">	try&#123;</span><br><span class="line">		module.exports = JSON.parse(strinpBOM(cntent));</span><br><span class="line">	&#125;catch(err)&#123;</span><br><span class="line">		err.message = filename + &apos;:&apos; + err.message;</span><br><span class="line">		throw err;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，Module._extensions会被赋值给 require() 的extensions属性，所以通过在代码中访问require.extensions可知道系统中已有的加载方式。编写代码测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//新建index.js文件</span><br><span class="line">console.log(require.extensions);</span><br><span class="line">//运行node index.js,输出</span><br><span class="line">//[Object: null prototype] &#123; &apos;.js&apos;: [Function], &apos;.json&apos;: [Function], &apos;.node&apos;: [Function] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想对自定义的扩展名进行特殊的加载，可以通过类似require.extensions[‘.ext’]的方式实现。早期的CoffeeScript文件就是通过添加require.extensions[‘.coffee’]扩展方式来加载的。但是从v0.10.6版本开始，官方不鼓励通过这种方式进行自定义扩展名的加载，而是期望先将其它语言或文件先编译成js文件后再进行加载，这样做的好处是不将繁琐的编译加载等过程引入node的执行过程。</p>
+<p>在确定文件的扩展名后，node将调用具体的编译方式来将文件执行后返回给调用者。</p>
+<p>注：我们都知道CommonJS模块规范中，每个模块文件都存在<code>require、exports、module、_filename、_dirname</code>这5个变量却不知其从何而来。若是把直接定义模块的过程放在浏览器端，势必会存在污染全局变量的情况，故其不可能。</p>
+<p>事实上，在编译过程中，node会对获取的js文件内容进行包装，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function(require、exports、module、_filename、_dirname)&#123;</span><br><span class="line">	var math = require(&apos;math&apos;);</span><br><span class="line">	exports.area = function(radius)&#123;</span><br><span class="line">		return Math.PI * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样每个模块文件之间都进行了作用于隔离。包装之后的代码会通过vm原生模块的runInThisContext() 方法执行，类似于eval，只是具有明确上下文，不污染全局，返回一个体的function对象。最后，将当前模块对象的exports属性，require()方法，module(模块对象本身)，以及在文件定位中得到的完整文件路径和文件目录作为参数传递给这个function()执行。</p>
+<p>这就是为什么这些变量并没有在每个模块声明却可以使用的原因。在执行后，模块的exports属性被返回给了调用方。exports属性上的任何方法都可以被外部调用到，但是模块中的其余变量和属性则不可直接被调用。</p>
+<p>至此，require、exports、module的流程已经完整，这就是Node对CommonJS模块规范的实现。</p>
+<p><strong>JSON文件的编译</strong></p>
+<p>json文件的编译是三种编译方式中最简单的。Node利用fs模块同步读取JSON文件的内容之后，调用JSON.parse（）方法得到对象，然后将它赋给模块对象的exports，以供外部调用。</p>
+<p>JSON文件在用作项目的配置文件时比较有用。如果你定义了JSON文件作为配置，那就不用调用fs模块去异步读取和解析，直接调用require（）引入即可。此外，你还可以享受到模块缓存的便利，并且二次引入时也没有性能影响。</p>
+<p>这里我们提到的模块编译都是指文件编译，即用户自己编写的模块。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-vue进阶" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1673,157 +1824,9 @@
 
 
   
-    <article id="post-事件机制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/25/事件机制/" class="article-date">
-      <time datetime="2019-09-25T13:25:10.000Z" itemprop="datePublished">2019-09-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/25/事件机制/">事件机制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="事件机制之冒泡、传播、委托"><a href="#事件机制之冒泡、传播、委托" class="headerlink" title="事件机制之冒泡、传播、委托"></a>事件机制之冒泡、传播、委托</h2><p>DOM事件流（event flow）存在三个阶段：<strong>事件捕获阶段，处于目标阶段，事件冒泡阶段</strong>。</p>
-<h5 id="事件捕获阶段（event-capuring）"><a href="#事件捕获阶段（event-capuring）" class="headerlink" title="事件捕获阶段（event  capuring）"></a>事件捕获阶段（event  capuring）</h5><p>通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点<strong>由外往内</strong>进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。</p>
-<h5 id="事件冒泡（dubbed-bubbling）"><a href="#事件冒泡（dubbed-bubbling）" class="headerlink" title="事件冒泡（dubbed bubbling）"></a>事件冒泡（dubbed bubbling）</h5><p>与事件捕获相反，事件冒泡是从目标元素<strong>由内往外</strong>进行事件传播，直到根节点。</p>
-<p>无论是事件冒泡还是事件捕获，都有一个共同点就是事件传播，她就像一根引线，只有通过引线才能将绑在引线上的鞭炮（事件监听器）引爆，试想一下，如果引线不导火了，那鞭炮就只有一响了！</p>
-<p>dom事件标准事件流的触发先后顺序是：<strong>先捕获后冒泡</strong>，即当触发dom事件时，会进行事件捕获，捕获到事件源后通过事件传播进行事件冒泡。不同浏览器对此有不同的实现，IE10及以下不支持捕获型事件，所以就少了一个时间捕获阶段，IE11,Chrome，Firefox，Safari等浏览器则同时存在。</p>
-<h5 id="事件绑定的方法"><a href="#事件绑定的方法" class="headerlink" title="事件绑定的方法"></a>事件绑定的方法</h5><h6 id="addEventlistener-event-listener-useCapture"><a href="#addEventlistener-event-listener-useCapture" class="headerlink" title="addEventlistener(event,listener,useCapture)"></a>addEventlistener(event,listener,useCapture)</h6><p>参数定义：event——（事件名称：如click，不带on）</p>
-<p>listener——事件监听函数，</p>
-<p>useCapture——是否采用事件捕获进行事件捕获，默认为false，即采用事件冒泡方式。</p>
-<p>addEventListener在IE11，Chrome，Firefox，Safari等浏览器都得到支持。</p>
-<h6 id="attachEvent（event，listener）"><a href="#attachEvent（event，listener）" class="headerlink" title="attachEvent（event，listener）"></a>attachEvent（event，listener）</h6><p>参数定义：event—（事件名称，如onclick，带on），</p>
-<p>listener—事件监听函数。</p>
-<p>attachEvent主要用于IE浏览器，并且仅在IE10及以下才支持，IE11已经废了这个方法了</p>
-<h6 id="事件冒泡例子"><a href="#事件冒泡例子" class="headerlink" title="事件冒泡例子"></a>事件冒泡例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,false);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,false);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;);</span><br><span class="line">    //event.stopProparation;</span><br><span class="line">    //可停止事件传播&#125;,false);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>当点击子盒子时，打印结果依次为children——parent——body</p>
-<p>事件触发的顺序是由内到外的，这就是事件冒泡，虽然只点击了子元素，但是他的父元素也会触发相应的事件，其实这也是合理的，因为父元素里面，点击了子元素不就相当于变相的点击了父元素。</p>
-<p>若不想触发父元素可停止事件传播只需在子元素中添加<strong>event.stopProparation;</strong>即可。</p>
-<h6 id="事件捕获例子"><a href="#事件捕获例子" class="headerlink" title="事件捕获例子"></a>事件捕获例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    body&#123;background: green;&#125;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,true);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,true);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;)&#125;,true);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>点击children方块，打印body——parent——childre</p>
-<p>点击parent方块，打印body——parent</p>
-<p>点击body区域，打印body</p>
-<p>事件通过事件捕获的方式注册了click事件，所以在事件捕获阶段就会触发，先是触发最外围注册了事件捕获的body，而后触发事件捕获的parent，最后触发事件源。这就是事件的时间流程。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-MVVC模型架构" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/17/MVVC模型架构/" class="article-date">
-      <time datetime="2019-09-17T11:57:30.000Z" itemprop="datePublished">2019-09-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="理解MVVC架构模式"><a href="#理解MVVC架构模式" class="headerlink" title="理解MVVC架构模式"></a>理解MVVC架构模式</h2><h4 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h4><p><strong>Model（模型）：数据层，负责存储数据。</strong></p>
-<p><strong>View(视图)：展现层，用户所看到的页面。</strong></p>
-<p><strong>Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。</strong></p>
-<p>Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于这两者之间的协调者。</p>
-<p><img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg" alt="img"></p>
-<p>MVC是过去常用的架构模式，随着App的发展，界面的多沿海，显然再使用MVC模式的会导致ViewController代码不断增多，更容易造成一些冗余的代码，如果作为迭代项目更不易维护。从而诞生了MVVC的架构模式。</p>
-<h4 id="MVVC"><a href="#MVVC" class="headerlink" title="MVVC"></a>MVVC</h4><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="无标题"></p>
-<p>M -Model</p>
-<p>V - View</p>
-<p>VM - ViewModel</p>
-<p>MVVM是将“数据模型数据双向绑定”的思想作为核心，因此在View和Model之间没有联系，通过ViewModel进行交互，而且Model和ViewModel之间的交互是双喜那个的，因此试图的数据的变化会同事修改数据源，而数据源数据的变化也会立即反应到View上。</p>
-<h4 id="MVVC优点"><a href="#MVVC优点" class="headerlink" title="MVVC优点"></a>MVVC优点</h4><p><strong>1. 低耦合</strong>。视图（View）可以独立于Model变化和修改，一个ViewModel可以绑定到不同的”View”上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。</p>
-<p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
-<p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
-<p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
