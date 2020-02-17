@@ -268,6 +268,138 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-深入理解包与NPM和package-json深入解读" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/17/深入理解包与NPM和package-json深入解读/" class="article-date">
+      <time datetime="2020-02-17T06:47:02.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="包与NPM"><a href="#包与NPM" class="headerlink" title="包与NPM"></a>包与NPM</h2><p>CommonJS的包规范的定义其实也十分简单，它由包结构和包描述文件两个部分组成，前者用于组织包中的各种文件，后者则用于描述包的相关信息，以供外部读取分析。</p>
+<h4 id="包结构"><a href="#包结构" class="headerlink" title="包结构"></a>包结构</h4><p>包实际上是一个存档文件，即一个目录直接打包为 .zip 或 tar.gz 格式的文件，安装后解压还原为目录。完全符合CommonJS规范的包目录应该包含如下文件。</p>
+<ol>
+<li>package.json： 包描述文件。</li>
+<li>bin：用于存放可执行二进制文件的目录。</li>
+<li>lib：用于存放JavaScript代码的目录。</li>
+<li>doc：用于存放文档的目录。</li>
+<li>test：用于存放单元测试用例的代码。</li>
+</ol>
+<p>可以看到，CommonJS包规范从文档、测试等方面都做过考虑。当一个包完成后向外公布时，用户可以看到单元测试和文档时，会给人一种踏实可靠的感觉。</p>
+<h4 id="包描述文件"><a href="#包描述文件" class="headerlink" title="包描述文件"></a>包描述文件</h4><p>包描述文件用于表达非代码相关的信息，它是一个JSON格式的文件——package.json，位于包的根目录下，是包的重要组成部分。而npm的所有行为都与包描述文件的字段息息相关。</p>
+<p>CommonJS为package.json文件定义一些必须的字段。</p>
+<ol>
+<li>name：包名。规范定义它需要小写字符和数字的组成，可以包含. \ _和 - ，但不允许出现空格。包名必须是唯一的，以免对外公布时产生重名冲突的误解。除此以外，NPM还建议不要在包名中附带上node或js来重复表示它是JavaScript或Node模块。</li>
+<li>description：包简介。</li>
+<li>version：版本号。</li>
+<li>keywords：关键词数组，NPM中主要用来做分类搜索。一个好的关键词数组有利于用户快速找到你编写的包。</li>
+<li>maintainers：包维护者列表，每个维护者由name、email和web这3个属性组成。</li>
+</ol>
+<p>NPM通过该属性进行权限认证。</p>
+<ol start="6">
+<li>contribuctors：贡献者列表。</li>
+<li>bugs：一个可以反馈bug的网页地址或邮箱地址。</li>
+<li>licenses：当前包所使用的许可证列表，表示这个包在哪些许可证下使用。</li>
+<li>repositories：托管源代码的位置列表，表明可以通过哪些方式和地址访问包的源代码。</li>
+<li>dependencies：使用当前包所依赖的包列表。这个属性非常重要，NPM会通过这个属性自动加载依赖的包。</li>
+</ol>
+<p>除了必选字段外，规范还定义了一部分可选的字段</p>
+<ol start="11">
+<li><p>homepage：当前包的网站地址。</p>
+</li>
+<li><p>os：操作系统支持的列表。这些操作系统的取值包括aix，freebsd，Linux，macos，solaris，vxworks，windows。如果设置了列表为空时，则不对操作系统做任何假设。</p>
+</li>
+<li><p>CPU：CPU架构的支持列表。</p>
+</li>
+<li><p>engine：支持的js引擎列表，有效的引擎列表取值包括ejs，flusspferd，gpsee，jsc，spidermonkey，narwhal，node，v8.</p>
+</li>
+<li><p>builtin：标志当前包是否是内建在底层系统的标准组件。</p>
+</li>
+<li><p>directories：包目录说明。</p>
+</li>
+<li><p>implements：实现规范的列表，标志当前包实现了CommonJS的那些规范。</p>
+</li>
+<li><p>scripts：脚本说明对象。它主要被包管理器用来安装，编译，测试和卸载包，为其提供钩子机制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//示例如下：</span><br><span class="line">&quot;scripts&quot;:&#123;</span><br><span class="line">	&quot;install&quot;:&quot;install.js&quot;,</span><br><span class="line">	&quot;uninstall&quot;:&quot;uninstall.js&quot;,</span><br><span class="line">	&quot;build&quot;:&quot;build.js&quot;,</span><br><span class="line">	&quot;test&quot;:&quot;test.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>包规范的定义可以帮助Node解决依赖包安装的问题，而NPM正是基于该规范进行了实现。最初，NPM工具是有Issac Z.Schlueter单独创建，提供给node服务的Node包管理器，需要单独安装。后来，在v6.3版本时集成进Node中作为默认包管理器，作为软件包的一部分一起安装。</p>
+<p>在包描述文件的规范中，NPM实际需要的字段主要有name，version，description，keywords，repositories，author，bin，main，scripts，engines，dependencies，devDependencies。</p>
+<p>与包规范的区别在于多了author，bin，main和devDependencies这4个字段。</p>
+<p>author：包作者。</p>
+<p>bin：一些包作者希望包可以作为命令行工具使用。配置好bin字段后，通过<code>npm install package_name -g</code>命令可以将脚本添加到执行路径中，之后可以在命令行中直接执行。通过-g命令安装的模块包称为全局模式。</p>
+<p>main：模块引入方法require（）在引入包时，会优先检查这个字段，并将其作为包中其余模块的入口。如果不存在这个字段，require（）方法会查找包目录下的 index.js , index.node  ,  index.json  文件作为默认入口。</p>
+<p>devDependencies：一些模块只在开发时需要依赖。配置这个属性，可以提示包的后续开发者安装依赖包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">//以下是node比较有名的框架express项目的package.json文件</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;express&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;Fast, unopinionated, minimalist web framework&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;4.17.1&quot;,</span><br><span class="line">  &quot;author&quot;: &quot;TJ Holowaychuk &lt;tj@vision-media.ca&gt;&quot;,</span><br><span class="line">  &quot;contributors&quot;: [</span><br><span class="line">    &quot;Aaron Heckmann &lt;aaron.heckmann+github@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Ciaran Jessup &lt;ciaranj@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Douglas Christopher Wilson &lt;doug@somethingdoug.com&gt;&quot;,</span><br><span class="line">    &quot;Guillermo Rauch &lt;rauchg@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Jonathan Ong &lt;me@jongleberry.com&gt;&quot;,</span><br><span class="line">    &quot;Roman Shtylman &lt;shtylman+expressjs@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Young Jae Sim &lt;hanul@hanul.me&gt;&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;license&quot;: &quot;MIT&quot;,</span><br><span class="line">  &quot;repository&quot;: &quot;expressjs/express&quot;,</span><br><span class="line">  &quot;homepage&quot;: &quot;http://expressjs.com/&quot;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;express&quot;,</span><br><span class="line">    &quot;framework&quot;,</span><br><span class="line">    &quot;sinatra&quot;,</span><br><span class="line">    &quot;web&quot;,</span><br><span class="line">    &quot;rest&quot;,</span><br><span class="line">    &quot;restful&quot;,</span><br><span class="line">    &quot;router&quot;,</span><br><span class="line">    &quot;app&quot;,</span><br><span class="line">    &quot;api&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;accepts&quot;: &quot;~1.3.7&quot;,</span><br><span class="line">    &quot;array-flatten&quot;: &quot;1.1.1&quot;,</span><br><span class="line">    &quot;body-parser&quot;: &quot;1.19.0&quot;,</span><br><span class="line">    &quot;content-disposition&quot;: &quot;0.5.3&quot;,</span><br><span class="line">    &quot;content-type&quot;: &quot;~1.0.4&quot;,</span><br><span class="line">    &quot;cookie&quot;: &quot;0.4.0&quot;,</span><br><span class="line">    &quot;cookie-signature&quot;: &quot;1.0.6&quot;,</span><br><span class="line">    &quot;debug&quot;: &quot;2.6.9&quot;,</span><br><span class="line">    &quot;depd&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;encodeurl&quot;: &quot;~1.0.2&quot;,</span><br><span class="line">    &quot;escape-html&quot;: &quot;~1.0.3&quot;,</span><br><span class="line">    &quot;etag&quot;: &quot;~1.8.1&quot;,</span><br><span class="line">    &quot;finalhandler&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;fresh&quot;: &quot;0.5.2&quot;,</span><br><span class="line">    &quot;merge-descriptors&quot;: &quot;1.0.1&quot;,</span><br><span class="line">    &quot;methods&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;on-finished&quot;: &quot;~2.3.0&quot;,</span><br><span class="line">    &quot;parseurl&quot;: &quot;~1.3.3&quot;,</span><br><span class="line">    &quot;path-to-regexp&quot;: &quot;0.1.7&quot;,</span><br><span class="line">    &quot;proxy-addr&quot;: &quot;~2.0.5&quot;,</span><br><span class="line">    &quot;qs&quot;: &quot;6.7.0&quot;,</span><br><span class="line">    &quot;range-parser&quot;: &quot;~1.2.1&quot;,</span><br><span class="line">    &quot;safe-buffer&quot;: &quot;5.1.2&quot;,</span><br><span class="line">    &quot;send&quot;: &quot;0.17.1&quot;,</span><br><span class="line">    &quot;serve-static&quot;: &quot;1.14.1&quot;,</span><br><span class="line">    &quot;setprototypeof&quot;: &quot;1.1.1&quot;,</span><br><span class="line">    &quot;statuses&quot;: &quot;~1.5.0&quot;,</span><br><span class="line">    &quot;type-is&quot;: &quot;~1.6.18&quot;,</span><br><span class="line">    &quot;utils-merge&quot;: &quot;1.0.1&quot;,</span><br><span class="line">    &quot;vary&quot;: &quot;~1.1.2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;after&quot;: &quot;0.8.2&quot;,</span><br><span class="line">    &quot;connect-redis&quot;: &quot;3.4.1&quot;,</span><br><span class="line">    &quot;cookie-parser&quot;: &quot;~1.4.4&quot;,</span><br><span class="line">    &quot;cookie-session&quot;: &quot;1.3.3&quot;,</span><br><span class="line">    &quot;ejs&quot;: &quot;2.6.1&quot;,</span><br><span class="line">    &quot;eslint&quot;: &quot;2.13.1&quot;,</span><br><span class="line">    &quot;express-session&quot;: &quot;1.16.1&quot;,</span><br><span class="line">    &quot;hbs&quot;: &quot;4.0.4&quot;,</span><br><span class="line">    &quot;istanbul&quot;: &quot;0.4.5&quot;,</span><br><span class="line">    &quot;marked&quot;: &quot;0.6.2&quot;,</span><br><span class="line">    &quot;method-override&quot;: &quot;3.0.0&quot;,</span><br><span class="line">    &quot;mocha&quot;: &quot;5.2.0&quot;,</span><br><span class="line">    &quot;morgan&quot;: &quot;1.9.1&quot;,</span><br><span class="line">    &quot;multiparty&quot;: &quot;4.2.1&quot;,</span><br><span class="line">    &quot;pbkdf2-password&quot;: &quot;1.2.1&quot;,</span><br><span class="line">    &quot;should&quot;: &quot;13.2.3&quot;,</span><br><span class="line">    &quot;supertest&quot;: &quot;3.3.0&quot;,</span><br><span class="line">    &quot;vhost&quot;: &quot;~3.0.2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;engines&quot;: &#123;</span><br><span class="line">    &quot;node&quot;: &quot;&gt;= 0.10.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;files&quot;: [</span><br><span class="line">    &quot;LICENSE&quot;,</span><br><span class="line">    &quot;History.md&quot;,</span><br><span class="line">    &quot;Readme.md&quot;,</span><br><span class="line">    &quot;index.js&quot;,</span><br><span class="line">    &quot;lib/&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;lint&quot;: &quot;eslint .&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-ci&quot;: &quot;istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-cov&quot;: &quot;istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-tap&quot;: &quot;mocha --require test/support/env --reporter tap --check-leaks test/ test/acceptance/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;__npminstall_done&quot;: &quot;Sun Feb 16 2020 11:22:54 GMT+0800 (GMT+08:00)&quot;,</span><br><span class="line">  &quot;_from&quot;: &quot;express@4.17.1&quot;,</span><br><span class="line">  &quot;_resolved&quot;: &quot;https://registry.npm.taobao.org/express/download/express-4.17.1.tgz&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NPM常用功能"><a href="#NPM常用功能" class="headerlink" title="NPM常用功能"></a>NPM常用功能</h4><p>CommonJS包规范是理论，NPM是其中的一种实践。对于Node而言，NPM帮助完成了第三方模块的发布，安装和依赖等。借助NPM，Node与第三方模块之间形成了很好地一个生态系统。</p>
+<h6 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h6><p>安装依赖包是NPM最常见的用法，它的执行语句是npm  install  express.。执行该命令后，NPM会在当前目录下创建node_module目录，然后在node_module目录下创建express目录，接着将包解压到这个目录下。</p>
+<p>安装好依赖包后，直接在代码中调用require(‘express’),即可引入该包，require（）方法在做路径分析时会通过，模块路径查找到express所在的位置。模块引入和包的安装是相辅相成的。</p>
+<h6 id="全局模式安装"><a href="#全局模式安装" class="headerlink" title="全局模式安装"></a>全局模式安装</h6><p>如果包含有命令行工具，那么需要执行<code>npm install express -g</code>命令进行全局安装。需要注意的是，全局模式并不是将一个模块包安装为一个全局包的意思，他并不意味着可以从任何地方通过require（）来引用到它。</p>
+<p>全局模式这个称谓其实并不精确，存在诸多误导。实际上，-g是将一个包安装为全局可用的可执行命令。他根据包描述文件中的bin字段配置，将实际脚本链接到与Node可执行文件相同的路径下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;bin&quot;:&#123;</span><br><span class="line">	&quot;express&quot;:&quot;./bin/express&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>事实上，通过全局模式安装的所有模块都被安装进一个统一的目录下，这个目录可以通过如下方式运算出来：</p>
+<p>path.resolve(process.execPath, ‘..’ , ‘lib’ , ‘node_modules’);</p>
+<p>如果Node可执行文件的位置是/user/local/bin/node，那么模块目录就是/user/local/lib/node_modules。最后，通过软链接的方式将bin字段配置的可执行文件链接到Node的可执行目录下。</p>
+<h6 id="从本地安装"><a href="#从本地安装" class="headerlink" title="从本地安装"></a>从本地安装</h6><p>对于一些没有发布到NPM上的包，或是因为网络原因导致无法直接安装的包，可通过将包下载到本地，然后本地安装。本地安装只需要为NPM指定package.json文件所在的位置即可：它可以是一个包含package.json的存档文件，也可以是一个URL地址，也可以是一个目录下有package.json文件的目录位置。具体参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;tarbar file&gt;</span><br><span class="line">npm install &lt;tarbar url&gt;</span><br><span class="line">npm install &lt;folder&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="从非官方源安装"><a href="#从非官方源安装" class="headerlink" title="从非官方源安装"></a>从非官方源安装</h6><p>如果不能通过官方源安装，可通过镜像安装。在执行命令时，添加 <code>--registry=http://registry.url</code>即可，实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm insatll underscore --registry=http://registry.yrl</span><br></pre></td></tr></table></figure>
+
+<p>如果使用过程几乎使用镜像源安装，可执行命令指定默认源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://registry.url</span><br></pre></td></tr></table></figure>
+
+<h4 id="NPM潜在问题"><a href="#NPM潜在问题" class="headerlink" title="NPM潜在问题"></a>NPM潜在问题</h4><p>作为为模块和包服务的工具，NPM十分便捷。它实质上已经是一个包共享平台，所有人都可以贡献并将其打包分享到这个平台上，也可以在许可证的允许下免费使用他们</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-JS中外部文件的优势-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1738,66 +1870,6 @@
 <p>ES6 允许继承原生构造函数定义子类，因为 ES6 是先新建父类的实例对象<code>this</code>，然后再用子类的构造函数修饰<code>this</code>，使得父类的所有行为都可以继承。下面是一个继承<code>Array</code>的例子。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class MyArray extends Array &#123;</span><br><span class="line">  constructor(...args) &#123;</span><br><span class="line">    super(...args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = new MyArray();</span><br><span class="line">arr[0] = 12;</span><br><span class="line">arr.length // 1</span><br><span class="line"></span><br><span class="line">arr.length = 0;</span><br><span class="line">arr[0] // undefined</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-项目开发流程" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/26/项目开发流程/" class="article-date">
-      <time datetime="2019-09-25T23:40:32.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/项目开发流程/">项目开发流程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="WEB前端项目开发流程"><a href="#WEB前端项目开发流程" class="headerlink" title="WEB前端项目开发流程"></a>WEB前端项目开发流程</h1><h3 id="项目需求分析"><a href="#项目需求分析" class="headerlink" title="项目需求分析"></a>项目需求分析</h3><p>这个环节是由设计师完成，设计师首先和客户进行交流，了解客户的需求，然后分析项目的可行性，如果项目可以被实现，设计师直接进行设计开发。</p>
-<h3 id="页面设计"><a href="#页面设计" class="headerlink" title="页面设计"></a>页面设计</h3><p>这个环节主要是UI设计师参与，UI设计师根据产品需求分析文档，对产品的整体美术风格、交互设计、界面结构、操作流程等做出设计。负责项目中各种交互界面、图标、LOGO、按钮等相关元素的设计与制作。最后设计出一份设计稿并交由程序员进行下一步开发。程序员拿到设计稿交流完需求后公司方需要支付3成定金。</p>
-<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>这个部分由程序员来实现。（程序员分为WEB前端开发工程师和后台开发工程师。前端开发人员主要根据原型图用代码写出我们可以在网页上看的见的页面，途中一些问题也需要同设计师直接交流，后台就做一些我们看不见的管理系统以及功能的实现。）程序员根据UI设计师的设计，用编码来完成整个项目的各个功能。</p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>由程序员部署到服务器上。</p>
-<h3 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h3><p>程序的维护是整个项目的最后一个阶段，但也是耗时最多，成本最高最高的的一个阶段。程序的维护是由程序员免费维护半年。</p>
 
       
     </div>
