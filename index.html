@@ -268,6 +268,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-用JavaScript封装栈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/27/用JavaScript封装栈/" class="article-date">
+      <time datetime="2020-02-27T03:23:47.000Z" itemprop="datePublished">2020-02-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="用JavaScript封装栈"><a href="#用JavaScript封装栈" class="headerlink" title="用JavaScript封装栈"></a>用JavaScript封装栈</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 封装栈</span><br><span class="line">   function Stack()&#123;</span><br><span class="line">       // 栈中的属性</span><br><span class="line">       this.items = [];</span><br><span class="line">       // 栈中的相关操作</span><br><span class="line">       // 1.将元素压入栈中</span><br><span class="line">       Stack.prototype.push = function(element)&#123;</span><br><span class="line">		this.items.push(element);</span><br><span class="line">       &#125;;</span><br><span class="line">       // 2.将元素弹出栈中</span><br><span class="line">       Stack.prototype.pop = function()&#123;</span><br><span class="line">		return	this.items.pop();</span><br><span class="line">       &#125;;</span><br><span class="line">       // 3.查看一下栈顶元素</span><br><span class="line">       Stack.prototype.check = function()&#123;</span><br><span class="line">		return this.items[this.items.length - 1];</span><br><span class="line">       &#125;;</span><br><span class="line">       // 4.判断栈中是否有元素</span><br><span class="line">       Stack.prototype.isEmpty = function()&#123;</span><br><span class="line">		return this.items.length == 0;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 5.获取栈中的元素的个数</span><br><span class="line">       Stack.prototype.size = function()&#123;</span><br><span class="line">		return this.items.length;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 6.toString方法</span><br><span class="line">       Stack.prototype.toString = function()&#123;</span><br><span class="line">           // 方法一：</span><br><span class="line">           // var resultString = &apos;&apos;;</span><br><span class="line">           // for(var i = 0; i &lt; this.items.length; i ++)&#123;</span><br><span class="line">           // 	resultString += this.items[i] + &apos; &apos;;</span><br><span class="line">           // &#125;</span><br><span class="line">           // return resultString;</span><br><span class="line">           // 方法二：</span><br><span class="line">           return this.items.join(&apos; &apos;);</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>之所以不使用<code>this.push=function(){}</code>，而是采用原型的方法，是因为通过prototype原型的方法相当于给整个类添加了方法，而this.push方式则仅是给某个实例添加方法。</p>
+<h4 id="用栈将十进制转为二进制"><a href="#用栈将十进制转为二进制" class="headerlink" title="用栈将十进制转为二进制"></a>用栈将十进制转为二进制</h4><ul>
+<li>因为我们习惯使用十进制，而计算机里面的所有内容都是用二进制数字表示的（0和1）</li>
+<li>可采用对十进制的数字进行除二取余法，将十进制转为二进制。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//函数：将十进制转为二进制</span><br><span class="line">function dec2bin(decNumber)&#123;</span><br><span class="line">    // 1.定义栈对象</span><br><span class="line">    var stack = new Stack();</span><br><span class="line">    while(decNumber &gt; 0)&#123;</span><br><span class="line">        stack.push(decNumber % 2);</span><br><span class="line">        decNumber = Math.floor(decNumber / 2);</span><br><span class="line">        console.log(decNumber)</span><br><span class="line">    &#125;</span><br><span class="line">    var binaryString = &apos;&apos;;</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        binaryString += stack.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    return binaryString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-伪类与伪元素的区区别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1816,61 +1880,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* index.qss，没导入该文件，其样式不会在index中显示 */</span><br><span class="line">@import &apos;./../template/template.qss&apos;</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/11/15/test/" class="article-date">
-      <time datetime="2019-11-15T12:57:07.000Z" itemprop="datePublished">2019-11-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/15/test/">test</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
       
     </div>
     
