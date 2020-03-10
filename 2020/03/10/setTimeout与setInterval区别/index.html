@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="setTimeout与setInterval区别这两个都是原生js的定时方法，但执行次数不同。  setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。简单得说就是几秒之后，你把我交给你得任务执行了。（执行一次） setTimeout(function(){ alert(&amp;quot;Hello&amp;quot;); }, 3000);  setInterval（）可按照指定的周期（以毫">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2019/11/15/test/index.html">
+<meta property="og:title" content="setTimeout与setInterval区别">
+<meta property="og:url" content="http://yoursite.com/2020/03/10/setTimeout与setInterval区别/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="setTimeout与setInterval区别这两个都是原生js的定时方法，但执行次数不同。  setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。简单得说就是几秒之后，你把我交给你得任务执行了。（执行一次） setTimeout(function(){ alert(&amp;quot;Hello&amp;quot;); }, 3000);  setInterval（）可按照指定的周期（以毫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-15T12:57:07.869Z">
+<meta property="og:updated_time" content="2020-03-10T01:54:50.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:title" content="setTimeout与setInterval区别">
+<meta name="twitter:description" content="setTimeout与setInterval区别这两个都是原生js的定时方法，但执行次数不同。  setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。简单得说就是几秒之后，你把我交给你得任务执行了。（执行一次） setTimeout(function(){ alert(&amp;quot;Hello&amp;quot;); }, 3000);  setInterval（）可按照指定的周期（以毫">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>test | Nikita</title>
+<title>setTimeout与setInterval区别 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-setTimeout与setInterval区别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/15/test/" class="article-date">
-      <time datetime="2019-11-15T12:57:07.000Z" itemprop="datePublished">2019-11-15</time>
+      <a href="/2020/03/10/setTimeout与setInterval区别/" class="article-date">
+      <time datetime="2020-03-10T01:52:21.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
 
 
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      test
+      setTimeout与setInterval区别
     </h1>
   
 
@@ -298,7 +298,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h6 id="setTimeout与setInterval区别"><a href="#setTimeout与setInterval区别" class="headerlink" title="setTimeout与setInterval区别"></a>setTimeout与setInterval区别</h6><p>这两个都是原生js的定时方法，但执行次数不同。</p>
+<ul>
+<li><p>setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。简单得说就是几秒之后，你把我交给你得任务执行了。（执行一次）</p>
+<p><code>setTimeout(function(){ alert(&quot;Hello&quot;); }, 3000);</code></p>
+</li>
+<li><p>setInterval（）可按照指定的周期（以毫秒计）来调用函数或计算表达式，直到clearInterval（）方法被调用或窗口被关闭。简单来说就是每几秒执行一次，无限执行。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var w, h;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    ~~function setSize() &#123;</span><br><span class="line">        window.onresize = arguments.callee;</span><br><span class="line">        w = window.innerWidth;</span><br><span class="line">        h = window.innerHeight;</span><br><span class="line">        canvas.width = w;</span><br><span class="line">        canvas.height = h;</span><br><span class="line">    &#125;();</span><br><span class="line">    var canCon = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    var x = randomNum(0,w);</span><br><span class="line">    var y = 100;</span><br><span class="line">    setInterval(function()&#123;</span><br><span class="line">        canCon.fillStyle = randomColor();</span><br><span class="line">        canCon.arc(x,y++,20,0,2*Math.PI)</span><br><span class="line">        canCon.fill();</span><br><span class="line">    &#125;,1000/60);</span><br><span class="line"></span><br><span class="line">    // 随机数</span><br><span class="line">    function randomNum(min,max)&#123;</span><br><span class="line">        return Math.floor(Math.random() * (max - min) + min);</span><br><span class="line">    &#125;</span><br><span class="line">    // 随机颜色</span><br><span class="line">    function randomColor()&#123;</span><br><span class="line">        var r,g,b,a;</span><br><span class="line">        r = randomNum(0,255);</span><br><span class="line">        g = randomNum(0,255);</span><br><span class="line">        b = randomNum(0,255);</span><br><span class="line">        a = Math.random();</span><br><span class="line">        return `rgba($&#123;r&#125;,$&#123;g&#125;,$&#123;b&#125;,$&#123;a&#125;)`;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>至此一个闪动的滚动条出现。</p>
+<p>但是我发现setInterval越来越快的问题…….</p>
+<p>经过仔细排查之后，我排除了我自己代码的问题，于是就开始查各种资料。最后才晓得这是setInterval()自身的问题。下面引用大佬的一段话来解释为什么使用setInterval会出现越来越快的问题。</p>
+<p>“JavaScript是运行在单线程的环境中的，所以这就意味着定时器就成了要执行的计划！而不是必须要执行的铁律！ 为啥呢？ 当函数开始执行时在栈中创建出来一个栈帧，这个栈帧的执行是需要时间的，假设有3秒，在这三秒内，JavaScript的单线程特点就会确保在这3秒内全力的专一的去解决掉这个栈帧（函数）。所以在这个函数运行的时候定时器是没有能力终止他的运行的，因此当函数的运行时间大于间隔时间时，间隔时间1秒到了，但是程序还有2秒没有执行完，那你也给我老老实实的等着函数执行完！！！”</p>
+<p>知道了问题的原因，那我们再来看一下怎么去解决这个问题。</p>
+<p><strong>使用setTimeout循环来解决setInterval越来越快的问题</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i=0;</span><br><span class="line">    function show() &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">        i++;</span><br><span class="line">        if(i&lt;5)&#123;</span><br><span class="line">            setTimeout(show,1000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    show();</span><br></pre></td></tr></table></figure>
+
+<h6 id="完成实例"><a href="#完成实例" class="headerlink" title="完成实例"></a>完成实例</h6><p><a href="https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/" target="_blank" rel="noopener">https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/</a></p>
+
       
     </div>
     
@@ -306,13 +325,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/15/test/">test</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-11-15, 20:57:07</p>
-        <p><span>最后更新:</span>2019-11-15, 20:57:07</p>
+        <p><span>发布时间:</span>2020-03-10, 09:52:21</p>
+        <p><span>最后更新:</span>2020-03-10, 09:54:50</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/15/test/" title="test">http://yoursite.com/2019/11/15/test/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/15/test/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/10/setTimeout与setInterval区别/" title="setTimeout与setInterval区别">http://yoursite.com/2020/03/10/setTimeout与setInterval区别/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/10/setTimeout与setInterval区别/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -324,16 +343,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/15/qq小程序天坑之旅/">
-                    qq小程序天坑之旅
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/10/27/proto/">
-                    proto
+                <a href="/2020/03/10/js中callee和caller/">
+                    js中callee和caller
                 </a>
             </div>
         
@@ -345,7 +358,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#setTimeout与setInterval区别"><span class="toc-number">1.</span> <span class="toc-text">setTimeout与setInterval区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#完成实例"><span class="toc-number">2.</span> <span class="toc-text">完成实例</span></a></li></ol>
         
     </div>
     <style>
@@ -381,7 +394,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"test　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"setTimeout与setInterval区别　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -401,15 +414,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/15/qq小程序天坑之旅/" title="上一篇: qq小程序天坑之旅">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/10/27/proto/" title="下一篇: proto">
+            <a href="/2020/03/10/js中callee和caller/" title="下一篇: js中callee和caller">
                 <i class="fa fa-angle-right"></i>
             </a>
         

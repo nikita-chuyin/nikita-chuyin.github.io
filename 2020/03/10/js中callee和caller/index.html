@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="caller 函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null； 123456789101112131415function fun()&amp;#123;	console.log(argument.callee.caller);	//argument.callee.caller必须写在fun中，	//因为argument，caller">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2019/11/15/test/index.html">
+<meta property="og:title" content="js中callee和caller">
+<meta property="og:url" content="http://yoursite.com/2020/03/10/js中callee和caller/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="caller 函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null； 123456789101112131415function fun()&amp;#123;	console.log(argument.callee.caller);	//argument.callee.caller必须写在fun中，	//因为argument，caller">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-15T12:57:07.869Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20160918153045501">
+<meta property="og:updated_time" content="2020-03-10T01:53:58.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:title" content="js中callee和caller">
+<meta name="twitter:description" content="caller 函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null； 123456789101112131415function fun()&amp;#123;	console.log(argument.callee.caller);	//argument.callee.caller必须写在fun中，	//因为argument，caller">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20160918153045501">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>test | Nikita</title>
+<title>js中callee和caller | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +264,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js中callee和caller" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/15/test/" class="article-date">
-      <time datetime="2019-11-15T12:57:07.000Z" itemprop="datePublished">2019-11-15</time>
+      <a href="/2020/03/10/js中callee和caller/" class="article-date">
+      <time datetime="2020-03-10T01:47:31.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
 
 
@@ -281,7 +283,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      test
+      js中callee和caller
     </h1>
   
 
@@ -298,7 +300,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h6 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h6><ol>
+<li><p>函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">	console.log(argument.callee.caller);</span><br><span class="line">	//argument.callee.caller必须写在fun中，</span><br><span class="line">	//因为argument，caller只在执行时才有效。</span><br><span class="line">&#125;</span><br><span class="line">fun(); </span><br><span class="line">//结果为null</span><br><span class="line"></span><br><span class="line">function a()&#123;</span><br><span class="line">    fun();</span><br><span class="line">    function fun()&#123;</span><br><span class="line">        console.log(fun.caller)//这里必须写在fun里面，因为caller只有函数执行过程中才有效</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+
+<p>结果为: a函数<br><img src="https://img-blog.csdn.net/20160918153045501" alt="这里写图片描述"></p>
+<h6 id="js中callee关键字的作用"><a href="#js中callee关键字的作用" class="headerlink" title="js中callee关键字的作用"></a>js中callee关键字的作用</h6><ol>
+<li><p>callee关键字的定义：在函数内部使用，代表当前函数的引用（名字）。</p>
+</li>
+<li><p>作用：降低代码的耦合度。</p>
+</li>
+<li><p>耦合度的定义：一处代码的修改会导致其他代码也要发生改变(耦合度高)在项目里边要开发低耦合度的代码(一处代码修改尽量少地引起其他代码的变化)。</p>
+</li>
+<li><p>语法结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;arguments.callee();&#125;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function jiecheng(n)&#123;</span><br><span class="line">            if(n==1)&#123;</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">            //return n * jiecheng(n-1);</span><br><span class="line">            //callee可以保证外部名称的变化，不会引起内部代码的修改，代码耦合度降低</span><br><span class="line">            return n * arguments.callee(n-1);</span><br><span class="line">        &#125;</span><br><span class="line">        //要把jiecheng名称换成其他的名字进行使用</span><br><span class="line"></span><br><span class="line">        var jc = jiecheng; //对象赋值，其为引用传递</span><br><span class="line"></span><br><span class="line">        jiecheng = null;  //销毁jiecheng函数对象，后期不使用了</span><br><span class="line">        console.log(jc(4)); //输出24</span><br><span class="line">        var jd = jc;</span><br><span class="line">        jc = null;</span><br><span class="line">        console.log(jd(6)); //输出720</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>callee返回正在执行的函数本身的引用。callee是arguments的一个属性，这个属性是一个指针，指向这个拥有arguments对象的函数，（arguments是调用函数，那么这个callee就是调用函数的啦）</p>
+<h6 id="完整项目实例："><a href="#完整项目实例：" class="headerlink" title="完整项目实例："></a>完整项目实例：</h6><p><a href="https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/" target="_blank" rel="noopener">https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/</a></p>
+</li>
+</ol>
+
       
     </div>
     
@@ -306,13 +332,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/15/test/">test</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/10/js中callee和caller/">js中callee和caller</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2019-11-15, 20:57:07</p>
-        <p><span>最后更新:</span>2019-11-15, 20:57:07</p>
+        <p><span>发布时间:</span>2020-03-10, 09:47:31</p>
+        <p><span>最后更新:</span>2020-03-10, 09:53:58</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/15/test/" title="test">http://yoursite.com/2019/11/15/test/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/15/test/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/10/js中callee和caller/" title="js中callee和caller">http://yoursite.com/2020/03/10/js中callee和caller/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/10/js中callee和caller/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -325,15 +351,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/15/qq小程序天坑之旅/">
-                    qq小程序天坑之旅
+                <a href="/2020/03/10/setTimeout与setInterval区别/">
+                    setTimeout与setInterval区别
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/10/27/proto/">
-                    proto
+                <a href="/2020/03/10/行内元素存在间距问题/">
+                    行内元素存在间距问题
                 </a>
             </div>
         
@@ -345,7 +371,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#caller"><span class="toc-number">1.</span> <span class="toc-text">caller</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#js中callee关键字的作用"><span class="toc-number">2.</span> <span class="toc-text">js中callee关键字的作用</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#完整项目实例："><span class="toc-number">3.</span> <span class="toc-text">完整项目实例：</span></a></li></ol>
         
     </div>
     <style>
@@ -381,7 +407,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"test　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"js中callee和caller　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -401,7 +427,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/15/qq小程序天坑之旅/" title="上一篇: qq小程序天坑之旅">
+            <a href="/2020/03/10/setTimeout与setInterval区别/" title="上一篇: setTimeout与setInterval区别">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -409,7 +435,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/10/27/proto/" title="下一篇: proto">
+            <a href="/2020/03/10/行内元素存在间距问题/" title="下一篇: 行内元素存在间距问题">
                 <i class="fa fa-angle-right"></i>
             </a>
         

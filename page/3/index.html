@@ -268,6 +268,181 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-js中的立即执行函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/15/js中的立即执行函数/" class="article-date">
+      <time datetime="2019-09-15T02:07:11.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="js中的立即执行函数"><a href="#js中的立即执行函数" class="headerlink" title="js中的立即执行函数"></a>js中的立即执行函数</h2><p>立即执行函数是一种语法模式，可以让你的函数在定义后立即执行。本质是一个表达式，使用运算符将函数声明转换为函数表达式之后就可达到立即执行效果</p>
+<p>这样，使得页面加载完成后只执行一次设置的函数。且因将设置函数中的变量包裹在局部变量中，不会泄露成全局变量。</p>
+<h6 id="立即执行函数的写法"><a href="#立即执行函数的写法" class="headerlink" title="立即执行函数的写法"></a>立即执行函数的写法</h6><ol>
+<li><p>匿名函数不能单独定义，必须赋值操作或立即执行，否则会被JS引擎定义为语法错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;alert(dada);&#125;</span><br><span class="line">VM229:1 Uncaught SyntaxError: Unexpected token</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在函数体后面加括号就能立即调用，这个函数形式必须是函数表达式，不能是函数声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;alert(123);&#125;();</span><br><span class="line">VM265:1 Uncaught SyntaxError: Unexpected token (</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在函数前面加符号，或者用括号将函数包住来消除函数声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;alert(123);&#125;)();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消除函数声明最安全的做法是加括号，因为运算符号还会和函数的返回值进行运算，造成不必要麻烦。</p>
+</li>
+<li><p>包住函数表达式的括号可以括住参数，也可以不括住，效果是一样的。</p>
+</li>
+</ol>
+<p>通常，全局变量被作为一个参数传递给立即执行函数参数，这样她在函数内部不使用window就可以访问到全局变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function (global)&#123;</span><br><span class="line">	console.log(global);</span><br><span class="line">&#125;)(this);</span><br></pre></td></tr></table></figure>
+
+<p>通过定义一个匿名函数，创建了一个新的函数作用域，相当于创建了一个“私有”的命名空间，该命名空间的变量和方法，不会破坏污染全局的命名空间。此时若是想访问全局对象，将全局对象以参数形式传进去即可，如jQuery代码结构。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-js中的闭包" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/14/js中的闭包/" class="article-date">
+      <time datetime="2019-09-14T14:50:11.000Z" itemprop="datePublished">2019-09-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/14/js中的闭包/">js中的闭包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="谈谈闭包"><a href="#谈谈闭包" class="headerlink" title="谈谈闭包"></a>谈谈闭包</h2><p>最开始我以为闭包就是一个函数里内嵌了一个内部函数，内部函数可以访问外部函数的私有变量，并使得其他函数可以访问到该私有变量，其实这只是一小部分，真正的闭包作用不止如此。</p>
+<p>一个闭包是一个可以自己拥有独立的环境与变量的表达式（通常是函数，因为到ES6才有块级作用域的概念）。它有权访问另一个函数作用域中的变量的函数。</p>
+<p>故主要作用归结为两个：</p>
+<ol>
+<li>可以在函数外部访问到函数内部的函数的局部变量。</li>
+<li>让这些变量始终保存在内存中，不会随着函数的结束而自动销毁。</li>
+</ol>
+<h4 id="深层原因"><a href="#深层原因" class="headerlink" title="深层原因"></a>深层原因</h4><ol>
+<li>我们都知道在js执行时一个函数时都会创建一个<strong>作用域函数</strong>，将函数中的局部变量（函数的形参也是局部变量（保存进去，伴随那些传入的函数变量一起被初始化。当函数执行完毕时，由于返回的函数使用了某个私有属性，，所以返回的函数中保存了一个指向该私有属性的引用，故不会被回收。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function A(age) &#123;</span><br><span class="line">  var name = &apos;wind&apos;;</span><br><span class="line">  var sayHello = function() &#123;</span><br><span class="line">   console.log(&apos;hello, &apos;+name+&apos;, you are &apos;+age+&apos; years old!&apos;);</span><br><span class="line">  &#125;;</span><br><span class="line">  return sayHello;</span><br><span class="line">&#125;</span><br><span class="line">var wind = A(20);</span><br><span class="line">wind();  // hello, wind, you are 20 years old!</span><br><span class="line"></span><br><span class="line">其作用域函数对象为&#123; age:20, name:&apos;wind&apos;&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>每次调用一次外部函数就产生一个新的闭包，新的作用域，以前的闭包依旧存在互不影响。</li>
+<li>同一个闭包会保留上一次的状态，当它被再次调用时会在上一次的基础上进行。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var nnum = 42;</span><br><span class="line">	return function()&#123; console.log(num++); &#125;</span><br><span class="line">&#125;</span><br><span class="line">var a = A();</span><br><span class="line">a();	//42</span><br><span class="line">a();	//43</span><br><span class="line">var b = A();	//重新调用A(),形成新闭包，有了新的作用域对象</span><br><span class="line">b();	//42</span><br></pre></td></tr></table></figure>
+
+<p>4、在外部函数中存在的多个函数 “ 同生共死 ”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var fun1, fun2, fun3;</span><br><span class="line">function A() &#123;</span><br><span class="line">  var num = 42;</span><br><span class="line">  fun1 = function() &#123; console.log(num); &#125;</span><br><span class="line">  fun2 = function() &#123; num++; &#125;</span><br><span class="line">  fun3 = function() &#123; num--; &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A();</span><br><span class="line">fun1();   // 42</span><br><span class="line">fun2(); </span><br><span class="line">fun2(); </span><br><span class="line">fun1();    // 44</span><br><span class="line">fun3(); </span><br><span class="line">fun1();   //43</span><br><span class="line"></span><br><span class="line">var old = fun1;</span><br><span class="line"></span><br><span class="line">A();  </span><br><span class="line">fun1();   // 42</span><br><span class="line">old();   // 43   上一个闭包的fun1()</span><br></pre></td></tr></table></figure>
+
+<p>三个函数被<strong>同时声明</strong>并且都可以对作用域对象的属性（局部变量）进行访问与操作。</p>
+<p>由于函数不能有多个返回值，所以我用了全局变量。我们再次可以看出在我们第二次调用A()时产生了一个新的闭包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr)&#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">		var item = &apos;item&apos; + i;</span><br><span class="line">		result.push(function()&#123; </span><br><span class="line">			console.log(item + &apos; &apos; + arr[i])</span><br><span class="line">			&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line">var fnlist = buildArr([1,2,3]);</span><br><span class="line">fnList[0]();	//item2 undefined</span><br><span class="line">fnList[1]();	//item2 undefined</span><br><span class="line">fnList[2]();	//item2 undefined</span><br></pre></td></tr></table></figure>
+
+<p>怎么会这样呢？我们预想的三个输出应该是 item0 1，  item1 2，  item2 3。为什么结果却是返回的result数组里面存储了三个 item2 undefined ？</p>
+<p>我们上文中提到过两点：</p>
+<ol>
+<li>闭包在返回的时候对作用域对象有一个引用。</li>
+<li>在外部函数中存在的内部函数的“同生共死”。</li>
+</ol>
+<p>我们的for循环为外部函数创建了多个“同生共死”的内部函数，他们都共享一个环境，而当result数组返回时，所有内部函数都引用了同一个作用域对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var bArr = &#123;</span><br><span class="line">	item: &apos;item2&apos;,</span><br><span class="line">	i : 3,</span><br><span class="line">	arr: [1,2,3]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么作用域对象是这样》就拿我们上面的例子来说，当循环全部结束时，作用域对象中的属性i正好是i++之后的3，而arr[3]是没有值的，所以为undefined。</p>
+<p><strong>注意：</strong>在最后一次循环的时候即i = 2时，当i++，i = 3的循环条件不满足循环结束，此时的item的值已经被保存下来了，所以此时的arr[i]为arr[3],而item为item2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr) &#123;</span><br><span class="line">    var result = [];</span><br><span class="line">      for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">          result.push( (function(n) &#123;</span><br><span class="line">             return function() &#123;</span><br><span class="line">                var item = &apos;item&apos; + n;</span><br><span class="line">             	console.log(item + &apos; &apos; + arr[n]);</span><br><span class="line">             &#125;</span><br><span class="line">          &#125;)(i));</span><br><span class="line">     &#125;</span><br><span class="line">     return result;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> var fnlist = buildArr([1,2,3]);</span><br><span class="line"> fnlist[0]();  //  item0 1</span><br><span class="line"> fnlist[1]();  //  item1 2</span><br></pre></td></tr></table></figure>
+
+<p>我们可以用一个自执行函数将i绑定，这样i的每一个状态都会被存储，答案就和我们预期的一样了。 </p>
+<p><strong>所以以后在使用闭包的时候遇到循环变量我们要习惯性的想到用自执行函数来绑定它。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr)&#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	for(let i = 0; i &lt;arr.length; i++)&#123;</span><br><span class="line">		let item = &apos;item&apos; + i;</span><br><span class="line">		result.push(function()&#123;console.log(item + &apos;&apos; + arr[i])&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line">var fnlist = buildArr([1,2,3]);</span><br><span class="line">fnlist[0](); 	//item0   1</span><br></pre></td></tr></table></figure>
+
+<p>使用let代替，主要是利用let会创建块级作用域的特性。</p>
+<p>推荐博文：<a href="https://blog.csdn.net/qq_36276528/article/details/70049825" target="_blank" rel="noopener">https://blog.csdn.net/qq_36276528/article/details/70049825</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-了解浏览器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
