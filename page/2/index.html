@@ -268,6 +268,300 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-攻克object对象" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/15/攻克object对象/" class="article-date">
+      <time datetime="2019-11-15T13:32:33.000Z" itemprop="datePublished">2019-11-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/15/攻克object对象/">攻克object对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
+<li>Object构造函数创建一个对象包装器。如果给定值是null或undefined，将返回一个空对象</li>
+</ul>
+<h4 id="改变原型链的方法"><a href="#改变原型链的方法" class="headerlink" title="改变原型链的方法"></a>改变原型链的方法</h4><p>几乎所有的js对象都是Object的实例；一个典型的对象继承Object.prototype的属性及方法。改变Object原型会通过原型链改变所有对象。</p>
+<ul>
+<li>Object.create(null)创建的对象</li>
+<li>Object.setPrototypeOf()</li>
+<li><code>obj.__proto__</code> = 原型对象</li>
+</ul>
+<h4 id="Object构造函数的属性"><a href="#Object构造函数的属性" class="headerlink" title="Object构造函数的属性"></a>Object构造函数的属性</h4><ul>
+<li><p>Object.length         //值为1</p>
+</li>
+<li><p>Object.prototype ：可以为所有Object类型的对象添加属性（现在一般用class类代替）</p>
+<ul>
+<li><strong>Object.prototype.constructor</strong><ul>
+<li>返回创建实例对象的Object构造函数的引用（new 关键字后面的值）；注意，此属性的值是对函数本身的引用，而不是一个包含函数名称的字符串。对原始类型来说，如<code>1</code>，<code>true</code>和<code>&quot;test&quot;</code>，该值只可读。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [];</span><br><span class="line">arr.constructor  //Array</span><br><span class="line">var obj = new zhuTou()    </span><br><span class="line">obj.constrctor    //zhuTou</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="Object构造函数的方法"><a href="#Object构造函数的方法" class="headerlink" title="Object构造函数的方法"></a>Object构造函数的方法</h4><h6 id="Object-assign-复制"><a href="#Object-assign-复制" class="headerlink" title="Object.assign()复制"></a>Object.assign()复制</h6><p><strong>Object.assign( targetObj, obj1,obj2,…)</strong></p>
+<ul>
+<li>将obj1，obj2等对象里的自身属性且为可枚举属性复制到targetObj对象上，属于浅拷贝。</li>
+<li>若有相同属性，则targetObj里的属性会被覆盖。</li>
+<li>返回值是一个与targetObj一样的对象，两者绝对相等。</li>
+<li>Deep Clone  <code>let obj3 = JSON.parse(JSON.stringify(obj1));</code>   obj1与obj3更改属性值互不影响。</li>
+<li>可拷贝symbol类型属性，继承属性和不可枚举属性不能被拷贝。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let targetObj = &#123;name:&apos;targetObj&apos;&#125;</span><br><span class="line">let obj1 = Object.create(&#123;foo:1&#125;,&#123;</span><br><span class="line">    bar1:&#123;</span><br><span class="line">   	 value:1   //bar是一个不可枚举属性</span><br><span class="line">    &#125;，</span><br><span class="line">    bar2:&#123;</span><br><span class="line">    	value:2,</span><br><span class="line">    	enumerable:true  //bar2是个自身可枚举属性</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">let obj2 = &#123; [Symbol(&apos;foo&apos;)]:2,name:&apos;obj1&apos; &#125;;</span><br><span class="line">let </span><br><span class="line">let obj = Object.assign(targetObject,obj1,obj2)</span><br><span class="line">&#123;</span><br><span class="line">	name:&apos;obj1&apos;,     //后来居上，覆盖targetObj里的值</span><br><span class="line">	[Symbol(&apos;foo&apos;)]:2,   //可拷贝symbol类型属性</span><br><span class="line">	bar2 : 2,        //bar1不可枚举，bar2指定可枚举</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原始类型会被包装成对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const v1 = &quot;abc&quot;;</span><br><span class="line">const v2 = true;</span><br><span class="line">const v3 = 10;</span><br><span class="line">const v4 = Symbol(&quot;foo&quot;)</span><br><span class="line"></span><br><span class="line">const obj = Object.assign(&#123;&#125;, v1, null, v2, undefined, v3, v4); </span><br><span class="line">// 原始类型会被包装，null 和 undefined 会被忽略。</span><br><span class="line">// 注意，只有字符串的包装对象才可能有自身可枚举属性。</span><br><span class="line">console.log(obj); // &#123; &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>异常会打断后续拷贝任务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const target = Object.defineProperty(&#123;&#125;, &quot;foo&quot;, &#123;</span><br><span class="line">    value: 1,</span><br><span class="line">    writable: false</span><br><span class="line">&#125;); // target 的 foo 属性是个只读属性。</span><br><span class="line"></span><br><span class="line">Object.assign(target, &#123;bar: 2&#125;, &#123;foo2: 3, foo: 3, foo3: 3&#125;, &#123;baz: 4&#125;);</span><br><span class="line">// TypeError: &quot;foo&quot; is read-only</span><br><span class="line">// 注意这个异常是在拷贝第二个源对象的第二个属性时发生的。</span><br><span class="line"></span><br><span class="line">console.log(target.bar);  // 2，说明第一个源对象拷贝成功了。</span><br><span class="line">console.log(target.foo2); // 3，说明第二个源对象的第一个属性也拷贝成功了。</span><br><span class="line">console.log(target.foo);  // 1，只读属性不能被覆盖，所以第二个源对象的第二个属性拷贝失败了。</span><br><span class="line">console.log(target.foo3); // undefined，异常之后 assign 方法就退出了，第三个属性是不会被拷贝到的。</span><br><span class="line">console.log(target.baz);  // undefined，第三个源对象更是不会被拷贝到的。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>异常会打断后续拷贝任务。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//以下函数会拷贝所有自有属性的属性描述符</span><br><span class="line">function completeAssign(target,...sources)&#123;</span><br><span class="line">	sources.forEach(source =&gt; &#123;</span><br><span class="line">		let descritors = Object.keys(source).reduce( (descriptors,key) =&gt; &#123;</span><br><span class="line">			descriptors[key] = Object.getOwnPropertyDescriptor(source,key);</span><br><span class="line">			return descriptors;</span><br><span class="line">		&#125;,&#123;&#125;);</span><br><span class="line">		//Object.assign默认也会拷贝可枚举的Symbols</span><br><span class="line">		object.getOwnPropertySymbols(source).forEach( sym =&gt; &#123;</span><br><span class="line">		  let descriptor = Object.getOwnPropertyDescriptor(source,sym);</span><br><span class="line">		  if(descriptor.enumerable)&#123;</span><br><span class="line">		  	descriptors[sym] = descriptor;</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		Object.defineProperties(target,descriptors);</span><br><span class="line">	&#125;);</span><br><span class="line">	return target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此<a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill" target="_blank" rel="noopener">polyfill</a>不支持 symbol 属性，因为ES5 中根本没有 symbol ：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">if (typeof Object.assign != &apos;function&apos;) &#123;</span><br><span class="line">  // Must be writable: true, enumerable: false, configurable: true</span><br><span class="line">  Object.defineProperty(Object, &quot;assign&quot;, &#123;</span><br><span class="line">    value: function assign(target, varArgs) &#123; // .length of function is 2</span><br><span class="line">      &apos;use strict&apos;;</span><br><span class="line">      if (target == null) &#123; // TypeError if undefined or null</span><br><span class="line">        throw new TypeError(&apos;Cannot convert undefined or null to object&apos;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      let to = Object(target);</span><br><span class="line"></span><br><span class="line">      for (var index = 1; index &lt; arguments.length; index++) &#123;</span><br><span class="line">        var nextSource = arguments[index];</span><br><span class="line"></span><br><span class="line">        if (nextSource != null) &#123; // Skip over if undefined or null</span><br><span class="line">          for (let nextKey in nextSource) &#123;</span><br><span class="line">            // Avoid bugs when hasOwnProperty is shadowed</span><br><span class="line">            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) &#123;</span><br><span class="line">              to[nextKey] = nextSource[nextKey];</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return to;</span><br><span class="line">    &#125;,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-create-继承"><a href="#Object-create-继承" class="headerlink" title="Object.create()继承"></a>Object.create()继承</h6><ul>
+<li><p>Object(proto[,propertiesObject])：实现类式继承</p>
+<ul>
+<li>proto：新创建的原型对象。</li>
+<li>propertiesObject：未指定为undefined，要添加到新创建对象的可枚举属性（不是其原型链上的枚举属性，而是自定义属性）对象的属性描述符以及相应的属性名称。若为null或非原始包装对象抛出TypeError异常。</li>
+<li>返回一个带着指定原型对象和属性的新对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function Shape()&#123;	//父类</span><br><span class="line">  this.x = 0;</span><br><span class="line">  this.y = 0;</span><br><span class="line">&#125;</span><br><span class="line">Shape.prototype.move = function(x,y)&#123;</span><br><span class="line">  this.x += x;</span><br><span class="line">  this.y += y;</span><br><span class="line">  console.log(this,&apos;shape moved&apos;);</span><br><span class="line">&#125;;</span><br><span class="line">function Rectangle()&#123;</span><br><span class="line">  Shape.call(this);</span><br><span class="line">&#125;</span><br><span class="line">Rectangle.prototype = Object.create(Shape.prototype);</span><br><span class="line">Rectangle.prototype.constructor = Rectangle;//没有这句，输出的this指向父类Shape</span><br><span class="line">var rect = new Rectangle();</span><br><span class="line">console.log(rect instanceof Rectangle);</span><br><span class="line">console.log(rect instanceof Shape);</span><br><span class="line">rect.move();</span><br><span class="line">//true</span><br><span class="line">//true</span><br><span class="line">//Rectangle &#123; x: NaN, y: NaN &#125; &apos;shape moved&apos;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>继承多个对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function MyClass()&#123;</span><br><span class="line">	SuperClass.call(this);</span><br><span class="line">	otherSuperClass.call(this);</span><br><span class="line">&#125;</span><br><span class="line">//继承一个类</span><br><span class="line">MyClass.prototype = Object.create(SuperClass.prototype);</span><br><span class="line">//混合其他</span><br><span class="line">Object.assign(MyClass.prototype,OtherSuperclass.prototype);</span><br><span class="line">//重新指定constructor</span><br><span class="line">MyClass.prototype.constructor = MyClass;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">var o;</span><br><span class="line">// 创建一个原型为null的空对象</span><br><span class="line">o = Object.create(null);</span><br><span class="line"></span><br><span class="line">o = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// 以字面量方式创建的空对象就相当于:</span><br><span class="line">o = Object.create(Object.prototype);</span><br><span class="line">o = Object.create(Object.prototype, &#123;</span><br><span class="line">  // foo会成为所创建对象的数据属性</span><br><span class="line">  foo: &#123; </span><br><span class="line">    writable:true,</span><br><span class="line">    configurable:true,</span><br><span class="line">    value: &quot;hello&quot; </span><br><span class="line">  &#125;,</span><br><span class="line">  // bar会成为所创建对象的访问器属性</span><br><span class="line">  bar: &#123;</span><br><span class="line">    configurable: false,</span><br><span class="line">    get: function() &#123; return 10 &#125;,</span><br><span class="line">    set: function(value) &#123;</span><br><span class="line">      console.log(&quot;Setting `o.bar` to&quot;, value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function Constructor()&#123;&#125;</span><br><span class="line">o = new Constructor();</span><br><span class="line">// 上面的一句就相当于:</span><br><span class="line">o = Object.create(Constructor.prototype);</span><br><span class="line">// 当然,如果在Constructor函数中有一些初始化代码,Object.create不能执行那些代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 创建一个以另一个空对象为原型,且拥有一个属性p的对象</span><br><span class="line">o = Object.create(&#123;&#125;, &#123; p: &#123; value: 42 &#125; &#125;)</span><br><span class="line"></span><br><span class="line">// 省略了的属性特性默认为false,所以属性p是不可写,不可枚举,不可配置的:</span><br><span class="line">o.p = 24</span><br><span class="line">o.p</span><br><span class="line">//42</span><br><span class="line"></span><br><span class="line">o.q = 12</span><br><span class="line">for (var prop in o) &#123;</span><br><span class="line">   console.log(prop)</span><br><span class="line">&#125;</span><br><span class="line">//&quot;q&quot;</span><br><span class="line"></span><br><span class="line">delete o.p</span><br><span class="line">//false</span><br><span class="line"></span><br><span class="line">//创建一个可写的,可枚举的,可配置的属性p</span><br><span class="line">o2 = Object.create(&#123;&#125;, &#123;</span><br><span class="line">  p: &#123;</span><br><span class="line">    value: 42, </span><br><span class="line">    writable: true,</span><br><span class="line">    enumerable: true,</span><br><span class="line">    configurable: true </span><br><span class="line">  &#125; </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h6 id="Object-defineProperties"><a href="#Object-defineProperties" class="headerlink" title="Object.defineProperties()"></a>Object.defineProperties()</h6><ul>
+<li>Object.defineProperties(obj,props):在对象obj上定义或修改现有属性，并返回该对象obj</li>
+<li>props：要定义的其可枚举属性或修改的属性描述符对象。对象上存在的属性描述符主要有两种：数据描述符（有值的属性，该值可写，也可能不可写）和访问器描述符。描述符具有以下键：<ul>
+<li>configurable：默认为false。描述属性能否被修改或删除，一旦定义值后不可修改，否则会抛出错误。但是删除configurable属性值为false的属性值nothing happen，也不会报错。</li>
+<li>enumerable：默认为false。能否使用<strong>for…in循环和Object.keys()</strong>，是否可枚举。</li>
+<li>value：默认undefined。可为任何有效js值。</li>
+<li>writable：默认false。是否可重写。</li>
+<li>get：默认undefined。作为函数的getter函数，若无getter函数则为undefined。</li>
+<li>set：与get同理。</li>
+</ul>
+</li>
+</ul>
+<h6 id="object-defineProperty"><a href="#object-defineProperty" class="headerlink" title="object.defineProperty()"></a>object.defineProperty()</h6><ul>
+<li>Object.defineProperty(obj,prop,descriptor):返回被传递给函数的对象，即obj，该方法式定义key为Symbol的属性的方法之一。</li>
+<li>通过简单赋值操作的普通属性可delete，<strong>通过该方法定义的属性值不能修改</strong>。</li>
+<li>如果一个描述符不具有value,writable,get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常。</li>
+<li>如果某些属性是继承来的，需要先冻结Object.prototype，明确指定所有属性，或通过Object.create(nill)将<code>__proto__</code>属性指向null。var des</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//使用__proto__</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">var descriptor = Object.create(null);//没有继承的属性</span><br><span class="line">//默认没有enumerable，没有configurable，没有writable</span><br><span class="line">descriptor.value=&quot;static&quot;;</span><br><span class="line">Object.defineProperty(obj,&quot;key&quot;,descriptor);</span><br><span class="line"></span><br><span class="line">//显式定义</span><br><span class="line">Object.defineProperty(obj,&quot;key&quot;,&#123;</span><br><span class="line">	enumerable:false,</span><br><span class="line">	confingurable:false,</span><br><span class="line">	writable:false,</span><br><span class="line">	value:&apos;static&apos;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//循环使用同一个对象</span><br><span class="line">function withValue(value)&#123;</span><br><span class="line">	var d = withValue.d || (</span><br><span class="line">		withValue.d = &#123;</span><br><span class="line">			enumerable:false,</span><br><span class="line">			configurable:false,</span><br><span class="line">			writable:false,</span><br><span class="line">			value:null</span><br><span class="line">		&#125;</span><br><span class="line">	);</span><br><span class="line">	d.value = value;</span><br><span class="line">	return d;</span><br><span class="line">&#125;</span><br><span class="line">Object.defineProperty(obj,&quot;key&quot;,withValue(&quot;static&quot;));</span><br><span class="line"></span><br><span class="line">//如果freeze可用，防止代码添加或删除对象圆形的属性</span><br><span class="line">(Object.freeze || object)(Object.prototype);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果对象中不存在指定的属性，<code>Object.defineProperty()</code>就创建这个属性。当描述符中省略某些字段时，这些字段将使用它们的默认值。拥有布尔值的字段的默认值都是<code>false</code>。<code>value</code>，<code>get</code>和<code>set</code>字段的默认值为<code>undefined</code>。一个没有<code>get/set/value/writable</code>定义的属性被称为“通用的”，并被“键入”为一个数据描述符。</li>
+<li>如果访问者的属性是被继承的，它的get和set方法会在子对象的属性被修改或访问时调用。如果这些方法用一个变量存值，该值会被所有对象共享。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function myClass()&#123;&#125;</span><br><span class="line">var value;</span><br><span class="line">myClass.prototype.x = 2;</span><br><span class="line">Object.defineProperty(myClass.prototype,&quot;x&quot;,&#123;</span><br><span class="line">	get()&#123; return value; &#125;,</span><br><span class="line">	set(x)&#123; value = x; &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var a = new myClass();</span><br><span class="line">var b = new myClass();</span><br><span class="line">a.x = 1;</span><br><span class="line">b.x   //1</span><br><span class="line">myClass.prototype.x   //2   实例上的x与原型上的x不同，更改实例上的值不影响原型上的值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这可通过将值存入另一个属性中解决，在get或set中，this指向某个被访问的被访问和修改属性的对象。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function myClass()&#123;&#125;</span><br><span class="line">Object.defineProperty(myClass.prototype,&quot;x&quot;,&#123;</span><br><span class="line">	get()&#123; return this.stored_x; &#125;,</span><br><span class="line">	set(x)&#123; this._stored_x = x; &#125;</span><br><span class="line">&#125;);</span><br><span class="line">myClass.prototype.x = 1;</span><br><span class="line">Object.defineProperty(myClass.prototype,&quot;y&quot;,&#123;</span><br><span class="line">	writable:false,</span><br><span class="line">	value:&quot;y&quot;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var a = new myClass();</span><br><span class="line">var b = new myClass();</span><br><span class="line">a.x = 2;</span><br><span class="line">b.x    //undefined</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-entries"><a href="#Object-entries" class="headerlink" title="Object.entries()"></a>Object.entries()</h6><ul>
+<li>Object.entries(obj)：返回一个给定对象<strong>自身可枚举属性的键值对数组</strong>，其排列顺序与<strong>for…in循环（会遍历原型链上的可枚举属性</strong>）返回顺序相同。如果是类数组则按数字键从小到大排列。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123; foo: &apos;bar&apos;, baz: 42 &#125;;</span><br><span class="line">console.log(Object.entries(obj)); // [ [&apos;foo&apos;, &apos;bar&apos;], [&apos;baz&apos;, 42] ]</span><br><span class="line"></span><br><span class="line">// array like object</span><br><span class="line">const obj = &#123; 0: &apos;a&apos;, 1: &apos;b&apos;, 2: &apos;c&apos; &#125;;</span><br><span class="line">console.log(Object.entries(obj)); // [ [&apos;0&apos;, &apos;a&apos;], [&apos;1&apos;, &apos;b&apos;], [&apos;2&apos;, &apos;c&apos;] ]</span><br><span class="line"></span><br><span class="line">// array like object with random key ordering</span><br><span class="line">const anObj = &#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &#125;;</span><br><span class="line">console.log(Object.entries(anObj)); // [ [&apos;2&apos;, &apos;b&apos;], [&apos;7&apos;, &apos;c&apos;], [&apos;100&apos;, &apos;a&apos;] ]</span><br><span class="line"></span><br><span class="line">// getFoo is property which isn&apos;t enumerable</span><br><span class="line">const myObj = Object.create(&#123;&#125;, &#123; getFoo: &#123; value() &#123; return this.foo; &#125; &#125; &#125;);</span><br><span class="line">myObj.foo = &apos;bar&apos;;</span><br><span class="line">console.log(Object.entries(myObj)); // [ [&apos;foo&apos;, &apos;bar&apos;] ]</span><br><span class="line"></span><br><span class="line">// non-object argument will be coerced to an object</span><br><span class="line">console.log(Object.entries(&apos;foo&apos;)); // [ [&apos;0&apos;, &apos;f&apos;], [&apos;1&apos;, &apos;o&apos;], [&apos;2&apos;, &apos;o&apos;] ]</span><br><span class="line"></span><br><span class="line">// iterate through key-value gracefully</span><br><span class="line">const obj = &#123; a: 5, b: 7, c: 9 &#125;;</span><br><span class="line">for (const [key, value] of Object.entries(obj)) &#123;</span><br><span class="line">  console.log(`$&#123;key&#125; $&#123;value&#125;`); // &quot;a 5&quot;, &quot;b 7&quot;, &quot;c 9&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Or, using array extras</span><br><span class="line">Object.entries(obj).forEach(([key, value]) =&gt; &#123;</span><br><span class="line">console.log(`$&#123;key&#125; $&#123;value&#125;`); // &quot;a 5&quot;, &quot;b 7&quot;, &quot;c 9&quot;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze()"></a>Object.freeze()</h6><ul>
+<li>Object.freeze(obj)：将obj对象冻结，不能对其自身属性进行任何操作，同时该对象的原型也不能修改。如果一个属性的值是个对象，则这个对象中的属性是可以修改的，除非它也是个冻结对象。数组作为一种对象，被冻结，其元素不能被修改。没有数组元素可以被添加或移除。</li>
+<li>这个方法返回传递的对象obj，而不是创建一个被冻结的副本。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//浅冻结</span><br><span class="line">obj1 = &#123; name:&apos;nikita&apos;, internal:&#123;&#125; &#125;;</span><br><span class="line">Object.freeze(obj1);</span><br><span class="line">obj1.name = &apos;hello&apos;</span><br><span class="line">obj1.internal.a = 1;</span><br><span class="line">obj1     //&#123;name: &quot;nikita&quot;, internal: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>递归冻结每个对象属性，即深度冻结</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function deepFreeze(obj)&#123;</span><br><span class="line">	//取回定义在obj上的属性名</span><br><span class="line">	var propNames = object.getPropertyName(obj);</span><br><span class="line">	//在冻结对象之前冻结属性</span><br><span class="line">	propNames.forEach(function(name)&#123;</span><br><span class="line">		var prop = obj[name];</span><br><span class="line">		if(typeof prop == &apos;object&apos; &amp;&amp; prop !== null)&#123;</span><br><span class="line">			deepFreeze(prop);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	//冻结自身</span><br><span class="line">	return Object.freeze(obj);</span><br><span class="line">&#125;</span><br><span class="line">obj2 = &#123;</span><br><span class="line">  internal: &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">deepFreeze(obj2);</span><br><span class="line">obj2.internal.a = &apos;anotherValue&apos;;</span><br><span class="line">obj2.internal.a; // undefined</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-getOwnPropertyDescriptor"><a href="#Object-getOwnPropertyDescriptor" class="headerlink" title="Object.getOwnPropertyDescriptor()"></a>Object.getOwnPropertyDescriptor()</h6><ul>
+<li>Object.getOwnPropertyDescriptor(obj,prop)：返回指定对象自身属性的属性描述符。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var o, d;</span><br><span class="line"></span><br><span class="line">o = &#123; get foo() &#123; return 17; &#125; &#125;;</span><br><span class="line">d = Object.getOwnPropertyDescriptor(o, &quot;foo&quot;);</span><br><span class="line">// d &#123;</span><br><span class="line">//   configurable: true,</span><br><span class="line">//   enumerable: true,</span><br><span class="line">//   get: /*the getter function*/,</span><br><span class="line">//   set: undefined</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>若第一个参数不是对象，ES5报错，ES6强制转换为对象。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyDescriptor(&apos;foo&apos;, 0);</span><br><span class="line">// 类型错误: &quot;foo&quot; 不是一个对象  // ES5 code</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyDescriptor(&apos;foo&apos;, 0);</span><br><span class="line">// Object returned by ES2015 code: &#123;</span><br><span class="line">//   configurable: false,</span><br><span class="line">//   enumerable: true,</span><br><span class="line">//   value: &quot;f&quot;,</span><br><span class="line">//   writable: false</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Object.getOwnPropertyDescriptors()</code> 方法用来获取一个对象的所有自身属性的描述符。</li>
+<li>浅拷贝一个对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object.create(</span><br><span class="line">	Object.getPrototypeOf(obj),</span><br><span class="line">	Object.getownpropertyDescriptors(obj)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建子类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function superClass()&#123;&#125;</span><br><span class="line">superClass.prototype=&#123;&#125;</span><br><span class="line">function subClass = &#123;&#125;</span><br><span class="line">subClass.prototype = Object.create(superClass.prototype,Object.getOwnpropertyDescriptors(&#123;&#125;));</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-getOwnPropertyNames-obj"><a href="#Object-getOwnPropertyNames-obj" class="headerlink" title="Object.getOwnPropertyNames(obj)"></a>Object.getOwnPropertyNames(obj)</h6><ul>
+<li>返回一个包含所有属性名（<strong>包括不可枚举属性但不包括Symbol值作为名称的属性</strong>）组成的<strong>数组</strong>。</li>
+</ul>
+<h6 id="Object-keys-obj"><a href="#Object-keys-obj" class="headerlink" title="Object.keys(obj)"></a>Object.keys(obj)</h6><ul>
+<li>返回自身属性的字符串数组</li>
+</ul>
+<h6 id="Object-values-obj"><a href="#Object-values-obj" class="headerlink" title="Object.values(obj)"></a>Object.values(obj)</h6><ul>
+<li>返回给定对象自身的所有可枚举属性值的数组。</li>
+</ul>
+<h6 id="Object-is"><a href="#Object-is" class="headerlink" title="Object.is()"></a>Object.is()</h6><p>object.is(val1,val2)：判断两个值是否是相同的值，作用与”==”相似，只不过Object.is()不会隐式类型转换，返回boolean值。</p>
+<p><strong>注意相等的几种情况</strong>：</p>
+<ul>
+<li>两个值都是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="noopener"><code>undefined</code></a></li>
+<li>两个值都是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="noopener"><code>null</code></a></li>
+<li>两个值都是 <code>true</code> 或者都是 <code>false</code></li>
+<li>两个值是由相同个数的字符按照相同的顺序组成的字符串</li>
+<li>两个值指向同一个对象</li>
+<li>两个值都是数字并且<ul>
+<li>都是正零 <code>+0</code></li>
+<li>都是负零 <code>-0</code></li>
+<li>都是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN" target="_blank" rel="noopener"><code>NaN</code></a></li>
+<li>都是除零和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN" target="_blank" rel="noopener"><code>NaN</code></a> 外的其它同一个数字</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 特例</span><br><span class="line">Object.is(0, -0);            // false</span><br><span class="line">Object.is(0, +0);            // true</span><br><span class="line">Object.is(-0, -0);           // true</span><br><span class="line">Object.is(NaN, 0/0);         // true</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-isExtensible-obj"><a href="#Object-isExtensible-obj" class="headerlink" title="Object.isExtensible(obj)"></a>Object.isExtensible(obj)</h6><ul>
+<li>检测对象obj是否可扩展（能否加新的属性），返回boolean值。</li>
+<li>默认是可扩展的，即可为他们添加新的属性。以及他们的<code>__prop__</code>属性也是可被更改的。Object.preventExtensions,Object.seal或Object.freeze方法都可使对象obj变成不可扩展。</li>
+<li>若参数不是object类型，ES5会报错，ES6会将其转为不可扩展的普通对象.</li>
+</ul>
+<h6 id="Object-isFrozen-obj"><a href="#Object-isFrozen-obj" class="headerlink" title="Object.isFrozen(obj)"></a>Object.isFrozen(obj)</h6><ul>
+<li>判断对象obj是否被冻结，冻结指它不可扩展，所有属性所有属性都是不可配置的，且所有数据属性（即没有getter或setter组件的访问器）都是不可写的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var oneProp = &#123;p:42&#125;</span><br><span class="line">// 让这个对象变的不可扩展,并不意味着这个对象变成了冻结对象,</span><br><span class="line">// 因为p属性仍然是可以配置的(而且可写的).</span><br><span class="line">Object.preventExtensions(oneProp);</span><br><span class="line">Object.isFrozen(oneProp) //=== false</span><br><span class="line">//此时如果删除了这个属性，则它会变成一个冻结对象</span><br><span class="line">delete oneProp.p;</span><br><span class="line">Object.isFrozen(oneProp) //===true</span><br><span class="line">//一个不可扩展的对象，拥有一个不可写但可配置的属性，则它仍是不可冻结的</span><br><span class="line">var nonWritable = &#123;e:&apos;plep&apos;&#125;;</span><br><span class="line">Object.preventExtensions(nonWritable);</span><br><span class="line">Object.defineProperty(noWritable,&apos;e&apos;,&#123;writable:false&#125;);</span><br><span class="line">Object.isFrozen(nonWritable)  //===false</span><br><span class="line">//将该属性变为不可配置则可让其变为冻结对象</span><br><span class="line">Object.defineProperty(noWritable,&apos;e&apos;,&#123;configurable:false&#125;);</span><br><span class="line">Object.isFrozen(nonWritable)  //===true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果参数不是对象类型，ES5报错。ES6将其视为一个冻结的普通对象。</li>
+</ul>
+<h6 id="Object-isSealed-obj"><a href="#Object-isSealed-obj" class="headerlink" title="Object.isSealed(obj)"></a>Object.isSealed(obj)</h6><ul>
+<li>判断一个对象是否被密封，返回boolean值。密封对象是指那些不可扩展且所有自身属性都不可配置且不可删除（但不一定是不可写的）的对象。</li>
+</ul>
+<h6 id="Object-hasOwnProperty-str-symbol"><a href="#Object-hasOwnProperty-str-symbol" class="headerlink" title="Object.hasOwnProperty(str/symbol)"></a>Object.hasOwnProperty(str/symbol)</h6><ul>
+<li>判断某个属性是否为对象自身属性，与in不同，该方法会忽略掉从原型链上继承来的属性。即使属性值为null或undefined，只要属性存在都返回true</li>
+</ul>
+<h6 id="Object-toString"><a href="#Object-toString" class="headerlink" title="Object.toString()"></a>Object.toString()</h6><ul>
+<li>返回【Object  type】</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var toString = Object.prototype.toString;</span><br><span class="line"></span><br><span class="line">toString.call(new Date); // [object Date]</span><br><span class="line">toString.call(new String); // [object String]</span><br><span class="line">toString.call(Math); // [object Math]</span><br><span class="line"></span><br><span class="line">//Since JavaScript 1.8.5</span><br><span class="line">toString.call(undefined); // [object Undefined]</span><br><span class="line">toString.call(null); // [object Null]</span><br></pre></td></tr></table></figure>
+
+<h6 id="obj-valueOf"><a href="#obj-valueOf" class="headerlink" title="obj.valueOf()"></a>obj.valueOf()</h6><ul>
+<li>返回指定对象的原始值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>对象</strong></th>
+<th align="left"><strong>返回值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Array</td>
+<td align="left">返回数组对象本身。</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">布尔值。</td>
+</tr>
+<tr>
+<td align="left">Date</td>
+<td align="left">存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。</td>
+</tr>
+<tr>
+<td align="left">Function</td>
+<td align="left">函数本身。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">数字值。</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">对象本身。这是默认情况。</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">字符串值。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Math 和 Error 对象没有 valueOf 方法。</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>字符串上下文中的对象通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="noopener"><code>toString()</code></a>方法转换，这与使用<code>valueOf</code>转换为原始字符串的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/String" target="_blank" rel="noopener"><code>String</code></a>对象不同。所有对象都能转换成一个“<code>[object *类型*]</code>”这种格式的字符串。但是很多对象不能转换为数字，布尔或函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// new一个Boolean对象</span><br><span class="line">var newBool = new Boolean(true);</span><br><span class="line">// valueOf()返回的是true，两者的值相等</span><br><span class="line">console.log(newBool.valueOf() == newBool);   // true</span><br><span class="line">// 但是不全等，两者类型不相等，前者是boolean类型，后者是object类型</span><br><span class="line">console.log(newBool.valueOf() === newBool);   // false</span><br></pre></td></tr></table></figure>
+
+<h6 id="Object-seal-prop"><a href="#Object-seal-prop" class="headerlink" title="Object.seal(prop)"></a>Object.seal(prop)</h6><p><code>**Object.seal()**</code>方法封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要可写就可以改变。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-qq小程序天坑之旅" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1023,99 +1317,6 @@
 
 <p>使用let代替，主要是利用let会创建块级作用域的特性。</p>
 <p>推荐博文：<a href="https://blog.csdn.net/qq_36276528/article/details/70049825" target="_blank" rel="noopener">https://blog.csdn.net/qq_36276528/article/details/70049825</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-了解浏览器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/14/了解浏览器/" class="article-date">
-      <time datetime="2019-09-14T03:07:43.000Z" itemprop="datePublished">2019-09-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/14/了解浏览器/">了解浏览器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="理解浏览器的工作原理"><a href="#理解浏览器的工作原理" class="headerlink" title="理解浏览器的工作原理"></a>理解浏览器的工作原理</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。</p>
-<h4 id="浏览器组成"><a href="#浏览器组成" class="headerlink" title="浏览器组成"></a>浏览器组成</h4><p><img src="https://pic.xiaohuochai.site/blog/browserRender1.png" alt="browser"></p>
-<p>主要组件包括：</p>
-<ol>
-<li>用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。</li>
-<li>浏览器引擎——用来查询及操作渲染引擎的接口。</li>
-<li>渲染引擎——用来显示请求的内容，如：如果请求内容为html，他负责解析html及css，并将解析后的结果显示在页面。</li>
-<li>网络——用来完成网络调用，如：http请求，它具有平台无关的接口，可以在不同平台上工作。</li>
-<li>UI后端——用来绘制类似组合选择框及对话框等基本组件，具有不特定与某个平台的通用接口，顶层使用操作系统的用户接口。</li>
-<li>JS解释器——用来执行JS代码。</li>
-<li>数据存储——属于持久层，浏览器需要在硬盘中保存类似cookie的各种数据，HTML5定义了web database技术，这是一种轻量级完整的客户端存储技术。</li>
-</ol>
-<h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h4><p>浏览器分为两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源并解析排版并呈现给用户。</p>
-<p>默认情况下，渲染引擎可以显示html，xml文档及图片，他可以借助插件显示其他类型数据，例如使用PDF阅读器插件，可以显示PDF格式。</p>
-<h6 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h6><p>firefox使用gecko引擎</p>
-<p>IE使用Trident引擎，2015年微软推出自己新的浏览器，原名叫斯巴达，后改名edge，使用edge引擎</p>
-<p>opera最早使用Presto引擎，后来弃用</p>
-<p>chrome\safari\opera使用webkit引擎，13年chrome和opera开始使用Blink引擎</p>
-<p>UC使用U3引擎</p>
-<p>QQ浏览器和微信内核使用X5引擎，16年开始使用Blink引擎</p>
-<h6 id="js引擎"><a href="#js引擎" class="headerlink" title="js引擎"></a>js引擎</h6><p>老版本IE使用Jscript引擎，IE9之后使用Chakra引擎，edge浏览器仍然使用Chakra引擎</p>
-<p>firefox使用monkey系列引擎</p>
-<p>safari使用的SquirrelFish系列引擎</p>
-<p>Opera使用Carakan引擎</p>
-<p>chrome使用V8引擎。nodeJs其实就是封装了V8引擎</p>
-<h6 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h6><p>　　从资源的下载到最终的页面展现，渲染流程可简单地理解成一个线性串联的变换过程的组合，原始输入为URL地址，最终输出为页面Bitmap，中间依次经过了Loader、Parser、Layout和Paint模块</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome1.jpeg" alt="chrome1"></p>
-<p>　渲染引擎的核心流程如下所示</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome4.jpeg" alt="chrome"></p>
-<h6 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h6><p>Loader模块负责处理所有的HTTP请求以及网络资源的缓存，相当于是从URL输入到Page Resource输出的变换过程。HTML页面中通常由JS/CSS/Image资源，为了不阻塞后续解析过程，一般会有两个IO管道同时存在，一个负责主页面下载，一个负责各种外链接资源的下载。</p>
-<p><img src="https://pic.xiaohuochai.site/blog/chrome2.jpeg" alt="chrome"></p>
-<p><strong>注意：</strong>虽然大部分情况下不同资源都是并发下载异步解析（如图片资源可以在主页面解析显示完成后再被显示），但JS脚本可能会要求改变页面，因此有时保持执行顺序和下载管道后续处理的阻塞是不可避免的。</p>
-<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>缓存在浏览器中也得到广泛的应用，对提高用户体验起到重要的作用。在浏览器中，主要存在三种类型的缓存：Page Cache，Memory Cache，Disk Cacche。这三类Cache的容量都是额可以配置的，比如限制Memory Cache最大不超过30M，Page Cache缓存的页面数量不超过5个等。</p>
-<p><code>Page Cache</code>：即页面缓存。用来缓存用户访问过的网页DOM树、Render树等数据。设计页面缓存的意图在于提供流畅的页面前进、后退浏览体验。几乎所有的现代浏览器都支持页面缓存功能</p>
-<p><code>Memory Cache</code>：浏览器内部的缓存机制，对于相同的url的资源直接从缓存中获取，不需要重新下载。在使用浏览器浏览网页时，尤其是浏览一个大型网站的不同页面时，经常会遇到网页中包含相同资源的情况，应用Memory Cache可以显著提高浏览器的用户体验，减少无谓的内存、时间以及网络带宽开销。</p>
-<p><code>Disk Cache</code>：资源加载缓存和服务器进行交互，服务器端可以通过HTTP头信息设置网页要不要加载；</p>
-<p>转自：</p>
-<p><a href="https://www.cnblogs.com/itplay/p/10475368.html" target="_blank" rel="noopener">https://www.cnblogs.com/itplay/p/10475368.html </a> </p>
 
       
     </div>
