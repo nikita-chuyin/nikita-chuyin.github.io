@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="涂鸦部分 为了兼容性，使用canvas.getContext判断是否有该属性。 使用canvas.getContext（）获得画板执行上下文。 给canvas添加鼠标按下事件。 获取鼠标按下时，相对画布的x，y坐标。 设置画笔颜色，以及笔的宽度（ctx.lineWidth)； 开始画线。    canvas的lineCap属性 lineCap属性是设置或返回线条末端线帽的样式，其中，“round”">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈canvas和相关实战">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/浅谈canvas和相关实战/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="涂鸦部分 为了兼容性，使用canvas.getContext判断是否有该属性。 使用canvas.getContext（）获得画板执行上下文。 给canvas添加鼠标按下事件。 获取鼠标按下时，相对画布的x，y坐标。 设置画笔颜色，以及笔的宽度（ctx.lineWidth)； 开始画线。    canvas的lineCap属性 lineCap属性是设置或返回线条末端线帽的样式，其中，“round”">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-18T05:06:22.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈canvas和相关实战">
+<meta name="twitter:description" content="涂鸦部分 为了兼容性，使用canvas.getContext判断是否有该属性。 使用canvas.getContext（）获得画板执行上下文。 给canvas添加鼠标按下事件。 获取鼠标按下时，相对画布的x，y坐标。 设置画笔颜色，以及笔的宽度（ctx.lineWidth)； 开始画线。    canvas的lineCap属性 lineCap属性是设置或返回线条末端线帽的样式，其中，“round”">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>浅谈canvas和相关实战 | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-浅谈canvas和相关实战" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/18/浅谈canvas和相关实战/" class="article-date">
+      <time datetime="2020-03-18T05:06:00.000Z" itemprop="datePublished">2020-03-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈canvas和相关实战
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h6 id="涂鸦部分"><a href="#涂鸦部分" class="headerlink" title="涂鸦部分"></a>涂鸦部分</h6><ul>
+<li>为了兼容性，使用canvas.getContext判断是否有该属性。</li>
+<li>使用canvas.getContext（）获得画板执行上下文。</li>
+<li>给canvas添加鼠标按下事件。<ul>
+<li>获取鼠标按下时，相对画布的x，y坐标。</li>
+<li>设置画笔颜色，以及笔的宽度（ctx.lineWidth)；</li>
+<li>开始画线。</li>
+</ul>
+</li>
+</ul>
+<h6 id="canvas的lineCap属性"><a href="#canvas的lineCap属性" class="headerlink" title="canvas的lineCap属性"></a>canvas的lineCap属性</h6><ul>
+<li><p>lineCap属性是设置或返回线条末端线帽的样式，其中，“round”和“square”会使线条稍微变长。</p>
+</li>
+<li><p><code>context.lineCap=&quot;butt|round|square&quot;;</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">butt</td>
+<td align="left">默认。向线条的每个末端添加平直的边缘。</td>
+</tr>
+<tr>
+<td align="left">round</td>
+<td align="left">向线条的每个末端添加圆形线帽。</td>
+</tr>
+<tr>
+<td align="left">square</td>
+<td align="left">向线条的每个末端添加正方形线帽。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h6 id="globalCompositeOperation-属性"><a href="#globalCompositeOperation-属性" class="headerlink" title="globalCompositeOperation 属性"></a>globalCompositeOperation 属性</h6><ul>
+<li><p>globalCompositeOperation 属性设置或返回如何将一个源（新的）图像绘制到目标（已有）的图像上。</p>
+<p>源图像 = 您打算放置到画布上的绘图。</p>
+<p>目标图像 = 您已经放置在画布上的绘图。</p>
+</li>
+<li><p><code>context.globalCompositeOperation=&quot;source-in&quot;;</code>在目标图像中显示源图像。只有目标图像内的源图像部分会显示，目标图像是透明的。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        canvas&#123;</span><br><span class="line">            box-shadow: 0 0 10px black;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            display: block;</span><br><span class="line">            margin-top: 30px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    ctx.fillStyle = &apos;blue&apos;;</span><br><span class="line">    ctx.fillRect(20,20,100,100);</span><br><span class="line"></span><br><span class="line">    ctx.globalCompositeOperation = &apos;source-atop&apos;</span><br><span class="line">    ctx.fillStyle = &apos;red&apos;;</span><br><span class="line">    ctx.fillRect(80,80,100,100);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="请求关键帧运动"><a href="#请求关键帧运动" class="headerlink" title="请求关键帧运动"></a>请求关键帧运动</h6><ul>
+<li><p><code>window.requestAnimationFrame(move);</code>系统自动计算出什么时候执行该函数或方法。</p>
+</li>
+<li><p>与setTimeout与setInterval一样设置定时运动，但<code>window.requestAnimationFrame(move);</code>更流畅，且丢帧情况比较少。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;涂鸦&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            background-color: gray;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas id=&quot;canvas&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;button onclick=&quot;clear()&quot;&gt;清除&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    // 画笔部分</span><br><span class="line">    canvas.onmousedown = function (e) &#123;</span><br><span class="line">        var x, y;</span><br><span class="line">        x = e.clientX - canvas.offsetLeft;</span><br><span class="line">        y = e.clientY - canvas.offsetTop;</span><br><span class="line">        ctx.lineWidth = 20;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.strokeStyle = &apos;blue&apos;;</span><br><span class="line"></span><br><span class="line">        ctx.moveTo(x, y);</span><br><span class="line">        canvas.onmousemove = function (e) &#123;</span><br><span class="line">            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);</span><br><span class="line">            ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.onmouseup = function () &#123;</span><br><span class="line">            canvas.onmousemove = &apos;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="图像水平移动"><a href="#图像水平移动" class="headerlink" title="图像水平移动"></a>图像水平移动</h6><h6 id="ctx-drawImage"><a href="#ctx-drawImage" class="headerlink" title="ctx.drawImage()"></a>ctx.drawImage()</h6><ul>
+<li>drawImage（）方法能在画布上绘制图像，画布或视频，也能够绘制图像的某些部分，以及增加或减少图像的尺寸。</li>
+<li>js语法</li>
+</ul>
+<ol>
+<li>在画布上定位图像：<code>ctx.drawImage(img,x,y);</code></li>
+<li>在画布上定位图像并规定图像的宽高：<code>ctx.drawImage(img,x,y,width,height);</code></li>
+<li>剪切图像，并在画布上定位被剪切的部分：<code>ctx.drawImage(img,sx,sy,swidth,sheigt,x,y,width,height);</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>img</em></td>
+<td align="left">规定要使用的图像、画布或视频。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>sx</em></td>
+<td align="left">可选。开始剪切的 x 坐标位置。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>sy</em></td>
+<td align="left">可选。开始剪切的 y 坐标位置。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>swidth</em></td>
+<td align="left">可选。被剪切图像的宽度。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>sheight</em></td>
+<td align="left">可选。被剪切图像的高度。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>x</em></td>
+<td align="left">在画布上放置图像的 x 坐标位置。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>y</em></td>
+<td align="left">在画布上放置图像的 y 坐标位置。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>width</em></td>
+<td align="left">可选。要使用的图像的宽度（伸展或缩小图像）。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><em>height</em></td>
+<td align="left">可选。要使用的图像的高度（伸展或缩小图像）。</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//一般需要先指定图片属性</span><br><span class="line">var img = new Image();</span><br><span class="line">img.src = &apos;*.png&apos;;</span><br><span class="line"></span><br><span class="line">//图片加载完完才开始绘制</span><br><span class="line">img.onload = function()&#123;</span><br><span class="line">	ctx.drawImage(img,x,y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="ctx-createPattern"><a href="#ctx-createPattern" class="headerlink" title="ctx.createPattern()"></a>ctx.createPattern()</h6><ul>
+<li><p>ctx.createPattern()方法是在指定的方向内重复指定的元素。元素可以是图片，视频或其他canvas元素。</p>
+</li>
+<li><p>被重复的元素可用于绘制/填充矩形，圆形或线条等等。</p>
+</li>
+<li><p><code>ctx.createPattern(image,&quot;repeat|repeat-x|repeat-y|no-repeat&quot;);</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>image</em></td>
+<td align="left">规定要使用的模式的图片、画布或视频元素。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">repeat</td>
+<td align="left">默认。该模式在水平和垂直方向重复。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">repeat-x</td>
+<td align="left">该模式只在水平方向重复。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">repeat-y</td>
+<td align="left">该模式只在垂直方向重复。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">no-repeat</td>
+<td align="left">该模式只显示一次（不重复）。</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h6 id="记录状态save"><a href="#记录状态save" class="headerlink" title="记录状态save()"></a>记录状态save()</h6><ul>
+<li><p>可以通过ctx.save()方法保存当前环境的状态，包括位置，画笔颜色等。</p>
+</li>
+<li><p>ctx.restore()则是还原之前画过的路径状态和属性。</p>
+<p><strong>注意:save的存储方式类似于栈的存储结构</strong>；即第一次调用的状态是倒数第一次save的状态，第二次调用的状态是倒数第二次save的状态。</p>
+</li>
+</ul>
+<h6 id="改变原点位置translate"><a href="#改变原点位置translate" class="headerlink" title="改变原点位置translate"></a>改变原点位置translate</h6><ul>
+<li><p>translate() 方法重新映射画布上的 (0,0) 位置。</p>
+<p><strong>注意：</strong>当您在 translate() 之后调用诸如 fillRect() 之类的方法时，值会添加到 x 和 y 坐标值上。</p>
+</li>
+<li><p>在位置 (10,10) 处绘制一个矩形，将新的 (0,0) 位置设置为 (70,70)。再次绘制新的矩形（请注意现在矩形从位置 (80,80) 开始绘制）</p>
+</li>
+</ul>
+<h4 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h4><h6 id="水平全景展示项目"><a href="#水平全景展示项目" class="headerlink" title="水平全景展示项目"></a>水平全景展示项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        canvas&#123;</span><br><span class="line">            box-shadow: 0 0 10px #123;</span><br><span class="line">            display: block;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 25px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    // 创建图片</span><br><span class="line">    var img = new Image();</span><br><span class="line">    img.src = &apos;5.png&apos;;</span><br><span class="line">    img.onload = function()&#123;</span><br><span class="line">        drawImage();</span><br><span class="line">    &#125;</span><br><span class="line">    // 图片绘制开始点</span><br><span class="line">    var x = 0;</span><br><span class="line">    function drawImage()&#123;</span><br><span class="line">        // 记录状态</span><br><span class="line">        ctx.save();</span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">        // 图片绘制开始点向左移动</span><br><span class="line">        ctx.translate(-x,0);</span><br><span class="line">        // 图片将画布铺满</span><br><span class="line">        ctx.drawImage(img,0,0);</span><br><span class="line">        // 为实现无缝连接再画一张图片</span><br><span class="line">        ctx.drawImage(img,canvas.width,0);</span><br><span class="line">        x++;</span><br><span class="line">        // 当第一张图片溢出画布时，就将x置为0.</span><br><span class="line">        if(x &gt;= canvas.width)&#123;</span><br><span class="line">            x = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        // 还原之前画过的路径状态和属性。</span><br><span class="line">        ctx.restore();</span><br><span class="line">        // arguments.callee等价于drawImage</span><br><span class="line">        // 自动定时调用函数</span><br><span class="line">        window.requestAnimationFrame(arguments.callee);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="球碰撞项目"><a href="#球碰撞项目" class="headerlink" title="球碰撞项目"></a>球碰撞项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            box-shadow: 0 0 10px black;</span><br><span class="line">            display: block;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 30px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;600&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    // 获取canvas对象</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    // 获取执行上下文</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    // 建一个画⚪的类</span><br><span class="line">    function Circle(x, y, r, color, speed) &#123;</span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">        this.r = r;</span><br><span class="line">        this.color = color;</span><br><span class="line">        this.speed = speed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在原型上定义draw方法画圆</span><br><span class="line">    Circle.prototype.draw = function () &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.fillStyle = this.color;</span><br><span class="line">        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);</span><br><span class="line">        ctx.fill();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在原型上定义move移动</span><br><span class="line">    Circle.prototype.move = function()&#123;</span><br><span class="line">        this.x += this.speed;</span><br><span class="line">        this.y += this.speed;</span><br><span class="line">        if(this.x &lt; this.r || this.x + this.r &gt; canvas.width)&#123;</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;else if(this.x == this.r &amp;&amp; this.y == this.r)&#123;</span><br><span class="line">            // 解决正好卡在对角的球</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(this.y &lt; this.r || this.y + this.r &gt; canvas.height)&#123;</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var circle1 = new Circle(40,40, 20, &apos;red&apos;, 2);</span><br><span class="line">    var circle2 = new Circle(190,250, 20, &apos;blue&apos;, 2);</span><br><span class="line">        circle1.draw();</span><br><span class="line">        circle2.draw();</span><br><span class="line">        actions();</span><br><span class="line">    function actions()&#123;</span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">        circle1.move();</span><br><span class="line">        circle2.move();</span><br><span class="line">        circle1.draw();</span><br><span class="line">        circle2.draw();</span><br><span class="line">        // 检测两个球是否相撞</span><br><span class="line">        if(isCircleHit(circle1,circle2))&#123;</span><br><span class="line">            circle1.speed *= -1;</span><br><span class="line">            circle2.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">        window.requestAnimationFrame(arguments.callee);</span><br><span class="line">    &#125;</span><br><span class="line">    function isCircleHit(circle1,circle2)&#123;</span><br><span class="line">        var min1 = circle1.x;</span><br><span class="line">        var min2 = circle2.x;</span><br><span class="line">        var max1 = circle1.x + circle1.r;</span><br><span class="line">        var max2 = circle2.x + circle2.r;</span><br><span class="line">        var min = Math.min(min1.min2);</span><br><span class="line">        var max = Math.max(max1,max2);</span><br><span class="line">        if(min &gt;= max)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="刮刮卡项目"><a href="#刮刮卡项目" class="headerlink" title="刮刮卡项目"></a>刮刮卡项目</h6><p>实现：1. 有一张图和一个画布。</p>
+<ol start="2">
+<li>给图片蒙上一张灰色蒙版，当鼠标按下时获取当前鼠标相对画布的坐标。</li>
+<li>设置ctx.globalCompositeOperation 为 ‘destination-out’，在源图像（灰色蒙版）中显示目标图像（画笔）。只有源图像之内的目标图像部分会被显示，源图像是透明的。</li>
+<li>在不松开鼠标前提下，移动鼠标，得到并不断更新的坐标，先清除</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            left: 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;img src=&quot;5.png&quot; alt=&quot;Image&quot; width=&quot;300&quot; height=&quot;400&quot;&gt;</span><br><span class="line">    &lt;canvas width=&quot;300&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    ctx.fillStyle = &apos;gray&apos;;</span><br><span class="line">    ctx.fillRect(0, 0, 300, 400);</span><br><span class="line">    ctx.globalCompositeOperation = &apos;destination-out&apos;;</span><br><span class="line">    ctx.lineWidth = 10;</span><br><span class="line">        ctx.lineCap = &apos;round&apos;;</span><br><span class="line">    canvas.onmousedown = function (e) &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(e.clientX, e.clientY);</span><br><span class="line">        canvas.onmousemove = function (e) &#123;</span><br><span class="line">            ctx.lineTo(e.clientX, e.clientY);</span><br><span class="line">            ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.onmouseup = function(e)&#123;</span><br><span class="line">            canvas.onmousemove = &apos;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-03-18, 13:06:00</p>
+        <p><span>最后更新:</span>2020-03-18, 13:06:22</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/18/浅谈canvas和相关实战/" title="浅谈canvas和相关实战">http://yoursite.com/2020/03/18/浅谈canvas和相关实战/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/18/浅谈canvas和相关实战/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/10/setTimeout与setInterval区别/">
+                    setTimeout与setInterval区别
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#涂鸦部分"><span class="toc-number">1.</span> <span class="toc-text">涂鸦部分</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#canvas的lineCap属性"><span class="toc-number">2.</span> <span class="toc-text">canvas的lineCap属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#globalCompositeOperation-属性"><span class="toc-number">3.</span> <span class="toc-text">globalCompositeOperation 属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#请求关键帧运动"><span class="toc-number">4.</span> <span class="toc-text">请求关键帧运动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图像水平移动"><span class="toc-number">5.</span> <span class="toc-text">图像水平移动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ctx-drawImage"><span class="toc-number">6.</span> <span class="toc-text">ctx.drawImage()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ctx-createPattern"><span class="toc-number">7.</span> <span class="toc-text">ctx.createPattern()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#记录状态save"><span class="toc-number">8.</span> <span class="toc-text">记录状态save()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#改变原点位置translate"><span class="toc-number">9.</span> <span class="toc-text">改变原点位置translate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#项目"><span class="toc-number"></span> <span class="toc-text">项目</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#水平全景展示项目"><span class="toc-number">1.</span> <span class="toc-text">水平全景展示项目</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#球碰撞项目"><span class="toc-number">2.</span> <span class="toc-text">球碰撞项目</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#刮刮卡项目"><span class="toc-number">3.</span> <span class="toc-text">刮刮卡项目</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"浅谈canvas和相关实战　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/10/setTimeout与setInterval区别/" title="下一篇: setTimeout与setInterval区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
