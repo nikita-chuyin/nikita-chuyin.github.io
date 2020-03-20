@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="JS中外部文件的优势在HTML中嵌入js代码虽然没有问题，但一般认为最好使用外部文件来包含代码。不过，并不存在必须使用外部文件的硬性要求，但支持使用外部文件的人多会强调如下优点：  可维护性：遍及不同HTML页面的js代码会造成维护问题，但把所有js文件放在一个文件夹中，维护起来就轻松多了。而且开发人员也可在不触及HTML标记的情况下，集中精力编辑js代码。 可缓存性：浏览器能够根据具体的缓存链接">
+<meta name="description" content="Day10开启Apache的gzip压缩要让apache支持gzip功能，要用到deflate_Module和headers_Module。打开apache的配置文件httpd.conf，大约在105行左右，找到以下两行内容：（这两行不是连续在一起的） 12#LoadModule deflate_module modules/mod_deflate.so#LoadModule headers_mo">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS中外部文件的优势">
-<meta property="og:url" content="http://yoursite.com/2020/02/15/JS中外部文件的优势-1/index.html">
+<meta property="og:title" content="vue学习九">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/vue学习九/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="JS中外部文件的优势在HTML中嵌入js代码虽然没有问题，但一般认为最好使用外部文件来包含代码。不过，并不存在必须使用外部文件的硬性要求，但支持使用外部文件的人多会强调如下优点：  可维护性：遍及不同HTML页面的js代码会造成维护问题，但把所有js文件放在一个文件夹中，维护起来就轻松多了。而且开发人员也可在不触及HTML标记的情况下，集中精力编辑js代码。 可缓存性：浏览器能够根据具体的缓存链接">
+<meta property="og:description" content="Day10开启Apache的gzip压缩要让apache支持gzip功能，要用到deflate_Module和headers_Module。打开apache的配置文件httpd.conf，大约在105行左右，找到以下两行内容：（这两行不是连续在一起的） 12#LoadModule deflate_module modules/mod_deflate.so#LoadModule headers_mo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-15T04:20:20.479Z">
+<meta property="og:image" content="d:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday10%5C%E7%AC%94%E8%AE%B0%5Cvuex%E6%A6%82%E5%BF%B5%E5%9B%BE.png">
+<meta property="og:updated_time" content="2020-03-20T05:52:30.917Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS中外部文件的优势">
-<meta name="twitter:description" content="JS中外部文件的优势在HTML中嵌入js代码虽然没有问题，但一般认为最好使用外部文件来包含代码。不过，并不存在必须使用外部文件的硬性要求，但支持使用外部文件的人多会强调如下优点：  可维护性：遍及不同HTML页面的js代码会造成维护问题，但把所有js文件放在一个文件夹中，维护起来就轻松多了。而且开发人员也可在不触及HTML标记的情况下，集中精力编辑js代码。 可缓存性：浏览器能够根据具体的缓存链接">
+<meta name="twitter:title" content="vue学习九">
+<meta name="twitter:description" content="Day10开启Apache的gzip压缩要让apache支持gzip功能，要用到deflate_Module和headers_Module。打开apache的配置文件httpd.conf，大约在105行左右，找到以下两行内容：（这两行不是连续在一起的） 12#LoadModule deflate_module modules/mod_deflate.so#LoadModule headers_mo">
+<meta name="twitter:image" content="d:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday10%5C%E7%AC%94%E8%AE%B0%5Cvuex%E6%A6%82%E5%BF%B5%E5%9B%BE.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JS中外部文件的优势 | Nikita</title>
+<title>vue学习九 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +264,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JS中外部文件的优势-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-vue学习九" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/02/15/JS中外部文件的优势-1/" class="article-date">
-      <time datetime="2020-02-15T04:19:45.000Z" itemprop="datePublished">2020-02-15</time>
+      <a href="/2020/03/20/vue学习九/" class="article-date">
+      <time datetime="2020-03-20T05:45:20.000Z" itemprop="datePublished">2020-03-20</time>
 </a>
 
 
@@ -281,7 +283,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS中外部文件的优势
+      vue学习九
     </h1>
   
 
@@ -298,21 +300,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="JS中外部文件的优势"><a href="#JS中外部文件的优势" class="headerlink" title="JS中外部文件的优势"></a>JS中外部文件的优势</h4><p>在HTML中嵌入js代码虽然没有问题，但一般认为最好使用外部文件来包含代码。不过，并不存在必须使用外部文件的硬性要求，但支持使用外部文件的人多会强调如下优点：</p>
-<ol>
-<li>可维护性：遍及不同HTML页面的js代码会造成维护问题，但把所有js文件放在一个文件夹中，维护起来就轻松多了。而且开发人员也可在不触及HTML标记的情况下，集中精力编辑js代码。</li>
-<li>可缓存性：浏览器能够根据具体的缓存链接到所有的外部文件。也就是说，如果有两个页面都是使用同一个文件，那么这个文件只需下载一次。因此，最终结果就是能够加快页面加载的速度。</li>
-<li>适应未来：通过外部文件来包含js无需使用前面提到的XHTML或注释hack。HTML和XHTM包含外部文件的语法是相同的。</li>
-</ol>
-<p>把JavaScript插入到HTML页面中要使用<code>&lt;script&gt;</code>元素。使用这个元素可以把JavaScript嵌入到HTML页面中，让脚本与标记混合在一起；也可以包含外部的JavaScript文件。而我们需要注意的地方有：</p>
-<ol>
-<li>在包含外部JavaScript文件时，必须将src属性设置为指向文件的 url 。而这个文件可以是与包含它的页面位于同一服务器上的文件，也可以是其他文件域中的文件。</li>
-<li>所有<code>&lt;script&gt;</code>元素都会按照它们在页面中出现的先后顺序依次被解析。在不使用defer，async属性的情况下，只有解析完前面<code>&lt;script&gt;</code>代码后才会开始解析后面的<code>&lt;/script&gt;</code>元素中的代码。</li>
-<li>由于浏览器会先解析完不使用defer属性的<code>&lt;script&gt;</code>元素中的代码，然后再解析后面的内容，所以一般应该把<code>&lt;script&gt;</code>元素放在页面最后，及主要内容的后面，<code>&lt;/body&gt;</code>标签前面。</li>
-<li>使用defer属性可以让脚本在文档完全呈现之后再执行。延迟脚本总是按照它们指定的顺序执行。</li>
-<li>使用ansyc属性可以表示当前脚本不必等待其他脚本，也不必阻塞文档呈现。不能保证异步脚本按照它们在页面中出现的顺序执行。</li>
-<li>另外，使用<code>&lt;noscript&gt;</code>元素可以指定在不支持脚本的浏览器中显示的替代内容。但在启动了脚本的情况下，浏览器不会显示<code>&lt;noscript&gt;</code>元素中的任何内容。</li>
-</ol>
+        <h1 id="Day10"><a href="#Day10" class="headerlink" title="Day10"></a>Day10</h1><h2 id="开启Apache的gzip压缩"><a href="#开启Apache的gzip压缩" class="headerlink" title="开启Apache的gzip压缩"></a>开启Apache的gzip压缩</h2><p>要让apache支持gzip功能，要用到deflate_Module和headers_Module。打开apache的配置文件httpd.conf，大约在105行左右，找到以下两行内容：（这两行不是连续在一起的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#LoadModule deflate_module modules/mod_deflate.so</span><br><span class="line">#LoadModule headers_module modules/mod_headers.so</span><br></pre></td></tr></table></figure>
+
+<p>然后将其前面的“#”注释删掉，表示开启gzip压缩功能。开启以后还需要进行相关配置。在httpd.conf文件的最后添加以下内容即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule deflate_module&gt;</span><br><span class="line">    #必须的，就像一个开关一样，告诉apache对传输到浏览器的内容进行压缩</span><br><span class="line">    SetOutputFilter DEFLATE</span><br><span class="line">    DeflateCompressionLevel 9</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最少需要加上以上内容，才可以生gzip功能生效。由于没有做其它的额外配置，所以其它相关的配置均使用Apache的默认设置。这里说一下参数“DeflateCompressionLevel”，它表示压缩级别，值从1到9，值越大表示压缩的越厉害。</p>
+<h2 id="使用ngrok将本机映射为一个外网的Web服务器"><a href="#使用ngrok将本机映射为一个外网的Web服务器" class="headerlink" title="使用ngrok将本机映射为一个外网的Web服务器"></a>使用ngrok将本机映射为一个外网的Web服务器</h2><p>注意：由于默认使用的美国的服务器进行中间转接，所以访问速度炒鸡慢，访问时可启用FQ软件，提高网页打开速度！</p>
+<h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><p><img src="D:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday10%5C%E7%AC%94%E8%AE%B0%5Cvuex%E6%A6%82%E5%BF%B5%E5%9B%BE.png" alt="vuex概念图"></p>
+<p>概念：<br>vuex 是 Vue 配套的 公共数据管理工具，它可以把一些共享的数据，保存到 vuex 中，方便 整个程序中的任何组件直接获取或修改我们的公共数据；</p>
 
       
     </div>
@@ -321,13 +318,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/20/vue学习九/">vue学习九</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2020-02-15, 12:19:45</p>
-        <p><span>最后更新:</span>2020-02-15, 12:20:20</p>
+        <p><span>发布时间:</span>2020-03-20, 13:45:20</p>
+        <p><span>最后更新:</span>2020-03-20, 13:52:30</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/02/15/JS中外部文件的优势-1/" title="JS中外部文件的优势">http://yoursite.com/2020/02/15/JS中外部文件的优势-1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/15/JS中外部文件的优势-1/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/20/vue学习九/" title="vue学习九">http://yoursite.com/2020/03/20/vue学习九/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/20/vue学习九/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -339,16 +336,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/02/17/深入理解包与NPM和package-json深入解读/">
-                    深入理解包与NPMM,package.json深入解读
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/02/15/node模块编译/">
-                    node模块编译
+                <a href="/2020/03/20/vue学习八/">
+                    vue学习八
                 </a>
             </div>
         
@@ -360,7 +351,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#JS中外部文件的优势"><span class="toc-number">1.</span> <span class="toc-text">JS中外部文件的优势</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day10"><span class="toc-number">1.</span> <span class="toc-text">Day10</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开启Apache的gzip压缩"><span class="toc-number">1.1.</span> <span class="toc-text">开启Apache的gzip压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ngrok将本机映射为一个外网的Web服务器"><span class="toc-number">1.2.</span> <span class="toc-text">使用ngrok将本机映射为一个外网的Web服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex"><span class="toc-number">1.3.</span> <span class="toc-text">vuex</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -396,7 +387,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JS中外部文件的优势　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"vue学习九　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -416,15 +407,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/02/17/深入理解包与NPM和package-json深入解读/" title="上一篇: 深入理解包与NPMM,package.json深入解读">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/02/15/node模块编译/" title="下一篇: node模块编译">
+            <a href="/2020/03/20/vue学习八/" title="下一篇: vue学习八">
                 <i class="fa fa-angle-right"></i>
             </a>
         
