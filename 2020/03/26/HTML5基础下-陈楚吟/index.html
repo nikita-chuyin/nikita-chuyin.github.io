@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="拖放事件              #container{             width:650px;height:300px;border:1px solid #333;         }               function allowDrop(eve){             eve.preventDefault();     }     function d">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML5基础下--陈楚吟">
 <meta property="og:url" content="http://yoursite.com/2020/03/26/HTML5基础下-陈楚吟/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="拖放事件              #container{             width:650px;height:300px;border:1px solid #333;         }               function allowDrop(eve){             eve.preventDefault();     }     function d">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-26T03:25:59.906Z">
+<meta property="og:image" content="https://img11.360buyimg.com/mobilecms/s280x280_jfs/t1/21802/16/14332/101394/5ca5a6feEd942df02/e343cc2669340fe0.png!q90.webp">
+<meta property="og:updated_time" content="2020-03-26T03:49:46.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML5基础下--陈楚吟">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:description" content="拖放事件              #container{             width:650px;height:300px;border:1px solid #333;         }               function allowDrop(eve){             eve.preventDefault();     }     function d">
+<meta name="twitter:image" content="https://img11.360buyimg.com/mobilecms/s280x280_jfs/t1/21802/16/14332/101394/5ca5a6feEd942df02/e343cc2669340fe0.png!q90.webp">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -298,7 +300,561 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <title>拖放事件</title>
+    <style type="text/css">
+        #container{
+            width:650px;height:300px;border:1px solid #333;
+        }
+    </style>
+    <script>
+    function allowDrop(eve){
+            eve.preventDefault();
+    }
+    function drag(eve){
+            eve.dataTransfer.setData("Text",eve.target.id);
+    }
+    function drop(eve){
+                eve.preventDefault();
+                var data=eve.dataTransfer.getData("Text");
+                eve.target.appendChild(document.getElementById(data));
+    }
+    </script>
+</head>
+<body>
+    <div id="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <img id="img1" src="https://img11.360buyimg.com/mobilecms/s280x280_jfs/t1/21802/16/14332/101394/5ca5a6feEd942df02/e343cc2669340fe0.png!q90.webp" width="600px" draggable="true" ondragstart="drag(event)">
+</body>
+/*将元素设为可拖动draggable="true"
+拖动时调用函数，去除默认处理方式调用方法 eve.preventDefault()
+移到边框时去除默认处理方式，设为允许放置
+通过 dataTransfer.getData("Text") 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。
+被拖数据是被拖元素的 id ("img1")
+把被拖元素追加到放置元素（目标元素）中
+*/
+
+
+<h2 id="一-元素细节"><a href="#一-元素细节" class="headerlink" title="一 . 元素细节"></a>一 . 元素细节</h2><h5 id="1-a链接标签"><a href="#1-a链接标签" class="headerlink" title="1.a链接标签"></a>1.a链接标签</h5><p><a href="指定链接的目标"></a></p>
+<p>如果没有href属性，则不能使用hreflang，media，rel，target，type属性且该标签仅仅是一个占位符；通常在当前浏览器窗口显示被链接页面，除非规定了其他target</p>
+<p><a href="#id名">可链接到指定id位置</a></p>
+<h5 id="2-area标签"><a href="#2-area标签" class="headerlink" title="2.area标签"></a>2.area标签</h5><p>能够在所需图像上设置作用区域，使用者可通过点击该作用区域来跳转到相应的页面</p>
+<h5 id="3-abbr标签"><a href="#3-abbr标签" class="headerlink" title="3.abbr标签"></a>3.abbr标签</h5><p>用来表示一个缩略词或首字母缩略词，通过对缩略词语进行标记，能为浏览器，拼写检查程序，翻译系统以及搜索引擎分度器提供有用的信息The <abbr title="World Health Organization">    WHO</abbr> was founded in 1948.</p>
+<h5 id="4-article标签，aside标签"><a href="#4-article标签，aside标签" class="headerlink" title="4.article标签，aside标签"></a>4.article标签，aside标签</h5><p>article标签定义独立的内容，定义的内容必须是有意义的且必须独立于文档的其他内容。论坛帖子，博客文章，新闻故事，评论都是其潜在来源</p>
+<p>aside标签用来表示跟当前页面的内容没有很大关系的部分，通常显示侧边栏和补充关系的内容，如目录，索引等。<strong>注意：</strong>不要用aside元素去标记括号内的文本，因为这种类型的文本被认为是其内容流的一部分。</p>
+<h5 id="5-address标签"><a href="#5-address标签" class="headerlink" title="5.address标签"></a>5.address标签</h5><p>可得到某个文档中所属作者或者持有者的相关信息。</p>
+<ul>
+<li>位于body元素内部，表示文档作者/所有者的联系信息</li>
+<li>位于article元素内部，表示该文章作者/所有者的联系信息</li>
+<li>如果行文中出现了一些随意的地址，你就不应该使用address元素，而应该使用普通的<p>元素就行了。</p></li>
+<li>address元素里应该只存放地址信息，不要放置其它跟地址不相关的信息，比如出版时间，你应该把它放到time元素里。</li>
+</ul>
+<h5 id="6-base标签"><a href="#6-base标签" class="headerlink" title="6.base标签"></a>6.base标签</h5><ul>
+<li>规定所有链接的默认URL和默认目标必须位于head标签内，且一个文档最多使用一个base元素</li>
+<li>最好把base标签放在head元素的第一位，这样head区域的其他元素就可以使用base元素的信息</li>
+<li>如果使用base标签，则必须具备href或者target属性或者两个属性都具备，支持全局属性，不支持任何事件</li>
+</ul>
+<h5 id="7-blockquote标签"><a href="#7-blockquote标签" class="headerlink" title="7. blockquote标签"></a>7. blockquote标签</h5><ul>
+<li>用于引用大段的内容块，处于该标签的文本会独自分离出来且自动缩进</li>
+<li>如果标签是不需要段落分隔的短引用，请使用q标签</li>
+<li>若引文来自网络，则可将原内容的出处URL地址设置到cite属性上，若要以文本的形式告知读者引文的出处，可用cite标签<blockquote cite="**"></blockquote></li>
+</ul>
+<h4 id="8-button标签"><a href="#8-button标签" class="headerlink" title="8.button标签"></a><strong>8.button标签</strong></h4><ul>
+<li><p>可定义一个按钮，在button元素内部可放置内容，比如文本或图像。这是该元素与使用input元素创建的按钮之间的不同之处</p>
+</li>
+<li><p>请始终为button元素规定type元素。不同浏览器对button元素的type属性使用不同的默认值，IE将提交button与/button之间的文本，而其他浏览器将提交value属性的内容。</p>
+<ul>
+<li><p>在使用<button>标签时很容易想当然的当成 </button><input type="button">使用，这很容易产生以下几点错误用法：</p>
+<p>1、通过$(‘#customBtn’).val()获取<button id="customBtn" value="test">按钮</button> value的值</p>
+<p>​     在IE(IE内核)下这样用到得的是值是“按钮”，而不是“test”，非IE下得到的是“test”。</p>
+</li>
+</ul>
+</li>
+<li><p>如果在 HTML 表单中使用 <button> 元素，不同的浏览器可能会提交不同的按钮值。请使用 input在 HTML 表单中创建按钮。</button></p>
+</li>
+<li><p><strong>唯一禁止</strong>使用的元素是图像映射，因为图像映射对鼠标和键盘敏感的动作会干扰表单按钮的行为</p>
+</li>
+<li><p>button属性</p>
+<ul>
+<li>form属性规定button元素属于哪个表单，位于表单之外却仍是表单的一部分，但其属性值必须是按钮所属表单<form>的id，如需使用一个以上的表单，使用空格分隔的列表</form></li>
+<li>autofocus属性规定当页面加载时按钮自动获得焦点。</li>
+<li>disabled属性规定禁用该按钮</li>
+<li>formaction规定当提交表单时向何处提交表单数据。覆盖form元素的action属性，但必须配合type=“submit”使用</li>
+<li>formanctype属性规定在向服务器发送表单数据之前如何对其进行编码。覆盖表单的nctypr属性，也必须和submit配合使用</li>
+<li>formmethod属性规定用于发送表单数据的HTTP方法，覆盖method属性必须和submit配合使用</li>
+<li>formnovalidate属性，提交表单时不进行验证</li>
+<li>formtarget属性规定何处打开action URL.覆盖form元素的target属性</li>
+<li>name属性</li>
+<li>type</li>
+<li>value</li>
+</ul>
+</li>
+</ul>
+<h5 id="9-bdo标签"><a href="#9-bdo标签" class="headerlink" title="9.bdo标签"></a>9.bdo标签</h5><ul>
+<li><p>bdo标签覆盖默认的文本标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bdo dir=&quot;rtl&quot;&gt;该段落文字从右到左显示&lt;/bdo&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dir属性为必填，仅有 ltr 和 rtl 属性值</p>
+</li>
+</ul>
+<h4 id="10-table表格子标签"><a href="#10-table表格子标签" class="headerlink" title="10.table表格子标签"></a>10.table表格子标签</h4><h5 id="1-col标签"><a href="#1-col标签" class="headerlink" title="1.col标签"></a>1.col标签</h5><ul>
+<li>用于控制表格中的列，使你更方便为表格中的列应用样式</li>
+</ul>
+<h5 id="2-colgroup标签"><a href="#2-colgroup标签" class="headerlink" title="2.colgroup标签"></a>2.colgroup标签</h5><ul>
+<li>用于对表格中的列进行组合，以便对其进行格式化，通过使用colgrounp标签，可以向整个列应用样式，而不需要重复为每个单元格设置样式</li>
+<li>只能在table元素内，在caption元素之后，在任何thead，tbody，tfoot，tr元素之前使用colgroup标签</li>
+<li>span属性规定列组应该横跨的列数</li>
+</ul>
+<h5 id="3-caption标签"><a href="#3-caption标签" class="headerlink" title="3.caption标签"></a>3.caption标签</h5><ul>
+<li>定义表格的标题，只能对每个表格定义一个标题</li>
+</ul>
+<h4 id="4-td，th标签"><a href="#4-td，th标签" class="headerlink" title="4.td，th标签"></a>4.td，th标签</h4><ul>
+<li>都是用于表示一个表格的单元格</li>
+<li>th为表头单元格，包含头部信息（粗体并且居中），td为标准单元格，包含数据（左对齐）</li>
+<li>colspan属性规定单元格可横跨的列数</li>
+<li>rowspan属性设置单元格可横跨的行数</li>
+<li>headers属性规定与单元格相关联的一个或多个表头单元格  header=”th标签的id值”</li>
+</ul>
+<h5 id="5-tr标签"><a href="#5-tr标签" class="headerlink" title="5.tr标签"></a>5.tr标签</h5><ul>
+<li>定义表格的行</li>
+</ul>
+<h5 id="6-tfoot，thead，tbody标签"><a href="#6-tfoot，thead，tbody标签" class="headerlink" title="6.tfoot，thead，tbody标签"></a>6.tfoot，thead，tbody标签</h5><ul>
+<li><p>tfoot用于表示一个表格的页脚，tbody规定表格的表头，tbody规定表格的主体</p>
+</li>
+<li><p>三者必须结合起来用</p>
+</li>
+<li><p>通过使用这些元素，使浏览器有能力支持独立于表格表头和表格页脚的表格主体滚动。当包含多个页面的长的表格被打印时，表格的表头和页脚可被打印在包含表格数据的每张页面上</p>
+</li>
+<li><p>tfoot&gt;元素内部必须包含一个或者多个 tr 标签。</p>
+<p>thead、tbody 和 tfoot&gt;元素默认不会影响表格的布局。不过，您可以使用 CSS 来为这些元素定义样式，从而改变表格的外观。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt; </span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt; </span><br><span class="line">&lt;title&gt;W3Cschool(w3cschool.cn)&lt;/title&gt; </span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border=&quot;1&quot;&gt;</span><br><span class="line">  &lt;colgroup&gt;</span><br><span class="line">    &lt;col span=&quot;2&quot; style=&quot;background-color:red&quot;&gt;</span><br><span class="line">    &lt;col style=&quot;background-color:yellow&quot;&gt;</span><br><span class="line">  &lt;/colgroup&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;ISBN&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;Title&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;Price&lt;/th&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;3476896&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;My first HTML&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;$53&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;5869207&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;My first CSS&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;$49&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0"> 
+<meta charset="utf-8"> 
+<title>W3Cschool(w3cschool.cn)</title> 
+</head>
+<body>
+
+
+<table border="1">
+  <colgroup>
+    <col span="2" style="background-color:red">
+    <col style="background-color:yellow">
+  </colgroup>
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Price</th>
+  </tr>
+  <tr>
+    <td>3476896</td>
+    <td>My first HTML</td>
+    <td>$53</td>
+  </tr>
+  <tr>
+    <td>5869207</td>
+    <td>My first CSS</td>
+    <td>$49</td>
+  </tr>
+</table>
+
+<h4 id="11-title标签"><a href="#11-title标签" class="headerlink" title="11.title标签"></a>11.title标签</h4><h5 id="定义文档的标题"><a href="#定义文档的标题" class="headerlink" title="定义文档的标题"></a>定义文档的标题</h5><ul>
+<li>定义浏览器工具栏中的标题</li>
+<li>提供页面被添加到文件夹时的标题</li>
+<li>显示搜索引擎结果中的页面标题</li>
+</ul>
+<h4 id="12-time标签"><a href="#12-time标签" class="headerlink" title="12.time标签"></a>12.time标签</h4><ul>
+<li>用于标注日期、时间或日期与时间的组合（日期格式是YYYY-MM-DD）。</li>
+<li>该元素能够以机器可读的方式对日期和时间进行编码，这样，举例说，用户代理能够把生日提醒或排定的事件添加到用户日程表中，搜索引擎也能够生成更智能的搜索结果。</li>
+</ul>
+<h4 id="13-textarea标签"><a href="#13-textarea标签" class="headerlink" title="13.textarea标签"></a>13.textarea标签</h4><ul>
+<li><p>textarea标签用于创建一个可以输入多行的文本框。</p>
+</li>
+<li><p>文本区域中可容纳无限数量的文本，其中的文本的默认字体是等宽字体（通常是 Courier）。</p>
+<p>可以通过 cols 和 rows 属性来规定 textarea 的尺寸大小，不过更好的办法是使用 CSS 的 height和 width属性</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-autofocus.html" target="_blank" rel="noopener">autofocus</a>New</td>
+<td>autofocus</td>
+<td>规定当页面加载时，文本区域自动获得焦点。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-cols.html" target="_blank" rel="noopener">cols</a></td>
+<td><em>number</em></td>
+<td>规定文本区域内可见的列数。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-disabled.html" target="_blank" rel="noopener">disabled</a></td>
+<td>disabled</td>
+<td>规定禁用文本区域。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-form.html" target="_blank" rel="noopener">form</a>New</td>
+<td><em>form_id</em></td>
+<td>定义文本区域所属的一个或多个表单。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-maxlength.html" target="_blank" rel="noopener">maxlength</a>New</td>
+<td><em>number</em></td>
+<td>规定文本区域允许的最大字符数。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-name.html" target="_blank" rel="noopener">name</a></td>
+<td><em>text</em></td>
+<td>规定文本区域的名称。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-placeholder.html" target="_blank" rel="noopener">placeholder</a>New</td>
+<td><em>text</em></td>
+<td>规定一个简短的提示，描述文本区域期望的输入值。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-readonly.html" target="_blank" rel="noopener">readonly</a></td>
+<td>readonly</td>
+<td>规定文本区域为只读。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-required.html" target="_blank" rel="noopener">required</a>New</td>
+<td>required</td>
+<td>规定文本区域是必需的/必填的。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-rows.html" target="_blank" rel="noopener">rows</a></td>
+<td><em>number</em></td>
+<td>规定文本区域内可见的行数。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-textarea-wrap.html" target="_blank" rel="noopener">wrap</a>New</td>
+<td>hard soft</td>
+<td>规定当提交表单时，文本区域中的文本应该怎样换行。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="14-短语元素"><a href="#14-短语元素" class="headerlink" title="14. 短语元素"></a>14. 短语元素</h4><h5 id="1-em标签呈现的是被强调的文本"><a href="#1-em标签呈现的是被强调的文本" class="headerlink" title="1.em标签呈现的是被强调的文本"></a>1.em标签呈现的是被强调的文本</h5><h5 id="2-strong标签定义重要的文本"><a href="#2-strong标签定义重要的文本" class="headerlink" title="2.strong标签定义重要的文本"></a>2.strong标签定义重要的文本</h5><h5 id="3-dfn标签定义一个定义项目"><a href="#3-dfn标签定义一个定义项目" class="headerlink" title="3.dfn标签定义一个定义项目"></a>3.dfn标签定义一个定义项目</h5><h5 id="4-code定义计算机代码文本"><a href="#4-code定义计算机代码文本" class="headerlink" title="4.code定义计算机代码文本"></a>4.code定义计算机代码文本</h5><h5 id="5-samp定义样本文本"><a href="#5-samp定义样本文本" class="headerlink" title="5.samp定义样本文本"></a>5.samp定义样本文本</h5><h5 id="6-kbd标签定义键盘文本，表示文本是从键-盘上键入的。"><a href="#6-kbd标签定义键盘文本，表示文本是从键-盘上键入的。" class="headerlink" title="6.kbd标签定义键盘文本，表示文本是从键        盘上键入的。"></a>6.kbd标签定义键盘文本，表示文本是从键        盘上键入的。</h5><h5 id="7-var标签定义变量"><a href="#7-var标签定义变量" class="headerlink" title="7.var标签定义变量"></a>7.var标签定义变量</h5><h5 id="8-cite标签定义引用。"><a href="#8-cite标签定义引用。" class="headerlink" title="8.cite标签定义引用。"></a>8.cite标签定义引用。</h5><p>​        可使用该标签对参考文献的引用进行定义，比如        书籍或杂志的标题</p>
+<h5 id="9-高亮显示mark标签"><a href="#9-高亮显示mark标签" class="headerlink" title="9.高亮显示mark标签"></a>9.高亮显示mark标签</h5><h4 id="15-列表标签"><a href="#15-列表标签" class="headerlink" title="15.列表标签"></a>15.列表标签</h4><h5 id="1-ul-无序列表"><a href="#1-ul-无序列表" class="headerlink" title="1.ul 无序列表"></a>1.ul 无序列表</h5><h5 id="2-dl带有项目和描述的描述列表"><a href="#2-dl带有项目和描述的描述列表" class="headerlink" title="2.dl带有项目和描述的描述列表"></a>2.dl带有项目和描述的描述列表</h5><p><strong>注意 :</strong></p>
+<p>请不要将该元素（也不要用 ul 元素）用来在页面创建具有缩进效果的内容。虽然这样的结果样式看上去没问题，但是，这是很糟糕的做法，并且语义也不清晰。</p>
+<p>要改变描述列表中描述的缩进量，请使用 CSS margin 属性。</p>
+<h4 id="16-del删除标签，ins插入标签"><a href="#16-del删除标签，ins插入标签" class="headerlink" title="16.del删除标签，ins插入标签"></a>16.del删除标签，ins插入标签</h4><p>My favorite color is <del>blue</del> <ins>red</ins>!</p> 
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cite</td>
+<td><em>URL</em></td>
+<td>规定一个解释了文本被删除的原因的文档的 URL。</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td><em>YYYY-MM-DDThh:mm:ssTZD</em></td>
+<td>规定文本被删除的日期和时间。</td>
+</tr>
+</tbody></table>
+<h4 id="17-details细节标签"><a href="#17-details细节标签" class="headerlink" title="17.details细节标签"></a>17.details细节标签</h4><ul>
+<li><p>只有chrome和Safari 6 支持details标签</p>
+</li>
+<li><p>details标签规定了用户可见的或者隐藏的需求的补充细节</p>
+</li>
+<li><p>details标签用于供用户开启关闭的交互式控件。任何形式的内容都可以被放在details标签内</p>
+</li>
+<li><p>details标签内的内容对用户是不可见的，除非设置了open属性</p>
+</li>
+<li><p>details标签与summary标签配合使用可以为details定义标题。标题是可见的，用户点击标题时，会显示出details内的内容</p>
+<details>
+<summary>Copyright 1999-2011.</summary>
+<p> - by Refsnes Data. All Rights Reserved.</p>
+<p>All content and graphics on this web site are the property of the company Refsnes Data.</p></details>
+
+</li>
+</ul>
+<h4 id="18-embed-标签"><a href="#18-embed-标签" class="headerlink" title="18. embed 标签"></a>18. embed 标签</h4><ul>
+<li>embed 标签定义了一个容器，用来嵌入外部应用或者互动程序（插件）</li>
+</ul>
+<h4 id="19-figcaption标签"><a href="#19-figcaption标签" class="headerlink" title="19.figcaption标签"></a>19.figcaption标签</h4><ul>
+<li>figcaption标签用来表示figure标签的标题</li>
+<li>figcaption元素应该被置于figure元素的第一个或者最后一个子元素的位置</li>
+</ul>
+<h4 id="20-form表单"><a href="#20-form表单" class="headerlink" title="20.form表单"></a>20.form表单</h4><h5 id="1-form-元素包含一个或多个如下的表单元素："><a href="#1-form-元素包含一个或多个如下的表单元素：" class="headerlink" title="1.form 元素包含一个或多个如下的表单元素："></a>1.form 元素包含一个或多个如下的表单元素：</h5><ul>
+<li>input</li>
+<li>textarea</li>
+<li>button</li>
+<li>select</li>
+<li>option</li>
+<li>optgroup</li>
+<li>fieldset</li>
+<li>label</li>
+</ul>
+<h5 id="20-form-标签用于创建供用户输入的-HTML-表单。"><a href="#20-form-标签用于创建供用户输入的-HTML-表单。" class="headerlink" title="20.form 标签用于创建供用户输入的 HTML 表单。"></a>20.form 标签用于创建供用户输入的 HTML 表单。</h5><p>可以用 ‘:valid ‘  和’:invalid’ CSS 伪类 来给一个元素指定样式。</p>
+<h4 id="21-footer标签"><a href="#21-footer标签" class="headerlink" title="21.footer标签"></a>21.footer标签</h4><ul>
+<li><footer> 标签定义文档或者文档的一部分区域的页脚。
+
+
+</footer></li>
+</ul>
+  
+
+<ul>
+<li><footer> 元素应该包含它所包含的元素的信息。
+
+
+</footer></li>
+</ul>
+<p>  在典型情况下，该元素会包含文档创作者的姓名、文档的版权信息、使用条款的链接、联系信息等等。在一个文档中，您可以定义多个 <footer> 元素。</footer></p>
+<ul>
+<li>假如您使用 <footer> 元素来插入联系信息，应该在 <footer> 元素内使用 footer标签。</footer></footer></li>
+</ul>
+<h4 id="22-fieldset标签"><a href="#22-fieldset标签" class="headerlink" title="22.fieldset标签"></a>22.fieldset标签</h4><ul>
+<li>HTML5 <fieldset>标签用于对表单中的相关元素进行分组：</fieldset></li>
+<li><fieldset> 标签可以将表单内的相关元素<fieldset> 标签会在相关表单元素周围绘制边框。
+
+</fieldset></fieldset></li>
+</ul>
+<form>
+ <fieldset>
+   <legend>Personalia:</legend>
+   Name: <input type="text"><br>
+   Email: <input type="text"><br>
+   Date of birth: <input type="text">
+ </fieldset>
+</form> 
+
+<h4 id="23-hgroup标签"><a href="#23-hgroup标签" class="headerlink" title="23.hgroup标签"></a>23.hgroup标签</h4><ul>
+<li>使用hgroup标签对标题进行组合</li>
+<li>注意: 本元素已经从HTML5（W3C）规范中删除，但是它仍旧在 WHATWG 的 HTML 版本里。大多数浏览器都部分地实现，所以它不太可能消失。 但是其轮廓算法(outline algorithm)未在任何浏览器中实现，因此 <hgroup> 语义仍旧是理论的。HTML5 (W3C) 规范提供了如何处理副标题，小标题，可选标题和标语（Subheadings, subtitles, alternative titles and taglines）的建议。</hgroup></li>
+</ul>
+<h4 id="24-水平线hr标签"><a href="#24-水平线hr标签" class="headerlink" title="24.水平线hr标签"></a>24.水平线hr标签</h4><ul>
+<li>定义内容中的主题变化，并显示为一条水平线。</li>
+</ul>
+<h4 id="25-header标签"><a href="#25-header标签" class="headerlink" title="25.header标签"></a>25.header标签</h4><p>header标签用来表示介绍性的内容，即，定义了文档中的页眉，作为介绍内容或者导航链接栏的容器。</p>
+<article>
+    <header>
+        <h1>Internet Explorer 9</h1>
+        <p><time pubdate datetime="2011-03-15"></time></p>
+    </header>
+    <p> Windows Internet Explorer 9(缩写为 IE9 )是在2011年3月14日21:00发布的</p>
+</article>
+
+<p><strong>注释：</strong><header> 标签不能被放在 <footer>、<address> 或者另一个 <header> 元素内部。</header></address></footer></header></p>
+<h4 id="26-link标签"><a href="#26-link标签" class="headerlink" title="26.link标签"></a>26.link标签</h4><link>标签用于在文档与将要使用的外部之间建立联系，以为文档获取相应的资源。
+
+<p>链接到外部样式文件:<link rel="stylesheet" type="text/css" href="theme.css"></p>
+<h4 id="27-legend标签"><a href="#27-legend标签" class="headerlink" title="27.legend标签"></a>27.legend标签</h4><p>legend元素是fieldset元素的第一个子元素，定义了fieldset元素的标题</p>
+<h4 id="28-label属性"><a href="#28-label属性" class="headerlink" title="28.label属性"></a>28.label属性</h4><ul>
+<li>可以为input标签做出标记</li>
+<li>label元素不会向用户呈现任何特殊的效果。不过，他为鼠标用户改进了可用性。如果您在label元素内点击文本，就会触发此控件。即当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上</li>
+<li>label标签的for属性应与相关元素的id属性相同</li>
+</ul>
+<h4 id="29-map标签用来表示图像映射"><a href="#29-map标签用来表示图像映射" class="headerlink" title="29.map标签用来表示图像映射"></a>29.map标签用来表示图像映射</h4><p>&lt;mapname=”planetmap”&gt;<br><area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun"><br><area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury"><br><area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus"><br></p>
+<ul>
+<li>map标签用于客户端图像映射（指可点击区域的一幅图像。</li>
+<li>img中的usemap属性可引用map中的id或name属性（取决于浏览器），so我们应该同时向map添加id和name属性</li>
+<li>area元素永远嵌套在map元素内部</li>
+</ul>
+<h4 id="30-元数据meta标签"><a href="#30-元数据meta标签" class="headerlink" title="30.元数据meta标签"></a>30.元数据meta标签</h4><ul>
+<li><p>元数据是数据的数据信息，不会显示在客户端，当时会被浏览器解析</p>
+</li>
+<li><p>meta元素通常用于指定页面的描述，关键词，文件的最后的修改，作者和其他元数据</p>
+</li>
+<li><p>元数据可以被浏览器使用（如何显示内容或重新加载页面），搜索引擎（关键词）或其他web服务调用</p>
+</li>
+<li><p>meta标签通常位于head区域内，以名称/值对出现，如果没有提供name属性，则名称/值对中会采用http-equiv属性的值</p>
+</li>
+<li><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><strong>实例 1 - 定义文档关键词，用于搜索引擎：</strong></p>
+<meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+
+
+</li>
+</ul>
+<p>  <strong>实例 2 - 定义web页面描述：</strong></p>
+  <meta name="description" content="Free Web tutorials on HTML and CSS">
+
+
+<p>  <strong>实例 3 - 定义页面作者：</strong></p>
+  <meta name="author" content="Hege Refsnes">
+
+
+<p>  <strong>实例 4 - 每30秒刷新页面：</strong></p>
+  <meta http-equiv="refresh" content="30">
+
+<h4 id="31-度量衡meter标签"><a href="#31-度量衡meter标签" class="headerlink" title="31.度量衡meter标签"></a>31.度量衡meter标签</h4><ul>
+<li><meter value="2" max="10" min="0">out of 10</meter></li>
+<li>用于定义度量衡，仅用于已知最大和最小值的度量，如磁盘使用情况，查寻结果的相关性</li>
+<li><meter> 不能作为一个进度条来使用， 进度条 progress 标签</meter></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-form.html" target="_blank" rel="noopener">form</a>New</td>
+<td><em>form_id</em></td>
+<td>规定 <meter> 元素所属的一个或多个表单。</meter></td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-high.html" target="_blank" rel="noopener">high</a>New</td>
+<td><em>number</em></td>
+<td>规定被界定为高的值的范围。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-low.html" target="_blank" rel="noopener">low</a>New</td>
+<td><em>number</em></td>
+<td>规定被界定为低的值的范围。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-max.html" target="_blank" rel="noopener">max</a>New</td>
+<td><em>number</em></td>
+<td>规定范围的最大值。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-min.html" target="_blank" rel="noopener">min</a>New</td>
+<td><em>number</em></td>
+<td>规定范围的最小值。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-optimum.html" target="_blank" rel="noopener">optimum</a>New</td>
+<td><em>number</em></td>
+<td>规定度量的最优值。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/htmltags/att-meter-value.html" target="_blank" rel="noopener">value</a>New</td>
+<td><em>number</em></td>
+<td>必需。规定度量的当前值。</td>
+</tr>
+</tbody></table>
+<h4 id="32-导航nav标签"><a href="#32-导航nav标签" class="headerlink" title="32.导航nav标签"></a>32.导航nav标签</h4><ul>
+<li>nav标签用于html页面中的导航，可以是页与页之间的导航，也可是业内的段与段之间的导航</li>
+</ul>
+<h4 id="33-noscript标签"><a href="#33-noscript标签" class="headerlink" title="33.noscript标签"></a>33.noscript标签</h4><ul>
+<li><p>noscript 元素用来定义在脚本未被执行时的替代内容（文本），此标签可被用于可识别 <noscript> 标签但无法支持其中的脚本的浏览器。</noscript></p>
+</li>
+<li><script>
+document.write("Hello World!")
+</script>
+<p><noscript>抱歉，你的浏览器不支持 JavaScript!</noscript></p>
+</li>
+<li><p>如果浏览器支持脚本，那么它不会显示出 noscript 元素中的文本，无法识别 <script> 标签的浏览器会把标签的内容显示到页面上。为了避免浏览器这样做，您应当在注释标签中隐藏脚本。老式的（无法识别 <script> 标签的）浏览器会忽略注释，这样就不会把标签的内容写到页面上，而新式的浏览器则懂得执行这些脚本，即使它们被包围在注释标签中！</p>
+</li>
+</ul>
+<script>
+<!--
+function displayMsg()
+{
+alert("Hello World!")
+}
+//-->
+</script> 
+
+</p><h4 id="34-option标签"><a href="#34-option标签" class="headerlink" title="34.option标签"></a>34.option标签</h4><ul>
+<li>定义下拉列表的一个选项</li>
+<li>必须与select或datalist标签结合使用</li>
+<li>option可在不带任何属性的情况下使用，但通常需要value值，该属性定义了发送到服务器的数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>disabled</td>
+<td>disabled</td>
+<td>规定此选项应在首次加载时被禁用。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>label</td>
+<td>text</td>
+<td>定义当使用 <optgroup> 时所使用的标注。</optgroup></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>selected</td>
+<td>selected</td>
+<td>规定选项（在首次显示在列表中时）表现为选中状态。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>text</td>
+<td>定义送往服务器的选项值。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="35-output标签"><a href="#35-output标签" class="headerlink" title="35.output标签"></a>35.output标签</h4><ul>
+<li>用于定义不同类型的输出，可作为输出结果显示（执行脚本的输出）</li>
+</ul>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+<input type="range" id="a" value="50">100
++<input type="number" id="b" value="50">
+=<output name="x" for="a b"></output>
+</form>
+
+<h4 id="36-optgroup标签"><a href="#36-optgroup标签" class="headerlink" title="36.optgroup标签"></a>36.optgroup标签</h4><ul>
+<li>optgroup标签用来定义一个选项组，即可将文档中的选项进行组合</li>
+</ul>
+<select>
+  <optgroup label="Swedish Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+</select> 
+
+<h4 id="37-预格式化pre标签"><a href="#37-预格式化pre标签" class="headerlink" title="37.预格式化pre标签"></a>37.预格式化pre标签</h4><ul>
+<li>被包围在 <pre> 标签 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。一个常见应用就是用来表示计算机的源代码。</pre></li>
+</ul>
+<h4 id="38-中文注音或字符"><a href="#38-中文注音或字符" class="headerlink" title="38.中文注音或字符"></a>38.中文注音或字符</h4><ul>
+<li><p><ruby> 标签定义 ruby 注释（中文注音或字符）。</ruby></p>
+<p>在东亚使用，显示的是东亚字符的发音。</p>
+<p>将 <ruby> 标签与rt和 rp 标签一起使用：<br><ruby> 元素由一个或多个需要解释/发音的字符和一个提供该信息的 <rt> 元素组成，还包括可选的 <rp> 元素，定义当浏览器不支持 "ruby" 元素时显示的内容。</rp></rt></ruby></ruby></p>
+</li>
+<li><p>汉 (Han)<br>字 (Zi) </p>
+<ruby> 
+汉 <rp>(</rp><rt>Han</rt><rp>)</rp> 
+字 <rp>(</rp><rt>Zi</rt><rp>)</rp> 
+</ruby>
+
+</li>
+</ul>
+<h4 id="39-上标下标sub-sup标签"><a href="#39-上标下标sub-sup标签" class="headerlink" title="39.上标下标sub sup标签"></a>39.上标下标sub sup标签</h4><ul>
+<li><p><sub>和<sup>标签分别为文档中的内容定义下标和上标</sup></sub></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这段文本包含 &lt;sub&gt;下标&lt;/sub&gt;</span><br><span class="line">      </span><br><span class="line">这段文本包含 &lt;sup&gt;上标&lt;/sup&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li></ul></body></html></html>
       
     </div>
     
@@ -309,7 +865,7 @@
         <p><span>本文标题:</span><a href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-03-26, 11:25:59</p>
-        <p><span>最后更新:</span>2020-03-26, 11:25:59</p>
+        <p><span>最后更新:</span>2020-03-26, 11:49:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/03/26/HTML5基础下-陈楚吟/" title="HTML5基础下--陈楚吟">http://yoursite.com/2020/03/26/HTML5基础下-陈楚吟/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/HTML5基础下-陈楚吟/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -345,7 +901,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-元素细节"><span class="toc-number">1.</span> <span class="toc-text">一 . 元素细节</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-a链接标签"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.a链接标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-area标签"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.area标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-abbr标签"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.abbr标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-article标签，aside标签"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.article标签，aside标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-address标签"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5.address标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-base标签"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">6.base标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-blockquote标签"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">7. blockquote标签</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-button标签"><span class="toc-number">1.0.1.</span> <span class="toc-text">8.button标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#9-bdo标签"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">9.bdo标签</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-table表格子标签"><span class="toc-number">1.0.2.</span> <span class="toc-text">10.table表格子标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-col标签"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">1.col标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-colgroup标签"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">2.colgroup标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-caption标签"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">3.caption标签</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-td，th标签"><span class="toc-number">1.0.3.</span> <span class="toc-text">4.td，th标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-tr标签"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">5.tr标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-tfoot，thead，tbody标签"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">6.tfoot，thead，tbody标签</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-title标签"><span class="toc-number">1.0.4.</span> <span class="toc-text">11.title标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#定义文档的标题"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">定义文档的标题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-time标签"><span class="toc-number">1.0.5.</span> <span class="toc-text">12.time标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-textarea标签"><span class="toc-number">1.0.6.</span> <span class="toc-text">13.textarea标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-短语元素"><span class="toc-number">1.0.7.</span> <span class="toc-text">14. 短语元素</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-em标签呈现的是被强调的文本"><span class="toc-number">1.0.7.1.</span> <span class="toc-text">1.em标签呈现的是被强调的文本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-strong标签定义重要的文本"><span class="toc-number">1.0.7.2.</span> <span class="toc-text">2.strong标签定义重要的文本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-dfn标签定义一个定义项目"><span class="toc-number">1.0.7.3.</span> <span class="toc-text">3.dfn标签定义一个定义项目</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-code定义计算机代码文本"><span class="toc-number">1.0.7.4.</span> <span class="toc-text">4.code定义计算机代码文本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-samp定义样本文本"><span class="toc-number">1.0.7.5.</span> <span class="toc-text">5.samp定义样本文本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-kbd标签定义键盘文本，表示文本是从键-盘上键入的。"><span class="toc-number">1.0.7.6.</span> <span class="toc-text">6.kbd标签定义键盘文本，表示文本是从键        盘上键入的。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-var标签定义变量"><span class="toc-number">1.0.7.7.</span> <span class="toc-text">7.var标签定义变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-cite标签定义引用。"><span class="toc-number">1.0.7.8.</span> <span class="toc-text">8.cite标签定义引用。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-高亮显示mark标签"><span class="toc-number">1.0.7.9.</span> <span class="toc-text">9.高亮显示mark标签</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-列表标签"><span class="toc-number">1.0.8.</span> <span class="toc-text">15.列表标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-ul-无序列表"><span class="toc-number">1.0.8.1.</span> <span class="toc-text">1.ul 无序列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-dl带有项目和描述的描述列表"><span class="toc-number">1.0.8.2.</span> <span class="toc-text">2.dl带有项目和描述的描述列表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-del删除标签，ins插入标签"><span class="toc-number">1.0.9.</span> <span class="toc-text">16.del删除标签，ins插入标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-details细节标签"><span class="toc-number">1.0.10.</span> <span class="toc-text">17.details细节标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-embed-标签"><span class="toc-number">1.0.11.</span> <span class="toc-text">18. embed 标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-figcaption标签"><span class="toc-number">1.0.12.</span> <span class="toc-text">19.figcaption标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-form表单"><span class="toc-number">1.0.13.</span> <span class="toc-text">20.form表单</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-form-元素包含一个或多个如下的表单元素："><span class="toc-number">1.0.13.1.</span> <span class="toc-text">1.form 元素包含一个或多个如下的表单元素：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#20-form-标签用于创建供用户输入的-HTML-表单。"><span class="toc-number">1.0.13.2.</span> <span class="toc-text">20.form 标签用于创建供用户输入的 HTML 表单。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-footer标签"><span class="toc-number">1.0.14.</span> <span class="toc-text">21.footer标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-fieldset标签"><span class="toc-number">1.0.15.</span> <span class="toc-text">22.fieldset标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-hgroup标签"><span class="toc-number">1.0.16.</span> <span class="toc-text">23.hgroup标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-水平线hr标签"><span class="toc-number">1.0.17.</span> <span class="toc-text">24.水平线hr标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#25-header标签"><span class="toc-number">1.0.18.</span> <span class="toc-text">25.header标签</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number"></span> <span class="toc-text">Internet Explorer 9</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#26-link标签"><span class="toc-number">0.0.1.</span> <span class="toc-text">26.link标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27-legend标签"><span class="toc-number">0.0.2.</span> <span class="toc-text">27.legend标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#28-label属性"><span class="toc-number">0.0.3.</span> <span class="toc-text">28.label属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#29-map标签用来表示图像映射"><span class="toc-number">0.0.4.</span> <span class="toc-text">29.map标签用来表示图像映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#30-元数据meta标签"><span class="toc-number">0.0.5.</span> <span class="toc-text">30.元数据meta标签</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#31-度量衡meter标签"><span class="toc-number">1.0.1.</span> <span class="toc-text">31.度量衡meter标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#32-导航nav标签"><span class="toc-number">1.0.2.</span> <span class="toc-text">32.导航nav标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#33-noscript标签"><span class="toc-number">1.0.3.</span> <span class="toc-text">33.noscript标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#34-option标签"><span class="toc-number">1.0.4.</span> <span class="toc-text">34.option标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#35-output标签"><span class="toc-number">1.0.5.</span> <span class="toc-text">35.output标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#36-optgroup标签"><span class="toc-number">1.0.6.</span> <span class="toc-text">36.optgroup标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#37-预格式化pre标签"><span class="toc-number">1.0.7.</span> <span class="toc-text">37.预格式化pre标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#38-中文注音或字符"><span class="toc-number">1.0.8.</span> <span class="toc-text">38.中文注音或字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#39-上标下标sub-sup标签"><span class="toc-number">1.0.9.</span> <span class="toc-text">39.上标下标sub sup标签</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -415,7 +971,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器-1/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习九/">vue学习九</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习七/">vue学习七</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习六/">vue学习六</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习五/">vue学习五</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习九/">vue学习九</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习七/">vue学习七</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习六/">vue学习六</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习五/">vue学习五</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
 
 
 

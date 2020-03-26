@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="将学习技术点汇总">
+<meta name="description" content="一 .HTML优点1 . html5的建立的规则 新特性应该基于html，css，dom，js 应该减少对外部插件的使用（就因乔布斯炮轰flash插件推动了html5的发展） 更优秀的错误处理 更多取代脚本的标记 html5应该独立于设备 开发进程应向公众透明  2.新特性 用于绘画的canvas元素和SVG元素（这个属性超级棒，你可以画一些很好玩的图形） 用于媒介回放的video和audio元素">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML5基础上-陈楚吟">
 <meta property="og:url" content="http://yoursite.com/2020/03/26/HTML5基础上-陈楚吟/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="将学习技术点汇总">
+<meta property="og:description" content="一 .HTML优点1 . html5的建立的规则 新特性应该基于html，css，dom，js 应该减少对外部插件的使用（就因乔布斯炮轰flash插件推动了html5的发展） 更优秀的错误处理 更多取代脚本的标记 html5应该独立于设备 开发进程应向公众透明  2.新特性 用于绘画的canvas元素和SVG元素（这个属性超级棒，你可以画一些很好玩的图形） 用于媒介回放的video和audio元素">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-26T03:25:47.688Z">
+<meta property="og:updated_time" content="2020-03-26T03:49:24.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML5基础上-陈楚吟">
-<meta name="twitter:description" content="将学习技术点汇总">
+<meta name="twitter:description" content="一 .HTML优点1 . html5的建立的规则 新特性应该基于html，css，dom，js 应该减少对外部插件的使用（就因乔布斯炮轰flash插件推动了html5的发展） 更优秀的错误处理 更多取代脚本的标记 html5应该独立于设备 开发进程应向公众透明  2.新特性 用于绘画的canvas元素和SVG元素（这个属性超级棒，你可以画一些很好玩的图形） 用于媒介回放的video和audio元素">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -298,7 +298,236 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h2 id="一-HTML优点"><a href="#一-HTML优点" class="headerlink" title="一 .HTML优点"></a>一 .HTML优点</h2><h4 id="1-html5的建立的规则"><a href="#1-html5的建立的规则" class="headerlink" title="1 . html5的建立的规则"></a>1 . html5的建立的规则</h4><ul>
+<li>新特性应该基于html，css，dom，js</li>
+<li>应该减少对外部插件的使用（就因乔布斯炮轰flash插件推动了html5的发展）</li>
+<li>更优秀的错误处理</li>
+<li>更多取代脚本的标记</li>
+<li>html5应该独立于设备</li>
+<li>开发进程应向公众透明</li>
+</ul>
+<h4 id="2-新特性"><a href="#2-新特性" class="headerlink" title="2.新特性"></a>2.新特性</h4><ul>
+<li>用于绘画的canvas元素和SVG元素（这个属性超级棒，你可以画一些很好玩的图形）</li>
+<li>用于媒介回放的video和audio元素（摆脱了flash等插件，网页加载速度极大提升了）</li>
+<li>对于对本地离线的存储的更好支持（这是html5最强大之处）</li>
+<li>新的表单控件产生，特别是有关时间日期的，email，calendar，date，time，url，search</li>
+<li>新的语义化的内容标签出现，article，footer，header，nav，section（减少div的使用，同时提高了代码的复用性）</li>
+</ul>
+<h4 id="3-浏览器"><a href="#3-浏览器" class="headerlink" title="3.浏览器"></a>3.浏览器</h4><p>现在的浏览器几乎都支持html5</p>
+<p>主流浏览器是指拥有自己内核且实用度极高的浏览器。</p>
+<ul>
+<li>Firefox：Gecko内核</li>
+<li>谷歌 ： 之前是Webkit内核，现在是Blink内核</li>
+<li>IE : Trident内核</li>
+<li>Opera ： Presto内核——Webkit——Blink</li>
+<li>Safari ：Webkit内核</li>
+</ul>
+<h2 id="二-主要的新增元素"><a href="#二-主要的新增元素" class="headerlink" title="二 . 主要的新增元素"></a>二 . 主要的新增元素</h2><h4 id="1-画布Canvas-基于脚本）"><a href="#1-画布Canvas-基于脚本）" class="headerlink" title="1 . 画布Canvas(基于脚本）"></a>1 . 画布Canvas(基于脚本）</h4><ul>
+<li>默认没有边框和内容，通常需要指定id属性以供脚本使用，所有绘制工作由脚本完成，因其是逐像素进行渲染的，故最适合图像密集型的游戏，其中的许多对象会被频繁重绘。</li>
+<li>绘制步骤（前两部是固定的）<ul>
+<li>通过id属性找到canvas元素：var c=document.getElementById(“id值”)；</li>
+<li>创建context对象（就是做绘图前的准备）：var cxt=c.getContext(“2d”);</li>
+<li>利用context对象绘制路径</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-可伸缩矢量图形SVG（基于XML"><a href="#2-可伸缩矢量图形SVG（基于XML" class="headerlink" title="2. 可伸缩矢量图形SVG（基于XML)"></a>2. 可伸缩矢量图形SVG（基于XML)</h4><ul>
+<li><p>定义：用于定义用于网格的基于矢量的，用XML格式定义的图形，SVG图像在放大或改变尺寸时其图形质量不变</p>
+</li>
+<li><p>优势（与其他图像格式相比，如jpg，gif）</p>
+<ul>
+<li>可通过文本编辑器来创建和修改</li>
+<li>可被搜索，压缩，索引，脚本化，且在任何分辨率下高质量的打印，即使放大缩小，其质量也不会下降。适合大型渲染区域的应用程序（如google地图）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>canvas</th>
+<th>SVG</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>支持分辨率</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody></table>
+<p>支持事件处理器            不支持                支持</p>
+<p>文本渲染能力                弱                强</p>
+</li>
+</ul>
+<h4 id="3-表单元素属性"><a href="#3-表单元素属性" class="headerlink" title="3. 表单元素属性"></a>3. 表单元素属性</h4><ul>
+<li>datalist元素规定表单域中自动完成功能，配合option使用</li>
+<li>keygen元素的作用是提供一种验证用户的可靠方法，其规定了用于表单的密钥生成器字段。当提交时会生成密钥和私钥两个键（防止中间人通过截取密钥解密数据），私钥存储于客户端，公钥被发送到服务器。公钥可用于之后验证用户的客户端证书<keygen name="security"></li>
+<li>output 元素定义不同类型的输出，比如脚本的输出</li>
+</ul>
+<h4 id="4-HTML5-Shiv"><a href="#4-HTML5-Shiv" class="headerlink" title="4. HTML5 Shiv"></a>4. HTML5 Shiv</h4><ul>
+<li>IE8及更早版本无法在语义化元素中渲染css效果，可使用HTML Shiv脚本解决兼容问题</li>
+<li>解决方法：1. 下载shiv然后将以下代码放在网页中<!--[if It IE 9]><script src="htmlshiv.js"></script><![endif]--></li>
+</ul>
+<h2 id="三-html-Web存储"><a href="#三-html-Web存储" class="headerlink" title="三 . html Web存储"></a>三 . html Web存储</h2><ul>
+<li>定义及优点：使用html5可以在本地存储用户的浏览数据，web存储更安全与快速。这些数据不会保存在服务器端，只用于用户请求网站数据上。可存储大量的数据而不影响网站的性能（这也是为什么你输入网址会先在本地检索的原因），解决了之前cookie存储时需要在请求头上带着数据，且存储大小不超过4k的缺点,数据以键值对存在，且只允许该网页访问web网页上的数据</li>
+<li>客户端存储数据的两个对象（进行web存储时先检查是否支持（typeof(Storage)!==”undefined”))<ul>
+<li>localStorage：没有时间限制的本地数据存储，关闭浏览器后，数据仍保存在浏览器上</li>
+<li>sessionStorage：针对一个session的数据存储，关闭浏览器后，数据都将被删除</li>
+</ul>
+</li>
+<li>常用方法：<ul>
+<li>保存数据：localStorage.setItem(key,value);</li>
+<li>读取数据：localStorage.getItem(key);</li>
+<li>删除单个数据：localStorage.removeItem(key);</li>
+<li>删除所有数据：localStorage.clear();</li>
+<li>得到某个索引的key：localStorage.key(index);</li>
+</ul>
+</li>
+</ul>
+<h2 id="四-HTML5-Web-SQL数据库"><a href="#四-HTML5-Web-SQL数据库" class="headerlink" title="四 . HTML5 Web SQL数据库"></a>四 . HTML5 Web SQL数据库</h2><h5 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h5><ul>
+<li>Web SQL 是在浏览器上模拟数据库，可使用js对操作SQL完成对数据的读写，但是Web SQL数据库不是HTML5规范的一部分，它是一个独立的规范引入一组使用SQL操作客户端数据库的APIs。（仅在Safari,Chrome,Opera浏览器工作）</li>
+</ul>
+<h5 id="2-三大核心方法"><a href="#2-三大核心方法" class="headerlink" title="2. 三大核心方法"></a>2. 三大核心方法</h5><ul>
+<li><p>openDatabase：这个方法使用现有的数据库或新建的数据库创建一个数据库对象</p>
+<ul>
+<li>openDatabase（’数据库名称‘，’版本号‘，’描述文本‘，’数据库大小‘）；创建完后会回调并调用；</li>
+</ul>
+</li>
+<li><p>transaction:这份方法让我们能够控制一个事务，以及基于这种情况执行提交或者回滚</p>
+</li>
+<li><p>executeSql:用于执行实际的SQL查询</p>
+<h5 id="for-example"><a href="#for-example" class="headerlink" title="for example"></a>for example</h5><p>var db = openDatabase(‘mydb’, ‘1.0’, ‘Test DB’, 2 * 1024 * 1024);<br>db.transaction(function (tx) {<br>tx.executeSql(‘CREATE TABLE IF NOT EXISTS LOGS (id unique, log)’);<br>tx.executeSql(‘INSERT INTO LOGS (id, log) VALUES (1, “W3Cschool教程”)’);<br>tx.executeSql(‘INSERT INTO LOGS (id, log) VALUES (2, “<a href="http://www.w3cschool.cn&quot;)&#39;" target="_blank" rel="noopener">www.w3cschool.cn&quot;)&#39;</a>);<br>});</p>
+</li>
+</ul>
+<h2 id="五-html5-应用程序缓存"><a href="#五-html5-应用程序缓存" class="headerlink" title="五 . html5 应用程序缓存"></a>五 . html5 应用程序缓存</h2><h4 id="1-三大优势："><a href="#1-三大优势：" class="headerlink" title="1.三大优势："></a>1.三大优势：</h4><ul>
+<li>离线浏览-用户可在应用离线下使用它们</li>
+<li>已缓存资源加载更快</li>
+<li>减少服务器负载——浏览器将只从服务器下载更新过或更改的资源</li>
+</ul>
+<h5 id="2-应用："><a href="#2-应用：" class="headerlink" title="2.应用："></a>2.应用：</h5><html manifest="demo.appcache">每个指定了manifest的页面在用户对其访问时都会被缓存，未指定则不会缓存
+
+<h4 id="3-Manifest文件"><a href="#3-Manifest文件" class="headerlink" title="3.Manifest文件"></a>3.Manifest文件</h4><ul>
+<li>manifest 文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容）。</li>
+<li>manifest 文件可分为三个部分：<ul>
+<li><em>CACHE MANIFEST</em> - 在此标题下列出的文件将在首次下载后进行缓存</li>
+<li><em>NETWORK</em> - 在此标题下列出的文件需要与服务器的连接，且不会被缓存</li>
+<li><em>FALLBACK</em> - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）</li>
+</ul>
+</li>
+<li>更新缓存，一旦应用被缓存，他就会保持缓存直到发生以下情况<ul>
+<li>用户清空浏览器</li>
+<li>manifest文件被修改</li>
+<li>由程序来更新应用缓存</li>
+</ul>
+</li>
+</ul>
+<h2 id="六-Web-Workers"><a href="#六-Web-Workers" class="headerlink" title="六  . Web Workers"></a>六  . Web Workers</h2><h5 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h5><p>是运行在后台的javascript，属于后端的线程，不影响页面的性能。当html页面执行脚本时，页面的状态是不可响应的，直到脚本已完成，因其是前端的单线程</p>
+<h5 id="2-前轴"><a href="#2-前轴" class="headerlink" title="2.前轴"></a>2.前轴</h5><p>在创建 web worker 之前，请检测用户的浏览器是否支持它：typeof(Worker)!==”undefined”  这步的检测非常重要！你必须先检测才能保证接下来可以顺利操作 web worker！ web worker 通常不用于如此简单的脚本，而是用于更耗费 CPU 资源的任务。</p>
+<h5 id="3-Web-Workers-和-DOM"><a href="#3-Web-Workers-和-DOM" class="headerlink" title="3. Web Workers 和 DOM"></a>3. Web Workers 和 DOM</h5><p>由于 web worker 位于外部文件中，它们无法访问下例 JavaScript 对象：</p>
+<ul>
+<li>window 对象</li>
+<li>document </li>
+<li>parent 对象</li>
+</ul>
+<h2 id="七-HTML5-SSE"><a href="#七-HTML5-SSE" class="headerlink" title="七 . HTML5 SSE"></a>七 . HTML5 SSE</h2><h5 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1.定义"></a>1.定义</h5><p>HTML5 服务器发送事件(Server-Sent Events)是基于WebSocket协议的一种服务器向客户端发送事件和数据的<strong><em>单向通讯</em></strong>,允许网页来自服务器的更新，除了·IE，其他主流浏览器都支持</p>
+<h5 id="2-实例讲解"><a href="#2-实例讲解" class="headerlink" title="2 . 实例讲解"></a>2 . 实例讲解</h5><p>var source=new EventSource(“demo_sse.php”);<br>source.onmessage=function(event)<br>  {<br>  document.getElementById(“result”).innerHTML+=event.data + “<br>“;<br>  };</p>
+<ul>
+<li>创建一个新的 EventSource 对象（用于接收发送事件通知），然后规定发送更新的页面的 URL（本例中是 “demo_sse.php”）</li>
+<li>每接收到一次更新，就会发生 onmessage 事件</li>
+<li>当 onmessage 事件发生时，把已接收的数据推入 id 为 “result” 的元素中</li>
+</ul>
+<h2 id="八-WebSocket事件"><a href="#八-WebSocket事件" class="headerlink" title="八 . WebSocket事件"></a>八 . WebSocket事件</h2><h5 id="1-定义及优势"><a href="#1-定义及优势" class="headerlink" title="1.定义及优势"></a>1.定义及优势</h5><ul>
+<li>WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯协议（没有request和response的概念，两者地位完全相同，连接一旦建立就建立了持久性连接，双方可随时向对方发送数据）</li>
+<li>在WebSocket API中，浏览器和服务器只需做一个握手的动作，两者间就会形成一条快速通道，故可直接进行数据传送。之前一直处于最开始的短轮询Polling阶段，即建立连接必须经过三次握手，连接才能算成功</li>
+<li>WebSockcet协议本质上是一个基于tcp的协议。为建立一个WebSoccket连接，客户端首先要向服务器端发起一个HTTP请求，这个请求和通常的HTTP请求不同，包含了一些附加头信息，其中附加头信息“Upgrade：WebSocket”表明这是一个申请协议升级的HTTP请求，服务端解析这些附加头信息并产生应答信息返回给客户端，客户端和服务器端就建立起来，双方可通过这个自由通道的传递信息，且这个连接会一直存在直到两方中有一方断开连接</li>
+</ul>
+<h5 id="2-用法"><a href="#2-用法" class="headerlink" title="2.用法"></a>2.用法</h5><ul>
+<li><p>通过send（）方法向服务器发送数据，并通过onmessage时间接收服务器返回的数据</p>
+</li>
+<li><p>创建WebSocket对象，var Socket=new WebSocket(url,[protocal]);</p>
+<p>url:指定连接的URL</p>
+<p>protocol:指定可接受的子协议</p>
+</li>
+<li><p>只读属性Socket.readyState表示连接状态</p>
+<ul>
+<li>0-连接尚未建立</li>
+<li>1—连接已建立，可进行通信</li>
+<li>2—连接正在关闭</li>
+<li>3—连接已经关闭或者连接不能打开</li>
+</ul>
+</li>
+<li><p>Socket.bufferedAmount:只读属性bufferedAmount已被send（)放入队列中等待传输，但还没有发出UTF-8文本字节数</p>
+</li>
+<li><p>示例代码：</p>
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <title>数据传输</title>
+      <meta charset="utf-8">
+    <script type="text/javascript">
+           function WebSocketTest()
+            {if("WebSocket" in window){
+                alert("您的浏览器支持WebSocket");
+                var ws=new WebSocket("ws://localhost:9998/echo");
+                ws.onopen=function(){
+                    ws.send("森达message");
+                    alert("messsage is sending");
+                };
+                ws.onmessage= function (evt){
+                    var received_msg=evt.data;
+                    alert("数据已经收");
+                };
+                ws.onclose=function(){
+                    alert("the link is broken");
+                };
+            }
+                else{
+                    alert("your brouse is not supposed");
+                }
+            }
+    </script>
+</head>
+<body>
+<div id="sse">
+     <a href="javascript:WebSocketTest()" target="_blank" rel="noopener">运行 WebSocket</a>
+</div>
+</body>
+</html>
+
+
+</li>
+</ul>
+<h2 id="九-代码规范"><a href="#九-代码规范" class="headerlink" title="九 . 代码规范"></a>九 . 代码规范</h2><h5 id="1-使用正确的生命文档类型"><a href="#1-使用正确的生命文档类型" class="headerlink" title="1.使用正确的生命文档类型"></a>1.使用正确的生命文档类型</h5><p>  文档类型生命位于html文档的第一行<!DOCTYPE html></p>
+<h5 id="2-使用小写元素名"><a href="#2-使用小写元素名" class="headerlink" title="2.使用小写元素名"></a>2.使用小写元素名</h5><h5 id="3-关闭所有元素"><a href="#3-关闭所有元素" class="headerlink" title="3.关闭所有元素"></a>3.关闭所有元素</h5><h5 id="4-关闭空的-HTML-元素"><a href="#4-关闭空的-HTML-元素" class="headerlink" title="4.关闭空的 HTML 元素"></a>4.关闭空的 HTML 元素</h5><h5 id="5-属性值我们推荐使用引号"><a href="#5-属性值我们推荐使用引号" class="headerlink" title="5.属性值我们推荐使用引号:"></a>5.属性值我们推荐使用引号:</h5><ul>
+<li><p>如果属性值含有空格需要使用引号。</p>
+</li>
+<li><p>混合风格不推荐的，建议统一风格。</p>
+</li>
+<li><p>属性值使用引号易于阅读。</p>
+<h5 id="6-图片属性"><a href="#6-图片属性" class="headerlink" title="6.图片属性"></a>6.图片属性</h5><p>图片通常使用<strong>alt</strong> 属性。 在图片不能显示时，它能替代图片显示。</p>
+<h5 id="7-空行和缩进"><a href="#7-空行和缩进" class="headerlink" title="7.空行和缩进"></a>7.空行和缩进</h5><p>不要无缘无故添加空行。</p>
+<p>为每个逻辑功能块添加空行，这样更易于阅读。</p>
+<p>缩进使用两个空格，不建议使用 TAB。</p>
+<p>比较短的代码间不要使用不必要的空行和缩进。</p>
+<h5 id="8-样式表"><a href="#8-样式表" class="headerlink" title="8.样式表"></a>8.样式表</h5></li>
+<li><p>将左花括号与选择器放在同一行。</p>
+</li>
+<li><p>左花括号与选择器间添加以空格。</p>
+</li>
+<li><p>使用两个空格来缩进。</p>
+</li>
+<li><p>冒号与属性值之间添加已空格。</p>
+</li>
+<li><p>逗号和符号之后使用一个空格。</p>
+</li>
+<li><p>每个属性与值结尾都要使用符号。</p>
+</li>
+<li><p>只有属性值包含空格时才使用引号。</p>
+</li>
+<li><p>右花括号放在新的一行。</p>
+</li>
+<li><p>每行最多 80 个字符。</p>
+</li>
+</ul>
+</html>
       
     </div>
     
@@ -309,7 +538,7 @@
         <p><span>本文标题:</span><a href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-03-26, 11:25:47</p>
-        <p><span>最后更新:</span>2020-03-26, 11:25:47</p>
+        <p><span>最后更新:</span>2020-03-26, 11:49:24</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/03/26/HTML5基础上-陈楚吟/" title="HTML5基础上-陈楚吟">http://yoursite.com/2020/03/26/HTML5基础上-陈楚吟/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/HTML5基础上-陈楚吟/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -345,7 +574,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-HTML优点"><span class="toc-number">1.</span> <span class="toc-text">一 .HTML优点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-html5的建立的规则"><span class="toc-number">1.0.1.</span> <span class="toc-text">1 . html5的建立的规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-新特性"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.新特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-浏览器"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.浏览器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-主要的新增元素"><span class="toc-number">2.</span> <span class="toc-text">二 . 主要的新增元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-画布Canvas-基于脚本）"><span class="toc-number">2.0.1.</span> <span class="toc-text">1 . 画布Canvas(基于脚本）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-可伸缩矢量图形SVG（基于XML"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 可伸缩矢量图形SVG（基于XML)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-表单元素属性"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 表单元素属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-HTML5-Shiv"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. HTML5 Shiv</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-html-Web存储"><span class="toc-number">3.</span> <span class="toc-text">三 . html Web存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-HTML5-Web-SQL数据库"><span class="toc-number">4.</span> <span class="toc-text">四 . HTML5 Web SQL数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-基本概念"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">1.基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-三大核心方法"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">2. 三大核心方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#for-example"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">for example</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-html5-应用程序缓存"><span class="toc-number">5.</span> <span class="toc-text">五 . html5 应用程序缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-三大优势："><span class="toc-number">5.0.1.</span> <span class="toc-text">1.三大优势：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-应用："><span class="toc-number">5.0.1.1.</span> <span class="toc-text">2.应用：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Manifest文件"><span class="toc-number">5.0.2.</span> <span class="toc-text">3.Manifest文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-Web-Workers"><span class="toc-number">6.</span> <span class="toc-text">六  . Web Workers</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义"><span class="toc-number">6.0.0.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-前轴"><span class="toc-number">6.0.0.2.</span> <span class="toc-text">2.前轴</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Web-Workers-和-DOM"><span class="toc-number">6.0.0.3.</span> <span class="toc-text">3. Web Workers 和 DOM</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-HTML5-SSE"><span class="toc-number">7.</span> <span class="toc-text">七 . HTML5 SSE</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义-1"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例讲解"><span class="toc-number">7.0.0.2.</span> <span class="toc-text">2 . 实例讲解</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八-WebSocket事件"><span class="toc-number">8.</span> <span class="toc-text">八 . WebSocket事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义及优势"><span class="toc-number">8.0.0.1.</span> <span class="toc-text">1.定义及优势</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用法"><span class="toc-number">8.0.0.2.</span> <span class="toc-text">2.用法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九-代码规范"><span class="toc-number">9.</span> <span class="toc-text">九 . 代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-使用正确的生命文档类型"><span class="toc-number">9.0.0.1.</span> <span class="toc-text">1.使用正确的生命文档类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-使用小写元素名"><span class="toc-number">9.0.0.2.</span> <span class="toc-text">2.使用小写元素名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-关闭所有元素"><span class="toc-number">9.0.0.3.</span> <span class="toc-text">3.关闭所有元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-关闭空的-HTML-元素"><span class="toc-number">9.0.0.4.</span> <span class="toc-text">4.关闭空的 HTML 元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-属性值我们推荐使用引号"><span class="toc-number">9.0.0.5.</span> <span class="toc-text">5.属性值我们推荐使用引号:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-图片属性"><span class="toc-number">9.0.0.6.</span> <span class="toc-text">6.图片属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-空行和缩进"><span class="toc-number">9.0.0.7.</span> <span class="toc-text">7.空行和缩进</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-样式表"><span class="toc-number">9.0.0.8.</span> <span class="toc-text">8.样式表</span></a></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -415,7 +644,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器-1/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习九/">vue学习九</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习七/">vue学习七</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习六/">vue学习六</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习五/">vue学习五</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习九/">vue学习九</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习七/">vue学习七</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习六/">vue学习六</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习五/">vue学习五</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
 
 
 
