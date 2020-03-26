@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="一 . Grid布局 CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列 grid的目标是完全改变我们基于网格的用户界面的布局方式 Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）  1 . 网格容器 要把wra">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nikita">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/Grid布局/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="一 . Grid布局 CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列 grid的目标是完全改变我们基于网格的用户界面的布局方式 Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）  1 . 网格容器 要把wra">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.html.cn/newimg88/2018/12/terms-grid-line.svg">
+<meta property="og:image" content="https://www.html.cn/newimg88/2018/12/terms-grid-track.svg">
+<meta property="og:image" content="https://www.html.cn/newimg88/2018/12/dddgrid-template-areas.svg">
+<meta property="og:image" content="https://www.html.cn/newimg88/2018/12/template-columns-rows-01.svg">
+<meta property="og:image" content="https://www.html.cn/newimg88/2017/12/1_l-adYpQCGve7W6DWY949pw.png">
+<meta property="og:image" content="https://www.html.cn/newimg88/2017/12/1_QDSybpxjXSat6UtoHgUapQ.png">
+<meta property="og:updated_time" content="2019-04-15T13:42:01.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nikita">
+<meta name="twitter:description" content="一 . Grid布局 CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列 grid的目标是完全改变我们基于网格的用户界面的布局方式 Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）  1 . 网格容器 要把wra">
+<meta name="twitter:image" content="https://www.html.cn/newimg88/2018/12/terms-grid-line.svg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Grid布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/26/Grid布局/" class="article-date">
+      <time datetime="2020-03-26T02:03:06.669Z" itemprop="datePublished">2020-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一-Grid布局"><a href="#一-Grid布局" class="headerlink" title="一 . Grid布局"></a>一 . Grid布局</h2><ul>
+<li>CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列</li>
+<li>grid的目标是完全改变我们基于网格的用户界面的布局方式</li>
+<li>Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）</li>
+</ul>
+<h4 id="1-网格容器"><a href="#1-网格容器" class="headerlink" title="1 . 网格容器"></a><strong>1 . 网格容器</strong></h4><ul>
+<li>要把wrapper元素变成grid，只要简单将其display设置为grid即可。应用 <code>display: grid</code> 的元素。这是所有 网格项（grid item）的直接父级元素。</li>
+<li>属性<ul>
+<li>display：将网格定义为网格容器，并为其内容建立新的网格格式上下文。grid （生成一个块级网格） ；inline-grid （内联网格）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-网格项"><a href="#2-网格项" class="headerlink" title="2 .网格项"></a>2 .<strong>网格项</strong></h4><ul>
+<li>是网格容器的直接子元素（注意：通过嵌套元素（也称为子网格，即 subgrid ）向下传递网格参数的能力已移至 CSS Grid 规范的 Level 2 版本(详情访问 <a href="https://www.w3.org/TR/css-grid-2/#subgrids" target="_blank" rel="noopener">https://www.w3.org/TR/css-grid-2/#subgrids</a>）</li>
+</ul>
+<h4 id="3-网格线"><a href="#3-网格线" class="headerlink" title="3.网格线"></a>3.<strong>网格线</strong></h4><ul>
+<li>构成网格结构的分界线。它们既可以是垂直的（“列网格线(column grid lines)”），也可以是水平的（“行网格线(row grid lines)”），并位于行或列的任一侧。例如，这里的黄线就是一条列网格线。</li>
+<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-line.svg" alt="网格线(Grid Line)"></li>
+</ul>
+<h4 id="4-网格轨道"><a href="#4-网格轨道" class="headerlink" title="4.网格轨道"></a>4.<strong>网格轨道</strong></h4><ul>
+<li>两条相邻网格线之间的空间。你可以把它们想象成网格的列或行。下图是第二条和第三条 行网格线 之间的 网格轨道(Grid Track)。</li>
+<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-track.svg" alt="网格轨道(Grid Track)"></li>
+</ul>
+<h4 id="5-网格单元格"><a href="#5-网格单元格" class="headerlink" title="5.网格单元格"></a>5.<strong>网格单元格</strong></h4><ul>
+<li>两个相邻的行和两个相邻的列网格线之间的空间。这是 Grid(网格) 系统的一个“单元”。</li>
+</ul>
+<h4 id="6-网格区域-grid-template-areas"><a href="#6-网格区域-grid-template-areas" class="headerlink" title="6 .网格区域(grid-template-areas)"></a>6 .<strong>网格区域</strong>(grid-template-areas)</h4><ul>
+<li><p>4条网格线包围的总空间。一个 网格区域(Grid Area) 可以由任意数量的 网格单元格(Grid Cell) 组成。</p>
+</li>
+<li><p>网格单元格可以认为是网格线行为1和2，以及列网格线1和2之间的网格区域</p>
+</li>
+<li><p>通过引用grid-area属性指定的网格区域名称来定义网格模板，重复网格区域的名称导致内容跨越这些单元格。一个点号（.）代表空单元格。这个语法本身可视作网格的可视化结构。</p>
+<ul>
+<li><p><grid-area-name>:由网格项的grid-area指定网格区域名称</grid-area-name></p>
+</li>
+<li><p>none：不定义网格区域</p>
+</li>
+<li><p>.container{  grid-template-columns: 50px 50px 50px 50px;  grid-template-rows: auto;  grid-template-areas:     “header header header header”    “main main . sidebar”    “footer footer footer footer”; }</p>
+</li>
+<li><p><img src="https://www.html.cn/newimg88/2018/12/dddgrid-template-areas.svg" alt="网格区域名称模板"></p>
+</li>
+<li><h5 id="注意你不能-用这个语法来命名网格线，只是命名-网格区域"><a href="#注意你不能-用这个语法来命名网格线，只是命名-网格区域" class="headerlink" title="注意你不能 用这个语法来命名网格线，只是命名 网格区域"></a><strong>注意你不能 用这个语法来命名网格线，只是命名 网格区域</strong></h5><ul>
+<li>当你使用这种语法时，区域两端的网格线实际上会自动命名。如果你的网格区域的名字是 <strong>foo</strong>，该区域的起始行网格线 和 起始列网格线 的名称将为 <strong>foo-start</strong>，而最后一条行网格线 和 最后一条列网格线 的名称将为 <strong>foo-end</strong>。这意味着某些网格线可能有多个名字，如上例中最左边的网格线，它将有三个名称：header-start，main-start 和 footer-start 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>columns（列）和rows（行）</p>
+<ul>
+<li><p>为了使其成为网格的二维容器，需要定义行和列。</p>
+</li>
+<li><p>要定位和调整items（子元素）大小，我们将使用grid-column和grid-row属性来设置。使用空格分隔的值列表，用来定义网格的列和行。这些值表示 网格轨道(Grid Track) 大小，它们之间的空格表示网格线。</p>
+<ul>
+<li><p>track-size： 可以是长度值，百分比，或者等份网格容器中可用空间（使用 <code>fr</code> 单位）     line-name`：你可以选择的任意名称</p>
+</li>
+<li><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br><span class="line"> grid-template-rows: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义100px宽的3列  grid-template-columns ：100px  100px  100px;</p>
+</li>
+<li><p>定义50px高的两行   grid-template-rows : 50px  50px；</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 40px 50px auto 50px 40px;</span><br><span class="line"> grid-template-rows: 25% 100px auto;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="https://www.html.cn/newimg88/2018/12/template-columns-rows-01.svg" alt="网格线名称"></p>
+</li>
+<li><p>.wrapper{display: grid；grid-template-columns: 100px 100px 100px;grid-template-rows: 100px 100px 100px；}</p>
+</li>
+<li><p>如果你的定义包含多个重复值，则可以使用 <code>repeat()</code> 表示法来简化定义：  grid-template-columns:repeate(3,20px [col-start]);</p>
+</li>
+<li><p>你也可以明确的指定网格线(Grid Line)名称   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];</span><br><span class="line">  grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果多行共享相同的名称，则可通过网格线名称和计数来引用它们 grid-template-start: col-start 2;</p>
+</li>
+<li><p>fr单元允许你用等分网格容器剩余可用空间来设置 网格轨道(Grid Track) 的大小 。例如grid-temp-columns : 1fr  1fr  1fr ;该代码会将每个网格项设置为网格容器宽度的三分之一：</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>放置items（子元素）</p>
+<ul>
+<li>设置子元素的大小可通过网格线来设置</li>
+<li><ul>
+<li>.item1{grid-column-start :1;grid-column-end :4;}</li>
+<li>简写式 .item1{grid-column: 1 / 4 ;}</li>
+<li>表示item1占据从第一条网格线开始，到第四条网格线结束（<strong>注意</strong>：3列有4条网格线）<img src="https://www.html.cn/newimg88/2017/12/1_l-adYpQCGve7W6DWY949pw.png" alt="Grid 布局，列网格线"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.item1 &#123;</span><br><span class="line">    grid-column-start: 1;</span><br><span class="line">    grid-column-end: 3;</span><br><span class="line">&#125;</span><br><span class="line">.item3 &#123;</span><br><span class="line">    grid-row-start: 2;</span><br><span class="line">    grid-row-end: 4;</span><br><span class="line">&#125;</span><br><span class="line">.item4 &#123;</span><br><span class="line">    grid-column-start: 2;</span><br><span class="line">    grid-column-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.html.cn/newimg88/2017/12/1_QDSybpxjXSat6UtoHgUapQ.png" alt="Grid 布局"></p>
+<h4 id="7-简写属性grid-template"><a href="#7-简写属性grid-template" class="headerlink" title="7. 简写属性grid-template"></a>7. 简写属性grid-template</h4><ul>
+<li>用于定义rows , columns , areas 简写属性   grid-template: none | <grid-template-rows> / <grid-template-columns>;</grid-template-columns></grid-template-rows></li>
+<li><code>none</code>：将所有三个属性设置为其初始值</li>
+<li><code>&lt;grid-template-rows&gt; / &lt;grid-template-columns&gt;</code>：将 grid-template-columns 和 grid-template-rows`设置为相应地特定的值，并且设置grid-template-areas为none</li>
+</ul>
+<p>游戏：</p>
+<p>如果你觉得同时输入<code>grid-column</code>和<code>grid-row</code>也很复杂，我们还有另一种缩写。<code>grid-area</code>属性接受4个由’/‘分开的值：<code>grid-row-start</code>, <code>grid-column-start</code>, <code>grid-row-end</code>, 最后是<code>grid-column-end</code>。</p>
+<p>举个例子如下所示：<code>grid-area: 1 / 1 / 3 / 6;</code>。</p>
+<p>如果我们有很多个网格项呢？你可以任意覆盖它们不用有任何担心。用<code>grid-area</code>定义第二个网格项为所有未浇水的胡萝卜浇水。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/26/Grid布局/"></a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-03-26, 10:03:06</p>
+        <p><span>最后更新:</span>2019-04-15, 21:42:01</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/26/Grid布局/" title="">http://yoursite.com/2020/03/26/Grid布局/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/Grid布局/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/03/26/HTML5基础上--陈楚吟/">
+                    
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/26/CSS3高阶/">
+                    
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-Grid布局"><span class="toc-number">1.</span> <span class="toc-text">一 . Grid布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-网格容器"><span class="toc-number">1.0.1.</span> <span class="toc-text">1 . 网格容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-网格项"><span class="toc-number">1.0.2.</span> <span class="toc-text">2 .网格项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-网格线"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.网格线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-网格轨道"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.网格轨道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-网格单元格"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.网格单元格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-网格区域-grid-template-areas"><span class="toc-number">1.0.6.</span> <span class="toc-text">6 .网格区域(grid-template-areas)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#注意你不能-用这个语法来命名网格线，只是命名-网格区域"><span class="toc-number">1.0.6.1.</span> <span class="toc-text">注意你不能 用这个语法来命名网格线，只是命名 网格区域</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-简写属性grid-template"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. 简写属性grid-template</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/03/26/HTML5基础上--陈楚吟/" title="上一篇: ">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/26/CSS3高阶/" title="下一篇: ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下--陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上--陈楚吟/">HTML5基础上--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习九/">vue学习九</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习七/">vue学习七</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习六/">vue学习六</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习五/">vue学习五</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/25/vue学习/">vue学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
