@@ -268,6 +268,238 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-vue学习六" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/20/vue学习六/" class="article-date">
+      <time datetime="2020-03-20T05:44:49.000Z" itemprop="datePublished">2020-03-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/20/vue学习六/">vue学习六</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Vue-js-day6"><a href="#Vue-js-day6" class="headerlink" title="Vue.js - day6"></a>Vue.js - day6</h1><h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>有时候使用<code>npm i node-sass -D</code>装不上，这时候，就必须使用 <code>cnpm i node-sass -D</code></p>
+<h2 id="在普通页面中使用render函数渲染组件"><a href="#在普通页面中使用render函数渲染组件" class="headerlink" title="在普通页面中使用render函数渲染组件"></a>在普通页面中使用render函数渲染组件</h2><h2 id="在webpack中配置-vue组件页面的解析"><a href="#在webpack中配置-vue组件页面的解析" class="headerlink" title="在webpack中配置.vue组件页面的解析"></a>在webpack中配置.vue组件页面的解析</h2><ol>
+<li><p>运行<code>cnpm i vue -S</code>将vue安装为运行依赖；</p>
+</li>
+<li><p>运行<code>cnpm i vue-loader vue-template-compiler -D</code>将解析转换vue的包安装为开发依赖；</p>
+</li>
+<li><p>运行<code>cnpm i style-loader css-loader -D</code>将解析转换CSS的包安装为开发依赖，因为.vue文件中会写CSS样式；</p>
+</li>
+<li><p>在<code>webpack.config.js</code>中，添加如下<code>module</code>规则：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line"></span><br><span class="line">    rules: [</span><br><span class="line"></span><br><span class="line">      &#123; test: /\.css$/, use: [&apos;style-loader&apos;, &apos;css-loader&apos;] &#125;,</span><br><span class="line"></span><br><span class="line">      &#123; test: /\.vue$/, use: &apos;vue-loader&apos; &#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>创建<code>App.js</code>组件页面：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 注意：在 .vue 的组件中，template 中必须有且只有唯一的根元素进行包裹，一般都用 div 当作唯一的根元素 --&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;h1&gt;这是APP组件 - &#123;&#123;msg&#125;&#125;&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">    &lt;h3&gt;我是h3&lt;/h3&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">// 注意：在 .vue 的组件中，通过 script 标签来定义组件的行为，需要使用 ES6 中提供的 export default 方式，导出一个vue实例对象</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line"></span><br><span class="line">  data() &#123;</span><br><span class="line"></span><br><span class="line">    return &#123;</span><br><span class="line"></span><br><span class="line">      msg: &apos;OK&apos;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">h1 &#123;</span><br><span class="line"></span><br><span class="line">  color: red;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>创建<code>main.js</code>入口文件：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 导入 Vue 组件</span><br><span class="line"></span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 导入 App组件</span><br><span class="line"></span><br><span class="line">import App from &apos;./components/App.vue&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 创建一个 Vue 实例，使用 render 函数，渲染指定的组件</span><br><span class="line"></span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line"></span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line"></span><br><span class="line">  render: c =&gt; c(App)</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="在使用webpack构建的Vue项目中使用模板对象？"><a href="#在使用webpack构建的Vue项目中使用模板对象？" class="headerlink" title="在使用webpack构建的Vue项目中使用模板对象？"></a>在使用webpack构建的Vue项目中使用模板对象？</h2><ol>
+<li>在<code>webpack.config.js</code>中添加<code>resolve</code>属性：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      &apos;vue$&apos;: &apos;vue/dist/vue.esm.js&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ES6中语法使用总结"><a href="#ES6中语法使用总结" class="headerlink" title="ES6中语法使用总结"></a>ES6中语法使用总结</h2><ol>
+<li><p>使用 <code>export default</code> 和 <code>export</code> 导出模块中的成员; 对应ES5中的 <code>module.exports</code> 和 <code>export</code></p>
+</li>
+<li><p>使用 <code>import ** from **</code> 和 <code>import &#39;路径&#39;</code> 还有 <code>import {a, b} from &#39;模块标识&#39;</code> 导入其他模块</p>
+</li>
+<li><p>使用箭头函数：<code>(a, b)=&gt; { return a-b; }</code></p>
+</li>
+</ol>
+<h2 id="在vue组件页面中，集成vue-router路由模块"><a href="#在vue组件页面中，集成vue-router路由模块" class="headerlink" title="在vue组件页面中，集成vue-router路由模块"></a>在vue组件页面中，集成vue-router路由模块</h2><p><a href="https://router.vuejs.org/" target="_blank" rel="noopener">vue-router官网</a></p>
+<ol>
+<li>导入路由模块：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import VueRouter from &apos;vue-router&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装路由模块：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(VueRouter);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>导入需要展示的组件:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import login from &apos;./components/account/login.vue&apos;</span><br><span class="line"></span><br><span class="line">import register from &apos;./components/account/register.vue&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建路由对象:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var router = new VueRouter(&#123;</span><br><span class="line"></span><br><span class="line">  routes: [</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/&apos;, redirect: &apos;/login&apos; &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/login&apos;, component: login &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/register&apos;, component: register &#125;</span><br><span class="line"></span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>将路由对象，挂载到 Vue 实例上:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line"></span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line"></span><br><span class="line">  // render: c =&gt; &#123; return c(App) &#125;</span><br><span class="line"></span><br><span class="line">  render(c) &#123;</span><br><span class="line"></span><br><span class="line">    return c(App);</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  router // 将路由对象，挂载到 Vue 实例上</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>改造App.vue组件，在 template 中，添加<code>router-link</code>和<code>router-view</code>：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/login&quot;&gt;登录&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">&lt;router-link to=&quot;/register&quot;&gt;注册&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件中的css作用域问题"><a href="#组件中的css作用域问题" class="headerlink" title="组件中的css作用域问题"></a>组件中的css作用域问题</h2><h2 id="抽离路由为单独的模块"><a href="#抽离路由为单独的模块" class="headerlink" title="抽离路由为单独的模块"></a>抽离路由为单独的模块</h2><h2 id="使用-饿了么的-MintUI-组件"><a href="#使用-饿了么的-MintUI-组件" class="headerlink" title="使用 饿了么的 MintUI 组件"></a>使用 饿了么的 MintUI 组件</h2><p><a href="https://github.com/ElemeFE/mint-ui" target="_blank" rel="noopener">Github 仓储地址</a></p>
+<p><a href="http://mint-ui.github.io/#!/zh-cn" target="_blank" rel="noopener">Mint-UI官方文档</a></p>
+<ol>
+<li>导入所有MintUI组件：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import MintUI from &apos;mint-ui&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>导入样式表：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &apos;mint-ui/lib/style.css&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 vue 中使用 MintUI中的Button按钮和Toast弹框提示：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(MintUI)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>使用的例子：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mt-button type=&quot;primary&quot; size=&quot;large&quot;&gt;primary&lt;/mt-button&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mint-UI中按需导入的配置方式"><a href="#Mint-UI中按需导入的配置方式" class="headerlink" title="Mint-UI中按需导入的配置方式"></a>Mint-UI中按需导入的配置方式</h2><h2 id="使用-MUI-代码片段"><a href="#使用-MUI-代码片段" class="headerlink" title="使用 MUI 代码片段"></a>使用 MUI 代码片段</h2><blockquote>
+<p>注意： MUI 不同于 Mint-UI，MUI只是开发出来的一套好用的代码片段，里面提供了配套的样式、配套的HTML代码段，类似于 Bootstrap； 而 Mint-UI，是真正的组件库，是使用 Vue 技术封装出来的 成套的组件，可以无缝的和 VUE项目进行集成开发；<br>因此，从体验上来说， Mint-UI体验更好，因为这是别人帮我们开发好的现成的Vue组件；<br>从体验上来说， MUI和Bootstrap类似；<br>理论上，任何项目都可以使用 MUI 或 Bootstrap，但是，MInt-UI只适用于Vue项目；</p>
+</blockquote>
+<p>注意： MUI 并不能使用  npm 去下载，需要自己手动从 github 上，下载现成的包，自己解压出来，然后手动拷贝到项目中使用；</p>
+<p><a href="http://dev.dcloud.net.cn/mui/" target="_blank" rel="noopener">官网首页</a></p>
+<p><a href="http://dev.dcloud.net.cn/mui/ui/" target="_blank" rel="noopener">文档地址</a></p>
+<ol>
+<li>导入 MUI 的样式表：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &apos;../lib/mui/css/mui.min.css&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在<code>webpack.config.js</code>中添加新的loader规则：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; test: /\.(png|jpg|gif|ttf)$/, use: &apos;url-loader&apos; &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>根据官方提供的文档和example，尝试使用相关的组件</li>
+</ol>
+<h2 id="将项目源码托管到oschina中"><a href="#将项目源码托管到oschina中" class="headerlink" title="将项目源码托管到oschina中"></a>将项目源码托管到oschina中</h2><ol>
+<li><p>点击头像 -&gt; 修改资料 -&gt; SSH公钥 <a href="http://git.mydoc.io/?t=154712" target="_blank" rel="noopener">如何生成SSH公钥</a></p>
+</li>
+<li><p>创建自己的空仓储，使用 <code>git config --global user.name &quot;用户名&quot;</code> 和 <code>git config --global user.email ***@**.com</code> 来全局配置提交时用户的名称和邮箱</p>
+</li>
+<li><p>使用 <code>git init</code> 在本地初始化项目</p>
+</li>
+<li><p>使用 <code>touch README.md</code> 和 <code>touch .gitignore</code> 来创建项目的说明文件和忽略文件；</p>
+</li>
+<li><p>使用 <code>git add .</code> 将所有文件托管到 git 中</p>
+</li>
+<li><p>使用 <code>git commit -m &quot;init project&quot;</code> 将项目进行本地提交</p>
+</li>
+<li><p>使用 <code>git remote add origin 仓储地址</code>将本地项目和远程仓储连接，并使用origin最为远程仓储的别名</p>
+</li>
+<li><p>使用 <code>git push -u origin master</code> 将本地代码push到仓储中</p>
+</li>
+</ol>
+<h2 id="App-vue-组件的基本设置"><a href="#App-vue-组件的基本设置" class="headerlink" title="App.vue 组件的基本设置"></a>App.vue 组件的基本设置</h2><ol>
+<li><p>头部的固定导航栏使用 <code>Mint-UI</code> 的 <code>Header</code> 组件；</p>
+</li>
+<li><p>底部的页签使用 <code>mui</code> 的 <code>tabbar</code>;</p>
+</li>
+<li><p>购物车的图标，使用 <code>icons-extra</code> 中的 <code>mui-icon-extra mui-icon-extra-cart</code>，同时，应该把其依赖的字体图标文件 <code>mui-icons-extra.ttf</code>，复制到 <code>fonts</code> 目录下！</p>
+</li>
+<li><p>将底部的页签，改造成 <code>router-link</code> 来实现单页面的切换；</p>
+</li>
+<li><p>Tab Bar 路由激活时候设置高亮的两种方式：</p>
+<ul>
+<li>全局设置样式如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.router-link-active&#123;</span><br><span class="line"></span><br><span class="line">    	color:#007aff !important;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>或者在 <code>new VueRouter</code> 的时候，通过 <code>linkActiveClass</code> 来指定高亮的类：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 创建路由对象</span><br><span class="line"></span><br><span class="line">  var router = new VueRouter(&#123;</span><br><span class="line"></span><br><span class="line">    routes: [</span><br><span class="line"></span><br><span class="line">      &#123; path: &apos;/&apos;, redirect: &apos;/home&apos; &#125;</span><br><span class="line"></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    linkActiveClass: &apos;mui-active&apos;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="实现-tabbar-页签不同组件页面的切换"><a href="#实现-tabbar-页签不同组件页面的切换" class="headerlink" title="实现 tabbar 页签不同组件页面的切换"></a>实现 tabbar 页签不同组件页面的切换</h2><ol>
+<li><p>将 tabbar 改造成 <code>router-link</code> 形式，并指定每个连接的 <code>to</code> 属性；</p>
+</li>
+<li><p>在入口文件中导入需要展示的组件，并创建路由对象：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 导入需要展示的组件</span><br><span class="line"></span><br><span class="line">import Home from &apos;./components/home/home.vue&apos;</span><br><span class="line"></span><br><span class="line">import Member from &apos;./components/member/member.vue&apos;</span><br><span class="line"></span><br><span class="line">import Shopcar from &apos;./components/shopcar/shopcar.vue&apos;</span><br><span class="line"></span><br><span class="line">import Search from &apos;./components/search/search.vue&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 创建路由对象</span><br><span class="line"></span><br><span class="line">var router = new VueRouter(&#123;</span><br><span class="line"></span><br><span class="line">  routes: [</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/&apos;, redirect: &apos;/home&apos; &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/home&apos;, component: Home &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/member&apos;, component: Member &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/shopcar&apos;, component: Shopcar &#125;,</span><br><span class="line"></span><br><span class="line">    &#123; path: &apos;/search&apos;, component: Search &#125;</span><br><span class="line"></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  linkActiveClass: &apos;mui-active&apos;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-mt-swipe-轮播图组件"><a href="#使用-mt-swipe-轮播图组件" class="headerlink" title="使用 mt-swipe 轮播图组件"></a>使用 mt-swipe 轮播图组件</h2><ol>
+<li>假数据：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lunbo: [</span><br><span class="line"></span><br><span class="line">        &apos;http://www.itcast.cn/images/slidead/BEIJING/2017440109442800.jpg&apos;,</span><br><span class="line"></span><br><span class="line">        &apos;http://www.itcast.cn/images/slidead/BEIJING/2017511009514700.jpg&apos;,</span><br><span class="line"></span><br><span class="line">        &apos;http://www.itcast.cn/images/slidead/BEIJING/2017421414422600.jpg&apos;</span><br><span class="line"></span><br><span class="line">      ]</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入轮播图组件：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Mint-UI 轮播图组件 --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class=&quot;home-swipe&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;mt-swipe :auto=&quot;4000&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;mt-swipe-item v-for=&quot;(item, i) in lunbo&quot; :key=&quot;i&quot;&gt;</span><br><span class="line"></span><br><span class="line">          &lt;img :src=&quot;item&quot; alt=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/mt-swipe-item&gt;</span><br><span class="line"></span><br><span class="line">      &lt;/mt-swipe&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在-vue组件中使用vue-resource获取数据"><a href="#在-vue组件中使用vue-resource获取数据" class="headerlink" title="在.vue组件中使用vue-resource获取数据"></a>在<code>.vue</code>组件中使用<code>vue-resource</code>获取数据</h2><ol>
+<li><p>运行<code>cnpm i vue-resource -S</code>安装模块</p>
+</li>
+<li><p>导入 vue-resource 组件</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import VueResource from &apos;vue-resource&apos;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在vue中使用 vue-resource 组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(VueResource);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-vue学习五" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1925,70 +2157,6 @@
 <li>for … of …是遍历数组中的子项，for … in … 遍历下标。</li>
 <li>创建一个数组来存放小球，用以标记已生成的小球。</li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-用JavaScript封装栈" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/27/用JavaScript封装栈/" class="article-date">
-      <time datetime="2020-02-27T03:23:47.000Z" itemprop="datePublished">2020-02-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="用JavaScript封装栈"><a href="#用JavaScript封装栈" class="headerlink" title="用JavaScript封装栈"></a>用JavaScript封装栈</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 封装栈</span><br><span class="line">   function Stack()&#123;</span><br><span class="line">       // 栈中的属性</span><br><span class="line">       this.items = [];</span><br><span class="line">       // 栈中的相关操作</span><br><span class="line">       // 1.将元素压入栈中</span><br><span class="line">       Stack.prototype.push = function(element)&#123;</span><br><span class="line">		this.items.push(element);</span><br><span class="line">       &#125;;</span><br><span class="line">       // 2.将元素弹出栈中</span><br><span class="line">       Stack.prototype.pop = function()&#123;</span><br><span class="line">		return	this.items.pop();</span><br><span class="line">       &#125;;</span><br><span class="line">       // 3.查看一下栈顶元素</span><br><span class="line">       Stack.prototype.check = function()&#123;</span><br><span class="line">		return this.items[this.items.length - 1];</span><br><span class="line">       &#125;;</span><br><span class="line">       // 4.判断栈中是否有元素</span><br><span class="line">       Stack.prototype.isEmpty = function()&#123;</span><br><span class="line">		return this.items.length == 0;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 5.获取栈中的元素的个数</span><br><span class="line">       Stack.prototype.size = function()&#123;</span><br><span class="line">		return this.items.length;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 6.toString方法</span><br><span class="line">       Stack.prototype.toString = function()&#123;</span><br><span class="line">           // 方法一：</span><br><span class="line">           // var resultString = &apos;&apos;;</span><br><span class="line">           // for(var i = 0; i &lt; this.items.length; i ++)&#123;</span><br><span class="line">           // 	resultString += this.items[i] + &apos; &apos;;</span><br><span class="line">           // &#125;</span><br><span class="line">           // return resultString;</span><br><span class="line">           // 方法二：</span><br><span class="line">           return this.items.join(&apos; &apos;);</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>之所以不使用<code>this.push=function(){}</code>，而是采用原型的方法，是因为通过prototype原型的方法相当于给整个类添加了方法，而this.push方式则仅是给某个实例添加方法。</p>
-<h4 id="用栈将十进制转为二进制"><a href="#用栈将十进制转为二进制" class="headerlink" title="用栈将十进制转为二进制"></a>用栈将十进制转为二进制</h4><ul>
-<li>因为我们习惯使用十进制，而计算机里面的所有内容都是用二进制数字表示的（0和1）</li>
-<li>可采用对十进制的数字进行除二取余法，将十进制转为二进制。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//函数：将十进制转为二进制</span><br><span class="line">function dec2bin(decNumber)&#123;</span><br><span class="line">    // 1.定义栈对象</span><br><span class="line">    var stack = new Stack();</span><br><span class="line">    while(decNumber &gt; 0)&#123;</span><br><span class="line">        stack.push(decNumber % 2);</span><br><span class="line">        decNumber = Math.floor(decNumber / 2);</span><br><span class="line">        console.log(decNumber)</span><br><span class="line">    &#125;</span><br><span class="line">    var binaryString = &apos;&apos;;</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        binaryString += stack.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    return binaryString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
