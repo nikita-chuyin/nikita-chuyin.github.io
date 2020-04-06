@@ -449,6 +449,7 @@
 <li><strong>SSL加速（SSL Acceleration）：使用SSL协议对HTTP协议进行加密，在通道内加密并加速</strong></li>
 <li><strong>TCP缓冲：通过采用TCP缓冲技术，可以提高服务器端响应时间和处理效率，减少由于通信链路问题给服务器造成的连接负担。</strong></li>
 </ul>
+<h4 id="Cache-control缓存控制"><a href="#Cache-control缓存控制" class="headerlink" title="Cache-control缓存控制"></a>Cache-control缓存控制</h4><p>网页的缓存是由HTTP消息头中的“Cache-control”来控制的，常见的取值有private、no-cache、max-age、must-revalidate等，默认为private。<br>其作用根据不同的重新浏览方式分为以下几种情况：<br>（1）  打开新窗口如果指定cache-control的值为private、no-cache、must-revalidate，那么打开新窗口访问时都会重新访问服务器。而如果指定了max-age值，那么在此值内的时间里就不会重新访问服务器，例如： Cache-control: max-age=5 表示当访问此网页后的5秒内再次访问不会去服务器。<br>（2） 在地址栏回车如果值为private或must-revalidate（和网上说的不一样），则只有第一次访问时会访问服务器，以后就不再访问。如果值为no-cache，那么每次都会访问。如果值为max-age，则在过期之前不会重复访问。<br>（3） 按后退按扭如果值为private、must-revalidate、max-age，则不会重访问，而如果为no-cache，则每次都重复访问。<br>（4） 按刷新按扭无论为何值，都会重复访问  当指定Cache-control值为“no-cache”时，访问此页面不会在Internet临时文章夹留下页面备份。另外，通过指定“Expires”值也会影响到缓存。例如，指定Expires值为一个早已过去的时间，那么访问此网时若重复在地址栏按回车，那么每次都会重复访问： Expires: Fri, 31 Dec 1999 16:00:00 GMT  在ASP中，可以通过Response对象的Expires、ExpiresAbsolute属性控制Expires值；通过Response对象的CacheControl属性控制Cache-control的值，例如： Response.ExpiresAbsolute = #2000-1-1# ‘  指定绝对的过期时间，这个时间用的是服务器当地时间，会被自动转换为GMT时间 Response.Expires = 20 ‘  指定相对的过期时间，以分钟为单位，表示从当前时间起过多少分钟过期。 Response.CacheControl = “no-cache”  Expires值是可以通过在Internet临时文件夹中查看临时文件的属性看到的。                                    </p>
 
       
     </div>
