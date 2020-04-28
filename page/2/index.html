@@ -1041,7 +1041,9 @@
 <li><p>不要用import Vue from ‘vue/dist/vue.js’-用一些工具或第三方工具库引入Vue，这可能导致应用程序在同一加载运行时和独立构建并造成错误。</p>
 </li>
 </ul>
-<h6 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h6><ul>
+<h6 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h6><p>核心方法是通过Object.definedProperty()来实现对属性进行劫持，达到监听数据变动的目的。</p>
+<p>beforeDestroy（销毁前） 在实例销毁之前调用。实例仍然完全可用。<br>  destroyed（销毁后） 在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p>
+<h4 id="数据绑定原理"><a href="#数据绑定原理" class="headerlink" title="数据绑定原理"></a>数据绑定原理</h4><h6 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h6><ul>
 <li>实现mvvm双向绑定需实现以下几点：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.实现一个数据监听器Observer，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者。</span><br><span class="line">2.实现一个指令解析器Compile，对每个元素节点进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</span><br><span class="line">3.实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的响应回调函数，从而更新视图。</span><br><span class="line">4.mvvm入口函数，整合以上三者。</span><br></pre></td></tr></table></figure>
