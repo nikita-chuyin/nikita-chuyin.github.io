@@ -476,71 +476,6 @@
 
 
   
-    <article id="post-课程表制作" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/29/课程表制作/" class="article-date">
-      <time datetime="2020-03-29T00:09:28.000Z" itemprop="datePublished">2020-03-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/29/课程表制作/">课程表制作</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h5 id="课程表制作"><a href="#课程表制作" class="headerlink" title="课程表制作"></a>课程表制作</h5><p>使用微信小程序制作的课程表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//index.wxml文件</span><br><span class="line"></span><br><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;view class=&quot;top&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[&apos;一&apos;,&apos;二&apos;,&apos;三&apos;,&apos;四&apos;,&apos;五&apos;,&apos;六&apos;,&apos;日&apos;]&#125;&#125;&quot; class=&quot;top-text&quot;&gt;</span><br><span class="line">      周&#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br><span class="line">&lt;view style=&quot;display:flex;flex-direction:row;background:#D2E6B3&quot;&gt;</span><br><span class="line">  &lt;view style=&quot;color:#7cba23;&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot; class=&quot;left&quot;&gt;</span><br><span class="line">      &#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">  &lt;!-- &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view style=&quot;width:750rpx;margin-top:&#123;&#123;(index+1)*100&#125;&#125;rpx;  position: absolute;border-bottom:1rpx solid &#123;&#123;index==3?&apos;red&apos;:&apos;lightgray&apos;&#125;&#125;;&quot;&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt; --&gt;</span><br><span class="line">  &lt;view wx:for=&quot;&#123;&#123;wlist&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view class=&quot;flex-item kcb-item&quot; bindtap=&quot;showCardView&quot; data-statu=&quot;open&quot; data-index=&quot;&#123;&#123;index&#125;&#125;&quot; style=&quot;margin-left:&#123;&#123;(item.xqj-1)*100&#125;&#125;rpx;margin-top:&#123;&#123;(item.skjc-1)*100+10&#125;&#125;rpx;height:&#123;&#123;item.skcd*100-5&#125;&#125;rpx;background-color:&#123;&#123;colorArrays[index%9]&#125;&#125;&quot;&gt;</span><br><span class="line">      &lt;view class=&quot;smalltext&quot;&gt;&#123;&#123;item.kcmc&#125;&#125;&lt;/view&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<p>index.wxss</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">.top &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: row;</span><br><span class="line">  margin-left: 35rpx;</span><br><span class="line">  background-color: #d2e6b3;</span><br><span class="line">  color: #7cba23;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.top-text &#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 35rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  width: 35rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.flex-item &#123;</span><br><span class="line">  width: 95rpx;</span><br><span class="line">  height: 100px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.kcb-item &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.smalltext &#123;</span><br><span class="line">  font-size: 8pt;</span><br><span class="line">  color: #fff;</span><br><span class="line">  padding-left: 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.scroll &#123;</span><br><span class="line">  height: 1170rpx;</span><br><span class="line">  z-index: 101;</span><br><span class="line">  position: fixed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>index.js文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">//获取应用实例</span><br><span class="line">const app = getApp()</span><br><span class="line"></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    colorArrays: [&quot;#85B8CF&quot;, &quot;#C0C652&quot;, &quot;#D8AA5A&quot;, &quot;#FC9F9D&quot;, &quot;#0A9A84&quot;, &quot;#61BC69&quot;, &quot;#12AEF3&quot;, &quot;#E29AAD&quot;], </span><br><span class="line">    wlist: [</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 1, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 4, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 8, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 5, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 2, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 5, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 6, &quot;skjc&quot;: 3, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 7, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">    ],</span><br><span class="line">    motto: &apos;Hello World&apos;,</span><br><span class="line">    userInfo: &#123;&#125;,</span><br><span class="line">    hasUserInfo: false,</span><br><span class="line">    canIUse: wx.canIUse(&apos;button.open-type.getUserInfo&apos;)</span><br><span class="line">  &#125;,</span><br><span class="line">  //事件处理函数</span><br><span class="line">  bindViewTap: function() &#123;</span><br><span class="line">    wx.navigateTo(&#123;</span><br><span class="line">      url: &apos;../logs/logs&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad: function () &#123;</span><br><span class="line">    if (app.globalData.userInfo) &#123;</span><br><span class="line">      this.setData(&#123;</span><br><span class="line">        userInfo: app.globalData.userInfo,</span><br><span class="line">        hasUserInfo: true</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else if (this.data.canIUse)&#123;</span><br><span class="line">      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回</span><br><span class="line">      // 所以此处加入 callback 以防止这种情况</span><br><span class="line">      app.userInfoReadyCallback = res =&gt; &#123;</span><br><span class="line">        this.setData(&#123;</span><br><span class="line">          userInfo: res.userInfo,</span><br><span class="line">          hasUserInfo: true</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // 在没有 open-type=getUserInfo 版本的兼容处理</span><br><span class="line">      wx.getUserInfo(&#123;</span><br><span class="line">        success: res =&gt; &#123;</span><br><span class="line">          app.globalData.userInfo = res.userInfo</span><br><span class="line">          this.setData(&#123;</span><br><span class="line">            userInfo: res.userInfo,</span><br><span class="line">            hasUserInfo: true</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getUserInfo: function(e) &#123;</span><br><span class="line">    console.log(e)</span><br><span class="line">    app.globalData.userInfo = e.detail.userInfo</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      userInfo: e.detail.userInfo,</span><br><span class="line">      hasUserInfo: true</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C3.png" alt="3"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-CSS3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -4156,11 +4091,11 @@ alert("Hello World!")
 
 
   
-    <article id="post-深入理解css" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-js中callee和caller" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/26/深入理解css/" class="article-date">
-      <time datetime="2020-03-26T03:23:41.000Z" itemprop="datePublished">2020-03-26</time>
+      <a href="/2020/03/10/js中callee和caller/" class="article-date">
+      <time datetime="2020-03-10T01:47:31.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
 
 
@@ -4175,7 +4110,7 @@ alert("Hello World!")
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/26/深入理解css/">深入理解css</a>
+      <a class="article-title" href="/2020/03/10/js中callee和caller/">js中callee和caller</a>
     </h1>
   
 
@@ -4185,25 +4120,260 @@ alert("Hello World!")
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="低调的width-auto"><a href="#低调的width-auto" class="headerlink" title="低调的width:auto"></a>低调的<code>width:auto</code></h4><p>width 的默认值是auto；但auto至少包含4种不同的宽度表现：</p>
-<ol>
-<li>充分可利用空间。如div，p这些块级元素的默认宽度默认是100%于父级容器的，即 fill-available 。</li>
-<li>收缩与包裹。典型代表是浮动，绝对定位，inline-block元素或table元素，即shrink-to-fit ，类似于CSS3中的 fit-content 指的是这种宽度表现。</li>
-<li>收缩到最小。这个最容易出现在table-layout为auto的表格中，当一列空间不够时，文字说断就断。</li>
-<li>超出容器限制。除非有明确的width相关设置，否则这上面3种情况都不会主动超过父级容器宽度，但存在一些特殊情况。如：内容很长的连续的英文与数字，或者内联元素被设置了<code>white-space:nowrap</code>,则会将所有元素堆在一行。</li>
+        <h6 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h6><ol>
+<li><p>函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">	console.log(argument.callee.caller);</span><br><span class="line">	//argument.callee.caller必须写在fun中，</span><br><span class="line">	//因为argument，caller只在执行时才有效。</span><br><span class="line">&#125;</span><br><span class="line">fun(); </span><br><span class="line">//结果为null</span><br><span class="line"></span><br><span class="line">function a()&#123;</span><br><span class="line">    fun();</span><br><span class="line">    function fun()&#123;</span><br><span class="line">        console.log(fun.caller)//这里必须写在fun里面，因为caller只有函数执行过程中才有效</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+
+<p>结果为: a函数<br><img src="https://img-blog.csdn.net/20160918153045501" alt="这里写图片描述"></p>
+<h6 id="js中callee关键字的作用"><a href="#js中callee关键字的作用" class="headerlink" title="js中callee关键字的作用"></a>js中callee关键字的作用</h6><ol>
+<li><p>callee关键字的定义：在函数内部使用，代表当前函数的引用（名字）。</p>
+</li>
+<li><p>作用：降低代码的耦合度。</p>
+</li>
+<li><p>耦合度的定义：一处代码的修改会导致其他代码也要发生改变(耦合度高)在项目里边要开发低耦合度的代码(一处代码修改尽量少地引起其他代码的变化)。</p>
+</li>
+<li><p>语法结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;arguments.callee();&#125;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
-<h6 id="格式化宽度。"><a href="#格式化宽度。" class="headerlink" title="格式化宽度。"></a>格式化宽度。</h6><ul>
-<li>格式化宽度仅出现在”绝对定位宽度“中，也就是出现在position属性值为absolute或fixed的元素中。在默认情况下，绝对元素的宽度表现是”包裹性“，宽度由内部尺寸决定。</li>
-<li>但是对于非替换元素，即left/top或top/bottom对立方位的属性值同时存在时，元素的宽度表现为”格式化宽度“，其宽度的大小相对于最近的具有定位特性（position属性值不是static）的祖先元素计算。</li>
-</ul>
-<p>内部尺寸：简单讲就是元素的尺寸由内部的元素决定，而非外部的容器决定。如何快速判断一个元素使用的是否为”内部尺寸“呢？很简单，假如这个元素里面没有内容，宽度就是0，那就是应用的”内部尺寸“。</p>
+<p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function jiecheng(n)&#123;</span><br><span class="line">            if(n==1)&#123;</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">            //return n * jiecheng(n-1);</span><br><span class="line">            //callee可以保证外部名称的变化，不会引起内部代码的修改，代码耦合度降低</span><br><span class="line">            return n * arguments.callee(n-1);</span><br><span class="line">        &#125;</span><br><span class="line">        //要把jiecheng名称换成其他的名字进行使用</span><br><span class="line"></span><br><span class="line">        var jc = jiecheng; //对象赋值，其为引用传递</span><br><span class="line"></span><br><span class="line">        jiecheng = null;  //销毁jiecheng函数对象，后期不使用了</span><br><span class="line">        console.log(jc(4)); //输出24</span><br><span class="line">        var jd = jc;</span><br><span class="line">        jc = null;</span><br><span class="line">        console.log(jd(6)); //输出720</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>callee返回正在执行的函数本身的引用。callee是arguments的一个属性，这个属性是一个指针，指向这个拥有arguments对象的函数，（arguments是调用函数，那么这个callee就是调用函数的啦）</p>
+<h6 id="完整项目实例："><a href="#完整项目实例：" class="headerlink" title="完整项目实例："></a>完整项目实例：</h6><p><a href="https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/" target="_blank" rel="noopener">https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-canvas绘制碰撞球动画" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/09/canvas绘制碰撞球动画/" class="article-date">
+      <time datetime="2020-03-09T14:32:25.000Z" itemprop="datePublished">2020-03-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h6 id="碰撞球动画"><a href="#碰撞球动画" class="headerlink" title="碰撞球动画"></a>碰撞球动画</h6><ol>
+<li><p>画一个简单的球</p>
+<ol>
+<li><p>通过选择器获取画布。</p>
+<p><code>var canvas = document.getElementById(&#39;canvas&#39;);</code>或<code>var canvas = document.querySelector(&#39;#canvas&#39;)</code></p>
+</li>
+<li><p>获取屏幕宽高，设置画布宽高为屏幕宽高，背景色。当浏览器宽高变化时重新给canvas元素设置宽高。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">出现问题：1. 页面出现滚动条。</span><br><span class="line">2. 宽高只是页面初始宽高，改变窗口大小时，画布不能随页面宽高切换。</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<ol>
+<li><p>出现滚动条是因为canvas是行内元素（display:inline-block；），行内元素有行内行间距，故当你设置画布宽高为屏幕宽高，滚出滚动条那部分即为行间距。既然是行内元素引起的，那我就将元素设置为块级元素。同时去除默认边距。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line">        #canvas&#123;</span><br><span class="line">            background-color: red;</span><br><span class="line">            display: block;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给函数添加reSize方法，当改变窗口大小时，给画布重新设置大小。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var w, h;</span><br><span class="line">var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">~~function setSize() &#123;</span><br><span class="line">       window.onresize = arguments.callee;</span><br><span class="line">        w = window.innerWidth;</span><br><span class="line">        h = window.innerHeight;</span><br><span class="line">        canvas.width = w;</span><br><span class="line">        canvas.height = h;</span><br><span class="line"> &#125;();</span><br><span class="line"> //立即执行函数写法之一，</span><br><span class="line"> //还有(function()&#123;&#125;());</span><br><span class="line"> //或(function()&#123;&#125;)();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>获取画布可画区域（getContext）</p>
+<ol>
+<li><p>设置是2d效果还是3d效果。</p>
+<p><code>var canCon = canvas.getContext(&#39;2d&#39;);</code></p>
+</li>
+</ol>
+</li>
+<li><p>设置用什么笔和笔的颜色。</p>
+<p><code>canCon.fillStyle = &#39;red&#39;;</code></p>
+</li>
+<li><p>构思图形。</p>
+<ol>
+<li><p>提笔。（beginPath）</p>
+</li>
+<li><p>画什么形状，图形的位置，大小。</p>
+<p><code>canCon.arc(300,100,50,0,2*Math.PI)</code></p>
+</li>
+</ol>
+</li>
+<li><p>开始画。</p>
+<ol>
+<li><p>确定空心还是实心（stroke或fill）。</p>
+</li>
+<li><p>还是绘制文字。（fillText，strokeText）</p>
+<p><code>canCon.fill()</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var w, h;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    ~~function setSize() &#123;</span><br><span class="line">        window.onresize = arguments.callee;</span><br><span class="line">        w = window.innerWidth;</span><br><span class="line">        h = window.innerHeight;</span><br><span class="line">        canvas.width = w;</span><br><span class="line">        canvas.height = h;</span><br><span class="line">    &#125;();</span><br><span class="line">    var canCon = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    var x = randomNum(0,w);</span><br><span class="line">    var y = 100;</span><br><span class="line">    setInterval(function()&#123;</span><br><span class="line">        canCon.fillStyle = randomColor();</span><br><span class="line">        canCon.arc(x,y++,20,0,2*Math.PI)</span><br><span class="line">        canCon.fill();</span><br><span class="line">    &#125;,1000/60);</span><br><span class="line"></span><br><span class="line">    // 随机数</span><br><span class="line">    function randomNum(min,max)&#123;</span><br><span class="line">        return Math.floor(Math.random() * (max - min) + min);</span><br><span class="line">    &#125;</span><br><span class="line">    // 随机颜色</span><br><span class="line">    function randomColor()&#123;</span><br><span class="line">        var r,g,b,a;</span><br><span class="line">        r = randomNum(0,255);</span><br><span class="line">        g = randomNum(0,255);</span><br><span class="line">        b = randomNum(0,255);</span><br><span class="line">        a = Math.random();</span><br><span class="line">        return `rgba($&#123;r&#125;,$&#123;g&#125;,$&#123;b&#125;,$&#123;a&#125;)`;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>至此一个闪动的滚动条出现。</p>
+<p>要出现很多球群魔乱舞现象，需要构造一个球的生成函数，里面包括初始化值，画球，还有球的移动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        *&#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line">        canvas&#123;</span><br><span class="line">            background-color: black;</span><br><span class="line">            display: block;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var w,h;</span><br><span class="line">    var aBubble = [];</span><br><span class="line">    ~~function()&#123;</span><br><span class="line">        window.onresize = arguments.callee;</span><br><span class="line">        w = window.innerWidth;</span><br><span class="line">        h = window.innerHeight;</span><br><span class="line">        canvas.width = w;</span><br><span class="line">        canvas.height = h;</span><br><span class="line">    &#125;();</span><br><span class="line">    var canCon = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    function Bubble()&#123;&#125;;</span><br><span class="line">    Bubble.prototype = &#123;</span><br><span class="line">        init:function()&#123;</span><br><span class="line">            this.r = random(4,6);</span><br><span class="line">            this.x = random(this.r,w);</span><br><span class="line">            this.y = random(this.r,h);</span><br><span class="line">            this.color = randomColor();</span><br><span class="line">            this.vx = random(-2,2);</span><br><span class="line">            this.vy = random(-1,1);</span><br><span class="line">        &#125;,</span><br><span class="line">        draw:function()&#123;</span><br><span class="line">            canCon.beginPath();</span><br><span class="line">            canCon.fillStyle = this.color;</span><br><span class="line">            canCon.arc(this.x,this.y,this.r,0,Math.PI * 2);</span><br><span class="line">            canCon.fill();</span><br><span class="line">        &#125;,</span><br><span class="line">        move:function()&#123;</span><br><span class="line">            this.x += this.vx;</span><br><span class="line">            this.y += this.vy;</span><br><span class="line">            if(this.x &lt; this.r || this.x + this.r &gt; w)&#123;</span><br><span class="line">                this.vx = -this.vx;</span><br><span class="line">            &#125;</span><br><span class="line">            if(this.y &lt; this.r || this.y + this.r &gt; h)&#123;</span><br><span class="line">                this.vy = -this.vy;</span><br><span class="line">            &#125;</span><br><span class="line">            this.draw();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    function create(num)&#123;</span><br><span class="line">        for(var i = 0; i &lt; num; i++)&#123;</span><br><span class="line">            var bubble = new Bubble();</span><br><span class="line">                bubble.init();</span><br><span class="line">                bubble.draw();</span><br><span class="line">                aBubble.push(bubble);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    create(999);</span><br><span class="line">    setInterval(function()&#123;</span><br><span class="line">        canCon.clearRect(0,0,w,h);  //必须有这一句，不然贱泪横生</span><br><span class="line">        for(var item of aBubble)&#123;</span><br><span class="line">            item.move();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,1000/60);</span><br><span class="line"></span><br><span class="line">    // 随机数</span><br><span class="line">    function random(min, max)&#123;</span><br><span class="line">        return Math.floor(Math.random() * (max - min) + min);</span><br><span class="line">    &#125;</span><br><span class="line">    // 随机颜色生成器</span><br><span class="line">    function randomColor()&#123;</span><br><span class="line">        var r,g,b,a;</span><br><span class="line">        r = random(0,255);</span><br><span class="line">        g = random(0,255);</span><br><span class="line">        b = random(0,255);</span><br><span class="line">        a = Math.random();</span><br><span class="line">        return `rgba($&#123;r&#125;,$&#123;g&#125;,$&#123;b&#125;,$&#123;a&#125;)`;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>知识点：</p>
+<ol>
+<li>for … of …是遍历数组中的子项，for … in … 遍历下标。</li>
+<li>创建一个数组来存放小球，用以标记已生成的小球。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/15/js执行上下文/" class="article-date">
+      <time datetime="2019-09-15T12:36:10.000Z" itemprop="datePublished">2019-09-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/15/js执行上下文/">js执行上下文</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="js的执行上下文"><a href="#js的执行上下文" class="headerlink" title="js的执行上下文"></a>js的执行上下文</h2><p>执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。</p>
+<h4 id="执行上下文的的三种类型"><a href="#执行上下文的的三种类型" class="headerlink" title="执行上下文的的三种类型"></a>执行上下文的的三种类型</h4><p><strong>全局执行上下文</strong>：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：</p>
 <ul>
-<li>button标签按钮才会自动换行，input标签按钮默认<code>white-space:pre</code>是不会换行的，需将pre值重置为normal。</li>
+<li>创建一个全局对象，在浏览器中这个全局对象就是window对象。</li>
+<li>将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
 </ul>
-<h6 id="动态文字例子"><a href="#动态文字例子" class="headerlink" title="动态文字例子"></a>动态文字例子</h6><p>需求：页面某个模块文字内容是动态的，文字少时居中显示，超过一行者居左显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;!-- &lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt; --&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">       .box&#123;</span><br><span class="line">           padding: 10px;</span><br><span class="line">           background-color: #cd0000;</span><br><span class="line">           text-align: center;</span><br><span class="line">       &#125;</span><br><span class="line">       .content&#123;</span><br><span class="line">           display: inline-block;</span><br><span class="line">           text-align: left;</span><br><span class="line">       &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">       &lt;p id=&quot;conMore&quot; class=&quot;content&quot;&gt;</span><br><span class="line">        文字内容</span><br><span class="line">       &lt;/p&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   &lt;button&gt;get more&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.getElementsByTagName(&apos;button&apos;)[0];</span><br><span class="line">    var content = document.getElementById(&apos;conMore&apos;);</span><br><span class="line">    if(btn &amp;&amp; content)&#123;</span><br><span class="line">        btn.onclick = function()&#123;</span><br><span class="line">            content.innerHTML += &apos;你好&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在被调用时才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，她都会按照特定的顺序执行一系列步骤。</p>
+<p><strong>Eval函数执行上下文</strong>：运行在eval函数中的代码也获得自己的执行上下文。</p>
+<h4 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h4><p>执行上下文的生命周期包括三个阶段：<strong>创建阶段——执行阶段——回收阶段</strong></p>
+<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>当函数被调用时，但未被执行其内部任意代码前，会做以下三件事：</p>
+<ol>
+<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
+<li>创建作用域链（scope chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，js始终从代码嵌套的最内层开始，如果最内层没有该变量，就往上一层父级作用域中找，直到找到变量。</li>
+<li>确定this指向</li>
+</ol>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
+<p>以上过程实则为代码的预处理阶段，详细过程如下：</p>
+<ol>
+<li>读取分析整个源代码</li>
+<li>先扫描函数声明，之后扫描变量（var声明）<ul>
+<li>处理函数声明时有冲突，会覆盖。</li>
+<li>处理变量声明有冲突，会忽略。</li>
+</ul>
+</li>
+<li>将扫描到的函数和变量保存到一个对象中（全局的会保存在window对象中）</li>
+<li>变量的值是undefined，函数的值则是指向该函数（是一个函数字符串）<ul>
+<li>形式如：window = { x : undefined , f : ‘function(){console.log(1);}’ }</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>执行变量赋值、代码执行。</p>
+<p>该过程为：</p>
+<ol>
+<li><p>将变量的值从undefined改为给定值。</p>
+</li>
+<li><p>调用函数f（），以便函数得到执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">上面函数(f)内，代码的处理过程：</span><br><span class="line"></span><br><span class="line">    1、预处理阶段</span><br><span class="line"></span><br><span class="line">        a、将函数的参数添加到一个对象（暂定为：词法对象）</span><br><span class="line"></span><br><span class="line">        b、扫描函数声明，之后扫描变量(var声明)</span><br><span class="line"></span><br><span class="line">        d、将扫描到的函数和方法添加到词法对象里面</span><br><span class="line"></span><br><span class="line">        c、变量的值是undefined，函数的值则指向该函数（与全局的一样）</span><br><span class="line"></span><br><span class="line">    2、运行阶段</span><br><span class="line"></span><br><span class="line">        与全局的的运行原理一样</span><br></pre></td></tr></table></figure>
 
-<p>这主要得益于”包裹性“，未达内部容器大小时，样式主要取决于外部盒子，超过时，取内部容器大小。除了 inline-block 元素，浮动元素以及绝对定位元素都具有包裹性，据有类似的智能宽度的行为。</p>
+</li>
+</ol>
+<h4 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h4><p>执行上下文出栈等待虚拟机回收执行上下文</p>
+<p>看看一下例子就知道变量提升是怎么回事了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    var arg = &apos;hello&apos;; // 3.var arg 变量声明被忽略， arg = &apos;hello&apos;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">	console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line">test(&apos;hi&apos;);</span><br><span class="line">/* 输出：</span><br><span class="line">function arg()&#123;</span><br><span class="line">    console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">hello </span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
+<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。<strong>可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则</strong>。</p>
+<p>我们需要记住几个关键点：</p>
+<ul>
+<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
+<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
+<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
+<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
+<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
+</ul>
+<p>推荐：</p>
+<p><a href="https://www.cnblogs.com/lark-/p/7954047.html" target="_blank" rel="noopener">https://www.cnblogs.com/lark-/p/7954047.html</a></p>
 
       
     </div>
@@ -4230,11 +4400,11 @@ alert("Hello World!")
 
 
   
-    <article id="post-选择器" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-css盒模型集锦" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/26/选择器/" class="article-date">
-      <time datetime="2020-03-26T03:22:55.000Z" itemprop="datePublished">2020-03-26</time>
+      <a href="/2019/09/11/css盒模型集锦/" class="article-date">
+      <time datetime="2019-09-11T10:48:31.000Z" itemprop="datePublished">2019-09-11</time>
 </a>
 
 
@@ -4249,7 +4419,7 @@ alert("Hello World!")
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/26/选择器/">选择器</a>
+      <a class="article-title" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a>
     </h1>
   
 
@@ -4259,38 +4429,132 @@ alert("Hello World!")
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="一-选择器"><a href="#一-选择器" class="headerlink" title="一 . 选择器"></a>一 . 选择器</h2><h4 id="1-通配选择器"><a href="#1-通配选择器" class="headerlink" title="1.通配选择器 *"></a>1.通配选择器 *</h4><ul>
-<li>通用选择器匹配html元素的所有元素</li>
+        <p>第一次写博文，先来说说css中的盒子模型吧！</p>
+<h2 id="css盒子模型"><a href="#css盒子模型" class="headerlink" title="css盒子模型"></a>css盒子模型</h2><p>所有HTML元素可以看作盒子，在CSS中，”box model”这一术语是用来设计和布局时使用。</p>
+<p>CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。</p>
+<p>盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。</p>
+<p><img src="https://7n.w3cschool.cn/statics/images/course/box-model.gif" alt="CSS box-model"></p>
+<p>在页面设计中有4个常见属性：content（内容）、padding（内边距）、border（边框）和margin（外边距），我们把这4部分转化成日常生活的盒子来理解，所以称为盒子模型。</p>
+<p>content（内容）就是盒子里装的东西，padding（内边距）就是怕盒子里装的东西损坏而添加的泡沫或者其他抗震防挤压的辅料，border（边框）就是盒子本身了，margin（外边距）则说明盒子摆放的时候不能全部堆在一起，要留一定空隙。</p>
+<p>在网页设计中，content常指文字、图片等元素，但是也可以是小盒子（DIV嵌套），padding只有宽度属性，可以理解为真实盒子中抗震辅料的厚度，而border有大小和颜色之分，又可以理解为真实盒子的厚度以及这个盒子的颜色或材料，margin就是该盒子与其他东西要保留多大距离。</p>
+<hr>
+<p>了解完盒子模型就不得不说元素的宽度和高度了。</p>
+<h4 id="W3C标准盒模型-box-sizing：content-box；"><a href="#W3C标准盒模型-box-sizing：content-box；" class="headerlink" title="W3C标准盒模型(box-sizing：content-box；)"></a>W3C标准盒模型(box-sizing：content-box；)</h4><p><strong>一般元素默认使用标准盒模型</strong>，<strong>元素实际宽</strong> = content内容宽（设置的width值）+ padding-left（左内边距）+ padding-right（右内边距）+border-left（左边宽）+border-right（右边宽）+margin-left（左边距）+margin-right（右边距）；</p>
+<p><strong>元素实际高</strong> = content内容高（设置的height值）+ padding-top（上内边距）+ padding-bottom（下内边距）+border-top（上边宽）+border-bottom（下边宽）+margin-top（上边距）+margin-bottom（下边距）；</p>
+<p><strong>注意</strong>：我们通过javascript代码获取某一个元素的大小时，其实指的是content的大小，即我们设置width的值。</p>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line"></span><br><span class="line">width: 200px;</span><br><span class="line"></span><br><span class="line">height: 180px;</span><br><span class="line"></span><br><span class="line">padding: 10px;</span><br><span class="line"></span><br><span class="line">border: 1px solid black;</span><br><span class="line"></span><br><span class="line">margin: 5px; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>盒子实际尺寸</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">宽度 = margin.left + border.left + padding.left + content.width + padding.right + border.right + margin.right</span><br><span class="line">	= 5 + 1 + 10 + 200 + 10 + 1 + 5</span><br><span class="line">	= 232</span><br><span class="line">高度 = margin.top + border.top + padding.top + content.height + padding.bottom + border.bottom + margin.bottom</span><br><span class="line">	= 5 + 1 + 10 + 180 + 10 + 1 + 5</span><br><span class="line">	= 212</span><br></pre></td></tr></table></figure>
+
+<h4 id="IE模型-box-sizing：border-box"><a href="#IE模型-box-sizing：border-box" class="headerlink" title="IE模型(box-sizing：border-box;)"></a>IE模型(box-sizing：border-box;)</h4><p>如果想在非IE浏览器使用该模型，只需设置 <kbd><strong>box-sizing：border-box；</strong></kbd>即可</p>
+<p>盒子实际宽度 = 内容宽（width 的值）+ margin-left + margin-right；</p>
+<p>上面例子中的盒子实际尺寸</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">宽度 = margin.left + width + margin.right</span><br><span class="line">	= 5 + 200 + 5</span><br><span class="line">	= 210</span><br><span class="line">高度 = margin.top + height + margin.bottom</span><br><span class="line">	= 5 + 180 +  5</span><br><span class="line">	= 190</span><br></pre></td></tr></table></figure>
+
+<p>这是因为IE模型中的width默认包括<strong>content，padding和border</strong>的值。</p>
+<h4 id="弹性盒子flexbox"><a href="#弹性盒子flexbox" class="headerlink" title="弹性盒子flexbox"></a>弹性盒子flexbox</h4><p>Flexbox布局的最大特性就是让Flex项目可伸缩，也就是让Flex项目的宽度和高度可以自动填充Flex容器剩余的空间或者缩小Flex项目适配Flex容器不足的宽度。而这一切都是依赖于Flexbox属性中的<code>flex</code>属性来完成。</p>
+<p>弹性盒子是一种当页面需要适应不同屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式</p>
+<p>引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间</p>
+<p>弹性盒子由弹性容器(Flex container)和弹性子元素(Flex item)组成。弹性容器通过设置 display 属性的值为 flex 或 inline-flex将其定义为弹性容器。弹性容器内包含了一个或多个弹性子元素。</p>
+<p><strong>注意：</strong> 弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。</p>
+<p><img src="https://www.w3cplus.com/sites/default/files/blogs/2018/1811/flex-1.png" alt="img"></p>
+<h6 id="1-指定弹性子元素在父容器中的位置flex-direction"><a href="#1-指定弹性子元素在父容器中的位置flex-direction" class="headerlink" title="1.指定弹性子元素在父容器中的位置flex-direction"></a>1.指定弹性子元素在父容器中的位置flex-direction</h6><ul>
+<li>flex-direction 属性规定灵活项目的方向。</li>
+<li><strong>当你调转行和列的方向时，flex-start和flex-end对应的方向也被调转</strong>；</li>
+<li>当flex以列为方向时，<code>justify-content</code>控制纵向对齐，<code>align-items</code>控制横向对齐。</li>
+<li>flex-direction: row|row-reverse|column|column-reverse|initial|inherit;</li>
 </ul>
-<h4 id="2-元素选择器"><a href="#2-元素选择器" class="headerlink" title="2.元素选择器"></a>2.元素选择器</h4><ul>
-<li>直接使用元素作为选择器名</li>
+<h6 id="2-内容（横轴上）对齐justify-content属性"><a href="#2-内容（横轴上）对齐justify-content属性" class="headerlink" title="2.内容（横轴上）对齐justify-content属性"></a>2.内容（横轴上）对齐justify-content属性</h6><ul>
+<li><p><strong>内容对齐justify-content属性应用在弹性容器上</strong>，把弹性项沿着弹性容器的主轴线（main axis）对齐。</p>
+</li>
+<li><p>justify-content 用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式。</p>
+</li>
+<li><p>justify-content: flex-start | flex-end | center | space-between | space-around；</p>
+<ul>
+<li><p>flex-start：</p>
+<p>弹性项目向行头紧挨着填充。这个是默认值。第一个弹性项的main-start外边距边线被放置在该行的main-start边线，而后续弹性项依次平齐摆放。</p>
+</li>
+<li><p>flex-end：</p>
+<p>弹性项目向行尾紧挨着填充。第一个弹性项的main-end外边距边线被放置在该行的main-end边线，而后续弹性项依次平齐摆放。</p>
+</li>
+<li><p>center：</p>
+<p>弹性项目居中紧挨着填充。（如果剩余的自由空间是负的，则弹性项目将在两个方向上同时溢出）。</p>
+</li>
+<li><p>space-between：</p>
+<p>弹性项目平均分布在该行上。如果剩余空间为负或者只有一个弹性项，则该值等同于flex-start。否则，第1个弹性项的外边距和行的main-start边线对齐，而最后1个弹性项的外边距和行的main-end边线对齐，然后剩余的弹性项分布在该行上，相邻项目的间隔相等。</p>
+</li>
+<li><p>space-around：</p>
+<p>弹性项目平均分布在该行上，两边留有一半的间隔空间。如果剩余空间为负或者只有一个弹性项，则该值等同于center。否则，弹性项目沿该行分布，且彼此间隔相等（比如是20px），同时首尾两边和弹性容器之间留有一半的间隔（1/2*20px=10px）。</p>
+</li>
 </ul>
-<h4 id="3-ID选择器"><a href="#3-ID选择器" class="headerlink" title="3.ID选择器"></a>3.ID选择器</h4><ul>
-<li>通过对元素设置全局属性id，然后使用#id值来选择页面唯一的元素</li>
+</li>
 </ul>
-<h4 id="4-类选择器"><a href="#4-类选择器" class="headerlink" title="4 . 类选择器"></a>4 . 类选择器</h4><ul>
-<li>通过对元素设置全局属性class，然后使用.class值选择器选择页面一个或多个元素</li>
-<li>也可使用”元素.class值“形式，限定某种类型的元素</li>
-<li>类选择器还可以调用多种中间用空格隔开进行层叠</li>
+<p><img src="https://7n.w3cschool.cn/attachments/day_161125/201611251344358256.jpg" alt="img"></p>
+<h6 id="3-侧轴方向上的对齐方式align-items"><a href="#3-侧轴方向上的对齐方式align-items" class="headerlink" title="3.侧轴方向上的对齐方式align-items"></a>3.侧轴方向上的对齐方式align-items</h6><ul>
+<li><code>align-items</code> 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。</li>
+<li>align-items: flex-start | flex-end | center | baseline | stretch<ul>
+<li>flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。</li>
+<li>flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。</li>
+<li>center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。</li>
+<li>baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与’flex-start’等效。其它情况下，该值将参与基线对齐。</li>
+<li>stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。</li>
 </ul>
-<h4 id="5-属性选择器"><a href="#5-属性选择器" class="headerlink" title="5. 属性选择器"></a>5. 属性选择器</h4><ul>
-<li>直接通过两个中括号里面包含属性名即可  如 ： [href]</li>
-<li>匹配属性值的属性选择器 [type=”password”]</li>
-<li>属性值开头匹配的属性选择器 [href^=”http”]</li>
-<li>属性值结尾匹配的属性值 [hre$=”.com”]</li>
-<li>包含指定字符的属性选择器 [href=”google”]</li>
+</li>
 </ul>
-<h4 id="6-复合选择器"><a href="#6-复合选择器" class="headerlink" title="6.复合选择器"></a>6.复合选择器</h4><h6 id="1-分组选择器"><a href="#1-分组选择器" class="headerlink" title="1.分组选择器"></a>1.分组选择器</h6><ul>
-<li>将多个选择器通过逗号分隔，同时设置统一样式。</li>
+<h6 id="4-弹性盒子子元素换行方式flex-wrap"><a href="#4-弹性盒子子元素换行方式flex-wrap" class="headerlink" title="4.弹性盒子子元素换行方式flex-wrap"></a>4.弹性盒子子元素换行方式flex-wrap</h6><ul>
+<li>flex-wrap 属性规定flex容器是单行或者多行，同时横轴的方向决定了新行堆叠的方向。</li>
+<li>flex-wrap ：normal | wrap | wrap-reverse | initial |inherit ;</li>
 </ul>
-<h6 id="2-后代选择器"><a href="#2-后代选择器" class="headerlink" title="2.后代选择器"></a>2.后代选择器</h6><ul>
-<li>选择器内部所有子选择器（包括直接的和间接的），不在乎子选择器的层次</li>
+<h6 id="5-设置各个行（垂直方向）的对齐aign-content"><a href="#5-设置各个行（垂直方向）的对齐aign-content" class="headerlink" title="5.设置各个行（垂直方向）的对齐aign-content"></a>5.设置各个行（垂直方向）的对齐aign-content</h6><ul>
+<li>设置行与行之间的距离</li>
+<li>align-content属性在弹性容器内的各项没有占用交叉轴上所有可用空间时对齐容器内的各项（只在垂直方向上，都是单独占据一行）</li>
+<li>align-content: flex-start | flex-end | center | space-between | space-around | stretch<ul>
+<li><code>stretch</code> - 默认。各行将会伸展以占用剩余的空间。</li>
+<li><code>flex-start</code> - 各行向弹性盒容器的起始位置堆叠。</li>
+<li><code>flex-end</code> - 各行向弹性盒容器的结束位置堆叠。</li>
+<li><code>center</code> -各行向弹性盒容器的中间位置堆叠。</li>
+<li><code>space-between</code> -各行在弹性盒容器中平均分布。</li>
+<li><code>space-around</code> - 各行在弹性盒容器中平均分布，两端保留子元素与子元素之间间距大小的一半。</li>
 </ul>
-<h6 id="3-子选择器"><a href="#3-子选择器" class="headerlink" title="3.子选择器"></a>3.子选择器</h6><ul>
-<li>只能是选择器内的直接选择器</li>
+</li>
 </ul>
-<h6 id="4-相邻兄弟选择器-，用加号连接"><a href="#4-相邻兄弟选择器-，用加号连接" class="headerlink" title="4.相邻兄弟选择器 ，用加号连接"></a>4.相邻兄弟选择器 ，用加号连接</h6><h6 id="5-普通兄弟选择器，用“-”连接"><a href="#5-普通兄弟选择器，用“-”连接" class="headerlink" title="5.普通兄弟选择器，用“~”连接"></a>5.普通兄弟选择器，用“~”连接</h6><h4 id="7-伪元素选择器"><a href="#7-伪元素选择器" class="headerlink" title="7.伪元素选择器"></a>7.伪元素选择器</h4><h6 id="1-first-line-块级首行"><a href="#1-first-line-块级首行" class="headerlink" title="1.   ::first-line 块级首行"></a>1.   ::first-line 块级首行</h6><ul>
-<li>块级元素比如p,div等首行文本被选定若想限定某种元素，可加前置  p::first-line{}</li>
+<h6 id="6-排列弹性子元素order"><a href="#6-排列弹性子元素order" class="headerlink" title="6.排列弹性子元素order"></a>6.排列弹性子元素order</h6><ul>
+<li>用整数来定义排列顺序，数值小的排在前面，可为负值。 设置或检索弹性盒模型对象的<strong>子元素</strong>出现的順序。</li>
+<li>order: <em>number</em>|initial|inherit;</li>
+</ul>
+<h6 id="7-完美居中margin：auto；"><a href="#7-完美居中margin：auto；" class="headerlink" title="7.完美居中margin：auto；"></a>7.完美居中margin：auto；</h6><ul>
+<li>使用弹性盒子，只需设置margin：auto；可使得弹性子元素在两上轴方向上完全居中</li>
+</ul>
+<h6 id="8-设置弹性元素自身在侧轴方向上的对齐方式align-self"><a href="#8-设置弹性元素自身在侧轴方向上的对齐方式align-self" class="headerlink" title="8.设置弹性元素自身在侧轴方向上的对齐方式align-self"></a>8.设置弹性元素自身在侧轴方向上的对齐方式align-self</h6><ul>
+<li><p>align-self:auto | flex-start | flex-end | center | baseline | stretch</p>
+<ul>
+<li><p>auto：如果’align-self’的值为’auto’，则其计算值为元素的父元素的’align-items’值，如果其没有父元素，则计算值为’stretch’。</p>
+</li>
+<li><p>flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。</p>
+</li>
+<li><p>flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。</p>
+</li>
+<li><p>center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。</p>
+</li>
+<li><p>baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与’flex-start’等效。其它情况下，该值将参与基线对齐。</p>
+</li>
+<li><h6 id="stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min-max-width-height’属性的限制。"><a href="#stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min-max-width-height’属性的限制。" class="headerlink" title="stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。"></a>stretch：如果指定侧轴大小的属性值为’auto’，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照’min/max-width/height’属性的限制。</h6></li>
+<li><p>align-self 属性可重写灵活容器的 align-items 属性。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="9-指定子元素如何分配空间flex"><a href="#9-指定子元素如何分配空间flex" class="headerlink" title="9.指定子元素如何分配空间flex"></a>9.指定子元素如何分配空间flex</h5><ul>
+<li>flex属性用于设置和检索弹性盒模型对象的子元素如何分配空间</li>
+<li>flex属性是flex-grow，flex-shrink和flex-basis属性的简写属性</li>
+<li><strong>注意：</strong>如果元素不是弹性盒模型对象的子元素，则 flex 属性不起作用。</li>
+<li>flex: <em>flex-grow</em>  <em>flex-shrink</em>  <em>flex-basis</em> | auto | initial | inherit;</li>
+</ul>
+<h6 id="10-设置flex容器的对齐方式align-items"><a href="#10-设置flex容器的对齐方式align-items" class="headerlink" title="10.设置flex容器的对齐方式align-items"></a>10.设置flex容器的对齐方式align-items</h6><ul>
+<li>使用每个flex对象元素的 align-self 属性可重写 align-items 属性。</li>
+<li>align-items： stretch | center | flex-start | flex-end | baseline | initial | inherit;</li>
 </ul>
 
       
@@ -4318,75 +4582,6 @@ alert("Hello World!")
 
 
   
-    <article id="post-vue学习九" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/20/vue学习九/" class="article-date">
-      <time datetime="2020-03-20T05:45:20.000Z" itemprop="datePublished">2020-03-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/20/vue学习九/">vue学习九</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="Day10"><a href="#Day10" class="headerlink" title="Day10"></a>Day10</h1><h2 id="开启Apache的gzip压缩"><a href="#开启Apache的gzip压缩" class="headerlink" title="开启Apache的gzip压缩"></a>开启Apache的gzip压缩</h2><p>要让apache支持gzip功能，要用到deflate_Module和headers_Module。打开apache的配置文件httpd.conf，大约在105行左右，找到以下两行内容：（这两行不是连续在一起的）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#LoadModule deflate_module modules/mod_deflate.so</span><br><span class="line">#LoadModule headers_module modules/mod_headers.so</span><br></pre></td></tr></table></figure>
-
-<p>然后将其前面的“#”注释删掉，表示开启gzip压缩功能。开启以后还需要进行相关配置。在httpd.conf文件的最后添加以下内容即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule deflate_module&gt;</span><br><span class="line">    #必须的，就像一个开关一样，告诉apache对传输到浏览器的内容进行压缩</span><br><span class="line">    SetOutputFilter DEFLATE</span><br><span class="line">    DeflateCompressionLevel 9</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-
-<p>最少需要加上以上内容，才可以生gzip功能生效。由于没有做其它的额外配置，所以其它相关的配置均使用Apache的默认设置。这里说一下参数“DeflateCompressionLevel”，它表示压缩级别，值从1到9，值越大表示压缩的越厉害。</p>
-<h2 id="使用ngrok将本机映射为一个外网的Web服务器"><a href="#使用ngrok将本机映射为一个外网的Web服务器" class="headerlink" title="使用ngrok将本机映射为一个外网的Web服务器"></a>使用ngrok将本机映射为一个外网的Web服务器</h2><p>注意：由于默认使用的美国的服务器进行中间转接，所以访问速度炒鸡慢，访问时可启用FQ软件，提高网页打开速度！</p>
-<h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><p><img src="D:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday10%5C%E7%AC%94%E8%AE%B0%5Cvuex%E6%A6%82%E5%BF%B5%E5%9B%BE.png" alt="vuex概念图"></p>
-<p>概念：<br>vuex 是 Vue 配套的 公共数据管理工具，它可以把一些共享的数据，保存到 vuex 中，方便 整个程序中的任何组件直接获取或修改我们的公共数据；</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
   
 </div>
       <footer id="footer">
