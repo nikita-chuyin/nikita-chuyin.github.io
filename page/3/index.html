@@ -268,6 +268,169 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-proto" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/27/proto/" class="article-date">
+      <time datetime="2019-10-27T05:45:18.000Z" itemprop="datePublished">2019-10-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/proto/">proto</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="类的prototype属性和-proto-属性"><a href="#类的prototype属性和-proto-属性" class="headerlink" title="类的prototype属性和__proto__属性"></a>类的prototype属性和<code>__proto__</code>属性</h4><ul>
+<li>每个对象都有<code>__proto__</code>属性，指向对应的构造函数的prototype属性。</li>
+<li><strong>子类的<code>__proto__</code>属性表示构造函数的继承，总是指向父类。</strong></li>
+<li><strong>子类的prototype属性的<code>__proto__</code>属性表示方法的继承，总是指向父类的prototype属性。</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">class B extends A&#123;&#125;</span><br><span class="line">B.__proto__ === A  //true</span><br><span class="line">B.prototype.__proto__  === A.prototype  //true</span><br><span class="line"></span><br><span class="line">//B的实例继承A的实例</span><br><span class="line">Object.setPrototypeOf(B.prototype,A.prototype);</span><br><span class="line">//B继承A的静态属性</span><br><span class="line">Object.setPrototypeOf(B,A);</span><br><span class="line"></span><br><span class="line">//Object.setPrototypeOf方法实现</span><br><span class="line">Object.setPrototypeOf = function(obj,proto)&#123;</span><br><span class="line">	obj.__proto__ = proto;</span><br><span class="line">	return obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两条继承链，可以这样理解：作为一个对象，子类（<code>B</code>）的原型（<code>__proto__</code>属性）是父类（<code>A</code>）；作为一个构造函数，子类（<code>B</code>）的原型对象（<code>prototype</code>属性）是父类的原型对象（<code>prototype</code>属性）的实例。</p>
+<p>上面代码的<code>A</code>，只要是一个有<code>prototype</code>属性的函数，就能被<code>B</code>继承。由于函数都有<code>prototype</code>属性（除了<code>Function.prototype</code>函数），因此<code>A</code>可以是任意函数。</p>
+<h6 id="以下两种特殊情况"><a href="#以下两种特殊情况" class="headerlink" title="以下两种特殊情况"></a>以下两种特殊情况</h6><ul>
+<li>子类继承Object类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class A extends Object&#123;&#125;</span><br><span class="line">A.__proto__ === Object  //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype  //true</span><br><span class="line">//A其实就是构造函数Object的复制，A的实例就是Object的实例</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不存在任何继承</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">A.__proto__ === Function.prototype   //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype   //true</span><br></pre></td></tr></table></figure>
+
+<p>A作为一个基类，即不存在任何继承，就是一个普通函数，所以直接继承Function.prototype。但是，A调用后返回一个空对象即object实例，所以<code>A.prototype.__proto__</code>指向构造函数Object的prototype属性。</p>
+<h6 id="实例的-proto-属性"><a href="#实例的-proto-属性" class="headerlink" title="实例的 proto 属性"></a>实例的 <strong>proto</strong> 属性</h6><p>子类实例的<code>__proto__</code>属性的<code>__proto__</code>属性，指向父类实例的<code>__proto__</code>属性。也就是说，子类的原型的原型，是父类的原型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123; /* ... */ &#125;</span><br><span class="line">class ColorPoint extends Point &#123;</span><br><span class="line">  constructor(x, y, color) &#123;</span><br><span class="line">    super(x, y); // 调用父类的constructor(x, y)</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  toString() &#123;</span><br><span class="line">    return this.color + &apos; &apos; + super.toString(); // 调用父类的toString()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new Point(2, 3);</span><br><span class="line">var p2 = new ColorPoint(2, 3, &apos;red&apos;);</span><br><span class="line"></span><br><span class="line">p2.__proto__ === p1.__proto__ // false</span><br><span class="line">p2.__proto__.__proto__ === p1.__proto__ // true</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>ColorPoint</code>继承了<code>Point</code>，导致前者原型的原型是后者的原型。</p>
+<p>因此，通过子类实例的<code>__proto__.__proto__</code>属性，可以修改父类实例的行为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p2.__proto__.__proto__.printName = function () &#123;</span><br><span class="line">  console.log(&apos;Ha&apos;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">p1.printName() // &quot;Ha&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="原生构造函数的继承"><a href="#原生构造函数的继承" class="headerlink" title="原生构造函数的继承"></a>原生构造函数的继承</h6><ul>
+<li><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。一般不能继承，有以下九种：</p>
+<p><code>Boolean(),Number(),String(),Array(),Date(),Function(),RegExp(),Error(),Object()</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function MyArray() &#123;</span><br><span class="line">  Array.apply(this, arguments);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyArray.prototype = Object.create(Array.prototype, &#123;</span><br><span class="line">  constructor: &#123;</span><br><span class="line">    value: MyArray,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true,</span><br><span class="line">    enumerable: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var colors = new MyArray();</span><br><span class="line">colors[0] = &quot;red&quot;;</span><br><span class="line">colors.length  // 0</span><br><span class="line"></span><br><span class="line">colors.length = 0;</span><br><span class="line">colors[0]  // &quot;red&quot;</span><br></pre></td></tr></table></figure>
+
+<p>之所以会发生这种情况，是因为子类无法获得原生构造函数的内部属性，通过<code>Array.apply()</code>或者分配给原型对象都不行。原生构造函数会忽略<code>apply</code>方法传入的<code>this</code>，也就是说，原生构造函数的<code>this</code>无法绑定，导致拿不到内部属性。</p>
+<p>ES5 是先新建子类的实例对象<code>this</code>，再将父类的属性添加到子类上，由于父类的内部属性无法获取，导致无法继承原生的构造函数。比如，<code>Array</code>构造函数有一个内部属性<code>[[DefineOwnProperty]]</code>，用来定义新属性时，更新<code>length</code>属性，这个内部属性无法在子类获取，导致子类的<code>length</code>属性行为不正常。</p>
+<p>ES6 允许继承原生构造函数定义子类，因为 ES6 是先新建父类的实例对象<code>this</code>，然后再用子类的构造函数修饰<code>this</code>，使得父类的所有行为都可以继承。下面是一个继承<code>Array</code>的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class MyArray extends Array &#123;</span><br><span class="line">  constructor(...args) &#123;</span><br><span class="line">    super(...args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = new MyArray();</span><br><span class="line">arr[0] = 12;</span><br><span class="line">arr.length // 1</span><br><span class="line"></span><br><span class="line">arr.length = 0;</span><br><span class="line">arr[0] // undefined</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-MVVC模型架构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/17/MVVC模型架构/" class="article-date">
+      <time datetime="2019-09-17T11:57:30.000Z" itemprop="datePublished">2019-09-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="理解MVVC架构模式"><a href="#理解MVVC架构模式" class="headerlink" title="理解MVVC架构模式"></a>理解MVVC架构模式</h2><h4 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h4><p><strong>Model（模型）：数据层，负责存储数据。</strong></p>
+<p><strong>View(视图)：展现层，用户所看到的页面。</strong></p>
+<p><strong>Controller（控制器）：协调层，负责协调Model和View，根据用户在Model上做出的改变，同时把更改的信息返回到View上。</strong></p>
+<p>Controller可以直接访问Model，也可以直接控制View，但是Model与View不能互相通信，相当于Controller就是介于这两者之间的协调者。</p>
+<p><img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=7948cf4dbf096b63951456026d5aec21/b03533fa828ba61edbddc04d4034970a304e59a4.jpg" alt="img"></p>
+<p>MVC是过去常用的架构模式，随着App的发展，界面的多沿海，显然再使用MVC模式的会导致ViewController代码不断增多，更容易造成一些冗余的代码，如果作为迭代项目更不易维护。从而诞生了MVVC的架构模式。</p>
+<h4 id="MVVC"><a href="#MVVC" class="headerlink" title="MVVC"></a>MVVC</h4><p>M -Model</p>
+<p>V - View</p>
+<p>VM - ViewModel</p>
+<p>MVVM是将“数据模型数据双向绑定”的思想作为核心，因此在View和Model之间没有联系，通过ViewModel进行交互，而且Model和ViewModel之间的交互是双喜那个的，因此试图的数据的变化会同事修改数据源，而数据源数据的变化也会立即反应到View上。</p>
+<h4 id="MVVC优点"><a href="#MVVC优点" class="headerlink" title="MVVC优点"></a>MVVC优点</h4><p><strong>1. 低耦合</strong>。视图（View）可以独立于Model变化和修改，一个ViewModel可以绑定到不同的”View”上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。</p>
+<p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
+<p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
+<p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
