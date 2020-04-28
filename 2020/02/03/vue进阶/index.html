@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://segmentfault.com/img/bVBQYu?w=730&h=390">
 <meta property="og:image" content="https://segmentfault.com/img/bVBQY3?w=625&h=259">
 <meta property="og:image" content="https://atts.w3cschool.cn/attachments/day_190316/201903161724311621.png">
-<meta property="og:updated_time" content="2020-04-28T04:45:33.052Z">
+<meta property="og:updated_time" content="2020-04-28T04:46:13.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue进阶">
 <meta name="twitter:description" content="独立构建VS运行时构建 两者区别，独立构建包含模板编译器。模板编译是将编译vue模板字符串成纯js渲染函数，若想用template，则需要编译。  独立构建 独立构建包含模板编译器并支持template选项。他也依赖于浏览器接口的存在，所以你不能用其来为服务器渲染。  运行时构建 运行时构建不包含模板编译器，只能用render选项但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件">
@@ -320,6 +320,7 @@
 <h6 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h6><p>核心方法是通过Object.definedProperty()来实现对属性进行劫持，达到监听数据变动的目的。</p>
 <p>beforeDestroy（销毁前） 在实例销毁之前调用。实例仍然完全可用。<br>  destroyed（销毁后） 在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p>
 <h4 id="数据绑定原理"><a href="#数据绑定原理" class="headerlink" title="数据绑定原理"></a>数据绑定原理</h4><p>vue实现数据双向绑定主要是：<strong>采用数据劫持结合发布者-订阅者模式</strong>的方式，通过<strong>Object.defineProperty（）</strong>来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应监听回调。当把一个普通 Javascript 对象传给 Vue 实例来作为它的 data 选项时，Vue 将遍历它的属性，用 Object.defineProperty 将它们转为 getter/setter。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。</p>
+<p> vue的数据双向绑定 将MVVM作为数据绑定的入口，整合Observer，Compile和Watcher三者，通过Observer来监听自己的model的数据变化，通过Compile来解析编译模板指令（vue中是用来解析），最终利用watcher搭起observer和Compile之间的通信桥梁，达到数据变化 —&gt;视图更新；视图交互变化（input）—&gt;数据model变更双向绑定效果。</p>
 <h6 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h6><ul>
 <li>实现mvvm双向绑定需实现以下几点：</li>
 </ul>
@@ -567,7 +568,7 @@
         <p><span>本文标题:</span><a href="/2020/02/03/vue进阶/">vue进阶</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-02-03, 16:25:10</p>
-        <p><span>最后更新:</span>2020-04-28, 12:45:33</p>
+        <p><span>最后更新:</span>2020-04-28, 12:46:13</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/03/vue进阶/" title="vue进阶">http://yoursite.com/2020/02/03/vue进阶/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/03/vue进阶/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
