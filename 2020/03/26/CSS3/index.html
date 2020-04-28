@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="CSS知识点 一 . 解决老的浏览器支持问题1.加上相应的前缀即可   Chorme IE Firefox Safari Opera    -webkit- -ms- -moz- -webkit- -o-或者-xv-   2.基本概念 CSS3弹性盒子： 是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/CSS3/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="CSS知识点 一 . 解决老的浏览器支持问题1.加上相应的前缀即可   Chorme IE Firefox Safari Opera    -webkit- -ms- -moz- -webkit- -o-或者-xv-   2.基本概念 CSS3弹性盒子： 是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-26T03:48:20.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3">
+<meta name="twitter:description" content="CSS知识点 一 . 解决老的浏览器支持问题1.加上相应的前缀即可   Chorme IE Firefox Safari Opera    -webkit- -ms- -moz- -webkit- -o-或者-xv-   2.基本概念 CSS3弹性盒子： 是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>CSS3 | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-CSS3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/26/CSS3/" class="article-date">
+      <time datetime="2020-03-26T03:48:03.000Z" itemprop="datePublished">2020-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS3
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>CSS知识点</p>
+<h2 id="一-解决老的浏览器支持问题"><a href="#一-解决老的浏览器支持问题" class="headerlink" title="一 . 解决老的浏览器支持问题"></a>一 . 解决老的浏览器支持问题</h2><h5 id="1-加上相应的前缀即可"><a href="#1-加上相应的前缀即可" class="headerlink" title="1.加上相应的前缀即可"></a>1.加上相应的前缀即可</h5><table>
+<thead>
+<tr>
+<th>Chorme</th>
+<th>IE</th>
+<th>Firefox</th>
+<th>Safari</th>
+<th>Opera</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-webkit-</td>
+<td>-ms-</td>
+<td>-moz-</td>
+<td>-webkit-</td>
+<td>-o-或者-xv-</td>
+</tr>
+</tbody></table>
+<h4 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2.基本概念"></a>2.基本概念</h4><ul>
+<li>CSS3弹性盒子：<ul>
+<li>是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行排列，对齐和分配空白空间。</li>
+<li>弹性容器通过设置display属性为flex或inline-flex将其定义为弹性盒子，弹性容器内包含了一个或多个弹性子元素； 弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。</li>
+<li>弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-选择器"><a href="#3-选择器" class="headerlink" title="3.选择器"></a>3.选择器</h4><table>
+<thead>
+<tr>
+<th>.intro</th>
+<th>选择所有class=”intro”的元素</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-id.html" target="_blank" rel="noopener">#<em>id</em></a></td>
+<td>#firstname</td>
+<td>选择所有id=”firstname”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-all.html" target="_blank" rel="noopener">*</a></td>
+<td>*</td>
+<td>选择所有元素</td>
+</tr>
+<tr>
+<td><em>element</em></td>
+<td>p</td>
+<td>选择所有p元素</td>
+</tr>
+<tr>
+<td><em>element,element</em></td>
+<td>div,p</td>
+<td>选择所有元素和元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-element.html" target="_blank" rel="noopener"><em>element element</em></a></td>
+<td>div p</td>
+<td>选择元素内的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-gt.html" target="_blank" rel="noopener"><em>element</em>&gt;<em>element</em></a></td>
+<td>div&gt;p</td>
+<td>选择所有父级是div元素的p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-pluss.html" target="_blank" rel="noopener"><em>element</em>+<em>element</em></a></td>
+<td>div+p</td>
+<td>选择所有紧接着元素之后的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute.html" target="_blank" rel="noopener">[<em>attribute</em>]</a></td>
+<td>[target]</td>
+<td>选择所有带有target属性元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value.html" target="_blank" rel="noopener">[<em>attribute</em>=<em>value</em>]</a></td>
+<td>[target=-blank]</td>
+<td>选择所有使用target=”-blank”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-contains.html" target="_blank" rel="noopener">[<em>attribute</em>~=<em>value</em>]</a></td>
+<td>[title~=flower]</td>
+<td>选择标题属性包含单词”flower”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-lang.html" target="_blank" rel="noopener">[<em>attribute</em>|=<em>language</em>]</a></td>
+<td>[lang|=en]</td>
+<td>选择一个lang属性的起始值=”EN”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-link.html" target="_blank" rel="noopener">:link</a></td>
+<td>a:link</td>
+<td>选择所有未访问链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-visited.html" target="_blank" rel="noopener">:visited</a></td>
+<td>a:visited</td>
+<td>选择所有访问过的链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-active.html" target="_blank" rel="noopener">:active</a></td>
+<td>a:active</td>
+<td>选择活动链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-hover.html" target="_blank" rel="noopener">:hover</a></td>
+<td>a:hover</td>
+<td>选择鼠标在链接上面时</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-focus.html" target="_blank" rel="noopener">:focus</a></td>
+<td>input:focus</td>
+<td>选择具有焦点的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstletter.html" target="_blank" rel="noopener">:first-letter</a></td>
+<td>p:first-letter</td>
+<td>选择每一个元素的第一个字母</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstline.html" target="_blank" rel="noopener">:first-line</a></td>
+<td>p:first-line</td>
+<td>选择每一个元素的第一行</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstchild.html" target="_blank" rel="noopener">:first-child</a></td>
+<td>p:first-child</td>
+<td>指定只有当元素是其父级的第一个子级的样式。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-before.html" target="_blank" rel="noopener">:before</a></td>
+<td>p:before</td>
+<td>在每个元素之前插入内容</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-after.html" target="_blank" rel="noopener">:after</a></td>
+<td>p:after</td>
+<td>在每个元素之后插入内容</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-lang.html" target="_blank" rel="noopener">:lang(<em>language</em>)</a></td>
+<td>p:lang(it)</td>
+<td>选择一个lang属性的起始值=”it”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-gen-sibling.html" target="_blank" rel="noopener"><em>element1</em>~<em>element2</em></a></td>
+<td>p~ul</td>
+<td>选择p元素之后的每一个ul元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-begin.html" target="_blank" rel="noopener">[<em>attribute</em>^=<em>value</em>]</a></td>
+<td>a[src^=”https”]</td>
+<td>选择每一个src属性的值以”https”开头的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-end.html" target="_blank" rel="noopener">[<em>attribute</em>$=<em>value</em>]</a></td>
+<td>a[src$=”.pdf”]</td>
+<td>选择每一个src属性的值以”.pdf”结尾的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-contain.html" target="_blank" rel="noopener">[<em>attribute*</em>=<em>value</em>]</a></td>
+<td>a[src*=”44lan”]</td>
+<td>选择每一个src属性的值包含子字符串”44lan”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-first-of-type.html" target="_blank" rel="noopener">:first-of-type</a></td>
+<td>p:first-of-type</td>
+<td>选择每个p元素是其父级的第一个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-last-of-type.html" target="_blank" rel="noopener">:last-of-type</a></td>
+<td>p:last-of-type</td>
+<td>选择每个p元素是其父级的最后一个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-only-of-type.html" target="_blank" rel="noopener">:only-of-type</a></td>
+<td>p:only-of-type</td>
+<td>选择每个p元素是其父级的唯一p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-only-child.html" target="_blank" rel="noopener">:only-child</a></td>
+<td>p:only-child</td>
+<td>选择每个p元素是其父级的唯一子元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-child.html" target="_blank" rel="noopener">:nth-child(<em>n</em>)</a></td>
+<td>p:nth-child(2)</td>
+<td>选择每个p元素是其父级的第二个子元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-child.html" target="_blank" rel="noopener">:nth-last-child(<em>n</em>)</a></td>
+<td>p:nth-last-child(2)</td>
+<td>选择每个p元素的是其父级的第二个子元素，从最后一个子项计数</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-of-type.html" target="_blank" rel="noopener">:nth-of-type(<em>n</em>)</a></td>
+<td>p:nth-of-type(2)</td>
+<td>选择每个p元素是其父级的第二个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-of-type.html" target="_blank" rel="noopener">:nth-last-of-type(<em>n</em>)</a></td>
+<td>p:nth-last-of-type(2)</td>
+<td>选择每个p元素的是其父级的第二个p元素，从最后一个子项计数</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-last-child.html" target="_blank" rel="noopener">:last-child</a></td>
+<td>p:last-child</td>
+<td>选择每个p元素是其父级的最后一个子级。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-root.html" target="_blank" rel="noopener">:root</a></td>
+<td>:root</td>
+<td>选择文档的根元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-empty.html" target="_blank" rel="noopener">:empty</a></td>
+<td>p:empty</td>
+<td>选择每个没有任何子级的p元素（包括文本节点）</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-target.html" target="_blank" rel="noopener">:target</a></td>
+<td>#news:target</td>
+<td>选择当前活动的#news元素（包含该锚名称的点击的URL）</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-enabled.html" target="_blank" rel="noopener">:enabled</a></td>
+<td>input:enabled</td>
+<td>选择每一个已启用的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-disabled.html" target="_blank" rel="noopener">:disabled</a></td>
+<td>input:disabled</td>
+<td>选择每一个禁用的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-checked.html" target="_blank" rel="noopener">:checked</a></td>
+<td>input:checked</td>
+<td>选择每个选中的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-not.html" target="_blank" rel="noopener">:not(<em>selector</em>)</a></td>
+<td>:not(p)</td>
+<td>选择每个并非p元素的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-selection.html" target="_blank" rel="noopener">::selection</a></td>
+<td>::selection</td>
+<td>匹配元素中被用户选中或处于高亮状态的部分</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-out-of-range.html" target="_blank" rel="noopener">:out-of-range</a></td>
+<td>:out-of-range</td>
+<td>匹配值在指定区间之外的input元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-in-range.html" target="_blank" rel="noopener">:in-range</a></td>
+<td>:in-range</td>
+<td>匹配值在指定区间之内的input元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-read-write.html" target="_blank" rel="noopener">:read-write</a></td>
+<td>:read-write</td>
+<td>用于匹配可读及可写的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-read-only.html" target="_blank" rel="noopener">:read-only</a></td>
+<td>:read-only</td>
+<td>用于匹配设置 “readonly”（只读） 属性的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-optional.html" target="_blank" rel="noopener">:optional</a></td>
+<td>:optional</td>
+<td>用于匹配可选的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-required.html" target="_blank" rel="noopener">:required</a></td>
+<td>:required</td>
+<td>用于匹配设置了 “required” 属性的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-valid.html" target="_blank" rel="noopener">:valid</a></td>
+<td>:valid</td>
+<td>用于匹配输入值为合法的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-invalid.html" target="_blank" rel="noopener">:invalid</a></td>
+<td>:invalid</td>
+<td>用于匹配输入值为非法的元素</td>
+</tr>
+</tbody></table>
+<h2 id="二-多重样式优先级深入概念"><a href="#二-多重样式优先级深入概念" class="headerlink" title="二 . 多重样式优先级深入概念"></a>二 . 多重样式优先级深入概念</h2><p>优先级是浏览器是通过判断哪些属性值与元素最相关以决定并应用到该元素上的。优先级仅由选择器组成的匹配规则决定的。</p>
+<p>优先级就是分配给指定的CSS声明的一个权重，它由匹配的选择器中的每一种选择器类型的数值决定。</p>
+<h3 id="优先级顺序"><a href="#优先级顺序" class="headerlink" title="优先级顺序"></a>优先级顺序</h3><p>下列是一份优先级逐级增加的选择器列表：</p>
+<ul>
+<li>通用选择器（*）</li>
+<li>元素(类型)选择器</li>
+<li>类选择器</li>
+<li>属性选择器</li>
+<li>伪类</li>
+<li>ID 选择器</li>
+<li>内联样式</li>
+</ul>
+<h3 id="important-规则例外"><a href="#important-规则例外" class="headerlink" title="!important 规则例外"></a>!important 规则例外</h3><p>当 !important 规则被应用在一个样式声明中时,该样式声明会覆盖CSS中任何其他的声明, 无论它处在声明列表中的哪里. 尽管如此, !important规则还是与优先级毫无关系.使用 !important 不是一个好习惯，因为它改变了你样式表本来的级联规则，从而使其难以调试。</p>
+<p>一些经验法则：</p>
+<ul>
+<li><strong>Always</strong> 要优化考虑使用样式规则的优先级来解决问题而不是 <code>!important</code></li>
+<li><strong>Only</strong> 只在需要覆盖全站或外部 css（例如引用的 ExtJs 或者 YUI ）的特定页面中使用 <code>!important</code></li>
+<li><strong>Never</strong> 永远不要在全站范围的 css 上使用<code>!important</code></li>
+<li><strong>Never</strong> 永远不要在你的插件中使用 <code>!important</code></li>
+<li><ul>
+<li>内联样式表的权值最高 1000；</li>
+<li>ID 选择器的权值为 100</li>
+<li>Class 类选择器的权值为 10</li>
+<li>HTML 标签选择器的权值为 1</li>
+</ul>
+</li>
+<li>id属性不要以数字开头，数字开头的id在Mozilla/Firefox浏览器不起作用</li>
+<li>创建样式表<ul>
+<li>外部样式表</li>
+<li>内部样式表</li>
+<li>内联样式表</li>
+<li>多重样式表</li>
+</ul>
+</li>
+</ul>
+<h3 id="CSS-优先级法则："><a href="#CSS-优先级法则：" class="headerlink" title="CSS 优先级法则："></a>CSS 优先级法则：</h3><ul>
+<li>A 选择器都有一个权值，权值越大越优先；</li>
+<li>B 当权值相等时，后出现的样式表设置要优于先出现的样式表设置；</li>
+<li>C 创作者的规则高于浏览者：即网页编写者设置的CSS 样式的优先权高于浏览器所设置的样式；</li>
+<li>D 继承的CSS 样式不如后来指定的CSS 样式；</li>
+<li>E 在同一组属性设置中标有“!important”规则的优先级最大；</li>
+</ul>
+<h4 id="目标选择器"><a href="#目标选择器" class="headerlink" title="目标选择器"></a>目标选择器</h4><ul>
+<li>：target{ }当目标被选中时就会执行该样式</li>
+</ul>
+<h2 id="三-CSS属性"><a href="#三-CSS属性" class="headerlink" title="三 . CSS属性"></a>三 . CSS属性</h2><h4 id="1-align-content"><a href="#1-align-content" class="headerlink" title="1.align-content"></a>1.align-content</h4><ul>
+<li><p>align-content属性在弹性容器内的各项没有占用交叉轴上所有可用的空间时对齐容器内的各项（垂直）</p>
+</li>
+<li><p><strong>提示：</strong>使用 justify-content 属性对齐主轴上的各项（水平）</p>
+<p><strong>注意：</strong>容器内必须有多行的项目，该属性才能渲染出效果。</p>
+<h2 id="CSS-语法"><a href="#CSS-语法" class="headerlink" title="CSS 语法"></a>CSS 语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: stretch|center|flex-start|flex-end|space-between|space-around|initial|inherit;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stretch</td>
+<td>默认值。项目被拉伸以适应容器</td>
+</tr>
+<tr>
+<td>center</td>
+<td>项目位于容器的中心。</td>
+</tr>
+<tr>
+<td>flex-start</td>
+<td>项目位于容器的开头。</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>项目位于容器的结尾。</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>项目位于各行之间留有空白的容器内。</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>项目位于各行之前、之间、之后都留有空白的容器内。</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>设置该属性为它的默认值。</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>从父元素继承该属性。</td>
+</tr>
+</tbody></table>
+<p>#main { width: 70px; height: 300px; border: 1px solid #c3c3c3; display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; -webkit-align-content: center; align-content: center;}</p>
+</li>
+</ul>
+<h4 id="2-align-items属性"><a href="#2-align-items属性" class="headerlink" title="2.align-items属性"></a>2.align-items属性</h4><ul>
+<li>设置flex容器的对齐方式，使用每个flex对象元素的 align-self 属性可重写 align-items 属性。</li>
+<li>语法<ul>
+<li>align-items: stretch|center|flex-start|flex-end|baseline（位置元素在容器的基线）|initial（设为默认值）|inherit;</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-背景属性background"><a href="#3-背景属性background" class="headerlink" title="3.背景属性background"></a>3.背景属性background</h5><ul>
+<li>当使用简写属性时，属性值的顺序为：:<ul>
+<li>background-color</li>
+<li>background-image</li>
+<li>background-repeat</li>
+<li>background-attachment</li>
+<li>background-position</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background</td>
+<td>简写属性，作用是将背景属性设置在一个声明中。</td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td>背景图像是否固定或者随着页面的其余部分滚动。</td>
+</tr>
+<tr>
+<td>background-color</td>
+<td>设置元素的背景颜色。</td>
+</tr>
+<tr>
+<td>background-image</td>
+<td>把图像设置为背景。</td>
+</tr>
+<tr>
+<td>background-position</td>
+<td>设置背景图像的起始位置。</td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td>设置背景图像是否及如何重复。</td>
+</tr>
+</tbody></table>
+<h5 id="四-文本格式"><a href="#四-文本格式" class="headerlink" title="四 . 文本格式"></a>四 . 文本格式</h5><ul>
+<li>文本颜色color</li>
+<li>文本对齐方式：text-align</li>
+<li>文本修饰：text-decoration</li>
+<li>文本转换：text-transform</li>
+<li>文本缩进（指定第一行缩进）：text-indent</li>
+<li>指定字符间的距离：letter-spacing（可正可负）</li>
+<li>指定一个段落中行之间的空间：line-height</li>
+<li>指定单词间的间距：word-spacing</li>
+</ul>
+<h2 id="一-CSS3的基本概念"><a href="#一-CSS3的基本概念" class="headerlink" title="一 . CSS3的基本概念"></a>一 . CSS3的基本概念</h2><ul>
+<li>CSS 用于控制网页的样式和布局。而CSS3是CSS技术的升级版本，CSS3语言开发是朝着模块化发展的。</li>
+<li>CSS3使用了层叠样式表技术，可以对网页布局、字体、颜色、背景灯效果做出控制。css3作为css的进阶版，拆分和增加了盒子模型、列表模块、语言模块 、背景边框 、文字特效 、多栏布局等等。CSS3的改变有很多，增加了文字特效，丰富了下划线样式，加入了圈重点的功能。在边框方面，有了更多的灵活性，可以更加轻松地操控渐变效果和动态效果等等。在文字效果方面，特意增加了投影。CSS3在兼容上做了很大的功夫，并且网络浏览器也还将继续支持CSS2，因此原来的代码不需要做太多的改变，只会变得更加地轻松。</li>
+<li>css是指层叠样式表，解决内容与表现分离的问题</li>
+<li>id选择器可为特有的id的html元素指定特定的样式，ID属性不要以数字开头，数字开头的ID在 Mozilla/Firefox 浏览器中不起作用。</li>
+<li><em>不要在属性值与单位之间留有空格（如：”margin-left: 20 px” ），正确的写法是 “margin-left: 20px” 。</em></li>
+</ul>
+<h2 id="二-CSS3的新属性"><a href="#二-CSS3的新属性" class="headerlink" title="二 . CSS3的新属性"></a>二 . CSS3的新属性</h2><h4 id="1-边框border"><a href="#1-边框border" class="headerlink" title="1.边框border"></a>1.边框border</h4><ul>
+<li>圆角边框：border-radius<ul>
+<li>border-radius：左上 右上 右下 左下；</li>
+</ul>
+</li>
+<li>阴影边框：border-shadow<ul>
+<li>box-shadow: 右偏移量 下偏移量 模糊距离 阴影尺寸  颜色 内外阴影；(可同时加多个)</li>
+<li><ul>
+<li>h-shadow：必需，水平阴影的位置。允许负值</li>
+<li>v-shadow：必需。垂直阴影的位置。允许负值。</li>
+<li>blur：可选，模糊距离</li>
+<li>spread：可选，阴影尺寸</li>
+<li>color：颜色</li>
+<li>insert：可选，将外部阴影（outset）改为内部阴影，外部阴影是默认值（不允许写）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图像边框（IE浏览器不支持）：border-image</li>
+<li>对于 border-image，Safari 5 以及更老的版本需要前缀 -webkit-。Opera 支持 border-radius 和 box-shadow 属性，但是对于 border-image 需要前缀 -o-。</li>
+</ul>
+<h4 id="2-图片滤镜filter属性"><a href="#2-图片滤镜filter属性" class="headerlink" title="2.图片滤镜filter属性"></a>2.图片滤镜filter属性</h4><ul>
+<li>为元素添加可视效果（如饱和度与模糊度）</li>
+<li>img{ filter:grayscale(100%); //修改所有图片的颜色为100%灰度}</li>
+<li>常用属性值<ul>
+<li>filter:none | biur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity()| saturate() | sepia() | url();</li>
+</ul>
+</li>
+</ul>
+<p><strong>提示:</strong> 使用空格分隔多个滤镜。</p>
+<h2 id="Filter-函数"><a href="#Filter-函数" class="headerlink" title="Filter 函数"></a>Filter 函数</h2><p><strong>注意:</strong> 滤镜通常使用百分比 (如：75%), 当然也可以使用小数来表示 (如：0.75)。</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>默认值，没有效果。</td>
+</tr>
+<tr>
+<td>blur(<em>px</em>)</td>
+<td>给图像设置高斯模糊。”radius”一值设定高斯函数的标准差，或者是屏幕上以多少像素融在一起， 所以值越大越模糊； 如果没有设定值，则默认是0；这个参数可设置css长度值，但不接受百分比值。</td>
+</tr>
+<tr>
+<td>brightness(<em>%</em>)</td>
+<td>给图片应用一种线性乘法，使其看起来更亮或更暗。如果值是0%，图像会全黑。值是100%，则图像无变化。其他的值对应线性乘数效果。值超过100%也是可以的，图像会比原来更亮。如果没有设定值，默认是1。</td>
+</tr>
+<tr>
+<td>contrast(<em>%</em>)</td>
+<td>调整图像的对比度。值是0%的话，图像会全黑。值是100%，图像不变。值可以超过100%，意味着会运用更低的对比。若没有设置值，默认是1。</td>
+</tr>
+<tr>
+<td>drop-shadow(<em>h-shadow v-shadow blur spread color</em>)</td>
+<td>给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受<shadow>(在CSS3背景中定义)类型的值，除了”inset”关键字是不允许的。该函数与已有的box-shadow box-shadow属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速。<code>&lt;shadow&gt;参数如下：```**&lt;offset-x&gt; &lt;offset-y&gt;** (必须)这是设置阴影偏移量的两个 &lt;length&gt;值. **&lt;offset-x&gt;** 设定水平方向距离. 负值会使阴影出现在元素左边. **&lt;offset-y&gt;**设定垂直距离.负值会使阴影出现在元素上方。查看**&lt;length&gt;**可能的单位. **如果两个值都是0**, 则阴影出现在元素正后面 (如果设置了</code><blur-radius> and/or <spread-radius>，会有模糊效果).``<strong><blur-radius></blur-radius></strong> (可选)这是第三个code&gt;<length>值. 值越大，越模糊，则阴影会变得更大更淡.不允许负值 若未设定，默认是0 (则阴影的边界很锐利).<strong><spread-radius></spread-radius></strong> (可选)这是第四个 <length>值. 正值会使阴影扩张和变大，负值会是阴影缩小.若未设定，默认是0 (阴影会与元素一样大小). 注意: Webkit, 以及一些其他浏览器 不支持第四个长度，如果加了也不会渲染。 <strong><color></color></strong> (可选)查看 <color>该值可能的关键字和标记。若未设定，颜色值基于浏览器。在Gecko (Firefox), Presto (Opera)和Trident (Internet Explorer)中， 会应用color<strong>color</strong>属性的值。另外, 如果颜色值省略，WebKit中阴影是透明的。`</color></length></length></spread-radius></blur-radius></shadow></td>
+</tr>
+<tr>
+<td>grayscale(<em>%</em>)</td>
+<td>将图像转换为灰度图像。值定义转换的比例。值为100%则完全转为灰度图像，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
+</tr>
+<tr>
+<td>hue-rotate(<em>deg</em>)</td>
+<td>给图像应用色相旋转。”angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</td>
+</tr>
+<tr>
+<td>invert(<em>%</em>)</td>
+<td>反转输入图像。值定义转换的比例。100%的价值是完全反转。值为0%则图像无变化。值在0%和100%之间，则是效果的线性乘子。 若值未设置，值默认是0。</td>
+</tr>
+<tr>
+<td>opacity(<em>%</em>)</td>
+<td>转化图像的透明程度。值定义转换的比例。值为0%则是完全透明，值为100%则图像无变化。值在0%和100%之间，则是效果的线性乘子，也相当于图像样本乘以数量。 若值未设置，值默认是1。该函数与已有的opacity属性很相似，不同之处在于通过filter，一些浏览器为了提升性能会提供硬件加速。</td>
+</tr>
+<tr>
+<td>saturate(<em>%</em>)</td>
+<td>转换图像饱和度。值定义转换的比例。值为0%则是完全不饱和，值为100%则图像无变化。其他值，则是效果的线性乘子。超过100%的值是允许的，则有更高的饱和度。 若值未设置，值默认是1。</td>
+</tr>
+<tr>
+<td>sepia(<em>%</em>)</td>
+<td>将图像转换为深褐色。值定义转换的比例。值为100%则完全是深褐色的，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
+</tr>
+<tr>
+<td>url()</td>
+<td>URL函数接受一个XML文件，该文件设置了 一个SVG滤镜，且可以包含一个锚点来指定一个具体的滤镜元素。例如：<code>filter: url(svg-url#element-id)</code></td>
+</tr>
+<tr>
+<td>initial</td>
+<td>设置属性为默认值，可参阅： <a href="https://www.w3cschool.cn/cssref/css-initial.html" target="_blank" rel="noopener">CSS initial 关键字</a></td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>从父元素继承该属性，可参阅：<a href="https://www.w3cschool.cn/cssref/css-inherit.html" target="_blank" rel="noopener">CSS inherit 关键字</a></td>
+</tr>
+</tbody></table>
+<h2 id="三-常见模型和样式表"><a href="#三-常见模型和样式表" class="headerlink" title="三 . 常见模型和样式表"></a>三 . 常见模型和样式表</h2><p><strong>行内元素只有左右边距，没有上下边距，指定padding值可能有bug</strong></p>
+<h4 id="1-居中对齐汇总"><a href="#1-居中对齐汇总" class="headerlink" title="1.居中对齐汇总"></a>1.居中对齐汇总</h4><h5 id="1-1-水平居中对齐"><a href="#1-1-水平居中对齐" class="headerlink" title="1-1 . 水平居中对齐"></a>1-1 . 水平居中对齐</h5><h5 id="margin-0-auto"><a href="#margin-0-auto" class="headerlink" title="margin:0 auto;"></a>margin:0 auto;</h5><p>必须是块级元素，且给定了宽度</p>
+<h5 id="text-align-center"><a href="#text-align-center" class="headerlink" title="text-align:center;"></a>text-align:center;</h5><p>父级元素是块级元素，自身是行内元素或者行内块元素</p>
+<p><strong>width:内容宽；height：内容高；padding：盒宽减去内容宽再除以2；background-clip：content-box；</strong></p>
+<p>利用padding和background-clip配合实现div的水平居中</p>
+<p>.parent{margin:0 auto;width:200px;height:200px;background-color:red;}.children {width: 100px;height: 100px;padding: 50px;background-color: black;background-clip:content-box;/<em>居中的关键</em>/</p>
+<h4 id="2-垂直居中"><a href="#2-垂直居中" class="headerlink" title="2 . 垂直居中"></a>2 . 垂直居中</h4><p><strong>line-height:盒子高</strong></p>
+<p>自身或者父级元素必须有具体行高</p>
+<p>position加translate（-50%，-50%），百分比以自身为基准,适合没固定大小的内容（min-width,max-height,overflow:scroll)</p>
+<style> #ex3_container{ width:200px; height:200px; background-color:yellow; position:relative; } #ex3_content{ left:50%; top:50%; transform:translate(-50%,-50%); -webkit-transform:translate(-50%,-50%); background-color:gray; color:white; position:absolute; } </style>
+
+<p><strong>绝对定位</strong></p>
+<p>祖先容器：position：relative；</p>
+<p>自身：height：***；position：absolute；margin：auto；top：0；left：0；</p>
+<p><em>高度必须给出，建议加overflow：auto；防止内容溢出</em></p>
+<h5 id="内容元素：position-fixed，z-index-999，记住父容器元素position-relative"><a href="#内容元素：position-fixed，z-index-999，记住父容器元素position-relative" class="headerlink" title="内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **"></a>内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **</h5><p>.Absolute-Center.is-Fixed { width: 50%; height: 50%; overflow: auto; margin: auto; position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 999;}</p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><h5 id="1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"><a href="#1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准" class="headerlink" title="1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"></a>1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准</h5><h4 id="2-嵌套块元素垂直外边距的合并"><a href="#2-嵌套块元素垂直外边距的合并" class="headerlink" title="2.嵌套块元素垂直外边距的合并"></a>2.嵌套块元素垂直外边距的合并</h4><p>对于两个嵌套关系的块级元素，如果父级元素没有上内边距及边框，则父元素的上边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会合并</p>
+<p>解决方法：</p>
+<ul>
+<li>可以为父级盒子加上1px的上边框或上内边距</li>
+<li>可以为父元素添加overflow：hidden；</li>
+</ul>
+<h4 id="3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"><a href="#3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）" class="headerlink" title="3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"></a>3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）</h4><p>计算盒子模型总高度时，还应考虑上下两个盒子外边框合并问题</p>
+<p>如果一个盒子没有给定宽度/高度或者继承父亲的宽度/高度，则padding不会影响本盒子的大小</p>
+<p>内盒尺寸（元素实际大小）=width/height+padding+border</p>
+<h4 id="4-盒子模型布局稳定性"><a href="#4-盒子模型布局稳定性" class="headerlink" title="4.盒子模型布局稳定性"></a>4.盒子模型布局稳定性</h4><p>按照优先使用宽度（width），内边距（padding）外边距（margin）</p>
+<p>width &gt; padding &gt; margin</p>
+<p>原因：</p>
+<ul>
+<li>margin会有外边距合并问题还有ie下面的margin加倍的bug，所以最后使用</li>
+<li>padding 会影响盒子的大小，需要进行加减计算，比较麻烦，其次使用</li>
+<li>width没有什么问题</li>
+</ul>
+<h4 id="5-CSS盒模型"><a href="#5-CSS盒模型" class="headerlink" title="5. CSS盒模型"></a>5. CSS盒模型</h4><p>CSS3中可以通过box-sizing来指定盒模型，即指定为content-box，border-box，这样我们在计算盒子大小的方式就发生了变化</p>
+<p>可分为以下两种情况：</p>
+<ul>
+<li><p>box-sizing : content-box ;盒子大小为 width+padding +border，content-border指事默认值，其让元素维持W3C的标准Box Mode</p>
+</li>
+<li><p>box-sizing ： border-box；盒子大小就是width，即padding和border是包含在width里面的，新添属性</p>
+<p><strong>注意</strong>：上面的标注的width指的是CSS属性里设置的width：length；content的值会自动调整的</p>
+</li>
+</ul>
+<h4 id="6-CSS层叠样式"><a href="#6-CSS层叠样式" class="headerlink" title="6 . CSS层叠样式"></a>6 . CSS层叠样式</h4><ul>
+<li>样式冲突，遵循就近原则。哪个样式离结构近，就执行哪个样式</li>
+<li>样式不冲突不会层叠</li>
+</ul>
+<h4 id="7-CSS继承性"><a href="#7-CSS继承性" class="headerlink" title="7.CSS继承性"></a>7.CSS继承性</h4><p>恰当地使用继承可以简化代码，子元素可以继承父元素的样式（text-，font-，line-，这些元素开头的都可以继承，以及color属性）</p>
+<h4 id="8-CSS优先级"><a href="#8-CSS优先级" class="headerlink" title="8.CSS优先级"></a>8.CSS优先级</h4><p>定义css样式时，经常出现两个或更多规则应用在同一元素上，这时就出现优先级问题</p>
+<p>继承样式的权重为0.即在嵌套结构中，不管父元素权重多大，被子元素继承时，他的权重都为0，也就是说子元素定义的样式会覆盖继承来的样式，行内样式优先，应用style属性的元素，其行内样式的权重非常高，远大于100.</p>
+<p>权重相同时遵循就近原则。！important拥有最大的权重</p>
+<h4 id="9-浮动Float"><a href="#9-浮动Float" class="headerlink" title="9.浮动Float"></a>9.浮动Float</h4><ul>
+<li><p>浮动首先包含块的概念（包裹）。也就是说，浮动的元素总是找离他最近的父级元素对齐，但是不会超过内边距的范围</p>
+</li>
+<li><p>浮动元素排列元素，跟上一个元素（块级）有关。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/26/CSS3/">CSS3</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-03-26, 11:48:03</p>
+        <p><span>最后更新:</span>2020-03-26, 11:48:20</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/26/CSS3/" title="CSS3">http://yoursite.com/2020/03/26/CSS3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/CSS3/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/26/Grid布局/">
+                    Grid布局
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-解决老的浏览器支持问题"><span class="toc-number">1.</span> <span class="toc-text">一 . 解决老的浏览器支持问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-加上相应的前缀即可"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.加上相应的前缀即可</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-基本概念"><span class="toc-number">1.0.1.</span> <span class="toc-text">2.基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-选择器"><span class="toc-number">1.0.2.</span> <span class="toc-text">3.选择器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-多重样式优先级深入概念"><span class="toc-number">2.</span> <span class="toc-text">二 . 多重样式优先级深入概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优先级顺序"><span class="toc-number">2.1.</span> <span class="toc-text">优先级顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#important-规则例外"><span class="toc-number">2.2.</span> <span class="toc-text">!important 规则例外</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-优先级法则："><span class="toc-number">2.3.</span> <span class="toc-text">CSS 优先级法则：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目标选择器"><span class="toc-number">2.3.1.</span> <span class="toc-text">目标选择器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-CSS属性"><span class="toc-number">3.</span> <span class="toc-text">三 . CSS属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-align-content"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.align-content</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-语法"><span class="toc-number">4.</span> <span class="toc-text">CSS 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-align-items属性"><span class="toc-number">4.0.1.</span> <span class="toc-text">2.align-items属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-背景属性background"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">3.背景属性background</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#四-文本格式"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">四 . 文本格式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-CSS3的基本概念"><span class="toc-number">5.</span> <span class="toc-text">一 . CSS3的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-CSS3的新属性"><span class="toc-number">6.</span> <span class="toc-text">二 . CSS3的新属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-边框border"><span class="toc-number">6.0.1.</span> <span class="toc-text">1.边框border</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-图片滤镜filter属性"><span class="toc-number">6.0.2.</span> <span class="toc-text">2.图片滤镜filter属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter-函数"><span class="toc-number">7.</span> <span class="toc-text">Filter 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-常见模型和样式表"><span class="toc-number">8.</span> <span class="toc-text">三 . 常见模型和样式表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-居中对齐汇总"><span class="toc-number">8.0.1.</span> <span class="toc-text">1.居中对齐汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-水平居中对齐"><span class="toc-number">8.0.1.1.</span> <span class="toc-text">1-1 . 水平居中对齐</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#margin-0-auto"><span class="toc-number">8.0.1.2.</span> <span class="toc-text">margin:0 auto;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#text-align-center"><span class="toc-number">8.0.1.3.</span> <span class="toc-text">text-align:center;</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-垂直居中"><span class="toc-number">8.0.2.</span> <span class="toc-text">2 . 垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#内容元素：position-fixed，z-index-999，记住父容器元素position-relative"><span class="toc-number">8.0.2.1.</span> <span class="toc-text">内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">8.1.</span> <span class="toc-text">注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"><span class="toc-number">8.1.0.1.</span> <span class="toc-text">1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-嵌套块元素垂直外边距的合并"><span class="toc-number">8.1.1.</span> <span class="toc-text">2.嵌套块元素垂直外边距的合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"><span class="toc-number">8.1.2.</span> <span class="toc-text">3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-盒子模型布局稳定性"><span class="toc-number">8.1.3.</span> <span class="toc-text">4.盒子模型布局稳定性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-CSS盒模型"><span class="toc-number">8.1.4.</span> <span class="toc-text">5. CSS盒模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-CSS层叠样式"><span class="toc-number">8.1.5.</span> <span class="toc-text">6 . CSS层叠样式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-CSS继承性"><span class="toc-number">8.1.6.</span> <span class="toc-text">7.CSS继承性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-CSS优先级"><span class="toc-number">8.1.7.</span> <span class="toc-text">8.CSS优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-浮动Float"><span class="toc-number">8.1.8.</span> <span class="toc-text">9.浮动Float</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"CSS3　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/26/Grid布局/" title="下一篇: Grid布局">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

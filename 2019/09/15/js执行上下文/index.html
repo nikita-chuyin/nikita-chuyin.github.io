@@ -15,21 +15,18 @@
 
 
 
-<meta name="description" content="行内元素之间存在间距的问题行内元素不换行刚在做项目的时候，发现发现，display:inline-block；的元素（即行内元素）之间存在一些间距。我查看之后发现没有margin,padding这种东西。即使我使用通配符也不能消除内外边距，究其原因是行内元素的回车换行符引起的。看看以下实例： 123&amp;lt;input /&amp;gt;&amp;lt;button&amp;gt;提交&amp;lt;/button&amp;gt;&amp;lt;">
+<meta name="description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="行内元素存在间距问题">
-<meta property="og:url" content="http://yoursite.com/2020/03/10/行内元素存在间距问题/index.html">
+<meta property="og:title" content="js执行上下文">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/js执行上下文/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="行内元素之间存在间距的问题行内元素不换行刚在做项目的时候，发现发现，display:inline-block；的元素（即行内元素）之间存在一些间距。我查看之后发现没有margin,padding这种东西。即使我使用通配符也不能消除内外边距，究其原因是行内元素的回车换行符引起的。看看以下实例： 123&amp;lt;input /&amp;gt;&amp;lt;button&amp;gt;提交&amp;lt;/button&amp;gt;&amp;lt;">
+<meta property="og:description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C932$0W~%5B9J$8B%KDTI%7D%5BY%60K.png">
-<meta property="og:image" content="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C9%5D$V0J_KVL$_FSTPS38OGT9.png">
-<meta property="og:updated_time" content="2020-03-10T01:43:34.478Z">
+<meta property="og:updated_time" content="2020-03-26T02:00:00.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="行内元素存在间距问题">
-<meta name="twitter:description" content="行内元素之间存在间距的问题行内元素不换行刚在做项目的时候，发现发现，display:inline-block；的元素（即行内元素）之间存在一些间距。我查看之后发现没有margin,padding这种东西。即使我使用通配符也不能消除内外边距，究其原因是行内元素的回车换行符引起的。看看以下实例： 123&amp;lt;input /&amp;gt;&amp;lt;button&amp;gt;提交&amp;lt;/button&amp;gt;&amp;lt;">
-<meta name="twitter:image" content="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C932$0W~%5B9J$8B%KDTI%7D%5BY%60K.png">
+<meta name="twitter:title" content="js执行上下文">
+<meta name="twitter:description" content="js的执行上下文执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。 执行上下文的的三种类型全局执行上下文：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：  创建一个全局对象，在浏览器中这个全局对象就是window对象。 将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。  函数执行上">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -61,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>行内元素存在间距问题 | Nikita</title>
+<title>js执行上下文 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-行内元素存在间距问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/10/行内元素存在间距问题/" class="article-date">
-      <time datetime="2020-03-10T01:42:10.000Z" itemprop="datePublished">2020-03-10</time>
+      <a href="/2019/09/15/js执行上下文/" class="article-date">
+      <time datetime="2019-09-15T12:36:10.000Z" itemprop="datePublished">2019-09-15</time>
 </a>
 
 
@@ -284,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      行内元素存在间距问题
+      js执行上下文
     </h1>
   
 
@@ -301,44 +298,65 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="行内元素之间存在间距的问题"><a href="#行内元素之间存在间距的问题" class="headerlink" title="行内元素之间存在间距的问题"></a>行内元素之间存在间距的问题</h4><h6 id="行内元素不换行"><a href="#行内元素不换行" class="headerlink" title="行内元素不换行"></a>行内元素不换行</h6><p>刚在做项目的时候，发现发现，display:inline-block；的元素（即行内元素）之间存在一些间距。我查看之后发现没有margin,padding这种东西。即使我使用通配符也不能消除内外边距，究其原因是行内元素的回车换行符引起的。看看以下实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input /&gt;</span><br><span class="line">&lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;input type=&quot;text&quot;&gt;&lt;input type=&quot;submit&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C932$0W~%5B9J$8B%KDTI%7D%5BY%60K.png" alt="img"></p>
-<p>可以看出相邻行内元素间当换行写时有间隔，不换行写时没有间隔。元素间留白间距出现的原因就是标签段之间的空格，因此，去掉HTML中的空格，自然间距就木有了。</p>
-<p>故解决方法之一是行内元素在编辑器中不换行。但考虑到代码可读性，显然连成一行的写法是不可取的。</p>
-<h6 id="使用margin负值"><a href="#使用margin负值" class="headerlink" title="使用margin负值"></a>使用margin负值</h6><p>我们还可以使用margin负值，但是margin负值的大小与上下文的字体和文字大小相关。</p>
-<p>例如，对于12像素大小的上下文，Arial字体的<code>margin</code>负值为<code>-3</code>像素，Tahoma和Verdana就是<code>-4</code>像素，而Geneva为<code>-6</code>像素。</p>
-<p>由于外部环境的不确定性，以及最后一个元素多出的父margin值等问题，这个方法不适合大规模使用。</p>
-<h6 id="不写闭合标签"><a href="#不写闭合标签" class="headerlink" title="不写闭合标签"></a>不写闭合标签</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;space&quot;&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;惆怅&lt;/a&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;淡定&lt;/a&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;热血&lt;/a&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;div class=&quot;space&quot;&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;惆怅</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;淡定</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;热血&lt;/a&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   /*为了兼容IE6/IE7的浏览器，最后一个列表的标签的结束（闭合）标签不能丢。*/</span><br></pre></td></tr></table></figure>
-
-<p><img src="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C9%5D$V0J_KVL$_FSTPS38OGT9.png" alt="img"></p>
-<h6 id="设置font-size为0；"><a href="#设置font-size为0；" class="headerlink" title="设置font-size为0；"></a>设置font-size为0；</h6><p>添加样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    font-size: 0;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个方法，基本上可以解决大部分浏览器下inline-block元素之间的间距(IE7等浏览器有时候会有1像素的间距)。但是随之而来的问题就是这个盒子里不能有文字了，其子元素可以设置字体需多嵌套一层。</p>
-<h6 id="使用letter-spacing"><a href="#使用letter-spacing" class="headerlink" title="使用letter-spacing"></a>使用letter-spacing</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    letter-spacing: -5px;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    letter-spacing: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>该方法可以搞定基本上所有浏览器。</p>
-<h6 id="使用word-spacing"><a href="#使用word-spacing" class="headerlink" title="使用word-spacing"></a>使用word-spacing</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    word-spacing: -5px;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    word-spacing: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个是字符间距(<code>letter-spacing</code>)一个是单词间距(<code>word-spacing</code>)，大同小异。</p>
-<h6 id="使用浮动"><a href="#使用浮动" class="headerlink" title="使用浮动"></a>使用浮动</h6><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>行内元素之间存在间距的问题解决方法：</p>
+        <h2 id="js的执行上下文"><a href="#js的执行上下文" class="headerlink" title="js的执行上下文"></a>js的执行上下文</h2><p>执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。</p>
+<h4 id="执行上下文的的三种类型"><a href="#执行上下文的的三种类型" class="headerlink" title="执行上下文的的三种类型"></a>执行上下文的的三种类型</h4><p><strong>全局执行上下文</strong>：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：</p>
+<ul>
+<li>创建一个全局对象，在浏览器中这个全局对象就是window对象。</li>
+<li>将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
+</ul>
+<p><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在被调用时才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，她都会按照特定的顺序执行一系列步骤。</p>
+<p><strong>Eval函数执行上下文</strong>：运行在eval函数中的代码也获得自己的执行上下文。</p>
+<h4 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h4><p>执行上下文的生命周期包括三个阶段：<strong>创建阶段——执行阶段——回收阶段</strong></p>
+<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>当函数被调用时，但未被执行其内部任意代码前，会做以下三件事：</p>
 <ol>
-<li>行内元素不换行，但这样页面不够美观。</li>
-<li>使用margin负值，这个得结合字体大小调整，不是特别建议使用。</li>
-<li>不写闭合标签。</li>
-<li>使用font-size:0px;这样也可以使间距消失，但是随之而来的问题就是这个盒子里不能有文字了，其子元素可以设置字体需多嵌套一层。</li>
-<li>使用letter-spacing或word-spaing。</li>
-<li>最后一个flot，flot:left。不建议使用，使用时注意清除浮动。</li>
+<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
+<li>创建作用域链（scope chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，js始终从代码嵌套的最内层开始，如果最内层没有该变量，就往上一层父级作用域中找，直到找到变量。</li>
+<li>确定this指向</li>
 </ol>
-<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><p>最近还在用canvas绘图，想要实现设置画布宽高为屏幕宽高，但是页面出现了滚动条，而这也是行内元素的杰作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> var w = window.innerWidth,</span><br><span class="line">     h = window.innerHeight;</span><br><span class="line">var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">   canvas.width = w;</span><br><span class="line">   canvas.height = h;</span><br></pre></td></tr></table></figure>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
+<p>以上过程实则为代码的预处理阶段，详细过程如下：</p>
+<ol>
+<li>读取分析整个源代码</li>
+<li>先扫描函数声明，之后扫描变量（var声明）<ul>
+<li>处理函数声明时有冲突，会覆盖。</li>
+<li>处理变量声明有冲突，会忽略。</li>
+</ul>
+</li>
+<li>将扫描到的函数和变量保存到一个对象中（全局的会保存在window对象中）</li>
+<li>变量的值是undefined，函数的值则是指向该函数（是一个函数字符串）<ul>
+<li>形式如：window = { x : undefined , f : ‘function(){console.log(1);}’ }</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>执行变量赋值、代码执行。</p>
+<p>该过程为：</p>
+<ol>
+<li><p>将变量的值从undefined改为给定值。</p>
+</li>
+<li><p>调用函数f（），以便函数得到执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">上面函数(f)内，代码的处理过程：</span><br><span class="line"></span><br><span class="line">    1、预处理阶段</span><br><span class="line"></span><br><span class="line">        a、将函数的参数添加到一个对象（暂定为：词法对象）</span><br><span class="line"></span><br><span class="line">        b、扫描函数声明，之后扫描变量(var声明)</span><br><span class="line"></span><br><span class="line">        d、将扫描到的函数和方法添加到词法对象里面</span><br><span class="line"></span><br><span class="line">        c、变量的值是undefined，函数的值则指向该函数（与全局的一样）</span><br><span class="line"></span><br><span class="line">    2、运行阶段</span><br><span class="line"></span><br><span class="line">        与全局的的运行原理一样</span><br></pre></td></tr></table></figure>
 
-<p>解决方法：</p>
-<p>既然是行内元素引起的，那我就将元素设置为块级元素。同时去除默认边距。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">          margin: 0;</span><br><span class="line">          padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line">      #canvas&#123;</span><br><span class="line">          background-color: red;</span><br><span class="line">          display: block;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h4><p>执行上下文出栈等待虚拟机回收执行上下文</p>
+<p>看看一下例子就知道变量提升是怎么回事了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    var arg = &apos;hello&apos;; // 3.var arg 变量声明被忽略， arg = &apos;hello&apos;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">	console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line">test(&apos;hi&apos;);</span><br><span class="line">/* 输出：</span><br><span class="line">function arg()&#123;</span><br><span class="line">    console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">hello </span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
+<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
+<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。<strong>可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则</strong>。</p>
+<p>我们需要记住几个关键点：</p>
+<ul>
+<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
+<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
+<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
+<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
+<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
+</ul>
+<p>推荐：</p>
+<p><a href="https://www.cnblogs.com/lark-/p/7954047.html" target="_blank" rel="noopener">https://www.cnblogs.com/lark-/p/7954047.html</a></p>
 
       
     </div>
@@ -347,13 +365,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/15/js执行上下文/">js执行上下文</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2020-03-10, 09:42:10</p>
-        <p><span>最后更新:</span>2020-03-10, 09:43:34</p>
+        <p><span>发布时间:</span>2019-09-15, 20:36:10</p>
+        <p><span>最后更新:</span>2020-03-26, 10:00:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/03/10/行内元素存在间距问题/" title="行内元素存在间距问题">http://yoursite.com/2020/03/10/行内元素存在间距问题/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/10/行内元素存在间距问题/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/15/js执行上下文/" title="js执行上下文">http://yoursite.com/2019/09/15/js执行上下文/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/15/js执行上下文/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -366,15 +384,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/03/10/js中callee和caller/">
-                    js中callee和caller
+                <a href="/2019/12/27/webpack学习/">
+                    webpack学习
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/03/09/canvas绘制碰撞球动画/">
-                    canvas绘制碰撞球动画
+                <a href="/2019/09/11/css盒模型集锦/">
+                    css盒模型集锦
                 </a>
             </div>
         
@@ -386,7 +404,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#行内元素之间存在间距的问题"><span class="toc-number">1.</span> <span class="toc-text">行内元素之间存在间距的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#行内元素不换行"><span class="toc-number">1.0.1.</span> <span class="toc-text">行内元素不换行</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用margin负值"><span class="toc-number">1.0.2.</span> <span class="toc-text">使用margin负值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#不写闭合标签"><span class="toc-number">1.0.3.</span> <span class="toc-text">不写闭合标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置font-size为0；"><span class="toc-number">1.0.4.</span> <span class="toc-text">设置font-size为0；</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用letter-spacing"><span class="toc-number">1.0.5.</span> <span class="toc-text">使用letter-spacing</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用word-spacing"><span class="toc-number">1.0.6.</span> <span class="toc-text">使用word-spacing</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用浮动"><span class="toc-number">1.0.7.</span> <span class="toc-text">使用浮动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注："><span class="toc-number">3.</span> <span class="toc-text">注：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js的执行上下文"><span class="toc-number">1.</span> <span class="toc-text">js的执行上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文的的三种类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">执行上下文的的三种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文的生命周期"><span class="toc-number">1.0.2.</span> <span class="toc-text">执行上下文的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建阶段"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">创建阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行阶段"><span class="toc-number">1.0.3.</span> <span class="toc-text">执行阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回收阶段"><span class="toc-number">1.0.4.</span> <span class="toc-text">回收阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行上下文栈"><span class="toc-number">1.0.5.</span> <span class="toc-text">执行上下文栈</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -422,7 +440,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"行内元素存在间距问题　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"js执行上下文　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -442,7 +460,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/10/js中callee和caller/" title="上一篇: js中callee和caller">
+            <a href="/2019/12/27/webpack学习/" title="上一篇: webpack学习">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -450,7 +468,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/03/09/canvas绘制碰撞球动画/" title="下一篇: canvas绘制碰撞球动画">
+            <a href="/2019/09/11/css盒模型集锦/" title="下一篇: css盒模型集锦">
                 <i class="fa fa-angle-right"></i>
             </a>
         
