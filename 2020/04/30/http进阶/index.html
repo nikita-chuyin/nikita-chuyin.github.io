@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="Telnet实例由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。 Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。 Web结构组件 代理：位于客户端和服务器之间的HTTP中间实体。">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http进阶">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/http进阶/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="Telnet实例由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。 Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。 Web结构组件 代理：位于客户端和服务器之间的HTTP中间实体。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E9%9A%A7%E9%81%93.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430094207000.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502215359440.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220337984.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220845355.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221420633.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221552479.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503080735091.png">
+<meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503082210004.png">
+<meta property="og:updated_time" content="2020-05-03T00:22:49.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http进阶">
+<meta name="twitter:description" content="Telnet实例由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。 Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。 Web结构组件 代理：位于客户端和服务器之间的HTTP中间实体。">
+<meta name="twitter:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E9%9A%A7%E9%81%93.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>http进阶 | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-http进阶" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/30/http进阶/" class="article-date">
+      <time datetime="2020-04-29T23:40:38.000Z" itemprop="datePublished">2020-04-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      http进阶
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h6 id="Telnet实例"><a href="#Telnet实例" class="headerlink" title="Telnet实例"></a>Telnet实例</h6><p>由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。</p>
+<p>Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。</p>
+<h4 id="Web结构组件"><a href="#Web结构组件" class="headerlink" title="Web结构组件"></a>Web结构组件</h4><ol>
+<li>代理：位于客户端和服务器之间的HTTP中间实体。</li>
+<li>缓存：HTTP的仓库，是常用页面的副本可以存在离客户端更近的地方。</li>
+<li>网关：连接应用程序的特殊Web服务器。</li>
+<li>隧道：对HTTP通信报文进行盲转发的特殊代理。</li>
+<li>Agent代理：发起自动HTTP请求的半智能Web客户端。</li>
+</ol>
+<h6 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h6><p>HTTP代理服务器是Web安全，应用集成以及性能优化的重要组成模块。</p>
+<p>代理位于客户端与服务器之间，接收所有客户端的HTTP请求，并将这些请求转发给服务器（可能会对请求进行修改之后转发）。对用户来说，这些应用程序就是一个代理，代表用户访问服务器。</p>
+<p>出于安全考虑，通常会将代理作为转发所有Web流量的可信任中间节点使用。代理还可以对请求和响应进行过滤。比如，在企业中对下载的应用程序进行病毒检测，或者对小学生屏蔽一些成人才能看的内容。</p>
+<h6 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h6><p>WEb缓存（Web cache）或代理缓存（proxy cache）是一种特殊的HTTP代理服务器，可以将经过代理传送的常用文档复制保存起来。下一个请求同一文档的客户端就可以享受缓存的私有副本所提供的服务了。</p>
+<h6 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h6><p>网关（gateway）是一种特殊的服务器，作为其他服务器的中间实体使用，通常用于将HTTP流量转换成其他的协议。网关接受时就好像自己是咨议员的源端服务器一样。客户端可能并不知道自己正在与一个网关进行通信。</p>
+<p>如：一个HTTP/FTP网关会通过HTTP请求接受对FTP URI的请求，但通过FTP协议来获取文档。得到的文档会被封装成一条HTTP报文发给客户端。</p>
+<h6 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h6><p>隧道（tunnel）是建立起来之后就会在两条连接之间对原始数据进行盲转发的HTTP应用程序。HTTP隧道通常用来在一条或多条HTTP连接上进行转发非HTTP数据，转发时不会窥探数据。</p>
+<p>HTTP隧道的一种常见用途是通过HTTP连接承载加密的安全套接字层（SSL,Secure Socket Layout)流量，这样ssl流量就可以穿过只允许Web流量通过的防火墙了。</p>
+<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E9%9A%A7%E9%81%93.png" alt="隧道"></p>
+<p>如：HTTP/SSL隧道收到一条HTTP请求，要求建立一条到目的的地址和端口的输出连接，然后在HTTP信道上通过隧道传输加密的SSL流量，这样就可以将其转发到目的服务器上。</p>
+<h6 id="Agent代理"><a href="#Agent代理" class="headerlink" title="Agent代理"></a>Agent代理</h6><p>用户代理是代表用户发起HTTP请求的客户端程序。所有发布Web请求的应用程序都是HTTP Agent代理。到目前为止，我们只提过一种HTTP Agent代理：WEb浏览器，但用户Agent代理还有很多类型。</p>
+<p>如：有些自己会在Web上闲逛的自动用户Agent代理，可以在无人监视的情况下发布HTTP事务并获取内容。这些自动代理的名字很生动，比如“网络蜘蛛”或“web机器人”。网络蜘蛛会在WEb上闲逛，搜集信息以构建有效的Web内容档案，比如一个搜索引擎的数据库或者为比较购物机器人生成的产品目录。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430094207000.png" alt="image-20200430094207000"></p>
+<h4 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h4><p>请求报文格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;method&gt;     &lt;request-URL&gt;  &lt;version&gt;</span><br><span class="line">&lt;headers&gt; </span><br><span class="line">&lt;entrity-body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;version&gt;   &lt;status&gt;   &lt;response-phrase&gt;</span><br><span class="line">&lt;headers&gt;</span><br><span class="line">&lt;entrity-body&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方法（method）"><a href="#方法（method）" class="headerlink" title="方法（method）"></a>方法（method）</h6><p>客户端希望服务器对资源执行的动作，是一个单独的词，比如GET,HEAD或POST.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>是否包含主体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>从服务器获取一份文档</td>
+<td>否</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>只从服务器获取文档的首部</td>
+<td>否</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向服务器发送需要处理的数据</td>
+<td>是</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>将请求的主体部分存储在服务器上</td>
+<td>是</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>对可能经过代理服务器传送到服务器上去的报文进行追踪</td>
+<td>否</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>决定可以在服务器上执行哪些方法</td>
+<td>否</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>从服务器上删除一份文档</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p><strong>扩展方法</strong>：指的是没有在HTTP/1.1规范中定义的方法，服务器会为它所管理的资源实现一些二HTTP服务，这些方法为开发者提供了一种扩展这些HTTP服务能力的手段。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LOCK</td>
+<td>允许用户“锁定”资源——比如，可以在编辑某个资源的时候将其锁定，以防别人对其进行修改。</td>
+</tr>
+<tr>
+<td>MKCOL</td>
+<td>允许用户创建资源</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td>便于在服务器上复制资源</td>
+</tr>
+<tr>
+<td>MOVE</td>
+<td>在服务器上移动资源</td>
+</tr>
+</tbody></table>
+<p>惯例：对所发送的内容要求严一点，对接收的内容宽容一些处理扩展方法。</p>
+<ol start="2">
+<li><p>请求URL(request-URL)</p>
+<p>命名了所有请求资源，或者URL路径组件的完整URL。如果直接与服务器进行对话，只要URL的路径组件是资源的绝对路径，通常就不会有什么问题——服务器可以假定自己是URL的主机/端口。</p>
+</li>
+<li><p>版本（version）</p>
+</li>
+<li><p>状态码（status-code）</p>
+<p>这三位数字描述了请求过程中所发生的情况。每个状态码的第一位数字都用于描述状态的一般类型（“成功”、“出错”）。</p>
+<p><strong>状态码分类</strong></p>
+<table>
+<thead>
+<tr>
+<th>整体范围</th>
+<th>已定义范围</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100-199</td>
+<td>100-101</td>
+<td>信息提示</td>
+</tr>
+<tr>
+<td>200-299</td>
+<td>200-206</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>300-399</td>
+<td>300-305</td>
+<td>重定向</td>
+</tr>
+<tr>
+<td>400-499</td>
+<td>400-415</td>
+<td>客户端错误</td>
+</tr>
+<tr>
+<td>500-599</td>
+<td>500-505</td>
+<td>服务器错误</td>
+</tr>
+</tbody></table>
+<p><strong>常见状态码</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>OK</td>
+<td>成功。请求的所有数据都在响应主体中。</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized（未授权）</td>
+<td>需要输入用户名和密码</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found（未找到）</td>
+<td>服务器无法找到所请求URL对应的资源</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented（无法实现）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>信息性状态码</strong>‘</p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>说明受到了请求的初始部分，请客户端继续，发送了这个状态码后，服务器在收到请求后必须进行响应。</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>说明服务器正在根据客户端的指定，将协议切换成Update’首部所列的协议。</td>
+</tr>
+</tbody></table>
+<p>100 Continue是一种优化，客户端应用程序只有在避免向服务器发送一个服务器无法处理或使用的大实体时才会使用100 Continue。当服务端超时一定时间后，客户端直接将实体发出去。</p>
+<p><strong>成功状态码</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>请求没问题，实体的主体部分包含了所请求的资源</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>201</td>
+<td>用于创建对象的请求（PUT)。响应的主体部分包含各种已创建资源的URL，location首部包含则是最具体的引用。</td>
+<td>Created</td>
+</tr>
+<tr>
+<td>202</td>
+<td>请求已被接受，但服务器还未对其执行任何动作，不能保证服务器会完成这个请求。</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td>203</td>
+<td>实体部分包含的资源不是来自源服务器，而是来自资源的一份副本。如果中间节点上有一份资源副本，但无法对它所发送的与资源有关的元信息（首部）进行验证，就会出现这种情况。</td>
+<td>Non-Authoritative-Information</td>
+</tr>
+<tr>
+<td>204</td>
+<td>响应报文中包含若干首部和一个状态行，但没有实体部分，主要用于在浏览器不转为显示新文档的情况下，对其将进行更新（如刷新一个表单页面）</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td>205</td>
+<td>另一个主要用于浏览器的代码，负责告诉浏览器清除当前页面中所有HTML表单元素。</td>
+<td>Reset Content</td>
+</tr>
+<tr>
+<td>206</td>
+<td>成功执行一部分请求。稍后会看到，客户端可以通过一些特殊的首部来获取部分或某个范围内的文档——这个状态码就说明请求成功了。</td>
+<td>Partial Content</td>
+</tr>
+</tbody></table>
+<p><strong>重定向状态码</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>客户端请求一个实际指向多个资源的URL时会返回这个状态码，比如服务器上有某个HTML文档的英语和法语版本。返回这个代码时会带有一个选项列表，这样用户就可以选择他希望使用的那一项了。有多个版本1可用时，客户端需要沟通解决。</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permananently</td>
+<td>在请求的URL已被移除时使用。响应的Location首部中应该包含资源现在所处的URL。</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>与301状态码相似，但是客户端应该使用Location首部给出的URL来临时定位资源。将来的请求仍应使用老的URL。</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>告知客户端应该用另一个URL来获取资源。新的URL位于响应报文的Location首部。其主要目的是允许POST请求的响应将客户端定向到某个资源上去。</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>客户端可以通过所包含的请求首部，使其请求变成有条件的。如果客户端发起一个GET请求，而最近资源未被修改，就可用这个状态码来说明资源未被修改，带有这个状态吗的响应不应该包含实体的主体部分。</td>
+</tr>
+<tr>
+<td>305</td>
+<td>Use Proxy</td>
+<td>用来说明必须通过一个代理来访问资源，代理的位置由Location首部给出。很重要一点是，客户端是相对某个特定资源来解析这个响应的，不能假定所有请求，甚至所有对持有所请求资源的服务器的请求都通过这个代理进行。如果客户端错误的让代理介入了某条请求，可能会引发破环性的行为，而且会造成安全漏洞。</td>
+</tr>
+<tr>
+<td>306</td>
+<td>（未使用）</td>
+<td>当前未使用</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>与301状态码相似，但是客户端应该使用Location首部给出的URL来临时定位资源。将来的请求仍应使用老的URL。</td>
+</tr>
+</tbody></table>
+<p><strong>客户端错误</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>用于告诉客户端他发送了一个错误的请求</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>与适当的首部一同返回，在这些首部中请求客户端在获取对资源的访问权之前，对自己进行认证。</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>现在这个状态码还未使用，但已经被保留，以作未来之用。</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>用以说明请求被服务器拒绝了，如果服务器想说明为什么拒绝请求，可以包含实体的主体部分来对原因进行描述。但这个状态通常是在服务器不想说明拒绝原因的时候使用的。</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>用于说明服务器无法找到所请求的URL。通常会包含一个实体以便客户端应用程序显示给用户看。</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>发起的请求中带所请求的URL不支持的方法时，使用此状态码。应该在响应中包含Allow首部，以告知客户端对请求的资源可以使用哪些方法。</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>客户端可以指定参数来说明他们愿意接受什么类型的实体。服务器没有与客户端可接受的URL相匹配的资源时，使用此代码。通常，服务器会包含一些首部以便客户端弄清楚为什么请求无法满足。</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>与401状态码类似，但用于要求对资源进行认证的代理服务器。</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>如果客户端完成请求所花的时间太长，服务器可以回送此状态码，并关闭连接。超时时长随服务器的不同而不同，但通常对所有合法请求来说都是够长的。</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>用于说明请求可能在资源上引发的一些冲突，服务器担心请求会引发冲突时可发送此状态码。响应中应该包含描述冲突的主体。</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>与404相似，只要服务曾经拥有过此资源。主要用于Web站点的维护，这样服务器的管理者就可以在资源被移除的情况下通知客户端了。</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>服务器要求在请求报文中包含Content-Length首部时使用。</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>客户端发起了条件请求且其中一个条件失败时使用。</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entrity Too Large</td>
+<td>客户端发送实体主体部分比服务器能够或希望处理的要大时发送此状态码。</td>
+</tr>
+<tr>
+<td>414</td>
+<td>Request URL Too Long</td>
+<td>客户端发送请求中的URL比服务器希望处理的要大时发送此状态码。</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>服务器无法理解或无法支持客户端所发送实体的内容类型时</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Unsupported Media Type</td>
+<td>请求报文所请求的是指定资源的某个范围，而此范围无效或无法满足时使用此状态码。</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>请求的Expect请求首部包含了一个期望，但服务器无法满足此期望时，使用此状态码。如果代理或其他中间应用程序与确切证据说明源端服务器会为某请求产生一个失败的期望就可发送此状态码。</td>
+</tr>
+</tbody></table>
+<p><strong>服务器错误</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器遇到一个妨碍它为请求提供服务的错误时使用此状态码。</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>客户端发起的请求超出服务器的能力范围。</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>作为代理或网关使用的服务器从请求响应链的下一条链路上收到了一条伪响应（如，他无法链接到其父网关时）。</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>用来说明服务器现在不能为请求提供服务，但将来可以。如果服务器知道什么时候资源会变为可用的，可在响应中包含一个Retry-After首部。</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>与状态码408相似，只是这里的响应来自一个网关或代理，他们在等待另一服务器对其请求进行响应时超时了。</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>服务器收到的请求使用了它无法或不愿支持的协议版本。有些服务器应用程序会选择不支持协议的早期版本。</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<ol start="5">
+<li><p>原因短语（reason-phrase）</p>
+<p>数字状态码的可读版本，包含行终止序列的所有文本。</p>
+</li>
+<li><p>首部（header）</p>
+<p>可以有零个或多个首部，每个首部都包含一个名字，后面跟着一个冒号，然后是一个可选的空格，接着是一个值，最后是一个CRLF。首部是由一个空行结束的，表示了首部列表的结束和实体主体部分的开始。</p>
+<p><strong>首部分类</strong></p>
+<ul>
+<li>通用首部：既可以出现在请求报文中，又可以出现在响应报文中。</li>
+<li>请求首部：提供更多有关请求的信息。</li>
+<li>响应首部：提供更多有关响应的信息。</li>
+<li>实体首部：描述主体的长度和内容，或者资源自身。</li>
+<li>扩展首部：规范中没有定义的新首部。</li>
+</ul>
+<p><strong>常见首部实例</strong></p>
+<table>
+<thead>
+<tr>
+<th>首部实例</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date：Tue,3 Oct 1997  02:16:03  GMT</td>
+<td>服务器产生响应的日期</td>
+</tr>
+<tr>
+<td>Content-length:15040</td>
+<td>实体的主体部分包含了</td>
+</tr>
+<tr>
+<td>Content-type:image/gif</td>
+<td>实体的主体部分是一个GIF图片</td>
+</tr>
+<tr>
+<td>Accept:image/gif, image/jpeg, text/html</td>
+<td>客户端可以接收</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>允许客户端和服务器指定与请求或响应连接有关的选项。</td>
+</tr>
+<tr>
+<td>MIME-Version</td>
+<td>给定发送端使用的MIME版本。</td>
+</tr>
+<tr>
+<td>Trailer</td>
+<td>如果报文采用了分块传输编码（chunked transfer encoding）方式就可以用这个首部列出位于报文拖挂（trailer）部分的首部集合。</td>
+</tr>
+<tr>
+<td>Transfer-Encoding</td>
+<td>告知接收端为了保证报文可靠传输，对报文采取什么编码方式。</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>给出了发送端可能想要“升级”使用的新版本或协议。</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>显示了报文经过的中间节点（代理，网关）</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>实体的主体部分（entrity-body）</p>
+<p>实体的主体部分包含一个由任意数据组成的数据块。并不是所有的报文都包含实体的主体部分。</p>
+</li>
+</ol>
+<h6 id="通用首部"><a href="#通用首部" class="headerlink" title="通用首部"></a>通用首部</h6><p>通用缓存首部：HTTP/1.0引入了第一个允许HTTP应用程序缓存对象本地副本的首部，这样就不需要总是直接从源端服务器获取了。</p>
+<table>
+<thead>
+<tr>
+<th>首部</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache-Control</td>
+<td>用于随报文传送缓存指示。</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>另一种随报文传送指示的方式，但并不专用于缓存。</td>
+</tr>
+</tbody></table>
+<p><strong>请求首部</strong>：是只在请求报文中有意义的首部，用于说明是谁或什么在发送请求，请求源自何处，或者客户端的喜好和能力。服务器可以根据请求首部给出的客户端信息，试着为客户端提供更好的响应。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502215359440.png" alt="image-20200502215359440"></p>
+<p><strong>Accept首部</strong>为客户端提供一种将其喜好和能力告知服务器的方式，包括它们想要什么，可以使用什么，以及最重要的，他们不想要什么，这样，服务器可以根据这些额外的信息，对要发送的内容做出更明智的决定。Accept首部会使连接的两端都受益。客户端会得到它们想要的内容，服务器则不会浪费时间和带宽来发送客户端无法使用的东西。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220337984.png" alt="image-20200502220337984"></p>
+<p><strong>条件请求首部</strong>：有时客户端希望为请求加上某些限制。比如，如果客户端已经有了一份文件副本就希望只在服务器上的文档与客户端拥有的副本有所区别时才请求服务器传输文档。通过条件请求首部，客户端就可以为请求加上这种限制，要求服务器在对请求进行响应前，确保某个条件为真。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220845355.png" alt="image-20200502220845355"></p>
+<p><strong>安全请求首部</strong></p>
+<p>HTTP本身就支持一种简单的机制，可以对请求进行质询/响应认证。这种机制要求客户端在获取特定资源之前，先对自身进行认证，这样就可以使事务稍微安全一些。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221420633.png" alt="image-20200502221420633"></p>
+<p><strong>代理请求首部</strong></p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221552479.png" alt="image-20200502221552479"></p>
+<h6 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h6><p>响应报文有自己的响应首部集。响应首部为客户端提供了一些额外信息，比如谁发送响应，响应者的功能，甚至与响应相关的一些特殊指令，这些首部有助于客户端处理响应，并在将来发起更好的请求。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503080735091.png" alt="image-20200503080735091"></p>
+<p><strong>协商首部</strong></p>
+<p>如果资源有多种表示方法——如，若服务器上有某文档的法语和德语译稿，HTTP/1.1可以为服务器和客户端提供对资源进行协商的能力。</p>
+<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503082210004.png" alt="image-20200503082210004"></p>
+<p><strong>安全响应首部</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/04/30/http进阶/">http进阶</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-04-30, 07:40:38</p>
+        <p><span>最后更新:</span>2020-05-03, 08:22:49</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/04/30/http进阶/" title="http进阶">http://yoursite.com/2020/04/30/http进阶/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/30/http进阶/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/04/30/node进阶/">
+                    node进阶
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/04/28/ES6的学习/">
+                    ES6的学习
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Telnet实例"><span class="toc-number">1.</span> <span class="toc-text">Telnet实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web结构组件"><span class="toc-number"></span> <span class="toc-text">Web结构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代理"><span class="toc-number">1.</span> <span class="toc-text">代理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#缓存"><span class="toc-number">2.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网关"><span class="toc-number">3.</span> <span class="toc-text">网关</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#隧道"><span class="toc-number">4.</span> <span class="toc-text">隧道</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Agent代理"><span class="toc-number">5.</span> <span class="toc-text">Agent代理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP报文"><span class="toc-number"></span> <span class="toc-text">HTTP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#方法（method）"><span class="toc-number">1.</span> <span class="toc-text">方法（method）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#通用首部"><span class="toc-number">2.</span> <span class="toc-text">通用首部</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#响应报文"><span class="toc-number">3.</span> <span class="toc-text">响应报文</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"http进阶　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/04/30/node进阶/" title="上一篇: node进阶">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/04/28/ES6的学习/" title="下一篇: ES6的学习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

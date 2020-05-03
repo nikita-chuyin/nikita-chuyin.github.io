@@ -268,6 +268,308 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-js中的闭包" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/14/js中的闭包/" class="article-date">
+      <time datetime="2019-09-14T14:50:11.000Z" itemprop="datePublished">2019-09-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/14/js中的闭包/">js中的闭包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="谈谈闭包"><a href="#谈谈闭包" class="headerlink" title="谈谈闭包"></a>谈谈闭包</h2><p>最开始我以为闭包就是一个函数里内嵌了一个内部函数，内部函数可以访问外部函数的私有变量，并使得其他函数可以访问到该私有变量，其实这只是一小部分，真正的闭包作用不止如此。</p>
+<p>一个闭包是一个可以自己拥有独立的环境与变量的表达式（通常是函数，因为到ES6才有块级作用域的概念）。它有权访问另一个函数作用域中的变量的函数。</p>
+<p>故主要作用归结为两个：</p>
+<ol>
+<li>可以在函数外部访问到函数内部的函数的局部变量。</li>
+<li>让这些变量始终保存在内存中，不会随着函数的结束而自动销毁。</li>
+</ol>
+<h4 id="深层原因"><a href="#深层原因" class="headerlink" title="深层原因"></a>深层原因</h4><ol>
+<li>我们都知道在js执行时一个函数时都会创建一个<strong>作用域函数</strong>，将函数中的局部变量（函数的形参也是局部变量（保存进去，伴随那些传入的函数变量一起被初始化。当函数执行完毕时，由于返回的函数使用了某个私有属性，，所以返回的函数中保存了一个指向该私有属性的引用，故不会被回收。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function A(age) &#123;</span><br><span class="line">  var name = &apos;wind&apos;;</span><br><span class="line">  var sayHello = function() &#123;</span><br><span class="line">   console.log(&apos;hello, &apos;+name+&apos;, you are &apos;+age+&apos; years old!&apos;);</span><br><span class="line">  &#125;;</span><br><span class="line">  return sayHello;</span><br><span class="line">&#125;</span><br><span class="line">var wind = A(20);</span><br><span class="line">wind();  // hello, wind, you are 20 years old!</span><br><span class="line"></span><br><span class="line">其作用域函数对象为&#123; age:20, name:&apos;wind&apos;&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>每次调用一次外部函数就产生一个新的闭包，新的作用域，以前的闭包依旧存在互不影响。</li>
+<li>同一个闭包会保留上一次的状态，当它被再次调用时会在上一次的基础上进行。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var nnum = 42;</span><br><span class="line">	return function()&#123; console.log(num++); &#125;</span><br><span class="line">&#125;</span><br><span class="line">var a = A();</span><br><span class="line">a();	//42</span><br><span class="line">a();	//43</span><br><span class="line">var b = A();	//重新调用A(),形成新闭包，有了新的作用域对象</span><br><span class="line">b();	//42</span><br></pre></td></tr></table></figure>
+
+<p>4、在外部函数中存在的多个函数 “ 同生共死 ”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var fun1, fun2, fun3;</span><br><span class="line">function A() &#123;</span><br><span class="line">  var num = 42;</span><br><span class="line">  fun1 = function() &#123; console.log(num); &#125;</span><br><span class="line">  fun2 = function() &#123; num++; &#125;</span><br><span class="line">  fun3 = function() &#123; num--; &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A();</span><br><span class="line">fun1();   // 42</span><br><span class="line">fun2(); </span><br><span class="line">fun2(); </span><br><span class="line">fun1();    // 44</span><br><span class="line">fun3(); </span><br><span class="line">fun1();   //43</span><br><span class="line"></span><br><span class="line">var old = fun1;</span><br><span class="line"></span><br><span class="line">A();  </span><br><span class="line">fun1();   // 42</span><br><span class="line">old();   // 43   上一个闭包的fun1()</span><br></pre></td></tr></table></figure>
+
+<p>三个函数被<strong>同时声明</strong>并且都可以对作用域对象的属性（局部变量）进行访问与操作。</p>
+<p>由于函数不能有多个返回值，所以我用了全局变量。我们再次可以看出在我们第二次调用A()时产生了一个新的闭包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr)&#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">		var item = &apos;item&apos; + i;</span><br><span class="line">		result.push(function()&#123; </span><br><span class="line">			console.log(item + &apos; &apos; + arr[i])</span><br><span class="line">			&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line">var fnlist = buildArr([1,2,3]);</span><br><span class="line">fnList[0]();	//item2 undefined</span><br><span class="line">fnList[1]();	//item2 undefined</span><br><span class="line">fnList[2]();	//item2 undefined</span><br></pre></td></tr></table></figure>
+
+<p>怎么会这样呢？我们预想的三个输出应该是 item0 1，  item1 2，  item2 3。为什么结果却是返回的result数组里面存储了三个 item2 undefined ？</p>
+<p>我们上文中提到过两点：</p>
+<ol>
+<li>闭包在返回的时候对作用域对象有一个引用。</li>
+<li>在外部函数中存在的内部函数的“同生共死”。</li>
+</ol>
+<p>我们的for循环为外部函数创建了多个“同生共死”的内部函数，他们都共享一个环境，而当result数组返回时，所有内部函数都引用了同一个作用域对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var bArr = &#123;</span><br><span class="line">	item: &apos;item2&apos;,</span><br><span class="line">	i : 3,</span><br><span class="line">	arr: [1,2,3]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么作用域对象是这样?就拿我们上面的例子来说，当循环全部结束时，作用域对象中的属性i正好是i++之后的3，而arr[3]是没有值的，所以为undefined。</p>
+<p><strong>注意：</strong>在最后一次循环的时候即i = 2时，当i++，i = 3的循环条件不满足循环结束，此时的item的值已经被保存下来了，所以此时的arr[i]为arr[3],而item为item2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr) &#123;</span><br><span class="line">    var result = [];</span><br><span class="line">      for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">          result.push( (function(n) &#123;</span><br><span class="line">             return function() &#123;</span><br><span class="line">                var item = &apos;item&apos; + n;</span><br><span class="line">             	console.log(item + &apos; &apos; + arr[n]);</span><br><span class="line">             &#125;</span><br><span class="line">          &#125;)(i));</span><br><span class="line">     &#125;</span><br><span class="line">     return result;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> var fnlist = buildArr([1,2,3]);</span><br><span class="line"> fnlist[0]();  //  item0 1</span><br><span class="line"> fnlist[1]();  //  item1 2</span><br></pre></td></tr></table></figure>
+
+<p>我们可以用一个自执行函数将i绑定，这样i的每一个状态都会被存储，答案就和我们预期的一样了。 </p>
+<p><strong>所以以后在使用闭包的时候遇到循环变量我们要习惯性的想到用自执行函数来绑定它。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function buildArr(arr)&#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	for(let i = 0; i &lt;arr.length; i++)&#123;</span><br><span class="line">		let item = &apos;item&apos; + i;</span><br><span class="line">		result.push(function()&#123;console.log(item + &apos;&apos; + arr[i])&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line">var fnlist = buildArr([1,2,3]);</span><br><span class="line">fnlist[0](); 	//item0   1</span><br></pre></td></tr></table></figure>
+
+<p>使用let代替，主要是利用let会创建块级作用域的特性。</p>
+<h6 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h6><ol>
+<li>读取函数内部的变量。</li>
+<li>让这些变量的值始终保持在内存中，不会在函数被调用后被自动清除。</li>
+<li>方便调用上下文的局部变量，利于代码的封装。</li>
+</ol>
+<h6 id="闭包应用场景"><a href="#闭包应用场景" class="headerlink" title="闭包应用场景"></a>闭包应用场景</h6><ol>
+<li>setTimeout</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//原生的setTimeout传递的第一个函数不能带参数</span><br><span class="line">  setTimeout(function(param)&#123;</span><br><span class="line">      alert(param)</span><br><span class="line">  &#125;,1000)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  //通过闭包可以实现传参效果</span><br><span class="line">  function func(param)&#123;</span><br><span class="line">      return function()&#123;</span><br><span class="line">          alert(param)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  var f1 = func(1);</span><br><span class="line">  setTimeout(f1,1000);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>作为回调函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function changeSize(size)&#123;</span><br><span class="line">       return function()&#123;</span><br><span class="line">           document.body.style.fontSize = size + &apos;px&apos;;</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>封装变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;闭包模拟私有方法&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    //用闭包定义能访问私有函数和私有变量的公有函数。</span><br><span class="line">    var counter = (function()&#123;</span><br><span class="line">        var privateCounter = 0; //私有变量</span><br><span class="line">        function change(val)&#123;</span><br><span class="line">            privateCounter += val;</span><br><span class="line">        &#125;</span><br><span class="line">        return &#123;</span><br><span class="line">            increment:function()&#123;   //三个闭包共享一个词法环境</span><br><span class="line">                change(1);</span><br><span class="line">            &#125;,</span><br><span class="line">            decrement:function()&#123;</span><br><span class="line">                change(-1);</span><br><span class="line">            &#125;,</span><br><span class="line">            value:function()&#123;</span><br><span class="line">                return privateCounter;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;)();</span><br><span class="line"></span><br><span class="line">    console.log(counter.value());//0</span><br><span class="line">    counter.increment();</span><br><span class="line">    counter.increment();//2</span><br><span class="line">    //共享的环境创建在一个匿名函数体内，立即执行。</span><br><span class="line">    //环境中有一个局部变量一个局部函数，通过匿名函数返回的对象的三个公共函数访问。</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>为节点循环绑定click事件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p id=&quot;info&quot;&gt;123&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;E-mail: &lt;input type=&quot;text&quot; id=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;Name: &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;Age: &lt;input type=&quot;text&quot; id=&quot;age&quot; name=&quot;age&quot;&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function showContent(content)&#123;</span><br><span class="line">        document.getElementById(&apos;info&apos;).innerHTML = content;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function setContent()&#123;</span><br><span class="line">        var infoArr = [</span><br><span class="line">            &#123;&apos;id&apos;:&apos;email&apos;,&apos;content&apos;:&apos;your email address&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;name&apos;,&apos;content&apos;:&apos;your name&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;age&apos;,&apos;content&apos;:&apos;your age&apos;&#125;</span><br><span class="line">        ];</span><br><span class="line">        for (var i = 0; i &lt; infoArr.length; i++) &#123;</span><br><span class="line">            var item = infoArr[i];</span><br><span class="line">            document.getElementById(item.id).onfocus = function()&#123;</span><br><span class="line">                showContent(item.content)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setContent()</span><br><span class="line">    //循环中创建了三个闭包，他们使用了相同的词法环境item，item.content是变化的变量</span><br><span class="line">    //当onfocus执行时，item.content才确定，此时循环已经结束，三个闭包共享的item已经指向数组最后一项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解决方法1     通过函数工厂，则函数为每一个回调都创建一个新的词法环境</span><br><span class="line">     */</span><br><span class="line">    function showContent(content)&#123;</span><br><span class="line">        document.getElementById(&apos;info&apos;).innerHTML = content;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function callBack(content)&#123;</span><br><span class="line">        return function()&#123;</span><br><span class="line">            showContent(content)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function setContent()&#123;</span><br><span class="line">        var infoArr = [</span><br><span class="line">            &#123;&apos;id&apos;:&apos;email&apos;,&apos;content&apos;:&apos;your email address&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;name&apos;,&apos;content&apos;:&apos;your name&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;age&apos;,&apos;content&apos;:&apos;your age&apos;&#125;</span><br><span class="line">        ];</span><br><span class="line">        for (var i = 0; i &lt; infoArr.length; i++) &#123;</span><br><span class="line">            var item = infoArr[i];</span><br><span class="line">            document.getElementById(item.id).onfocus = callBack(item.content)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setContent()</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解决方法2        绑定事件放在立即执行函数中</span><br><span class="line">     */</span><br><span class="line">    function showContent(content)&#123;</span><br><span class="line">        document.getElementById(&apos;info&apos;).innerHTML = content;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function setContent()&#123;</span><br><span class="line">        var infoArr = [</span><br><span class="line">            &#123;&apos;id&apos;:&apos;email&apos;,&apos;content&apos;:&apos;your email address&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;name&apos;,&apos;content&apos;:&apos;your name&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;age&apos;,&apos;content&apos;:&apos;your age&apos;&#125;</span><br><span class="line">        ];</span><br><span class="line">        for (var i = 0; i &lt; infoArr.length; i++) &#123;</span><br><span class="line">            (function()&#123;</span><br><span class="line">                var item = infoArr[i];</span><br><span class="line">                document.getElementById(item.id).onfocus = function()&#123;</span><br><span class="line">                    showContent(item.content)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)()//放立即执行函数，立即绑定，用每次的值绑定到事件上，而不是循环结束的值</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setContent()</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解决方案3        用ES6声明，避免声明提前，作用域只在当前块内</span><br><span class="line">     */</span><br><span class="line">    function showContent(content)&#123;</span><br><span class="line">        document.getElementById(&apos;info&apos;).innerHTML = content;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function setContent()&#123;</span><br><span class="line">        var infoArr = [</span><br><span class="line">            &#123;&apos;id&apos;:&apos;email&apos;,&apos;content&apos;:&apos;your email address&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;name&apos;,&apos;content&apos;:&apos;your name&apos;&#125;,</span><br><span class="line">            &#123;&apos;id&apos;:&apos;age&apos;,&apos;content&apos;:&apos;your age&apos;&#125;</span><br><span class="line">        ];</span><br><span class="line">        for (var i = 0; i &lt; infoArr.length; i++) &#123;</span><br><span class="line">            let item = infoArr[i];      //限制作用域只在当前块内</span><br><span class="line">            document.getElementById(item.id).onfocus = function()&#123;</span><br><span class="line">                showContent(item.content)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setContent()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>推荐博文：<a href="https://blog.csdn.net/qq_36276528/article/details/70049825" target="_blank" rel="noopener">https://blog.csdn.net/qq_36276528/article/details/70049825</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-了解浏览器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/14/了解浏览器/" class="article-date">
+      <time datetime="2019-09-14T03:07:43.000Z" itemprop="datePublished">2019-09-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/14/了解浏览器/">了解浏览器</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="理解浏览器的工作原理"><a href="#理解浏览器的工作原理" class="headerlink" title="理解浏览器的工作原理"></a>理解浏览器的工作原理</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>​    浏览器是专门用来访问和浏览万维网页面的客户端软件，也是现在最为流行的软件之一，其重要性不言而喻。前端工程师作为负责程序页面显示的工程师，需要直接和浏览器打交道。本文将详细介绍浏览器的工作原理。</p>
+<h4 id="浏览器组成"><a href="#浏览器组成" class="headerlink" title="浏览器组成"></a>浏览器组成</h4><p><img src="https://pic.xiaohuochai.site/blog/browserRender1.png" alt="browser"></p>
+<p>主要组件包括：</p>
+<ol>
+<li>用户界面——包括地址栏，后退/前进按钮，书签，目录等，也就是所看到的除了用来显示所请求的页面窗口之外的其他部分。</li>
+<li>浏览器引擎——用来查询及操作渲染引擎的接口。</li>
+<li>渲染引擎——用来显示请求的内容，如：如果请求内容为html，他负责解析html及css，并将解析后的结果显示在页面。</li>
+<li>网络——用来完成网络调用，如：http请求，它具有平台无关的接口，可以在不同平台上工作。</li>
+<li>UI后端——用来绘制类似组合选择框及对话框等基本组件，具有不特定与某个平台的通用接口，顶层使用操作系统的用户接口。</li>
+<li>JS解释器——用来执行JS代码。</li>
+<li>数据存储——属于持久层，浏览器需要在硬盘中保存类似cookie的各种数据，HTML5定义了web database技术，这是一种轻量级完整的客户端存储技术。</li>
+</ol>
+<h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h4><p>浏览器分为两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源并解析排版并呈现给用户。</p>
+<p>默认情况下，渲染引擎可以显示html，xml文档及图片，他可以借助插件显示其他类型数据，例如使用PDF阅读器插件，可以显示PDF格式。</p>
+<h6 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h6><p>firefox使用gecko引擎</p>
+<p>IE使用Trident引擎，2015年微软推出自己新的浏览器，原名叫斯巴达，后改名edge，使用edge引擎</p>
+<p>opera最早使用Presto引擎，后来弃用</p>
+<p>chrome\safari\opera使用webkit引擎，13年chrome和opera开始使用Blink引擎</p>
+<p>UC使用U3引擎</p>
+<p>QQ浏览器和微信内核使用X5引擎，16年开始使用Blink引擎</p>
+<h6 id="js引擎"><a href="#js引擎" class="headerlink" title="js引擎"></a>js引擎</h6><p>老版本IE使用Jscript引擎，IE9之后使用Chakra引擎，edge浏览器仍然使用Chakra引擎</p>
+<p>firefox使用monkey系列引擎</p>
+<p>safari使用的SquirrelFish系列引擎</p>
+<p>Opera使用Carakan引擎</p>
+<p>chrome使用V8引擎。nodeJs其实就是封装了V8引擎</p>
+<h6 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h6><p>　　从资源的下载到最终的页面展现，渲染流程可简单地理解成一个线性串联的变换过程的组合，原始输入为URL地址，最终输出为页面Bitmap，中间依次经过了Loader、Parser、Layout和Paint模块</p>
+<p><img src="https://pic.xiaohuochai.site/blog/chrome1.jpeg" alt="chrome1"></p>
+<p>　渲染引擎的核心流程如下所示</p>
+<p><img src="https://pic.xiaohuochai.site/blog/chrome4.jpeg" alt="chrome"></p>
+<h6 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h6><p>Loader模块负责处理所有的HTTP请求以及网络资源的缓存，相当于是从URL输入到Page Resource输出的变换过程。HTML页面中通常由JS/CSS/Image资源，为了不阻塞后续解析过程，一般会有两个IO管道同时存在，一个负责主页面下载，一个负责各种外链接资源的下载。</p>
+<p><img src="https://pic.xiaohuochai.site/blog/chrome2.jpeg" alt="chrome"></p>
+<p><strong>注意：</strong>虽然大部分情况下不同资源都是并发下载异步解析（如图片资源可以在主页面解析显示完成后再被显示），但JS脚本可能会要求改变页面，因此有时保持执行顺序和下载管道后续处理的阻塞是不可避免的。</p>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>缓存在浏览器中也得到广泛的应用，对提高用户体验起到重要的作用。在浏览器中，主要存在三种类型的缓存：Page Cache，Memory Cache，Disk Cacche。这三类Cache的容量都是额可以配置的，比如限制Memory Cache最大不超过30M，Page Cache缓存的页面数量不超过5个等。</p>
+<p><code>Page Cache</code>：即页面缓存。用来缓存用户访问过的网页DOM树、Render树等数据。设计页面缓存的意图在于提供流畅的页面前进、后退浏览体验。几乎所有的现代浏览器都支持页面缓存功能</p>
+<p><code>Memory Cache</code>：浏览器内部的缓存机制，对于相同的url的资源直接从缓存中获取，不需要重新下载。在使用浏览器浏览网页时，尤其是浏览一个大型网站的不同页面时，经常会遇到网页中包含相同资源的情况，应用Memory Cache可以显著提高浏览器的用户体验，减少无谓的内存、时间以及网络带宽开销。</p>
+<p><code>Disk Cache</code>：资源加载缓存和服务器进行交互，服务器端可以通过HTTP头信息设置网页要不要加载；</p>
+<p>转自：</p>
+<p><a href="https://www.cnblogs.com/itplay/p/10475368.html" target="_blank" rel="noopener">https://www.cnblogs.com/itplay/p/10475368.html </a> </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-我认识的js原型及原型链" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/13/我认识的js原型及原型链/" class="article-date">
+      <time datetime="2019-09-13T10:31:13.000Z" itemprop="datePublished">2019-09-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="JavaScript原型"><a href="#JavaScript原型" class="headerlink" title="JavaScript原型"></a>JavaScript原型</h2><p>在讲js原型之前，必须先了解Object和Function。</p>
+<p>Object和Function作为js自带的函数，Object继承自己，Function继承自己，Object和Function互相继承对方，也就是说Object和Function都既是函数也是对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Function instanceof Object;	//true</span><br><span class="line">Object instanceof Function;	//true</span><br><span class="line">Function.prototype	//f()&#123; [native code]&#125;</span><br><span class="line">Object.prototype	//Object</span><br></pre></td></tr></table></figure>
+
+<h4 id="普通对象和函数对象"><a href="#普通对象和函数对象" class="headerlink" title="普通对象和函数对象"></a>普通对象和函数对象</h4><p>在Javascript的世界里，全都是对象，而对象之间也是存在区别，我们首先区分一下普通对象和函数对象，如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;&#125;;</span><br><span class="line">var f2 = function()&#123;&#125;;</span><br><span class="line">var f3 = new function()&#123;&#125;;</span><br><span class="line"> </span><br><span class="line">var o1 = &#123;&#125;;</span><br><span class="line">var o2 = new Object();</span><br><span class="line">var o3 = new f1();</span><br><span class="line"> </span><br><span class="line">console.log(typeof Object); //function</span><br><span class="line">console.log(typeof Function);//function</span><br><span class="line">console.log(typeof f1) //function</span><br><span class="line">console.log(typeof f2) // function</span><br><span class="line">console.log(typeof f3) //function</span><br><span class="line">console.log(typeof o1) //object</span><br><span class="line">console.log(typeof o2) //object</span><br><span class="line">console.log(typeof o3)// object</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中可以看出，f1、f2和f3都是函数对象，而o1，o2和o3都是object对象，也就是普通对象，函数对象本质就是由new function（）构造而来，其他的都是普通对象；函数对象可以创建普通对象，普通对象没法创建函数对象。</p>
+<p><strong>注意：</strong></p>
+<p>1、每一个函数对象都有一个prototype属性，但是普通对象是没有的；</p>
+<p>　 prototype下面又有个construetor，指向这个函数。</p>
+<p>2、每个对象都有一个名为<code>__proto__</code>的内部属性，指向它所对应的构造函数的原型对象，原型链基于<code>__proto__</code>;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;&#125;;</span><br><span class="line">o.prototype;	//undefined</span><br><span class="line">o instanceof Object;	//true</span><br><span class="line">o._proto_ === Object.prototype;		//true</span><br><span class="line">Object === Object.prototype.constructor;	//true</span><br><span class="line">Object.prototype.constructor;	//function Object()&#123; [native code]&#125;</span><br><span class="line">Object.prototype.__proto__;		//null</span><br></pre></td></tr></table></figure>
+
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>在js中，原型也是一个对象，其作用则是实现对象的继承。</p>
+<p>在js的所有函数对象中都存在一个属性prototype，该属性对应当前对象的原型。</p>
+<p>而所有js对象都存在一个<code>__proto__</code>属性（由于<code>__proto__</code>是一个非标准属性，因此只有火狐和谷歌两个浏览器支持，标准方法是Object.getPrototypeOf())，<code>__proto__</code>属性指向实例对象的构造函数的原型，理解起来就是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var p = new Person();</span><br><span class="line">p.__proto__ === Person.prototype;		//true</span><br></pre></td></tr></table></figure>
+
+<p>从上面代码中，p是实例对象，Person是p的构造函数，可看出p的<code>__proto__</code>属性指向构造函数Person的原型。</p>
+<p>请看一下例子加深理解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var parent = function(name)&#123;</span><br><span class="line"> this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">parent.prototype.getName = function()&#123;</span><br><span class="line"> return this.name;</span><br><span class="line">&#125;</span><br><span class="line">var son = new parent(&quot;huahua&quot;);</span><br><span class="line"> </span><br><span class="line">console.log(son.getName());//&apos;huahua&apos;</span><br></pre></td></tr></table></figure>
+
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>除开Object的prototype的原型是null以外，所有的对象和原型都有自己的原型，对象的原型指向原型对象。</p>
+<p>在层级多的关系中，多个原型层层相连则构成了原型链。</p>
+<p>在查找一个对象的属性时，倘若在当前对象找不到该属性，则会沿着原型链一直往上查找，知道找到为止，如果到了原型链顶端，还没找到，则返回undefined。</p>
+<p><img src="https://files.jb51.net/file_images/article/201702/2017215100629240.jpg?201711510636" alt="img"></p>
+<p><strong>JS中所有的东西都是对象,所有的东西都由Object衍生而来, 即所有东西原型链的终点指向null</strong></p>
+<h4 id="构造器constructor"><a href="#构造器constructor" class="headerlink" title="构造器constructor"></a>构造器constructor</h4><p>constructor是构造函数创建的实例的属性，该属性的作用是指向创建当前对象的构造函数。</p>
+<p>例如，son.constructor == parent;//true</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-深入理解js中的this" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
