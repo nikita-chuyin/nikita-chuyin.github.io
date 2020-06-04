@@ -32,7 +32,7 @@
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221552479.png">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503080735091.png">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503082210004.png">
-<meta property="og:updated_time" content="2020-05-03T00:22:49.901Z">
+<meta property="og:updated_time" content="2020-05-05T14:58:04.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http进阶">
 <meta name="twitter:description" content="Telnet实例由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。 Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。 Web结构组件 代理：位于客户端和服务器之间的HTTP中间实体。">
@@ -840,6 +840,58 @@
 <p>如果资源有多种表示方法——如，若服务器上有某文档的法语和德语译稿，HTTP/1.1可以为服务器和客户端提供对资源进行协商的能力。</p>
 <p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503082210004.png" alt="image-20200503082210004"></p>
 <p><strong>安全响应首部</strong></p>
+<table>
+<thead>
+<tr>
+<th>首部</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Proxy-Authenticate</td>
+<td>来自代理的对客户端的质询列表</td>
+</tr>
+<tr>
+<td>Set-Cookie</td>
+<td>不是真正的安全首部，但隐含有安全功能，可以在客户端设置一个令牌，以便服务器对客户端进行标识。</td>
+</tr>
+<tr>
+<td>Set-Cookie2</td>
+<td>与Set-Cookie类似</td>
+</tr>
+<tr>
+<td>www-Authenticate</td>
+<td>来自服务器的对客户端的质询列表</td>
+</tr>
+</tbody></table>
+<h6 id="HTTP事务产生时延的原因"><a href="#HTTP事务产生时延的原因" class="headerlink" title="HTTP事务产生时延的原因"></a>HTTP事务产生时延的原因</h6><ol>
+<li>客户端首先需要根据URI确定Web服务器的IP地址和端口号。如果最近没有对URI中的主机名进行访问，通过DNS解析系统将URI中的主机名转换成一个IP地址可能要花费数十秒的时间。</li>
+<li>接下来，客户端会向服务器发送一条TCP连接请求，并等待服务器回送一个请求经接受应答。每条新的TCP连接都会有连接建立时延。这个值通常最多只有一两秒钟，但如果有数百个HTTP事务的话，这个值就会快速叠加上去。</li>
+<li>一旦连接建立起来，客户端就会通过新建立的TCP管道来发送HTTP请求。数据到达时，Web服务器会从TCP链接中读取请求报文，并对请求进行处理。因特网传输请求报文，以及服务器请求报文都需要时间。</li>
+<li>然后，Web服务器会回送HTTP响应，这也需要花费时间。</li>
+</ol>
+<p>注：大多数HTTP客户端都有一个小的DNS缓存,用来保存近期所访问站点的IP地址。如果已经在本地“缓存”了IP地址，查询就可立即完成，因为大多数Web浏览器浏览的是少数常用站点，所以通常可以很快将主机名解析出来。</p>
+<p>TCP网络时延的大小取决于硬件速度，网络和服务器的负载，请求和响应报文的尺寸，以及客户端和服务器之间的距离。</p>
+<h6 id="TCP连接握手步骤"><a href="#TCP连接握手步骤" class="headerlink" title="TCP连接握手步骤"></a>TCP连接握手步骤</h6><ol>
+<li>请求新的TCP连接时，客户端要向服务器发送一个小的TCP分组（通常是40-60字节）。这个分组中设置了一个特殊的SYN标记，说明这是一个连接请求。</li>
+<li>如果服务器接受了连接，就会对连接参数进行计算，并向客户端回送一个TCP分组，这个分组中的SYN和ACK标记都被置位，说明连接请求已被接受。</li>
+<li>最后，客户端向服务器回送一条确认消息，通知他连接已成功建立，现代的TCP栈都允许客户端在这个确认分组中发送消息。</li>
+</ol>
+<p>小的HTTP事务可能会在TCP建立上花费50%，或更多的时间</p>
+<h6 id="延迟确认"><a href="#延迟确认" class="headerlink" title="延迟确认"></a>延迟确认</h6><p>由于因特网自身无法确保可靠的分组传输（因特网路由器超负荷的话，可以随意丢弃分组），所以TCP实现了自己的确认机制来确保数据的成功传输。</p>
+<p>每个TCP段都有一个序列号和数据完整性校验和。每个段的接收者收到完好的段时，都会向发送者回送小的确认分组。如果发送者，欸有在指定的窗口时间内收到确认信息，发送者就会认为分组已被破环或损毁，并重发数据。</p>
+<p>由于u企鹅人保温很小，所以TCP允许在发往相同方向的输出数据分组中对其进行“捎带”。TCP将将返回的确认信息与输出的数据分组结合在一起，可以更有效利用网络。为了增加确认报文找到同向传输数据分组的可能性，很多TCP栈都实现了一种延迟确认算法。延迟确认算法会在一个特定的窗口时间内将输出确认缓存放在缓存区中，以寻找能够捎带他的输出数据分组。如果在那个时间段内没有输出数据分组，就将确认信息放在单独的分组中传送。</p>
+<p>但是，HTTP具有双峰特征的请求——应答行为就降低了捎带信息的可能。当希望有相反方向回传分组的时候，偏偏没有那么多。通常，延迟确认算法会引起相当大的时延。根据所使用的操作系统的不同，可以调整或禁止延迟确认算法。</p>
+<p>在对TCP栈的任何参数进行修改之前，一定要对袭击在做什么会有清晰的了解。TCP中引入这些算法的目的是为了防止设计欠佳的应用程序对因特网造成破环。对TCP配置进行任意修改都要绝对确保应用程序不会引发这些i算法所要避免的问题。</p>
+<h6 id="TCP慢启动"><a href="#TCP慢启动" class="headerlink" title="TCP慢启动"></a>TCP慢启动</h6><p>TCP数据传输的性能还取决于TCP连接的使用期。TCP连接会随着时间进行自我“调谐”，起初还会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度，这种调谐被称为TCP慢启动，用于防止因特网的突然过载和拥塞。</p>
+<p>TCP慢启动限制了一个TCP端点在任意时刻可以传输的分组数。简单来讲是每成功接收一个分组，发送端就有了发送另外两个分组的权限。如果某个HTTP事务有大量的数据要发送，是不能依次将所有分组都发送出去的，必须发送一个分组，确认后才可以再发。这种方式是”打开拥塞窗口“。</p>
+<p>由于存在这种拥塞控制特性，所以新连接的传输速度会比已经交换过一定数据量的，“已调谐”连接慢一些。由于已调谐连接要更快一些，所以HTTP中有一些可以重用现存连接的工具。即HTTP“持久连接”。</p>
+<h6 id="提高HTTP连接性能的四类方法"><a href="#提高HTTP连接性能的四类方法" class="headerlink" title="提高HTTP连接性能的四类方法"></a>提高HTTP连接性能的四类方法</h6><ol>
+<li>并行连接</li>
+<li>持久连接</li>
+<li>管道化连接</li>
+<li>复用连接</li>
+</ol>
 
       
     </div>
@@ -851,7 +903,7 @@
         <p><span>本文标题:</span><a href="/2020/04/30/http进阶/">http进阶</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-04-30, 07:40:38</p>
-        <p><span>最后更新:</span>2020-05-03, 08:22:49</p>
+        <p><span>最后更新:</span>2020-05-05, 22:58:04</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/30/http进阶/" title="http进阶">http://yoursite.com/2020/04/30/http进阶/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/30/http进阶/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -887,7 +939,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Telnet实例"><span class="toc-number">1.</span> <span class="toc-text">Telnet实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web结构组件"><span class="toc-number"></span> <span class="toc-text">Web结构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代理"><span class="toc-number">1.</span> <span class="toc-text">代理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#缓存"><span class="toc-number">2.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网关"><span class="toc-number">3.</span> <span class="toc-text">网关</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#隧道"><span class="toc-number">4.</span> <span class="toc-text">隧道</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Agent代理"><span class="toc-number">5.</span> <span class="toc-text">Agent代理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP报文"><span class="toc-number"></span> <span class="toc-text">HTTP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#方法（method）"><span class="toc-number">1.</span> <span class="toc-text">方法（method）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#通用首部"><span class="toc-number">2.</span> <span class="toc-text">通用首部</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#响应报文"><span class="toc-number">3.</span> <span class="toc-text">响应报文</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Telnet实例"><span class="toc-number">1.</span> <span class="toc-text">Telnet实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web结构组件"><span class="toc-number"></span> <span class="toc-text">Web结构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代理"><span class="toc-number">1.</span> <span class="toc-text">代理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#缓存"><span class="toc-number">2.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网关"><span class="toc-number">3.</span> <span class="toc-text">网关</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#隧道"><span class="toc-number">4.</span> <span class="toc-text">隧道</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Agent代理"><span class="toc-number">5.</span> <span class="toc-text">Agent代理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP报文"><span class="toc-number"></span> <span class="toc-text">HTTP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#方法（method）"><span class="toc-number">1.</span> <span class="toc-text">方法（method）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#通用首部"><span class="toc-number">2.</span> <span class="toc-text">通用首部</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#响应报文"><span class="toc-number">3.</span> <span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#HTTP事务产生时延的原因"><span class="toc-number">4.</span> <span class="toc-text">HTTP事务产生时延的原因</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP连接握手步骤"><span class="toc-number">5.</span> <span class="toc-text">TCP连接握手步骤</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#延迟确认"><span class="toc-number">6.</span> <span class="toc-text">延迟确认</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP慢启动"><span class="toc-number">7.</span> <span class="toc-text">TCP慢启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#提高HTTP连接性能的四类方法"><span class="toc-number">8.</span> <span class="toc-text">提高HTTP连接性能的四类方法</span></a></li></ol>
         
     </div>
     <style>
@@ -957,7 +1009,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/01/前端经验/">字体图标</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/linux学习/">linux学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/10/pandas之excel/">pandas之excel</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/爬虫/">爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/python的学习/">python的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
 
 
 
