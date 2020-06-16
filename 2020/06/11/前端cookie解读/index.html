@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="低调的width:autowidth 的默认值是auto；但auto至少包含4种不同的宽度表现：  充分可利用空间。如div，p这些块级元素的默认宽度默认是100%于父级容器的，即 fill-available 。 收缩与包裹。典型代表是浮动，绝对定位，inline-block元素或table元素，即shrink-to-fit ，类似于CSS3中的 fit-content 指的是这种宽度表现。 收">
+<meta name="description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入理解css">
-<meta property="og:url" content="http://yoursite.com/2020/03/26/深入理解css/index.html">
+<meta property="og:title" content="前端cookie解读">
+<meta property="og:url" content="http://yoursite.com/2020/06/11/前端cookie解读/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="低调的width:autowidth 的默认值是auto；但auto至少包含4种不同的宽度表现：  充分可利用空间。如div，p这些块级元素的默认宽度默认是100%于父级容器的，即 fill-available 。 收缩与包裹。典型代表是浮动，绝对定位，inline-block元素或table元素，即shrink-to-fit ，类似于CSS3中的 fit-content 指的是这种宽度表现。 收">
+<meta property="og:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-26T03:50:20.163Z">
+<meta property="og:updated_time" content="2020-06-12T02:38:16.566Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解css">
-<meta name="twitter:description" content="低调的width:autowidth 的默认值是auto；但auto至少包含4种不同的宽度表现：  充分可利用空间。如div，p这些块级元素的默认宽度默认是100%于父级容器的，即 fill-available 。 收缩与包裹。典型代表是浮动，绝对定位，inline-block元素或table元素，即shrink-to-fit ，类似于CSS3中的 fit-content 指的是这种宽度表现。 收">
+<meta name="twitter:title" content="前端cookie解读">
+<meta name="twitter:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>深入理解css | Nikita</title>
+<title>前端cookie解读 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-深入理解css" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-前端cookie解读" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/26/深入理解css/" class="article-date">
-      <time datetime="2020-03-26T03:23:41.000Z" itemprop="datePublished">2020-03-26</time>
+      <a href="/2020/06/11/前端cookie解读/" class="article-date">
+      <time datetime="2020-06-11T07:33:30.000Z" itemprop="datePublished">2020-06-11</time>
 </a>
 
 
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      深入理解css
+      前端cookie解读
     </h1>
   
 
@@ -298,25 +298,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="低调的width-auto"><a href="#低调的width-auto" class="headerlink" title="低调的width:auto"></a>低调的<code>width:auto</code></h4><p>width 的默认值是auto；但auto至少包含4种不同的宽度表现：</p>
-<ol>
-<li>充分可利用空间。如div，p这些块级元素的默认宽度默认是100%于父级容器的，即 fill-available 。</li>
-<li>收缩与包裹。典型代表是浮动，绝对定位，inline-block元素或table元素，即shrink-to-fit ，类似于CSS3中的 fit-content 指的是这种宽度表现。</li>
-<li>收缩到最小。这个最容易出现在table-layout为auto的表格中，当一列空间不够时，文字说断就断。</li>
-<li>超出容器限制。除非有明确的width相关设置，否则这上面3种情况都不会主动超过父级容器宽度，但存在一些特殊情况。如：内容很长的连续的英文与数字，或者内联元素被设置了<code>white-space:nowrap</code>,则会将所有元素堆在一行。</li>
-</ol>
-<h6 id="格式化宽度。"><a href="#格式化宽度。" class="headerlink" title="格式化宽度。"></a>格式化宽度。</h6><ul>
-<li>格式化宽度仅出现在”绝对定位宽度“中，也就是出现在position属性值为absolute或fixed的元素中。在默认情况下，绝对元素的宽度表现是”包裹性“，宽度由内部尺寸决定。</li>
-<li>但是对于非替换元素，即left/top或top/bottom对立方位的属性值同时存在时，元素的宽度表现为”格式化宽度“，其宽度的大小相对于最近的具有定位特性（position属性值不是static）的祖先元素计算。</li>
-</ul>
-<p>内部尺寸：简单讲就是元素的尺寸由内部的元素决定，而非外部的容器决定。如何快速判断一个元素使用的是否为”内部尺寸“呢？很简单，假如这个元素里面没有内容，宽度就是0，那就是应用的”内部尺寸“。</p>
-<ul>
-<li>button标签按钮才会自动换行，input标签按钮默认<code>white-space:pre</code>是不会换行的，需将pre值重置为normal。</li>
-</ul>
-<h6 id="动态文字例子"><a href="#动态文字例子" class="headerlink" title="动态文字例子"></a>动态文字例子</h6><p>需求：页面某个模块文字内容是动态的，文字少时居中显示，超过一行者居左显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;!-- &lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt; --&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">       .box&#123;</span><br><span class="line">           padding: 10px;</span><br><span class="line">           background-color: #cd0000;</span><br><span class="line">           text-align: center;</span><br><span class="line">       &#125;</span><br><span class="line">       .content&#123;</span><br><span class="line">           display: inline-block;</span><br><span class="line">           text-align: left;</span><br><span class="line">       &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">       &lt;p id=&quot;conMore&quot; class=&quot;content&quot;&gt;</span><br><span class="line">        文字内容</span><br><span class="line">       &lt;/p&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   &lt;button&gt;get more&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.getElementsByTagName(&apos;button&apos;)[0];</span><br><span class="line">    var content = document.getElementById(&apos;conMore&apos;);</span><br><span class="line">    if(btn &amp;&amp; content)&#123;</span><br><span class="line">        btn.onclick = function()&#123;</span><br><span class="line">            content.innerHTML += &apos;你好&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这主要得益于”包裹性“，未达内部容器大小时，样式主要取决于外部盒子，超过时，取内部容器大小。除了 inline-block 元素，浮动元素以及绝对定位元素都具有包裹性，据有类似的智能宽度的行为。</p>
+        <h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。</p>
+<h6 id="Cookie的引入"><a href="#Cookie的引入" class="headerlink" title="Cookie的引入"></a>Cookie的引入</h6><p>当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。</p>
+<h6 id="Cookie的简介"><a href="#Cookie的简介" class="headerlink" title="Cookie的简介"></a>Cookie的简介</h6><p>cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它是所有web开发语言据支持的技术。它是一种进行网络会话状态跟踪的技术。</p>
+<p>会话（当用户打开浏览器，从发出第一次请求开始，一直到最终关闭浏览器就表示一次会话的完成）则是由一组请求和响应组成，是围绕看一件相关事情所进行的请求和响应，所以这些请求和响应之间必须有数据传递，即进行会话状态跟踪。但http协议是一种无状态协议，在不同请求间无法进行数据传递。此时就需要一种可以进行请求间数据传递的会话跟踪技术，而cookie就是这样一种技术。</p>
+<p>Cookie是由服务器生成，保存在客户端的一种信息载体。这个载体中存放着用户访问该站点的会话状态信息。只要cookie没有被清空，或cookie没有生效，那么保存在其中的会话状态就有效。用户在提交第一次请求后，由服务器生成cookie并将其封装到响应头中，以响应的形式发送给客户端，客户端接收到这个响应后，将cookie保存到客户端。当客户端再发起同类的请求（资源路径路径相同）后，在请求中会携带保存在客户端的cookie数据，发送给服务器，由服务器对会话进行跟踪。</p>
+<p>注意：cookie禁用仅是客户端不接收来自客户端的cookie，后端服务器还是有响应cookie回来的。一般不会禁用cookie，否则就不能使用，会出现500错误。</p>
+<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>session即会话，是web开发中的一种会话状态跟踪技术，跟cookie类似，不过cookie是将会话状态存放于客户端的，而session是存在于服务端的。</p>
+<h6 id="服务端生成session"><a href="#服务端生成session" class="headerlink" title="服务端生成session"></a>服务端生成session</h6><p>在服务器中系统会为每个会话维护一个session。不同的会话，对应不同的session。服务器对当前应用中的session是以Map的形式进行管理的，这个Map称为Session列表，该map的key为一个32位长度的随机串，这个随机串称为JSession，value则为session对象的引用。当用户第一次提交请求时，服务端servlet中执行到<code>request.getSession()</code>后会自动生成一个<code>Map.Entry</code>对象，key为一个根据某种算法新生成的JSessionID，value则为新创建的HttpSession对象。</p>
+<h6 id="服务器生成并发送cookie"><a href="#服务器生成并发送cookie" class="headerlink" title="服务器生成并发送cookie"></a>服务器生成并发送cookie</h6><p>在将Session信息写入session列表后，系统还会自动将JSESSIONID作为name，这个32位长度的随机串作为value，以cookie的形式存放到响应头中，并随着响应将该cookie发送到客户端。</p>
+<h6 id="客户端接收并发送cookie"><a href="#客户端接收并发送cookie" class="headerlink" title="客户端接收并发送cookie"></a>客户端接收并发送cookie</h6><p>客户端接受到这个cookie后会将其存放到浏览器的缓存中。即只要客户端浏览器不关闭，浏览器缓存的cookie就不会消失。</p>
+<p>当用户提交第二次请求时，会将缓存中的这个cookie伴随着请求的头部信息一块发到服务端。</p>
+<h6 id="congsession列表中查找"><a href="#congsession列表中查找" class="headerlink" title="congsession列表中查找"></a>congsession列表中查找</h6><p>服务端从请求中读取到从客户端发来的cookie，并根据cookie的JSESSIONID的值，从Map中查找相应key所对应的value，即session对象。然后对该session对象的域属性进行读写操作。</p>
+<h6 id="session的失效"><a href="#session的失效" class="headerlink" title="session的失效"></a>session的失效</h6><p>web开发中引入的session超时的概念，session的失效就是指session的超时。若某个session在指定的时间范围内一直未被访问，那session将超时，即将失效。</p>
+<p>服务器针对不同的会话找到不同的session，是因为cookie完成了会话的跟踪。但是，若客户端浏览器将cookie禁用，则服务器每提交一次请求，服务器在给出的响应中都会包含名称为JSESSIONID的cookie，只不过这个cookie值每次都不同，也就是说客户端所提交的请求中没有包含JSESSIONID，服务器就会认为这是一次新的会话的开始，就会为其生成一个<code>Map.Entry</code>对象，所以也就无法实现会话跟踪了。</p>
 
       
     </div>
@@ -325,13 +320,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/03/26/深入理解css/">深入理解css</a></p>
+        <p><span>本文标题:</span><a href="/2020/06/11/前端cookie解读/">前端cookie解读</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2020-03-26, 11:23:41</p>
-        <p><span>最后更新:</span>2020-03-26, 11:50:20</p>
+        <p><span>发布时间:</span>2020-06-11, 15:33:30</p>
+        <p><span>最后更新:</span>2020-06-12, 10:38:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/03/26/深入理解css/" title="深入理解css">http://yoursite.com/2020/03/26/深入理解css/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/深入理解css/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/11/前端cookie解读/" title="前端cookie解读">http://yoursite.com/2020/06/11/前端cookie解读/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/11/前端cookie解读/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -344,15 +339,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/03/26/HTML5基础上-陈楚吟/">
-                    HTML5基础上-陈楚吟
+                <a href="/2020/06/13/刷题笔记/">
+                    刷题笔记
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/03/26/选择器/">
-                    选择器
+                <a href="/2020/06/04/前端经验/">
+                    前端经验
                 </a>
             </div>
         
@@ -364,7 +359,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#低调的width-auto"><span class="toc-number">1.</span> <span class="toc-text">低调的width:auto</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#格式化宽度。"><span class="toc-number">1.0.1.</span> <span class="toc-text">格式化宽度。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#动态文字例子"><span class="toc-number">1.0.2.</span> <span class="toc-text">动态文字例子</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的引入"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cookie的引入</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的简介"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cookie的简介</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">2.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#服务端生成session"><span class="toc-number">2.0.1.</span> <span class="toc-text">服务端生成session</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务器生成并发送cookie"><span class="toc-number">2.0.2.</span> <span class="toc-text">服务器生成并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#客户端接收并发送cookie"><span class="toc-number">2.0.3.</span> <span class="toc-text">客户端接收并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#congsession列表中查找"><span class="toc-number">2.0.4.</span> <span class="toc-text">congsession列表中查找</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#session的失效"><span class="toc-number">2.0.5.</span> <span class="toc-text">session的失效</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -400,7 +395,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"深入理解css　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"前端cookie解读　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +415,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/26/HTML5基础上-陈楚吟/" title="上一篇: HTML5基础上-陈楚吟">
+            <a href="/2020/06/13/刷题笔记/" title="上一篇: 刷题笔记">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -428,7 +423,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/03/26/选择器/" title="下一篇: 选择器">
+            <a href="/2020/06/04/前端经验/" title="下一篇: 前端经验">
                 <i class="fa fa-angle-right"></i>
             </a>
         

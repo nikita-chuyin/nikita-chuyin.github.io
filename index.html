@@ -268,6 +268,158 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-刷题笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/13/刷题笔记/" class="article-date">
+      <time datetime="2020-06-13T01:16:13.000Z" itemprop="datePublished">2020-06-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/13/刷题笔记/">刷题笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><ol>
+<li><p>form表单中input元素的disabled指当input元素加载时禁用此元素，input内容不会随着表单提交。readonly规定输入字段为只读，input内容会随着表单提交。但是无论设置readonly还是disabled，通过js脚本都能更改input的value。</p>
+</li>
+<li><p><code>&lt;parent&gt;&lt;child&gt;content&lt;/child&gt;&lt;/parent&gt;</code>可使child内容垂直居中。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*把parent变成table，child变成table-cell，而vertical-align可设置元素垂直对齐，前提是：只能应用于内联元素，当parent只有child一个子元素时，child会铺满parent全部空间，即使child有宽高*/</span></span><br><span class="line"><span class="selector-tag">parent</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">child</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:table-cell;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*弹性布局。*/</span></span><br><span class="line"><span class="selector-tag">parent</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:flex;</span><br><span class="line">	<span class="attribute">align-items</span>:center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*父元素设置相对定位，子元素设置绝对定位，子元素的top设置50%，即父元素的高度一半，注意此时是child元素的左上角（0，0）移到了parent的（0，parent高度的50%），而不是子元素的中心点移到了父元素垂直方向的中心点。因此子元素需要上移自身高度的一半，即transform:translateY(-50%)*/</span></span><br><span class="line"><span class="selector-tag">parent</span>&#123;</span><br><span class="line">	<span class="attribute">positionn</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">child</span>&#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">	<span class="attribute">transform</span>: <span class="built_in">translateY</span>(-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*设置伪元素。vertical-align属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。如：有两个行内元素a和b，a，b都是img，若s加了vertical-align：middle样式，b的底部（基线）就会对齐a的中间位置；若a，b都加了，则互相对齐了对方的中间位置，也就是他们在垂直方向上的中线对齐了。*/</span></span><br><span class="line"><span class="selector-tag">parent</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">	<span class="attribute">content</span>:<span class="string">''</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">child</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: inline-block;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>display:none</code>指的是元素不完全陈列出来，不占据空间，涉及到了DOM结构，故产生重排和重绘。</p>
+<p><code>visibility:hidden</code>指的是元素不可见但存在，保留空间，不影响结构，故只产生重绘，但不可触发绑定事件。</p>
+<p><code>opacity=0</code>指的是元素不可见但存在，保留空间，不影响结构，并且如果如果该元素已经绑定了一些事件，如click事件，那么点击该区域，也能触发点击事件的。</p>
+</li>
+<li><p>Web SQL数据库API并不是HTML5规范的一部分，但它是一个独立的规范，引入了一组使用SQL操作数据库的APIs。</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ele.clientWidth = 宽度 + padding</span><br><span class="line">ele.offsetWidth = 宽度 + padding + border</span><br><span class="line">ele.scrollTop = 被卷去的上侧距离</span><br><span class="line">ele.scrollHeight = 自身实际的高度（不包含边框）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Object.keys()</code>不能遍历出对象原型链上的属性。<code>Object.assign(obj1,obj2)</code>可以实现对象的浅拷贝。</p>
+</li>
+<li><p><code>null === null</code>结果为true。</p>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> A();</span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> B();</span><br><span class="line"></span><br><span class="line"><span class="comment">//以下都为true</span></span><br><span class="line">a.__proto__ === A.prototype </span><br><span class="line">b.__proto__ === B.prototype</span><br><span class="line">B.__proto__ === A</span><br><span class="line">B.prototype.__proto__ === A.prototype</span><br><span class="line">b.__proto__.__proto__ === A.prototype</span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-前端cookie解读" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/11/前端cookie解读/" class="article-date">
+      <time datetime="2020-06-11T07:33:30.000Z" itemprop="datePublished">2020-06-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/11/前端cookie解读/">前端cookie解读</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。</p>
+<h6 id="Cookie的引入"><a href="#Cookie的引入" class="headerlink" title="Cookie的引入"></a>Cookie的引入</h6><p>当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。</p>
+<h6 id="Cookie的简介"><a href="#Cookie的简介" class="headerlink" title="Cookie的简介"></a>Cookie的简介</h6><p>cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它是所有web开发语言据支持的技术。它是一种进行网络会话状态跟踪的技术。</p>
+<p>会话（当用户打开浏览器，从发出第一次请求开始，一直到最终关闭浏览器就表示一次会话的完成）则是由一组请求和响应组成，是围绕看一件相关事情所进行的请求和响应，所以这些请求和响应之间必须有数据传递，即进行会话状态跟踪。但http协议是一种无状态协议，在不同请求间无法进行数据传递。此时就需要一种可以进行请求间数据传递的会话跟踪技术，而cookie就是这样一种技术。</p>
+<p>Cookie是由服务器生成，保存在客户端的一种信息载体。这个载体中存放着用户访问该站点的会话状态信息。只要cookie没有被清空，或cookie没有生效，那么保存在其中的会话状态就有效。用户在提交第一次请求后，由服务器生成cookie并将其封装到响应头中，以响应的形式发送给客户端，客户端接收到这个响应后，将cookie保存到客户端。当客户端再发起同类的请求（资源路径路径相同）后，在请求中会携带保存在客户端的cookie数据，发送给服务器，由服务器对会话进行跟踪。</p>
+<p>注意：cookie禁用仅是客户端不接收来自客户端的cookie，后端服务器还是有响应cookie回来的。一般不会禁用cookie，否则就不能使用，会出现500错误。</p>
+<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>session即会话，是web开发中的一种会话状态跟踪技术，跟cookie类似，不过cookie是将会话状态存放于客户端的，而session是存在于服务端的。</p>
+<h6 id="服务端生成session"><a href="#服务端生成session" class="headerlink" title="服务端生成session"></a>服务端生成session</h6><p>在服务器中系统会为每个会话维护一个session。不同的会话，对应不同的session。服务器对当前应用中的session是以Map的形式进行管理的，这个Map称为Session列表，该map的key为一个32位长度的随机串，这个随机串称为JSession，value则为session对象的引用。当用户第一次提交请求时，服务端servlet中执行到<code>request.getSession()</code>后会自动生成一个<code>Map.Entry</code>对象，key为一个根据某种算法新生成的JSessionID，value则为新创建的HttpSession对象。</p>
+<h6 id="服务器生成并发送cookie"><a href="#服务器生成并发送cookie" class="headerlink" title="服务器生成并发送cookie"></a>服务器生成并发送cookie</h6><p>在将Session信息写入session列表后，系统还会自动将JSESSIONID作为name，这个32位长度的随机串作为value，以cookie的形式存放到响应头中，并随着响应将该cookie发送到客户端。</p>
+<h6 id="客户端接收并发送cookie"><a href="#客户端接收并发送cookie" class="headerlink" title="客户端接收并发送cookie"></a>客户端接收并发送cookie</h6><p>客户端接受到这个cookie后会将其存放到浏览器的缓存中。即只要客户端浏览器不关闭，浏览器缓存的cookie就不会消失。</p>
+<p>当用户提交第二次请求时，会将缓存中的这个cookie伴随着请求的头部信息一块发到服务端。</p>
+<h6 id="congsession列表中查找"><a href="#congsession列表中查找" class="headerlink" title="congsession列表中查找"></a>congsession列表中查找</h6><p>服务端从请求中读取到从客户端发来的cookie，并根据cookie的JSESSIONID的值，从Map中查找相应key所对应的value，即session对象。然后对该session对象的域属性进行读写操作。</p>
+<h6 id="session的失效"><a href="#session的失效" class="headerlink" title="session的失效"></a>session的失效</h6><p>web开发中引入的session超时的概念，session的失效就是指session的超时。若某个session在指定的时间范围内一直未被访问，那session将超时，即将失效。</p>
+<p>服务器针对不同的会话找到不同的session，是因为cookie完成了会话的跟踪。但是，若客户端浏览器将cookie禁用，则服务器每提交一次请求，服务器在给出的响应中都会包含名称为JSESSIONID的cookie，只不过这个cookie值每次都不同，也就是说客户端所提交的请求中没有包含JSESSIONID，服务器就会认为这是一次新的会话的开始，就会为其生成一个<code>Map.Entry</code>对象，所以也就无法实现会话跟踪了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-前端经验" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -891,12 +1043,59 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h4><h6 id="AJAX优缺点"><a href="#AJAX优缺点" class="headerlink" title="AJAX优缺点"></a>AJAX优缺点</h6><p>浏览器可以从服务器同时请求多项内容，利用异步请求可以确保浏览器在后台工作，避免因完全页面刷新而中断用户的工作。</p>
+        <h4 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h4><h6 id="传统网站存在的问题"><a href="#传统网站存在的问题" class="headerlink" title="传统网站存在的问题"></a>传统网站存在的问题</h6><ol>
+<li>网速慢的情况下，页面加载时间长，用户只能等待。</li>
+<li>表单提交后，如果一项内容不合格，需要重新填写所有表单内容。</li>
+<li>页面跳转，重新加载页面，造成资源浪费，增加用户等待时间。</li>
+</ol>
+<h6 id="Ajax概述"><a href="#Ajax概述" class="headerlink" title="Ajax概述"></a>Ajax概述</h6><p>它是浏览器提供的一套方法，可以实现页面无刷新更新数据，提高用户浏览网站应用的体验。</p>
+<h6 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h6><ol>
+<li>页面上拉加载更多数据，当下拉到底部并点击加载更多时才会向服务器发起请求并响应给用户。</li>
+<li>列表数据无刷新分页，当从第一页切换到第二页时，只有列表中的数据才会变，头部和底部是不会发生变化的。</li>
+<li>表单项离开焦点数据验证，当用户输入数据且该表单项失去焦点后，网页会自动将数据传给服务器进行验证，若已有该记录提示给用户。</li>
+<li>搜索框提示文字下拉列表。</li>
+</ol>
+<h6 id="AJAX优缺点"><a href="#AJAX优缺点" class="headerlink" title="AJAX优缺点"></a>AJAX优缺点</h6><p>浏览器可以从服务器同时请求多项内容，利用异步请求可以确保浏览器在后台工作，避免因完全页面刷新而中断用户的工作。</p>
 <p>浏览器请求返回的速度会快得多，只是在有些情况下如此而已，请求和响应的速度取决于服务器返回的内容。AJAX页面完全有可能比传统页面的速度更慢。</p>
 <p>不能够更真实的渲染颜色，因为颜色渲染由用户监视器控制而不是由用户支配。</p>
 <p>只有页面真正改变部分会得到更新。</p>
 <p>会减少服务器数据流量，利用AJAX可以建立更小更集中的请求。不过要当心……这也很容易导致建立更多的请求以至于增大数据流量，因为可能要一部建立所有这些请求。</p>
 <p>页面的不兼容问题会更严重，由于除了XHTML外，AJAX页面还依赖于其它一些技术，所以使用AJAX后的兼容性问题实际会更严重。</p>
+<h6 id="Ajax运行原理及实现"><a href="#Ajax运行原理及实现" class="headerlink" title="Ajax运行原理及实现"></a>Ajax运行原理及实现</h6><p><strong>原理</strong></p>
+<p>Ajax相当于浏览器发送请求与接收响应的代理人以实现在不影响用户浏览页面的情况下，局部更新数据，从而提高用户体验。</p>
+<p><strong>Ajax实现步骤</strong></p>
+<ol>
+<li><p>创建Ajax对象</p>
+<p><code>var xhr = new XMLHttpRequest();</code></p>
+</li>
+<li><p>告诉Ajax请求地址以及请求方式</p>
+<p><code>xhr.open(&#39;get&#39;,&#39;http://www.example.com&#39;)</code></p>
+</li>
+<li><p>发送请求</p>
+<p><code>xhr.send();</code></p>
+</li>
+<li><p>获取服务器端给与客户端的响应数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr.onload = function()&#123;</span><br><span class="line">	console.log(xhr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>服务器端相应的数据格式</strong></p>
+<p>在真实的项目中，服务器端大多数情况下会以JSON对象作为响应数据的格式。</p>
+<p>在http请求与响应过程中，无论是请求参数还是响应内容，如果是对象类型最终都会被转换为对象字符串进行传输。</p>
+<p><code>JSON.parse()   //将json字符串转换为json对象</code></p>
+<p><strong>请求参数传递</strong></p>
+<p>传统网站表单提交</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"get"</span> <span class="attr">action</span>=<span class="string">"http://www.example.com"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- http://www.example.com?username=zhangsan&amp;passwor=123456 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Ajax中的get请求</strong></p>
+<p><code>xhr.open(&#39;GET&#39;,&#39;http://www.example.com?name=zhangsan&amp;age=20&#39;);</code></p>
+<p><strong>post请求</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.setResquestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;)</span><br><span class="line">xhr.send(&apos;name=zhangsan&amp;age=20&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>application/json</p>
+<p>{name:’zhangsan’ , age: ‘20’ ,  sex: ‘男 ‘}</p>
+<p>在请求头中指定Content-Type属性的值是application/json，告诉服务器当前请求参数的格式是json。</p>
+<p><code>JSON.stringify()</code>    // 将json对象转换为json字符串</p>
 
       
     </div>
@@ -961,700 +1160,6 @@
 <p>Node采用了与Web Workers相同的思路来解决单线程中大计算量的问题：child_process。</p>
 <p>子进程的出现，意味着Node可以从容地应对单线程在健壮性和无法利用多核CPU方面的问题。通过计算分发到各个子进程，可以将大量计算分解掉，然后再通过进程之间的事件消息来传递结果，这可以很好的保持应用模型的简单和地低依赖。通过Master-Worker的管理方式，也可以很好地管理各个工作进程，以达到更高的的健壮性。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-http进阶" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/30/http进阶/" class="article-date">
-      <time datetime="2020-04-29T23:40:38.000Z" itemprop="datePublished">2020-04-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/http进阶/">http进阶</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h6 id="Telnet实例"><a href="#Telnet实例" class="headerlink" title="Telnet实例"></a>Telnet实例</h6><p>由于Http使用的是TCP/IP传输协议，而且它是基于文本的，没有使用哪些难以理解的二进制格式，因此很容易直接1与Web服务器进行对话。</p>
-<p>Telnet程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程终端会话，但它几乎可以连接所有的TCP服务器，包括HTTP服务器。</p>
-<h4 id="Web结构组件"><a href="#Web结构组件" class="headerlink" title="Web结构组件"></a>Web结构组件</h4><ol>
-<li>代理：位于客户端和服务器之间的HTTP中间实体。</li>
-<li>缓存：HTTP的仓库，是常用页面的副本可以存在离客户端更近的地方。</li>
-<li>网关：连接应用程序的特殊Web服务器。</li>
-<li>隧道：对HTTP通信报文进行盲转发的特殊代理。</li>
-<li>Agent代理：发起自动HTTP请求的半智能Web客户端。</li>
-</ol>
-<h6 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h6><p>HTTP代理服务器是Web安全，应用集成以及性能优化的重要组成模块。</p>
-<p>代理位于客户端与服务器之间，接收所有客户端的HTTP请求，并将这些请求转发给服务器（可能会对请求进行修改之后转发）。对用户来说，这些应用程序就是一个代理，代表用户访问服务器。</p>
-<p>出于安全考虑，通常会将代理作为转发所有Web流量的可信任中间节点使用。代理还可以对请求和响应进行过滤。比如，在企业中对下载的应用程序进行病毒检测，或者对小学生屏蔽一些成人才能看的内容。</p>
-<h6 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h6><p>WEb缓存（Web cache）或代理缓存（proxy cache）是一种特殊的HTTP代理服务器，可以将经过代理传送的常用文档复制保存起来。下一个请求同一文档的客户端就可以享受缓存的私有副本所提供的服务了。</p>
-<h6 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h6><p>网关（gateway）是一种特殊的服务器，作为其他服务器的中间实体使用，通常用于将HTTP流量转换成其他的协议。网关接受时就好像自己是咨议员的源端服务器一样。客户端可能并不知道自己正在与一个网关进行通信。</p>
-<p>如：一个HTTP/FTP网关会通过HTTP请求接受对FTP URI的请求，但通过FTP协议来获取文档。得到的文档会被封装成一条HTTP报文发给客户端。</p>
-<h6 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h6><p>隧道（tunnel）是建立起来之后就会在两条连接之间对原始数据进行盲转发的HTTP应用程序。HTTP隧道通常用来在一条或多条HTTP连接上进行转发非HTTP数据，转发时不会窥探数据。</p>
-<p>HTTP隧道的一种常见用途是通过HTTP连接承载加密的安全套接字层（SSL,Secure Socket Layout)流量，这样ssl流量就可以穿过只允许Web流量通过的防火墙了。</p>
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E9%9A%A7%E9%81%93.png" alt="隧道"></p>
-<p>如：HTTP/SSL隧道收到一条HTTP请求，要求建立一条到目的的地址和端口的输出连接，然后在HTTP信道上通过隧道传输加密的SSL流量，这样就可以将其转发到目的服务器上。</p>
-<h6 id="Agent代理"><a href="#Agent代理" class="headerlink" title="Agent代理"></a>Agent代理</h6><p>用户代理是代表用户发起HTTP请求的客户端程序。所有发布Web请求的应用程序都是HTTP Agent代理。到目前为止，我们只提过一种HTTP Agent代理：WEb浏览器，但用户Agent代理还有很多类型。</p>
-<p>如：有些自己会在Web上闲逛的自动用户Agent代理，可以在无人监视的情况下发布HTTP事务并获取内容。这些自动代理的名字很生动，比如“网络蜘蛛”或“web机器人”。网络蜘蛛会在WEb上闲逛，搜集信息以构建有效的Web内容档案，比如一个搜索引擎的数据库或者为比较购物机器人生成的产品目录。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430094207000.png" alt="image-20200430094207000"></p>
-<h4 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h4><p>请求报文格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;method&gt;     &lt;request-URL&gt;  &lt;version&gt;</span><br><span class="line">&lt;headers&gt; </span><br><span class="line">&lt;entrity-body&gt;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;version&gt;   &lt;status&gt;   &lt;response-phrase&gt;</span><br><span class="line">&lt;headers&gt;</span><br><span class="line">&lt;entrity-body&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方法（method）"><a href="#方法（method）" class="headerlink" title="方法（method）"></a>方法（method）</h6><p>客户端希望服务器对资源执行的动作，是一个单独的词，比如GET,HEAD或POST.</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-<th>是否包含主体</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>GET</td>
-<td>从服务器获取一份文档</td>
-<td>否</td>
-</tr>
-<tr>
-<td>HEAD</td>
-<td>只从服务器获取文档的首部</td>
-<td>否</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>向服务器发送需要处理的数据</td>
-<td>是</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>将请求的主体部分存储在服务器上</td>
-<td>是</td>
-</tr>
-<tr>
-<td>TRACE</td>
-<td>对可能经过代理服务器传送到服务器上去的报文进行追踪</td>
-<td>否</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>决定可以在服务器上执行哪些方法</td>
-<td>否</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>从服务器上删除一份文档</td>
-<td>否</td>
-</tr>
-</tbody></table>
-<p><strong>扩展方法</strong>：指的是没有在HTTP/1.1规范中定义的方法，服务器会为它所管理的资源实现一些二HTTP服务，这些方法为开发者提供了一种扩展这些HTTP服务能力的手段。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LOCK</td>
-<td>允许用户“锁定”资源——比如，可以在编辑某个资源的时候将其锁定，以防别人对其进行修改。</td>
-</tr>
-<tr>
-<td>MKCOL</td>
-<td>允许用户创建资源</td>
-</tr>
-<tr>
-<td>COPY</td>
-<td>便于在服务器上复制资源</td>
-</tr>
-<tr>
-<td>MOVE</td>
-<td>在服务器上移动资源</td>
-</tr>
-</tbody></table>
-<p>惯例：对所发送的内容要求严一点，对接收的内容宽容一些处理扩展方法。</p>
-<ol start="2">
-<li><p>请求URL(request-URL)</p>
-<p>命名了所有请求资源，或者URL路径组件的完整URL。如果直接与服务器进行对话，只要URL的路径组件是资源的绝对路径，通常就不会有什么问题——服务器可以假定自己是URL的主机/端口。</p>
-</li>
-<li><p>版本（version）</p>
-</li>
-<li><p>状态码（status-code）</p>
-<p>这三位数字描述了请求过程中所发生的情况。每个状态码的第一位数字都用于描述状态的一般类型（“成功”、“出错”）。</p>
-<p><strong>状态码分类</strong></p>
-<table>
-<thead>
-<tr>
-<th>整体范围</th>
-<th>已定义范围</th>
-<th>分类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>100-199</td>
-<td>100-101</td>
-<td>信息提示</td>
-</tr>
-<tr>
-<td>200-299</td>
-<td>200-206</td>
-<td>成功</td>
-</tr>
-<tr>
-<td>300-399</td>
-<td>300-305</td>
-<td>重定向</td>
-</tr>
-<tr>
-<td>400-499</td>
-<td>400-415</td>
-<td>客户端错误</td>
-</tr>
-<tr>
-<td>500-599</td>
-<td>500-505</td>
-<td>服务器错误</td>
-</tr>
-</tbody></table>
-<p><strong>常见状态码</strong></p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200</td>
-<td>OK</td>
-<td>成功。请求的所有数据都在响应主体中。</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized（未授权）</td>
-<td>需要输入用户名和密码</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found（未找到）</td>
-<td>服务器无法找到所请求URL对应的资源</td>
-</tr>
-<tr>
-<td>501</td>
-<td>Not Implemented（无法实现）</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>信息性状态码</strong>‘</p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>100</td>
-<td>Continue</td>
-<td>说明受到了请求的初始部分，请客户端继续，发送了这个状态码后，服务器在收到请求后必须进行响应。</td>
-</tr>
-<tr>
-<td>101</td>
-<td>Switching Protocols</td>
-<td>说明服务器正在根据客户端的指定，将协议切换成Update’首部所列的协议。</td>
-</tr>
-</tbody></table>
-<p>100 Continue是一种优化，客户端应用程序只有在避免向服务器发送一个服务器无法处理或使用的大实体时才会使用100 Continue。当服务端超时一定时间后，客户端直接将实体发出去。</p>
-<p><strong>成功状态码</strong></p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>原因短语</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200</td>
-<td>请求没问题，实体的主体部分包含了所请求的资源</td>
-<td>OK</td>
-</tr>
-<tr>
-<td>201</td>
-<td>用于创建对象的请求（PUT)。响应的主体部分包含各种已创建资源的URL，location首部包含则是最具体的引用。</td>
-<td>Created</td>
-</tr>
-<tr>
-<td>202</td>
-<td>请求已被接受，但服务器还未对其执行任何动作，不能保证服务器会完成这个请求。</td>
-<td>Accepted</td>
-</tr>
-<tr>
-<td>203</td>
-<td>实体部分包含的资源不是来自源服务器，而是来自资源的一份副本。如果中间节点上有一份资源副本，但无法对它所发送的与资源有关的元信息（首部）进行验证，就会出现这种情况。</td>
-<td>Non-Authoritative-Information</td>
-</tr>
-<tr>
-<td>204</td>
-<td>响应报文中包含若干首部和一个状态行，但没有实体部分，主要用于在浏览器不转为显示新文档的情况下，对其将进行更新（如刷新一个表单页面）</td>
-<td>No Content</td>
-</tr>
-<tr>
-<td>205</td>
-<td>另一个主要用于浏览器的代码，负责告诉浏览器清除当前页面中所有HTML表单元素。</td>
-<td>Reset Content</td>
-</tr>
-<tr>
-<td>206</td>
-<td>成功执行一部分请求。稍后会看到，客户端可以通过一些特殊的首部来获取部分或某个范围内的文档——这个状态码就说明请求成功了。</td>
-<td>Partial Content</td>
-</tr>
-</tbody></table>
-<p><strong>重定向状态码</strong></p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>300</td>
-<td>Multiple Choices</td>
-<td>客户端请求一个实际指向多个资源的URL时会返回这个状态码，比如服务器上有某个HTML文档的英语和法语版本。返回这个代码时会带有一个选项列表，这样用户就可以选择他希望使用的那一项了。有多个版本1可用时，客户端需要沟通解决。</td>
-</tr>
-<tr>
-<td>301</td>
-<td>Moved Permananently</td>
-<td>在请求的URL已被移除时使用。响应的Location首部中应该包含资源现在所处的URL。</td>
-</tr>
-<tr>
-<td>302</td>
-<td>Found</td>
-<td>与301状态码相似，但是客户端应该使用Location首部给出的URL来临时定位资源。将来的请求仍应使用老的URL。</td>
-</tr>
-<tr>
-<td>303</td>
-<td>See Other</td>
-<td>告知客户端应该用另一个URL来获取资源。新的URL位于响应报文的Location首部。其主要目的是允许POST请求的响应将客户端定向到某个资源上去。</td>
-</tr>
-<tr>
-<td>304</td>
-<td>Not Modified</td>
-<td>客户端可以通过所包含的请求首部，使其请求变成有条件的。如果客户端发起一个GET请求，而最近资源未被修改，就可用这个状态码来说明资源未被修改，带有这个状态吗的响应不应该包含实体的主体部分。</td>
-</tr>
-<tr>
-<td>305</td>
-<td>Use Proxy</td>
-<td>用来说明必须通过一个代理来访问资源，代理的位置由Location首部给出。很重要一点是，客户端是相对某个特定资源来解析这个响应的，不能假定所有请求，甚至所有对持有所请求资源的服务器的请求都通过这个代理进行。如果客户端错误的让代理介入了某条请求，可能会引发破环性的行为，而且会造成安全漏洞。</td>
-</tr>
-<tr>
-<td>306</td>
-<td>（未使用）</td>
-<td>当前未使用</td>
-</tr>
-<tr>
-<td>307</td>
-<td>Temporary Redirect</td>
-<td>与301状态码相似，但是客户端应该使用Location首部给出的URL来临时定位资源。将来的请求仍应使用老的URL。</td>
-</tr>
-</tbody></table>
-<p><strong>客户端错误</strong></p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>400</td>
-<td>Bad Request</td>
-<td>用于告诉客户端他发送了一个错误的请求</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-<td>与适当的首部一同返回，在这些首部中请求客户端在获取对资源的访问权之前，对自己进行认证。</td>
-</tr>
-<tr>
-<td>402</td>
-<td>Payment Required</td>
-<td>现在这个状态码还未使用，但已经被保留，以作未来之用。</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden</td>
-<td>用以说明请求被服务器拒绝了，如果服务器想说明为什么拒绝请求，可以包含实体的主体部分来对原因进行描述。但这个状态通常是在服务器不想说明拒绝原因的时候使用的。</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found</td>
-<td>用于说明服务器无法找到所请求的URL。通常会包含一个实体以便客户端应用程序显示给用户看。</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed</td>
-<td>发起的请求中带所请求的URL不支持的方法时，使用此状态码。应该在响应中包含Allow首部，以告知客户端对请求的资源可以使用哪些方法。</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable</td>
-<td>客户端可以指定参数来说明他们愿意接受什么类型的实体。服务器没有与客户端可接受的URL相匹配的资源时，使用此代码。通常，服务器会包含一些首部以便客户端弄清楚为什么请求无法满足。</td>
-</tr>
-<tr>
-<td>407</td>
-<td>Proxy Authentication Required</td>
-<td>与401状态码类似，但用于要求对资源进行认证的代理服务器。</td>
-</tr>
-<tr>
-<td>408</td>
-<td>Request Timeout</td>
-<td>如果客户端完成请求所花的时间太长，服务器可以回送此状态码，并关闭连接。超时时长随服务器的不同而不同，但通常对所有合法请求来说都是够长的。</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Conflict</td>
-<td>用于说明请求可能在资源上引发的一些冲突，服务器担心请求会引发冲突时可发送此状态码。响应中应该包含描述冲突的主体。</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone</td>
-<td>与404相似，只要服务曾经拥有过此资源。主要用于Web站点的维护，这样服务器的管理者就可以在资源被移除的情况下通知客户端了。</td>
-</tr>
-<tr>
-<td>411</td>
-<td>Length Required</td>
-<td>服务器要求在请求报文中包含Content-Length首部时使用。</td>
-</tr>
-<tr>
-<td>412</td>
-<td>Precondition Failed</td>
-<td>客户端发起了条件请求且其中一个条件失败时使用。</td>
-</tr>
-<tr>
-<td>413</td>
-<td>Request Entrity Too Large</td>
-<td>客户端发送实体主体部分比服务器能够或希望处理的要大时发送此状态码。</td>
-</tr>
-<tr>
-<td>414</td>
-<td>Request URL Too Long</td>
-<td>客户端发送请求中的URL比服务器希望处理的要大时发送此状态码。</td>
-</tr>
-<tr>
-<td>415</td>
-<td>Unsupported Media Type</td>
-<td>服务器无法理解或无法支持客户端所发送实体的内容类型时</td>
-</tr>
-<tr>
-<td>416</td>
-<td>Unsupported Media Type</td>
-<td>请求报文所请求的是指定资源的某个范围，而此范围无效或无法满足时使用此状态码。</td>
-</tr>
-<tr>
-<td>417</td>
-<td>Expectation Failed</td>
-<td>请求的Expect请求首部包含了一个期望，但服务器无法满足此期望时，使用此状态码。如果代理或其他中间应用程序与确切证据说明源端服务器会为某请求产生一个失败的期望就可发送此状态码。</td>
-</tr>
-</tbody></table>
-<p><strong>服务器错误</strong></p>
-<table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>原因短语</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>500</td>
-<td>Internal Server Error</td>
-<td>服务器遇到一个妨碍它为请求提供服务的错误时使用此状态码。</td>
-</tr>
-<tr>
-<td>501</td>
-<td>Not Implemented</td>
-<td>客户端发起的请求超出服务器的能力范围。</td>
-</tr>
-<tr>
-<td>502</td>
-<td>Bad Gateway</td>
-<td>作为代理或网关使用的服务器从请求响应链的下一条链路上收到了一条伪响应（如，他无法链接到其父网关时）。</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable</td>
-<td>用来说明服务器现在不能为请求提供服务，但将来可以。如果服务器知道什么时候资源会变为可用的，可在响应中包含一个Retry-After首部。</td>
-</tr>
-<tr>
-<td>504</td>
-<td>Gateway Timeout</td>
-<td>与状态码408相似，只是这里的响应来自一个网关或代理，他们在等待另一服务器对其请求进行响应时超时了。</td>
-</tr>
-<tr>
-<td>505</td>
-<td>HTTP Version Not Supported</td>
-<td>服务器收到的请求使用了它无法或不愿支持的协议版本。有些服务器应用程序会选择不支持协议的早期版本。</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<ol start="5">
-<li><p>原因短语（reason-phrase）</p>
-<p>数字状态码的可读版本，包含行终止序列的所有文本。</p>
-</li>
-<li><p>首部（header）</p>
-<p>可以有零个或多个首部，每个首部都包含一个名字，后面跟着一个冒号，然后是一个可选的空格，接着是一个值，最后是一个CRLF。首部是由一个空行结束的，表示了首部列表的结束和实体主体部分的开始。</p>
-<p><strong>首部分类</strong></p>
-<ul>
-<li>通用首部：既可以出现在请求报文中，又可以出现在响应报文中。</li>
-<li>请求首部：提供更多有关请求的信息。</li>
-<li>响应首部：提供更多有关响应的信息。</li>
-<li>实体首部：描述主体的长度和内容，或者资源自身。</li>
-<li>扩展首部：规范中没有定义的新首部。</li>
-</ul>
-<p><strong>常见首部实例</strong></p>
-<table>
-<thead>
-<tr>
-<th>首部实例</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Date：Tue,3 Oct 1997  02:16:03  GMT</td>
-<td>服务器产生响应的日期</td>
-</tr>
-<tr>
-<td>Content-length:15040</td>
-<td>实体的主体部分包含了</td>
-</tr>
-<tr>
-<td>Content-type:image/gif</td>
-<td>实体的主体部分是一个GIF图片</td>
-</tr>
-<tr>
-<td>Accept:image/gif, image/jpeg, text/html</td>
-<td>客户端可以接收</td>
-</tr>
-<tr>
-<td>Connection</td>
-<td>允许客户端和服务器指定与请求或响应连接有关的选项。</td>
-</tr>
-<tr>
-<td>MIME-Version</td>
-<td>给定发送端使用的MIME版本。</td>
-</tr>
-<tr>
-<td>Trailer</td>
-<td>如果报文采用了分块传输编码（chunked transfer encoding）方式就可以用这个首部列出位于报文拖挂（trailer）部分的首部集合。</td>
-</tr>
-<tr>
-<td>Transfer-Encoding</td>
-<td>告知接收端为了保证报文可靠传输，对报文采取什么编码方式。</td>
-</tr>
-<tr>
-<td>Update</td>
-<td>给出了发送端可能想要“升级”使用的新版本或协议。</td>
-</tr>
-<tr>
-<td>Via</td>
-<td>显示了报文经过的中间节点（代理，网关）</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>实体的主体部分（entrity-body）</p>
-<p>实体的主体部分包含一个由任意数据组成的数据块。并不是所有的报文都包含实体的主体部分。</p>
-</li>
-</ol>
-<h6 id="通用首部"><a href="#通用首部" class="headerlink" title="通用首部"></a>通用首部</h6><p>通用缓存首部：HTTP/1.0引入了第一个允许HTTP应用程序缓存对象本地副本的首部，这样就不需要总是直接从源端服务器获取了。</p>
-<table>
-<thead>
-<tr>
-<th>首部</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Cache-Control</td>
-<td>用于随报文传送缓存指示。</td>
-</tr>
-<tr>
-<td>Pragma</td>
-<td>另一种随报文传送指示的方式，但并不专用于缓存。</td>
-</tr>
-</tbody></table>
-<p><strong>请求首部</strong>：是只在请求报文中有意义的首部，用于说明是谁或什么在发送请求，请求源自何处，或者客户端的喜好和能力。服务器可以根据请求首部给出的客户端信息，试着为客户端提供更好的响应。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502215359440.png" alt="image-20200502215359440"></p>
-<p><strong>Accept首部</strong>为客户端提供一种将其喜好和能力告知服务器的方式，包括它们想要什么，可以使用什么，以及最重要的，他们不想要什么，这样，服务器可以根据这些额外的信息，对要发送的内容做出更明智的决定。Accept首部会使连接的两端都受益。客户端会得到它们想要的内容，服务器则不会浪费时间和带宽来发送客户端无法使用的东西。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220337984.png" alt="image-20200502220337984"></p>
-<p><strong>条件请求首部</strong>：有时客户端希望为请求加上某些限制。比如，如果客户端已经有了一份文件副本就希望只在服务器上的文档与客户端拥有的副本有所区别时才请求服务器传输文档。通过条件请求首部，客户端就可以为请求加上这种限制，要求服务器在对请求进行响应前，确保某个条件为真。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502220845355.png" alt="image-20200502220845355"></p>
-<p><strong>安全请求首部</strong></p>
-<p>HTTP本身就支持一种简单的机制，可以对请求进行质询/响应认证。这种机制要求客户端在获取特定资源之前，先对自身进行认证，这样就可以使事务稍微安全一些。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221420633.png" alt="image-20200502221420633"></p>
-<p><strong>代理请求首部</strong></p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200502221552479.png" alt="image-20200502221552479"></p>
-<h6 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h6><p>响应报文有自己的响应首部集。响应首部为客户端提供了一些额外信息，比如谁发送响应，响应者的功能，甚至与响应相关的一些特殊指令，这些首部有助于客户端处理响应，并在将来发起更好的请求。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503080735091.png" alt="image-20200503080735091"></p>
-<p><strong>协商首部</strong></p>
-<p>如果资源有多种表示方法——如，若服务器上有某文档的法语和德语译稿，HTTP/1.1可以为服务器和客户端提供对资源进行协商的能力。</p>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200503082210004.png" alt="image-20200503082210004"></p>
-<p><strong>安全响应首部</strong></p>
-<table>
-<thead>
-<tr>
-<th>首部</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Proxy-Authenticate</td>
-<td>来自代理的对客户端的质询列表</td>
-</tr>
-<tr>
-<td>Set-Cookie</td>
-<td>不是真正的安全首部，但隐含有安全功能，可以在客户端设置一个令牌，以便服务器对客户端进行标识。</td>
-</tr>
-<tr>
-<td>Set-Cookie2</td>
-<td>与Set-Cookie类似</td>
-</tr>
-<tr>
-<td>www-Authenticate</td>
-<td>来自服务器的对客户端的质询列表</td>
-</tr>
-</tbody></table>
-<h6 id="HTTP事务产生时延的原因"><a href="#HTTP事务产生时延的原因" class="headerlink" title="HTTP事务产生时延的原因"></a>HTTP事务产生时延的原因</h6><ol>
-<li>客户端首先需要根据URI确定Web服务器的IP地址和端口号。如果最近没有对URI中的主机名进行访问，通过DNS解析系统将URI中的主机名转换成一个IP地址可能要花费数十秒的时间。</li>
-<li>接下来，客户端会向服务器发送一条TCP连接请求，并等待服务器回送一个请求经接受应答。每条新的TCP连接都会有连接建立时延。这个值通常最多只有一两秒钟，但如果有数百个HTTP事务的话，这个值就会快速叠加上去。</li>
-<li>一旦连接建立起来，客户端就会通过新建立的TCP管道来发送HTTP请求。数据到达时，Web服务器会从TCP链接中读取请求报文，并对请求进行处理。因特网传输请求报文，以及服务器请求报文都需要时间。</li>
-<li>然后，Web服务器会回送HTTP响应，这也需要花费时间。</li>
-</ol>
-<p>注：大多数HTTP客户端都有一个小的DNS缓存,用来保存近期所访问站点的IP地址。如果已经在本地“缓存”了IP地址，查询就可立即完成，因为大多数Web浏览器浏览的是少数常用站点，所以通常可以很快将主机名解析出来。</p>
-<p>TCP网络时延的大小取决于硬件速度，网络和服务器的负载，请求和响应报文的尺寸，以及客户端和服务器之间的距离。</p>
-<h6 id="TCP连接握手步骤"><a href="#TCP连接握手步骤" class="headerlink" title="TCP连接握手步骤"></a>TCP连接握手步骤</h6><ol>
-<li>请求新的TCP连接时，客户端要向服务器发送一个小的TCP分组（通常是40-60字节）。这个分组中设置了一个特殊的SYN标记，说明这是一个连接请求。</li>
-<li>如果服务器接受了连接，就会对连接参数进行计算，并向客户端回送一个TCP分组，这个分组中的SYN和ACK标记都被置位，说明连接请求已被接受。</li>
-<li>最后，客户端向服务器回送一条确认消息，通知他连接已成功建立，现代的TCP栈都允许客户端在这个确认分组中发送消息。</li>
-</ol>
-<p>小的HTTP事务可能会在TCP建立上花费50%，或更多的时间</p>
-<h6 id="延迟确认"><a href="#延迟确认" class="headerlink" title="延迟确认"></a>延迟确认</h6><p>由于因特网自身无法确保可靠的分组传输（因特网路由器超负荷的话，可以随意丢弃分组），所以TCP实现了自己的确认机制来确保数据的成功传输。</p>
-<p>每个TCP段都有一个序列号和数据完整性校验和。每个段的接收者收到完好的段时，都会向发送者回送小的确认分组。如果发送者，欸有在指定的窗口时间内收到确认信息，发送者就会认为分组已被破环或损毁，并重发数据。</p>
-<p>由于u企鹅人保温很小，所以TCP允许在发往相同方向的输出数据分组中对其进行“捎带”。TCP将将返回的确认信息与输出的数据分组结合在一起，可以更有效利用网络。为了增加确认报文找到同向传输数据分组的可能性，很多TCP栈都实现了一种延迟确认算法。延迟确认算法会在一个特定的窗口时间内将输出确认缓存放在缓存区中，以寻找能够捎带他的输出数据分组。如果在那个时间段内没有输出数据分组，就将确认信息放在单独的分组中传送。</p>
-<p>但是，HTTP具有双峰特征的请求——应答行为就降低了捎带信息的可能。当希望有相反方向回传分组的时候，偏偏没有那么多。通常，延迟确认算法会引起相当大的时延。根据所使用的操作系统的不同，可以调整或禁止延迟确认算法。</p>
-<p>在对TCP栈的任何参数进行修改之前，一定要对袭击在做什么会有清晰的了解。TCP中引入这些算法的目的是为了防止设计欠佳的应用程序对因特网造成破环。对TCP配置进行任意修改都要绝对确保应用程序不会引发这些i算法所要避免的问题。</p>
-<h6 id="TCP慢启动"><a href="#TCP慢启动" class="headerlink" title="TCP慢启动"></a>TCP慢启动</h6><p>TCP数据传输的性能还取决于TCP连接的使用期。TCP连接会随着时间进行自我“调谐”，起初还会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度，这种调谐被称为TCP慢启动，用于防止因特网的突然过载和拥塞。</p>
-<p>TCP慢启动限制了一个TCP端点在任意时刻可以传输的分组数。简单来讲是每成功接收一个分组，发送端就有了发送另外两个分组的权限。如果某个HTTP事务有大量的数据要发送，是不能依次将所有分组都发送出去的，必须发送一个分组，确认后才可以再发。这种方式是”打开拥塞窗口“。</p>
-<p>由于存在这种拥塞控制特性，所以新连接的传输速度会比已经交换过一定数据量的，“已调谐”连接慢一些。由于已调谐连接要更快一些，所以HTTP中有一些可以重用现存连接的工具。即HTTP“持久连接”。</p>
-<h6 id="提高HTTP连接性能的四类方法"><a href="#提高HTTP连接性能的四类方法" class="headerlink" title="提高HTTP连接性能的四类方法"></a>提高HTTP连接性能的四类方法</h6><ol>
-<li>并行连接</li>
-<li>持久连接</li>
-<li>管道化连接</li>
-<li>复用连接</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ES6的学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/28/ES6的学习/" class="article-date">
-      <time datetime="2020-04-28T06:51:11.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/ES6的学习/">ES6的学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
       
     </div>
     
