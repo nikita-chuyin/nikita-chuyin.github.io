@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="jquery对象是一个包含所有匹配的dom元素的伪数组对象。 js 加载时间线1、创建document对象，开始解析web页面。创建HTMLHtmlElement对象，添加到document中。这个阶段document.readyState = ‘loading’； 2、遇到link外部css，创建线程加载，并继续解析文档。并发； 3、遇到script外部js，并且没有设置async、defer，">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery">
+<meta property="og:url" content="http://yoursite.com/2020/06/17/jquery/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="jquery对象是一个包含所有匹配的dom元素的伪数组对象。 js 加载时间线1、创建document对象，开始解析web页面。创建HTMLHtmlElement对象，添加到document中。这个阶段document.readyState = ‘loading’； 2、遇到link外部css，创建线程加载，并继续解析文档。并发； 3、遇到script外部js，并且没有设置async、defer，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://7n.w3cschool.cn/statics/images/course/img_jquerydim.gif">
+<meta property="og:updated_time" content="2020-06-17T07:30:00.183Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery">
+<meta name="twitter:description" content="jquery对象是一个包含所有匹配的dom元素的伪数组对象。 js 加载时间线1、创建document对象，开始解析web页面。创建HTMLHtmlElement对象，添加到document中。这个阶段document.readyState = ‘loading’； 2、遇到link外部css，创建线程加载，并继续解析文档。并发； 3、遇到script外部js，并且没有设置async、defer，">
+<meta name="twitter:image" content="https://7n.w3cschool.cn/statics/images/course/img_jquerydim.gif">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>jquery | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-jquery" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/jquery/" class="article-date">
+      <time datetime="2020-06-17T07:29:38.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jquery
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>jquery对象是一个包含所有匹配的dom元素的伪数组对象。</strong></p>
+<h1 id="js-加载时间线"><a href="#js-加载时间线" class="headerlink" title="js 加载时间线"></a><a href="https://www.cnblogs.com/wenlv88/articles/9932919.html" target="_blank" rel="noopener">js 加载时间线</a></h1><p>1、创建document对象，开始<strong>解析</strong>web页面。创建HTMLHtmlElement对象，添加到document中。这个阶段document.readyState = ‘loading’；</p>
+<p>2、遇到link外部css，创建线程加载，并继续解析文档。<strong>并发；</strong></p>
+<p>3、遇到script外部js，并且没有设置async、defer，浏览器创建线程加载，并<strong>阻塞</strong>，等待js加载完成并执行该脚本，然后继续解析文档。<strong>js拥有修改dom的能力</strong>–&gt;domcument.write；</p>
+<p>4、遇到script外部js，并且设置有async、defter，浏览器创建线程加载，并继续解析文档；</p>
+<p>　　defer属性设置后，表示加载script外部js和解析html页面是异步，并且等到html解析完成再执行js解析后的代码；</p>
+<p>　　async属性设置后，表示加载script外部js和解析html页面是异步，但是当js解析完成，立刻执行它，此时html解析是<strong>被阻塞</strong>的；</p>
+<p>document.createElement(‘script’)的方式动态插入script元素来模拟async属性，实现脚本异步加载和执行；</p>
+<p>5、遇到img等，浏览器创建线程加载，并继续解析文档。<strong>并发；</strong></p>
+<p>6、当文档解析完成，document.readyState = ‘interactive’；</p>
+<p>7、文档解析完成后，所有设置有defer的脚本会按照顺序执行（注意与async的不同）；</p>
+<p>8、document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段，<strong>转化为事件驱动阶段；</strong></p>
+<p>9、当所有async的脚本加载完成并执行后、img等加载完成后，document.readyState = ‘complete’，window对象触发load事件；</p>
+<p>10、从此，以异步响应方式处理用户输入、网络事件等。</p>
+<h1 id="jQeury"><a href="#jQeury" class="headerlink" title="jQeury"></a>jQeury</h1><p>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在网络上的内容分发网络，依靠部署在各边缘服务器，通过中心平台的负载均衡，内容分发，调度等功能模块，使用户就近获取所需的内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术在于内容存储和分发技术。</p>
+<p>使用Google的CDN</p>
+<p>src=”<a href="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js&quot;" target="_blank" rel="noopener">http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js&quot;</a></p>
+<p>使用Microsoft的CDN</p>
+<p>src=”<a href="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.mim.js&quot;" target="_blank" rel="noopener">http://ajax.microsoft.com/ajax/jquery/jquery-1.4.mim.js&quot;</a></p>
+<p>如果您不希望下载并存放 jQuery，那么也可以通过 CDN（内容分发网络） 引用它。</p>
+<p>百度、又拍云、新浪、谷歌和微软的服务器都存有 jQuery 。</p>
+<p>如果你的站点用户是国内的，建议使用百度、又拍云、新浪等国内CDN地址，如果你站点用户是国外的可以使用谷歌和微软。</p>
+<p>使用百度，又拍云，新浪，谷歌或微软的jQuery的一大优势：</p>
+<p>当用户在访问其他站点时，已经从百度，又拍云，新浪，谷歌或1微软加载过jQuery，所以当他们访问你的站点时，会从缓存中加载jQuery,这样就减少了加载时间。同时，大多数CDN都可以确保当用户向其请求文件时，会从离用户最近的服务器上访问响应，这样也可以提高加载速度</p>
+<p>$(document).ready(function(){//jQuery代码})；</p>
+<p>这是为了防止文档未完全加载之前就执行jQuery代码，可能会失败</p>
+<table>
+<thead>
+<tr>
+<th align="left">语法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$(“*”)</td>
+<td align="left">选取所有元素</td>
+</tr>
+<tr>
+<td align="left">$(this)</td>
+<td align="left">选取当前 HTML 元素</td>
+</tr>
+<tr>
+<td align="left">$(“p.intro”)</td>
+<td align="left">选取 class 为 intro 的 <p> 元素</p></td>
+</tr>
+<tr>
+<td align="left">$(“p:first”)</td>
+<td align="left">选取第一个 <p> 元素</p></td>
+</tr>
+<tr>
+<td align="left">$(“ul li:first”)</td>
+<td align="left">选取第一个 <ul> 元素的第一个 <li> 元素</li></ul></td>
+</tr>
+<tr>
+<td align="left">$(“ul li:first-child”)</td>
+<td align="left">选取每个 <ul> 元素的第一个 <li> 元素</li></ul></td>
+</tr>
+<tr>
+<td align="left">$(“[href]”)</td>
+<td align="left">选取带有 href 属性的元素</td>
+</tr>
+<tr>
+<td align="left">$(“a[target=’_blank’]”)</td>
+<td align="left">选取所有 target 属性值等于 “_blank” 的 <a> 元素</a></td>
+</tr>
+<tr>
+<td align="left">$(“a[target!=’_blank’]”)</td>
+<td align="left">选取所有 target 属性值不等于 “_blank” 的 <a> 元素</a></td>
+</tr>
+<tr>
+<td align="left">$(“:button”)</td>
+<td align="left">选取所有 type=”button” 的 <input> 元素 和 <button> 元素</button></td>
+</tr>
+<tr>
+<td align="left">$(“tr:even”)</td>
+<td align="left">选取偶数位置的 </td></tr><tr> 元素
+</tr>
+<tr>
+<td align="left">$(“tr:odd”)</td>
+<td align="left">选取奇数位置的 </td></tr><tr> 元素
+</tr>
+</tbody></table>
+<p>常见 DOM 事件：</p>
+<table>
+<thead>
+<tr>
+<th align="left">鼠标事件</th>
+<th align="left">键盘事件</th>
+<th align="left">表单事件</th>
+<th align="left">文档/窗口事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">click</td>
+<td align="left">keypress</td>
+<td align="left">submit</td>
+<td align="left">load</td>
+</tr>
+<tr>
+<td align="left">dblclick</td>
+<td align="left">keydown</td>
+<td align="left">change</td>
+<td align="left">resize</td>
+</tr>
+<tr>
+<td align="left">mouseenter</td>
+<td align="left">keyup</td>
+<td align="left">focus</td>
+<td align="left">scroll</td>
+</tr>
+<tr>
+<td align="left">mouseleave</td>
+<td align="left"></td>
+<td align="left">blur</td>
+<td align="left">unload</td>
+</tr>
+</tbody></table>
+<h4 id="基本行为"><a href="#基本行为" class="headerlink" title="基本行为"></a>基本行为</h4><ul>
+<li>length：包含dom元素个数</li>
+<li>[index]/get(index)：得到对应位置的DOM元素</li>
+<li>each()：遍历包含所有的DOM元素</li>
+<li>index():得到所在兄弟元素中的下标</li>
+</ul>
+<h6 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h6><ul>
+<li><p>多个过滤器不是同时执行的，而是依次执行的。</p>
+<p>$(‘li:gt(0):lt(3)’).css(‘background’,’red’)      下标是 1  2  3变底色</p>
+<p>$(‘li:lt(3):gt(0)’).css(‘background’,’red’)       下标是1  2 变底色</p>
+</li>
+</ul>
+<h6 id="mouseover与mouseenter区别"><a href="#mouseover与mouseenter区别" class="headerlink" title="mouseover与mouseenter区别"></a>mouseover与mouseenter区别</h6><ul>
+<li>mouseover：在移入子元素时才会触发，对应mouseout</li>
+<li>mouseenter：只在移入当前元素才触发，对应mouseleave</li>
+<li>hover（）使用的是mouseenter与mouseleave</li>
+</ul>
+<h4 id="事件委托（委派-代理）"><a href="#事件委托（委派-代理）" class="headerlink" title="事件委托（委派/代理）"></a>事件委托（委派/代理）</h4><ul>
+<li>将多个元素（li）的事件监听委托给父辈元素上（ul）处理。</li>
+<li>监听回调是加在父辈元素上</li>
+<li>当操作任何一个子元素时（li），事件会冒泡到父辈元素上（ul）</li>
+<li>父辈元素不会直接处理事件，而是通过event.target得到发生事件的子元素（li），通过这个子元素调用事件回调函数。</li>
+<li>$(‘ul’).delegate(‘li’,’click’,function(){})</li>
+<li>委托2方<ul>
+<li>委托方：业主   li</li>
+<li>被委托方     中介   ul</li>
+</ul>
+</li>
+<li>好处<ul>
+<li>新添加的子元素自动有事件响应处理。</li>
+<li>减少事件监听的数量 ： n==&gt;1</li>
+</ul>
+</li>
+<li>API<ul>
+<li>设置事件委托：$(parentSelector).delegate(childrenSelector,eventName,callback)</li>
+<li>移出事件委托：$(parentSlector).undelegate(eventName)</li>
+</ul>
+</li>
+</ul>
+<h2 id="比较keypress、keydown与keyup"><a href="#比较keypress、keydown与keyup" class="headerlink" title="比较keypress、keydown与keyup"></a>比较keypress、keydown与keyup</h2><ul>
+<li>keydown：在键盘上按下某键时发生，一直按着则会不断触发（opera浏览器除外），它返回的是键盘代码;</li>
+<li>keypress：在键盘上按下一个按键，并产生一个字符时发生, 返回ASCII码。注意: shift、alt、ctrl等键按下并不会产生字符，所以监听无效，换句话说，只有按下能在屏幕上输出字符的按键时keypress事件才会触发。若一直按着某按键则会不断触发。</li>
+<li>keyup：用户松开某一个按键时触发，与keydown相对，返回键盘代码.</li>
+</ul>
+<p>$(<em>selector</em>).hide(<em>speed,callback</em>);<br>$(<em>selector</em>).show(<em>speed,callback</em>);</p>
+<p>$(selector).toggle(speed,callback);  //切换hide（）和show（）方法</p>
+<p>可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。</p>
+<p>可选的 callback 参数是 toggle() 方法完成后所执行的函数名称。</p>
+<p>可选的 callback 参数，具有以下三点说明：</p>
+<ol>
+<li>$(selector)选中的元素的个数为n个，则callback函数会执行n次</li>
+<li>callback函数名后加括号，会立刻执行函数体，而不是等到显示/隐藏完成后才执行</li>
+<li>callback既可以是函数名，也可以是匿名函数</li>
+</ol>
+<p>在在jQuery中可以通过四个方法来实现元素的淡入淡出，这四个方法分别是：fadeIn()、fadeOut()、fadeToggle() 以及 fadeTo()</p>
+<p>$(document).ready(function(){<br>  $(“button”).click(function(){<br>    $(“#div1”).fadeIn();<br>    $(“#div2”).fadeIn(“slow”);<br>    $(“#div3”).fadeIn(3000);<br>  });<br>});</p>
+<p>jQuery fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）。</p>
+<p>$(<em>selector</em>).fadeTo(<em>speed,opacity,callback</em>);</p>
+<p>jQuery slideDown() 方法用于向下滑动元素。</p>
+<p>$(<em>selector</em>).slideDown(<em>speed,callback</em>);</p>
+<h2 id="jQuery-slideToggle-方法"><a href="#jQuery-slideToggle-方法" class="headerlink" title="jQuery slideToggle() 方法"></a>jQuery slideToggle() 方法</h2><p>jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。</p>
+<p>如果元素向下滑动，则 slideToggle() 可向上滑动它们。</p>
+<p>如果元素向上滑动，则 slideToggle() 可向下滑动它们。</p>
+<p> $(<em>selector</em>).animate({<em>params</em>}<em>,speed,callback</em>);</p>
+<p>必需的 params 参数定义形成动画的 CSS 属性。</p>
+<p>可选的 speed 参数规定效果的时长。它可以取以下值：”slow”、”fast” 或毫秒。</p>
+<p>可选的 callback 参数是动画完成后所执行的函数名称。</p>
+<p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+<p><strong>可以用 animate() 方法来操作所有 CSS 属性吗？</strong><br>是的，几乎可以！不过，需要记住一件重要的事情：当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等。</p>
+<p>jQuery stop() 方法用于停止动画或效果，在它们完成之前。</p>
+<p>stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。</p>
+<p> $(<em>selector</em>).stop(<em>stopAll,goToEnd</em>);</p>
+<p>可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。</p>
+<p>可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。</p>
+<p>因此，默认地，stop() 会清除在被选元素上指定的当前动画。</p>
+<p>三个简单实用的用于 DOM 操作的 jQuery 方法：</p>
+<ul>
+<li>text() - 设置或返回所选元素的文本内容</li>
+<li>html() - 设置或返回所选元素的内容（包括 HTML 标记）</li>
+<li>val() - 设置或返回表单字段的值</li>
+</ul>
+<p>jQuery attr() 方法用于获取属性值。</p>
+<h2 id="添加新的-HTML-内容"><a href="#添加新的-HTML-内容" class="headerlink" title="添加新的 HTML 内容"></a>添加新的 HTML 内容</h2><p>我们将学习用于添加新内容的四个 jQuery 方法：</p>
+<ul>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-append.html" target="_blank" rel="noopener">append()</a> - 在被选元素内部的结尾插入指定内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-prepend.html" target="_blank" rel="noopener">prepend()</a> - 在被选元素内部的开头插入指定内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-after.html" target="_blank" rel="noopener">after()</a> - 在被选元素之后插入内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-before.html" target="_blank" rel="noopener">before()</a> - 在被选元素之前插入内容</p>
+<p>$(“img”).after(“在后面添加文本”); </p>
+</li>
+</ul>
+<p>$(“img”).before(“在前面添加文本”);  </p>
+<p><strong>提示：</strong>在jQuery中，append/prepend 是在选择元素内部嵌入，而after/before 是在元素外面追加。</p>
+<h2 id="删除元素-内容"><a href="#删除元素-内容" class="headerlink" title="删除元素/内容"></a>删除元素/内容</h2><p>如需删除元素和内容，一般可使用以下两个 jQuery 方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/html-remove.html" target="_blank" rel="noopener">remove()</a> - 删除被选元素（及其子元素）</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-empty.html" target="_blank" rel="noopener">empty()</a> - 从被选元素中删除子元素</li>
+</ul>
+<h2 id="jQuery-操作-CSS"><a href="#jQuery-操作-CSS" class="headerlink" title="jQuery 操作 CSS"></a>jQuery 操作 CSS</h2><p>jQuery 拥有若干进行 CSS 操作的方法。我们将学习下面这些：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/html-addclass.html" target="_blank" rel="noopener">addClass()</a> - 向被选元素添加一个或多个类</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-removeclass.html" target="_blank" rel="noopener">removeClass()</a> - 从被选元素删除一个或多个类</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-toggleclass.html" target="_blank" rel="noopener">toggleClass()</a> - 对被选元素进行添加/删除类的切换操作</li>
+<li><a href="https://www.w3cschool.cn/jquery/jquery-css.html" target="_blank" rel="noopener">css()</a> - 设置或返回样式属性</li>
+</ul>
+<h2 id="设置-CSS-属性"><a href="#设置-CSS-属性" class="headerlink" title="设置 CSS 属性"></a>设置 CSS 属性</h2><p>如需设置指定的 CSS 属性，请使用如下语法：    </p>
+<p>css({“<em>propertyname</em>“:”<em>value</em>“,”<em>propertyname</em>“:”<em>value</em>“,…});</p>
+<p>jQuery 提供多个处理尺寸的重要方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/css-width.html" target="_blank" rel="noopener">width()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/css-height.html" target="_blank" rel="noopener">height()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-innerwidth.html" target="_blank" rel="noopener">innerWidth()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-innerheight.html" target="_blank" rel="noopener">innerHeight()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-outerwidth.html" target="_blank" rel="noopener">outerWidth()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-outerheight.html" target="_blank" rel="noopener">outerHeight()</a></li>
+</ul>
+<p><img src="https://7n.w3cschool.cn/statics/images/course/img_jquerydim.gif" alt="jQuery Dimensions"></p>
+<h2 id="向上遍历-DOM-树"><a href="#向上遍历-DOM-树" class="headerlink" title="向上遍历 DOM 树"></a>向上遍历 DOM 树</h2><ul>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parent.html" target="_blank" rel="noopener">parent()</a><ul>
+<li>parent() 方法返回被选元素的直接父元素。</li>
+</ul>
+</li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parents.html" target="_blank" rel="noopener">parents()</a><ul>
+<li>parents() 方法返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (<html>)。</html></li>
+</ul>
+</li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parentsuntil.html" target="_blank" rel="noopener">parentsUntil()</a><ul>
+<li>parentsUntil() 方法返回介于两个给定元素之间的所有祖先元素。</li>
+<li>返回介于 <span> 与 <div> 元素之间的所有祖先元素： $(“span”).parentsUntil(“div”);</div></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="向下遍历-DOM-树"><a href="#向下遍历-DOM-树" class="headerlink" title="向下遍历 DOM 树"></a>向下遍历 DOM 树</h2><p>下面是两个用于向下遍历 DOM 树的 jQuery 方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-children.html" target="_blank" rel="noopener">children()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-find.html" target="_blank" rel="noopener">find()</a></li>
+</ul>
+<h2 id="在-DOM-树中水平遍历"><a href="#在-DOM-树中水平遍历" class="headerlink" title="在 DOM 树中水平遍历"></a>在 DOM 树中水平遍历</h2><p>有许多有用的方法让我们在 DOM 树进行水平遍历：</p>
+<ul>
+<li>siblings()：返回被选元素的所有同胞元素</li>
+<li>next()：返回被选元素的下一个同胞元素</li>
+<li>nextAll()：返回被选元素的所有跟随的同胞元素</li>
+<li>nextUntil()：返回介于两个给定参数之间的所有跟随的同胞元素</li>
+<li>prev()</li>
+<li>prevAll()</li>
+<li>prevUntil()</li>
+</ul>
+<h2 id="缩小搜索元素的范围"><a href="#缩小搜索元素的范围" class="headerlink" title="缩小搜索元素的范围"></a>缩小搜索元素的范围</h2><p>三个最基本的过滤方法是：first(), last() 和 eq()，它们允许您基于其在一组元素中的位置来选择一个特定的元素。</p>
+<p>其他过滤方法，比如 filter() 和 not() 允许您选取匹配或不匹配某项指定标准的元素。</p>
+<p>first（）：返回被选元素的首个元素</p>
+<p>last（）：返回被选元素的最后一个元素</p>
+<p><a href="https://www.w3cschool.cn/jquery/traversing-eq.html" target="_blank" rel="noopener">eq() 方法</a>返回被选元素中带有指定索引号的元素。</p>
+<p>索引号从 0 开始，因此首个元素的索引号是 0 而不是 1。</p>
+<p><a href="https://www.w3cschool.cn/jquery/traversing-filter.html" target="_blank" rel="noopener">filter() 方法</a>允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。</p>
+<p>jQuery  AJAX</p>
+<ul>
+<li>AJAX是与服务器交换数据的技术，它在不重载全部页面的情况下，实现对部分页面的更新</li>
+<li>AJAX=异步JavaScript和XML（Asynchronous  JavaScript   and  XML),通过AJAX方法，你可以使用HTTP Get和HTTP Post从远程服务器上请求文本，HTML,XML,JSON,同时你可把这些外部数据直接载入网页的被选元素中</li>
+</ul>
+<h4 id="作为一般函数调用-param"><a href="#作为一般函数调用-param" class="headerlink" title="作为一般函数调用$(param)"></a>作为一般函数调用$(param)</h4><ol>
+<li>参数为函数：当DOM加载完成后，执行此回调函数。</li>
+<li>参数为选择器字符串：查找所有匹配的标签，并把它们封装成jquery对象。</li>
+<li>参数是DOM对象：将dom对象封装成jquery对象。</li>
+<li>参数为html标签字符串（用得最少）：创建标签对象并封装成jquery对象。</li>
+</ol>
+<h4 id="作为对象使用"><a href="#作为对象使用" class="headerlink" title="作为对象使用"></a>作为对象使用</h4><ol>
+<li>$.each()：隐式遍历数组</li>
+<li>$.trim()：去除两端的空格</li>
+</ol>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><h4 id="load（）"><a href="#load（）" class="headerlink" title="load（）"></a>load（）</h4><ul>
+<li>load（）方法从服务器加载数据，并把返回的数据放入被选元素中<ul>
+<li>$(selector).load(URL,data,callback);</li>
+<li>必须的URL参数规定你希望加载的URL</li>
+<li>可选的data参数规定与请求一同发送的查询字符串键/值对集合</li>
+<li>可选的callback（responseTxt，statusTXT，xhr）参数是load（）完成后执行的函数名称，无论AJAX请求是否成功，一旦请求完成后，函数callback立即被触发</li>
+<li>responseTxt–包含调用成功时的结果内容     statusTXT—包含调用的状态        xhr——包含XMLHttpRequest对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="get（URL-callback）和post（）"><a href="#get（URL-callback）和post（）" class="headerlink" title="$.get（URL,callback）和post（）"></a>$.get（URL,callback）和post（）</h4><ul>
+<li>两者都能通过HTTP或POST请求从服务器请求数据</li>
+<li>get是从指定的资源请求数据，基本用于从服务器获得数据，可能返回缓存数据</li>
+<li>post向指定的资源提交要处理的数据，可用于从服务器获取数据。不过，post方法不会缓存数据，并且常用于连同请求一起发送数据</li>
+</ul>
+<h4 id="noConflict（）方法"><a href="#noConflict（）方法" class="headerlink" title="$.noConflict（）方法"></a>$.noConflict（）方法</h4><ul>
+<li>解决在页面同时使用jQuery和其他框架（在同一个页面加载多个jQuery实例，尤其是不同版本的jQuery）</li>
+<li>noConflict（）会释放对$($是jQuery的简写）</li>
+</ul>
+<h4 id="selector-bind-event-data-function-map"><a href="#selector-bind-event-data-function-map" class="headerlink" title="$(selector).bind(event,data,function,map)"></a>$(selector).bind(event,data,function,map)</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>event</em></td>
+<td align="left">必需。规定添加到元素的一个或多个事件。  由空格分隔多个事件值。必须是有效的事件。</td>
+</tr>
+<tr>
+<td align="left"><em>data</em></td>
+<td align="left">可选。规定传递到函数的额外数据。</td>
+</tr>
+<tr>
+<td align="left"><em>function</em></td>
+<td align="left">必需。规定当事件发生时运行的函数。</td>
+</tr>
+<tr>
+<td align="left"><em>map</em></td>
+<td align="left">规定事件映射 (<em>{event:function, event:function, …})</em>，包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>bind() 方法向被选元素添加一个或多个事件处理程序，以及当事件发生时运行的函数。</p>
+</li>
+<li><p>自 jQuery 版本 1.7 起，<a href="https://www.w3cschool.cn/jquery/event-on.html" target="_blank" rel="noopener">on()</a> 方法是向被选元素添加事件处理程序的首选方法。</p>
+</li>
+</ul>
+<h4 id="selector-delegate-childSelector-event-data-function"><a href="#selector-delegate-childSelector-event-data-function" class="headerlink" title="$(selector).delegate(childSelector,event,data,function)"></a>$(selector).delegate(childSelector,event,data,function)</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>childSelector</em></td>
+<td align="left">必需。规定要添加事件处理程序的一个或多个子元素。</td>
+</tr>
+<tr>
+<td align="left"><em>event</em></td>
+<td align="left">必需。规定添加到元素的一个或多个事件。  由空格分隔多个事件值。必须是有效的事件。</td>
+</tr>
+<tr>
+<td align="left"><em>data</em></td>
+<td align="left">可选。规定传递到函数的额外数据。</td>
+</tr>
+<tr>
+<td align="left"><em>function</em></td>
+<td align="left">必需。规定当事件发生时运行的函数。</td>
+</tr>
+</tbody></table>
+<h1 id="原生js与jQuery的区别"><a href="#原生js与jQuery的区别" class="headerlink" title="原生js与jQuery的区别"></a>原生js与jQuery的区别</h1><p>1.原生JS与jQuery入口函数的加载模式不同</p>
+<ul>
+<li>原生JS会等到DOM元素和图片都加载完毕再执行</li>
+<li>jQuery只是等DOM加载完毕之后就执行</li>
+</ul>
+<p>2.覆盖问题</p>
+<ul>
+<li>原生js如果有多个入口函数，后面编写的会覆盖前面的</li>
+<li>jQuery有多个入口函数时不会相互覆盖，都会执行</li>
+</ul>
+<p>3.多个框架时的冲突问题</p>
+<ul>
+<li>解决方法：释放$的使用权</li>
+</ul>
+<p>iQuery.noConflict();</p>
+<p>注意点：释放操作必须在编写其他jQuery代码之前编写</p>
+<p>​              释放之后就不能再使用$改为jQuery</p>
+<ul>
+<li>自定义访问符号</li>
+</ul>
+<p>var  nj = jQuery.noConflict();</p>
+<p>nj(function (){ });</p>
+<p>4.遍历数组</p>
+<ul>
+<li><p>js中用forEach（）只能遍历数组，不能遍历伪数组，参数位置不同</p>
+<p>arr.forEach(function (value,index){  });</p>
+</li>
+<li><p>利用jQuery的Each（）静态方法遍历数组/伪数组,参数位置不同</p>
+<p>$.each(arr,function (index,value){  });//遍历数组</p>
+<p>$.each(obj，function (index,value){  });//遍历伪数组</p>
+</li>
+</ul>
+<p>jQuery中的each（）静态方法和map（）静态方法的区别：</p>
+<ul>
+<li>each（）静态方法默认的返回值就是遍历谁就返回谁，不支持在回调函数中对数组进行处理</li>
+<li>map（）静态方法默认的返回值是一个空数组，可通过回调函数进行处理，然后生成一个新的数组返回</li>
+</ul>
+<h2 id="复习jquery"><a href="#复习jquery" class="headerlink" title="复习jquery"></a>复习jquery</h2><ul>
+<li>DOM中的顶级对象：document ——页面中的顶级对象</li>
+<li>BOM中的顶级对象：window</li>
+<li>jQuery的顶级对象：jQuery——$</li>
+</ul>
+<h6 id="与-的区别"><a href="#与-的区别" class="headerlink" title="$与$()的区别"></a>$与$()的区别</h6><ul>
+<li>$是一个函数对象，包含很多静态方法，这种方法，一般的js也是可以使用。</li>
+<li>$（）是调用这个函数对象的一个实例，返回一个对象，一般是由$对象拓展的对象属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$().css();</span><br><span class="line">$().html();</span><br><span class="line"></span><br><span class="line">$.trim();</span><br><span class="line">$.proxy();</span><br></pre></td></tr></table></figure>
+
+<h6 id="常见属性方法"><a href="#常见属性方法" class="headerlink" title="$常见属性方法"></a>$常见属性方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">trim()			去除前后格</span><br><span class="line">makeArray()		类数组转为真数组</span><br><span class="line">inArray()		数组版indexOf</span><br><span class="line">merge()			合并数组</span><br><span class="line">grep()			过滤新数组</span><br><span class="line">map()			映射新数组</span><br><span class="line">guid			唯一标识符</span><br><span class="line">proxy()			改this指向</span><br><span class="line">access()		多功能操作值（内部）</span><br><span class="line">now()			当前时间</span><br><span class="line">swap()			CSS交换（内部）</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/06/17/jquery/">jquery</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-06-17, 15:29:38</p>
+        <p><span>最后更新:</span>2020-06-17, 15:30:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/17/jquery/" title="jquery">http://yoursite.com/2020/06/17/jquery/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/17/jquery/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/06/17/js动画篇/">
+                    js动画篇
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#js-加载时间线"><span class="toc-number">1.</span> <span class="toc-text">js 加载时间线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jQeury"><span class="toc-number">2.</span> <span class="toc-text">jQeury</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本行为"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">基本行为</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#过滤器"><span class="toc-number">2.0.0.1.0.1.</span> <span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#mouseover与mouseenter区别"><span class="toc-number">2.0.0.1.0.2.</span> <span class="toc-text">mouseover与mouseenter区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件委托（委派-代理）"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">事件委托（委派/代理）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较keypress、keydown与keyup"><span class="toc-number">2.1.</span> <span class="toc-text">比较keypress、keydown与keyup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery-slideToggle-方法"><span class="toc-number">2.2.</span> <span class="toc-text">jQuery slideToggle() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加新的-HTML-内容"><span class="toc-number">2.3.</span> <span class="toc-text">添加新的 HTML 内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除元素-内容"><span class="toc-number">2.4.</span> <span class="toc-text">删除元素/内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery-操作-CSS"><span class="toc-number">2.5.</span> <span class="toc-text">jQuery 操作 CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置-CSS-属性"><span class="toc-number">2.6.</span> <span class="toc-text">设置 CSS 属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#向上遍历-DOM-树"><span class="toc-number">2.7.</span> <span class="toc-text">向上遍历 DOM 树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#向下遍历-DOM-树"><span class="toc-number">2.8.</span> <span class="toc-text">向下遍历 DOM 树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-DOM-树中水平遍历"><span class="toc-number">2.9.</span> <span class="toc-text">在 DOM 树中水平遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缩小搜索元素的范围"><span class="toc-number">2.10.</span> <span class="toc-text">缩小搜索元素的范围</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作为一般函数调用-param"><span class="toc-number">2.10.0.1.</span> <span class="toc-text">作为一般函数调用$(param)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作为对象使用"><span class="toc-number">2.10.0.2.</span> <span class="toc-text">作为对象使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX"><span class="toc-number">2.11.</span> <span class="toc-text">AJAX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#load（）"><span class="toc-number">2.11.0.1.</span> <span class="toc-text">load（）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get（URL-callback）和post（）"><span class="toc-number">2.11.0.2.</span> <span class="toc-text">$.get（URL,callback）和post（）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#noConflict（）方法"><span class="toc-number">2.11.0.3.</span> <span class="toc-text">$.noConflict（）方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-bind-event-data-function-map"><span class="toc-number">2.11.0.4.</span> <span class="toc-text">$(selector).bind(event,data,function,map)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-delegate-childSelector-event-data-function"><span class="toc-number">2.11.0.5.</span> <span class="toc-text">$(selector).delegate(childSelector,event,data,function)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原生js与jQuery的区别"><span class="toc-number">3.</span> <span class="toc-text">原生js与jQuery的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#复习jquery"><span class="toc-number">3.1.</span> <span class="toc-text">复习jquery</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#与-的区别"><span class="toc-number">3.1.0.0.0.1.</span> <span class="toc-text">$与$()的区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#常见属性方法"><span class="toc-number">3.1.0.0.0.2.</span> <span class="toc-text">$常见属性方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"jquery　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/06/17/js动画篇/" title="下一篇: js动画篇">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/jquery/">jquery</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js动画篇/">js动画篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js精研/">js精研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js基础/">js基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/刷题笔记/">刷题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/前端cookie解读/">前端cookie解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/04/前端经验/">前端经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/linux学习/">linux学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/10/pandas之excel/">pandas之excel</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/爬虫/">爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/python的学习/">python的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

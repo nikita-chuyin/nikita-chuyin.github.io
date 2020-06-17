@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="一 . 基础补充1.值，变量和类型 typeof  undefined;//“undefined”  js是基于32位整数的  以下两种情况，js会自动将数值转为科学计数法  小数点前的数字多于21位 小数点后的0多于5个   在js内部，实际存在两个0：+0和-0，他们是等价的  当js在算数运算时发生溢出（overflow，结果是Infinity），下溢（underflow，结果是-Infin">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js精研">
+<meta property="og:url" content="http://yoursite.com/2020/06/17/js精研/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="一 . 基础补充1.值，变量和类型 typeof  undefined;//“undefined”  js是基于32位整数的  以下两种情况，js会自动将数值转为科学计数法  小数点前的数字多于21位 小数点后的0多于5个   在js内部，实际存在两个0：+0和-0，他们是等价的  当js在算数运算时发生溢出（overflow，结果是Infinity），下溢（underflow，结果是-Infin">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://7n.w3cschool.cn/attachments/day_160920/201609201937112397.gif">
+<meta property="og:image" content="https://7n.w3cschool.cn/attachments/day_160921/201609211757355298.gif">
+<meta property="og:updated_time" content="2020-06-17T07:27:06.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js精研">
+<meta name="twitter:description" content="一 . 基础补充1.值，变量和类型 typeof  undefined;//“undefined”  js是基于32位整数的  以下两种情况，js会自动将数值转为科学计数法  小数点前的数字多于21位 小数点后的0多于5个   在js内部，实际存在两个0：+0和-0，他们是等价的  当js在算数运算时发生溢出（overflow，结果是Infinity），下溢（underflow，结果是-Infin">
+<meta name="twitter:image" content="https://7n.w3cschool.cn/attachments/day_160920/201609201937112397.gif">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>js精研 | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-js精研" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/js精研/" class="article-date">
+      <time datetime="2020-06-17T07:15:42.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js精研
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一-基础补充"><a href="#一-基础补充" class="headerlink" title="一 . 基础补充"></a>一 . 基础补充</h2><h4 id="1-值，变量和类型"><a href="#1-值，变量和类型" class="headerlink" title="1.值，变量和类型"></a>1.值，变量和类型</h4><ul>
+<li><p>typeof  undefined;//“undefined”</p>
+</li>
+<li><p>js是基于32位整数的</p>
+</li>
+<li><p>以下两种情况，js会自动将数值转为科学计数法</p>
+<ul>
+<li>小数点前的数字多于21位</li>
+<li>小数点后的0多于5个</li>
+</ul>
+</li>
+<li><p>在js内部，实际存在两个0：+0和-0，他们是等价的</p>
+</li>
+<li><p>当js在算数运算时发生溢出（overflow，结果是Infinity），下溢（underflow，结果是-Infinity）或被0整除时不会报错</p>
+</li>
+<li><p>Infinity大于一切数值（除了NaN），-Infinity小于一切数值（除了NaN）。isFinite函数返回一个布尔值，检查某个值是不是正常数值，而不是Infinity。</p>
+</li>
+<li><p><strong>注意</strong>：0除以0是无意义的，会返回NaN</p>
+<ul>
+<li>isNaN判断一个值是否为NaN，它只对数值有效，若传入其他值，会被先转成数值。比如，传入字符串的时候，字符串会被先转成NaN，所以最后返回true，这一点要特别引起注意。也就是说，isNaN为true时，有可能不是NaN，而不是一个字符串</li>
+<li>使用isNaN前，最好判断一下数据类型  typeof  value===’number’&amp;&amp; isNaN(value)</li>
+<li>判断NaN更可靠的方法是利用NaN在js中唯一不等于自身的值这个特点进行判断   value!==value</li>
+</ul>
+</li>
+<li><p>字符串可以被视为字符数组，因此可以使用数组的方括号运算符，用来返回某个位置的字符（位置编号从0开始）。</p>
+<ul>
+<li><p>length属性返回字符串的长度，该属性也是无法改变的。</p>
+</li>
+<li><p>如果方括号中的数字超过字符串的长度，或者方括号中根本不是数字，则返回undefined。</p>
+</li>
+<li><p>注意：字符串与数组仅仅是相似而已。字符串是无法改变字符串之中的单个字符。</p>
+<p>var a = ‘hello’;</p>
+<p>delete s[0];</p>
+<p>s // “hello”</p>
+<p>s[0] = ‘a’;</p>
+<p>s  // “hello”</p>
+</li>
+</ul>
+</li>
+<li><p>尽管null和undefined是不同的，但它们都表示“值的空缺”，两者往往可以互换。当用相等运算符“==”来比较两者时，会返回true。（要使用严格相等运算符“===”来区分它们）</p>
+</li>
+<li><p>如果JavaScript预期某个位置应该是布尔值，会将该位置上现有的值自动转为布尔值。转换规则是除了下面六个值被转为false，其他值都视为true。</p>
+<p>undefined<br>null<br>false<br>0<br>NaN<br>“”或’’（空字符串）</p>
+</li>
+<li><p>如果一个变量没有声明就直接使用，JavaScript会<strong>报错</strong>，告诉你变量未定义。</p>
+</li>
+<li><p><strong>声明提前（变量提升）</strong> </p>
+<ul>
+<li>JavaScript引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就是声明提前（变量提升，hoisting）。</li>
+<li>变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。</li>
+</ul>
+</li>
+<li><p>typeof运算符对未声明的变量运算，不会报错，输出值也是“undefined”，故不能区分该值是否已声明，但是其他运算符对未声明变量进行运算会报错</p>
+</li>
+<li><p><strong>对于浮点字面量的有趣之处在于，用它进行计算之前，真正存储的是字符串。</strong>任何值在输出时一般都会转化成字符串输出</p>
+</li>
+<li><p>ECMAScript默认把具有6个或6个以上前导0的浮点数转化成科学计数法。也可以用64位IEEE 754形式存储浮点值，这意味着十进制最多可以有17个十进制位，17位之后的值将被裁剪，从而造成较小的误差</p>
+</li>
+<li><p>当计算生成的数大于 Number.MAX_VALUE 时，它将被赋予值Number.POSITIVE_INFINITY，意味着不再有数字值。同样，生成的数值小于Number.MIN_VALUE 的计算也会被赋予值Number.NEGATIVE_INFINITY，也意味着不再有数字值。如果计算返回的是无穷大值，那么生成的结果不能再用于其他计算。</p>
+</li>
+<li></li>
+</ul>
+<h4 id="2-语句"><a href="#2-语句" class="headerlink" title="2.语句"></a>2.语句</h4><ul>
+<li><p><strong>注意</strong>：由于对每个case的匹配操作实际是“===”恒等运算符比较，而不是“==”相等运算符比较，因此，表达式和case的匹配并不会做任何类型转换。</p>
+</li>
+<li><p>使用while(true)则会创建一个死循环。</p>
+</li>
+<li><p><strong>标签语句</strong></p>
+<ul>
+<li><p>语句是可以添加标签的，标签是由语句前的标识符和冒号组成：</p>
+<p>label  :  statement</p>
+</li>
+</ul>
+</li>
+<li><p>return语句只能在函数体内出现，否则报错。当执行到return语句时，函数终止执行。</p>
+</li>
+<li><p><strong>throw语句</strong>:异常是指当发生了某种异常情况或错误时产生的一个信号。</p>
+</li>
+<li><p>with语句：用于临时扩展作用域链</p>
+<p>with ( object ){</p>
+<p>statement</p>
+<p>}</p>
+<p>将object添加到作用域链的头部，然后执行statement，最后把作用域链恢复到原生状态。</p>
+<p>注意：在严格模式中是禁止使用with语句的。</p>
+</li>
+<li><p>debugger语句用来产生一个断点（breakpoint），JavaScript代码的执行会停止在断点的位置。一般用来调试代码。</p>
+</li>
+<li><p><strong>“use strict”</strong></p>
+<p>使用”use strict”指令的目的是说明后续的代码将会解析成严格代码。</p>
+</li>
+</ul>
+<h4 id="3-对象"><a href="#3-对象" class="headerlink" title="3.对象"></a>3.对象</h4><ul>
+<li><p>对象是一个基本数据类型，成员以键值对形式存在</p>
+</li>
+<li><p>键名：对象的所有键名都是字符串，所以加不加引号都可以。如果键名是数值，会被自动转为字符串。</p>
+</li>
+<li><p>对象的每一个“键名”又称为“属性”（property），它的“键值”可以是任何数据类型。如果一个属性的值为函数，通常把这个属性称为“方法”，它可以像函数那样调用。</p>
+</li>
+<li><p>如果键名不符合标识名的条件（比如第一个字符为数字，或者含有空格或运算符），也不是数字，则必须加上引号，否则会报错。</p>
+</li>
+<li><p>为了避免这种歧义，JavaScript规定，如果行首是大括号，一律解释为语句（即代码块）。如果要解释为表达式（即对象），必须在大括号前加上圆括号。</p>
+</li>
+<li><p><strong>创建对象</strong></p>
+<p>在JavaScript中，有三种方法创建对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对象直接量： var o=&#123;&#125;;</span><br><span class="line">关键字new： var o=new Object();</span><br><span class="line">Object.create()函数： var o=Object.create(null)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象直接量中的最后一个属性后的逗号可有可无，但是在ie中，如果多了一个逗号，会报错。<strong>通过new创建对象</strong></p>
+<p>new运算符创建并初始化一个新对象。关键字new后跟随一个函数调用，这个函数称做<strong>构造函数</strong>（constructor）。</p>
+</li>
+<li><p>属性名可以是包含空字符串在内的任意字符串，但对象中不能存在两个同名的属性。</p>
+</li>
+<li><p>读取对象的属性</p>
+<ul>
+<li>有两种方法，一种是使用点运算符（最终还是得先变成方括号），还有一种是使用方括号运算符</li>
+<li>数值键名不能使用点运算符（因为会被当成小数点），只能使用方括号运算符。</li>
+<li>通过点（.）或方括号（[]）运算符来获取属性的值时，运算符左侧应当是一个表达式，它返回一个对象。</li>
+</ul>
+</li>
+<li><p>查看一个对象本身的所有属性，可以使用Object.keys方法，返回一个类数组</p>
+<p>var o = {</p>
+<p>  name : ‘a’,</p>
+<p>  age : 12</p>
+<p>}</p>
+<p>Object.keys(o)  //[‘name’,’age’]</p>
+</li>
+<li><p><strong>删除属性</strong></p>
+<ul>
+<li><p>delete运算符只能删除自有属性，不能删除继承属性。</p>
+</li>
+<li><h6 id="删除一个不存在的属性，delete不报错，而且返回true。"><a href="#删除一个不存在的属性，delete不报错，而且返回true。" class="headerlink" title="删除一个不存在的属性，delete不报错，而且返回true。"></a>删除一个不存在的属性，delete不报错，而且返回true。</h6></li>
+<li><p>只有一种情况，delete命令会返回false，那就是该属性存在，且不得删除。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>检测属性</strong>是否存在于某个对象中</p>
+<ul>
+<li><p>用“！==”来判断一个属性是否是undefined（无法判断属性是否是继承来的）</p>
+</li>
+<li><h6 id="hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性"><a href="#hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性" class="headerlink" title="hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性"></a>hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性</h6></li>
+<li><h6 id="propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true"><a href="#propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true" class="headerlink" title="propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true"></a>propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true</h6></li>
+<li><p>in元素符左侧属性名（字符串），右侧是对象。如果对象的自有属性或继承属性中包含这个属性就返回true（无法判断属性是否是继承来的）</p>
+</li>
+</ul>
+</li>
+<li><p>对象的三大属性</p>
+<ul>
+<li>每个对象都有与之相关的<strong>原型（prototype）</strong>，类（class）和可扩展性（extensible  attribute）</li>
+<li>将对象作为参数传入Object.getPrototypeOf()可以查询他的原型</li>
+<li>检测一个对象是否是另一个对象的原型，可使用isPrototypeOf（）方法</li>
+</ul>
+</li>
+<li><p>序列化对象</p>
+<ul>
+<li><p>对象序列化是指将对象的状态转换为字符串，也可将字符串还原为对象</p>
+</li>
+<li><p>在js中，提供内置函数JSON.stringify（）和JSON.parse（）用来序列化和还原js对象</p>
+</li>
+<li><p>NaN,Infinity和-Infinity序列化的结果是null</p>
+<p>var o = {</p>
+<p>  name : ‘a’,</p>
+<p>  age : 12,</p>
+<p>  intro : [false,null,’’]</p>
+<p>}</p>
+<p>s= JSON.stringify(o)  // s {“name”:”a”,”age”:12,”intro”:[false,null,””]}</p>
+<p>p=JSON.parse(s)  // p是o的深拷贝</p>
+</li>
+<li><p>JSON.stringify（）只能序列化对象可枚举的自有属性，对于一个不能序列化的属性来说，在序列化后的输出字符串中会将这个属性省略掉</p>
+</li>
+<li><p>深拷贝与浅拷贝的区别</p>
+<ul>
+<li><p>浅拷贝只是复制了对象的地址，两个对象指向同一个地址，所以修改其中的值，另一个值都会随之改变</p>
+</li>
+<li><p>深拷贝是将对象及值复制过来，两个对象修改其中任意值，另一个值不会随之改变，这就是深拷贝（如：JSON.stringify（）和JSON.parse（），但是此方法无法复制函数数据类型）</p>
+</li>
+<li><p>当你需要深拷贝对象中的方法时可使用lodash.js（提高js原生方法性能的js库）中的cloneDeep（）方法</p>
+<p>var objA = { “name”: “戈德斯文” };</p>
+<p>var objB =lodash.cloneDeep(objA);</p>
+</li>
+<li><p>深拷贝首推的方法简单有效，JSON.stringfy()和JSON.parse()即可搞定。但是这种简单粗暴的方法有其局限性。当值为<code>undefined</code>、<code>function</code>、<code>symbol</code> 会在转换过程中被忽略。所以，对象值有这三种的话用这种方法会导致属性丢失。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var syb = Symbol(&apos;obj&apos;);</span><br><span class="line">var person = &#123;</span><br><span class="line">   name :&apos;tino&apos;,</span><br><span class="line">   say: function()&#123;</span><br><span class="line">      console.log(&apos;hi&apos;);</span><br><span class="line">   &#125;,</span><br><span class="line">   ok: syb,</span><br><span class="line">   un: undefined</span><br><span class="line">&#125;</span><br><span class="line">var copy = JSON.parse(JSON.stringify(person))</span><br><span class="line">// copy</span><br><span class="line">// &#123;name: &quot;tino&quot;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>js中对象的可枚举属性和不可枚举属性是由属性的enumerable值决定的。可枚举性决定了这个属性能否被for….in查找遍历到</p>
+<ul>
+<li>js中的基本包装类的原型属性是不可枚举的，如Object，Array，Number，这些对象的内置属性是不可枚举的</li>
+<li>需要注意的是：如果判断的属性存在于Object对象的原型内，不管它是否可枚举都会返回false。</li>
+</ul>
+</li>
+<li><p>构造函数是用来生成“对象”的函数。一个构造函数可生成多个对象，这些对象都有相同的结构</p>
+<ul>
+<li><p>构造函数的特点：函数体内使用this关键字代表所要生成的对象实例。生成对象时，必须用new命令，构造函数名字的首字母通常大写</p>
+</li>
+<li><p>new命令本身就可以执行构造函数，所以后面的构造函数可带括号可不带</p>
+<p>var c = new Car();</p>
+<p>var c = new Car;</p>
+</li>
+<li><p>每一个构造函数都有prototype属性</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p><strong>事件机制之冒泡、传播、委托</strong></p>
+<p>DOM事件流（event flow）存在三个阶段：<strong>事件捕获阶段，处于目标阶段，事件冒泡阶段</strong>。</p>
+<h4 id="事件捕获阶段（event-capuring）"><a href="#事件捕获阶段（event-capuring）" class="headerlink" title="事件捕获阶段（event  capuring）"></a>事件捕获阶段（event  capuring）</h4><p>通俗理解就是，当鼠标点击或触发dom事件时，浏览器会从根节点<strong>由外往内</strong>进行事件传播，即点击了子元素，如果父元素通过事件捕获注册了对应的事件的话，会先触发父元素绑定的的事件。</p>
+<h4 id="事件冒泡（dubbed-bubbling）"><a href="#事件冒泡（dubbed-bubbling）" class="headerlink" title="事件冒泡（dubbed bubbling）"></a>事件冒泡（dubbed bubbling）</h4><p>与事件捕获相反，事件冒泡是从目标元素<strong>由内往外</strong>进行事件传播，直到根节点。</p>
+<p>无论是事件冒泡还是事件捕获，都有一个共同点就是事件传播，她就像一根引线，只有通过引线才能将绑在引线上的鞭炮（事件监听器）引爆，试想一下，如果引线不导火了，那鞭炮就只有一响了！</p>
+<p>dom事件标准事件流的触发先后顺序是：<strong>先捕获后冒泡</strong>，即当触发dom事件时，会进行事件捕获，捕获到事件源后通过事件传播进行事件冒泡。不同浏览器对此有不同的实现，IE10及以下不支持捕获型事件，所以就少了一个时间捕获阶段，IE11,Chrome，Firefox，Safari等浏览器则同时存在。</p>
+<h4 id="事件绑定的方法"><a href="#事件绑定的方法" class="headerlink" title="事件绑定的方法"></a>事件绑定的方法</h4><h6 id="addEventlistener-event-listener-useCapture"><a href="#addEventlistener-event-listener-useCapture" class="headerlink" title="addEventlistener(event,listener,useCapture)"></a>addEventlistener(event,listener,useCapture)</h6><p>参数定义：event——（事件名称：如click，不带on）</p>
+<p>listener——事件监听函数，</p>
+<p>useCapture——是否采用事件捕获进行事件捕获，默认为false，即采用事件冒泡方式。</p>
+<p>addEventListener在IE11，Chrome，Firefox，Safari等浏览器都得到支持。</p>
+<h6 id="attachEvent（event，listener）"><a href="#attachEvent（event，listener）" class="headerlink" title="attachEvent（event，listener）"></a>attachEvent（event，listener）</h6><p>参数定义：event—（事件名称，如onclick，带on），</p>
+<p>listener—事件监听函数。</p>
+<p>attachEvent主要用于IE浏览器，并且仅在IE10及以下才支持，IE11已经废了这个方法了</p>
+<h6 id="事件冒泡例子"><a href="#事件冒泡例子" class="headerlink" title="事件冒泡例子"></a>事件冒泡例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,false);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,false);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;);</span><br><span class="line">    //event.stopProparation;</span><br><span class="line">    //可停止事件传播&#125;,false);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当点击子盒子时，打印结果依次为children——parent——body</p>
+<p>事件触发的顺序是由内到外的，这就是事件冒泡，虽然只点击了子元素，但是他的父元素也会触发相应的事件，其实这也是合理的，因为父元素里面，点击了子元素不就相当于变相的点击了父元素。</p>
+<p>若不想触发父元素可停止事件传播只需在子元素中添加<strong>event.stopProparation;</strong>即可。</p>
+<h6 id="事件捕获例子"><a href="#事件捕获例子" class="headerlink" title="事件捕获例子"></a>事件捕获例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    body&#123;background: green;&#125;</span><br><span class="line">    #parent&#123;width:200px;height:200px;background:yellow;margin:10px auto;border:1px solid black;&#125;</span><br><span class="line">    #children&#123;width:50px;height:50px;background:pink;margin:80px auto;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;parent&quot;&gt;</span><br><span class="line">        &lt;div id=&quot;children&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var children = document.getElementById(&apos;children&apos;);</span><br><span class="line">    var parent = document.getElementById(&apos;parent&apos;);</span><br><span class="line">    document.body.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;body&apos;)&#125;,true);</span><br><span class="line">    parent.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;parent&apos;)&#125;,true);</span><br><span class="line">    children.addEventListener(&apos;click&apos;,function()&#123;console.log(&apos;children&apos;)&#125;,true);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>点击children方块，打印body——parent——childre</p>
+<p>点击parent方块，打印body——parent</p>
+<p>点击body区域，打印body</p>
+<p>事件通过事件捕获的方式注册了click事件，所以在事件捕获阶段就会触发，先是触发最外围注册了事件捕获的body，而后触发事件捕获的parent，最后触发事件源。这就是事件的时间流程。</p>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><h4 id="高质量代码"><a href="#高质量代码" class="headerlink" title="高质量代码"></a>高质量代码</h4><ul>
+<li>bug暴露</li>
+<li>不扩展内置原型，多用this取代构造函数的prototype</li>
+<li>使用switch模式增强可读性和健壮性</li>
+<li>使用绝对相等或绝对不等，避免隐式类型转换</li>
+<li>避免使用eval（），因此方法接受任意的字符串，被执行的代码可能被篡改，有极大的安全隐患。且会污染全局变量</li>
+<li>用方括号表示法访问动态属性</li>
+<li>parseInt（）下数值转换，最好指定基数参数，不然，可能以0开头的数据被当成8进制使用</li>
+</ul>
+<h4 id="提高性能"><a href="#提高性能" class="headerlink" title="提高性能"></a>提高性能</h4><h6 id="（类）数组循环获取值时缓存长度"><a href="#（类）数组循环获取值时缓存长度" class="headerlink" title="（类）数组循环获取值时缓存长度"></a>（类）数组循环获取值时缓存长度</h6><ul>
+<li>不足：每次循环时数组的长度都要去获取，会降低代码</li>
+<li>若是类数组，需实时查询基本文档（html页面），这意味着每次你访问任何集合的长度，你要实时查询DOM，而DOM操作一般都是比较昂贵的。</li>
+<li>解决：把数组长度放在一个变量里；从后往下标为0的数数，因为和0做比较要比和数组长度或是其他不是0的东西作比较更有效率。</li>
+</ul>
+<h6 id="for循环遍历数组，for-in循环遍历类数组"><a href="#for循环遍历数组，for-in循环遍历类数组" class="headerlink" title="for循环遍历数组，for-in循环遍历类数组"></a>for循环遍历数组，for-in循环遍历类数组</h6><h6 id="遍历属性时使用hasOwnProperty（）方法过滤原型上的属性"><a href="#遍历属性时使用hasOwnProperty（）方法过滤原型上的属性" class="headerlink" title="遍历属性时使用hasOwnProperty（）方法过滤原型上的属性"></a>遍历属性时使用hasOwnProperty（）方法过滤原型上的属性</h6><h4 id="var的作用"><a href="#var的作用" class="headerlink" title="var的作用"></a>var的作用</h4><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ul>
+<li>避免创建隐式全局变量：1.函数中未声明就使用变量  2.使用任务链进行部分var声明</li>
+<li>可移植性：可在不同主机上使用</li>
+</ul>
+<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><ul>
+<li>通过var创建的全局变量不可通过delete删除，无var创建的隐式全局变量（并非真正的全局变量，只是全局变量的属性）可通过delete删除</li>
+</ul>
+<h4 id="执行层面"><a href="#执行层面" class="headerlink" title="执行层面"></a>执行层面</h4><h6 id="代码处理的两个阶段（预解析hoisting）"><a href="#代码处理的两个阶段（预解析hoisting）" class="headerlink" title="代码处理的两个阶段（预解析hoisting）"></a>代码处理的两个阶段（预解析hoisting）</h6><ul>
+<li>变量，函数声明，以及正常格式的参数创建，这是一个解析和进入上下文的阶段</li>
+<li>代码执行，函数表达式和不合格的标识符（为声明的变量）被创建。</li>
+</ul>
+<h2 id="二-JavaScript对象"><a href="#二-JavaScript对象" class="headerlink" title="二 . JavaScript对象"></a>二 . JavaScript对象</h2><ul>
+<li><p>JavaScript是一种直译式脚本语言，是一种动态类型，弱类型，基于原型的语言，内置支持类型</p>
+</li>
+<li><h6 id="日常用途"><a href="#日常用途" class="headerlink" title="日常用途"></a>日常用途</h6><ol>
+<li>嵌入动态文本于HTML页面。</li>
+<li>对浏览器事件做出响应。</li>
+<li>读写<a href="https://www.w3cschool.cn/html/html-elements.html" target="_blank" rel="noopener">HTML元素</a>。 </li>
+<li>在数据被提交到服务器之前验证数据。</li>
+<li>检测访客的浏览器信息。 </li>
+<li>控制cookies，包括创建和修改等。</li>
+<li>基于Node.js技术进行服务器端编程。</li>
+</ol>
+</li>
+</ul>
+<h4 id="对象公共属性"><a href="#对象公共属性" class="headerlink" title="对象公共属性"></a>对象公共属性</h4><h5 id="1-constructor属性"><a href="#1-constructor属性" class="headerlink" title="1.constructor属性"></a>1.constructor属性</h5><ul>
+<li>constructor属性返回对创建此对象的函数的引用</li>
+<li>函数对象。 返回创建布尔对象的函数原型。=函数.constructor;</li>
+</ul>
+<h5 id="2-prototype属性"><a href="#2-prototype属性" class="headerlink" title="2.prototype属性"></a>2.prototype属性</h5><ul>
+<li>是您有能力向对象添加属性和方法</li>
+<li>当构造一个原型，所有的对应对象默认都添加了属性和方法</li>
+<li>每个js对象（除了null）都和另一个对象相关联，即继承另一个对象。另一个对象就是我们熟知的“原型（prototype），每个对象都从原型继承属性。只有null除外，他没有自己的原型对象</li>
+<li>通过Object.prototype获得对原型对象的引用，通过对象或构造函数调用创建的对象的原型就是构造函数的prototype属性的值，找不到原型，返回undefined</li>
+</ul>
+<h5 id="3-toString（-把对象转为字符串并返回结果"><a href="#3-toString（-把对象转为字符串并返回结果" class="headerlink" title="3.toString（)把对象转为字符串并返回结果"></a>3.toString（)把对象转为字符串并返回结果</h5><ul>
+<li>String=对象.toString()</li>
+</ul>
+<h5 id="4-valueOf（）-返回对象的原始值"><a href="#4-valueOf（）-返回对象的原始值" class="headerlink" title="4.valueOf（）  返回对象的原始值"></a>4.valueOf（）  返回对象的原始值</h5><p>Array=<em>array</em>.valueOf()  不会改变原数组</p>
+<h5 id="5-Object-getPrototypeOf"><a href="#5-Object-getPrototypeOf" class="headerlink" title="5.Object.getPrototypeOf()"></a>5.Object.getPrototypeOf()</h5><ul>
+<li>返回一个对象的原型</li>
+</ul>
+<h5 id="6-Object-setPrototypeOf"><a href="#6-Object-setPrototypeOf" class="headerlink" title="6.Object.setPrototypeOf()"></a>6.Object.setPrototypeOf()</h5><ul>
+<li>为现有对象设置原型，返回一个新对象</li>
+<li>接受两个参数，第一个是现有对象，第二个是原型对象</li>
+</ul>
+<h5 id="7-Object-create"><a href="#7-Object-create" class="headerlink" title="7.Object.create()"></a>7.Object.create()</h5><ul>
+<li>用于从原型对象生成新的实例对象，可以替代new命令</li>
+<li>它接受一个对象作为参数，返回一个新的对象，后者完全继承前者的属性，即原有对象成为新对象的原型</li>
+</ul>
+<h5 id="8-Object-prototype-isPrototypeOf"><a href="#8-Object-prototype-isPrototypeOf" class="headerlink" title="8.Object.prototype.isPrototypeOf()"></a>8.Object.prototype.isPrototypeOf()</h5><ul>
+<li>判断一个对象是否是另一个对象的原型</li>
+<li>Object.prototype.isPrototypeOf({}) //true</li>
+</ul>
+<h5 id="9-Object-prototype-proto"><a href="#9-Object-prototype-proto" class="headerlink" title="9.Object.prototype.proto_"></a>9.Object.prototype.<em>proto_</em></h5><p>_proto__属性（前后各两个下划线）可以改写某个对象的原型对象</p>
+<h5 id="10-Object-getPropertyOfNames"><a href="#10-Object-getPropertyOfNames" class="headerlink" title="10.Object.getPropertyOfNames()"></a>10.Object.getPropertyOfNames()</h5><ul>
+<li>该方法返回一个数组，成员是对象本身的所有属性的键名，不包含的属性键名</li>
+</ul>
+<h5 id="11-Object-prototype-hasOwnProperty"><a href="#11-Object-prototype-hasOwnProperty" class="headerlink" title="11.Object.prototype.hasOwnProperty()"></a>11.Object.prototype.hasOwnProperty()</h5><ul>
+<li>返回一个布尔值，用于判断某个属性定义在对象本身还是在原型链上</li>
+</ul>
+<h3 id="1-Array数组对象"><a href="#1-Array数组对象" class="headerlink" title="1.Array数组对象"></a>1.Array数组对象</h3><ul>
+<li>数组对象的作用是使用单独的变量名来存储一系列的值</li>
+<li>length属性是可写的。如果人为设置一个小于当前成员个数的值，该数组的成员会自动减少到length设置的值。</li>
+</ul>
+<h5 id="1-concat（）连接两个或多个数组"><a href="#1-concat（）连接两个或多个数组" class="headerlink" title="1.concat（）连接两个或多个数组"></a>1.concat（）连接两个或多个数组</h5><ul>
+<li>该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本</li>
+<li><em>array1</em>.concat(<em>array2</em>,<em>array3</em>,…,<em>arrayX</em>)</li>
+</ul>
+<h5 id="2-every（-检查所有数组元素-返回boolear"><a href="#2-every（-检查所有数组元素-返回boolear" class="headerlink" title="2.every（)检查所有数组元素,返回boolear"></a>2.every（)检查所有数组元素,返回boolear</h5><ul>
+<li><p>用于检测数组所有元素是否都符合指定条件（通过函数提供），只有所有元素都满足条件才返回true</p>
+</li>
+<li><p>every（）不会对空数组进行检测，且不会改变原始数组</p>
+</li>
+<li><p>array.every（function（currentValue，index，arr），thisValue）</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>function(currentValue, index,arr)</em></td>
+<td align="left">必须。函数，数组中的每个元素都会执行这个函数 函数参数: 参数描述<em>currentValue</em>必须。当前元素的值<em>index</em>可选。当期元素的索引值<em>arr</em>可选。当期元素属于的数组对象</td>
+</tr>
+<tr>
+<td align="left"><em>thisValue</em></td>
+<td align="left">可选。对象作为该执行回调时使用，传递给函数，用作 “this” 的值。 如果省略了 thisValue ，”this” 的值为 “undefined”</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h5 id="3-filter-创建所有符合条件元素的数组"><a href="#3-filter-创建所有符合条件元素的数组" class="headerlink" title="3.filter()创建所有符合条件元素的数组"></a>3.filter()创建所有符合条件元素的数组</h5><ul>
+<li>创建一个新数组，不会对空数据进行检测，也不会改变原始数组.如果没有符合条件的元素则返回空数组。</li>
+<li>array.filter(function(currentValue,index,arr),thisValue)</li>
+</ul>
+<h5 id="4-indexOf（）返回指定字符串值首次出现的位置"><a href="#4-indexOf（）返回指定字符串值首次出现的位置" class="headerlink" title="4.indexOf（）返回指定字符串值首次出现的位置"></a>4.indexOf（）返回指定字符串值首次出现的位置</h5><ul>
+<li>array.indexOf(item,start)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>item</em></td>
+<td align="left">必须。查找的元素。</td>
+</tr>
+<tr>
+<td align="left"><em>start</em></td>
+<td align="left">可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 stringObject.length - 1。如省略该参数，则将从字符串的首字符开始检索。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>返回值为number值，如果没有搜索到则返回-1</li>
+<li>lastIndexOf()  查找字符串最后出现的位置</li>
+</ul>
+<h5 id="5-join-把数组中的所有元素为一个字符串"><a href="#5-join-把数组中的所有元素为一个字符串" class="headerlink" title="5.join()  把数组中的所有元素为一个字符串"></a>5.join()  把数组中的所有元素为一个字符串</h5><ul>
+<li><p>元素是通过指定的分隔符进行分隔的</p>
+</li>
+<li><p>string =array.join(separator)</p>
+<p>参数separator是可选的，是指定要使用的分隔符，若省略，默认使用逗号</p>
+<p>返回值是一字符串。该字符串是通过把arrayObject的每个元素转换为字符串，然后把这些字符串连接起来，在两个元素之间插入separator字符串生成</p>
+</li>
+</ul>
+<h5 id="6-map（）通过指定函数处理原始数组，并返回处理后的数组"><a href="#6-map（）通过指定函数处理原始数组，并返回处理后的数组" class="headerlink" title="6.map（）通过指定函数处理原始数组，并返回处理后的数组"></a>6.map（）通过指定函数处理原始数组，并返回处理后的数组</h5><ul>
+<li>map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。map() 方法按照原始数组元素顺序依次处理元素。</li>
+<li>map() 不会对空数组进行检测。map() 不会改变原始数组。</li>
+<li>array.map(function(currentValue,index,arr),thisValue)</li>
+</ul>
+<h5 id="7-pop-删除数组最后一个元素并返回处理后的数组"><a href="#7-pop-删除数组最后一个元素并返回处理后的数组" class="headerlink" title="7.pop()删除数组最后一个元素并返回处理后的数组"></a>7.pop()删除数组最后一个元素并返回处理后的数组</h5><ul>
+<li>array.pop();</li>
+<li>array.shift();删除数组的第一个元素</li>
+</ul>
+<h5 id="8-push-向数组的末尾添加一个或更多元素，并返回新的长度"><a href="#8-push-向数组的末尾添加一个或更多元素，并返回新的长度" class="headerlink" title="8.push()向数组的末尾添加一个或更多元素，并返回新的长度"></a>8.push()向数组的末尾添加一个或更多元素，并返回新的长度</h5><ul>
+<li>Number =array.push(item1,item2,…,itemX);</li>
+<li>array.unshift(item1,item2,…,itemX)) ; 向数组的开头添加一个或多个元素，并返回新的长度</li>
+</ul>
+<h5 id="9-reverse-颠倒数组中元素的顺序"><a href="#9-reverse-颠倒数组中元素的顺序" class="headerlink" title="9.reverse()颠倒数组中元素的顺序"></a>9.reverse()颠倒数组中元素的顺序</h5><ul>
+<li>不影响原数组</li>
+</ul>
+<ul>
+<li>Array=array.reverse()；</li>
+</ul>
+<h5 id="10-slice（）选取数组中的一部分，并返回一个新数组"><a href="#10-slice（）选取数组中的一部分，并返回一个新数组" class="headerlink" title="10.slice（）选取数组中的一部分，并返回一个新数组"></a>10.slice（）选取数组中的一部分，并返回一个新数组</h5><ul>
+<li><p>新数组中不包括end对应的值</p>
+</li>
+<li><p>Array=array.slice(start,end);</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>start</em></td>
+<td align="left">必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。</td>
+</tr>
+<tr>
+<td align="left"><em>end</em></td>
+<td align="left">可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。</td>
+</tr>
+</tbody></table>
+<h5 id="11-some-检测数组元素中是否有元素符合指定条件"><a href="#11-some-检测数组元素中是否有元素符合指定条件" class="headerlink" title="11.some()检测数组元素中是否有元素符合指定条件"></a>11.some()检测数组元素中是否有元素符合指定条件</h5><ul>
+<li>some() 方法会依次执行数组的每个元素：如果有一个元素满足条件，则表达式返回<em>true</em> , 剩余的元素不会再执行检测。如果没有满足条件的元素，则返回false。</li>
+<li>Boolean =array.some(function(currentValue,index,arr),thisValue);</li>
+</ul>
+<h5 id="12-sort-对数组的元素进行排序"><a href="#12-sort-对数组的元素进行排序" class="headerlink" title="12.sort()对数组的元素进行排序"></a>12.sort()对数组的元素进行排序</h5><ul>
+<li><p>排序顺序可以是字符或数字，并按升序或降序。默认按字母升序。 这种方法会改变原始数组！</p>
+</li>
+<li><p><strong>注意：</strong>当数字是按字母顺序排列时”40”将排在”5”前面。使用数字排序，你必须通过一个函数作为参数来调用。函数指定数字是按照升序还是降序排列。</p>
+</li>
+<li><p>Array =array.sort(sortfunction);</p>
+<p>参数sortfunction可选，规定排定顺序，必须是函数</p>
+<p>返回值Array是对原数组的引用。<strong>注意</strong>，数组在原数组进行排序，不生成副本</p>
+</li>
+</ul>
+<h5 id="13-splice（）从数组中添加或删除，替换元素"><a href="#13-splice（）从数组中添加或删除，替换元素" class="headerlink" title="13.splice（）从数组中添加或删除，替换元素"></a>13.splice（）从数组中添加或删除，替换元素</h5><ul>
+<li><p>改变原数组</p>
+</li>
+<li><p>Array =array.splice(index,howmany,item1,item2,…,itemsX);</p>
+<p>参数index是必须的，规定从何处添加或删除元素，该参数是开始插入或删除的数组元素的下标，必须是数字</p>
+<p>howmany是必填项，规定应该删除多少元素，若未规定，则默认从index开始删除直到原数组结尾的所有元素</p>
+<p>item1，可选，要添加到数组的新元素</p>
+</li>
+</ul>
+<h5 id="14-toString（-把数组转为字符串并返回结果"><a href="#14-toString（-把数组转为字符串并返回结果" class="headerlink" title="14.toString（)把数组转为字符串并返回结果"></a>14.toString（)把数组转为字符串并返回结果</h5><ul>
+<li>数组元素之间用逗号分隔</li>
+<li>String=array.toString()</li>
+</ul>
+<h5 id="15-valueOf（）-返回数组对象的原始值"><a href="#15-valueOf（）-返回数组对象的原始值" class="headerlink" title="15.valueOf（）  返回数组对象的原始值"></a>15.valueOf（）  返回数组对象的原始值</h5><p>Array=<em>array</em>.valueOf()  不会改变原数组</p>
+<h4 id="2-Boolean对象"><a href="#2-Boolean对象" class="headerlink" title="2.Boolean对象"></a>2.Boolean对象</h4><ul>
+<li>Boolean 对象用于转换一个不是 Boolean 类型的值转换为 Boolean 类型值 (true 或者false).</li>
+</ul>
+<h4 id="3-Date对象"><a href="#3-Date对象" class="headerlink" title="3.Date对象"></a>3.Date对象</h4><ul>
+<li>四种创建方法<ul>
+<li>var d =new Date();</li>
+<li>var d =new Date(<em>milliseconds</em>);</li>
+<li>var d =new Date(<em>dateString</em>);</li>
+<li>var d =new Date(<em>year</em>, <em>month</em>, <em>day</em>, <em>hours</em>, <em>minutes</em>, <em>seconds</em>, <em>milliseconds</em>);</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-Number对象"><a href="#4-Number对象" class="headerlink" title="4.Number对象"></a>4.Number对象</h4><ul>
+<li><p>Number对象是原始数值的包装对象</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-constructor-number.html" target="_blank" rel="noopener">constructor</a></td>
+<td align="left">返回对创建此对象的 Number 函数的引用。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-max-value.html" target="_blank" rel="noopener">MAX_VALUE</a></td>
+<td align="left">可表示的最大的数。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-min-value.html" target="_blank" rel="noopener">MIN_VALUE</a></td>
+<td align="left">可表示的最小的数。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-negative-infinity.html" target="_blank" rel="noopener">NEGATIVE_INFINITY</a></td>
+<td align="left">负无穷大，溢出时返回该值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-number-nan.html" target="_blank" rel="noopener">NaN</a></td>
+<td align="left">非数字值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-positive-infinity.html" target="_blank" rel="noopener">POSITIVE_INFINITY</a></td>
+<td align="left">正无穷大，溢出时返回该值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-prototype-num.html" target="_blank" rel="noopener">prototype</a></td>
+<td align="left">允许您有能力向对象添加属性和方法。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-toexponential.html" target="_blank" rel="noopener">toExponential(x)</a></td>
+<td align="left">把对象的值转换为指数计数法。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-tofixed.html" target="_blank" rel="noopener">toFixed(x)</a></td>
+<td align="left">把数字转换为字符串，结果的小数点后有指定位数的数字。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-toprecision.html" target="_blank" rel="noopener">toPrecision(x)</a></td>
+<td align="left">把数字格式化为指定的长度。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-tostring-number.html" target="_blank" rel="noopener">toString()</a></td>
+<td align="left">把数字转换为字符串，使用指定的基数。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3cschool.cn/jsref/jsref-valueof-number.html" target="_blank" rel="noopener">valueOf()</a></td>
+<td align="left">返回一个 Number 对象的基本数字值。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="三-深入理解js"><a href="#三-深入理解js" class="headerlink" title="三 . 深入理解js"></a>三 . 深入理解js</h2><h4 id="1-最小全局变量（Minimizing-Globals）"><a href="#1-最小全局变量（Minimizing-Globals）" class="headerlink" title="1.最小全局变量（Minimizing Globals）"></a>1.最小全局变量（Minimizing Globals）</h4><ul>
+<li><p>js通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不能使用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单实用的</p>
+</li>
+<li><p>每个js环境都有一个全局对象，但你在任意函数外面使用this就可以访问到。你创建的每一个全局变量都是这个全局对象的属性。在浏览器中，为方便起见，该全局对象有个附加属性叫做window，此window指向该全局对象本身</p>
+</li>
+<li><p>全局变量的问题在于，你的JavaScript应用程序和web页面上的所有代码都共享了这些全局变量，他们住在同一个全局命名空间，所以当程序的两个不同部分定义同名但不同作用的全局变量的时候，命名冲突在所难免。</p>
+<ul>
+<li>第三方的JavaScript库</li>
+<li>广告方的脚本代码</li>
+<li>第三方用户跟踪和分析脚本代码</li>
+<li>不同类型的小组件，标志和按钮</li>
+</ul>
+</li>
+<li><p>要想和其他脚本成为好邻居的话，尽可能少的使用全局变量是很重要的。一些减少全局变量的策略，例如命名空间模式或是函数立即自动执行，但是要想让全局变量少最重要的还是始终使用var来声明变量。</p>
+</li>
+<li><p>js因其特征，会不自觉地创建出全局变量。隐式创建全局变量的情况</p>
+<ul>
+<li><p>你可以不声明就可以使用变量，js会默认是全局对象的属性（js有隐含的全局概念）</p>
+</li>
+<li><p>使用任务链进行var声明    在函数内部     var  a=b=0；</p>
+<p>其中a是本地变量，而b是全局变量，因为这个是从右到左的赋值，首先通过赋值表达式b=0，此情况下b是未声明的。这个表达式的值是0，然后这个0就分配给通过var定义的全局变量a。若你提前声明了变量，使用链分配是比较好的，不会产生意料之外的情况</p>
+</li>
+</ul>
+</li>
+<li><p>另外一个避免全局变量的原因是可移植性，如果你想你的代码在不同环境（主机下）运行，使用全局变量如履薄冰，因为你会无意中覆盖你最初环境下不存在的主机对象（所以你原以为名称可以放心使用，实际上对于有些情况并不适用）</p>
+</li>
+<li><h6 id="忘记var的副作用（Side-Effect-when-forgetting-var）"><a href="#忘记var的副作用（Side-Effect-when-forgetting-var）" class="headerlink" title="忘记var的副作用（Side Effect when forgetting  var）"></a>忘记var的副作用（Side Effect when forgetting  var）</h6><ul>
+<li>隐式全局变量和明确全局变量有小差异，即通过delete操作符让变量未定义的能力。<ul>
+<li>通过var创建的全局变量（任何函数之外的程序中创建）是不能被删除的</li>
+<li>无var创建的隐式全局变量（无视是否在函数中创建）是能被删除的</li>
+</ul>
+</li>
+<li>这表明，在技术上，隐式全局变量并不是真正的全局变量，但他们是全局对象的属性。属性是可以通过delete操作符删除的，而变量不能</li>
+</ul>
+</li>
+</ul>
+<p>// 定义三个全局变量<br>var global_var = 1;<br>global_novar = 2; // 反面教材<br>(function () {<br>global_fromfunc = 3; // 反面教材<br>}());<br>// 试图删除<br>delete global_var; // false<br>delete global_novar; // true<br>delete global_fromfunc; // true<br>// 测试该删除<br>typeof global_var; // “number”<br>typeof global_novar; // “undefined”<br>typeof global_fromfunc; // “undefined”</p>
+<ul>
+<li><h6 id="访问全局对象-Access-to-the-Global-Object"><a href="#访问全局对象-Access-to-the-Global-Object" class="headerlink" title="访问全局对象(Access to the Global Object)"></a>访问全局对象(Access to the Global Object)</h6><p>在浏览器中，全局对象可以通过<code>window</code>属性在代码的任何位置访问（除非你做了些比较出格的事情，像是声明了一个名为window的局部变量）。但是在其他环境下，这个方便的属性可能被叫做其他什么东西（甚至在程序中不可用）。如果你需要在没有硬编码的<code>window</code>标识符下访问全局对象，你可以在任何层级的函数作用域中做如下操作：</p>
+</li>
+</ul>
+<p>var  global=(function(){</p>
+<p>return  this;</p>
+<p>}()); 这种方法可随时获得全局对象，因其在函数中被当作一个函数调用了（不是通过new构造），this总是指向全局对象。实际上这个病不适用于ECMAScript 5严格模式，所以，在严格模式下时，你必须采取不同的形式。例如，你正在开发一个JavaScript库，你可以将你的代码包裹在一个即时函数中，然后从 全局作用域中，传递一个引用指向this作为你即时函数的参数。</p>
+<ul>
+<li><h6 id="单var形式（Single-var-Pattern）"><a href="#单var形式（Single-var-Pattern）" class="headerlink" title="单var形式（Single var Pattern）"></a>单var形式（Single var Pattern）</h6><p>在函数顶部使用单var语句是比较有用的一种形式，其好处在于：</p>
+<ul>
+<li>提供了一个单一的地方去寻找功能所需要的所有局部变量</li>
+<li>防止变量在定义之前使用的逻辑错误</li>
+<li>帮助你记住声明的全局变量，因此较少了全局变量</li>
+<li>少代码（类型啊传值啊单线完成）</li>
+</ul>
+</li>
+<li><h6 id="预解析：var散布的问题-Hoisting-A-Problem-with-Scattered-vars"><a href="#预解析：var散布的问题-Hoisting-A-Problem-with-Scattered-vars" class="headerlink" title="预解析：var散布的问题(Hoisting: A Problem with Scattered vars)"></a>预解析：var散布的问题(Hoisting: A Problem with Scattered vars)</h6><p>JavaScript中，你可以在函数的任何位置声明多个var语句，并且它们就好像是在函数顶部声明一样发挥作用，这种行为称为 hoisting（悬置/置顶解析/预解析）。当你使用了一个变量，然后不久在函数中又重新声明的话，就可能产生逻辑错误。对于JavaScript，只 要你的变量是在同一个作用域中（同一函数），它都被当做是声明的，即使是它在var声明前使用的时候。</p>
+<p>// 反例<br>myname = “global”; // 全局变量<br>function func() {<br>alert(myname); // “undefined”<br>var myname = “local”;<br>alert(myname); // “local”<br>}<br>func();</p>
+</li>
+</ul>
+<h4 id="2-代码处理的两个阶段"><a href="#2-代码处理的两个阶段" class="headerlink" title="2.代码处理的两个阶段"></a>2.代码处理的两个阶段</h4><ul>
+<li>第一阶段是变量，函数声明，以及正常格式的参数创建，这是一个解析和进入上下文的阶段</li>
+<li>第二阶段是代码执行，函数表达式和不合格的标识符（未声明的变量）被创建</li>
+</ul>
+<h2 id="四-this-精讲"><a href="#四-this-精讲" class="headerlink" title="四 . this 精讲"></a>四 . this 精讲</h2><h4 id="谁调用这个函数或方法，this关键字就指向谁"><a href="#谁调用这个函数或方法，this关键字就指向谁" class="headerlink" title="谁调用这个函数或方法，this关键字就指向谁"></a>谁调用这个函数或方法，this关键字就指向谁</h4><ul>
+<li>this总是返回属性或方法“当前”所在的对象</li>
+<li>如果一个函数在全局环境中运行，那么this就是指顶层对象（浏览器中为window对象）。</li>
+</ul>
+<h4 id="1-改变this指向的三大方法"><a href="#1-改变this指向的三大方法" class="headerlink" title="1.改变this指向的三大方法"></a>1.改变this指向的三大方法</h4><h6 id="1-call、apply、bind方法的共同点和区别："><a href="#1-call、apply、bind方法的共同点和区别：" class="headerlink" title="1.call、apply、bind方法的共同点和区别："></a>1.call、apply、bind方法的共同点和区别：</h6><ul>
+<li><p>apply 、 call 、bind 三者都是用来改变函数的this对象的指向的；</p>
+</li>
+<li><p>apply 、 call 、bind 三者第一个参数都是this要指向的对象，也就是想指定的上下文（函数的每次调用都会拥有一个特殊值——本次调用的上下文（context）——这就是this关键字的值。）；</p>
+</li>
+<li><p>apply 、 call 、bind 三者都可以利用后续参数传参；</p>
+</li>
+<li><p>bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用 。</p>
+</li>
+</ul>
+<h6 id="2-thisObj的取值有以下4种情况："><a href="#2-thisObj的取值有以下4种情况：" class="headerlink" title="2.thisObj的取值有以下4种情况："></a>2.thisObj的取值有以下4种情况：</h6><p>（1） 不传，或者传null,undefined， 函数中的this指向window对象</p>
+<p>（2） 传递另一个函数的函数名，函数中的this指向这个函数的引用</p>
+<p>（3） 传递字符串、数值或布尔类型等基础类型，函数中的this指向其对应的包装对象，如 String、Number、Boolean</p>
+<p>（4） 传递一个对象，函数中的this指向这个对象</p>
+<ul>
+<li>function.prototype.call(obj,arg1,arg2,…)<ul>
+<li>obj是this要指向的对象（一般会写成this），也就是想指定的上下文；arg1，arg2都是要传入的参数</li>
+<li>如果参数为空，null和undefined，则默认传入全局对象</li>
+</ul>
+</li>
+<li>function.prototype.apply(obj,[arg1,arg2,..])<ul>
+<li>apply()和call（）差不多，但是apply的第二个参数是数组</li>
+</ul>
+</li>
+<li>function.prototype.bind(obj)<ul>
+<li>将函数绑定到某个对象，然后返回一个新的函数</li>
+</ul>
+</li>
+</ul>
+<h6 id="3-实例"><a href="#3-实例" class="headerlink" title="3.实例"></a>3.实例</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function a()&#123;     console.log(this);   //输出函数a中的this对象&#125;       </span><br><span class="line">function b()&#123;&#125;       </span><br><span class="line">var c=&#123;name:&quot;call&quot;&#125;;    //定义对象c  </span><br><span class="line">a.call();   //window</span><br><span class="line">a.call(null);   //window</span><br><span class="line">a.call(undefined);   //window</span><br><span class="line">a.call(1);   //Number</span><br><span class="line">a.call(&apos;&apos;);   //String</span><br><span class="line">a.call(true);   //Boolean</span><br><span class="line">a.call(b);   //function b()&#123;&#125;</span><br><span class="line">a.call(c);   //Object</span><br></pre></td></tr></table></figure>
+
+<p>function class1(){   </p>
+<p>  this.name=function(){   </p>
+<p>​    console.log(“我是class1内的方法”);   </p>
+<p>  }   </p>
+<p>}   </p>
+<p>function class2(){ </p>
+<p>  class1.call(this); //此行代码执行后，当前的this指向了class1（也可以说class2继承了class1）   </p>
+<p>}  </p>
+<p>var f=new class2();   </p>
+<p>f.name();   //调用的是class1内的方法，将class1的name方法交给class2使用</p>
+<p>function eat(x,y){   </p>
+<p>  console.log(x+y);   </p>
+<p>}   </p>
+<p>function drink(x,y){   </p>
+<p>  console.log(x-y);   </p>
+<p>}   </p>
+<p>eat.call(drink,3,2)；/<em>输出：5。这个例子中的意思就是用 eat 来替换 drink，eat.call(drink,3,2) == eat(3,2) ，所以运行结果为：console.log(5);</em>/</p>
+<p>function Animal(){   </p>
+<p>  this.name=”animal”;   </p>
+<p>  this.showName=function(){   </p>
+<p>​    console.log(this.name);   </p>
+<p>  }   </p>
+<p>}   </p>
+<p>function Dog(){   </p>
+<p>  this.name=”dog”;   </p>
+<p>}   </p>
+<p>var animal=new Animal();   </p>
+<p>var dog=new Dog();       </p>
+<p>animal.showName.call(dog);//输出：dog</p>
+<p>在上面的代码中，我们可以看到Dog里并没有showName方法，那为什么（this.name）的值是dog呢？</p>
+<p>关键就在于最后一段代码（animal.showName.call(dog)），意思是把animal的方法放到dog上执行，也可以说，把animal 的showName()方法放到 dog上来执行，所以this.name 应该是 dog。</p>
+<p>function Animal(name){   </p>
+<p>  this.name=name;   </p>
+<p>  this.showName=function(){   </p>
+<p>​    console.log(this.name);   </p>
+<p>  }   </p>
+<p>}   </p>
+<p>function Dog(name){   </p>
+<p>  Animal.call(this,name);   </p>
+<p>}   </p>
+<p>var dog=new Dog(“Crazy dog”);   </p>
+<p>dog.showName();//输出：Crazy dog</p>
+<p>Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么Dog就能直接调用Animal的所有属性和方法。著作权归作者所有。</p>
+<ul>
+<li>在JavaScript 中，某个函数的参数数量是不固定的，因此要说适用条件的话，当你的参数是明确知道数量时用 call ；而不确定的时候用 apply，然后把参数 push 进数组传递进去。当参数数量不确定时，函数内部也可以通过 arguments 这个数组来遍历所有的参数。著作权归作者所有。</li>
+</ul>
+<p>详情请看：<a href="http://ghmagical.com/article/page/id/UPLfoGI9vJ91" target="_blank" rel="noopener">http://ghmagical.com/article/page/id/UPLfoGI9vJ91</a></p>
+<h2 id="五-垃圾回收机制"><a href="#五-垃圾回收机制" class="headerlink" title="五 . 垃圾回收机制"></a>五 . 垃圾回收机制</h2><ul>
+<li>js具有自动垃圾回收机制（GC:Garbage  Collection），也就是说执行环境会负责管理代码执行过程中使用的内存</li>
+<li>原理：垃圾收集器会定期（周期性）找出那些不再继续使用的变量，然后释放其内存。此过程并非实时的，因其开销会很大。</li>
+<li>不再使用的变量也就是生命周期结束的变量，当让只可能是局部变量，全局变量的生命周期直至浏览器卸载页面才会结束，局部变量只在函数执行过程中存在，而在这个过程会为局部变量在堆和栈分配相应的空间，以存储它们的值，然后在函数中使用这些变量，直至函数结束，而闭包由于内部函数的原因，外部函数并不能算是结束。</li>
+<li></li>
+</ul>
+<h2 id="六-枚举"><a href="#六-枚举" class="headerlink" title="六. 枚举"></a>六. 枚举</h2><h2 id="ECMAScript原始值和引用值"><a href="#ECMAScript原始值和引用值" class="headerlink" title="ECMAScript原始值和引用值"></a>ECMAScript原始值和引用值</h2><h4 id="1-原始值"><a href="#1-原始值" class="headerlink" title="1.原始值"></a>1.原始值</h4><p>存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。</p>
+<h4 id="2-引用值"><a href="#2-引用值" class="headerlink" title="2.引用值"></a>2.引用值</h4><p>存储在堆（heap）中的对象，也就是说，存储在变量处的值是一个指针（point），指向存储对象的内存处。</p>
+<p>为变量赋值时，ECMAScript 的解释程序必须判断该值是原始类型，还是引用类型。要实现这一点，解释程序则需尝试判断<em>该值是否为 ECMAScript 的原始类型之一</em>，即 Undefined、Null、Boolean、Number和String型。由于这些原始类型占据的空间是固定的，所以可将他们存储在较小的内存区域 - 栈中。这样存储便于迅速查寻变量的值。</p>
+<p><strong>在许多语言中，字符串都被看作引用类型，而非原始类型，因为字符串的长度是可变的。ECMAScript打破了这一传统。</strong></p>
+<p>如果一个值是引用类型的，那么它的存储空间将从堆中分配。由于引用值的大小会改变，所以不能把它放在栈中，否则会降低变量查寻的速度。相反，放在变量的栈空间中的值是该对象存储在堆中的地址。地址的大小是固定的，所以把它存储在栈中对变量性能无任何负面影响</p>
+<p><img src="https://7n.w3cschool.cn/attachments/day_160920/201609201937112397.gif" alt="存储在堆和栈中的原始值和引用值"></p>
+<h4 id="3-对象-1"><a href="#3-对象-1" class="headerlink" title="3.对象"></a>3.对象</h4><h6 id="1-属性"><a href="#1-属性" class="headerlink" title="1.属性"></a>1.属性</h6><ul>
+<li>constructor：对创建对象的函数的引用（指针）。对于Object对象，该指针指向原始的Object（）函数</li>
+<li>prototype：对该对象的原型的引用。对于所有的对象，他默认返回Object对象的一个实例</li>
+</ul>
+<h6 id="2-方法"><a href="#2-方法" class="headerlink" title="2.方法"></a>2.方法</h6><ul>
+<li>hasOwnProperty（property）：判断对象是否有某个特定的属性。必须用字符串指定该属性（o.hasOwnProperty(“name”))</li>
+<li>IsPrototypeOf(object):判断该对象是否为另一个对象的原型</li>
+<li>PropertyIsEnumerable：判断给定的属性是否可以用for…in语句进行枚举</li>
+<li>ToString（）：返回对象的原始字符串表示。对于Object对象，ECMA-262没有定义这个值，所以不同的ECMAScript实现具有不同的值</li>
+<li>ValueOf（）返回最适合该对象的原始值。对于许多对象，该方法返回的值都与ToString（）的返回值相同</li>
+<li>上面列出的每种属性和方法都会被其他对象覆盖</li>
+</ul>
+<h4 id="4-String对象"><a href="#4-String对象" class="headerlink" title="4.String对象"></a>4.String对象</h4><ul>
+<li><p>localeCompare（）方法，对字符串进行排序。该方法有一个参数-要进行比较的字符串，返回的是下列三个值之一</p>
+<ul>
+<li>如果String对象按照字母顺序排在参数中的字符串之前，返回负数</li>
+<li>等于参数中的字符串，返回0</li>
+<li>排在参数中的字符串之后，返回正数</li>
+</ul>
+</li>
+<li><p>localeCompare()方法的独特之处在于，实现所处的区域（locale，兼指国家/地区和语言）确切说明了这种方法运行的方式。在美国，英语是ECMAScript实现的标准语言，localeCompare()是区分大小写的，大写字母在字母顺序上排在小写字母之后。不过，在其他区域，情况可能并非如此。</p>
+</li>
+<li><p>slice（）和substring（）</p>
+<ul>
+<li><p>ECMAScript提供了两种方法从字串创建字符串值，即slice（）和substring（）。这两种返回的都是要处理的字符串的子串，都接受一个或两个参数，第一个参数是要获取字串的起始位置，第二个参数（如果使用的话）是要获取<strong>子串终止前的位置</strong>（也就是说，获取终止位置不包括在返回值内）。若省略第二个参数，终值位就默认为字符串的长度。但是两种方法都不影响String对象本身的值</p>
+</li>
+<li><p>对于负数参数，slice（）方法会用字符串的长度加上参数，substring（）方法则将其作为0处理（也就是忽略他）</p>
+<p>var oStringObject = new String(“hello world”);<br>alert(oStringObject.slice(“-3”));        //输出 “rld”<br>alert(oStringObject.substring(“-3”));    //输出 “hello world”<br>alert(oStringObject.slice(“3, -4”));        //输出 “lo w”<br>alert(oStringObject.substring(“3, -4”));    //输出 “hel”</p>
+<p>substring()方法则将两个参数解释为substring(3, 0)，实际上即substring(0, 3)，因为substring()总把较小的数字作为起始位，较大的数字作为终止位。因此，substring(“3, -4”)返回的是”hel”。</p>
+</li>
+</ul>
+</li>
+<li><p>toLowerCase()和toUpperCase()方法是原始的，是以java.lang.String中相同方法为原型实现的。</p>
+<p>toLocaleLowerCase()和toLocaleUpperCase()方法是基于特定的区域实现的</p>
+<ul>
+<li>一般来说，如果不知道在以哪种编码运行一种语言，则使用区域特定的方法比较安全。</li>
+<li>String对象的所有属性和方法都可应用于String原始值上，因为它们是伪对象。</li>
+</ul>
+</li>
+<li><p>instanceof运算符</p>
+<ul>
+<li>解决使用typeof运算符时，所有类型的对象都返回“object”</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-整数"><a href="#5-整数" class="headerlink" title="5.整数"></a>5.整数</h4><ul>
+<li><p>ECMAScript中，所有整数字面量默认都是有符号32位整数，前31位（每一位都表示2的幂）是整数数值，最后一位表示符号，0表示正数，1表示负数</p>
+</li>
+<li><p>负整数：负数也存储为二进制代码，不过采用的形式是二进制补码。计算补码三部曲：</p>
+<ul>
+<li>确定该数字的非负版本的二进制表示（如，要计算-18的二进制补码，首先要确定18的二进制表示）</li>
+<li>求得二进制反码，即把0替换成1，把1替换成0</li>
+<li>在二进制反码上加上1</li>
+</ul>
+</li>
+<li><p>位运算NOT（~）三部曲</p>
+<ul>
+<li><p>把运算数转化成32位数字</p>
+</li>
+<li><p>把二进制转换成他的二进制反码</p>
+</li>
+<li><p>把二进制数转化成浮点数</p>
+<p><strong>位运算NOT实质上是对数字求负，然后减1</strong>，因此25变成-26</p>
+</li>
+<li><p>如果运算数是对象，返回false</p>
+</li>
+<li><p>如果运算数是数字0，返回true</p>
+</li>
+<li><p>如果运算数是0以外的任何数字，返回false</p>
+</li>
+<li><p>如果运算数是null，返回true</p>
+</li>
+<li><p>如果运算数是NaN，返回true</p>
+</li>
+<li><p>如果运算数是undefined，发生错误。</p>
+</li>
+</ul>
+</li>
+<li><p>AND运算符的运算数可以是任何类型的</p>
+<ul>
+<li>obj &amp;&amp;  boolean  ——–obj</li>
+<li>obj1  &amp;&amp;  obj2  ———obj2</li>
+<li>有null ———–null</li>
+<li>有NaN ——返回NaN</li>
+<li>第一个是undefined或第一个是true，第二个是undefined——发生错误</li>
+<li>第一个是false，第二个是undefined——返回false，因为第二个没被计算</li>
+</ul>
+</li>
+<li><p>乘法运算符*</p>
+<ul>
+<li>如果某个运算数是NaN，结果就是NaN</li>
+<li>Infinity乘以0，结果是NaN</li>
+<li>Infinity乘以0以外的数，结果为Infinity或-Infinity</li>
+</ul>
+</li>
+<li><p>除法运算符/</p>
+<ul>
+<li>如果结果太大或太小，生成的结果是Infinity或-infinity</li>
+<li>如果某个运算数是NaN，结果是NaN</li>
+<li>Infinity被Infinity除，结果是NaN。Infinity/Infinity=NaN</li>
+<li>Infinity被任何数字除，结果是Infinity    某个数/Infinity=Infinity</li>
+<li>0除以一个非无穷大的数字，结果为NaN   0/某个数=NaN</li>
+</ul>
+</li>
+<li><p>取余%</p>
+<ul>
+<li>Infinity%某数=NaN      某数%0=NaN</li>
+<li>Infinity%Infinity=NaN</li>
+<li>被除数%Infinity=被除数</li>
+<li>0%某数=0</li>
+</ul>
+</li>
+<li><p>加法+</p>
+<ul>
+<li>某个运算数是NaN，结果为NaN</li>
+<li>（-Infinity）+（-Infinity）= -Infinity</li>
+<li>Infinity + （-Infinity）=NaN</li>
+<li>（+0）+（+0）=（+0）</li>
+<li>（-0）+（+0）=（+0）</li>
+<li>（-0）-（-0）=（-0）</li>
+<li>（-0）+（-0）=（-0）</li>
+<li>如果两个运算数都是字符串，把第二个字符串连接到第一个上。</li>
+<li>如果只有一个运算数是字符串，把另一个运算数转换成字符串，结果是两个字符串连接成的字符串。</li>
+</ul>
+</li>
+<li><p>等性运算符==和！=</p>
+<ul>
+<li><p>如果一个运算数是Boolean值，在检查相等性之前，把它转换成数字值，true为1，false为0</p>
+</li>
+<li><p>字符串和数字，将字符串转成数字</p>
+</li>
+<li><p>对象和字符串，将对象转为字符串</p>
+</li>
+<li><p>对象和数字，将对象转成数字</p>
+</li>
+<li><p>值null和undefined相等</p>
+</li>
+<li><p>在检查相等性时，不能把null和undefined转换成其他值</p>
+</li>
+<li><p>有NaN，等号返回false，非等号返回true</p>
+</li>
+<li><p>如果两个运算数是对象，那比较的是他们的引用值，若指向同一对象，则等号返回true，否则两个运算数不等</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>null == undefined</td>
+<td>true</td>
+</tr>
+<tr>
+<td>“NaN” == NaN</td>
+<td>false</td>
+</tr>
+<tr>
+<td>5 == NaN</td>
+<td>false</td>
+</tr>
+<tr>
+<td>NaN == NaN</td>
+<td>false</td>
+</tr>
+<tr>
+<td>NaN != NaN</td>
+<td>true</td>
+</tr>
+<tr>
+<td>false == 0</td>
+<td>true</td>
+</tr>
+<tr>
+<td>true == 1</td>
+<td>true</td>
+</tr>
+<tr>
+<td>true == 2</td>
+<td>false</td>
+</tr>
+<tr>
+<td>undefined == 0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>null == 0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>“5” == 5</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-语句"><a href="#6-语句" class="headerlink" title="6.语句"></a>6.语句</h4><h6 id="1-有标签的语句"><a href="#1-有标签的语句" class="headerlink" title="1.有标签的语句"></a>1.有标签的语句</h6><ul>
+<li>break 语句和 continue 语句都可以与有标签的语句联合使用，返回代码中的特定位置。当循环内部还有循环时，会这样做</li>
+<li>with语句用于设置代码在特定对象中的作用域</li>
+</ul>
+<p>var sMessage = “hello”;<br>with(sMessage) {<br>alert(toUpperCase());    //输出 “HELLO”<br>}</p>
+<p>（1）在这个例子中，with语句用于字符串，所以调用toUpperCase()方法时，解释程序将检查该方法是否是本地程序。如果不是，他将检查伪对象sMessage，看他是否为该对象的方法，然后，alert输出“HELLO”,因为解释程序找到了字符串”hello“的toUpperCase（）方法</p>
+<p>（2）with语句是运行缓慢的代码块，尤其是在已设置了属性值时。大多情况下，如果可能，最好避免使用它</p>
+<h2 id="七-面向对象"><a href="#七-面向对象" class="headerlink" title="七. 面向对象"></a>七. 面向对象</h2><h4 id="1-具备的四种能力"><a href="#1-具备的四种能力" class="headerlink" title="1.具备的四种能力"></a>1.具备的四种能力</h4><ul>
+<li>封装：把相关信息（数据或方法）存储在对象中的能力</li>
+<li>聚集：把一个对象存储在另一个对象内的能力</li>
+<li>继承：有另一个类（或多个类）得来类的属性和方法的能力</li>
+<li>多态：编写能以多种方法运行的函数或方法的能力</li>
+</ul>
+<h4 id="2-对象的应用"><a href="#2-对象的应用" class="headerlink" title="2.对象的应用"></a>2.对象的应用</h4><ul>
+<li>对象的创建和销毁都在js执行过程中发生</li>
+</ul>
+<h4 id="3-对象废除"><a href="#3-对象废除" class="headerlink" title="3.对象废除"></a>3.对象废除</h4><ul>
+<li>ECNAScript拥有无用存储单元搜集程序（garbage collection routine），意味着不必专门销毁对象来释放内存。当没有对象引用时，称该对象被废除了（derefence）。运行无用存储单元收集程序时，所有废除的对象都被销毁。每当执行完它的代码，无用存储单元收集程序都会运行，释放所有的局部变量，还有在一些不可预知的情况下，无用存储单元收集程序也会运行</li>
+<li>把对象的所有引用都设置为null，可以强制性的废除材料</li>
+</ul>
+<h4 id="4-绑定"><a href="#4-绑定" class="headerlink" title="4.绑定"></a>4.绑定</h4><ul>
+<li>即把对象的接口与对象实例结合起来的方法</li>
+<li>早绑定（early binding）是指在实例化对象之前定义它的属性和方法，这样编译器或解释程序就能够提前转换机器代码。在 Java 和 Visual Basic 这样的语言中，有了早绑定，就可以在开发环境中使用 IntelliSense（即给开发者提供对象中属性和方法列表的功能）。ECMAScript 不是强类型语言，所以不支持早绑定。</li>
+<li>另一方面，晚绑定（late binding）指的是编译器或解释程序在运行前，不知道对象的类型。使用晚绑定，无需检查对象的类型，只需检查对象是否支持属性和方法即可。ECMAScript 中的所有变量都采用晚绑定方法。这样就允许执行大量的对象操作，而无任何惩罚。</li>
+</ul>
+<h4 id="5-作用域"><a href="#5-作用域" class="headerlink" title="5.作用域"></a>5.作用域</h4><ul>
+<li>指的是变量的适用范围</li>
+<li>ECMAScript只有公共作用域，所有对象的作用域都是公共的。由于缺少私有作用域，开发者确定了一个规约，说明哪些属性和方法应该被看做私有的。这种规约规定在属性前后加下划线</li>
+<li>ECMAScript没有静态作用域（静态作用域定义的属性和方法任何时候都能从同一位置访问），但可以为构造函数提供属性和方法，构造函数是函数，函数是对象，对象可以有属性和方法</li>
+</ul>
+<h4 id="6-使用动态原型方法类的属性和方法"><a href="#6-使用动态原型方法类的属性和方法" class="headerlink" title="6.使用动态原型方法类的属性和方法"></a>6.使用动态原型方法类的属性和方法</h4><ul>
+<li>在构造函数内定义非函数属性，而函数属性则利用原型属性定义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Car(sColor,iDoors,iMpg) &#123;</span><br><span class="line">  this.color = sColor;</span><br><span class="line">  this.doors = iDoors;</span><br><span class="line">  this.mpg = iMpg;</span><br><span class="line">  this.drivers = new Array(&quot;Mike&quot;,&quot;John&quot;);</span><br><span class="line">  </span><br><span class="line">  if (typeof Car._initialized == &quot;undefined&quot;) &#123;</span><br><span class="line">    Car.prototype.showColor = function() &#123;</span><br><span class="line">      alert(this.color);</span><br><span class="line">    &#125;;</span><br><span class="line">	</span><br><span class="line">    Car._initialized = true;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>知道检查typeof Car.__initialized是否等于“undefined”之前，这个构造函数都为改变。这行代码是动态原型方法中最重要的一部分。如果这个值没定义，构造函数将用原型方法继续定义对象的方法，然后把Car._initialized设置为true，如果这个值定义了，（它的值为true，typeof的值为Boolean），那么就不再创建该方法。简而言之，该方法使用（_initialized)来判断是否已给原型赋予了任何方法，该方法只创建并赋值一次。</li>
+</ul>
+<h4 id="7-ECMAScript的字符串"><a href="#7-ECMAScript的字符串" class="headerlink" title="7.ECMAScript的字符串"></a>7.ECMAScript的字符串</h4><ul>
+<li>ECMAScript的字符串是不可变的，即它们的值是不可变的</li>
+</ul>
+<p>var  str=”hello”;str += “world”;</p>
+<p>创建此段代码的实际步骤（特别耗资源）</p>
+<ul>
+<li>创建存储“hello”字符串</li>
+<li>创建存储“world”的字符串</li>
+<li>创建连接结果的字符串</li>
+<li>把str的当前结果复制到结果中</li>
+<li>把“world”复制到结果中</li>
+<li>更新str，使它指向结果</li>
+</ul>
+<p>解决方法是用Array对象存储字符串，然后用join（）方法（参数是空字符串）创建最后的字符串（但是不能确切反映出他的意图）</p>
+<p>var arr = new Array();<br>arr[0] = “hello “;<br>arr[1] = “world”;<br>var str = arr.join(“”);</p>
+<p>实现步骤</p>
+<ul>
+<li>创建存储结果的字符串</li>
+<li>把每个字符串复制到结果中的合适位置</li>
+</ul>
+<p>最好的方法是使用StringBuffer类包装该功能</p>
+<p>function   StringBuffer(){</p>
+<p>this.<em>_strings</em>=new Array();</p>
+<p>}</p>
+<p>StringBuffer.prototype.append=function(str){</p>
+<p>this.<em>_strings</em>.push(str);</p>
+<p>};</p>
+<p>StringBuffer.prototype.toString=function(){</p>
+<p>return this.<em>_strings</em>.join(“”);</p>
+<p>};</p>
+<p>这段代码首先要注意的是strings属性，本意是私有属性。它只有两个方法，append（）和toString（）方法。append（）方法只有一个参数，他把该参数附加到字符串数组中，toString（）方法调用数组的join方法，返回真正连接成的字符串。</p>
+<p>var buffer = new StringBuffer ();<br>buffer.append(“hello “);<br>buffer.append(“world”);<br>var result = buffer.toString();</p>
+<h2 id="八-继承机制实现"><a href="#八-继承机制实现" class="headerlink" title="八 . 继承机制实现"></a>八 . 继承机制实现</h2><ul>
+<li><p>要用ECMAScript实现继承机制，您可以从要继承的基类入手。所有开发者定义的类都可以作为基类。出于安全原因，本地类和宿主类不能作为基类，这样可以防止公用访问编译过的浏览器级的代码，因为这些代码可被用于恶意攻击</p>
+</li>
+<li><p>选定基类后，就可以创建它的子类了。是否使用基类完全由你决定。有时，你可能创建一个不能直接使用的基类，他只是用于给函数提供通用函数。这种情况下，基类被看成是抽象类。</p>
+</li>
+<li><p>创建的子类将继承超类的所有属性和方法，包括构造函数及方法的实现。记住，所有的属性和方法都是公用的，因此子类可以直接访问这些方法。子类还可以添加超类中没有的属性和方法，也可以覆盖超类中的属性和方法</p>
+</li>
+<li><p>JavaScript实现继承并非明确规定，而是通过模仿实现的，故和其他功能一样，不止一种实现方式。这意味着所有的继承细节并非完全由解释程序处理。作为开发者，你有权决定最适合的继承方法</p>
+</li>
+</ul>
+<h4 id="1-对象冒充"><a href="#1-对象冒充" class="headerlink" title="1.对象冒充"></a>1.对象冒充</h4><p>原理：构造函数使用this关键字给所有属性和方法赋值（即采用类声明的构造函数方式）。因为构造函数只是一个函数，所以可以使ClassA构造函数成为ClassB的方法，然后调用它。ClassB就会收到ClassA的构造函数中定义的属性和方法。</p>
+<p>function  ClassA(scolor){</p>
+<p>this.color=scolor;</p>
+<p>this.sayColor=function(){</p>
+<p>alert(this.color);}</p>
+<p>}</p>
+<p>function  ClassB(scolor){  </p>
+<p>this.newMethod=ClassA; this.newMethod(scolor);  delete  this.newMethod;</p>
+<p>  this.name = sName;<br>this.sayName = function () {<br>alert(this.name);<br>};</p>
+<p> }</p>
+<p>在这段段代码中，为ClassA赋予方法newMethod（请记住，函数名只是指向它的指针）。然后调用该方法，传递给它的是ClassB构造函数，第三行行删除对ClassA的引用，这样以后就不能再调用它了。所有新属性或新方法都必须在删除了新方法的代码行后才能执行。否则，可能会覆盖超类的相关方法和属性。</p>
+<ul>
+<li>对象冒充可以实现多重继承，即一个类可继承多个超类</li>
+</ul>
+<p><img src="https://7n.w3cschool.cn/attachments/day_160921/201609211757355298.gif" alt="继承机制 UML 图示实例"></p>
+<p>function ClassZ() {<br>this.newMethod = ClassX;<br>this.newMethod();<br>delete this.newMethod;<br>this.newMethod = ClassY;<br>this.newMethod();<br>delete this.newMethod;<br>}</p>
+<p>这里存在一个弊端，如果存在两个类 ClassX 和 ClassY 具有同名的属性或方法，ClassY 具有高优先级。因为它从后面的类继承。除这点小问题之外，用对象冒充实现多重继承机制轻而易举。</p>
+<h4 id="2-使用call（对象参数，形参1，2，"><a href="#2-使用call（对象参数，形参1，2，" class="headerlink" title="2.使用call（对象参数，形参1，2，..)"></a>2.使用call（对象参数，形参1，2，..)</h4><h4 id="3-使用apply（对象参数，形参数组）"><a href="#3-使用apply（对象参数，形参数组）" class="headerlink" title="3.使用apply（对象参数，形参数组）"></a>3.使用apply（对象参数，形参数组）</h4><h2 id="九-object对象"><a href="#九-object对象" class="headerlink" title="九.object对象"></a>九.object对象</h2><ul>
+<li><p>JavaScript 原生提供<code>Object</code>对象（注意起首的<code>O</code>是大写），所有其他对象都继承自这个对象。<code>Object</code>本身也是一个构造函数，可以直接通过它来生成新对象。</p>
+<p>var obj = new Object();</p>
+</li>
+<li><p>Object作为构造函数使用时，可接受一个参数。如果该参数是一个对象，则直接返回这个对象；如果是原始类型的值，则返回该值的包装对象。注意，通过<code>new Object()</code>的写法生成新对象，与字面量的写法<code>o = {}</code>是等价的。</p>
+<p>var o1 = {a: 1};<br>var o2 = new Object(o1);<br>o1 === o2 // true<br>new Object(123) instanceof Number<br>// true</p>
+</li>
+</ul>
+<h4 id="Object对象上面部署一个方法的两种做法。"><a href="#Object对象上面部署一个方法的两种做法。" class="headerlink" title="Object对象上面部署一个方法的两种做法。"></a><code>Object</code>对象上面部署一个方法的两种做法。</h4><h6 id="1-部署在Object对象本身"><a href="#1-部署在Object对象本身" class="headerlink" title="1.部署在Object对象本身"></a>1.部署在Object对象本身</h6><p>比如，在<code>Object</code>对象上面定义一个<code>print</code>方法，显示其他对象的内容。</p>
+<p>Object.print = function (o) { console.log(o) } ;</p>
+<p>var o =new Object() ;</p>
+<p>Object.print(o);</p>
+<h6 id="2-部署在Object-prototype对象"><a href="#2-部署在Object-prototype对象" class="headerlink" title="2.部署在Object.prototype对象"></a>2.部署在Object.prototype对象</h6><ul>
+<li><p>所有构造函数都有一个prototype属性，指向一个原型对象。凡是在Object.prototype对象上面定义的属性都将被所有实例对象所共享</p>
+<p>Object.prototype.print = function () { console.log(this) };</p>
+<p>var o = new Object();</p>
+<p>o.print();</p>
+<p>上面代码在Object.prototype定义了一个print方法，然后生成一个Object的实例o。o直接继承了Object.prototype的属性和方法，可以在自身调用它们，也就是说，o对象的print方法实质上是调用Object.prototype.print方法。。</p>
+</li>
+</ul>
+<h4 id="Object-方法"><a href="#Object-方法" class="headerlink" title="Object()方法"></a>Object()方法</h4><ul>
+<li><p>可将任意值转为对象。这个方法常用于保证某个值一定是对象。如果参数是原始类型的值，Object方法返回对应的包装对象的实例</p>
+<p>Object() instanceof Object // true<br>Object(undefined) // 返回一个空对象<br>Object(undefined) instanceof Object // true<br>Object(null) // 返回一个空对象<br>Object(null) instanceof Object // true<br>Object(1) // 等同于 new Number(1)<br>Object(1) instanceof Object // true<br>Object(1) instanceof Number // true<br>Object(‘foo’) // 等同于 new String(‘foo’)<br>Object(‘foo’) instanceof Object // true<br>Object(‘foo’) instanceof String // true<br>Object(true) // 等同于 new Boolean(true)<br>Object(true) instanceof Object // true<br>Object(true) instanceof Boolean // true</p>
+</li>
+<li><p>如果参数是一个对象，他总是返回原对象</p>
+<p>var arr = [];<br>Object(arr) // 返回原数组<br>Object(arr) === arr // true<br>var obj = {};<br>Object(obj) // 返回原对象<br>Object(obj) === obj // true<br>var fn = function () {};<br>Object(fn) // 返回原函数<br>Object(fn) === fn // true</p>
+<p>利用这一点，可以写一个判断变量是否为对象的函数。</p>
+<p>function isObject(value) {<br>return value === Object(value);<br>}<br>isObject([]) // true<br>isObject(true) // false</p>
+</li>
+</ul>
+<h4 id="Object对象的静态方法"><a href="#Object对象的静态方法" class="headerlink" title="Object对象的静态方法"></a>Object对象的静态方法</h4><ul>
+<li><p>是指部署在Object对象自身的方法</p>
+</li>
+<li><p><code>Object.keys</code>方法和<code>Object.getOwnPropertyNames</code>方法很相似，一般用来遍历对象的属性。它们的参数都是一个对象，都返回一个数组，该数组的成员都是对象自身的（而不是继承的）所有属性名。它们的区别在于，<code>Object.keys</code>方法只返回可枚举的属性Object.getOwnPropertyNames`方法还返回不可枚举的属性名。</p>
+<p>var o = {<br>p1: 123,<br>p2: 456<br>};<br>Object.keys(o)<br>// [“p1”, “p2”]<br>Object.getOwnPropertyNames(o)<br>// [“p1”, “p2”]</p>
+<p>有不可枚举属性length</p>
+<p>var a = [“Hello”, “World”];<br>Object.keys(a)<br>// [“0”, “1”]<br>Object.getOwnPropertyNames(a)<br>// [“0”, “1”, “length”]</p>
+</li>
+<li><p>由于JavaScript没有提供计算对象属性个数的方法，所以可以用这两个方法代替。</p>
+<p>Object.keys(o).length</p>
+<p>Object.getOwnPropertyNames(o).length</p>
+<p>一般情况下，几乎总是使用Object.keys方法遍历数组的属性</p>
+</li>
+</ul>
+<h4 id="对象属性模型的相关方法"><a href="#对象属性模型的相关方法" class="headerlink" title="对象属性模型的相关方法"></a>对象属性模型的相关方法</h4><ul>
+<li><code>Object.getOwnPropertyDescriptor()</code>：获取某个属性的<code>attributes</code>对象。</li>
+<li><code>Object.defineProperty()</code>：通过<code>attributes</code>对象，定义某个属性。</li>
+<li><code>Object.defineProperties()</code>：通过<code>attributes</code>对象，定义多个属性。</li>
+<li><code>Object.getOwnPropertyNames()</code>：返回直接定义在某个对象上面的全部属性的名称。</li>
+</ul>
+<h4 id="控制对象状态的方法"><a href="#控制对象状态的方法" class="headerlink" title="控制对象状态的方法"></a><strong>控制对象状态的方法</strong></h4><ul>
+<li><code>Object.preventExtensions()</code>：防止对象扩展。</li>
+<li><code>Object.isExtensible()</code>：判断对象是否可扩展。</li>
+<li><code>Object.seal()</code>：禁止对象配置。</li>
+<li><code>Object.isSealed()</code>：判断一个对象是否可配置。</li>
+<li><code>Object.freeze()</code>：冻结一个对象。</li>
+<li><code>Object.isFrozen()</code>：判断一个对象是否被冻结。</li>
+</ul>
+<h4 id="原型链相关方法"><a href="#原型链相关方法" class="headerlink" title="原型链相关方法"></a><strong>原型链相关方法</strong></h4><ul>
+<li><code>Object.create()</code>：该方法可以指定原型对象和属性，返回一个新的对象。</li>
+<li><code>Object.getPrototypeOf()</code>：获取对象的<code>Prototype</code>对象。</li>
+</ul>
+<h4 id="Object对象都有的六大实例方法"><a href="#Object对象都有的六大实例方法" class="headerlink" title="Object对象都有的六大实例方法"></a>Object对象都有的六大实例方法</h4><ul>
+<li><p>valueOf（）：返回当前对象对应的值</p>
+<ul>
+<li><p><code>valueOf</code>方法的作用是返回一个对象的“值”，默认情况下返回对象本身。</p>
+<p>var o = new Object();<br>o.valueOf() === o // true</p>
+</li>
+<li><p>valueOf`方法的主要用途是，JavaScript自动类型转换时会默认调用这个方法</p>
+<p>var o = new Object();<br>o.valueOf = function (){<br>return 2;<br>};<br>1 + o // 3</p>
+</li>
+</ul>
+</li>
+<li><p>toString（）：返回当前对象对应的字符串形式</p>
+<ul>
+<li><p><code>toString</code>方法的作用是返回一个对象的字符串形式，默认情况下返回类型字符串。</p>
+<p>var o1 = new Object();<br>o1.toString() // “[object Object]”<br>var o2 = {a:1};<br>o2.toString() // “[object Object]”</p>
+</li>
+<li><p>自动类型转换时</p>
+<p>var o = new Object();<br>o.toString = function () {<br>return ‘hello’;<br>};<br>o + ‘ ‘ + ‘world’ // “hello world”</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>[1, 2, 3].toString() // &quot;1,2,3&quot;
+&apos;123&apos;.toString() // &quot;123&quot;
+(function () {
+return 123;
+}).toString()
+// &quot;function () {
+//   return 123;
+// }&quot;
+(new Date()).toString()
+// &quot;Tue May 10 2016 09:11:31 GMT+0800 (CST)&quot;</code></pre><ul>
+<li><p>实例对象可能会自定义<code>toString</code>方法，覆盖掉<code>Object.prototype.toString</code>方法。通过函数的<code>call</code>方法，可以在任意值上调用<code>Object.prototype.toString</code>方法，帮助我们判断这个值的类型。</p>
+<p>Object.prototype.toString.call(value)</p>
+<p>不同数据类型的<code>Object.prototype.toString</code>方法返回值如下。</p>
+<ul>
+<li>数值：返回<code>[object Number]</code>。</li>
+<li>字符串：返回<code>[object String]</code>。</li>
+<li>布尔值：返回<code>[object Boolean]</code>。</li>
+<li>undefined：返回<code>[object Undefined]</code>。</li>
+<li>null：返回<code>[object Null]</code>。</li>
+<li>数组：返回<code>[object Array]</code>。</li>
+<li>arguments对象：返回<code>[object Arguments]</code>。</li>
+<li>函数：返回<code>[object Function]</code>。</li>
+<li>Error对象：返回<code>[object Error]</code>。</li>
+<li>Date对象：返回<code>[object Date]</code>。</li>
+<li>RegExp对象：返回<code>[object RegExp]</code>。</li>
+<li>其他对象：返回<code>[object Object]</code>。</li>
+</ul>
+</li>
+<li><p>也就是说，<code>Object.prototype.toString</code>可以得到一个实例对象的构造函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(2) // &quot;[object Number]&quot;</span><br><span class="line">Object.prototype.toString.call(&apos;&apos;) // &quot;[object String]&quot;</span><br><span class="line">Object.prototype.toString.call(true) // &quot;[object Boolean]&quot;</span><br><span class="line">Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call(null) // &quot;[object Null]&quot;</span><br><span class="line">Object.prototype.toString.call(Math) // &quot;[object Math]&quot;</span><br><span class="line">Object.prototype.toString.call(&#123;&#125;) // &quot;[object Object]&quot;</span><br><span class="line">Object.prototype.toString.call([]) // &quot;[object Array]&quot;</span><br></pre></td></tr></table></figure>
+
+<p>利用这个特性，可以写出一个比<code>typeof</code>运算符更准确的类型判断函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var type = function (o)&#123;</span><br><span class="line">  var s = Object.prototype.toString.call(o);</span><br><span class="line">  return s.match(/\[object (.*?)\]/)[1].toLowerCase();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">type(&#123;&#125;); // &quot;object&quot;</span><br><span class="line">type([]); // &quot;array&quot;</span><br><span class="line">type(5); // &quot;number&quot;</span><br><span class="line">type(null); // &quot;null&quot;</span><br><span class="line">type(); // &quot;undefined&quot;</span><br><span class="line">type(/abcd/); // &quot;regex&quot;</span><br><span class="line">type(new Date()); // &quot;date&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在上面这个<code>type</code>函数的基础上，还可以加上专门判断某种类型数据的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[&apos;Null&apos;,</span><br><span class="line"> &apos;Undefined&apos;,</span><br><span class="line"> &apos;Object&apos;,</span><br><span class="line"> &apos;Array&apos;,</span><br><span class="line"> &apos;String&apos;,</span><br><span class="line"> &apos;Number&apos;,</span><br><span class="line"> &apos;Boolean&apos;,</span><br><span class="line"> &apos;Function&apos;,</span><br><span class="line"> &apos;RegExp&apos;,</span><br><span class="line"> &apos;NaN&apos;,</span><br><span class="line"> &apos;Infinite&apos;</span><br><span class="line">].forEach(function (t) &#123;</span><br><span class="line">  type[&apos;is&apos; + t] = function (o) &#123;</span><br><span class="line">    return type(o) === t.toLowerCase();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">type.isObject(&#123;&#125;) // true</span><br><span class="line">type.isNumber(NaN) // true</span><br><span class="line">type.isRegExp(/abc/) // true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<ul>
+<li><p>toLocaleString（）：返回当前对象对应的本地字符串形式。</p>
+</li>
+<li><p>hasOwnProperty（）：判断某个属性是否为当前对象自身的属性值还是继承自原型对象的属性</p>
+</li>
+<li><p>isPrototypeOf（）：判断当前对象是否为另一个对象的原型</p>
+</li>
+<li><p>propertyIsEnumerable（）：判断某个属性是否可枚举</p>
+</li>
+</ul>
+<h4 id="Array对象"><a href="#Array对象" class="headerlink" title="Array对象"></a>Array对象</h4><ul>
+<li><p><code>Array</code>是JavaScript的内置对象，同时也是一个构造函数，可以用它生成新的数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = new Array(2);</span><br><span class="line">arr.length // 2</span><br><span class="line">arr // [ undefined x 2 ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Array</code>构造函数有一个很大的问题，就是不同的参数，会导致它的行为不一致。`因此，不建议使用它生成新数组，直接使用数组字面量是更好的做法。</p>
+<p>// 无参数时，返回一个空数组<br>new Array() // []<br>// 单个正整数参数，表示返回的新数组的长度<br>new Array(1) // [ undefined ]<br>new Array(2) // [ undefined x 2 ]<br>// 非正整数的数值作为参数，会报错<br>new Array(3.2) // RangeError: Invalid array length<br>new Array(-3) // RangeError: Invalid array length<br>// 单个非正整数参数（比如字符串、布尔值、对象等），<br>// 则该参数是返回的新数组的成员<br>new Array(‘abc’) // [‘abc’]<br>new Array([1]) // [Array[1]]<br>// 多参数时，所有参数都是返回的新数组的成员<br>new Array(1, 2) // [1, 2]<br>new Array(‘a’, ‘b’, ‘c’) // [‘a’, ‘b’, ‘c’]</p>
+</li>
+<li><p>注意，如果参数是一个正整数，返回数组的成员都是空位。虽然读取的时候返回<code>undefined</code>，但实际上该位置没有任何值。虽然可以取到<code>length</code>属性，但是取不到键名。</p>
+<p>var arr = new Array(3);<br>arr.length // 3<br>arr[0] // undefined<br>arr[1] // undefined<br>arr[2] // undefined<br>0 in arr // false<br>1 in arr // false<br>2 in arr // false</p>
+</li>
+<li><p>Array.isArray():判断一个值是否为数组，弥补typeof运算符的不足</p>
+</li>
+</ul>
+<h6 id="1-Array实例的方法"><a href="#1-Array实例的方法" class="headerlink" title="1.Array实例的方法"></a>1.Array实例的方法</h6><ul>
+<li><p>valueOf（）方法返回数组本身</p>
+<p>var a = [1, 2, 3];<br>a.valueOf() // [1, 2, 3]</p>
+</li>
+<li><p>toString（）方法返回数组的字符串形式</p>
+<p>var a = [1, 2, 3];<br>a.toString() // “1,2,3”<br>var a = [1, 2, 3, [4, 5, 6]];<br>a.toString() // “1,2,3,4,5,6”</p>
+</li>
+<li><p>push（）方法用于在数组的末端添加一个或多个元素，并返回添加新元素后的数组长度。注意，该方法会改变原数组。</p>
+<p>var a = [];<br>a.push(1) // 1<br>a.push(‘a’) // 2<br>a.push(true, {}) // 4<br>a // [1, ‘a’, true, {}]</p>
+</li>
+<li><p>合并两个数组</p>
+<p>var a = [1, 2, 3];<br>var b = [4, 5, 6];<br>Array.prototype.push.apply(a, b)<br>// 或者<br>a.push.apply(a, b)<br>// 上面两种写法等同于<br>a.push(4, 5, 6)<br>a // [1, 2, 3, 4, 5, 6]</p>
+</li>
+<li><p>push方法还可用于向对象添加元素，添加后的对象变成类似数组的对象，即新加入元素的键对应数组的索引，并且对象有一个length属性,其中的length属性是指加入键名的个数</p>
+<p>var  a= {a:1};</p>
+<p>[].push.call(a,2); </p>
+<p>a  //{a:1 ,0:2 ,  length :1}</p>
+<p>[].push.call(a,[3]);</p>
+<p>a     // {a:1,0:2,1:[3],length:2};</p>
+</li>
+<li><p>pop（）方法用于删除数组的最后一个元素，并返回该元素。该方法会改变原数组</p>
+<p>var  arr=[‘a’,’b’,’c’];</p>
+<p>a.pop()  //‘c’</p>
+<p>a  //[‘a’,’b’]</p>
+</li>
+<li><p>对空数组使用pop方法，不是犯错，而是返回undefined</p>
+<p>[ ].pop()   //undefined</p>
+</li>
+<li><p>push和pop结合使用就构成后进先出的栈结构</p>
+</li>
+<li><p>join（）方法以参数作为分隔符，将所有数组组成一个字符串返回。如果不提供参数，默认用逗号分隔</p>
+<p>var   str=”abcdefgh”;</p>
+<p>var  arr=str.split(‘’);    //[“a”, “b”, “c”, “d”, “e”, “f”, “g”, “h”]</p>
+<p>arr.join(‘’);   //“abcdefgh”</p>
+<p>arr.join(‘ ‘);     //a b c d e f g h’;</p>
+</li>
+<li><p>如果数组成员是undefined或null或空位，会被转成空字符串</p>
+<p>[undefined,null].join(‘#’)      //‘#’</p>
+<p>[‘a’, ,’b’].join(‘-‘)    //‘a- -b’</p>
+</li>
+<li><p>这个方法也可以用于字符串，通过call方法</p>
+<p>Array.prototype.join.call(‘hello’,’-‘)       //“h-e-l-l-o”</p>
+</li>
+<li><p>join方法也可以用于类似数组的对象</p>
+<p>var  obj={0:’a’,1:’b’,length:2};</p>
+<p>Array.prototype.join.call(obj,’-‘)   //‘a-b’</p>
+</li>
+<li><p>concat()用于将多个数组合并。它将新数组的成员添加到原数组的尾部，然后返回一个新数组，原数组不变</p>
+<p>[‘hello’].concat([‘world’], [‘!’])<br>// [“hello”, “world”, “!”]</p>
+</li>
+<li><p>concat方法如果不提供参数，<code>concat</code>方法返回当前数组的一个浅拷贝。所谓“浅拷贝”，指的是如果数组成员包括复合类型的值（比如对象），则新数组拷贝的是该值的引用（你改我也会改）。</p>
+<p>var obj = { a:1 };<br>var oldArray = [obj];<br>var newArray = oldArray.concat();<br>obj.a = 2;<br>newArray[0].a // 2</p>
+</li>
+<li><p>concat方法也可以用于将对象合并为数组，但是必须借助call方法</p>
+<p>[].concat.call({a: 1}, {b: 2})<br>// [{ a: 1 }, { b: 2 }]<br>[].concat.call({a: 1}, [2])<br>// [{a: 1}, 2]<br>[2].concat({a: 1})<br>// [2, {a: 1}]</p>
+</li>
+<li><p>shift用于删除数组的第一个元素，并返回该元素。注意，该方法会改变原数组</p>
+<p>var   a=[‘a’,’b’,’c’];</p>
+<p>a.shift();</p>
+<p>a    //[‘b’,’c’]</p>
+</li>
+<li><p><code>shift</code>方法可以遍历并清空一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var list = [1, 2, 3, 4, 5, 6];</span><br><span class="line">var item;</span><br><span class="line"></span><br><span class="line">while (item = list.shift()) &#123;</span><br><span class="line">  console.log(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">list // []</span><br></pre></td></tr></table></figure>
+
+<p><code>push</code>和<code>shift</code>结合使用，就构成了“先进先出”的队列结构（queue）。</p>
+</li>
+<li><p><code>unshift</code>方法用于在数组的第一个位置添加元素，并返回添加新元素后的数组长度。注意，该方法会改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];</span><br><span class="line"></span><br><span class="line">a.unshift(&apos;x&apos;); // 4</span><br><span class="line">a // [&apos;x&apos;, &apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span><br></pre></td></tr></table></figure>
+
+<p><code>unshift</code>方法可以在数组头部添加多个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [ &apos;c&apos;, &apos;d&apos; ];</span><br><span class="line">arr.unshift(&apos;a&apos;, &apos;b&apos;) // 4</span><br><span class="line">arr // [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos; ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>reverse()方法用于颠倒数组中的元素的顺序，返回改变后的数组。注意，会改变原数组</p>
+<p>var a = [‘a’, ‘b’, ‘c’];<br>a.reverse() // [“c”, “b”, “a”]<br>a // [“c”, “b”, “a”]</p>
+</li>
+<li><p>slice方法用于提取原数组的一部分，返回一个新数组，原数组不变。它的第一个参数为起始位置（从零开始），第二个参数为1终止位置（但不包括该元素本身）。若省略第二个参数，则一直返回到原数组最后一个成员，相当于原数组的拷贝。</p>
+<p>a.slice(0) // [“a”, “b”, “c”]<br>a.slice(1) // [“b”, “c”]<br>a.slice(1, 2) // [“b”]<br>a.slice(2, 6) // [“c”]<br>a.slice() // [“a”, “b”, “c”]</p>
+</li>
+<li><p>slice方法的参数是负数时表示倒数计算的位置。</p>
+<p>var a = [‘a’, ‘b’, ‘c’];<br>a.slice(-2) // [“b”, “c”]<br>a.slice(-2, -1) // [“b”]</p>
+</li>
+<li><p>如果参数值大于数组成员的个数，或者第二个参数小于第一个参数，则返回空数组。</p>
+<p>var a = [‘a’, ‘b’, ‘c’];<br>a.slice(4) // []<br>a.slice(2, 1) // []</p>
+</li>
+<li><p><code>slice</code>方法的一个重要应用，是将类似数组的对象转为真正的数组。</p>
+<p>Array.prototype.slice.call({ 0: ‘a’, 1: ‘b’, length: 2 })<br>// [‘a’, ‘b’]<br>Array.prototype.slice.call(document.querySelectorAll(“div”));<br>Array.prototype.slice.call(arguments);</p>
+</li>
+<li><p><code>splice</code>方法用于删除原数组的一部分成员，并可以在被删除的位置添加入新的数组成员，返回值是被删除的元素。注意，该方法会改变原数组。</p>
+<p><code>splice</code>的第一个参数是删除的起始位置，第二个参数是被删除的元素个数。如果后面还有更多的参数，则表示这些就是要被插入数组的新元素。</p>
+<p>// 格式<br>arr.splice(index, count_to_remove, addElement1, addElement2, …);<br>// 用法<br>var a = [‘a’, ‘b’, ‘c’, ‘d’, ‘e’, ‘f’];<br>a.splice(4, 2) // [“e”, “f”]<br>a // [“a”, “b”, “c”, “d”]</p>
+</li>
+<li><p>如果只提供第一个参数，等同于将原数组在指定位置拆分成两个数组。</p>
+<p>var a = [1, 2, 3, 4];<br>a.splice(2) // [3, 4]<br>a // [1, 2]</p>
+</li>
+<li><p><code>sort</code>方法对数组成员进行排序，默认是按照字典顺序排序。排序后，原数组将被改变。</p>
+</li>
+<li><p>如果想让<code>sort</code>方法按照自定义方式排序，可以传入一个函数作为参数，表示按照自定义方法进行排序。该函数本身又接受两个参数，表示进行比较的两个元素。如果返回值大于<code>0</code>，表示第一个元素排在第二个元素后面；其他情况下，都是第一个元素排在第二个元素前面。</p>
+<p>[10111, 1101, 111].sort(function (a, b) {<br>return a - b;<br>})<br>// [111, 1101, 10111]<br>[<br>{ name: “张三”, age: 30 },<br>{ name: “李四”, age: 24 },<br>{ name: “王五”, age: 28  }<br>].sort(function (o1, o2) {<br>return o1.age - o2.age;<br>})<br>// [<br>//   { name: “李四”, age: 24 },<br>//   { name: “王五”, age: 28  },<br>//   { name: “张三”, age: 30 }<br>// ]</p>
+</li>
+<li><p><code>map</code>方法对数组的所有成员依次调用一个函数，根据函数结果返回一个新数组。<code>map</code>方法接受一个函数作为参数。该函数调用时，<code>map</code>方法会将其传入三个参数，分别是当前成员、当前位置和数组本身。</p>
+<p>var numbers = [1, 2, 3];<br>numbers.map(function (n) {<br>return n + 1;<br>});<br>// [2, 3, 4]</p>
+<p>numbers<br>// [1, 2, 3]</p>
+<p>[1, 2, 3].map(function(elem, index, arr) {<br>return elem * index;<br>});<br>// [0, 2, 6]</p>
+<p><code>map</code>方法不仅可以用于数组，还可以用于字符串，用来遍历字符串的每个字符。但是，不能直接使用，而要通过函数的<code>call</code>方法间接使用，或者先将字符串转为数组，然后使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> upper = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x.toUpperCase();</span><br><span class="line">  &#125;;</span><br><span class="line">  [].map.call(<span class="string">'abc'</span>, upper)</span><br><span class="line">  <span class="comment">// [ 'A', 'B', 'C' ]</span></span><br><span class="line">  <span class="comment">// 或者</span></span><br><span class="line">  <span class="string">'abc'</span>.split(<span class="string">''</span>).map(upper)</span><br><span class="line"><span class="comment">// [ 'A', 'B', 'C' ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/06/17/js精研/">js精研</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-06-17, 15:15:42</p>
+        <p><span>最后更新:</span>2020-06-17, 15:27:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/17/js精研/" title="js精研">http://yoursite.com/2020/06/17/js精研/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/17/js精研/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/06/17/js动画篇/">
+                    js动画篇
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/06/17/js基础/">
+                    js基础
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-基础补充"><span class="toc-number">1.</span> <span class="toc-text">一 . 基础补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-值，变量和类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.值，变量和类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-语句"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-对象"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.对象</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#删除一个不存在的属性，delete不报错，而且返回true。"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">删除一个不存在的属性，delete不报错，而且返回true。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">hasOwnPreperty（）方法：检测的是自身属性，无关继承来的属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">propertyIsEnumerable（）方法：只有检测到自有属性且这个属性的可枚举性为true时才返回true</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件机制"><span class="toc-number">2.</span> <span class="toc-text">事件机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事件捕获阶段（event-capuring）"><span class="toc-number">2.0.1.</span> <span class="toc-text">事件捕获阶段（event  capuring）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件冒泡（dubbed-bubbling）"><span class="toc-number">2.0.2.</span> <span class="toc-text">事件冒泡（dubbed bubbling）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件绑定的方法"><span class="toc-number">2.0.3.</span> <span class="toc-text">事件绑定的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#addEventlistener-event-listener-useCapture"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">addEventlistener(event,listener,useCapture)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#attachEvent（event，listener）"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">attachEvent（event，listener）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#事件冒泡例子"><span class="toc-number">2.0.3.0.3.</span> <span class="toc-text">事件冒泡例子</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#事件捕获例子"><span class="toc-number">2.0.3.0.4.</span> <span class="toc-text">事件捕获例子</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要求"><span class="toc-number">3.</span> <span class="toc-text">要求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#高质量代码"><span class="toc-number">3.0.1.</span> <span class="toc-text">高质量代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#提高性能"><span class="toc-number">3.0.2.</span> <span class="toc-text">提高性能</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#（类）数组循环获取值时缓存长度"><span class="toc-number">3.0.2.0.1.</span> <span class="toc-text">（类）数组循环获取值时缓存长度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#for循环遍历数组，for-in循环遍历类数组"><span class="toc-number">3.0.2.0.2.</span> <span class="toc-text">for循环遍历数组，for-in循环遍历类数组</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#遍历属性时使用hasOwnProperty（）方法过滤原型上的属性"><span class="toc-number">3.0.2.0.3.</span> <span class="toc-text">遍历属性时使用hasOwnProperty（）方法过滤原型上的属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#var的作用"><span class="toc-number">3.0.3.</span> <span class="toc-text">var的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#优点"><span class="toc-number">3.0.3.0.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#缺点"><span class="toc-number">3.0.3.0.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行层面"><span class="toc-number">3.0.4.</span> <span class="toc-text">执行层面</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码处理的两个阶段（预解析hoisting）"><span class="toc-number">3.0.4.0.1.</span> <span class="toc-text">代码处理的两个阶段（预解析hoisting）</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-JavaScript对象"><span class="toc-number">4.</span> <span class="toc-text">二 . JavaScript对象</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#日常用途"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">日常用途</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象公共属性"><span class="toc-number">4.0.1.</span> <span class="toc-text">对象公共属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-constructor属性"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">1.constructor属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-prototype属性"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">2.prototype属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-toString（-把对象转为字符串并返回结果"><span class="toc-number">4.0.1.3.</span> <span class="toc-text">3.toString（)把对象转为字符串并返回结果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-valueOf（）-返回对象的原始值"><span class="toc-number">4.0.1.4.</span> <span class="toc-text">4.valueOf（）  返回对象的原始值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-Object-getPrototypeOf"><span class="toc-number">4.0.1.5.</span> <span class="toc-text">5.Object.getPrototypeOf()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-Object-setPrototypeOf"><span class="toc-number">4.0.1.6.</span> <span class="toc-text">6.Object.setPrototypeOf()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-Object-create"><span class="toc-number">4.0.1.7.</span> <span class="toc-text">7.Object.create()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-Object-prototype-isPrototypeOf"><span class="toc-number">4.0.1.8.</span> <span class="toc-text">8.Object.prototype.isPrototypeOf()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-Object-prototype-proto"><span class="toc-number">4.0.1.9.</span> <span class="toc-text">9.Object.prototype.proto_</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-Object-getPropertyOfNames"><span class="toc-number">4.0.1.10.</span> <span class="toc-text">10.Object.getPropertyOfNames()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-Object-prototype-hasOwnProperty"><span class="toc-number">4.0.1.11.</span> <span class="toc-text">11.Object.prototype.hasOwnProperty()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Array数组对象"><span class="toc-number">4.1.</span> <span class="toc-text">1.Array数组对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-concat（）连接两个或多个数组"><span class="toc-number">4.1.0.1.</span> <span class="toc-text">1.concat（）连接两个或多个数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-every（-检查所有数组元素-返回boolear"><span class="toc-number">4.1.0.2.</span> <span class="toc-text">2.every（)检查所有数组元素,返回boolear</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-filter-创建所有符合条件元素的数组"><span class="toc-number">4.1.0.3.</span> <span class="toc-text">3.filter()创建所有符合条件元素的数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-indexOf（）返回指定字符串值首次出现的位置"><span class="toc-number">4.1.0.4.</span> <span class="toc-text">4.indexOf（）返回指定字符串值首次出现的位置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-join-把数组中的所有元素为一个字符串"><span class="toc-number">4.1.0.5.</span> <span class="toc-text">5.join()  把数组中的所有元素为一个字符串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-map（）通过指定函数处理原始数组，并返回处理后的数组"><span class="toc-number">4.1.0.6.</span> <span class="toc-text">6.map（）通过指定函数处理原始数组，并返回处理后的数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-pop-删除数组最后一个元素并返回处理后的数组"><span class="toc-number">4.1.0.7.</span> <span class="toc-text">7.pop()删除数组最后一个元素并返回处理后的数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-push-向数组的末尾添加一个或更多元素，并返回新的长度"><span class="toc-number">4.1.0.8.</span> <span class="toc-text">8.push()向数组的末尾添加一个或更多元素，并返回新的长度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-reverse-颠倒数组中元素的顺序"><span class="toc-number">4.1.0.9.</span> <span class="toc-text">9.reverse()颠倒数组中元素的顺序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-slice（）选取数组中的一部分，并返回一个新数组"><span class="toc-number">4.1.0.10.</span> <span class="toc-text">10.slice（）选取数组中的一部分，并返回一个新数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-some-检测数组元素中是否有元素符合指定条件"><span class="toc-number">4.1.0.11.</span> <span class="toc-text">11.some()检测数组元素中是否有元素符合指定条件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-sort-对数组的元素进行排序"><span class="toc-number">4.1.0.12.</span> <span class="toc-text">12.sort()对数组的元素进行排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-splice（）从数组中添加或删除，替换元素"><span class="toc-number">4.1.0.13.</span> <span class="toc-text">13.splice（）从数组中添加或删除，替换元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-toString（-把数组转为字符串并返回结果"><span class="toc-number">4.1.0.14.</span> <span class="toc-text">14.toString（)把数组转为字符串并返回结果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15-valueOf（）-返回数组对象的原始值"><span class="toc-number">4.1.0.15.</span> <span class="toc-text">15.valueOf（）  返回数组对象的原始值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Boolean对象"><span class="toc-number">4.1.1.</span> <span class="toc-text">2.Boolean对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Date对象"><span class="toc-number">4.1.2.</span> <span class="toc-text">3.Date对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Number对象"><span class="toc-number">4.1.3.</span> <span class="toc-text">4.Number对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-深入理解js"><span class="toc-number">5.</span> <span class="toc-text">三 . 深入理解js</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-最小全局变量（Minimizing-Globals）"><span class="toc-number">5.0.1.</span> <span class="toc-text">1.最小全局变量（Minimizing Globals）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#忘记var的副作用（Side-Effect-when-forgetting-var）"><span class="toc-number">5.0.1.0.1.</span> <span class="toc-text">忘记var的副作用（Side Effect when forgetting  var）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#访问全局对象-Access-to-the-Global-Object"><span class="toc-number">5.0.1.0.2.</span> <span class="toc-text">访问全局对象(Access to the Global Object)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#单var形式（Single-var-Pattern）"><span class="toc-number">5.0.1.0.3.</span> <span class="toc-text">单var形式（Single var Pattern）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#预解析：var散布的问题-Hoisting-A-Problem-with-Scattered-vars"><span class="toc-number">5.0.1.0.4.</span> <span class="toc-text">预解析：var散布的问题(Hoisting: A Problem with Scattered vars)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代码处理的两个阶段"><span class="toc-number">5.0.2.</span> <span class="toc-text">2.代码处理的两个阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-this-精讲"><span class="toc-number">6.</span> <span class="toc-text">四 . this 精讲</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#谁调用这个函数或方法，this关键字就指向谁"><span class="toc-number">6.0.1.</span> <span class="toc-text">谁调用这个函数或方法，this关键字就指向谁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-改变this指向的三大方法"><span class="toc-number">6.0.2.</span> <span class="toc-text">1.改变this指向的三大方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-call、apply、bind方法的共同点和区别："><span class="toc-number">6.0.2.0.1.</span> <span class="toc-text">1.call、apply、bind方法的共同点和区别：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-thisObj的取值有以下4种情况："><span class="toc-number">6.0.2.0.2.</span> <span class="toc-text">2.thisObj的取值有以下4种情况：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-实例"><span class="toc-number">6.0.2.0.3.</span> <span class="toc-text">3.实例</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-垃圾回收机制"><span class="toc-number">7.</span> <span class="toc-text">五 . 垃圾回收机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-枚举"><span class="toc-number">8.</span> <span class="toc-text">六. 枚举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ECMAScript原始值和引用值"><span class="toc-number">9.</span> <span class="toc-text">ECMAScript原始值和引用值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原始值"><span class="toc-number">9.0.1.</span> <span class="toc-text">1.原始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-引用值"><span class="toc-number">9.0.2.</span> <span class="toc-text">2.引用值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-对象-1"><span class="toc-number">9.0.3.</span> <span class="toc-text">3.对象</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-属性"><span class="toc-number">9.0.3.0.1.</span> <span class="toc-text">1.属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-方法"><span class="toc-number">9.0.3.0.2.</span> <span class="toc-text">2.方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-String对象"><span class="toc-number">9.0.4.</span> <span class="toc-text">4.String对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-整数"><span class="toc-number">9.0.5.</span> <span class="toc-text">5.整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-语句"><span class="toc-number">9.0.6.</span> <span class="toc-text">6.语句</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-有标签的语句"><span class="toc-number">9.0.6.0.1.</span> <span class="toc-text">1.有标签的语句</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-面向对象"><span class="toc-number">10.</span> <span class="toc-text">七. 面向对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-具备的四种能力"><span class="toc-number">10.0.1.</span> <span class="toc-text">1.具备的四种能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-对象的应用"><span class="toc-number">10.0.2.</span> <span class="toc-text">2.对象的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-对象废除"><span class="toc-number">10.0.3.</span> <span class="toc-text">3.对象废除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-绑定"><span class="toc-number">10.0.4.</span> <span class="toc-text">4.绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-作用域"><span class="toc-number">10.0.5.</span> <span class="toc-text">5.作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-使用动态原型方法类的属性和方法"><span class="toc-number">10.0.6.</span> <span class="toc-text">6.使用动态原型方法类的属性和方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-ECMAScript的字符串"><span class="toc-number">10.0.7.</span> <span class="toc-text">7.ECMAScript的字符串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八-继承机制实现"><span class="toc-number">11.</span> <span class="toc-text">八 . 继承机制实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-对象冒充"><span class="toc-number">11.0.1.</span> <span class="toc-text">1.对象冒充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用call（对象参数，形参1，2，"><span class="toc-number">11.0.2.</span> <span class="toc-text">2.使用call（对象参数，形参1，2，..)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-使用apply（对象参数，形参数组）"><span class="toc-number">11.0.3.</span> <span class="toc-text">3.使用apply（对象参数，形参数组）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九-object对象"><span class="toc-number">12.</span> <span class="toc-text">九.object对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object对象上面部署一个方法的两种做法。"><span class="toc-number">12.0.1.</span> <span class="toc-text">Object对象上面部署一个方法的两种做法。</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-部署在Object对象本身"><span class="toc-number">12.0.1.0.1.</span> <span class="toc-text">1.部署在Object对象本身</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-部署在Object-prototype对象"><span class="toc-number">12.0.1.0.2.</span> <span class="toc-text">2.部署在Object.prototype对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-方法"><span class="toc-number">12.0.2.</span> <span class="toc-text">Object()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Object对象的静态方法"><span class="toc-number">12.0.3.</span> <span class="toc-text">Object对象的静态方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象属性模型的相关方法"><span class="toc-number">12.0.4.</span> <span class="toc-text">对象属性模型的相关方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制对象状态的方法"><span class="toc-number">12.0.5.</span> <span class="toc-text">控制对象状态的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型链相关方法"><span class="toc-number">12.0.6.</span> <span class="toc-text">原型链相关方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Object对象都有的六大实例方法"><span class="toc-number">12.0.7.</span> <span class="toc-text">Object对象都有的六大实例方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array对象"><span class="toc-number">12.0.8.</span> <span class="toc-text">Array对象</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-Array实例的方法"><span class="toc-number">12.0.8.0.1.</span> <span class="toc-text">1.Array实例的方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"js精研　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/06/17/js动画篇/" title="上一篇: js动画篇">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/06/17/js基础/" title="下一篇: js基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/jquery/">jquery</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js动画篇/">js动画篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js精研/">js精研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js基础/">js基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/刷题笔记/">刷题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/前端cookie解读/">前端cookie解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/04/前端经验/">前端经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/linux学习/">linux学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/10/pandas之excel/">pandas之excel</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/爬虫/">爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/python的学习/">python的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

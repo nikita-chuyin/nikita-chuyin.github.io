@@ -268,6 +268,1097 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-http的学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/06/http的学习/" class="article-date">
+      <time datetime="2020-04-06T02:47:35.000Z" itemprop="datePublished">2020-04-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/http的学习/">http的学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="HTTP无状态协议"><a href="#HTTP无状态协议" class="headerlink" title="HTTP无状态协议"></a>HTTP无状态协议</h4><p>HTTP无状态协议，是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
+<p>客户端与服务器进行动态交互的Web应用程序出现之后，HTTP无状态的特性严重阻碍了这些应用程序的实现，毕竟交互是需要承前启后的，简单的购物车程序也要知道用户到底在之前选择了什么商品。于是，两种用于保持HTTP连接状态的技术就应运而生了，一个是<a href="https://baike.baidu.com/item/Cookie" target="_blank" rel="noopener">Cookie</a>，而另一个则是<a href="https://baike.baidu.com/item/Session" target="_blank" rel="noopener">Session</a>。HTTP本身是一个无状态的<a href="https://baike.baidu.com/item/连接协议" target="_blank" rel="noopener">连接协议</a>，为了支持客户端与服务器之间的交互，我们就需要通过不同的技术为交互存储状态，而这些不同的技术就是Cookie和Session了。</p>
+<p>Cookie是通过客户端保持状态的<a href="https://baike.baidu.com/item/解决/32786" target="_blank" rel="noopener">解决</a>方案。从定义上来说，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。让我们说得更具体一些：当用户使用浏览器访问一个支持<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>的网站的时候，用户会提供包括用户名在内的个人信息并且提交至服务器；接着，服务器在向客户端回传相应的<a href="https://baike.baidu.com/item/超文本" target="_blank" rel="noopener">超文本</a>的同时也会发回这些个人信息，当然这些信息并不是存放在HTTP响应体（Response Body）中的，而是存放于HTTP响应头（Response Header）；当客户端浏览器接收到来自服务器的响应之后，浏览器会将这些信息存放在一个统一的位置，对于<a href="https://baike.baidu.com/item/Windows操作系统/852149" target="_blank" rel="noopener">Windows操作系统</a>而言，我们可以从： [<a href="https://baike.baidu.com/item/系统盘" target="_blank" rel="noopener">系统盘</a>]:\Documents and Settings[用户名]\Cookies目录中找到存储的Cookie；自此，客户端再向服务器发送请求的时候，都会把相应的<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>再次发回至服务器。而这次，Cookie信息则存放在<a href="https://baike.baidu.com/item/HTTP请求头/6623287" target="_blank" rel="noopener">HTTP请求头</a>（Request Header）了。</p>
+<p>有了Cookie这样的技术实现，服务器在接收到来自客户端浏览器的请求之后，就能够通过分析存放于请求头的Cookie得到客户端特有的信息，从而动态生成与该客户端相对应的内容。通常，我们可以从很多网站的登录界面中看到“请记住我”这样的选项，如果你勾选了它之后再登录，那么在下一次访问该网站的时候就不需要进行重复而繁琐的登录动作了，而这个功能就是通过Cookie实现的。</p>
+<p>与Cookie相对的一个解决方案是Session，它是通过服务器来保持状态的。由于<a href="https://baike.baidu.com/item/Session/479100" target="_blank" rel="noopener">Session</a>这个词汇包含的语义很多，因此需要在这里明确一下 Session的含义。首先，我们通常都会把Session翻译成会话，因此我们可以把客户端浏览器与服务器之间一系列交互的动作称为一个  Session。从这个语义出发，我们会提到Session持续的时间，会提到在Session过程中进行了什么操作等等；其次，Session指的是服务器端为客户端所开辟的存储空间，在其中保存的信息就是用于保持状态。从这个语义出发，我们则会提到往Session中存放什么内容，如何根据键值从 Session中获取匹配的内容等。</p>
+<p>要使用Session，第一步当然是创建Session了。那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法，而在<a href="https://baike.baidu.com/item/Java/85979" target="_blank" rel="noopener">Java</a>中是通过调用HttpServletRequest的getSession方法（使用true作为参数）创建的。在创建了<a href="https://baike.baidu.com/item/Session/479100" target="_blank" rel="noopener">Session</a>的同时，服务器会为该Session生成唯一的Session id，而这个Session  id在随后的请求中会被用来重新获得已经创建的Session；在Session被创建之后，就可以调用Session相关的方法往Session中增加内容了，而这些内容只会保存在服务器中，发到客户端的只有Session id；当客户端再次发送请求的时候，会将这个Session id带上，服务器接受到请求之后就会依据Session  id找到相应的Session，从而再次使用之。正是这样一个过程，用户的状态也就得以保持了。</p>
+<p>综上所述，HTTP本身是一个无状态的<a href="https://baike.baidu.com/item/连接协议/7768217" target="_blank" rel="noopener">连接协议</a>，为了支持客户端与服务器之间的交互，我们就需要通过不同的技术为交互存储状态，而这些不同的技术就是<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>和Session了。</p>
+<h4 id="cookie与session区别"><a href="#cookie与session区别" class="headerlink" title="cookie与session区别"></a>cookie与session区别</h4><p>​    1. cookie数据存放在客户的浏览器上，session数据放在服务器上。<br>​    2. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗。考虑到安全应当使用session。<br>​    3. session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能<br>​       考虑到减轻服务器性能方面，应当使用COOKIE。<br>​    4. 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</p>
+<h4 id="cookie的优缺点"><a href="#cookie的优缺点" class="headerlink" title="cookie的优缺点"></a>cookie的优缺点</h4><h6 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h6><p>​        1. 通过良好的编程习惯，控制保存在cookie中的session对象的大小。<br>​        2. 通过加密和安全传输技术，减少cookie被破解的可能性。<br>​        3. 只在cookie中存放不敏感数据，即使被盗也不会有重大损失。<br>​        4. 控制cookie的生命周期，使之不会永远有效。偷盗者可能拿到一个过期的cookie。<br>​        5.解决无状态问题。</p>
+<h6 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h6><p>​        1. cookie数量和长度的限制。每个域名最多有20条cookie，每个cookie长度不超过4KB，否则会被截掉。<br>​        2. 安全性问题。如果cookie被人拦截，那人就可以获取session信息。即使加密也于事无补，因为拦截者并不需要知道cookie的信息，他只要原样转发cookie就可达到目的。<br>​        3. 有些状态不可能保存在客户端。如，为了防止重复提交表单，我们需要在服务器保存一个计数器。如果我们把这个计数器保存在客户端就起不到任何作用。</p>
+<h4 id="常用的HTTP方法"><a href="#常用的HTTP方法" class="headerlink" title="常用的HTTP方法"></a>常用的HTTP方法</h4><ul>
+<li>GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器</li>
+<li>POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。</li>
+<li>PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。</li>
+<li>HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。</li>
+<li>DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。</li>
+<li>OPTIONS：查询相应URI支持的HTTP方法。</li>
+</ul>
+<h4 id="URL和URI区别"><a href="#URL和URI区别" class="headerlink" title="URL和URI区别"></a>URL和URI区别</h4><p><strong>URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</strong></p>
+<ul>
+<li>Web上可用的每种资源如HTML文档、图像、视频片段、程序等都是一个来URI来定位的</li>
+<li>URI一般由三部组成：</li>
+<li>①访问资源的命名机制</li>
+<li>②存放资源的主机名</li>
+<li>③资源自身的名称，由路径表示，着重强调于资源。</li>
+</ul>
+<p><strong>URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</strong></p>
+<ul>
+<li>URL是Internet上用来描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上，特别是著名的Mosaic。</li>
+<li>采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。URL一般由三部组成：</li>
+<li>①协议(或称为服务方式)</li>
+<li>②存有该资源的主机IP地址(有时也包括端口号)</li>
+<li>③主机资源的具体地址。如目录和文件名等</li>
+</ul>
+<h4 id="HTTP请求报文与响应报文格式"><a href="#HTTP请求报文与响应报文格式" class="headerlink" title="HTTP请求报文与响应报文格式"></a>HTTP请求报文与响应报文格式</h4><h6 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h6><p><img src="https://img-blog.csdn.net/20180213114347309" alt="img"></p>
+<ul>
+<li>a、请求行：包含请求方法、URI、HTTP版本信息</li>
+<li>b、请求首部字段</li>
+<li>c、请求内容实体</li>
+<li>d、空行</li>
+</ul>
+<h6 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h6><h6 id><a href="#" class="headerlink" title></a><img src="https://img-blog.csdn.net/20180213114358760" alt="img"></h6><ul>
+<li>a、状态行：包含HTTP版本、状态码、状态码的原因短语</li>
+<li>b、响应首部字段</li>
+<li>c、响应内容实体</li>
+<li>d、空行</li>
+</ul>
+<h6 id="常见的首部"><a href="#常见的首部" class="headerlink" title="常见的首部"></a>常见的首部</h6><ul>
+<li><strong>通用首部字段（请求报文与响应报文都会使用的首部字段）</strong><ul>
+<li>Date：创建报文时间</li>
+<li>Connection：连接的管理</li>
+<li>Cache-Control：缓存的控制</li>
+<li>Transfer-Encoding：报文主体的传输编码方式</li>
+</ul>
+</li>
+<li><strong>请求首部字段（请求报文会使用的首部字段）</strong><ul>
+<li>Host：请求资源所在服务器</li>
+<li>Accept：可处理的媒体类型</li>
+<li>Accept-Charset：可接收的字符集</li>
+<li>Accept-Encoding：可接受的内容编码</li>
+<li>Accept-Language：可接受的自然语言</li>
+</ul>
+</li>
+<li><strong>响应首部字段（响应报文会使用的首部字段）</strong><ul>
+<li>Accept-Ranges：可接受的字节范围</li>
+<li>Location：令客户端重新定向到的URI</li>
+<li>Server：HTTP服务器的安装信息</li>
+</ul>
+</li>
+<li><strong>实体首部字段（请求报文与响应报文的的实体部分使用的首部字段）</strong><ul>
+<li>Allow：资源可支持的HTTP方法</li>
+<li>Content-Type：实体主类的类型</li>
+<li>Content-Encoding：实体主体适用的编码方式</li>
+<li>Content-Language：实体主体的自然语言</li>
+<li>Content-Length：实体主体的的字节数</li>
+<li>Content-Range：实体主体的位置范围，一般用于发出部分请求时使用</li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTPS工作原理"><a href="#HTTPS工作原理" class="headerlink" title="HTTPS工作原理"></a>HTTPS工作原理</h4><ul>
+<li>首先HTTP请求服务端生成证书，客户端对证书的有效期、合法性、域名是否与请求的域名一致、证书的公钥（RSA加密）等进行校验；</li>
+<li>客户端如果校验通过后，就根据证书的公钥的有效， 生成随机数，随机数使用公钥进行加密（RSA加密）；</li>
+<li>消息体产生的后，对它的摘要进行MD5（或者SHA1）算法加密，此时就得到了RSA签名；</li>
+<li>发送给服务端，此时只有服务端（RSA私钥）能解密。</li>
+<li>解密得到的随机数，再用AES加密，作为密钥（此时的密钥只有客户端和服务端知道）。</li>
+</ul>
+<h4 id="一次完整的HTTP请求所经历的7个步骤"><a href="#一次完整的HTTP请求所经历的7个步骤" class="headerlink" title="一次完整的HTTP请求所经历的7个步骤"></a>一次完整的HTTP请求所经历的7个步骤</h4><p>HTTP通信机制是在一次完整的HTTP通信过程中，Web浏览器与Web服务器之间将完成下列7个步骤：</p>
+<ul>
+<li>建立TCP连接</li>
+</ul>
+<p>在HTTP工作开始之前，Web浏览器首先要通过网络与Web服务器建立连接，该连接是通过TCP来完成的，该协议与IP协议共同构建 Internet，即著名的TCP/IP协议族，因此Internet又被称作是TCP/IP网络。<strong>HTTP是比TCP更高层次的应用层协议，根据规则， 只有低层协议建立之后才能进行更层协议的连接，因此，首先要建立TCP连接，一般TCP连接的端口号是80。</strong></p>
+<ul>
+<li>Web浏览器向Web服务器发送请求行</li>
+</ul>
+<p>一旦建立了TCP连接，<strong>Web浏览器就会向Web服务器发送请求命令</strong>。例如：GET /sample/hello.js HTTP/1.1。</p>
+<ul>
+<li>Web浏览器发送请求头<ul>
+<li>浏览器发送其请求命令之后，还要以头信息的形式向Web服务器发送一些别的信息，<strong>之后浏览器发送了一空白行来通知服务器</strong>，它已经结束了该头信息的发送。</li>
+</ul>
+</li>
+<li>Web服务器应答<ul>
+<li>客户机向服务器发出请求后，服务器会客户机回送应答， <strong>HTTP/1.1 200 OK ，应答的第一部分是协议的版本号和应答状态码。</strong></li>
+</ul>
+</li>
+<li>Web服务器发送应答头<ul>
+<li>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据及被请求的文档。</li>
+</ul>
+</li>
+<li>Web服务器向浏览器发送数据<ul>
+<li>Web服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此为结束，接着，<strong>它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据</strong>。</li>
+</ul>
+</li>
+<li>Web服务器关闭TCP连接<ul>
+<li>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br></pre></td></tr></table></figure>
+
+<p>TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</p>
+<p>建立TCP连接-&gt;发送请求行-&gt;发送请求头-&gt;（到达服务器）发送状态行-&gt;发送响应头-&gt;发送响应数据-&gt;断TCP连接</p>
+<h4 id="常见的HTTP相应状态码"><a href="#常见的HTTP相应状态码" class="headerlink" title="常见的HTTP相应状态码"></a>常见的HTTP相应状态码</h4><ul>
+<li>200：请求被正常处理</li>
+<li>204：请求被受理但没有资源可以返回</li>
+<li>206：客户端只是请求资源的一部分，服务器只对请求的部分资源执行GET方法，相应报文中通过Content-Range指定范围的资源。</li>
+<li>301：永久性重定向</li>
+<li>302：临时重定向</li>
+<li>303：与302状态码有相似功能，只是它希望客户端在请求一个URI的时候，能通过GET方法重定向到另一个URI上</li>
+<li>304：发送附带条件的请求时，条件不满足时返回，与重定向无关</li>
+<li>307：临时重定向，与302类似，只是强制要求使用POST方法</li>
+<li>400：请求报文语法有误，服务器无法识别</li>
+<li>401：请求需要认证</li>
+<li>403：请求的对应资源禁止被访问</li>
+<li>404：服务器无法找到对应资源</li>
+<li>500：服务器内部错误</li>
+<li>503：服务器正忙</li>
+</ul>
+<h4 id="HTTP1-1版本新特性"><a href="#HTTP1-1版本新特性" class="headerlink" title="HTTP1.1版本新特性"></a>HTTP1.1版本新特性</h4><ul>
+<li>a、<strong>默认持久连接节省通信量</strong>，只要客户端服务端任意一端没有明确提出断开TCP连接，就一直保持连接，可以发送多次HTTP请求</li>
+<li>b、<strong>管线化，客户端可以同时发出多个HTTP请求，而不用一个个等待响应</strong></li>
+<li>c、<strong>断点续传</strong><ul>
+<li><strong>实际上就是利用HTTP消息头使用分块传输编码，将实体主体分块传输。</strong></li>
+</ul>
+</li>
+</ul>
+<h6 id="HTTP优化方案"><a href="#HTTP优化方案" class="headerlink" title="HTTP优化方案"></a>HTTP优化方案</h6><ul>
+<li><strong>TCP复用：TCP连接复用是将多个客户端的HTTP请求复用到一个服务器端TCP连接上，而HTTP复用则是一个客户端的多个HTTP请求通过一个TCP连接进行处理。前者是负载均衡设备的独特功能；而后者是HTTP 1.1协议所支持的新功能，目前被大多数浏览器所支持。</strong></li>
+<li><strong>内容缓存：将经常用到的内容进行缓存起来，那么客户端就可以直接在内存中获取相应的数据了。</strong></li>
+<li><strong>压缩：将文本数据进行压缩，减少带宽</strong></li>
+<li><strong>SSL加速（SSL Acceleration）：使用SSL协议对HTTP协议进行加密，在通道内加密并加速</strong></li>
+<li><strong>TCP缓冲：通过采用TCP缓冲技术，可以提高服务器端响应时间和处理效率，减少由于通信链路问题给服务器造成的连接负担。</strong></li>
+</ul>
+<h4 id="Cache-control缓存控制"><a href="#Cache-control缓存控制" class="headerlink" title="Cache-control缓存控制"></a>Cache-control缓存控制</h4><p>网页的缓存是由HTTP消息头中的“Cache-control”来控制的，常见的取值有private、no-cache、max-age、must-revalidate等，默认为private。<br>其作用根据不同的重新浏览方式分为以下几种情况：<br>（1）  打开新窗口如果指定cache-control的值为private、no-cache、must-revalidate，那么打开新窗口访问时都会重新访问服务器。而如果指定了max-age值，那么在此值内的时间里就不会重新访问服务器，例如： Cache-control: max-age=5 表示当访问此网页后的5秒内再次访问不会去服务器。<br>（2） 在地址栏回车如果值为private或must-revalidate（和网上说的不一样），则只有第一次访问时会访问服务器，以后就不再访问。如果值为no-cache，那么每次都会访问。如果值为max-age，则在过期之前不会重复访问。<br>（3） 按后退按扭如果值为private、must-revalidate、max-age，则不会重访问，而如果为no-cache，则每次都重复访问。<br>（4） 按刷新按扭无论为何值，都会重复访问  当指定Cache-control值为“no-cache”时，访问此页面不会在Internet临时文章夹留下页面备份。另外，通过指定“Expires”值也会影响到缓存。例如，指定Expires值为一个早已过去的时间，那么访问此网时若重复在地址栏按回车，那么每次都会重复访问： Expires: Fri, 31 Dec 1999 16:00:00 GMT  在ASP中，可以通过Response对象的Expires、ExpiresAbsolute属性控制Expires值；通过Response对象的CacheControl属性控制Cache-control的值，例如： Response.ExpiresAbsolute = #2000-1-1# ‘  指定绝对的过期时间，这个时间用的是服务器当地时间，会被自动转换为GMT时间 Response.Expires = 20 ‘  指定相对的过期时间，以分钟为单位，表示从当前时间起过多少分钟过期。 Response.CacheControl = “no-cache”  Expires值是可以通过在Internet临时文件夹中查看临时文件的属性看到的。                                    </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-课程表制作" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/29/课程表制作/" class="article-date">
+      <time datetime="2020-03-29T00:09:28.000Z" itemprop="datePublished">2020-03-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/29/课程表制作/">课程表制作</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h5 id="课程表制作"><a href="#课程表制作" class="headerlink" title="课程表制作"></a>课程表制作</h5><p>使用微信小程序制作的课程表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//index.wxml文件</span><br><span class="line"></span><br><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;view class=&quot;top&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[&apos;一&apos;,&apos;二&apos;,&apos;三&apos;,&apos;四&apos;,&apos;五&apos;,&apos;六&apos;,&apos;日&apos;]&#125;&#125;&quot; class=&quot;top-text&quot;&gt;</span><br><span class="line">      周&#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br><span class="line">&lt;view style=&quot;display:flex;flex-direction:row;background:#D2E6B3&quot;&gt;</span><br><span class="line">  &lt;view style=&quot;color:#7cba23;&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot; class=&quot;left&quot;&gt;</span><br><span class="line">      &#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">  &lt;!-- &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view style=&quot;width:750rpx;margin-top:&#123;&#123;(index+1)*100&#125;&#125;rpx;  position: absolute;border-bottom:1rpx solid &#123;&#123;index==3?&apos;red&apos;:&apos;lightgray&apos;&#125;&#125;;&quot;&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt; --&gt;</span><br><span class="line">  &lt;view wx:for=&quot;&#123;&#123;wlist&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view class=&quot;flex-item kcb-item&quot; bindtap=&quot;showCardView&quot; data-statu=&quot;open&quot; data-index=&quot;&#123;&#123;index&#125;&#125;&quot; style=&quot;margin-left:&#123;&#123;(item.xqj-1)*100&#125;&#125;rpx;margin-top:&#123;&#123;(item.skjc-1)*100+10&#125;&#125;rpx;height:&#123;&#123;item.skcd*100-5&#125;&#125;rpx;background-color:&#123;&#123;colorArrays[index%9]&#125;&#125;&quot;&gt;</span><br><span class="line">      &lt;view class=&quot;smalltext&quot;&gt;&#123;&#123;item.kcmc&#125;&#125;&lt;/view&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>index.wxss</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">.top &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: row;</span><br><span class="line">  margin-left: 35rpx;</span><br><span class="line">  background-color: #d2e6b3;</span><br><span class="line">  color: #7cba23;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.top-text &#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 35rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  width: 35rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.flex-item &#123;</span><br><span class="line">  width: 95rpx;</span><br><span class="line">  height: 100px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.kcb-item &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.smalltext &#123;</span><br><span class="line">  font-size: 8pt;</span><br><span class="line">  color: #fff;</span><br><span class="line">  padding-left: 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.scroll &#123;</span><br><span class="line">  height: 1170rpx;</span><br><span class="line">  z-index: 101;</span><br><span class="line">  position: fixed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>index.js文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">//获取应用实例</span><br><span class="line">const app = getApp()</span><br><span class="line"></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    colorArrays: [&quot;#85B8CF&quot;, &quot;#C0C652&quot;, &quot;#D8AA5A&quot;, &quot;#FC9F9D&quot;, &quot;#0A9A84&quot;, &quot;#61BC69&quot;, &quot;#12AEF3&quot;, &quot;#E29AAD&quot;], </span><br><span class="line">    wlist: [</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 1, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 4, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 8, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 5, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 2, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 5, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 6, &quot;skjc&quot;: 3, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 7, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">    ],</span><br><span class="line">    motto: &apos;Hello World&apos;,</span><br><span class="line">    userInfo: &#123;&#125;,</span><br><span class="line">    hasUserInfo: false,</span><br><span class="line">    canIUse: wx.canIUse(&apos;button.open-type.getUserInfo&apos;)</span><br><span class="line">  &#125;,</span><br><span class="line">  //事件处理函数</span><br><span class="line">  bindViewTap: function() &#123;</span><br><span class="line">    wx.navigateTo(&#123;</span><br><span class="line">      url: &apos;../logs/logs&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad: function () &#123;</span><br><span class="line">    if (app.globalData.userInfo) &#123;</span><br><span class="line">      this.setData(&#123;</span><br><span class="line">        userInfo: app.globalData.userInfo,</span><br><span class="line">        hasUserInfo: true</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else if (this.data.canIUse)&#123;</span><br><span class="line">      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回</span><br><span class="line">      // 所以此处加入 callback 以防止这种情况</span><br><span class="line">      app.userInfoReadyCallback = res =&gt; &#123;</span><br><span class="line">        this.setData(&#123;</span><br><span class="line">          userInfo: res.userInfo,</span><br><span class="line">          hasUserInfo: true</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // 在没有 open-type=getUserInfo 版本的兼容处理</span><br><span class="line">      wx.getUserInfo(&#123;</span><br><span class="line">        success: res =&gt; &#123;</span><br><span class="line">          app.globalData.userInfo = res.userInfo</span><br><span class="line">          this.setData(&#123;</span><br><span class="line">            userInfo: res.userInfo,</span><br><span class="line">            hasUserInfo: true</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getUserInfo: function(e) &#123;</span><br><span class="line">    console.log(e)</span><br><span class="line">    app.globalData.userInfo = e.detail.userInfo</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      userInfo: e.detail.userInfo,</span><br><span class="line">      hasUserInfo: true</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C3.png" alt="3"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-CSS3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/26/CSS3/" class="article-date">
+      <time datetime="2020-03-26T03:48:03.000Z" itemprop="datePublished">2020-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/26/CSS3/">CSS3</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>CSS知识点</p>
+<h2 id="一-解决老的浏览器支持问题"><a href="#一-解决老的浏览器支持问题" class="headerlink" title="一 . 解决老的浏览器支持问题"></a>一 . 解决老的浏览器支持问题</h2><h5 id="1-加上相应的前缀即可"><a href="#1-加上相应的前缀即可" class="headerlink" title="1.加上相应的前缀即可"></a>1.加上相应的前缀即可</h5><table>
+<thead>
+<tr>
+<th>Chorme</th>
+<th>IE</th>
+<th>Firefox</th>
+<th>Safari</th>
+<th>Opera</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-webkit-</td>
+<td>-ms-</td>
+<td>-moz-</td>
+<td>-webkit-</td>
+<td>-o-或者-xv-</td>
+</tr>
+</tbody></table>
+<h4 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2.基本概念"></a>2.基本概念</h4><ul>
+<li>CSS3弹性盒子：<ul>
+<li>是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行排列，对齐和分配空白空间。</li>
+<li>弹性容器通过设置display属性为flex或inline-flex将其定义为弹性盒子，弹性容器内包含了一个或多个弹性子元素； 弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。</li>
+<li>弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-选择器"><a href="#3-选择器" class="headerlink" title="3.选择器"></a>3.选择器</h4><table>
+<thead>
+<tr>
+<th>.intro</th>
+<th>选择所有class=”intro”的元素</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-id.html" target="_blank" rel="noopener">#<em>id</em></a></td>
+<td>#firstname</td>
+<td>选择所有id=”firstname”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-all.html" target="_blank" rel="noopener">*</a></td>
+<td>*</td>
+<td>选择所有元素</td>
+</tr>
+<tr>
+<td><em>element</em></td>
+<td>p</td>
+<td>选择所有p元素</td>
+</tr>
+<tr>
+<td><em>element,element</em></td>
+<td>div,p</td>
+<td>选择所有元素和元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-element.html" target="_blank" rel="noopener"><em>element element</em></a></td>
+<td>div p</td>
+<td>选择元素内的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-gt.html" target="_blank" rel="noopener"><em>element</em>&gt;<em>element</em></a></td>
+<td>div&gt;p</td>
+<td>选择所有父级是div元素的p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-element-pluss.html" target="_blank" rel="noopener"><em>element</em>+<em>element</em></a></td>
+<td>div+p</td>
+<td>选择所有紧接着元素之后的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute.html" target="_blank" rel="noopener">[<em>attribute</em>]</a></td>
+<td>[target]</td>
+<td>选择所有带有target属性元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value.html" target="_blank" rel="noopener">[<em>attribute</em>=<em>value</em>]</a></td>
+<td>[target=-blank]</td>
+<td>选择所有使用target=”-blank”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-contains.html" target="_blank" rel="noopener">[<em>attribute</em>~=<em>value</em>]</a></td>
+<td>[title~=flower]</td>
+<td>选择标题属性包含单词”flower”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-lang.html" target="_blank" rel="noopener">[<em>attribute</em>|=<em>language</em>]</a></td>
+<td>[lang|=en]</td>
+<td>选择一个lang属性的起始值=”EN”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-link.html" target="_blank" rel="noopener">:link</a></td>
+<td>a:link</td>
+<td>选择所有未访问链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-visited.html" target="_blank" rel="noopener">:visited</a></td>
+<td>a:visited</td>
+<td>选择所有访问过的链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-active.html" target="_blank" rel="noopener">:active</a></td>
+<td>a:active</td>
+<td>选择活动链接</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-hover.html" target="_blank" rel="noopener">:hover</a></td>
+<td>a:hover</td>
+<td>选择鼠标在链接上面时</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-focus.html" target="_blank" rel="noopener">:focus</a></td>
+<td>input:focus</td>
+<td>选择具有焦点的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstletter.html" target="_blank" rel="noopener">:first-letter</a></td>
+<td>p:first-letter</td>
+<td>选择每一个元素的第一个字母</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstline.html" target="_blank" rel="noopener">:first-line</a></td>
+<td>p:first-line</td>
+<td>选择每一个元素的第一行</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-firstchild.html" target="_blank" rel="noopener">:first-child</a></td>
+<td>p:first-child</td>
+<td>指定只有当元素是其父级的第一个子级的样式。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-before.html" target="_blank" rel="noopener">:before</a></td>
+<td>p:before</td>
+<td>在每个元素之前插入内容</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-after.html" target="_blank" rel="noopener">:after</a></td>
+<td>p:after</td>
+<td>在每个元素之后插入内容</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-lang.html" target="_blank" rel="noopener">:lang(<em>language</em>)</a></td>
+<td>p:lang(it)</td>
+<td>选择一个lang属性的起始值=”it”的所有元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-gen-sibling.html" target="_blank" rel="noopener"><em>element1</em>~<em>element2</em></a></td>
+<td>p~ul</td>
+<td>选择p元素之后的每一个ul元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-begin.html" target="_blank" rel="noopener">[<em>attribute</em>^=<em>value</em>]</a></td>
+<td>a[src^=”https”]</td>
+<td>选择每一个src属性的值以”https”开头的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-end.html" target="_blank" rel="noopener">[<em>attribute</em>$=<em>value</em>]</a></td>
+<td>a[src$=”.pdf”]</td>
+<td>选择每一个src属性的值以”.pdf”结尾的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-attr-contain.html" target="_blank" rel="noopener">[<em>attribute*</em>=<em>value</em>]</a></td>
+<td>a[src*=”44lan”]</td>
+<td>选择每一个src属性的值包含子字符串”44lan”的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-first-of-type.html" target="_blank" rel="noopener">:first-of-type</a></td>
+<td>p:first-of-type</td>
+<td>选择每个p元素是其父级的第一个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-last-of-type.html" target="_blank" rel="noopener">:last-of-type</a></td>
+<td>p:last-of-type</td>
+<td>选择每个p元素是其父级的最后一个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-only-of-type.html" target="_blank" rel="noopener">:only-of-type</a></td>
+<td>p:only-of-type</td>
+<td>选择每个p元素是其父级的唯一p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-only-child.html" target="_blank" rel="noopener">:only-child</a></td>
+<td>p:only-child</td>
+<td>选择每个p元素是其父级的唯一子元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-child.html" target="_blank" rel="noopener">:nth-child(<em>n</em>)</a></td>
+<td>p:nth-child(2)</td>
+<td>选择每个p元素是其父级的第二个子元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-child.html" target="_blank" rel="noopener">:nth-last-child(<em>n</em>)</a></td>
+<td>p:nth-last-child(2)</td>
+<td>选择每个p元素的是其父级的第二个子元素，从最后一个子项计数</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-of-type.html" target="_blank" rel="noopener">:nth-of-type(<em>n</em>)</a></td>
+<td>p:nth-of-type(2)</td>
+<td>选择每个p元素是其父级的第二个p元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-of-type.html" target="_blank" rel="noopener">:nth-last-of-type(<em>n</em>)</a></td>
+<td>p:nth-last-of-type(2)</td>
+<td>选择每个p元素的是其父级的第二个p元素，从最后一个子项计数</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-last-child.html" target="_blank" rel="noopener">:last-child</a></td>
+<td>p:last-child</td>
+<td>选择每个p元素是其父级的最后一个子级。</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-root.html" target="_blank" rel="noopener">:root</a></td>
+<td>:root</td>
+<td>选择文档的根元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-empty.html" target="_blank" rel="noopener">:empty</a></td>
+<td>p:empty</td>
+<td>选择每个没有任何子级的p元素（包括文本节点）</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-target.html" target="_blank" rel="noopener">:target</a></td>
+<td>#news:target</td>
+<td>选择当前活动的#news元素（包含该锚名称的点击的URL）</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-enabled.html" target="_blank" rel="noopener">:enabled</a></td>
+<td>input:enabled</td>
+<td>选择每一个已启用的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-disabled.html" target="_blank" rel="noopener">:disabled</a></td>
+<td>input:disabled</td>
+<td>选择每一个禁用的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-checked.html" target="_blank" rel="noopener">:checked</a></td>
+<td>input:checked</td>
+<td>选择每个选中的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-not.html" target="_blank" rel="noopener">:not(<em>selector</em>)</a></td>
+<td>:not(p)</td>
+<td>选择每个并非p元素的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-selection.html" target="_blank" rel="noopener">::selection</a></td>
+<td>::selection</td>
+<td>匹配元素中被用户选中或处于高亮状态的部分</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-out-of-range.html" target="_blank" rel="noopener">:out-of-range</a></td>
+<td>:out-of-range</td>
+<td>匹配值在指定区间之外的input元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-in-range.html" target="_blank" rel="noopener">:in-range</a></td>
+<td>:in-range</td>
+<td>匹配值在指定区间之内的input元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-read-write.html" target="_blank" rel="noopener">:read-write</a></td>
+<td>:read-write</td>
+<td>用于匹配可读及可写的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-read-only.html" target="_blank" rel="noopener">:read-only</a></td>
+<td>:read-only</td>
+<td>用于匹配设置 “readonly”（只读） 属性的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-optional.html" target="_blank" rel="noopener">:optional</a></td>
+<td>:optional</td>
+<td>用于匹配可选的输入元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-required.html" target="_blank" rel="noopener">:required</a></td>
+<td>:required</td>
+<td>用于匹配设置了 “required” 属性的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-valid.html" target="_blank" rel="noopener">:valid</a></td>
+<td>:valid</td>
+<td>用于匹配输入值为合法的元素</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/cssref/sel-invalid.html" target="_blank" rel="noopener">:invalid</a></td>
+<td>:invalid</td>
+<td>用于匹配输入值为非法的元素</td>
+</tr>
+</tbody></table>
+<h2 id="二-多重样式优先级深入概念"><a href="#二-多重样式优先级深入概念" class="headerlink" title="二 . 多重样式优先级深入概念"></a>二 . 多重样式优先级深入概念</h2><p>优先级是浏览器是通过判断哪些属性值与元素最相关以决定并应用到该元素上的。优先级仅由选择器组成的匹配规则决定的。</p>
+<p>优先级就是分配给指定的CSS声明的一个权重，它由匹配的选择器中的每一种选择器类型的数值决定。</p>
+<h3 id="优先级顺序"><a href="#优先级顺序" class="headerlink" title="优先级顺序"></a>优先级顺序</h3><p>下列是一份优先级逐级增加的选择器列表：</p>
+<ul>
+<li>通用选择器（*）</li>
+<li>元素(类型)选择器</li>
+<li>类选择器</li>
+<li>属性选择器</li>
+<li>伪类</li>
+<li>ID 选择器</li>
+<li>内联样式</li>
+</ul>
+<h3 id="important-规则例外"><a href="#important-规则例外" class="headerlink" title="!important 规则例外"></a>!important 规则例外</h3><p>当 !important 规则被应用在一个样式声明中时,该样式声明会覆盖CSS中任何其他的声明, 无论它处在声明列表中的哪里. 尽管如此, !important规则还是与优先级毫无关系.使用 !important 不是一个好习惯，因为它改变了你样式表本来的级联规则，从而使其难以调试。</p>
+<p>一些经验法则：</p>
+<ul>
+<li><strong>Always</strong> 要优化考虑使用样式规则的优先级来解决问题而不是 <code>!important</code></li>
+<li><strong>Only</strong> 只在需要覆盖全站或外部 css（例如引用的 ExtJs 或者 YUI ）的特定页面中使用 <code>!important</code></li>
+<li><strong>Never</strong> 永远不要在全站范围的 css 上使用<code>!important</code></li>
+<li><strong>Never</strong> 永远不要在你的插件中使用 <code>!important</code></li>
+<li><ul>
+<li>内联样式表的权值最高 1000；</li>
+<li>ID 选择器的权值为 100</li>
+<li>Class 类选择器的权值为 10</li>
+<li>HTML 标签选择器的权值为 1</li>
+</ul>
+</li>
+<li>id属性不要以数字开头，数字开头的id在Mozilla/Firefox浏览器不起作用</li>
+<li>创建样式表<ul>
+<li>外部样式表</li>
+<li>内部样式表</li>
+<li>内联样式表</li>
+<li>多重样式表</li>
+</ul>
+</li>
+</ul>
+<h3 id="CSS-优先级法则："><a href="#CSS-优先级法则：" class="headerlink" title="CSS 优先级法则："></a>CSS 优先级法则：</h3><ul>
+<li>A 选择器都有一个权值，权值越大越优先；</li>
+<li>B 当权值相等时，后出现的样式表设置要优于先出现的样式表设置；</li>
+<li>C 创作者的规则高于浏览者：即网页编写者设置的CSS 样式的优先权高于浏览器所设置的样式；</li>
+<li>D 继承的CSS 样式不如后来指定的CSS 样式；</li>
+<li>E 在同一组属性设置中标有“!important”规则的优先级最大；</li>
+</ul>
+<h4 id="目标选择器"><a href="#目标选择器" class="headerlink" title="目标选择器"></a>目标选择器</h4><ul>
+<li>：target{ }当目标被选中时就会执行该样式</li>
+</ul>
+<h2 id="三-CSS属性"><a href="#三-CSS属性" class="headerlink" title="三 . CSS属性"></a>三 . CSS属性</h2><h4 id="1-align-content"><a href="#1-align-content" class="headerlink" title="1.align-content"></a>1.align-content</h4><ul>
+<li><p>align-content属性在弹性容器内的各项没有占用交叉轴上所有可用的空间时对齐容器内的各项（垂直）</p>
+</li>
+<li><p><strong>提示：</strong>使用 justify-content 属性对齐主轴上的各项（水平）</p>
+<p><strong>注意：</strong>容器内必须有多行的项目，该属性才能渲染出效果。</p>
+<h2 id="CSS-语法"><a href="#CSS-语法" class="headerlink" title="CSS 语法"></a>CSS 语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: stretch|center|flex-start|flex-end|space-between|space-around|initial|inherit;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stretch</td>
+<td>默认值。项目被拉伸以适应容器</td>
+</tr>
+<tr>
+<td>center</td>
+<td>项目位于容器的中心。</td>
+</tr>
+<tr>
+<td>flex-start</td>
+<td>项目位于容器的开头。</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>项目位于容器的结尾。</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>项目位于各行之间留有空白的容器内。</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>项目位于各行之前、之间、之后都留有空白的容器内。</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>设置该属性为它的默认值。</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>从父元素继承该属性。</td>
+</tr>
+</tbody></table>
+<p>#main { width: 70px; height: 300px; border: 1px solid #c3c3c3; display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; -webkit-align-content: center; align-content: center;}</p>
+</li>
+</ul>
+<h4 id="2-align-items属性"><a href="#2-align-items属性" class="headerlink" title="2.align-items属性"></a>2.align-items属性</h4><ul>
+<li>设置flex容器的对齐方式，使用每个flex对象元素的 align-self 属性可重写 align-items 属性。</li>
+<li>语法<ul>
+<li>align-items: stretch|center|flex-start|flex-end|baseline（位置元素在容器的基线）|initial（设为默认值）|inherit;</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-背景属性background"><a href="#3-背景属性background" class="headerlink" title="3.背景属性background"></a>3.背景属性background</h5><ul>
+<li>当使用简写属性时，属性值的顺序为：:<ul>
+<li>background-color</li>
+<li>background-image</li>
+<li>background-repeat</li>
+<li>background-attachment</li>
+<li>background-position</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background</td>
+<td>简写属性，作用是将背景属性设置在一个声明中。</td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td>背景图像是否固定或者随着页面的其余部分滚动。</td>
+</tr>
+<tr>
+<td>background-color</td>
+<td>设置元素的背景颜色。</td>
+</tr>
+<tr>
+<td>background-image</td>
+<td>把图像设置为背景。</td>
+</tr>
+<tr>
+<td>background-position</td>
+<td>设置背景图像的起始位置。</td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td>设置背景图像是否及如何重复。</td>
+</tr>
+</tbody></table>
+<h5 id="四-文本格式"><a href="#四-文本格式" class="headerlink" title="四 . 文本格式"></a>四 . 文本格式</h5><ul>
+<li>文本颜色color</li>
+<li>文本对齐方式：text-align</li>
+<li>文本修饰：text-decoration</li>
+<li>文本转换：text-transform</li>
+<li>文本缩进（指定第一行缩进）：text-indent</li>
+<li>指定字符间的距离：letter-spacing（可正可负）</li>
+<li>指定一个段落中行之间的空间：line-height</li>
+<li>指定单词间的间距：word-spacing</li>
+</ul>
+<h2 id="一-CSS3的基本概念"><a href="#一-CSS3的基本概念" class="headerlink" title="一 . CSS3的基本概念"></a>一 . CSS3的基本概念</h2><ul>
+<li>CSS 用于控制网页的样式和布局。而CSS3是CSS技术的升级版本，CSS3语言开发是朝着模块化发展的。</li>
+<li>CSS3使用了层叠样式表技术，可以对网页布局、字体、颜色、背景灯效果做出控制。css3作为css的进阶版，拆分和增加了盒子模型、列表模块、语言模块 、背景边框 、文字特效 、多栏布局等等。CSS3的改变有很多，增加了文字特效，丰富了下划线样式，加入了圈重点的功能。在边框方面，有了更多的灵活性，可以更加轻松地操控渐变效果和动态效果等等。在文字效果方面，特意增加了投影。CSS3在兼容上做了很大的功夫，并且网络浏览器也还将继续支持CSS2，因此原来的代码不需要做太多的改变，只会变得更加地轻松。</li>
+<li>css是指层叠样式表，解决内容与表现分离的问题</li>
+<li>id选择器可为特有的id的html元素指定特定的样式，ID属性不要以数字开头，数字开头的ID在 Mozilla/Firefox 浏览器中不起作用。</li>
+<li><em>不要在属性值与单位之间留有空格（如：”margin-left: 20 px” ），正确的写法是 “margin-left: 20px” 。</em></li>
+</ul>
+<h2 id="二-CSS3的新属性"><a href="#二-CSS3的新属性" class="headerlink" title="二 . CSS3的新属性"></a>二 . CSS3的新属性</h2><h4 id="1-边框border"><a href="#1-边框border" class="headerlink" title="1.边框border"></a>1.边框border</h4><ul>
+<li>圆角边框：border-radius<ul>
+<li>border-radius：左上 右上 右下 左下；</li>
+</ul>
+</li>
+<li>阴影边框：border-shadow<ul>
+<li>box-shadow: 右偏移量 下偏移量 模糊距离 阴影尺寸  颜色 内外阴影；(可同时加多个)</li>
+<li><ul>
+<li>h-shadow：必需，水平阴影的位置。允许负值</li>
+<li>v-shadow：必需。垂直阴影的位置。允许负值。</li>
+<li>blur：可选，模糊距离</li>
+<li>spread：可选，阴影尺寸</li>
+<li>color：颜色</li>
+<li>insert：可选，将外部阴影（outset）改为内部阴影，外部阴影是默认值（不允许写）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图像边框（IE浏览器不支持）：border-image</li>
+<li>对于 border-image，Safari 5 以及更老的版本需要前缀 -webkit-。Opera 支持 border-radius 和 box-shadow 属性，但是对于 border-image 需要前缀 -o-。</li>
+</ul>
+<h4 id="2-图片滤镜filter属性"><a href="#2-图片滤镜filter属性" class="headerlink" title="2.图片滤镜filter属性"></a>2.图片滤镜filter属性</h4><ul>
+<li>为元素添加可视效果（如饱和度与模糊度）</li>
+<li>img{ filter:grayscale(100%); //修改所有图片的颜色为100%灰度}</li>
+<li>常用属性值<ul>
+<li>filter:none | biur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity()| saturate() | sepia() | url();</li>
+</ul>
+</li>
+</ul>
+<p><strong>提示:</strong> 使用空格分隔多个滤镜。</p>
+<h2 id="Filter-函数"><a href="#Filter-函数" class="headerlink" title="Filter 函数"></a>Filter 函数</h2><p><strong>注意:</strong> 滤镜通常使用百分比 (如：75%), 当然也可以使用小数来表示 (如：0.75)。</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>默认值，没有效果。</td>
+</tr>
+<tr>
+<td>blur(<em>px</em>)</td>
+<td>给图像设置高斯模糊。”radius”一值设定高斯函数的标准差，或者是屏幕上以多少像素融在一起， 所以值越大越模糊； 如果没有设定值，则默认是0；这个参数可设置css长度值，但不接受百分比值。</td>
+</tr>
+<tr>
+<td>brightness(<em>%</em>)</td>
+<td>给图片应用一种线性乘法，使其看起来更亮或更暗。如果值是0%，图像会全黑。值是100%，则图像无变化。其他的值对应线性乘数效果。值超过100%也是可以的，图像会比原来更亮。如果没有设定值，默认是1。</td>
+</tr>
+<tr>
+<td>contrast(<em>%</em>)</td>
+<td>调整图像的对比度。值是0%的话，图像会全黑。值是100%，图像不变。值可以超过100%，意味着会运用更低的对比。若没有设置值，默认是1。</td>
+</tr>
+<tr>
+<td>drop-shadow(<em>h-shadow v-shadow blur spread color</em>)</td>
+<td>给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受<shadow>(在CSS3背景中定义)类型的值，除了”inset”关键字是不允许的。该函数与已有的box-shadow box-shadow属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速。<code>&lt;shadow&gt;参数如下：```**&lt;offset-x&gt; &lt;offset-y&gt;** (必须)这是设置阴影偏移量的两个 &lt;length&gt;值. **&lt;offset-x&gt;** 设定水平方向距离. 负值会使阴影出现在元素左边. **&lt;offset-y&gt;**设定垂直距离.负值会使阴影出现在元素上方。查看**&lt;length&gt;**可能的单位. **如果两个值都是0**, 则阴影出现在元素正后面 (如果设置了</code><blur-radius> and/or <spread-radius>，会有模糊效果).``<strong><blur-radius></blur-radius></strong> (可选)这是第三个code&gt;<length>值. 值越大，越模糊，则阴影会变得更大更淡.不允许负值 若未设定，默认是0 (则阴影的边界很锐利).<strong><spread-radius></spread-radius></strong> (可选)这是第四个 <length>值. 正值会使阴影扩张和变大，负值会是阴影缩小.若未设定，默认是0 (阴影会与元素一样大小). 注意: Webkit, 以及一些其他浏览器 不支持第四个长度，如果加了也不会渲染。 <strong><color></color></strong> (可选)查看 <color>该值可能的关键字和标记。若未设定，颜色值基于浏览器。在Gecko (Firefox), Presto (Opera)和Trident (Internet Explorer)中， 会应用color<strong>color</strong>属性的值。另外, 如果颜色值省略，WebKit中阴影是透明的。`</color></length></length></spread-radius></blur-radius></shadow></td>
+</tr>
+<tr>
+<td>grayscale(<em>%</em>)</td>
+<td>将图像转换为灰度图像。值定义转换的比例。值为100%则完全转为灰度图像，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
+</tr>
+<tr>
+<td>hue-rotate(<em>deg</em>)</td>
+<td>给图像应用色相旋转。”angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</td>
+</tr>
+<tr>
+<td>invert(<em>%</em>)</td>
+<td>反转输入图像。值定义转换的比例。100%的价值是完全反转。值为0%则图像无变化。值在0%和100%之间，则是效果的线性乘子。 若值未设置，值默认是0。</td>
+</tr>
+<tr>
+<td>opacity(<em>%</em>)</td>
+<td>转化图像的透明程度。值定义转换的比例。值为0%则是完全透明，值为100%则图像无变化。值在0%和100%之间，则是效果的线性乘子，也相当于图像样本乘以数量。 若值未设置，值默认是1。该函数与已有的opacity属性很相似，不同之处在于通过filter，一些浏览器为了提升性能会提供硬件加速。</td>
+</tr>
+<tr>
+<td>saturate(<em>%</em>)</td>
+<td>转换图像饱和度。值定义转换的比例。值为0%则是完全不饱和，值为100%则图像无变化。其他值，则是效果的线性乘子。超过100%的值是允许的，则有更高的饱和度。 若值未设置，值默认是1。</td>
+</tr>
+<tr>
+<td>sepia(<em>%</em>)</td>
+<td>将图像转换为深褐色。值定义转换的比例。值为100%则完全是深褐色的，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
+</tr>
+<tr>
+<td>url()</td>
+<td>URL函数接受一个XML文件，该文件设置了 一个SVG滤镜，且可以包含一个锚点来指定一个具体的滤镜元素。例如：<code>filter: url(svg-url#element-id)</code></td>
+</tr>
+<tr>
+<td>initial</td>
+<td>设置属性为默认值，可参阅： <a href="https://www.w3cschool.cn/cssref/css-initial.html" target="_blank" rel="noopener">CSS initial 关键字</a></td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>从父元素继承该属性，可参阅：<a href="https://www.w3cschool.cn/cssref/css-inherit.html" target="_blank" rel="noopener">CSS inherit 关键字</a></td>
+</tr>
+</tbody></table>
+<h2 id="三-常见模型和样式表"><a href="#三-常见模型和样式表" class="headerlink" title="三 . 常见模型和样式表"></a>三 . 常见模型和样式表</h2><p><strong>行内元素只有左右边距，没有上下边距，指定padding值可能有bug</strong></p>
+<h4 id="1-居中对齐汇总"><a href="#1-居中对齐汇总" class="headerlink" title="1.居中对齐汇总"></a>1.居中对齐汇总</h4><h5 id="1-1-水平居中对齐"><a href="#1-1-水平居中对齐" class="headerlink" title="1-1 . 水平居中对齐"></a>1-1 . 水平居中对齐</h5><h5 id="margin-0-auto"><a href="#margin-0-auto" class="headerlink" title="margin:0 auto;"></a>margin:0 auto;</h5><p>必须是块级元素，且给定了宽度</p>
+<h5 id="text-align-center"><a href="#text-align-center" class="headerlink" title="text-align:center;"></a>text-align:center;</h5><p>父级元素是块级元素，自身是行内元素或者行内块元素</p>
+<p><strong>width:内容宽；height：内容高；padding：盒宽减去内容宽再除以2；background-clip：content-box；</strong></p>
+<p>利用padding和background-clip配合实现div的水平居中</p>
+<p>.parent{margin:0 auto;width:200px;height:200px;background-color:red;}.children {width: 100px;height: 100px;padding: 50px;background-color: black;background-clip:content-box;/<em>居中的关键</em>/</p>
+<h4 id="2-垂直居中"><a href="#2-垂直居中" class="headerlink" title="2 . 垂直居中"></a>2 . 垂直居中</h4><p><strong>line-height:盒子高</strong></p>
+<p>自身或者父级元素必须有具体行高</p>
+<p>position加translate（-50%，-50%），百分比以自身为基准,适合没固定大小的内容（min-width,max-height,overflow:scroll)</p>
+<style> #ex3_container{ width:200px; height:200px; background-color:yellow; position:relative; } #ex3_content{ left:50%; top:50%; transform:translate(-50%,-50%); -webkit-transform:translate(-50%,-50%); background-color:gray; color:white; position:absolute; } </style>
+
+<p><strong>绝对定位</strong></p>
+<p>祖先容器：position：relative；</p>
+<p>自身：height：***；position：absolute；margin：auto；top：0；left：0；</p>
+<p><em>高度必须给出，建议加overflow：auto；防止内容溢出</em></p>
+<h5 id="内容元素：position-fixed，z-index-999，记住父容器元素position-relative"><a href="#内容元素：position-fixed，z-index-999，记住父容器元素position-relative" class="headerlink" title="内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **"></a>内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **</h5><p>.Absolute-Center.is-Fixed { width: 50%; height: 50%; overflow: auto; margin: auto; position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 999;}</p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><h5 id="1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"><a href="#1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准" class="headerlink" title="1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"></a>1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准</h5><h4 id="2-嵌套块元素垂直外边距的合并"><a href="#2-嵌套块元素垂直外边距的合并" class="headerlink" title="2.嵌套块元素垂直外边距的合并"></a>2.嵌套块元素垂直外边距的合并</h4><p>对于两个嵌套关系的块级元素，如果父级元素没有上内边距及边框，则父元素的上边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会合并</p>
+<p>解决方法：</p>
+<ul>
+<li>可以为父级盒子加上1px的上边框或上内边距</li>
+<li>可以为父元素添加overflow：hidden；</li>
+</ul>
+<h4 id="3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"><a href="#3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）" class="headerlink" title="3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"></a>3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）</h4><p>计算盒子模型总高度时，还应考虑上下两个盒子外边框合并问题</p>
+<p>如果一个盒子没有给定宽度/高度或者继承父亲的宽度/高度，则padding不会影响本盒子的大小</p>
+<p>内盒尺寸（元素实际大小）=width/height+padding+border</p>
+<h4 id="4-盒子模型布局稳定性"><a href="#4-盒子模型布局稳定性" class="headerlink" title="4.盒子模型布局稳定性"></a>4.盒子模型布局稳定性</h4><p>按照优先使用宽度（width），内边距（padding）外边距（margin）</p>
+<p>width &gt; padding &gt; margin</p>
+<p>原因：</p>
+<ul>
+<li>margin会有外边距合并问题还有ie下面的margin加倍的bug，所以最后使用</li>
+<li>padding 会影响盒子的大小，需要进行加减计算，比较麻烦，其次使用</li>
+<li>width没有什么问题</li>
+</ul>
+<h4 id="5-CSS盒模型"><a href="#5-CSS盒模型" class="headerlink" title="5. CSS盒模型"></a>5. CSS盒模型</h4><p>CSS3中可以通过box-sizing来指定盒模型，即指定为content-box，border-box，这样我们在计算盒子大小的方式就发生了变化</p>
+<p>可分为以下两种情况：</p>
+<ul>
+<li><p>box-sizing : content-box ;盒子大小为 width+padding +border，content-border指事默认值，其让元素维持W3C的标准Box Mode</p>
+</li>
+<li><p>box-sizing ： border-box；盒子大小就是width，即padding和border是包含在width里面的，新添属性</p>
+<p><strong>注意</strong>：上面的标注的width指的是CSS属性里设置的width：length；content的值会自动调整的</p>
+</li>
+</ul>
+<h4 id="6-CSS层叠样式"><a href="#6-CSS层叠样式" class="headerlink" title="6 . CSS层叠样式"></a>6 . CSS层叠样式</h4><ul>
+<li>样式冲突，遵循就近原则。哪个样式离结构近，就执行哪个样式</li>
+<li>样式不冲突不会层叠</li>
+</ul>
+<h4 id="7-CSS继承性"><a href="#7-CSS继承性" class="headerlink" title="7.CSS继承性"></a>7.CSS继承性</h4><p>恰当地使用继承可以简化代码，子元素可以继承父元素的样式（text-，font-，line-，这些元素开头的都可以继承，以及color属性）</p>
+<h4 id="8-CSS优先级"><a href="#8-CSS优先级" class="headerlink" title="8.CSS优先级"></a>8.CSS优先级</h4><p>定义css样式时，经常出现两个或更多规则应用在同一元素上，这时就出现优先级问题</p>
+<p>继承样式的权重为0.即在嵌套结构中，不管父元素权重多大，被子元素继承时，他的权重都为0，也就是说子元素定义的样式会覆盖继承来的样式，行内样式优先，应用style属性的元素，其行内样式的权重非常高，远大于100.</p>
+<p>权重相同时遵循就近原则。！important拥有最大的权重</p>
+<h4 id="9-浮动Float"><a href="#9-浮动Float" class="headerlink" title="9.浮动Float"></a>9.浮动Float</h4><ul>
+<li><p>浮动首先包含块的概念（包裹）。也就是说，浮动的元素总是找离他最近的父级元素对齐，但是不会超过内边距的范围</p>
+</li>
+<li><p>浮动元素排列元素，跟上一个元素（块级）有关。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Grid布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/26/Grid布局/" class="article-date">
+      <time datetime="2020-03-26T03:26:54.000Z" itemprop="datePublished">2020-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/26/Grid布局/">Grid布局</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一-Grid布局"><a href="#一-Grid布局" class="headerlink" title="一 . Grid布局"></a>一 . Grid布局</h2><ul>
+<li>CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列</li>
+<li>grid的目标是完全改变我们基于网格的用户界面的布局方式</li>
+<li>Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）</li>
+</ul>
+<h4 id="1-网格容器"><a href="#1-网格容器" class="headerlink" title="1 . 网格容器"></a><strong>1 . 网格容器</strong></h4><ul>
+<li>要把wrapper元素变成grid，只要简单将其display设置为grid即可。应用 <code>display: grid</code> 的元素。这是所有 网格项（grid item）的直接父级元素。</li>
+<li>属性<ul>
+<li>display：将网格定义为网格容器，并为其内容建立新的网格格式上下文。grid （生成一个块级网格） ；inline-grid （内联网格）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-网格项"><a href="#2-网格项" class="headerlink" title="2 .网格项"></a>2 .<strong>网格项</strong></h4><ul>
+<li>是网格容器的直接子元素（注意：通过嵌套元素（也称为子网格，即 subgrid ）向下传递网格参数的能力已移至 CSS Grid 规范的 Level 2 版本(详情访问 <a href="https://www.w3.org/TR/css-grid-2/#subgrids" target="_blank" rel="noopener">https://www.w3.org/TR/css-grid-2/#subgrids</a>）</li>
+</ul>
+<h4 id="3-网格线"><a href="#3-网格线" class="headerlink" title="3.网格线"></a>3.<strong>网格线</strong></h4><ul>
+<li>构成网格结构的分界线。它们既可以是垂直的（“列网格线(column grid lines)”），也可以是水平的（“行网格线(row grid lines)”），并位于行或列的任一侧。例如，这里的黄线就是一条列网格线。</li>
+<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-line.svg" alt="网格线(Grid Line)"></li>
+</ul>
+<h4 id="4-网格轨道"><a href="#4-网格轨道" class="headerlink" title="4.网格轨道"></a>4.<strong>网格轨道</strong></h4><ul>
+<li>两条相邻网格线之间的空间。你可以把它们想象成网格的列或行。下图是第二条和第三条 行网格线 之间的 网格轨道(Grid Track)。</li>
+<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-track.svg" alt="网格轨道(Grid Track)"></li>
+</ul>
+<h4 id="5-网格单元格"><a href="#5-网格单元格" class="headerlink" title="5.网格单元格"></a>5.<strong>网格单元格</strong></h4><ul>
+<li>两个相邻的行和两个相邻的列网格线之间的空间。这是 Grid(网格) 系统的一个“单元”。</li>
+</ul>
+<h4 id="6-网格区域-grid-template-areas"><a href="#6-网格区域-grid-template-areas" class="headerlink" title="6 .网格区域(grid-template-areas)"></a>6 .<strong>网格区域</strong>(grid-template-areas)</h4><ul>
+<li><p>4条网格线包围的总空间。一个 网格区域(Grid Area) 可以由任意数量的 网格单元格(Grid Cell) 组成。</p>
+</li>
+<li><p>网格单元格可以认为是网格线行为1和2，以及列网格线1和2之间的网格区域</p>
+</li>
+<li><p>通过引用grid-area属性指定的网格区域名称来定义网格模板，重复网格区域的名称导致内容跨越这些单元格。一个点号（.）代表空单元格。这个语法本身可视作网格的可视化结构。</p>
+<ul>
+<li><p><grid-area-name>:由网格项的grid-area指定网格区域名称</grid-area-name></p>
+</li>
+<li><p>none：不定义网格区域</p>
+</li>
+<li><p>.container{  grid-template-columns: 50px 50px 50px 50px;  grid-template-rows: auto;  grid-template-areas:     “header header header header”    “main main . sidebar”    “footer footer footer footer”; }</p>
+</li>
+<li><p><img src="https://www.html.cn/newimg88/2018/12/dddgrid-template-areas.svg" alt="网格区域名称模板"></p>
+</li>
+<li><h5 id="注意你不能-用这个语法来命名网格线，只是命名-网格区域"><a href="#注意你不能-用这个语法来命名网格线，只是命名-网格区域" class="headerlink" title="注意你不能 用这个语法来命名网格线，只是命名 网格区域"></a><strong>注意你不能 用这个语法来命名网格线，只是命名 网格区域</strong></h5><ul>
+<li>当你使用这种语法时，区域两端的网格线实际上会自动命名。如果你的网格区域的名字是 <strong>foo</strong>，该区域的起始行网格线 和 起始列网格线 的名称将为 <strong>foo-start</strong>，而最后一条行网格线 和 最后一条列网格线 的名称将为 <strong>foo-end</strong>。这意味着某些网格线可能有多个名字，如上例中最左边的网格线，它将有三个名称：header-start，main-start 和 footer-start 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>columns（列）和rows（行）</p>
+<ul>
+<li><p>为了使其成为网格的二维容器，需要定义行和列。</p>
+</li>
+<li><p>要定位和调整items（子元素）大小，我们将使用grid-column和grid-row属性来设置。使用空格分隔的值列表，用来定义网格的列和行。这些值表示 网格轨道(Grid Track) 大小，它们之间的空格表示网格线。</p>
+<ul>
+<li><p>track-size： 可以是长度值，百分比，或者等份网格容器中可用空间（使用 <code>fr</code> 单位）     line-name`：你可以选择的任意名称</p>
+</li>
+<li><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br><span class="line"> grid-template-rows: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义100px宽的3列  grid-template-columns ：100px  100px  100px;</p>
+</li>
+<li><p>定义50px高的两行   grid-template-rows : 50px  50px；</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 40px 50px auto 50px 40px;</span><br><span class="line"> grid-template-rows: 25% 100px auto;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="https://www.html.cn/newimg88/2018/12/template-columns-rows-01.svg" alt="网格线名称"></p>
+</li>
+<li><p>.wrapper{display: grid；grid-template-columns: 100px 100px 100px;grid-template-rows: 100px 100px 100px；}</p>
+</li>
+<li><p>如果你的定义包含多个重复值，则可以使用 <code>repeat()</code> 表示法来简化定义：  grid-template-columns:repeate(3,20px [col-start]);</p>
+</li>
+<li><p>你也可以明确的指定网格线(Grid Line)名称   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];</span><br><span class="line">  grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果多行共享相同的名称，则可通过网格线名称和计数来引用它们 grid-template-start: col-start 2;</p>
+</li>
+<li><p>fr单元允许你用等分网格容器剩余可用空间来设置 网格轨道(Grid Track) 的大小 。例如grid-temp-columns : 1fr  1fr  1fr ;该代码会将每个网格项设置为网格容器宽度的三分之一：</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>放置items（子元素）</p>
+<ul>
+<li>设置子元素的大小可通过网格线来设置</li>
+<li><ul>
+<li>.item1{grid-column-start :1;grid-column-end :4;}</li>
+<li>简写式 .item1{grid-column: 1 / 4 ;}</li>
+<li>表示item1占据从第一条网格线开始，到第四条网格线结束（<strong>注意</strong>：3列有4条网格线）<img src="https://www.html.cn/newimg88/2017/12/1_l-adYpQCGve7W6DWY949pw.png" alt="Grid 布局，列网格线"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.item1 &#123;</span><br><span class="line">    grid-column-start: 1;</span><br><span class="line">    grid-column-end: 3;</span><br><span class="line">&#125;</span><br><span class="line">.item3 &#123;</span><br><span class="line">    grid-row-start: 2;</span><br><span class="line">    grid-row-end: 4;</span><br><span class="line">&#125;</span><br><span class="line">.item4 &#123;</span><br><span class="line">    grid-column-start: 2;</span><br><span class="line">    grid-column-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.html.cn/newimg88/2017/12/1_QDSybpxjXSat6UtoHgUapQ.png" alt="Grid 布局"></p>
+<h4 id="7-简写属性grid-template"><a href="#7-简写属性grid-template" class="headerlink" title="7. 简写属性grid-template"></a>7. 简写属性grid-template</h4><ul>
+<li>用于定义rows , columns , areas 简写属性   grid-template: none | <grid-template-rows> / <grid-template-columns>;</grid-template-columns></grid-template-rows></li>
+<li><code>none</code>：将所有三个属性设置为其初始值</li>
+<li><code>&lt;grid-template-rows&gt; / &lt;grid-template-columns&gt;</code>：将 grid-template-columns 和 grid-template-rows`设置为相应地特定的值，并且设置grid-template-areas为none</li>
+</ul>
+<p>游戏：</p>
+<p>如果你觉得同时输入<code>grid-column</code>和<code>grid-row</code>也很复杂，我们还有另一种缩写。<code>grid-area</code>属性接受4个由’/‘分开的值：<code>grid-row-start</code>, <code>grid-column-start</code>, <code>grid-row-end</code>, 最后是<code>grid-column-end</code>。</p>
+<p>举个例子如下所示：<code>grid-area: 1 / 1 / 3 / 6;</code>。</p>
+<p>如果我们有很多个网格项呢？你可以任意覆盖它们不用有任何担心。用<code>grid-area</code>定义第二个网格项为所有未浇水的胡萝卜浇水。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-CSS3高阶" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -3834,925 +4925,6 @@ alert("Hello World!")
 <h2 id="相关文件"><a href="#相关文件" class="headerlink" title="相关文件"></a>相关文件</h2><ol>
 <li><a href="http://www.cnblogs.com/joyho/articles/4430148.html" target="_blank" rel="noopener">URL中的hash（井号）</a></li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vue学习二" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/20/vue学习二/" class="article-date">
-      <time datetime="2020-03-20T05:43:28.000Z" itemprop="datePublished">2020-03-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/20/vue学习二/">vue学习二</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="品牌管理案例"><a href="#品牌管理案例" class="headerlink" title="品牌管理案例"></a>品牌管理案例</h2><h3 id="添加新品牌"><a href="#添加新品牌" class="headerlink" title="添加新品牌"></a>添加新品牌</h3><h3 id="删除品牌"><a href="#删除品牌" class="headerlink" title="删除品牌"></a>删除品牌</h3><h3 id="根据条件筛选品牌"><a href="#根据条件筛选品牌" class="headerlink" title="根据条件筛选品牌"></a>根据条件筛选品牌</h3><ol>
-<li>1.x 版本中的filterBy指令，在2.x中已经被废除：</li>
-</ol>
-<p><a href="https://v1-cn.vuejs.org/api/#filterBy" target="_blank" rel="noopener">filterBy - 指令</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr v-for=&quot;item in list | filterBy searchName in &apos;name&apos;&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.ctime&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;</span><br><span class="line"></span><br><span class="line">    &lt;a href=&quot;#&quot; @click.prevent=&quot;del(item.id)&quot;&gt;删除&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/td&gt;</span><br><span class="line"></span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在2.x版本中<a href="https://cn.vuejs.org/v2/guide/list.html#显示过滤-排序结果" target="_blank" rel="noopener">手动实现筛选的方式</a>：</li>
-</ol>
-<ul>
-<li>筛选框绑定到 VM 实例中的 <code>searchName</code> 属性：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;hr&gt; 输入筛选名称：</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;searchName&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在使用 <code>v-for</code> 指令循环每一行数据的时候，不再直接 <code>item in list</code>，而是 <code>in</code> 一个 过滤的methods 方法，同时，把过滤条件<code>searchName</code>传递进去：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;tbody&gt;</span><br><span class="line"></span><br><span class="line">      &lt;tr v-for=&quot;item in search(searchName)&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.ctime&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;</span><br><span class="line"></span><br><span class="line">          &lt;a href=&quot;#&quot; @click.prevent=&quot;del(item.id)&quot;&gt;删除&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/td&gt;</span><br><span class="line"></span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/tbody&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>search</code> 过滤方法中，使用 数组的 <code>filter</code> 方法进行过滤：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">search(name) &#123;</span><br><span class="line"></span><br><span class="line">  return this.list.filter(x =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    return x.name.indexOf(name) != -1;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue调试工具vue-devtools的安装步骤和使用"><a href="#Vue调试工具vue-devtools的安装步骤和使用" class="headerlink" title="Vue调试工具vue-devtools的安装步骤和使用"></a>Vue调试工具<code>vue-devtools</code>的安装步骤和使用</h2><p><a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=zh-CN" target="_blank" rel="noopener">Vue.js devtools - 翻墙安装方式 - 推荐</a></p>
-<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>概念：Vue.js 允许你自定义过滤器，<strong>可被用作一些常见的文本格式化</strong>。过滤器可以用在两个地方：<strong>mustache 插值和 v-bind 表达式</strong>。过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符指示；</p>
-<h3 id="私有过滤器"><a href="#私有过滤器" class="headerlink" title="私有过滤器"></a>私有过滤器</h3><ol>
-<li>HTML元素：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;td&gt;&#123;&#123;item.ctime | dataFormat(&apos;yyyy-mm-dd&apos;)&#125;&#125;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>私有 <code>filters</code> 定义方式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123; // 私有局部过滤器，只能在 当前 VM 对象所控制的 View 区域进行使用</span><br><span class="line"></span><br><span class="line">    dataFormat(input, pattern = &quot;&quot;) &#123; // 在参数列表中 通过 pattern=&quot;&quot; 来指定形参默认值，防止报错</span><br><span class="line"></span><br><span class="line">      var dt = new Date(input);</span><br><span class="line"></span><br><span class="line">      // 获取年月日</span><br><span class="line"></span><br><span class="line">      var y = dt.getFullYear();</span><br><span class="line"></span><br><span class="line">      var m = (dt.getMonth() + 1).toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">      var d = dt.getDate().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日</span><br><span class="line"></span><br><span class="line">      // 否则，就返回  年-月-日 时：分：秒</span><br><span class="line"></span><br><span class="line">      if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) &#123;</span><br><span class="line"></span><br><span class="line">        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`;</span><br><span class="line"></span><br><span class="line">      &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        // 获取时分秒</span><br><span class="line"></span><br><span class="line">        var hh = dt.getHours().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">        var mm = dt.getMinutes().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">        var ss = dt.getSeconds().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125; $&#123;hh&#125;:$&#123;mm&#125;:$&#123;ss&#125;`;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用ES6中的字符串新方法 String.prototype.padStart(maxLength, fillString=’’) 或 String.prototype.padEnd(maxLength, fillString=’’)来填充字符串；</p>
-</blockquote>
-<h3 id="全局过滤器"><a href="#全局过滤器" class="headerlink" title="全局过滤器"></a>全局过滤器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个全局过滤器</span><br><span class="line"></span><br><span class="line">Vue.filter(&apos;dataFormat&apos;, function (input, pattern = &apos;&apos;) &#123;</span><br><span class="line"></span><br><span class="line">  var dt = new Date(input);</span><br><span class="line"></span><br><span class="line">  // 获取年月日</span><br><span class="line"></span><br><span class="line">  var y = dt.getFullYear();</span><br><span class="line"></span><br><span class="line">  var m = (dt.getMonth() + 1).toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">  var d = dt.getDate().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日</span><br><span class="line"></span><br><span class="line">  // 否则，就返回  年-月-日 时：分：秒</span><br><span class="line"></span><br><span class="line">  if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) &#123;</span><br><span class="line"></span><br><span class="line">    return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`;</span><br><span class="line"></span><br><span class="line">  &#125; else &#123;</span><br><span class="line"></span><br><span class="line">    // 获取时分秒</span><br><span class="line"></span><br><span class="line">    var hh = dt.getHours().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">    var mm = dt.getMinutes().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">    var ss = dt.getSeconds().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125; $&#123;hh&#125;:$&#123;mm&#125;:$&#123;ss&#125;`;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：当有局部和全局两个名称相同的过滤器时候，会以就近原则进行调用，即：局部过滤器优先于全局过滤器被调用！</p>
-</blockquote>
-<h2 id="键盘修饰符以及自定义键盘修饰符"><a href="#键盘修饰符以及自定义键盘修饰符" class="headerlink" title="键盘修饰符以及自定义键盘修饰符"></a>键盘修饰符以及自定义键盘修饰符</h2><h3 id="1-x中自定义键盘修饰符【了解即可】"><a href="#1-x中自定义键盘修饰符【了解即可】" class="headerlink" title="1.x中自定义键盘修饰符【了解即可】"></a>1.x中自定义键盘修饰符【了解即可】</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&apos;on&apos;).keyCodes.f2 = 113;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-x中自定义键盘修饰符"><a href="#2-x中自定义键盘修饰符" class="headerlink" title="2.x中自定义键盘修饰符"></a><a href="https://cn.vuejs.org/v2/guide/events.html#键值修饰符" target="_blank" rel="noopener">2.x中自定义键盘修饰符</a></h3><ol>
-<li>通过<code>Vue.config.keyCodes.名称 = 按键值</code>来自定义案件修饰符的别名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.keyCodes.f2 = 113;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用自定义的按键修饰符：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;name&quot; @keyup.f2=&quot;add&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a><a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="noopener">自定义指令</a></h2><ol>
-<li>自定义全局和局部的 自定义指令：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 自定义全局指令 v-focus，为绑定的元素自动获取焦点：</span><br><span class="line"></span><br><span class="line">Vue.directive(&apos;focus&apos;, &#123;</span><br><span class="line"></span><br><span class="line">  inserted: function (el) &#123; // inserted 表示被绑定元素插入父节点时调用</span><br><span class="line"></span><br><span class="line">    el.focus();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 自定义局部指令 v-color 和 v-font-weight，为绑定的元素设置指定的字体颜色 和 字体粗细：</span><br><span class="line"></span><br><span class="line">  directives: &#123;</span><br><span class="line"></span><br><span class="line">    color: &#123; // 为元素设置指定的字体颜色</span><br><span class="line"></span><br><span class="line">      bind(el, binding) &#123;</span><br><span class="line"></span><br><span class="line">        el.style.color = binding.value;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &apos;font-weight&apos;: function (el, binding2) &#123; // 自定义指令的简写形式，等同于定义了 bind 和 update 两个钩子函数</span><br><span class="line"></span><br><span class="line">      el.style.fontWeight = binding2.value;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>自定义指令的使用方式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;searchName&quot; v-focus v-color=&quot;&apos;red&apos;&quot; v-font-weight=&quot;900&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue-1-x-中-自定义元素指令【已废弃-了解即可】"><a href="#Vue-1-x-中-自定义元素指令【已废弃-了解即可】" class="headerlink" title="Vue 1.x 中 自定义元素指令【已废弃,了解即可】"></a>Vue 1.x 中 自定义元素指令【已废弃,了解即可】</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.elementDirective(&apos;red-color&apos;, &#123;</span><br><span class="line">  bind: function () &#123;</span><br><span class="line">    this.el.style.color = &apos;red&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;red-color&gt;1232&lt;/red-color&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="vue实例的生命周期"><a href="#vue实例的生命周期" class="headerlink" title="vue实例的生命周期"></a><a href="https://cn.vuejs.org/v2/guide/instance.html#实例生命周期" target="_blank" rel="noopener">vue实例的生命周期</a></h2><ul>
-<li><p>什么是生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期！</p>
-</li>
-<li><p><a href="https://cn.vuejs.org/v2/api/#选项-生命周期钩子" target="_blank" rel="noopener">生命周期钩子</a>：就是生命周期事件的别名而已；</p>
-</li>
-<li><p>生命周期钩子 = 生命周期函数 = 生命周期事件</p>
-</li>
-<li><p>主要的生命周期函数分类：</p>
-<ul>
-<li><p>创建期间的生命周期函数：</p>
-<ul>
-<li>beforeCreate：实例刚在内存中被创建出来，此时，还没有初始化好 data 和 methods 属性</li>
-<li>created：实例已经在内存中创建OK，此时 data 和 methods 已经创建OK，此时还没有开始 编译模板</li>
-<li>beforeMount：此时已经完成了模板的编译，但是还没有挂载到页面中</li>
-<li>mounted：此时，已经将编译好的模板，挂载到了页面指定的容器中显示</li>
-</ul>
-</li>
-<li><p>运行期间的生命周期函数：</p>
-</li>
-</ul>
-<ul>
-<li>beforeUpdate：状态更新之前执行此函数， 此时 data 中的状态值是最新的，但是界面上显示的 数据还是旧的，因为此时还没有开始重新渲染DOM节点</li>
-<li>updated：实例更新完毕之后调用此函数，此时 data 中的状态值 和 界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了！</li>
-</ul>
-<ul>
-<li>销毁期间的生命周期函数：</li>
-</ul>
-<ul>
-<li>beforeDestroy：实例销毁之前调用。在这一步，实例仍然完全可用。</li>
-<li>destroyed：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。</li>
-</ul>
-</li>
-</ul>
-<p><img src="D:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday2%5C%E7%AC%94%E8%AE%B0%5Clifecycle.png" alt="lifecycle"></p>
-<h2 id="vue-resource-实现-get-post-jsonp请求"><a href="#vue-resource-实现-get-post-jsonp请求" class="headerlink" title="vue-resource 实现 get, post, jsonp请求"></a><a href="https://github.com/pagekit/vue-resource" target="_blank" rel="noopener">vue-resource 实现 get, post, jsonp请求</a></h2><p>除了 vue-resource 之外，还可以使用 <code>axios</code> 的第三方包实现实现数据的请求</p>
-<ol>
-<li><p>之前的学习中，如何发起数据请求？</p>
-</li>
-<li><p>常见的数据请求类型？  get  post jsonp</p>
-</li>
-<li><p>测试的URL请求资源地址：</p>
-<ul>
-<li>get请求地址： <a href="http://vue.studyit.io/api/getlunbo" target="_blank" rel="noopener">http://vue.studyit.io/api/getlunbo</a></li>
-<li>post请求地址：<a href="http://vue.studyit.io/api/post" target="_blank" rel="noopener">http://vue.studyit.io/api/post</a></li>
-<li>jsonp请求地址：<a href="http://vue.studyit.io/api/jsonp" target="_blank" rel="noopener">http://vue.studyit.io/api/jsonp</a></li>
-</ul>
-</li>
-<li><p>JSONP的实现原理</p>
-<ul>
-<li>由于浏览器的安全性限制，不允许AJAX访问 协议不同、域名不同、端口号不同的 数据接口，浏览器认为这种访问不安全；</li>
-<li>可以通过动态创建script标签的形式，把script标签的src属性，指向数据接口的地址，因为script标签不存在跨域限制，这种数据获取方式，称作JSONP（注意：根据JSONP的实现原理，知晓，JSONP只支持Get请求）；</li>
-<li>具体实现过程：</li>
-</ul>
-<ul>
-<li>先在客户端定义一个回调方法，预定义对数据的操作；</li>
-<li>再把这个回调方法的名称，通过URL传参的形式，提交到服务器的数据接口；</li>
-<li>服务器数据接口组织好要发送给客户端的数据，再拿着客户端传递过来的回调方法名称，拼接出一个调用这个方法的字符串，发送给客户端去解析执行；</li>
-<li>客户端拿到服务器返回的字符串之后，当作Script脚本去解析执行，这样就能够拿到JSONP的数据了；</li>
-</ul>
-<ul>
-<li>带大家通过 Node.js ，来手动实现一个JSONP的请求例子；</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&apos;http&apos;);</span><br><span class="line">// 导入解析 URL 地址的核心模块</span><br><span class="line">const urlModule = require(&apos;url&apos;);</span><br><span class="line"></span><br><span class="line">const server = http.createServer();</span><br><span class="line">// 监听 服务器的 request 请求事件，处理每个请求</span><br><span class="line">server.on(&apos;request&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  const url = req.url;</span><br><span class="line"></span><br><span class="line">  // 解析客户端请求的URL地址</span><br><span class="line">  var info = urlModule.parse(url, true);</span><br><span class="line"></span><br><span class="line">  // 如果请求的 URL 地址是 /getjsonp ，则表示要获取JSONP类型的数据</span><br><span class="line">  if (info.pathname === &apos;/getjsonp&apos;) &#123;</span><br><span class="line">    // 获取客户端指定的回调函数的名称</span><br><span class="line">    var cbName = info.query.callback;</span><br><span class="line">    // 手动拼接要返回给客户端的数据对象</span><br><span class="line">    var data = &#123;</span><br><span class="line">      name: &apos;zs&apos;,</span><br><span class="line">      age: 22,</span><br><span class="line">      gender: &apos;男&apos;,</span><br><span class="line">      hobby: [&apos;吃饭&apos;, &apos;睡觉&apos;, &apos;运动&apos;]</span><br><span class="line">    &#125;</span><br><span class="line">    // 拼接出一个方法的调用，在调用这个方法的时候，把要发送给客户端的数据，序列化为字符串，作为参数传递给这个调用的方法：</span><br><span class="line">    var result = `$&#123;cbName&#125;($&#123;JSON.stringify(data)&#125;)`;</span><br><span class="line">    // 将拼接好的方法的调用，返回给客户端去解析执行</span><br><span class="line">    res.end(result);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    res.end(&apos;404&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(3000, () =&gt; &#123;</span><br><span class="line">  console.log(&apos;server running at http://127.0.0.1:3000&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>vue-resource 的配置步骤：</p>
-<ul>
-<li>直接在页面中，通过<code>script</code>标签，引入 <code>vue-resource</code> 的脚本文件；</li>
-<li>注意：引用的先后顺序是：先引用 <code>Vue</code> 的脚本文件，再引用 <code>vue-resource</code> 的脚本文件；</li>
-</ul>
-</li>
-<li><p>发送get请求：</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getInfo() &#123; // get 方式获取数据</span><br><span class="line">  this.$http.get(&apos;http://127.0.0.1:8899/api/getlunbo&apos;).then(res =&gt; &#123;</span><br><span class="line">    console.log(res.body);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>发送post请求：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">postInfo() &#123;</span><br><span class="line">  var url = &apos;http://127.0.0.1:8899/api/post&apos;;</span><br><span class="line">  // post 方法接收三个参数：</span><br><span class="line">  // 参数1： 要请求的URL地址</span><br><span class="line">  // 参数2： 要发送的数据对象</span><br><span class="line">  // 参数3： 指定post提交的编码类型为 application/x-www-form-urlencoded</span><br><span class="line">  this.$http.post(url, &#123; name: &apos;zs&apos; &#125;, &#123; emulateJSON: true &#125;).then(res =&gt; &#123;</span><br><span class="line">    console.log(res.body);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="8">
-<li>发送JSONP请求获取数据：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jsonpInfo() &#123; // JSONP形式从服务器获取数据</span><br><span class="line">  var url = &apos;http://127.0.0.1:8899/api/jsonp&apos;;</span><br><span class="line">  this.$http.jsonp(url).then(res =&gt; &#123;</span><br><span class="line">    console.log(res.body);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置本地数据库和数据接口API"><a href="#配置本地数据库和数据接口API" class="headerlink" title="配置本地数据库和数据接口API"></a>配置本地数据库和数据接口API</h2><ol>
-<li>先解压安装 <code>PHPStudy</code>;</li>
-<li>解压安装 <code>Navicat</code> 这个数据库可视化工具，并激活；</li>
-<li>打开 <code>Navicat</code> 工具，新建空白数据库，名为 <code>dtcmsdb4</code>;</li>
-<li>双击新建的数据库，连接上这个空白数据库，在新建的数据库上<code>右键</code> -&gt; <code>运行SQL文件</code>，选择并执行 <code>dtcmsdb4.sql</code> 这个数据库脚本文件；如果执行不报错，则数据库导入完成；</li>
-<li>进入文件夹 <code>vuecms3_nodejsapi</code> 内部，执行 <code>npm i</code> 安装所有的依赖项；</li>
-<li>先确保本机安装了 <code>nodemon</code>, 没有安装，则运行 <code>npm i nodemon -g</code> 进行全局安装，安装完毕后，进入到 <code>vuecms3_nodejsapi</code>目录 -&gt; <code>src</code>目录 -&gt; 双击运行 <code>start.bat</code></li>
-<li>如果API启动失败，请检查 PHPStudy 是否正常开启，同时，检查 <code>app.js</code> 中第 <code>14行</code> 中数据库连接配置字符串是否正确；PHPStudy 中默认的 用户名是root，默认的密码也是root</li>
-</ol>
-<h2 id="品牌管理改造"><a href="#品牌管理改造" class="headerlink" title="品牌管理改造"></a>品牌管理改造</h2><h3 id="展示品牌列表"><a href="#展示品牌列表" class="headerlink" title="展示品牌列表"></a>展示品牌列表</h3><h3 id="添加品牌数据"><a href="#添加品牌数据" class="headerlink" title="添加品牌数据"></a>添加品牌数据</h3><h3 id="删除品牌数据"><a href="#删除品牌数据" class="headerlink" title="删除品牌数据"></a>删除品牌数据</h3><h2 id="Vue中的动画"><a href="#Vue中的动画" class="headerlink" title="Vue中的动画"></a><a href="https://cn.vuejs.org/v2/guide/transitions.html" target="_blank" rel="noopener">Vue中的动画</a></h2><p>为什么要有动画：动画能够提高用户的体验，帮助用户更好的理解页面中的功能；</p>
-<h3 id="使用过渡类名"><a href="#使用过渡类名" class="headerlink" title="使用过渡类名"></a>使用过渡类名</h3><ol>
-<li>HTML结构：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;动起来&quot; @click=&quot;myAnimate&quot;&gt;</span><br><span class="line">    &lt;!-- 使用 transition 将需要过渡的元素包裹起来 --&gt;</span><br><span class="line">    &lt;transition name=&quot;fade&quot;&gt;</span><br><span class="line">      &lt;div v-show=&quot;isshow&quot;&gt;动画哦&lt;/div&gt;</span><br><span class="line">    &lt;/transition&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>VM 实例：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 创建 Vue 实例，得到 ViewModel</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    isshow: false</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    myAnimate() &#123;</span><br><span class="line">      this.isshow = !this.isshow;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>定义两组类样式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/* 定义进入和离开时候的过渡状态 */</span><br><span class="line">    .fade-enter-active,</span><br><span class="line">    .fade-leave-active &#123;</span><br><span class="line">      transition: all 0.2s ease;</span><br><span class="line">      position: absolute;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 定义进入过渡的开始状态 和 离开过渡的结束状态 */</span><br><span class="line">    .fade-enter,</span><br><span class="line">    .fade-leave-to &#123;</span><br><span class="line">      opacity: 0;</span><br><span class="line">      transform: translateX(100px);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用第三方-CSS-动画库"><a href="#使用第三方-CSS-动画库" class="headerlink" title="使用第三方 CSS 动画库"></a><a href="https://cn.vuejs.org/v2/guide/transitions.html#自定义过渡类名" target="_blank" rel="noopener">使用第三方 CSS 动画库</a></h3><ol>
-<li>导入动画类库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./lib/animate.css&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>定义 transition 及属性：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition</span><br><span class="line">	enter-active-class=&quot;fadeInRight&quot;</span><br><span class="line">    leave-active-class=&quot;fadeOutRight&quot;</span><br><span class="line">    :duration=&quot;&#123; enter: 500, leave: 800 &#125;&quot;&gt;</span><br><span class="line">  	&lt;div class=&quot;animated&quot; v-show=&quot;isshow&quot;&gt;动画哦&lt;/div&gt;</span><br><span class="line">&lt;/transition&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用动画钩子函数"><a href="#使用动画钩子函数" class="headerlink" title="使用动画钩子函数"></a>使用动画钩子函数</h3><ol>
-<li>定义 transition 组件以及三个钩子函数：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;切换动画&quot; @click=&quot;isshow = !isshow&quot;&gt;</span><br><span class="line">    &lt;transition</span><br><span class="line">    @before-enter=&quot;beforeEnter&quot;</span><br><span class="line">    @enter=&quot;enter&quot;</span><br><span class="line">    @after-enter=&quot;afterEnter&quot;&gt;</span><br><span class="line">      &lt;div v-if=&quot;isshow&quot; class=&quot;show&quot;&gt;OK&lt;/div&gt;</span><br><span class="line">    &lt;/transition&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>定义三个 methods 钩子方法：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">        beforeEnter(el) &#123; // 动画进入之前的回调</span><br><span class="line">          el.style.transform = &apos;translateX(500px)&apos;;</span><br><span class="line">        &#125;,</span><br><span class="line">        enter(el, done) &#123; // 动画进入完成时候的回调</span><br><span class="line">          el.offsetWidth;</span><br><span class="line">          el.style.transform = &apos;translateX(0px)&apos;;</span><br><span class="line">          done();</span><br><span class="line">        &#125;,</span><br><span class="line">        afterEnter(el) &#123; // 动画进入完成之后的回调</span><br><span class="line">          this.isshow = !this.isshow;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;/</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>定义动画过渡时长和样式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.show&#123;</span><br><span class="line">      transition: all 0.4s ease;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="v-for-的列表过渡"><a href="#v-for-的列表过渡" class="headerlink" title="v-for 的列表过渡"></a><a href="https://cn.vuejs.org/v2/guide/transitions.html#列表的进入和离开过渡" target="_blank" rel="noopener">v-for 的列表过渡</a></h3><ol>
-<li>定义过渡样式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .list-enter,</span><br><span class="line">    .list-leave-to &#123;</span><br><span class="line">      opacity: 0;</span><br><span class="line">      transform: translateY(10px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .list-enter-active,</span><br><span class="line">    .list-leave-active &#123;</span><br><span class="line">      transition: all 0.3s ease;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>定义DOM结构，其中，需要使用 transition-group 组件把v-for循环的列表包裹起来：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &lt;input type=&quot;text&quot; v-model=&quot;txt&quot; @keyup.enter=&quot;add&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;transition-group tag=&quot;ul&quot; name=&quot;list&quot;&gt;</span><br><span class="line">    &lt;li v-for=&quot;(item, i) in list&quot; :key=&quot;i&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;/transition-group&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>定义 VM中的结构：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 创建 Vue 实例，得到 ViewModel</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    txt: &apos;&apos;,</span><br><span class="line">    list: [1, 2, 3, 4]</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    add() &#123;</span><br><span class="line">      this.list.push(this.txt);</span><br><span class="line">      this.txt = &apos;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="列表的排序过渡"><a href="#列表的排序过渡" class="headerlink" title="列表的排序过渡"></a>列表的排序过渡</h3><p><code>&lt;transition-group&gt;</code> 组件还有一个特殊之处。不仅可以进入和离开动画，<strong>还可以改变定位</strong>。要使用这个新功能只需了解新增的 <code>v-move</code> 特性，<strong>它会在元素的改变定位的过程中应用</strong>。</p>
-<ul>
-<li><code>v-move</code> 和 <code>v-leave-active</code> 结合使用，能够让列表的过渡更加平缓柔和：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.v-move&#123;</span><br><span class="line">  transition: all 0.8s ease;</span><br><span class="line">&#125;</span><br><span class="line">.v-leave-active&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ol>
-<li><a href="https://v1-cn.vuejs.org/" target="_blank" rel="noopener">vue.js 1.x 文档</a></li>
-<li><a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue.js 2.x 文档</a></li>
-<li><a href="http://www.css88.com/archives/7715" target="_blank" rel="noopener">String.prototype.padStart(maxLength, fillString)</a></li>
-<li><a href="http://www.cnblogs.com/wuhua1/p/6686237.html" target="_blank" rel="noopener">js 里面的键盘事件对应的键码</a></li>
-<li><a href="https://github.com/pagekit/vue-resource" target="_blank" rel="noopener">pagekit/vue-resource</a></li>
-<li><a href="https://jingyan.baidu.com/article/a65957f4976aad24e67f9b9b.html" target="_blank" rel="noopener">navicat如何导入sql文件和导出sql文件</a></li>
-<li><a href="http://cubic-bezier.com/#.4,-0.3,1,.33" target="_blank" rel="noopener">贝塞尔在线生成器</a></li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vue学习一" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/20/vue学习一/" class="article-date">
-      <time datetime="2020-03-20T05:33:42.000Z" itemprop="datePublished">2020-03-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/20/vue学习一/">vue学习一</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="Vue-js-Day1"><a href="#Vue-js-Day1" class="headerlink" title="Vue.js - Day1"></a>Vue.js - Day1</h1><h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
-<li><p>Vue.js 是目前最火的一个前端框架，React是最流行的一个前端框架（React除了开发网站，还可以开发手机App， Vue语法也是可以用于进行手机App开发的，需要借助于Weex）</p>
-</li>
-<li><p>Vue.js 是前端的<strong>主流框架之一</strong>，和Angular.js、React.js 一起，并成为前端三大主流框架！</p>
-</li>
-<li><p>Vue.js 是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于与第三方库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</p>
-</li>
-<li><p>前端的主要工作？主要负责MVC中的V这一层；主要工作就是和界面打交道，来制作前端页面效果；</p>
-</li>
-</ul>
-<h2 id="为什么要学习流行框架"><a href="#为什么要学习流行框架" class="headerlink" title="为什么要学习流行框架"></a>为什么要学习流行框架</h2><ul>
-<li><p>企业为了提高开发效率：在企业中，时间就是效率，效率就是金钱；</p>
-<ul>
-<li>企业中，使用框架，能够提高开发的效率；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>提高开发效率的发展历程：原生JS -&gt; Jquery之类的类库 -&gt; 前端模板引擎 -&gt; Angular.js / Vue.js（能够帮助我们减少不必要的DOM操作；提高渲染效率；双向数据绑定的概念【通过框架提供的指令，我们前端程序员只需要关心数据的业务逻辑，不再关心DOM是如何渲染的了】）</li>
-<li>在Vue中，一个核心的概念，就是让用户不再操作DOM元素，解放了用户的双手，让程序员可以更多的时间去关注业务逻辑；</li>
-</ul>
-<ul>
-<li><p>增强自己就业时候的竞争力</p>
-<ul>
-<li>人无我有，人有我优</li>
-<li>你平时不忙的时候，都在干嘛？</li>
-</ul>
-</li>
-</ul>
-<h2 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h2><ul>
-<li><p>框架：是一套完整的解决方案；对项目的侵入性较大，项目如果需要更换框架，则需要重新架构整个项目。</p>
-<ul>
-<li>node 中的 express；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>库（插件）：提供某一个小功能，对项目的侵入性较小，如果某个库无法完成某些需求，可以很容易切换到其它库实现需求。</p>
-<ul>
-<li><ol>
-<li>从Jquery 切换到 Zepto</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>从 EJS 切换到 art-template</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Node（后端）中的-MVC-与-前端中的-MVVM-之间的区别"><a href="#Node（后端）中的-MVC-与-前端中的-MVVM-之间的区别" class="headerlink" title="Node（后端）中的 MVC 与 前端中的 MVVM 之间的区别"></a>Node（后端）中的 MVC 与 前端中的 MVVM 之间的区别</h2><ul>
-<li><p>MVC 是后端的分层开发概念；</p>
-</li>
-<li><p>MVVM是前端视图层的概念，主要关注于 视图层分离，也就是说：MVVM把前端的视图层，分为了 三部分 Model, View , VM ViewModel</p>
-</li>
-<li><p>为什么有了MVC还要有MVVM</p>
-</li>
-</ul>
-<p><img src="D:%5CChromeCoreDownloads%5Cvue-----%E9%BB%91%E9%A9%AC%5C%E9%85%8D%E5%A5%97%E8%B5%84%E6%96%99%5Cday1%5C%E7%AC%94%E8%AE%B0%5C01.MVC%E5%92%8CMVVM%E7%9A%84%E5%85%B3%E7%B3%BB%E5%9B%BE%E8%A7%A3.png" alt="01.MVC和MVVM的关系图解"></p>
-<h2 id="Vue-js-基本代码-和-MVVM-之间的对应关系"><a href="#Vue-js-基本代码-和-MVVM-之间的对应关系" class="headerlink" title="Vue.js 基本代码 和 MVVM 之间的对应关系"></a>Vue.js 基本代码 和 MVVM 之间的对应关系</h2><h2 id="Vue之-基本的代码结构和插值表达式、v-cloak"><a href="#Vue之-基本的代码结构和插值表达式、v-cloak" class="headerlink" title="Vue之 - 基本的代码结构和插值表达式、v-cloak"></a>Vue之 - <code>基本的代码结构</code>和<code>插值表达式</code>、<code>v-cloak</code></h2><h2 id="Vue指令之v-text和v-html"><a href="#Vue指令之v-text和v-html" class="headerlink" title="Vue指令之v-text和v-html"></a>Vue指令之<code>v-text</code>和<code>v-html</code></h2><h2 id="Vue指令之v-bind的三种用法"><a href="#Vue指令之v-bind的三种用法" class="headerlink" title="Vue指令之v-bind的三种用法"></a>Vue指令之<code>v-bind</code>的三种用法</h2><ol>
-<li><p>直接使用指令<code>v-bind</code></p>
-</li>
-<li><p>使用简化指令<code>:</code></p>
-</li>
-<li><p>在绑定的时候，拼接绑定内容：<code>:title=&quot;btnTitle + &#39;, 这是追加的内容&#39;&quot;</code></p>
-</li>
-</ol>
-<h2 id="Vue指令之v-on和跑马灯效果"><a href="#Vue指令之v-on和跑马灯效果" class="headerlink" title="Vue指令之v-on和跑马灯效果"></a>Vue指令之<code>v-on</code>和<code>跑马灯效果</code></h2><h3 id="跑马灯效果"><a href="#跑马灯效果" class="headerlink" title="跑马灯效果"></a>跑马灯效果</h3><ol>
-<li>HTML结构：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;&#123;&#123;info&#125;&#125;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;开启&quot; v-on:click=&quot;go&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;停止&quot; v-on:click=&quot;stop&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Vue实例：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// 创建 Vue 实例，得到 ViewModel</span><br><span class="line"></span><br><span class="line">   var vm = new Vue(&#123;</span><br><span class="line"></span><br><span class="line">     el: &apos;#app&apos;,</span><br><span class="line"></span><br><span class="line">     data: &#123;</span><br><span class="line"></span><br><span class="line">       info: &apos;猥琐发育，别浪~！&apos;,</span><br><span class="line"></span><br><span class="line">       intervalId: null</span><br><span class="line"></span><br><span class="line">     &#125;,</span><br><span class="line"></span><br><span class="line">     methods: &#123;</span><br><span class="line"></span><br><span class="line">       go() &#123;</span><br><span class="line"></span><br><span class="line">         // 如果当前有定时器在运行，则直接return</span><br><span class="line"></span><br><span class="line">         if (this.intervalId != null) &#123;</span><br><span class="line"></span><br><span class="line">           return;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         // 开始定时器</span><br><span class="line"></span><br><span class="line">         this.intervalId = setInterval(() =&gt; &#123;</span><br><span class="line"></span><br><span class="line">           this.info = this.info.substring(1) + this.info.substring(0, 1);</span><br><span class="line"></span><br><span class="line">         &#125;, 500);</span><br><span class="line"></span><br><span class="line">       &#125;,</span><br><span class="line"></span><br><span class="line">       stop() &#123;</span><br><span class="line"></span><br><span class="line">         clearInterval(this.intervalId);</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue指令之v-on的缩写和事件修饰符"><a href="#Vue指令之v-on的缩写和事件修饰符" class="headerlink" title="Vue指令之v-on的缩写和事件修饰符"></a>Vue指令之<code>v-on的缩写</code>和<code>事件修饰符</code></h2><h3 id="事件修饰符："><a href="#事件修饰符：" class="headerlink" title="事件修饰符："></a>事件修饰符：</h3><ul>
-<li><p>.stop       阻止冒泡</p>
-</li>
-<li><p>.prevent    阻止默认事件</p>
-</li>
-<li><p>.capture    添加事件侦听器时使用事件捕获模式</p>
-</li>
-<li><p>.self       只当事件在该元素本身（比如不是子元素）触发时触发回调</p>
-</li>
-<li><p>.once       事件只触发一次</p>
-</li>
-</ul>
-<h2 id="Vue指令之v-model和双向数据绑定"><a href="#Vue指令之v-model和双向数据绑定" class="headerlink" title="Vue指令之v-model和双向数据绑定"></a>Vue指令之<code>v-model</code>和<code>双向数据绑定</code></h2><h2 id="简易计算器案例"><a href="#简易计算器案例" class="headerlink" title="简易计算器案例"></a>简易计算器案例</h2><ol>
-<li>HTML 代码结构</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=&quot;text&quot; v-model=&quot;n1&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;select v-model=&quot;opt&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;option value=&quot;0&quot;&gt;+&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">    &lt;option value=&quot;1&quot;&gt;-&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">    &lt;option value=&quot;2&quot;&gt;*&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">    &lt;option value=&quot;3&quot;&gt;÷&lt;/option&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=&quot;text&quot; v-model=&quot;n2&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=&quot;button&quot; value=&quot;=&quot; v-on:click=&quot;getResult&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=&quot;text&quot; v-model=&quot;result&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Vue实例代码：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">// 创建 Vue 实例，得到 ViewModel</span><br><span class="line"></span><br><span class="line">   var vm = new Vue(&#123;</span><br><span class="line"></span><br><span class="line">     el: &apos;#app&apos;,</span><br><span class="line"></span><br><span class="line">     data: &#123;</span><br><span class="line"></span><br><span class="line">       n1: 0,</span><br><span class="line"></span><br><span class="line">       n2: 0,</span><br><span class="line"></span><br><span class="line">       result: 0,</span><br><span class="line"></span><br><span class="line">       opt: &apos;0&apos;</span><br><span class="line"></span><br><span class="line">     &#125;,</span><br><span class="line"></span><br><span class="line">     methods: &#123;</span><br><span class="line"></span><br><span class="line">       getResult() &#123;</span><br><span class="line"></span><br><span class="line">         switch (this.opt) &#123;</span><br><span class="line"></span><br><span class="line">           case &apos;0&apos;:</span><br><span class="line"></span><br><span class="line">             this.result = parseInt(this.n1) + parseInt(this.n2);</span><br><span class="line"></span><br><span class="line">             break;</span><br><span class="line"></span><br><span class="line">           case &apos;1&apos;:</span><br><span class="line"></span><br><span class="line">             this.result = parseInt(this.n1) - parseInt(this.n2);</span><br><span class="line"></span><br><span class="line">             break;</span><br><span class="line"></span><br><span class="line">           case &apos;2&apos;:</span><br><span class="line"></span><br><span class="line">             this.result = parseInt(this.n1) * parseInt(this.n2);</span><br><span class="line"></span><br><span class="line">             break;</span><br><span class="line"></span><br><span class="line">           case &apos;3&apos;:</span><br><span class="line"></span><br><span class="line">             this.result = parseInt(this.n1) / parseInt(this.n2);</span><br><span class="line"></span><br><span class="line">             break;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="在Vue中使用样式"><a href="#在Vue中使用样式" class="headerlink" title="在Vue中使用样式"></a>在Vue中使用样式</h2><h3 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h3><ol>
-<li>数组</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;, &apos;thin&apos;]&quot;&gt;这是一个邪恶的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>数组中使用三元表达式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;, &apos;thin&apos;, isactive?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个邪恶的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>数组中嵌套对象</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;, &apos;thin&apos;, &#123;&apos;active&apos;: isactive&#125;]&quot;&gt;这是一个邪恶的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>直接使用对象</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :class=&quot;&#123;red:true, italic:true, active:true, thin:true&#125;&quot;&gt;这是一个邪恶的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用内联样式"><a href="#使用内联样式" class="headerlink" title="使用内联样式"></a>使用内联样式</h3><ol>
-<li>直接在元素上通过 <code>:style</code> 的形式，书写样式对象</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color: &apos;red&apos;, &apos;font-size&apos;: &apos;40px&apos;&#125;&quot;&gt;这是一个善良的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>将样式对象，定义到 <code>data</code> 中，并直接引用到 <code>:style</code> 中</p>
-<ul>
-<li>在data上定义样式：</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">        h1StyleObj: &#123; color: &apos;red&apos;, &apos;font-size&apos;: &apos;40px&apos;, &apos;font-weight&apos;: &apos;200&apos; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在元素中，通过属性绑定的形式，将样式对象应用到元素中：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;h1StyleObj&quot;&gt;这是一个善良的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><p>在 <code>:style</code> 中通过数组，引用多个 <code>data</code> 上的样式对象</p>
-<ul>
-<li>在data上定义样式：</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">        h1StyleObj: &#123; color: &apos;red&apos;, &apos;font-size&apos;: &apos;40px&apos;, &apos;font-weight&apos;: &apos;200&apos; &#125;,</span><br><span class="line">        h1StyleObj2: &#123; fontStyle: &apos;italic&apos; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在元素中，通过属性绑定的形式，将样式对象应用到元素中：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;[h1StyleObj, h1StyleObj2]&quot;&gt;这是一个善良的H1&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue指令之v-for和key属性"><a href="#Vue指令之v-for和key属性" class="headerlink" title="Vue指令之v-for和key属性"></a>Vue指令之<code>v-for</code>和<code>key</code>属性</h2><ol>
-<li>迭代数组</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li v-for=&quot;(item, i) in list&quot;&gt;索引：&#123;&#123;i&#125;&#125; --- 姓名：&#123;&#123;item.name&#125;&#125; --- 年龄：&#123;&#123;item.age&#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>迭代对象中的属性</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 循环遍历对象身上的属性 --&gt;</span><br><span class="line"></span><br><span class="line">   &lt;div v-for=&quot;(val, key, i) in userInfo&quot;&gt;&#123;&#123;val&#125;&#125; --- &#123;&#123;key&#125;&#125; --- &#123;&#123;i&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>迭代数字</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p v-for=&quot;i in 10&quot;&gt;这是第 &#123;&#123;i&#125;&#125; 个P标签&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>2.2.0+ 的版本里，<strong>当在组件中使用</strong> v-for 时，key 现在是必须的。</p>
-</blockquote>
-<p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用 “<strong>就地复用</strong>” 策略。如果数据项的顺序被改变，Vue将<strong>不是移动 DOM 元素来匹配数据项的顺序</strong>， 而是<strong>简单复用此处每个元素</strong>，并且确保它在特定索引下显示已被渲染过的每个元素。</p>
-<p>为了给 Vue 一个提示，<strong>以便它能跟踪每个节点的身份，从而重用和重新排序现有元素</strong>，你需要为每项提供一个唯一 key 属性。</p>
-<h2 id="Vue指令之v-if和v-show"><a href="#Vue指令之v-if和v-show" class="headerlink" title="Vue指令之v-if和v-show"></a>Vue指令之<code>v-if</code>和<code>v-show</code></h2><blockquote>
-<p>一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好。</p>
-</blockquote>
-<h2 id="品牌管理案例"><a href="#品牌管理案例" class="headerlink" title="品牌管理案例"></a>品牌管理案例</h2><h3 id="添加新品牌"><a href="#添加新品牌" class="headerlink" title="添加新品牌"></a>添加新品牌</h3><h3 id="删除品牌"><a href="#删除品牌" class="headerlink" title="删除品牌"></a>删除品牌</h3><h3 id="根据条件筛选品牌"><a href="#根据条件筛选品牌" class="headerlink" title="根据条件筛选品牌"></a>根据条件筛选品牌</h3><ol>
-<li>1.x 版本中的filterBy指令，在2.x中已经被废除：</li>
-</ol>
-<p><a href="https://v1-cn.vuejs.org/api/#filterBy" target="_blank" rel="noopener">filterBy - 指令</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr v-for=&quot;item in list | filterBy searchName in &apos;name&apos;&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;&#123;&#123;item.ctime&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">  &lt;td&gt;</span><br><span class="line"></span><br><span class="line">    &lt;a href=&quot;#&quot; @click.prevent=&quot;del(item.id)&quot;&gt;删除&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/td&gt;</span><br><span class="line"></span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在2.x版本中<a href="https://cn.vuejs.org/v2/guide/list.html#显示过滤-排序结果" target="_blank" rel="noopener">手动实现筛选的方式</a>：</li>
-</ol>
-<ul>
-<li>筛选框绑定到 VM 实例中的 <code>searchName</code> 属性：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;hr&gt; 输入筛选名称：</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;searchName&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在使用 <code>v-for</code> 指令循环每一行数据的时候，不再直接 <code>item in list</code>，而是 <code>in</code> 一个 过滤的methods 方法，同时，把过滤条件<code>searchName</code>传递进去：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;tbody&gt;</span><br><span class="line"></span><br><span class="line">      &lt;tr v-for=&quot;item in search(searchName)&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;&#123;&#123;item.ctime&#125;&#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">        &lt;td&gt;</span><br><span class="line"></span><br><span class="line">          &lt;a href=&quot;#&quot; @click.prevent=&quot;del(item.id)&quot;&gt;删除&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/td&gt;</span><br><span class="line"></span><br><span class="line">      &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/tbody&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>search</code> 过滤方法中，使用 数组的 <code>filter</code> 方法进行过滤：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">search(name) &#123;</span><br><span class="line"></span><br><span class="line">  return this.list.filter(x =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    return x.name.indexOf(name) != -1;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue调试工具vue-devtools的安装步骤和使用"><a href="#Vue调试工具vue-devtools的安装步骤和使用" class="headerlink" title="Vue调试工具vue-devtools的安装步骤和使用"></a>Vue调试工具<code>vue-devtools</code>的安装步骤和使用</h2><p><a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=zh-CN" target="_blank" rel="noopener">Vue.js devtools - 翻墙安装方式 - 推荐</a></p>
-<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>概念：Vue.js 允许你自定义过滤器，<strong>可被用作一些常见的文本格式化</strong>。过滤器可以用在两个地方：<strong>mustache 插值和 v-bind 表达式</strong>。过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符指示；</p>
-<h3 id="私有过滤器"><a href="#私有过滤器" class="headerlink" title="私有过滤器"></a>私有过滤器</h3><ol>
-<li>HTML元素：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;td&gt;&#123;&#123;item.ctime | dataFormat(&apos;yyyy-mm-dd&apos;)&#125;&#125;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>私有 <code>filters</code> 定义方式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123; // 私有局部过滤器，只能在 当前 VM 对象所控制的 View 区域进行使用</span><br><span class="line"></span><br><span class="line">    dataFormat(input, pattern = &quot;&quot;) &#123; // 在参数列表中 通过 pattern=&quot;&quot; 来指定形参默认值，防止报错</span><br><span class="line"></span><br><span class="line">      var dt = new Date(input);</span><br><span class="line"></span><br><span class="line">      // 获取年月日</span><br><span class="line"></span><br><span class="line">      var y = dt.getFullYear();</span><br><span class="line"></span><br><span class="line">      var m = (dt.getMonth() + 1).toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">      var d = dt.getDate().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日</span><br><span class="line"></span><br><span class="line">      // 否则，就返回  年-月-日 时：分：秒</span><br><span class="line"></span><br><span class="line">      if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) &#123;</span><br><span class="line"></span><br><span class="line">        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`;</span><br><span class="line"></span><br><span class="line">      &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        // 获取时分秒</span><br><span class="line"></span><br><span class="line">        var hh = dt.getHours().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">        var mm = dt.getMinutes().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">        var ss = dt.getSeconds().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125; $&#123;hh&#125;:$&#123;mm&#125;:$&#123;ss&#125;`;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用ES6中的字符串新方法 String.prototype.padStart(maxLength, fillString=’’) 或 String.prototype.padEnd(maxLength, fillString=’’)来填充字符串；</p>
-</blockquote>
-<h3 id="全局过滤器"><a href="#全局过滤器" class="headerlink" title="全局过滤器"></a>全局过滤器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个全局过滤器</span><br><span class="line"></span><br><span class="line">Vue.filter(&apos;dataFormat&apos;, function (input, pattern = &apos;&apos;) &#123;</span><br><span class="line"></span><br><span class="line">  var dt = new Date(input);</span><br><span class="line"></span><br><span class="line">  // 获取年月日</span><br><span class="line"></span><br><span class="line">  var y = dt.getFullYear();</span><br><span class="line"></span><br><span class="line">  var m = (dt.getMonth() + 1).toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">  var d = dt.getDate().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日</span><br><span class="line"></span><br><span class="line">  // 否则，就返回  年-月-日 时：分：秒</span><br><span class="line"></span><br><span class="line">  if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) &#123;</span><br><span class="line"></span><br><span class="line">    return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`;</span><br><span class="line"></span><br><span class="line">  &#125; else &#123;</span><br><span class="line"></span><br><span class="line">    // 获取时分秒</span><br><span class="line"></span><br><span class="line">    var hh = dt.getHours().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">    var mm = dt.getMinutes().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line">    var ss = dt.getSeconds().toString().padStart(2, &apos;0&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125; $&#123;hh&#125;:$&#123;mm&#125;:$&#123;ss&#125;`;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：当有局部和全局两个名称相同的过滤器时候，会以就近原则进行调用，即：局部过滤器优先于全局过滤器被调用！</p>
-</blockquote>
-<h2 id="键盘修饰符以及自定义键盘修饰符"><a href="#键盘修饰符以及自定义键盘修饰符" class="headerlink" title="键盘修饰符以及自定义键盘修饰符"></a>键盘修饰符以及自定义键盘修饰符</h2><h3 id="1-x中自定义键盘修饰符【了解即可】"><a href="#1-x中自定义键盘修饰符【了解即可】" class="headerlink" title="1.x中自定义键盘修饰符【了解即可】"></a>1.x中自定义键盘修饰符【了解即可】</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&apos;on&apos;).keyCodes.f2 = 113;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-x中自定义键盘修饰符"><a href="#2-x中自定义键盘修饰符" class="headerlink" title="2.x中自定义键盘修饰符"></a><a href="https://cn.vuejs.org/v2/guide/events.html#键值修饰符" target="_blank" rel="noopener">2.x中自定义键盘修饰符</a></h3><ol>
-<li>通过<code>Vue.config.keyCodes.名称 = 按键值</code>来自定义案件修饰符的别名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.keyCodes.f2 = 113;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用自定义的按键修饰符：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;name&quot; @keyup.f2=&quot;add&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a><a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="noopener">自定义指令</a></h2><ol>
-<li>自定义全局和局部的 自定义指令：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 自定义全局指令 v-focus，为绑定的元素自动获取焦点：</span><br><span class="line"></span><br><span class="line">Vue.directive(&apos;focus&apos;, &#123;</span><br><span class="line"></span><br><span class="line">  inserted: function (el) &#123; // inserted 表示被绑定元素插入父节点时调用</span><br><span class="line"></span><br><span class="line">    el.focus();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 自定义局部指令 v-color 和 v-font-weight，为绑定的元素设置指定的字体颜色 和 字体粗细：</span><br><span class="line"></span><br><span class="line">  directives: &#123;</span><br><span class="line"></span><br><span class="line">    color: &#123; // 为元素设置指定的字体颜色</span><br><span class="line"></span><br><span class="line">      bind(el, binding) &#123;</span><br><span class="line"></span><br><span class="line">        el.style.color = binding.value;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &apos;font-weight&apos;: function (el, binding2) &#123; // 自定义指令的简写形式，等同于定义了 bind 和 update 两个钩子函数</span><br><span class="line"></span><br><span class="line">      el.style.fontWeight = binding2.value;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>自定义指令的使用方式：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;searchName&quot; v-focus v-color=&quot;&apos;red&apos;&quot; v-font-weight=&quot;900&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue-1-x-中-自定义元素指令【已废弃-了解即可】"><a href="#Vue-1-x-中-自定义元素指令【已废弃-了解即可】" class="headerlink" title="Vue 1.x 中 自定义元素指令【已废弃,了解即可】"></a>Vue 1.x 中 自定义元素指令【已废弃,了解即可】</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.elementDirective(&apos;red-color&apos;, &#123;</span><br><span class="line">  bind: function () &#123;</span><br><span class="line">    this.el.style.color = &apos;red&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;red-color&gt;1232&lt;/red-color&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ol>
-<li><a href="https://v1-cn.vuejs.org/" target="_blank" rel="noopener">vue.js 1.x 文档</a></li>
-<li><a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue.js 2.x 文档</a></li>
-<li><a href="http://www.css88.com/archives/7715" target="_blank" rel="noopener">String.prototype.padStart(maxLength, fillString)</a></li>
-<li><a href="http://www.cnblogs.com/wuhua1/p/6686237.html" target="_blank" rel="noopener">js 里面的键盘事件对应的键码</a></li>
-<li><a href="http://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="noopener">Vue.js双向绑定的实现原理</a></li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-浅谈canvas和相关实战" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/18/浅谈canvas和相关实战/" class="article-date">
-      <time datetime="2020-03-18T05:06:00.000Z" itemprop="datePublished">2020-03-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h6 id="涂鸦部分"><a href="#涂鸦部分" class="headerlink" title="涂鸦部分"></a>涂鸦部分</h6><ul>
-<li>为了兼容性，使用canvas.getContext判断是否有该属性。</li>
-<li>使用canvas.getContext（）获得画板执行上下文。</li>
-<li>给canvas添加鼠标按下事件。<ul>
-<li>获取鼠标按下时，相对画布的x，y坐标。</li>
-<li>设置画笔颜色，以及笔的宽度（ctx.lineWidth)；</li>
-<li>开始画线。</li>
-</ul>
-</li>
-</ul>
-<h6 id="canvas的lineCap属性"><a href="#canvas的lineCap属性" class="headerlink" title="canvas的lineCap属性"></a>canvas的lineCap属性</h6><ul>
-<li><p>lineCap属性是设置或返回线条末端线帽的样式，其中，“round”和“square”会使线条稍微变长。</p>
-</li>
-<li><p><code>context.lineCap=&quot;butt|round|square&quot;;</code></p>
-<table>
-<thead>
-<tr>
-<th align="left">值</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">butt</td>
-<td align="left">默认。向线条的每个末端添加平直的边缘。</td>
-</tr>
-<tr>
-<td align="left">round</td>
-<td align="left">向线条的每个末端添加圆形线帽。</td>
-</tr>
-<tr>
-<td align="left">square</td>
-<td align="left">向线条的每个末端添加正方形线帽。</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h6 id="globalCompositeOperation-属性"><a href="#globalCompositeOperation-属性" class="headerlink" title="globalCompositeOperation 属性"></a>globalCompositeOperation 属性</h6><ul>
-<li><p>globalCompositeOperation 属性设置或返回如何将一个源（新的）图像绘制到目标（已有）的图像上。</p>
-<p>源图像 = 您打算放置到画布上的绘图。</p>
-<p>目标图像 = 您已经放置在画布上的绘图。</p>
-</li>
-<li><p><code>context.globalCompositeOperation=&quot;source-in&quot;;</code>在目标图像中显示源图像。只有目标图像内的源图像部分会显示，目标图像是透明的。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        canvas&#123;</span><br><span class="line">            box-shadow: 0 0 10px black;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            display: block;</span><br><span class="line">            margin-top: 30px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    ctx.fillStyle = &apos;blue&apos;;</span><br><span class="line">    ctx.fillRect(20,20,100,100);</span><br><span class="line"></span><br><span class="line">    ctx.globalCompositeOperation = &apos;source-atop&apos;</span><br><span class="line">    ctx.fillStyle = &apos;red&apos;;</span><br><span class="line">    ctx.fillRect(80,80,100,100);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="请求关键帧运动"><a href="#请求关键帧运动" class="headerlink" title="请求关键帧运动"></a>请求关键帧运动</h6><ul>
-<li><p><code>window.requestAnimationFrame(move);</code>系统自动计算出什么时候执行该函数或方法。</p>
-</li>
-<li><p>与setTimeout与setInterval一样设置定时运动，但<code>window.requestAnimationFrame(move);</code>更流畅，且丢帧情况比较少。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;涂鸦&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            background-color: gray;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas id=&quot;canvas&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;button onclick=&quot;clear()&quot;&gt;清除&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    // 画笔部分</span><br><span class="line">    canvas.onmousedown = function (e) &#123;</span><br><span class="line">        var x, y;</span><br><span class="line">        x = e.clientX - canvas.offsetLeft;</span><br><span class="line">        y = e.clientY - canvas.offsetTop;</span><br><span class="line">        ctx.lineWidth = 20;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.strokeStyle = &apos;blue&apos;;</span><br><span class="line"></span><br><span class="line">        ctx.moveTo(x, y);</span><br><span class="line">        canvas.onmousemove = function (e) &#123;</span><br><span class="line">            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);</span><br><span class="line">            ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.onmouseup = function () &#123;</span><br><span class="line">            canvas.onmousemove = &apos;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="图像水平移动"><a href="#图像水平移动" class="headerlink" title="图像水平移动"></a>图像水平移动</h6><h6 id="ctx-drawImage"><a href="#ctx-drawImage" class="headerlink" title="ctx.drawImage()"></a>ctx.drawImage()</h6><ul>
-<li>drawImage（）方法能在画布上绘制图像，画布或视频，也能够绘制图像的某些部分，以及增加或减少图像的尺寸。</li>
-<li>js语法</li>
-</ul>
-<ol>
-<li>在画布上定位图像：<code>ctx.drawImage(img,x,y);</code></li>
-<li>在画布上定位图像并规定图像的宽高：<code>ctx.drawImage(img,x,y,width,height);</code></li>
-<li>剪切图像，并在画布上定位被剪切的部分：<code>ctx.drawImage(img,sx,sy,swidth,sheigt,x,y,width,height);</code></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><em>img</em></td>
-<td align="left">规定要使用的图像、画布或视频。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>sx</em></td>
-<td align="left">可选。开始剪切的 x 坐标位置。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>sy</em></td>
-<td align="left">可选。开始剪切的 y 坐标位置。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>swidth</em></td>
-<td align="left">可选。被剪切图像的宽度。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>sheight</em></td>
-<td align="left">可选。被剪切图像的高度。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>x</em></td>
-<td align="left">在画布上放置图像的 x 坐标位置。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>y</em></td>
-<td align="left">在画布上放置图像的 y 坐标位置。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>width</em></td>
-<td align="left">可选。要使用的图像的宽度（伸展或缩小图像）。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"><em>height</em></td>
-<td align="left">可选。要使用的图像的高度（伸展或缩小图像）。</td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//一般需要先指定图片属性</span><br><span class="line">var img = new Image();</span><br><span class="line">img.src = &apos;*.png&apos;;</span><br><span class="line"></span><br><span class="line">//图片加载完完才开始绘制</span><br><span class="line">img.onload = function()&#123;</span><br><span class="line">	ctx.drawImage(img,x,y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="ctx-createPattern"><a href="#ctx-createPattern" class="headerlink" title="ctx.createPattern()"></a>ctx.createPattern()</h6><ul>
-<li><p>ctx.createPattern()方法是在指定的方向内重复指定的元素。元素可以是图片，视频或其他canvas元素。</p>
-</li>
-<li><p>被重复的元素可用于绘制/填充矩形，圆形或线条等等。</p>
-</li>
-<li><p><code>ctx.createPattern(image,&quot;repeat|repeat-x|repeat-y|no-repeat&quot;);</code></p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><em>image</em></td>
-<td align="left">规定要使用的模式的图片、画布或视频元素。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">repeat</td>
-<td align="left">默认。该模式在水平和垂直方向重复。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">repeat-x</td>
-<td align="left">该模式只在水平方向重复。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">repeat-y</td>
-<td align="left">该模式只在垂直方向重复。</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">no-repeat</td>
-<td align="left">该模式只显示一次（不重复）。</td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h6 id="记录状态save"><a href="#记录状态save" class="headerlink" title="记录状态save()"></a>记录状态save()</h6><ul>
-<li><p>可以通过ctx.save()方法保存当前环境的状态，包括位置，画笔颜色等。</p>
-</li>
-<li><p>ctx.restore()则是还原之前画过的路径状态和属性。</p>
-<p><strong>注意:save的存储方式类似于栈的存储结构</strong>；即第一次调用的状态是倒数第一次save的状态，第二次调用的状态是倒数第二次save的状态。</p>
-</li>
-</ul>
-<h6 id="改变原点位置translate"><a href="#改变原点位置translate" class="headerlink" title="改变原点位置translate"></a>改变原点位置translate</h6><ul>
-<li><p>translate() 方法重新映射画布上的 (0,0) 位置。</p>
-<p><strong>注意：</strong>当您在 translate() 之后调用诸如 fillRect() 之类的方法时，值会添加到 x 和 y 坐标值上。</p>
-</li>
-<li><p>在位置 (10,10) 处绘制一个矩形，将新的 (0,0) 位置设置为 (70,70)。再次绘制新的矩形（请注意现在矩形从位置 (80,80) 开始绘制）</p>
-</li>
-</ul>
-<h4 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h4><h6 id="水平全景展示项目"><a href="#水平全景展示项目" class="headerlink" title="水平全景展示项目"></a>水平全景展示项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        canvas&#123;</span><br><span class="line">            box-shadow: 0 0 10px #123;</span><br><span class="line">            display: block;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 25px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    // 创建图片</span><br><span class="line">    var img = new Image();</span><br><span class="line">    img.src = &apos;5.png&apos;;</span><br><span class="line">    img.onload = function()&#123;</span><br><span class="line">        drawImage();</span><br><span class="line">    &#125;</span><br><span class="line">    // 图片绘制开始点</span><br><span class="line">    var x = 0;</span><br><span class="line">    function drawImage()&#123;</span><br><span class="line">        // 记录状态</span><br><span class="line">        ctx.save();</span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">        // 图片绘制开始点向左移动</span><br><span class="line">        ctx.translate(-x,0);</span><br><span class="line">        // 图片将画布铺满</span><br><span class="line">        ctx.drawImage(img,0,0);</span><br><span class="line">        // 为实现无缝连接再画一张图片</span><br><span class="line">        ctx.drawImage(img,canvas.width,0);</span><br><span class="line">        x++;</span><br><span class="line">        // 当第一张图片溢出画布时，就将x置为0.</span><br><span class="line">        if(x &gt;= canvas.width)&#123;</span><br><span class="line">            x = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        // 还原之前画过的路径状态和属性。</span><br><span class="line">        ctx.restore();</span><br><span class="line">        // arguments.callee等价于drawImage</span><br><span class="line">        // 自动定时调用函数</span><br><span class="line">        window.requestAnimationFrame(arguments.callee);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="球碰撞项目"><a href="#球碰撞项目" class="headerlink" title="球碰撞项目"></a>球碰撞项目</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            box-shadow: 0 0 10px black;</span><br><span class="line">            display: block;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 30px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas width=&quot;600&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    // 获取canvas对象</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    // 获取执行上下文</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    // 建一个画⚪的类</span><br><span class="line">    function Circle(x, y, r, color, speed) &#123;</span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">        this.r = r;</span><br><span class="line">        this.color = color;</span><br><span class="line">        this.speed = speed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在原型上定义draw方法画圆</span><br><span class="line">    Circle.prototype.draw = function () &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.fillStyle = this.color;</span><br><span class="line">        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);</span><br><span class="line">        ctx.fill();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在原型上定义move移动</span><br><span class="line">    Circle.prototype.move = function()&#123;</span><br><span class="line">        this.x += this.speed;</span><br><span class="line">        this.y += this.speed;</span><br><span class="line">        if(this.x &lt; this.r || this.x + this.r &gt; canvas.width)&#123;</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;else if(this.x == this.r &amp;&amp; this.y == this.r)&#123;</span><br><span class="line">            // 解决正好卡在对角的球</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(this.y &lt; this.r || this.y + this.r &gt; canvas.height)&#123;</span><br><span class="line">            this.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var circle1 = new Circle(40,40, 20, &apos;red&apos;, 2);</span><br><span class="line">    var circle2 = new Circle(190,250, 20, &apos;blue&apos;, 2);</span><br><span class="line">        circle1.draw();</span><br><span class="line">        circle2.draw();</span><br><span class="line">        actions();</span><br><span class="line">    function actions()&#123;</span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">        circle1.move();</span><br><span class="line">        circle2.move();</span><br><span class="line">        circle1.draw();</span><br><span class="line">        circle2.draw();</span><br><span class="line">        // 检测两个球是否相撞</span><br><span class="line">        if(isCircleHit(circle1,circle2))&#123;</span><br><span class="line">            circle1.speed *= -1;</span><br><span class="line">            circle2.speed *= -1;</span><br><span class="line">        &#125;</span><br><span class="line">        window.requestAnimationFrame(arguments.callee);</span><br><span class="line">    &#125;</span><br><span class="line">    function isCircleHit(circle1,circle2)&#123;</span><br><span class="line">        var min1 = circle1.x;</span><br><span class="line">        var min2 = circle2.x;</span><br><span class="line">        var max1 = circle1.x + circle1.r;</span><br><span class="line">        var max2 = circle2.x + circle2.r;</span><br><span class="line">        var min = Math.min(min1.min2);</span><br><span class="line">        var max = Math.max(max1,max2);</span><br><span class="line">        if(min &gt;= max)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="刮刮卡项目"><a href="#刮刮卡项目" class="headerlink" title="刮刮卡项目"></a>刮刮卡项目</h6><p>实现：1. 有一张图和一个画布。</p>
-<ol start="2">
-<li>给图片蒙上一张灰色蒙版，当鼠标按下时获取当前鼠标相对画布的坐标。</li>
-<li>设置ctx.globalCompositeOperation 为 ‘destination-out’，在源图像（灰色蒙版）中显示目标图像（画笔）。只有源图像之内的目标图像部分会被显示，源图像是透明的。</li>
-<li>在不松开鼠标前提下，移动鼠标，得到并不断更新的坐标，先清除</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        html,</span><br><span class="line">        body,</span><br><span class="line">        canvas &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            left: 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;img src=&quot;5.png&quot; alt=&quot;Image&quot; width=&quot;300&quot; height=&quot;400&quot;&gt;</span><br><span class="line">    &lt;canvas width=&quot;300&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    ctx.fillStyle = &apos;gray&apos;;</span><br><span class="line">    ctx.fillRect(0, 0, 300, 400);</span><br><span class="line">    ctx.globalCompositeOperation = &apos;destination-out&apos;;</span><br><span class="line">    ctx.lineWidth = 10;</span><br><span class="line">        ctx.lineCap = &apos;round&apos;;</span><br><span class="line">    canvas.onmousedown = function (e) &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(e.clientX, e.clientY);</span><br><span class="line">        canvas.onmousemove = function (e) &#123;</span><br><span class="line">            ctx.lineTo(e.clientX, e.clientY);</span><br><span class="line">            ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.onmouseup = function(e)&#123;</span><br><span class="line">            canvas.onmousemove = &apos;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-setTimeout与setInterval区别" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/10/setTimeout与setInterval区别/" class="article-date">
-      <time datetime="2020-03-10T01:52:21.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h6 id="setTimeout与setInterval区别"><a href="#setTimeout与setInterval区别" class="headerlink" title="setTimeout与setInterval区别"></a>setTimeout与setInterval区别</h6><p>这两个都是原生js的定时方法，但执行次数不同。</p>
-<ul>
-<li><p>setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。简单得说就是几秒之后，你把我交给你得任务执行了。（执行一次）</p>
-<p><code>setTimeout(function(){ alert(&quot;Hello&quot;); }, 3000);</code></p>
-</li>
-<li><p>setInterval（）可按照指定的周期（以毫秒计）来调用函数或计算表达式，直到clearInterval（）方法被调用或窗口被关闭。简单来说就是每几秒执行一次，无限执行。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var w, h;</span><br><span class="line">    var canvas = document.querySelector(&apos;canvas&apos;);</span><br><span class="line">    ~~function setSize() &#123;</span><br><span class="line">        window.onresize = arguments.callee;</span><br><span class="line">        w = window.innerWidth;</span><br><span class="line">        h = window.innerHeight;</span><br><span class="line">        canvas.width = w;</span><br><span class="line">        canvas.height = h;</span><br><span class="line">    &#125;();</span><br><span class="line">    var canCon = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">    var x = randomNum(0,w);</span><br><span class="line">    var y = 100;</span><br><span class="line">    setInterval(function()&#123;</span><br><span class="line">        canCon.fillStyle = randomColor();</span><br><span class="line">        canCon.arc(x,y++,20,0,2*Math.PI)</span><br><span class="line">        canCon.fill();</span><br><span class="line">    &#125;,1000/60);</span><br><span class="line"></span><br><span class="line">    // 随机数</span><br><span class="line">    function randomNum(min,max)&#123;</span><br><span class="line">        return Math.floor(Math.random() * (max - min) + min);</span><br><span class="line">    &#125;</span><br><span class="line">    // 随机颜色</span><br><span class="line">    function randomColor()&#123;</span><br><span class="line">        var r,g,b,a;</span><br><span class="line">        r = randomNum(0,255);</span><br><span class="line">        g = randomNum(0,255);</span><br><span class="line">        b = randomNum(0,255);</span><br><span class="line">        a = Math.random();</span><br><span class="line">        return `rgba($&#123;r&#125;,$&#123;g&#125;,$&#123;b&#125;,$&#123;a&#125;)`;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>至此一个闪动的滚动条出现。</p>
-<p>但是我发现setInterval越来越快的问题…….</p>
-<p>经过仔细排查之后，我排除了我自己代码的问题，于是就开始查各种资料。最后才晓得这是setInterval()自身的问题。下面引用大佬的一段话来解释为什么使用setInterval会出现越来越快的问题。</p>
-<p>“JavaScript是运行在单线程的环境中的，所以这就意味着定时器就成了要执行的计划！而不是必须要执行的铁律！ 为啥呢？ 当函数开始执行时在栈中创建出来一个栈帧，这个栈帧的执行是需要时间的，假设有3秒，在这三秒内，JavaScript的单线程特点就会确保在这3秒内全力的专一的去解决掉这个栈帧（函数）。所以在这个函数运行的时候定时器是没有能力终止他的运行的，因此当函数的运行时间大于间隔时间时，间隔时间1秒到了，但是程序还有2秒没有执行完，那你也给我老老实实的等着函数执行完！！！”</p>
-<p>知道了问题的原因，那我们再来看一下怎么去解决这个问题。</p>
-<p><strong>使用setTimeout循环来解决setInterval越来越快的问题</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i=0;</span><br><span class="line">    function show() &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">        i++;</span><br><span class="line">        if(i&lt;5)&#123;</span><br><span class="line">            setTimeout(show,1000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    show();</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决重复点击，setInterval越来越快问题</strong></p>
-<p>在data中定义<code>intervalId</code>存储定时器，初始化<code>intetvalId</code>为null，当触发事件时，在方法内部先判断intervalId是否为null，是则开启interval，否则不做处理返回。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;openInterval&quot;&gt;开始&lt;/button&gt;</span><br><span class="line">&lt;button @click=&quot;closeInterVal&quot;&gt;关闭&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">data()&#123;</span><br><span class="line">	return &#123;</span><br><span class="line">		intervalId: null</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">	openInterval()&#123;</span><br><span class="line">		if(this.intervalId != null)   return;</span><br><span class="line">		this.setintervalId = setInterval(() =&gt; &#123;&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	closeInterVal()&#123;</span><br><span class="line">		clearInterval(this.intervalId);</span><br><span class="line">		this.intervalId = null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="完成实例"><a href="#完成实例" class="headerlink" title="完成实例"></a>完成实例</h6><p><a href="https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/" target="_blank" rel="noopener">https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/</a></p>
 
       
     </div>

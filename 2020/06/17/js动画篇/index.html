@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="动画一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式当在keyframes创建动画时，把他绑定到一个选择器，否则动画不会有任何效果，至少指定这两个动画属性  规定动画名称 规定动画时长 animation:  myfirst  5s;  二 . animation属性语法： animation: name    duration    time-f">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js动画篇">
+<meta property="og:url" content="http://yoursite.com/2020/06/17/js动画篇/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="动画一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式当在keyframes创建动画时，把他绑定到一个选择器，否则动画不会有任何效果，至少指定这两个动画属性  规定动画名称 规定动画时长 animation:  myfirst  5s;  二 . animation属性语法： animation: name    duration    time-f">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-17T07:27:56.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js动画篇">
+<meta name="twitter:description" content="动画一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式当在keyframes创建动画时，把他绑定到一个选择器，否则动画不会有任何效果，至少指定这两个动画属性  规定动画名称 规定动画时长 animation:  myfirst  5s;  二 . animation属性语法： animation: name    duration    time-f">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>js动画篇 | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-js动画篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/js动画篇/" class="article-date">
+      <time datetime="2020-06-17T07:27:46.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js动画篇
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><h4 id="一-keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式"><a href="#一-keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式" class="headerlink" title="一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式"></a>一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式</h4><p>当在keyframes创建动画时，把他绑定到一个选择器，否则动画不会有任何效果，至少指定这两个动画属性</p>
+<ul>
+<li>规定动画名称</li>
+<li>规定动画时长</li>
+<li>animation:  myfirst  5s;</li>
+</ul>
+<h4 id="二-animation属性"><a href="#二-animation属性" class="headerlink" title="二 . animation属性"></a>二 . animation属性</h4><p>语法：</p>
+<p>animation: name    duration    time-function    delay    iteration-count    direction;</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>animation-name</td>
+<td>规定需要绑定到选择器的keyframe名称</td>
+</tr>
+</tbody></table>
+<p>animation-duration    规定完成动画所花费的时间，以s/ms记</p>
+<p>animation-time-function    规定动画的速度曲线</p>
+<p>animation-iteration-count    规定动画应该播放的次数</p>
+<p>animation-direction    规定是否应该轮流方向播放动画</p>
+<p><strong>注意</strong>：请始终规定animation-duration属性，否则时长为0，就不会播放动画。</p>
+<h4 id="三-animation-delay属性"><a href="#三-animation-delay属性" class="headerlink" title="三  . animation-delay属性"></a>三  . animation-delay属性</h4><h5 id="1-定义动画什么时候开始（s-ms）"><a href="#1-定义动画什么时候开始（s-ms）" class="headerlink" title="1.定义动画什么时候开始（s/ms）"></a>1.定义动画什么时候开始（s/ms）</h5><ul>
+<li>可为负值，-2s使动画马上开始，但跳过2s进入动画</li>
+</ul>
+<h4 id="四-animation-direction属性"><a href="#四-animation-direction属性" class="headerlink" title="四 . animation-direction属性"></a>四 . animation-direction属性</h4><h5 id="1-animation-direction：属性控制如何在reverse或alternate周期播放动画。"><a href="#1-animation-direction：属性控制如何在reverse或alternate周期播放动画。" class="headerlink" title="1.animation-direction：属性控制如何在reverse或alternate周期播放动画。"></a>1.animation-direction：属性控制如何在<code>reverse</code>或<code>alternate</code>周期播放动画。</h5><p>如果 animation-direction 值是 “alternate”，则动画会在奇数次数（1、3、5 等等）正常播放，而在偶数次数（2、4、6 等等）向后播放。</p>
+<p>注释：如果把动画设置为只播放一次，则该属性没有效果。</p>
+<ul>
+<li>属性值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>以正常的方式播放动画</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>以相反方向播放动画</td>
+</tr>
+<tr>
+<td>alternate</td>
+<td>播放动画作为正常每奇数时间（1,3,5等）和反方向每偶数时间（2,4,6，等…）</td>
+</tr>
+<tr>
+<td>alternate-reverse</td>
+<td>在每个奇数时间（1,3,5等）在相反方向上播放动画，并且在每个偶数时间（2,4,6等等）的正常方向上播放动画</td>
+</tr>
+</tbody></table>
+<h4 id="五-animation-duration属性"><a href="#五-animation-duration属性" class="headerlink" title="五 . animation-duration属性"></a>五 . animation-duration属性</h4><h5 id="1-定义完成一个动画需要的时间s-ms"><a href="#1-定义完成一个动画需要的时间s-ms" class="headerlink" title="1.定义完成一个动画需要的时间s/ms"></a>1.定义完成一个动画需要的时间s/ms</h5><p>animation-duration：time；</p>
+<h4 id="六-animation-fill-mode属性"><a href="#六-animation-fill-mode属性" class="headerlink" title="六 . animation-fill-mode属性"></a>六 . animation-fill-mode属性</h4><h5 id="1-设置样式以在动画不播放时应用元素"><a href="#1-设置样式以在动画不播放时应用元素" class="headerlink" title="1.设置样式以在动画不播放时应用元素"></a>1.设置样式以在动画不播放时应用元素</h5><ul>
+<li><p>animation-fill-mode:none | forwards | backwards |both |initial |inherit ;</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>默认值，无样式</td>
+</tr>
+</tbody></table>
+<p>forwards    动画结束后，使用元素的结束属性值</p>
+<p>backwards    使用元素的起始值</p>
+<p>both    动画遵循向前向后的规则</p>
+</li>
+</ul>
+<h4 id="七-animation-iteration-count属性"><a href="#七-animation-iteration-count属性" class="headerlink" title="七 . animation-iteration-count属性"></a>七 . animation-iteration-count属性</h4><h5 id="1-定义动画应该播放几次"><a href="#1-定义动画应该播放几次" class="headerlink" title="1 . 定义动画应该播放几次"></a>1 . 定义动画应该播放几次</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>n</em></td>
+<td>定义播放动画多少次。 默认值为1</td>
+</tr>
+<tr>
+<td>infinite</td>
+<td>指定动画应该播放无限次（永远）</td>
+</tr>
+</tbody></table>
+<h4 id="八-animation-name属性"><a href="#八-animation-name属性" class="headerlink" title="八 . animation-name属性"></a>八 . animation-name属性</h4><h5 id="1-animation-name属性为-keyframes动画规定名称"><a href="#1-animation-name属性为-keyframes动画规定名称" class="headerlink" title="1. animation-name属性为@keyframes动画规定名称"></a>1. animation-name属性为@keyframes动画规定名称</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>keyframename</td>
+<td>规定需要绑定到选择器的 keyframe 的名称。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>规定无动画效果（可用于覆盖来自级联的动画）。</td>
+</tr>
+</tbody></table>
+<h4 id="九-animation-play-state属性"><a href="#九-animation-play-state属性" class="headerlink" title="九 . animation-play-state属性"></a>九 . animation-play-state属性</h4><h5 id="1-设置是否运行或者暂停动画"><a href="#1-设置是否运行或者暂停动画" class="headerlink" title="1.设置是否运行或者暂停动画"></a>1.设置是否运行或者暂停动画</h5><p>你可以在js中使用该属性，这样就可以在播放过程中暂停动画</p>
+<p>animation-play-state：paused | running；</p>
+<h4 id="十-animation-timing-function属性"><a href="#十-animation-timing-function属性" class="headerlink" title="十 . animation-timing-function属性"></a>十 . animation-timing-function属性</h4><h5 id="1-指定动画速度曲线"><a href="#1-指定动画速度曲线" class="headerlink" title="1 . 指定动画速度曲线"></a>1 . 指定动画速度曲线</h5><p>​    速度曲线定义动画从一套CSS样式变为另一套所用的时间，速度曲线用于使变化更为平滑</p>
+<p>​    animation-timing-function : linear | ease | ease-in | ease-out | cubic-bezier(n,n,n,n);</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">linear</td>
+<td align="left">动画从开始到结束具有相同的速度。</td>
+</tr>
+<tr>
+<td align="left">ease</td>
+<td align="left">动画有一个缓慢的开始，然后快，结束慢。</td>
+</tr>
+<tr>
+<td align="left">ease-in</td>
+<td align="left">动画有一个缓慢的开始。</td>
+</tr>
+<tr>
+<td align="left">ease-out</td>
+<td align="left">动画结束缓慢。</td>
+</tr>
+<tr>
+<td align="left">ease-in-out</td>
+<td align="left">动画具有缓慢的开始和慢的结束。</td>
+</tr>
+<tr>
+<td align="left">cubic-bezier(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">在立方贝塞尔函数中定义速度函数。 可能的值是从0到1的数字值。</td>
+</tr>
+</tbody></table>
+<hr>
+
+<h1 id="转换transform"><a href="#转换transform" class="headerlink" title="转换transform"></a>转换transform</h1><h2 id="一-2D转换"><a href="#一-2D转换" class="headerlink" title="一 . 2D转换"></a>一 . 2D转换</h2><h5 id="1-旋转transform-rotate-30deg"><a href="#1-旋转transform-rotate-30deg" class="headerlink" title="1.旋转transform : rotate(30deg);"></a>1.旋转transform : rotate(30deg);</h5><p>在给定度数顺时针旋转的元素。负值表示逆时针deg表示度数。</p>
+<h5 id="2-移动-transform-translate-50px-100px"><a href="#2-移动-transform-translate-50px-100px" class="headerlink" title="2.移动 transform:translate(50px,100px);"></a>2.移动 transform:translate(50px,100px);</h5><p>往左往上为正</p>
+<h5 id="3-缩放-transform：scale（2，4）；"><a href="#3-缩放-transform：scale（2，4）；" class="headerlink" title="3.缩放 transform：scale（2，4）；"></a>3.缩放 transform：scale（2，4）；</h5><p>scale（2,4）转变宽度为原来的大小的2倍，和其原始大小4倍的高度。</p>
+<h5 id="4-倾斜-transform：skew（30deg，20deg）；"><a href="#4-倾斜-transform：skew（30deg，20deg）；" class="headerlink" title="4.倾斜 transform：skew（30deg，20deg）；"></a>4.倾斜 transform：skew（30deg，20deg）；</h5><p>包含两个参数值，分别表示X轴和Y轴倾斜的角度，如果第二个参数为空，则默认为0，参数为负表示向相反方向倾斜。</p>
+<ul>
+<li>skewX( );表示只在X轴(水平方向)倾斜。</li>
+</ul>
+<ul>
+<li>skewY( );表示只在Y轴(垂直方向)倾斜。 </li>
+<li>skew(30deg,20deg) 是元素在X轴和Y轴上倾斜20度30度。</li>
+</ul>
+<h2 id="总的语法"><a href="#总的语法" class="headerlink" title="总的语法"></a>总的语法</h2><p>transform: none|<em>transform-functions</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">定义不进行转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">matrix(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">定义 2D 转换，使用六个值的矩阵。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">matrix3d(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">定义 3D 转换，使用 16 个值的 4x4 矩阵。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translate(<em>x</em>,<em>y</em>)</td>
+<td align="left">定义 2D 转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translate3d(<em>x</em>,<em>y</em>,<em>z</em>)</td>
+<td align="left">定义 3D 转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateX(<em>x</em>)</td>
+<td align="left">定义转换，只是用 X 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateY(<em>y</em>)</td>
+<td align="left">定义转换，只是用 Y 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateZ(<em>z</em>)</td>
+<td align="left">定义 3D 转换，只是用 Z 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scale(<em>x</em>[,<em>y</em>]?)</td>
+<td align="left">定义 2D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scale3d(<em>x</em>,<em>y</em>,<em>z</em>)</td>
+<td align="left">定义 3D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleX(<em>x</em>)</td>
+<td align="left">通过设置 X 轴的值来定义缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleY(<em>y</em>)</td>
+<td align="left">通过设置 Y 轴的值来定义缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleZ(<em>z</em>)</td>
+<td align="left">通过设置 Z 轴的值来定义 3D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotate(<em>angle</em>)</td>
+<td align="left">定义 2D 旋转，在参数中规定角度。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotate3d(<em>x</em>,<em>y</em>,<em>z</em>,<em>angle</em>)</td>
+<td align="left">定义 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateX(<em>angle</em>)</td>
+<td align="left">定义沿着 X 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateY(<em>angle</em>)</td>
+<td align="left">定义沿着 Y 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateZ(<em>angle</em>)</td>
+<td align="left">定义沿着 Z 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skew(<em>x-angle</em>,<em>y-angle</em>)</td>
+<td align="left">定义沿着 X 和 Y 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skewX(<em>angle</em>)</td>
+<td align="left">定义沿着 X 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skewY(<em>angle</em>)</td>
+<td align="left">定义沿着 Y 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">perspective(<em>n</em>)</td>
+<td align="left">为 3D 转换元素定义透视视图。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="二-transform-origin"><a href="#二-transform-origin" class="headerlink" title="二 . transform-origin"></a>二 . transform-origin</h4><h5 id="1-transform-Origin属性允许您更改转换元素的位置。"><a href="#1-transform-Origin属性允许您更改转换元素的位置。" class="headerlink" title="1.transform-Origin属性允许您更改转换元素的位置。"></a>1.transform-Origin属性允许您更改转换元素的位置。</h5><p>2D转换元素可以改变元素的X和Y轴。 3D转换元素，还可以更改元素的Z轴。</p>
+<p>transform-origin: <em>x-axis y-axis z-axis</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x-axis</td>
+<td align="left">定义视图被置于 X 轴的何处。left center right <em>length</em> <em>%</em></td>
+</tr>
+<tr>
+<td align="left">y-axis</td>
+<td align="left">定义视图被置于 Y 轴的何处。可能的值：top center bottom   <em>length</em>     <em>%</em></td>
+</tr>
+<tr>
+<td align="left">z-axis</td>
+<td align="left">定义视图被置于 Z 轴的何处。可能的值：<em>length</em></td>
+</tr>
+</tbody></table>
+<h5 id="2-transform-style属性指定嵌套元素是怎么在三维空间中呈现"><a href="#2-transform-style属性指定嵌套元素是怎么在三维空间中呈现" class="headerlink" title="2.transform-style属性指定嵌套元素是怎么在三维空间中呈现"></a>2.transform-style属性指定嵌套元素是怎么在三维空间中呈现</h5><ul>
+<li><p>transform-style: flat | preserve-3d;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">flat</td>
+<td align="left">子元素将不保留其 3D 位置。</td>
+</tr>
+<tr>
+<td align="left">preserve-3d</td>
+<td align="left">子元素将保留其 3D 位置。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p>让转换的子元素保留3D转换：</p>
+<p>div<br>{<br>transform: rotateY(60deg);<br>transform-style: preserve-3d;<br>-webkit-transform: rotateY(60deg); /* Safari and Chrome <em>/<br>-webkit-transform-style: preserve-3d; /</em> Safari and Chrome */<br>}</p>
+<h1 id="transition属性过渡"><a href="#transition属性过渡" class="headerlink" title="transition属性过渡"></a>transition属性过渡</h1><p>transition 属性是一个简写属性，用于设置四个过渡属性：</p>
+<ul>
+<li>transition-property</li>
+<li>transition-duration</li>
+<li>transition-timing-function</li>
+<li>transition-delay</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition: property duration timing-function delay;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>transition-property</td>
+<td>规定设置过渡效果的 CSS 属性的名称。</td>
+</tr>
+<tr>
+<td>transition-duration</td>
+<td>规定完成过渡效果需要多少秒或毫秒。</td>
+</tr>
+<tr>
+<td>transition-timing-function</td>
+<td>规定速度效果的速度曲线。</td>
+</tr>
+<tr>
+<td>transition-delay</td>
+<td>定义过渡效果何时开始。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>transition-property属性指定css属性的nametransition效果（transition效果时将会启动指定的css属性的变化。</p>
+</li>
+<li><p>一个转场效果通常发生在当鼠标悬停在一个元素上</p>
+</li>
+<li><p>始终指定transition-duration属性，否则持续时间为0，transition不会有效果默认值是all，多项改变要添加多个样式的变换效果，添加的属性由逗号分隔</p>
+<p>transition-property: none|all| <em>property</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">没有属性会获得过渡效果。</td>
+</tr>
+<tr>
+<td align="left">all</td>
+<td align="left">所有属性都将获得过渡效果。</td>
+</tr>
+<tr>
+<td align="left"><em>property</em></td>
+<td align="left">定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="三-透视3D属性perspective"><a href="#三-透视3D属性perspective" class="headerlink" title="三 . 透视3D属性perspective"></a>三 . 透视3D属性perspective</h4><p>多少像素的3D元素是从视图的perspective属性定义。这个属性允许你改变3D元素是怎样查看透视图。perspective 属性只影响 3D 转换元素；定义时的perspective属性，它是一个元素的子元素，透视图，而不是元素本身。</p>
+<p>perspective: <em>number</em>|none;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>number</em></td>
+<td align="left">元素距离视图的距离，以像素计。</td>
+</tr>
+<tr>
+<td align="left">none</td>
+<td align="left">默认值。与 0 相同。不设置透视。</td>
+</tr>
+</tbody></table>
+<p>一般跟perspective-origin属性配合使用，默认值都是50%</p>
+<h4 id="四-。-backface-visibility属性"><a href="#四-。-backface-visibility属性" class="headerlink" title="四 。 backface-visibility属性"></a>四 。 backface-visibility属性</h4><h5 id="1-backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见"><a href="#1-backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见" class="headerlink" title="1. backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见"></a>1. backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见</h5><p>如果在旋转元素不希望看到其背面时，该属性很有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backface-visibility: visible|hidden;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>visible</td>
+<td>默认值。 背面是可见的。</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>背面是不可见的。</td>
+</tr>
+</tbody></table>
+<h4 id="五-盒阴影box-shadow"><a href="#五-盒阴影box-shadow" class="headerlink" title="五 . 盒阴影box-shadow"></a>五 . 盒阴影box-shadow</h4><p>box-shadow : 向左偏移量  向下偏移量  阴影半径  颜色；</p>
+<p><strong>注意</strong>：向右向下为正</p>
+<h4 id="六-边界图片border-image"><a href="#六-边界图片border-image" class="headerlink" title="六 . 边界图片border-image"></a>六 . 边界图片border-image</h4><p>border-image属性允许你指定一个图片作为边框！用于创建上文边框的原始图像</p>
+<p>border-image:url(border.png) 30 30 round; </p>
+<p>速记属性</p>
+<p>border-image：source    slice   width    outset   repeat；</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>border-image-source</em></td>
+<td align="left">用于指定要用于绘制边框的图像的位置</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-slice</em></td>
+<td align="left">图像边界向内偏移</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-width</em></td>
+<td align="left">图像边界的宽度</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-outset</em></td>
+<td align="left">用于指定在边框外部绘制 border-image-area 的量</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-repeat</em></td>
+<td align="left">这个例子演示了如何创建一个border-image 属性的按钮。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>border-image-source: url(border.png);</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">没有图像被使用</td>
+</tr>
+<tr>
+<td align="left"><em>image</em></td>
+<td align="left">边框使用图像的路径</td>
+</tr>
+</tbody></table>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-image-outset: length|number（代表对应的border-width的倍数）;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注释：</strong>border-image-outset 属性规定边框图像超出边框盒的量。在上、右、下、左侧。如果忽略第四个值，则与第二个值相同。如果省略第三个值，则与第一个值相同。如果省略第二个值，则与第一个值相同。不允许任何负值作为 border-image-outset 值。</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-image-width: number|%|auto;</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>border-image -width的4个值指定用于把border图像区域分为九个部分。他们代表上，右，底部，左，两侧向内距离。如果第四个值被省略，它和第二个是相同的。如果也省略了第三个，它和第一个是相同的。如果也省略了第二个，它和第一个是相同的。负值是不允许的。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>number</em></td>
+<td>代表对应的 border-width 的倍数。</td>
+</tr>
+<tr>
+<td><em>%</em></td>
+<td>参考边框图像区域的尺寸：区域的高度影响水平偏移，宽度影响垂直偏移。</td>
+</tr>
+<tr>
+<td><em>auto</em></td>
+<td>如果规定该属性，则宽度为对应的图像切片的固有宽度。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="七-border-collapse-属性"><a href="#七-border-collapse-属性" class="headerlink" title="七 . border-collapse 属性"></a>七 . border-collapse 属性</h4><p>设置表格的边框是否被合并为一个单一的边框</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">collapse</td>
+<td align="left">如果可能，边框会合并为一个单一的边框。会忽略 border-spacing 和 empty-cells 属性</td>
+</tr>
+<tr>
+<td align="left">separate</td>
+<td align="left">默认值。边框会被分开。不会忽略 border-spacing 和 empty-cells 属性</td>
+</tr>
+<tr>
+<td align="left">inherit</td>
+<td align="left">规定应该从父元素继承 border-collapse 属性的值</td>
+</tr>
+</tbody></table>
+<h4 id="八-border-color-红，绿，蓝-粉红色"><a href="#八-border-color-红，绿，蓝-粉红色" class="headerlink" title="八 .border-color:红，绿，蓝,粉红色;"></a>八 .<strong>border-color:红，绿，蓝,粉红色;</strong></h4><ul>
+<li>上边框是红色</li>
+<li>右边框是绿色</li>
+<li>底部边框是蓝</li>
+<li>左边框是粉红色</li>
+</ul>
+<p><strong>border-color：红，绿，蓝;</strong></p>
+<ul>
+<li>上边框是红色</li>
+<li>左，右边框是绿色</li>
+<li>底部边框是蓝</li>
+</ul>
+<p><strong>border-color：红，绿;</strong></p>
+<ul>
+<li>顶部和底部边框是红色</li>
+<li>左右边框是绿色</li>
+</ul>
+<p><strong>border-color：红色;</strong></p>
+<ul>
+<li>所有四个边框是红色</li>
+</ul>
+<p>请始终把 border-style 属性声明到 border-color 属性之前。元素必须在您改变其颜色之前获得边框。</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>color</em></td>
+<td align="left">指定背景颜色。在CSS颜色值查找颜色值的完整列表</td>
+</tr>
+<tr>
+<td align="left">transparent</td>
+<td align="left">指定边框的颜色应该是透明的。这是默认</td>
+</tr>
+<tr>
+<td align="left">inherit</td>
+<td align="left">指定边框的颜色，应该从父元素继承</td>
+</tr>
+</tbody></table>
+<h1 id="颜色渐变"><a href="#颜色渐变" class="headerlink" title="颜色渐变"></a>颜色渐变</h1><h2 id="一-线性渐变（Linear-Gradients）"><a href="#一-线性渐变（Linear-Gradients）" class="headerlink" title="一 . 线性渐变（Linear Gradients）"></a>一 . 线性渐变（Linear Gradients）</h2><ul>
+<li>background: linear-gradient(direction, color-stop1, color-stop2, …);   <ul>
+<li>background: -webkit-linear-gradient(red, blue); /* Safari  */ </li>
+<li>background: -o-linear-gradient(red, blue); /* Opera **/ *</li>
+<li>background: -moz-linear-gradient(red, blue); /* Firefox  */ </li>
+<li>background: linear-gradient(red, blue); /* 标准的语法 */ </li>
+</ul>
+</li>
+</ul>
+<h2 id="二-径向渐变（Radial-Gradients）"><a href="#二-径向渐变（Radial-Gradients）" class="headerlink" title="二 . 径向渐变（Radial Gradients）"></a>二 . 径向渐变（Radial Gradients）</h2><ul>
+<li><p>默认情况下，渐变的中心是 center（表示在中心点），渐变的形状是 ellipse（表示椭圆形），渐变的大小是 farthest-corner（表示到最远的角落）。</p>
+</li>
+<li><p>background: radial-gradient(center, shape size, start-color, …, last-color);  </p>
+</li>
+<li><p><strong>径向渐变 - 颜色结点不均匀分布</strong></p>
+<ul>
+<li>background: -webkit-radial-gradient(red 5%, green 15%, blue 60%);</li>
+</ul>
+</li>
+<li><p>shape 参数定义了形状。它可以是值 circle 或 ellipse。其中，circle 表示圆形，ellipse 表示椭圆形。默认值是 ellipse。</p>
+<h5 id="不同尺寸大小关键字的使用"><a href="#不同尺寸大小关键字的使用" class="headerlink" title="不同尺寸大小关键字的使用"></a>不同尺寸大小关键字的使用</h5><p>size 参数定义了渐变的大小。它可以是以下四个值：</p>
+<ul>
+<li><strong>closest-side</strong></li>
+<li><strong>farthest-side</strong></li>
+<li><strong>closest-corner</strong></li>
+<li><strong>farthest-corner</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="三-透明度transparency"><a href="#三-透明度transparency" class="headerlink" title="三 . 透明度transparency"></a>三 . 透明度transparency</h3><ul>
+<li>用于创建减弱变淡的效果；为了添加透明度，我们使用 rgba() 函数来定义颜色结点。rgba() 函数中的最后一个参数可以是从 0 到 1 的值，它定义了颜色的透明度：0 表示完全透明，1 表示完全不透明。</li>
+<li>repeating-linear-gradient() 函数用于重复线性渐变：</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/06/17/js动画篇/">js动画篇</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-06-17, 15:27:46</p>
+        <p><span>最后更新:</span>2020-06-17, 15:27:56</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/17/js动画篇/" title="js动画篇">http://yoursite.com/2020/06/17/js动画篇/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/17/js动画篇/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/06/17/jquery/">
+                    jquery
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/06/17/js精研/">
+                    js精研
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动画"><span class="toc-number">1.</span> <span class="toc-text">动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-animation属性"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">二 . animation属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-animation-delay属性"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">三  . animation-delay属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义动画什么时候开始（s-ms）"><span class="toc-number">1.0.0.3.1.</span> <span class="toc-text">1.定义动画什么时候开始（s/ms）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-animation-direction属性"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">四 . animation-direction属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-animation-direction：属性控制如何在reverse或alternate周期播放动画。"><span class="toc-number">1.0.0.4.1.</span> <span class="toc-text">1.animation-direction：属性控制如何在reverse或alternate周期播放动画。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-animation-duration属性"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">五 . animation-duration属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义完成一个动画需要的时间s-ms"><span class="toc-number">1.0.0.5.1.</span> <span class="toc-text">1.定义完成一个动画需要的时间s/ms</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六-animation-fill-mode属性"><span class="toc-number">1.0.0.6.</span> <span class="toc-text">六 . animation-fill-mode属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-设置样式以在动画不播放时应用元素"><span class="toc-number">1.0.0.6.1.</span> <span class="toc-text">1.设置样式以在动画不播放时应用元素</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#七-animation-iteration-count属性"><span class="toc-number">1.0.0.7.</span> <span class="toc-text">七 . animation-iteration-count属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-定义动画应该播放几次"><span class="toc-number">1.0.0.7.1.</span> <span class="toc-text">1 . 定义动画应该播放几次</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#八-animation-name属性"><span class="toc-number">1.0.0.8.</span> <span class="toc-text">八 . animation-name属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-animation-name属性为-keyframes动画规定名称"><span class="toc-number">1.0.0.8.1.</span> <span class="toc-text">1. animation-name属性为@keyframes动画规定名称</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#九-animation-play-state属性"><span class="toc-number">1.0.0.9.</span> <span class="toc-text">九 . animation-play-state属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-设置是否运行或者暂停动画"><span class="toc-number">1.0.0.9.1.</span> <span class="toc-text">1.设置是否运行或者暂停动画</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#十-animation-timing-function属性"><span class="toc-number">1.0.0.10.</span> <span class="toc-text">十 . animation-timing-function属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-指定动画速度曲线"><span class="toc-number">1.0.0.10.1.</span> <span class="toc-text">1 . 指定动画速度曲线</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#转换transform"><span class="toc-number">2.</span> <span class="toc-text">转换transform</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-2D转换"><span class="toc-number">2.1.</span> <span class="toc-text">一 . 2D转换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-旋转transform-rotate-30deg"><span class="toc-number">2.1.0.0.1.</span> <span class="toc-text">1.旋转transform : rotate(30deg);</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-移动-transform-translate-50px-100px"><span class="toc-number">2.1.0.0.2.</span> <span class="toc-text">2.移动 transform:translate(50px,100px);</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-缩放-transform：scale（2，4）；"><span class="toc-number">2.1.0.0.3.</span> <span class="toc-text">3.缩放 transform：scale（2，4）；</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-倾斜-transform：skew（30deg，20deg）；"><span class="toc-number">2.1.0.0.4.</span> <span class="toc-text">4.倾斜 transform：skew（30deg，20deg）；</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总的语法"><span class="toc-number">2.2.</span> <span class="toc-text">总的语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二-transform-origin"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">二 . transform-origin</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-transform-Origin属性允许您更改转换元素的位置。"><span class="toc-number">2.2.0.1.1.</span> <span class="toc-text">1.transform-Origin属性允许您更改转换元素的位置。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-transform-style属性指定嵌套元素是怎么在三维空间中呈现"><span class="toc-number">2.2.0.1.2.</span> <span class="toc-text">2.transform-style属性指定嵌套元素是怎么在三维空间中呈现</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transition属性过渡"><span class="toc-number">3.</span> <span class="toc-text">transition属性过渡</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#三-透视3D属性perspective"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">三 . 透视3D属性perspective</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-。-backface-visibility属性"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">四 。 backface-visibility属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见"><span class="toc-number">3.0.0.2.1.</span> <span class="toc-text">1. backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-盒阴影box-shadow"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">五 . 盒阴影box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六-边界图片border-image"><span class="toc-number">3.0.0.4.</span> <span class="toc-text">六 . 边界图片border-image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#七-border-collapse-属性"><span class="toc-number">3.0.0.5.</span> <span class="toc-text">七 . border-collapse 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#八-border-color-红，绿，蓝-粉红色"><span class="toc-number">3.0.0.6.</span> <span class="toc-text">八 .border-color:红，绿，蓝,粉红色;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#颜色渐变"><span class="toc-number">4.</span> <span class="toc-text">颜色渐变</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-线性渐变（Linear-Gradients）"><span class="toc-number">4.1.</span> <span class="toc-text">一 . 线性渐变（Linear Gradients）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-径向渐变（Radial-Gradients）"><span class="toc-number">4.2.</span> <span class="toc-text">二 . 径向渐变（Radial Gradients）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#不同尺寸大小关键字的使用"><span class="toc-number">4.2.0.0.1.</span> <span class="toc-text">不同尺寸大小关键字的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-透明度transparency"><span class="toc-number">4.2.1.</span> <span class="toc-text">三 . 透明度transparency</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"js动画篇　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/06/17/jquery/" title="上一篇: jquery">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/06/17/js精研/" title="下一篇: js精研">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/jquery/">jquery</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js动画篇/">js动画篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js精研/">js精研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js基础/">js基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/刷题笔记/">刷题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/前端cookie解读/">前端cookie解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/04/前端经验/">前端经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/linux学习/">linux学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/10/pandas之excel/">pandas之excel</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/爬虫/">爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/python的学习/">python的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/node模块编译/">node模块编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
