@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="陈楚吟">
+
+
+
+<meta name="description" content="ts基础vscode配置自动编译ts123tsc --init  //生成tsconfig.json文件//在tsconfig.json文件 改 &amp;quot;outDir&amp;quot;: &amp;quot;./js&amp;quot;在导航栏找到  任务--&amp;gt; 监视 tsconfig.json  hbuild配置自动编译ts 在最上面菜单栏，点击工具——插件安装。 点击下方浏览Eclipse插件市场，搜索t">
+<meta name="keywords" content="write myBlog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typescript">
+<meta property="og:url" content="http://yoursite.com/2020/06/17/typescript/index.html">
+<meta property="og:site_name" content="Nikita">
+<meta property="og:description" content="ts基础vscode配置自动编译ts123tsc --init  //生成tsconfig.json文件//在tsconfig.json文件 改 &amp;quot;outDir&amp;quot;: &amp;quot;./js&amp;quot;在导航栏找到  任务--&amp;gt; 监视 tsconfig.json  hbuild配置自动编译ts 在最上面菜单栏，点击工具——插件安装。 点击下方浏览Eclipse插件市场，搜索t">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-17T07:36:12.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="typescript">
+<meta name="twitter:description" content="ts基础vscode配置自动编译ts123tsc --init  //生成tsconfig.json文件//在tsconfig.json文件 改 &amp;quot;outDir&amp;quot;: &amp;quot;./js&amp;quot;在导航栏找到  任务--&amp;gt; 监视 tsconfig.json  hbuild配置自动编译ts 在最上面菜单栏，点击工具——插件安装。 点击下方浏览Eclipse插件市场，搜索t">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Nikita" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>typescript | Nikita</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">陈楚吟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不负韶华</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">陈楚吟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">陈楚吟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不负韶华</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-typescript" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/typescript/" class="article-date">
+      <time datetime="2020-06-17T07:35:59.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      typescript
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="ts基础"><a href="#ts基础" class="headerlink" title="ts基础"></a>ts基础</h4><h6 id="vscode配置自动编译ts"><a href="#vscode配置自动编译ts" class="headerlink" title="vscode配置自动编译ts"></a>vscode配置自动编译ts</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tsc --init  //生成tsconfig.json文件</span><br><span class="line">//在tsconfig.json文件 改 &quot;outDir&quot;: &quot;./js&quot;</span><br><span class="line">在导航栏找到  任务--&gt; 监视 tsconfig.json</span><br></pre></td></tr></table></figure>
+
+<h6 id="hbuild配置自动编译ts"><a href="#hbuild配置自动编译ts" class="headerlink" title="hbuild配置自动编译ts"></a>hbuild配置自动编译ts</h6><ol>
+<li>在最上面菜单栏，点击工具——插件安装。</li>
+<li>点击下方浏览Eclipse插件市场，搜索typescript插件进行安装</li>
+<li>安装完后重启编译器，点击菜单栏工具——选项，选择编译ts文件</li>
+<li>在你的项目上右键点击——配置——Enable TypeScript Builder，之后你再保存</li>
+<li>.ts文件时会自动保存在当前目录编译出对应的.js文件</li>
+</ol>
+<h6 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h6><p>布尔类型(boolean)</p>
+<p>数字类型(number)</p>
+<p>字符串类型(string)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str:string = &apos;hello&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>数组类型(array)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr:Array&lt;number&gt; = [11,22,33];  //全是数字的数组</span><br><span class="line">var arr:number[] = [11,22,33];</span><br></pre></td></tr></table></figure>
+
+<p>元组类型(tuple)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//元组类型属于数组类型用于给数组中每个位置指定类型</span><br><span class="line">let arr:[number,string] = [123,&apos;this is ts&apos;];</span><br></pre></td></tr></table></figure>
+
+<p>枚举类型(enum)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enum 枚举名&#123;</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	...</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">&#125;;</span><br><span class="line">enum Flag &#123; success=1,error=2 &#125;;</span><br><span class="line">let s:Flag = Flag.success;</span><br><span class="line">console.log(s);   //1</span><br><span class="line">//如果标识符没有赋值，它的值就是下标。</span><br></pre></td></tr></table></figure>
+
+<p>任意类型(any)</p>
+<p>null 和 undefined</p>
+<p>void类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一般用于定义方法没有返回值</span><br><span class="line">function run():void&#123;</span><br><span class="line">	console.log(&apos;ksdkl&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>never类型</p>
+<ul>
+<li>never类型是其他类型（包括null和undefined）的子类型，代表从不会出现的值。这意味着声明never的变量只能被never类型所赋值。</li>
+</ul>
+<h6 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function run():string&#123;</span><br><span class="line">	//必须返回string类型的值</span><br><span class="line">&#125;</span><br><span class="line">//匿名函数</span><br><span class="line">let fun2 = function():number&#123;</span><br><span class="line">	//返回数字类型的值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>es5里面方法的实参和形参可以不一样，但是ts中必须一样，如果不一样就需要配置可选参数。（加个 ? )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string,age?:number):string&#123;</span><br><span class="line">	if(age)&#123;</span><br><span class="line">		return `$&#123;name&#125; --- $&#123;age&#125;`;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return `$&#123;name&#125; --- 年龄保密`</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">alert(getInfo(&apos;zhangsan&apos;));   //zhangsan --- 年龄保密</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts的重载"><a href="#ts的重载" class="headerlink" title="ts的重载"></a>ts的重载</h6><ul>
+<li>java中的方法的重载，重载指的是两个或两个以上同名函数，但他们的参数不一样，这时会出现函数重载的情况。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string):string;</span><br><span class="line">function getInfo(age:number):string;</span><br><span class="line">function getInfo(str:any):any&#123;</span><br><span class="line">	if(typeof str === &apos;string&apos;)&#123;</span><br><span class="line">		return &quot;我叫：&quot; + str;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return &quot;我的年龄是&quot; + str;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="对象继承"><a href="#对象继承" class="headerlink" title="对象继承"></a>对象继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//es5的类</span><br><span class="line">function Person()&#123;</span><br><span class="line">	this.name = &apos;张三&apos;;</span><br><span class="line">	this.age = 20;</span><br><span class="line">	this.run = function()&#123;</span><br><span class="line">		alert(this.name);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sex = &apos;男&apos;;</span><br><span class="line">Person.prototype.work = function()&#123;</span><br><span class="line">	alert(this.name);</span><br><span class="line">&#125;</span><br><span class="line">//web类继承Person类 原型链 + 对象冒充的组合继承模式</span><br><span class="line">function Web()&#123;</span><br><span class="line">	Person.call(this);  //对象冒充实现继承</span><br><span class="line">&#125;</span><br><span class="line">let w = new Web();</span><br><span class="line">w.run();  //对象冒充可以继承构造函数里面的属性和方法</span><br><span class="line">w.work();   //报错，对象冒充不可以继承原型链上的属性和方法</span><br><span class="line"></span><br><span class="line">function Web()&#123;&#125;</span><br><span class="line">Web.prototype = new Person();  //原型链实现继承</span><br><span class="line">let w = new Web();</span><br><span class="line">//原型链实现继承：可以继承构造函数里面的属性和方法，也可以继承原型链上的属性和方法。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//es6的类</span><br><span class="line">class Person&#123;</span><br><span class="line">	name:string;  //属性 前面省略了public关键字</span><br><span class="line">	constructor(a:string)&#123; </span><br><span class="line">		this.name = n;</span><br><span class="line">	&#125;</span><br><span class="line">	run():void&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let p = new Person(&apos;张三&apos;);</span><br><span class="line">p.run();</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts接口"><a href="#ts接口" class="headerlink" title="ts接口"></a>ts接口</h6><ul>
+<li>接口的作用：在面向对象编程中，接口是一种规范的定义，它定义了行为和动作的规范</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//封装请求的接口</span><br><span class="line">interface Config&#123;</span><br><span class="line">	type:string;</span><br><span class="line">	url: string;</span><br><span class="line">	data?: string;</span><br><span class="line">	dataType: string;</span><br><span class="line">&#125;</span><br><span class="line">function ajax(config:Config)&#123;</span><br><span class="line">	let xml = new XMLHttpResquest();</span><br><span class="line">	xhr.open(config.type,config.url,true);   //true表示异步请求</span><br><span class="line">	xhr.send(config.data);</span><br><span class="line">	xhr.onreadystatechange = function()&#123;</span><br><span class="line">		if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)&#123;</span><br><span class="line">			console.log(&apos;success&apos;);</span><br><span class="line">			if(config.dataType == &apos;json&apos;)&#123;</span><br><span class="line">				JSON.parse(xhr.responseText);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				console.log(xhr.responseText);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(&#123;</span><br><span class="line">	type: &apos;get&apos;,</span><br><span class="line">	data: &apos;name=zhangsan&apos;,</span><br><span class="line">	url: &apos;http://a.itying.com/api/productlist&apos;,</span><br><span class="line">	dataType: &apos;json&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数类型接口</strong></p>
+<ul>
+<li>对方法传入的参数以及返回值进行约束。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//加密的函数类型接口</span><br><span class="line">interface encrypt&#123;</span><br><span class="line">	(key:string,value:string):string;</span><br><span class="line">&#125;</span><br><span class="line">let md5:encrypt = function(key:string,value:string):string&#123;</span><br><span class="line">	return key + value;</span><br><span class="line">&#125;</span><br><span class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts的实现和继承"><a href="#ts的实现和继承" class="headerlink" title="ts的实现和继承"></a>ts的实现和继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface Animal&#123;</span><br><span class="line">	eat():void;</span><br><span class="line">&#125;</span><br><span class="line">interface Person extends Animal&#123;</span><br><span class="line">	work():void;</span><br><span class="line">&#125;</span><br><span class="line">class Web implements Person&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//web继承programmer，实现person</span><br><span class="line">class Programmer&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	coding(code:string)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Programmer implements Person&#123;</span><br><span class="line">	constructor(name:string)&#123;&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts泛型"><a href="#ts泛型" class="headerlink" title="ts泛型"></a>ts泛型</h6><ul>
+<li>泛型：在软件工程中，我们不仅要创建一致的良好的API，也要考虑其可重用性，组件不仅能够支持大哥钱的数据类型，同时也能能支持未来的数据类型，这在创建大型系统时为你提供灵活的功能。</li>
+<li>在像C#和java这样的语言中，可以使用泛型来创建可重用地组件，一个组件支持多种类型的数据，这样用户就可以以自己的数据来使用组件。</li>
+<li>泛型就是解决类 接口 方法的复用性，以及对不特定数据类型的支持。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//使用any相当于放弃了数据类型检查</span><br><span class="line">function getData(value:any):any&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">//T表示泛型，具体什么类型是调用这个方法时决定的，可支持不特定类型的数据类型。可支持传入参数与返回参数的类型一致。</span><br><span class="line">function getData&lt;T&gt;(value:T):T&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">getDate&lt;number&gt;(123);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//操作数据库的泛型类</span><br><span class="line">class Mysql&lt;T&gt;&#123;</span><br><span class="line">	add(info:T):boolean&#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class ArticleCate&#123;</span><br><span class="line">	title: string|undefined;</span><br><span class="line">	desc: string|undefined;</span><br><span class="line">	status: number|undefined;</span><br><span class="line">	constructor(params:&#123;</span><br><span class="line">		title: string|undefined;</span><br><span class="line">		desc: string|undefined;</span><br><span class="line">		status?: number|undefined;</span><br><span class="line">	&#125;)&#123;</span><br><span class="line">		this.title = params.title</span><br><span class="line">		this.deac = params.desc;</span><br><span class="line">		this.status = params.status;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var a = new ArticleCate(&#123;</span><br><span class="line">	title: &apos;分类&apos;,</span><br><span class="line">	desc: &apos;111&apos;,</span><br><span class="line">	status: 1</span><br><span class="line">&#125;)</span><br><span class="line">//类当作参数的泛型类</span><br><span class="line">var Db = new MySqlDb&lt;ArticleCate&gt;();</span><br><span class="line">Db.add(a);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/06/17/typescript/">typescript</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
+        <p><span>发布时间:</span>2020-06-17, 15:35:59</p>
+        <p><span>最后更新:</span>2020-06-17, 15:36:12</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/17/typescript/" title="typescript">http://yoursite.com/2020/06/17/typescript/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/17/typescript/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/06/17/同源策略/">
+                    同源策略
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/06/17/jquery/">
+                    jquery
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#ts基础"><span class="toc-number">1.</span> <span class="toc-text">ts基础</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#vscode配置自动编译ts"><span class="toc-number">1.0.1.</span> <span class="toc-text">vscode配置自动编译ts</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#hbuild配置自动编译ts"><span class="toc-number">1.0.2.</span> <span class="toc-text">hbuild配置自动编译ts</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数据类型"><span class="toc-number">1.0.3.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#函数定义"><span class="toc-number">1.0.4.</span> <span class="toc-text">函数定义</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ts的重载"><span class="toc-number">1.0.5.</span> <span class="toc-text">ts的重载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#对象继承"><span class="toc-number">1.0.6.</span> <span class="toc-text">对象继承</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ts接口"><span class="toc-number">1.0.7.</span> <span class="toc-text">ts接口</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ts的实现和继承"><span class="toc-number">1.0.8.</span> <span class="toc-text">ts的实现和继承</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ts泛型"><span class="toc-number">1.0.9.</span> <span class="toc-text">ts泛型</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"typescript　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/06/17/同源策略/" title="上一篇: 同源策略">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/06/17/jquery/" title="下一篇: jquery">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/同源策略/">同源策略</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/typescript/">typescript</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/jquery/">jquery</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js动画篇/">js动画篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js精研/">js精研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/17/js基础/">js基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/刷题笔记/">刷题笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/前端cookie解读/">前端cookie解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/04/前端经验/">前端经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/linux学习/">linux学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/10/pandas之excel/">pandas之excel</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/爬虫/">爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/python的学习/">python的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/AJAX学习/">AJAX学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/node进阶/">node进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/30/http进阶/">http进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/ES6的学习/">ES6的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/计算机网络/">计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/27/数据结构与算法/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/07/前端面试/">前端面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/06/http的学习/">http的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/课程表制作/">课程表制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3/">CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/Grid布局/">Grid布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/CSS3高阶/">CSS3高阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础下-陈楚吟/">HTML5基础下--陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/HTML5基础上-陈楚吟/">HTML5基础上-陈楚吟</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/深入理解css/">深入理解css</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/26/选择器/">选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习三/">vue学习三</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习二/">vue学习二</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/vue学习一/">vue学习一</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/浅谈canvas和相关实战/">浅谈canvas和相关实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/setTimeout与setInterval区别/">setTimeout与setInterval区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/js中callee和caller/">js中callee和caller</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/canvas绘制碰撞球动画/">canvas绘制碰撞球动画</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/用JavaScript封装栈/">用JavaScript封装栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/伪类与伪元素的区区别/">伪类与伪元素的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/15/JS中外部文件的优势-1/">JS中外部文件的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/03/vue进阶/">vue进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/攻克object对象/">攻克object对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/proto/">proto</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/26/项目开发流程/">项目开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/事件机制/">事件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/MVVC模型架构/">MVVC模型架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js执行上下文/">js执行上下文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/js中的立即执行函数/">js中的立即执行函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/js中的闭包/">js中的闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/了解浏览器/">了解浏览器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/13/我认识的js原型及原型链/">我认识的js原型及原型链</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/12/相对全面的数组去重/">相对全面的数组去重</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/css盒模型集锦/">css盒模型集锦</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 陈楚吟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
