@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta name="description" content="layout skill使用vw定制rem自适应布局 要点：移动端使用rem布局需要通过JS设置不同屏幕宽高比的font-size，结合vw单位和calc()可脱离JS的控制。  场景：rem页面布局（不兼容低版本移动端系统）  兼容：vw，calc（） 1234/* 基于UI width=750px DPR=2的页面 */html&amp;#123;	font-size: calc(100vw / 7.">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端cookie解读">
-<meta property="og:url" content="http://yoursite.com/2020/06/11/前端cookie解读/index.html">
+<meta property="og:title" content="css技术技巧">
+<meta property="og:url" content="http://yoursite.com/2020/06/25/css技术技巧/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta property="og:description" content="layout skill使用vw定制rem自适应布局 要点：移动端使用rem布局需要通过JS设置不同屏幕宽高比的font-size，结合vw单位和calc()可脱离JS的控制。  场景：rem页面布局（不兼容低版本移动端系统）  兼容：vw，calc（） 1234/* 基于UI width=750px DPR=2的页面 */html&amp;#123;	font-size: calc(100vw / 7.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-12T02:38:16.566Z">
+<meta property="og:updated_time" content="2020-06-26T03:59:30.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端cookie解读">
-<meta name="twitter:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta name="twitter:title" content="css技术技巧">
+<meta name="twitter:description" content="layout skill使用vw定制rem自适应布局 要点：移动端使用rem布局需要通过JS设置不同屏幕宽高比的font-size，结合vw单位和calc()可脱离JS的控制。  场景：rem页面布局（不兼容低版本移动端系统）  兼容：vw，calc（） 1234/* 基于UI width=750px DPR=2的页面 */html&amp;#123;	font-size: calc(100vw / 7.">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>前端cookie解读 | Nikita</title>
+<title>css技术技巧 | Nikita</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-前端cookie解读" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-css技术技巧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/06/11/前端cookie解读/" class="article-date">
-      <time datetime="2020-06-11T07:33:30.000Z" itemprop="datePublished">2020-06-11</time>
+      <a href="/2020/06/25/css技术技巧/" class="article-date">
+      <time datetime="2020-06-25T07:43:19.000Z" itemprop="datePublished">2020-06-25</time>
 </a>
 
 
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      前端cookie解读
+      css技术技巧
     </h1>
   
 
@@ -298,20 +298,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。</p>
-<h6 id="Cookie的引入"><a href="#Cookie的引入" class="headerlink" title="Cookie的引入"></a>Cookie的引入</h6><p>当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。</p>
-<h6 id="Cookie的简介"><a href="#Cookie的简介" class="headerlink" title="Cookie的简介"></a>Cookie的简介</h6><p>cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它是所有web开发语言据支持的技术。它是一种进行网络会话状态跟踪的技术。</p>
-<p>会话（当用户打开浏览器，从发出第一次请求开始，一直到最终关闭浏览器就表示一次会话的完成）则是由一组请求和响应组成，是围绕看一件相关事情所进行的请求和响应，所以这些请求和响应之间必须有数据传递，即进行会话状态跟踪。但http协议是一种无状态协议，在不同请求间无法进行数据传递。此时就需要一种可以进行请求间数据传递的会话跟踪技术，而cookie就是这样一种技术。</p>
-<p>Cookie是由服务器生成，保存在客户端的一种信息载体。这个载体中存放着用户访问该站点的会话状态信息。只要cookie没有被清空，或cookie没有生效，那么保存在其中的会话状态就有效。用户在提交第一次请求后，由服务器生成cookie并将其封装到响应头中，以响应的形式发送给客户端，客户端接收到这个响应后，将cookie保存到客户端。当客户端再发起同类的请求（资源路径路径相同）后，在请求中会携带保存在客户端的cookie数据，发送给服务器，由服务器对会话进行跟踪。</p>
-<p>注意：cookie禁用仅是客户端不接收来自客户端的cookie，后端服务器还是有响应cookie回来的。一般不会禁用cookie，否则就不能使用，会出现500错误。</p>
-<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>session即会话，是web开发中的一种会话状态跟踪技术，跟cookie类似，不过cookie是将会话状态存放于客户端的，而session是存在于服务端的。</p>
-<h6 id="服务端生成session"><a href="#服务端生成session" class="headerlink" title="服务端生成session"></a>服务端生成session</h6><p>在服务器中系统会为每个会话维护一个session。不同的会话，对应不同的session。服务器对当前应用中的session是以Map的形式进行管理的，这个Map称为Session列表，该map的key为一个32位长度的随机串，这个随机串称为JSession，value则为session对象的引用。当用户第一次提交请求时，服务端servlet中执行到<code>request.getSession()</code>后会自动生成一个<code>Map.Entry</code>对象，key为一个根据某种算法新生成的JSessionID，value则为新创建的HttpSession对象。</p>
-<h6 id="服务器生成并发送cookie"><a href="#服务器生成并发送cookie" class="headerlink" title="服务器生成并发送cookie"></a>服务器生成并发送cookie</h6><p>在将Session信息写入session列表后，系统还会自动将JSESSIONID作为name，这个32位长度的随机串作为value，以cookie的形式存放到响应头中，并随着响应将该cookie发送到客户端。</p>
-<h6 id="客户端接收并发送cookie"><a href="#客户端接收并发送cookie" class="headerlink" title="客户端接收并发送cookie"></a>客户端接收并发送cookie</h6><p>客户端接受到这个cookie后会将其存放到浏览器的缓存中。即只要客户端浏览器不关闭，浏览器缓存的cookie就不会消失。</p>
-<p>当用户提交第二次请求时，会将缓存中的这个cookie伴随着请求的头部信息一块发到服务端。</p>
-<h6 id="congsession列表中查找"><a href="#congsession列表中查找" class="headerlink" title="congsession列表中查找"></a>congsession列表中查找</h6><p>服务端从请求中读取到从客户端发来的cookie，并根据cookie的JSESSIONID的值，从Map中查找相应key所对应的value，即session对象。然后对该session对象的域属性进行读写操作。</p>
-<h6 id="session的失效"><a href="#session的失效" class="headerlink" title="session的失效"></a>session的失效</h6><p>web开发中引入的session超时的概念，session的失效就是指session的超时。若某个session在指定的时间范围内一直未被访问，那session将超时，即将失效。</p>
-<p>服务器针对不同的会话找到不同的session，是因为cookie完成了会话的跟踪。但是，若客户端浏览器将cookie禁用，则服务器每提交一次请求，服务器在给出的响应中都会包含名称为JSESSIONID的cookie，只不过这个cookie值每次都不同，也就是说客户端所提交的请求中没有包含JSESSIONID，服务器就会认为这是一次新的会话的开始，就会为其生成一个<code>Map.Entry</code>对象，所以也就无法实现会话跟踪了。</p>
+        <h4 id="layout-skill"><a href="#layout-skill" class="headerlink" title="layout skill"></a>layout skill</h4><h6 id="使用vw定制rem自适应布局"><a href="#使用vw定制rem自适应布局" class="headerlink" title="使用vw定制rem自适应布局"></a>使用vw定制rem自适应布局</h6><ul>
+<li><p>要点：移动端使用rem布局需要通过JS设置不同屏幕宽高比的<code>font-size</code>，结合<code>vw</code>单位和<code>calc()</code>可脱离JS的控制。</p>
+</li>
+<li><p>场景：rem页面布局（不兼容低版本移动端系统）</p>
+</li>
+<li><p>兼容：vw，calc（）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 基于UI width=750px DPR=2的页面 */</span></span><br><span class="line"><span class="selector-tag">html</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="built_in">calc</span>(100vw / 7.5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h6 id="使用-nth-child-筛选指定元素"><a href="#使用-nth-child-筛选指定元素" class="headerlink" title="使用:nth-child()筛选指定元素"></a>使用:nth-child()筛选指定元素</h6><ul>
+<li>要点：通过<code>:nth-child()</code>筛选指定的元素设置样式。</li>
+<li>场景：表格着色，边界元素排版（首元素，尾元素，左右两边元素）</li>
+</ul>
+<h6 id="使用writing-mode排版竖文"><a href="#使用writing-mode排版竖文" class="headerlink" title="使用writing-mode排版竖文"></a>使用writing-mode排版竖文</h6><ul>
+<li>要点：通过<code>writing-mode</code>调整文本排版方向。</li>
+<li>场景：竖行文字，文言文，诗词。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        html&#123;</span><br><span class="line"><span class="css">            <span class="selector-tag">background-color</span>: <span class="selector-id">#000</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.vertical-text</span>&#123;</span></span><br><span class="line">            writing-mode: vertical-rl;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.vertical-text</span> <span class="selector-tag">h3</span>&#123;</span></span><br><span class="line">            padding-left: 20px;</span><br><span class="line">            font-weight: bold;</span><br><span class="line">            font-size: 18px;</span><br><span class="line"><span class="css">            <span class="selector-tag">color</span>: <span class="selector-id">#f66</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.vertical-text</span> <span class="selector-tag">p</span>&#123;</span></span><br><span class="line">            line-height: 30px;</span><br><span class="line"><span class="css">            <span class="selector-tag">color</span>: <span class="selector-id">#66f</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"vertical-text"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>情<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>我见犹怜，<span class="tag">&lt;<span class="name">br</span>&gt;</span>爱不释手。<span class="tag">&lt;<span class="name">br</span>&gt;</span>雅俗共赏，<span class="tag">&lt;<span class="name">br</span>&gt;</span>君子好逑。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -320,13 +326,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/06/11/前端cookie解读/">前端cookie解读</a></p>
+        <p><span>本文标题:</span><a href="/2020/06/25/css技术技巧/">css技术技巧</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
-        <p><span>发布时间:</span>2020-06-11, 15:33:30</p>
-        <p><span>最后更新:</span>2020-06-12, 10:38:16</p>
+        <p><span>发布时间:</span>2020-06-25, 15:43:19</p>
+        <p><span>最后更新:</span>2020-06-26, 11:59:30</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/06/11/前端cookie解读/" title="前端cookie解读">http://yoursite.com/2020/06/11/前端cookie解读/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/11/前端cookie解读/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/25/css技术技巧/" title="css技术技巧">http://yoursite.com/2020/06/25/css技术技巧/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/25/css技术技巧/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -338,16 +344,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/06/13/刷题笔记/">
-                    刷题笔记
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/06/04/前端经验/">
-                    前端经验
+                <a href="/2020/06/23/数组中的reduce/">
+                    数组中的reduce
                 </a>
             </div>
         
@@ -359,7 +359,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的引入"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cookie的引入</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的简介"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cookie的简介</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">2.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#服务端生成session"><span class="toc-number">2.0.1.</span> <span class="toc-text">服务端生成session</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务器生成并发送cookie"><span class="toc-number">2.0.2.</span> <span class="toc-text">服务器生成并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#客户端接收并发送cookie"><span class="toc-number">2.0.3.</span> <span class="toc-text">客户端接收并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#congsession列表中查找"><span class="toc-number">2.0.4.</span> <span class="toc-text">congsession列表中查找</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#session的失效"><span class="toc-number">2.0.5.</span> <span class="toc-text">session的失效</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#layout-skill"><span class="toc-number">1.</span> <span class="toc-text">layout skill</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#使用vw定制rem自适应布局"><span class="toc-number">1.0.1.</span> <span class="toc-text">使用vw定制rem自适应布局</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用-nth-child-筛选指定元素"><span class="toc-number">1.0.2.</span> <span class="toc-text">使用:nth-child()筛选指定元素</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用writing-mode排版竖文"><span class="toc-number">1.0.3.</span> <span class="toc-text">使用writing-mode排版竖文</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -395,7 +395,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"前端cookie解读　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"css技术技巧　| Nikita　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -415,15 +415,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/06/13/刷题笔记/" title="上一篇: 刷题笔记">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/06/04/前端经验/" title="下一篇: 前端经验">
+            <a href="/2020/06/23/数组中的reduce/" title="下一篇: 数组中的reduce">
                 <i class="fa fa-angle-right"></i>
             </a>
         
