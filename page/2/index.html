@@ -268,6 +268,1255 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-typescript" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/typescript/" class="article-date">
+      <time datetime="2020-06-17T07:35:59.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/typescript/">typescript</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="ts基础"><a href="#ts基础" class="headerlink" title="ts基础"></a>ts基础</h4><h6 id="vscode配置自动编译ts"><a href="#vscode配置自动编译ts" class="headerlink" title="vscode配置自动编译ts"></a>vscode配置自动编译ts</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tsc --init  //生成tsconfig.json文件</span><br><span class="line">//在tsconfig.json文件 改 &quot;outDir&quot;: &quot;./js&quot;</span><br><span class="line">在导航栏找到  任务--&gt; 监视 tsconfig.json</span><br></pre></td></tr></table></figure>
+
+<h6 id="hbuild配置自动编译ts"><a href="#hbuild配置自动编译ts" class="headerlink" title="hbuild配置自动编译ts"></a>hbuild配置自动编译ts</h6><ol>
+<li>在最上面菜单栏，点击工具——插件安装。</li>
+<li>点击下方浏览Eclipse插件市场，搜索typescript插件进行安装</li>
+<li>安装完后重启编译器，点击菜单栏工具——选项，选择编译ts文件</li>
+<li>在你的项目上右键点击——配置——Enable TypeScript Builder，之后你再保存</li>
+<li>.ts文件时会自动保存在当前目录编译出对应的.js文件</li>
+</ol>
+<h6 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h6><p>布尔类型(boolean)</p>
+<p>数字类型(number)</p>
+<p>字符串类型(string)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str:string = &apos;hello&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>数组类型(array)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr:Array&lt;number&gt; = [11,22,33];  //全是数字的数组</span><br><span class="line">var arr:number[] = [11,22,33];</span><br></pre></td></tr></table></figure>
+
+<p>元组类型(tuple)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//元组类型属于数组类型用于给数组中每个位置指定类型</span><br><span class="line">let arr:[number,string] = [123,&apos;this is ts&apos;];</span><br></pre></td></tr></table></figure>
+
+<p>枚举类型(enum)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enum 枚举名&#123;</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	...</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">&#125;;</span><br><span class="line">enum Flag &#123; success=1,error=2 &#125;;</span><br><span class="line">let s:Flag = Flag.success;</span><br><span class="line">console.log(s);   //1</span><br><span class="line">//如果标识符没有赋值，它的值就是下标。</span><br></pre></td></tr></table></figure>
+
+<p>任意类型(any)</p>
+<p>null 和 undefined</p>
+<p>void类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一般用于定义方法没有返回值</span><br><span class="line">function run():void&#123;</span><br><span class="line">	console.log(&apos;ksdkl&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>never类型</p>
+<ul>
+<li>never类型是其他类型（包括null和undefined）的子类型，代表从不会出现的值。这意味着声明never的变量只能被never类型所赋值。</li>
+</ul>
+<h6 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function run():string&#123;</span><br><span class="line">	//必须返回string类型的值</span><br><span class="line">&#125;</span><br><span class="line">//匿名函数</span><br><span class="line">let fun2 = function():number&#123;</span><br><span class="line">	//返回数字类型的值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>es5里面方法的实参和形参可以不一样，但是ts中必须一样，如果不一样就需要配置可选参数。（加个 ? )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string,age?:number):string&#123;</span><br><span class="line">	if(age)&#123;</span><br><span class="line">		return `$&#123;name&#125; --- $&#123;age&#125;`;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return `$&#123;name&#125; --- 年龄保密`</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">alert(getInfo(&apos;zhangsan&apos;));   //zhangsan --- 年龄保密</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts的重载"><a href="#ts的重载" class="headerlink" title="ts的重载"></a>ts的重载</h6><ul>
+<li>java中的方法的重载，重载指的是两个或两个以上同名函数，但他们的参数不一样，这时会出现函数重载的情况。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string):string;</span><br><span class="line">function getInfo(age:number):string;</span><br><span class="line">function getInfo(str:any):any&#123;</span><br><span class="line">	if(typeof str === &apos;string&apos;)&#123;</span><br><span class="line">		return &quot;我叫：&quot; + str;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return &quot;我的年龄是&quot; + str;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="对象继承"><a href="#对象继承" class="headerlink" title="对象继承"></a>对象继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//es5的类</span><br><span class="line">function Person()&#123;</span><br><span class="line">	this.name = &apos;张三&apos;;</span><br><span class="line">	this.age = 20;</span><br><span class="line">	this.run = function()&#123;</span><br><span class="line">		alert(this.name);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sex = &apos;男&apos;;</span><br><span class="line">Person.prototype.work = function()&#123;</span><br><span class="line">	alert(this.name);</span><br><span class="line">&#125;</span><br><span class="line">//web类继承Person类 原型链 + 对象冒充的组合继承模式</span><br><span class="line">function Web()&#123;</span><br><span class="line">	Person.call(this);  //对象冒充实现继承</span><br><span class="line">&#125;</span><br><span class="line">let w = new Web();</span><br><span class="line">w.run();  //对象冒充可以继承构造函数里面的属性和方法</span><br><span class="line">w.work();   //报错，对象冒充不可以继承原型链上的属性和方法</span><br><span class="line"></span><br><span class="line">function Web()&#123;&#125;</span><br><span class="line">Web.prototype = new Person();  //原型链实现继承</span><br><span class="line">let w = new Web();</span><br><span class="line">//原型链实现继承：可以继承构造函数里面的属性和方法，也可以继承原型链上的属性和方法。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//es6的类</span><br><span class="line">class Person&#123;</span><br><span class="line">	name:string;  //属性 前面省略了public关键字</span><br><span class="line">	constructor(a:string)&#123; </span><br><span class="line">		this.name = n;</span><br><span class="line">	&#125;</span><br><span class="line">	run():void&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let p = new Person(&apos;张三&apos;);</span><br><span class="line">p.run();</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts接口"><a href="#ts接口" class="headerlink" title="ts接口"></a>ts接口</h6><ul>
+<li>接口的作用：在面向对象编程中，接口是一种规范的定义，它定义了行为和动作的规范</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//封装请求的接口</span><br><span class="line">interface Config&#123;</span><br><span class="line">	type:string;</span><br><span class="line">	url: string;</span><br><span class="line">	data?: string;</span><br><span class="line">	dataType: string;</span><br><span class="line">&#125;</span><br><span class="line">function ajax(config:Config)&#123;</span><br><span class="line">	let xml = new XMLHttpResquest();</span><br><span class="line">	xhr.open(config.type,config.url,true);   //true表示异步请求</span><br><span class="line">	xhr.send(config.data);</span><br><span class="line">	xhr.onreadystatechange = function()&#123;</span><br><span class="line">		if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)&#123;</span><br><span class="line">			console.log(&apos;success&apos;);</span><br><span class="line">			if(config.dataType == &apos;json&apos;)&#123;</span><br><span class="line">				JSON.parse(xhr.responseText);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				console.log(xhr.responseText);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(&#123;</span><br><span class="line">	type: &apos;get&apos;,</span><br><span class="line">	data: &apos;name=zhangsan&apos;,</span><br><span class="line">	url: &apos;http://a.itying.com/api/productlist&apos;,</span><br><span class="line">	dataType: &apos;json&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数类型接口</strong></p>
+<ul>
+<li>对方法传入的参数以及返回值进行约束。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//加密的函数类型接口</span><br><span class="line">interface encrypt&#123;</span><br><span class="line">	(key:string,value:string):string;</span><br><span class="line">&#125;</span><br><span class="line">let md5:encrypt = function(key:string,value:string):string&#123;</span><br><span class="line">	return key + value;</span><br><span class="line">&#125;</span><br><span class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts的实现和继承"><a href="#ts的实现和继承" class="headerlink" title="ts的实现和继承"></a>ts的实现和继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface Animal&#123;</span><br><span class="line">	eat():void;</span><br><span class="line">&#125;</span><br><span class="line">interface Person extends Animal&#123;</span><br><span class="line">	work():void;</span><br><span class="line">&#125;</span><br><span class="line">class Web implements Person&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//web继承programmer，实现person</span><br><span class="line">class Programmer&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	coding(code:string)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Programmer implements Person&#123;</span><br><span class="line">	constructor(name:string)&#123;&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="ts泛型"><a href="#ts泛型" class="headerlink" title="ts泛型"></a>ts泛型</h6><ul>
+<li>泛型：在软件工程中，我们不仅要创建一致的良好的API，也要考虑其可重用性，组件不仅能够支持大哥钱的数据类型，同时也能能支持未来的数据类型，这在创建大型系统时为你提供灵活的功能。</li>
+<li>在像C#和java这样的语言中，可以使用泛型来创建可重用地组件，一个组件支持多种类型的数据，这样用户就可以以自己的数据来使用组件。</li>
+<li>泛型就是解决类 接口 方法的复用性，以及对不特定数据类型的支持。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//使用any相当于放弃了数据类型检查</span><br><span class="line">function getData(value:any):any&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">//T表示泛型，具体什么类型是调用这个方法时决定的，可支持不特定类型的数据类型。可支持传入参数与返回参数的类型一致。</span><br><span class="line">function getData&lt;T&gt;(value:T):T&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">getDate&lt;number&gt;(123);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//操作数据库的泛型类</span><br><span class="line">class Mysql&lt;T&gt;&#123;</span><br><span class="line">	add(info:T):boolean&#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class ArticleCate&#123;</span><br><span class="line">	title: string|undefined;</span><br><span class="line">	desc: string|undefined;</span><br><span class="line">	status: number|undefined;</span><br><span class="line">	constructor(params:&#123;</span><br><span class="line">		title: string|undefined;</span><br><span class="line">		desc: string|undefined;</span><br><span class="line">		status?: number|undefined;</span><br><span class="line">	&#125;)&#123;</span><br><span class="line">		this.title = params.title</span><br><span class="line">		this.deac = params.desc;</span><br><span class="line">		this.status = params.status;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var a = new ArticleCate(&#123;</span><br><span class="line">	title: &apos;分类&apos;,</span><br><span class="line">	desc: &apos;111&apos;,</span><br><span class="line">	status: 1</span><br><span class="line">&#125;)</span><br><span class="line">//类当作参数的泛型类</span><br><span class="line">var Db = new MySqlDb&lt;ArticleCate&gt;();</span><br><span class="line">Db.add(a);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jquery" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/jquery/" class="article-date">
+      <time datetime="2020-06-17T07:29:38.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/jquery/">jquery</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>jquery对象是一个包含所有匹配的dom元素的伪数组对象。</strong></p>
+<h1 id="js-加载时间线"><a href="#js-加载时间线" class="headerlink" title="js 加载时间线"></a><a href="https://www.cnblogs.com/wenlv88/articles/9932919.html" target="_blank" rel="noopener">js 加载时间线</a></h1><p>1、创建document对象，开始<strong>解析</strong>web页面。创建HTMLHtmlElement对象，添加到document中。这个阶段document.readyState = ‘loading’；</p>
+<p>2、遇到link外部css，创建线程加载，并继续解析文档。<strong>并发；</strong></p>
+<p>3、遇到script外部js，并且没有设置async、defer，浏览器创建线程加载，并<strong>阻塞</strong>，等待js加载完成并执行该脚本，然后继续解析文档。<strong>js拥有修改dom的能力</strong>–&gt;domcument.write；</p>
+<p>4、遇到script外部js，并且设置有async、defter，浏览器创建线程加载，并继续解析文档；</p>
+<p>　　defer属性设置后，表示加载script外部js和解析html页面是异步，并且等到html解析完成再执行js解析后的代码；</p>
+<p>　　async属性设置后，表示加载script外部js和解析html页面是异步，但是当js解析完成，立刻执行它，此时html解析是<strong>被阻塞</strong>的；</p>
+<p>document.createElement(‘script’)的方式动态插入script元素来模拟async属性，实现脚本异步加载和执行；</p>
+<p>5、遇到img等，浏览器创建线程加载，并继续解析文档。<strong>并发；</strong></p>
+<p>6、当文档解析完成，document.readyState = ‘interactive’；</p>
+<p>7、文档解析完成后，所有设置有defer的脚本会按照顺序执行（注意与async的不同）；</p>
+<p>8、document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段，<strong>转化为事件驱动阶段；</strong></p>
+<p>9、当所有async的脚本加载完成并执行后、img等加载完成后，document.readyState = ‘complete’，window对象触发load事件；</p>
+<p>10、从此，以异步响应方式处理用户输入、网络事件等。</p>
+<h1 id="jQeury"><a href="#jQeury" class="headerlink" title="jQeury"></a>jQeury</h1><p>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在网络上的内容分发网络，依靠部署在各边缘服务器，通过中心平台的负载均衡，内容分发，调度等功能模块，使用户就近获取所需的内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术在于内容存储和分发技术。</p>
+<p>使用Google的CDN</p>
+<p>src=”<a href="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js&quot;" target="_blank" rel="noopener">http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js&quot;</a></p>
+<p>使用Microsoft的CDN</p>
+<p>src=”<a href="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.mim.js&quot;" target="_blank" rel="noopener">http://ajax.microsoft.com/ajax/jquery/jquery-1.4.mim.js&quot;</a></p>
+<p>如果您不希望下载并存放 jQuery，那么也可以通过 CDN（内容分发网络） 引用它。</p>
+<p>百度、又拍云、新浪、谷歌和微软的服务器都存有 jQuery 。</p>
+<p>如果你的站点用户是国内的，建议使用百度、又拍云、新浪等国内CDN地址，如果你站点用户是国外的可以使用谷歌和微软。</p>
+<p>使用百度，又拍云，新浪，谷歌或微软的jQuery的一大优势：</p>
+<p>当用户在访问其他站点时，已经从百度，又拍云，新浪，谷歌或1微软加载过jQuery，所以当他们访问你的站点时，会从缓存中加载jQuery,这样就减少了加载时间。同时，大多数CDN都可以确保当用户向其请求文件时，会从离用户最近的服务器上访问响应，这样也可以提高加载速度</p>
+<p>$(document).ready(function(){//jQuery代码})；</p>
+<p>这是为了防止文档未完全加载之前就执行jQuery代码，可能会失败</p>
+<table>
+<thead>
+<tr>
+<th align="left">语法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$(“*”)</td>
+<td align="left">选取所有元素</td>
+</tr>
+<tr>
+<td align="left">$(this)</td>
+<td align="left">选取当前 HTML 元素</td>
+</tr>
+<tr>
+<td align="left">$(“p.intro”)</td>
+<td align="left">选取 class 为 intro 的 <p> 元素</p></td>
+</tr>
+<tr>
+<td align="left">$(“p:first”)</td>
+<td align="left">选取第一个 <p> 元素</p></td>
+</tr>
+<tr>
+<td align="left">$(“ul li:first”)</td>
+<td align="left">选取第一个 <ul> 元素的第一个 <li> 元素</li></ul></td>
+</tr>
+<tr>
+<td align="left">$(“ul li:first-child”)</td>
+<td align="left">选取每个 <ul> 元素的第一个 <li> 元素</li></ul></td>
+</tr>
+<tr>
+<td align="left">$(“[href]”)</td>
+<td align="left">选取带有 href 属性的元素</td>
+</tr>
+<tr>
+<td align="left">$(“a[target=’_blank’]”)</td>
+<td align="left">选取所有 target 属性值等于 “_blank” 的 <a> 元素</a></td>
+</tr>
+<tr>
+<td align="left">$(“a[target!=’_blank’]”)</td>
+<td align="left">选取所有 target 属性值不等于 “_blank” 的 <a> 元素</a></td>
+</tr>
+<tr>
+<td align="left">$(“:button”)</td>
+<td align="left">选取所有 type=”button” 的 <input> 元素 和 <button> 元素</button></td>
+</tr>
+<tr>
+<td align="left">$(“tr:even”)</td>
+<td align="left">选取偶数位置的 </td></tr><tr> 元素
+</tr>
+<tr>
+<td align="left">$(“tr:odd”)</td>
+<td align="left">选取奇数位置的 </td></tr><tr> 元素
+</tr>
+</tbody></table>
+<p>常见 DOM 事件：</p>
+<table>
+<thead>
+<tr>
+<th align="left">鼠标事件</th>
+<th align="left">键盘事件</th>
+<th align="left">表单事件</th>
+<th align="left">文档/窗口事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">click</td>
+<td align="left">keypress</td>
+<td align="left">submit</td>
+<td align="left">load</td>
+</tr>
+<tr>
+<td align="left">dblclick</td>
+<td align="left">keydown</td>
+<td align="left">change</td>
+<td align="left">resize</td>
+</tr>
+<tr>
+<td align="left">mouseenter</td>
+<td align="left">keyup</td>
+<td align="left">focus</td>
+<td align="left">scroll</td>
+</tr>
+<tr>
+<td align="left">mouseleave</td>
+<td align="left"></td>
+<td align="left">blur</td>
+<td align="left">unload</td>
+</tr>
+</tbody></table>
+<h4 id="基本行为"><a href="#基本行为" class="headerlink" title="基本行为"></a>基本行为</h4><ul>
+<li>length：包含dom元素个数</li>
+<li>[index]/get(index)：得到对应位置的DOM元素</li>
+<li>each()：遍历包含所有的DOM元素</li>
+<li>index():得到所在兄弟元素中的下标</li>
+</ul>
+<h6 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h6><ul>
+<li><p>多个过滤器不是同时执行的，而是依次执行的。</p>
+<p>$(‘li:gt(0):lt(3)’).css(‘background’,’red’)      下标是 1  2  3变底色</p>
+<p>$(‘li:lt(3):gt(0)’).css(‘background’,’red’)       下标是1  2 变底色</p>
+</li>
+</ul>
+<h6 id="mouseover与mouseenter区别"><a href="#mouseover与mouseenter区别" class="headerlink" title="mouseover与mouseenter区别"></a>mouseover与mouseenter区别</h6><ul>
+<li>mouseover：在移入子元素时才会触发，对应mouseout</li>
+<li>mouseenter：只在移入当前元素才触发，对应mouseleave</li>
+<li>hover（）使用的是mouseenter与mouseleave</li>
+</ul>
+<h4 id="事件委托（委派-代理）"><a href="#事件委托（委派-代理）" class="headerlink" title="事件委托（委派/代理）"></a>事件委托（委派/代理）</h4><ul>
+<li>将多个元素（li）的事件监听委托给父辈元素上（ul）处理。</li>
+<li>监听回调是加在父辈元素上</li>
+<li>当操作任何一个子元素时（li），事件会冒泡到父辈元素上（ul）</li>
+<li>父辈元素不会直接处理事件，而是通过event.target得到发生事件的子元素（li），通过这个子元素调用事件回调函数。</li>
+<li>$(‘ul’).delegate(‘li’,’click’,function(){})</li>
+<li>委托2方<ul>
+<li>委托方：业主   li</li>
+<li>被委托方     中介   ul</li>
+</ul>
+</li>
+<li>好处<ul>
+<li>新添加的子元素自动有事件响应处理。</li>
+<li>减少事件监听的数量 ： n==&gt;1</li>
+</ul>
+</li>
+<li>API<ul>
+<li>设置事件委托：$(parentSelector).delegate(childrenSelector,eventName,callback)</li>
+<li>移出事件委托：$(parentSlector).undelegate(eventName)</li>
+</ul>
+</li>
+</ul>
+<h2 id="比较keypress、keydown与keyup"><a href="#比较keypress、keydown与keyup" class="headerlink" title="比较keypress、keydown与keyup"></a>比较keypress、keydown与keyup</h2><ul>
+<li>keydown：在键盘上按下某键时发生，一直按着则会不断触发（opera浏览器除外），它返回的是键盘代码;</li>
+<li>keypress：在键盘上按下一个按键，并产生一个字符时发生, 返回ASCII码。注意: shift、alt、ctrl等键按下并不会产生字符，所以监听无效，换句话说，只有按下能在屏幕上输出字符的按键时keypress事件才会触发。若一直按着某按键则会不断触发。</li>
+<li>keyup：用户松开某一个按键时触发，与keydown相对，返回键盘代码.</li>
+</ul>
+<p>$(<em>selector</em>).hide(<em>speed,callback</em>);<br>$(<em>selector</em>).show(<em>speed,callback</em>);</p>
+<p>$(selector).toggle(speed,callback);  //切换hide（）和show（）方法</p>
+<p>可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。</p>
+<p>可选的 callback 参数是 toggle() 方法完成后所执行的函数名称。</p>
+<p>可选的 callback 参数，具有以下三点说明：</p>
+<ol>
+<li>$(selector)选中的元素的个数为n个，则callback函数会执行n次</li>
+<li>callback函数名后加括号，会立刻执行函数体，而不是等到显示/隐藏完成后才执行</li>
+<li>callback既可以是函数名，也可以是匿名函数</li>
+</ol>
+<p>在在jQuery中可以通过四个方法来实现元素的淡入淡出，这四个方法分别是：fadeIn()、fadeOut()、fadeToggle() 以及 fadeTo()</p>
+<p>$(document).ready(function(){<br>  $(“button”).click(function(){<br>    $(“#div1”).fadeIn();<br>    $(“#div2”).fadeIn(“slow”);<br>    $(“#div3”).fadeIn(3000);<br>  });<br>});</p>
+<p>jQuery fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）。</p>
+<p>$(<em>selector</em>).fadeTo(<em>speed,opacity,callback</em>);</p>
+<p>jQuery slideDown() 方法用于向下滑动元素。</p>
+<p>$(<em>selector</em>).slideDown(<em>speed,callback</em>);</p>
+<h2 id="jQuery-slideToggle-方法"><a href="#jQuery-slideToggle-方法" class="headerlink" title="jQuery slideToggle() 方法"></a>jQuery slideToggle() 方法</h2><p>jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。</p>
+<p>如果元素向下滑动，则 slideToggle() 可向上滑动它们。</p>
+<p>如果元素向上滑动，则 slideToggle() 可向下滑动它们。</p>
+<p> $(<em>selector</em>).animate({<em>params</em>}<em>,speed,callback</em>);</p>
+<p>必需的 params 参数定义形成动画的 CSS 属性。</p>
+<p>可选的 speed 参数规定效果的时长。它可以取以下值：”slow”、”fast” 或毫秒。</p>
+<p>可选的 callback 参数是动画完成后所执行的函数名称。</p>
+<p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+<p><strong>可以用 animate() 方法来操作所有 CSS 属性吗？</strong><br>是的，几乎可以！不过，需要记住一件重要的事情：当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等。</p>
+<p>jQuery stop() 方法用于停止动画或效果，在它们完成之前。</p>
+<p>stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。</p>
+<p> $(<em>selector</em>).stop(<em>stopAll,goToEnd</em>);</p>
+<p>可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。</p>
+<p>可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。</p>
+<p>因此，默认地，stop() 会清除在被选元素上指定的当前动画。</p>
+<p>三个简单实用的用于 DOM 操作的 jQuery 方法：</p>
+<ul>
+<li>text() - 设置或返回所选元素的文本内容</li>
+<li>html() - 设置或返回所选元素的内容（包括 HTML 标记）</li>
+<li>val() - 设置或返回表单字段的值</li>
+</ul>
+<p>jQuery attr() 方法用于获取属性值。</p>
+<h2 id="添加新的-HTML-内容"><a href="#添加新的-HTML-内容" class="headerlink" title="添加新的 HTML 内容"></a>添加新的 HTML 内容</h2><p>我们将学习用于添加新内容的四个 jQuery 方法：</p>
+<ul>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-append.html" target="_blank" rel="noopener">append()</a> - 在被选元素内部的结尾插入指定内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-prepend.html" target="_blank" rel="noopener">prepend()</a> - 在被选元素内部的开头插入指定内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-after.html" target="_blank" rel="noopener">after()</a> - 在被选元素之后插入内容</p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/jquery/html-before.html" target="_blank" rel="noopener">before()</a> - 在被选元素之前插入内容</p>
+<p>$(“img”).after(“在后面添加文本”); </p>
+</li>
+</ul>
+<p>$(“img”).before(“在前面添加文本”);  </p>
+<p><strong>提示：</strong>在jQuery中，append/prepend 是在选择元素内部嵌入，而after/before 是在元素外面追加。</p>
+<h2 id="删除元素-内容"><a href="#删除元素-内容" class="headerlink" title="删除元素/内容"></a>删除元素/内容</h2><p>如需删除元素和内容，一般可使用以下两个 jQuery 方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/html-remove.html" target="_blank" rel="noopener">remove()</a> - 删除被选元素（及其子元素）</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-empty.html" target="_blank" rel="noopener">empty()</a> - 从被选元素中删除子元素</li>
+</ul>
+<h2 id="jQuery-操作-CSS"><a href="#jQuery-操作-CSS" class="headerlink" title="jQuery 操作 CSS"></a>jQuery 操作 CSS</h2><p>jQuery 拥有若干进行 CSS 操作的方法。我们将学习下面这些：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/html-addclass.html" target="_blank" rel="noopener">addClass()</a> - 向被选元素添加一个或多个类</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-removeclass.html" target="_blank" rel="noopener">removeClass()</a> - 从被选元素删除一个或多个类</li>
+<li><a href="https://www.w3cschool.cn/jquery/html-toggleclass.html" target="_blank" rel="noopener">toggleClass()</a> - 对被选元素进行添加/删除类的切换操作</li>
+<li><a href="https://www.w3cschool.cn/jquery/jquery-css.html" target="_blank" rel="noopener">css()</a> - 设置或返回样式属性</li>
+</ul>
+<h2 id="设置-CSS-属性"><a href="#设置-CSS-属性" class="headerlink" title="设置 CSS 属性"></a>设置 CSS 属性</h2><p>如需设置指定的 CSS 属性，请使用如下语法：    </p>
+<p>css({“<em>propertyname</em>“:”<em>value</em>“,”<em>propertyname</em>“:”<em>value</em>“,…});</p>
+<p>jQuery 提供多个处理尺寸的重要方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/css-width.html" target="_blank" rel="noopener">width()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/css-height.html" target="_blank" rel="noopener">height()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-innerwidth.html" target="_blank" rel="noopener">innerWidth()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-innerheight.html" target="_blank" rel="noopener">innerHeight()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-outerwidth.html" target="_blank" rel="noopener">outerWidth()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/html-outerheight.html" target="_blank" rel="noopener">outerHeight()</a></li>
+</ul>
+<p><img src="https://7n.w3cschool.cn/statics/images/course/img_jquerydim.gif" alt="jQuery Dimensions"></p>
+<h2 id="向上遍历-DOM-树"><a href="#向上遍历-DOM-树" class="headerlink" title="向上遍历 DOM 树"></a>向上遍历 DOM 树</h2><ul>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parent.html" target="_blank" rel="noopener">parent()</a><ul>
+<li>parent() 方法返回被选元素的直接父元素。</li>
+</ul>
+</li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parents.html" target="_blank" rel="noopener">parents()</a><ul>
+<li>parents() 方法返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (<html>)。</html></li>
+</ul>
+</li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-parentsuntil.html" target="_blank" rel="noopener">parentsUntil()</a><ul>
+<li>parentsUntil() 方法返回介于两个给定元素之间的所有祖先元素。</li>
+<li>返回介于 <span> 与 <div> 元素之间的所有祖先元素： $(“span”).parentsUntil(“div”);</div></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="向下遍历-DOM-树"><a href="#向下遍历-DOM-树" class="headerlink" title="向下遍历 DOM 树"></a>向下遍历 DOM 树</h2><p>下面是两个用于向下遍历 DOM 树的 jQuery 方法：</p>
+<ul>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-children.html" target="_blank" rel="noopener">children()</a></li>
+<li><a href="https://www.w3cschool.cn/jquery/traversing-find.html" target="_blank" rel="noopener">find()</a></li>
+</ul>
+<h2 id="在-DOM-树中水平遍历"><a href="#在-DOM-树中水平遍历" class="headerlink" title="在 DOM 树中水平遍历"></a>在 DOM 树中水平遍历</h2><p>有许多有用的方法让我们在 DOM 树进行水平遍历：</p>
+<ul>
+<li>siblings()：返回被选元素的所有同胞元素</li>
+<li>next()：返回被选元素的下一个同胞元素</li>
+<li>nextAll()：返回被选元素的所有跟随的同胞元素</li>
+<li>nextUntil()：返回介于两个给定参数之间的所有跟随的同胞元素</li>
+<li>prev()</li>
+<li>prevAll()</li>
+<li>prevUntil()</li>
+</ul>
+<h2 id="缩小搜索元素的范围"><a href="#缩小搜索元素的范围" class="headerlink" title="缩小搜索元素的范围"></a>缩小搜索元素的范围</h2><p>三个最基本的过滤方法是：first(), last() 和 eq()，它们允许您基于其在一组元素中的位置来选择一个特定的元素。</p>
+<p>其他过滤方法，比如 filter() 和 not() 允许您选取匹配或不匹配某项指定标准的元素。</p>
+<p>first（）：返回被选元素的首个元素</p>
+<p>last（）：返回被选元素的最后一个元素</p>
+<p><a href="https://www.w3cschool.cn/jquery/traversing-eq.html" target="_blank" rel="noopener">eq() 方法</a>返回被选元素中带有指定索引号的元素。</p>
+<p>索引号从 0 开始，因此首个元素的索引号是 0 而不是 1。</p>
+<p><a href="https://www.w3cschool.cn/jquery/traversing-filter.html" target="_blank" rel="noopener">filter() 方法</a>允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。</p>
+<p>jQuery  AJAX</p>
+<ul>
+<li>AJAX是与服务器交换数据的技术，它在不重载全部页面的情况下，实现对部分页面的更新</li>
+<li>AJAX=异步JavaScript和XML（Asynchronous  JavaScript   and  XML),通过AJAX方法，你可以使用HTTP Get和HTTP Post从远程服务器上请求文本，HTML,XML,JSON,同时你可把这些外部数据直接载入网页的被选元素中</li>
+</ul>
+<h4 id="作为一般函数调用-param"><a href="#作为一般函数调用-param" class="headerlink" title="作为一般函数调用$(param)"></a>作为一般函数调用$(param)</h4><ol>
+<li>参数为函数：当DOM加载完成后，执行此回调函数。</li>
+<li>参数为选择器字符串：查找所有匹配的标签，并把它们封装成jquery对象。</li>
+<li>参数是DOM对象：将dom对象封装成jquery对象。</li>
+<li>参数为html标签字符串（用得最少）：创建标签对象并封装成jquery对象。</li>
+</ol>
+<h4 id="作为对象使用"><a href="#作为对象使用" class="headerlink" title="作为对象使用"></a>作为对象使用</h4><ol>
+<li>$.each()：隐式遍历数组</li>
+<li>$.trim()：去除两端的空格</li>
+</ol>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><h4 id="load（）"><a href="#load（）" class="headerlink" title="load（）"></a>load（）</h4><ul>
+<li>load（）方法从服务器加载数据，并把返回的数据放入被选元素中<ul>
+<li>$(selector).load(URL,data,callback);</li>
+<li>必须的URL参数规定你希望加载的URL</li>
+<li>可选的data参数规定与请求一同发送的查询字符串键/值对集合</li>
+<li>可选的callback（responseTxt，statusTXT，xhr）参数是load（）完成后执行的函数名称，无论AJAX请求是否成功，一旦请求完成后，函数callback立即被触发</li>
+<li>responseTxt–包含调用成功时的结果内容     statusTXT—包含调用的状态        xhr——包含XMLHttpRequest对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="get（URL-callback）和post（）"><a href="#get（URL-callback）和post（）" class="headerlink" title="$.get（URL,callback）和post（）"></a>$.get（URL,callback）和post（）</h4><ul>
+<li>两者都能通过HTTP或POST请求从服务器请求数据</li>
+<li>get是从指定的资源请求数据，基本用于从服务器获得数据，可能返回缓存数据</li>
+<li>post向指定的资源提交要处理的数据，可用于从服务器获取数据。不过，post方法不会缓存数据，并且常用于连同请求一起发送数据</li>
+</ul>
+<h4 id="noConflict（）方法"><a href="#noConflict（）方法" class="headerlink" title="$.noConflict（）方法"></a>$.noConflict（）方法</h4><ul>
+<li>解决在页面同时使用jQuery和其他框架（在同一个页面加载多个jQuery实例，尤其是不同版本的jQuery）</li>
+<li>noConflict（）会释放对$($是jQuery的简写）</li>
+</ul>
+<h4 id="selector-bind-event-data-function-map"><a href="#selector-bind-event-data-function-map" class="headerlink" title="$(selector).bind(event,data,function,map)"></a>$(selector).bind(event,data,function,map)</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>event</em></td>
+<td align="left">必需。规定添加到元素的一个或多个事件。  由空格分隔多个事件值。必须是有效的事件。</td>
+</tr>
+<tr>
+<td align="left"><em>data</em></td>
+<td align="left">可选。规定传递到函数的额外数据。</td>
+</tr>
+<tr>
+<td align="left"><em>function</em></td>
+<td align="left">必需。规定当事件发生时运行的函数。</td>
+</tr>
+<tr>
+<td align="left"><em>map</em></td>
+<td align="left">规定事件映射 (<em>{event:function, event:function, …})</em>，包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>bind() 方法向被选元素添加一个或多个事件处理程序，以及当事件发生时运行的函数。</p>
+</li>
+<li><p>自 jQuery 版本 1.7 起，<a href="https://www.w3cschool.cn/jquery/event-on.html" target="_blank" rel="noopener">on()</a> 方法是向被选元素添加事件处理程序的首选方法。</p>
+</li>
+</ul>
+<h4 id="selector-delegate-childSelector-event-data-function"><a href="#selector-delegate-childSelector-event-data-function" class="headerlink" title="$(selector).delegate(childSelector,event,data,function)"></a>$(selector).delegate(childSelector,event,data,function)</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>childSelector</em></td>
+<td align="left">必需。规定要添加事件处理程序的一个或多个子元素。</td>
+</tr>
+<tr>
+<td align="left"><em>event</em></td>
+<td align="left">必需。规定添加到元素的一个或多个事件。  由空格分隔多个事件值。必须是有效的事件。</td>
+</tr>
+<tr>
+<td align="left"><em>data</em></td>
+<td align="left">可选。规定传递到函数的额外数据。</td>
+</tr>
+<tr>
+<td align="left"><em>function</em></td>
+<td align="left">必需。规定当事件发生时运行的函数。</td>
+</tr>
+</tbody></table>
+<h1 id="原生js与jQuery的区别"><a href="#原生js与jQuery的区别" class="headerlink" title="原生js与jQuery的区别"></a>原生js与jQuery的区别</h1><p>1.原生JS与jQuery入口函数的加载模式不同</p>
+<ul>
+<li>原生JS会等到DOM元素和图片都加载完毕再执行</li>
+<li>jQuery只是等DOM加载完毕之后就执行</li>
+</ul>
+<p>2.覆盖问题</p>
+<ul>
+<li>原生js如果有多个入口函数，后面编写的会覆盖前面的</li>
+<li>jQuery有多个入口函数时不会相互覆盖，都会执行</li>
+</ul>
+<p>3.多个框架时的冲突问题</p>
+<ul>
+<li>解决方法：释放$的使用权</li>
+</ul>
+<p>iQuery.noConflict();</p>
+<p>注意点：释放操作必须在编写其他jQuery代码之前编写</p>
+<p>​              释放之后就不能再使用$改为jQuery</p>
+<ul>
+<li>自定义访问符号</li>
+</ul>
+<p>var  nj = jQuery.noConflict();</p>
+<p>nj(function (){ });</p>
+<p>4.遍历数组</p>
+<ul>
+<li><p>js中用forEach（）只能遍历数组，不能遍历伪数组，参数位置不同</p>
+<p>arr.forEach(function (value,index){  });</p>
+</li>
+<li><p>利用jQuery的Each（）静态方法遍历数组/伪数组,参数位置不同</p>
+<p>$.each(arr,function (index,value){  });//遍历数组</p>
+<p>$.each(obj，function (index,value){  });//遍历伪数组</p>
+</li>
+</ul>
+<p>jQuery中的each（）静态方法和map（）静态方法的区别：</p>
+<ul>
+<li>each（）静态方法默认的返回值就是遍历谁就返回谁，不支持在回调函数中对数组进行处理</li>
+<li>map（）静态方法默认的返回值是一个空数组，可通过回调函数进行处理，然后生成一个新的数组返回</li>
+</ul>
+<h2 id="复习jquery"><a href="#复习jquery" class="headerlink" title="复习jquery"></a>复习jquery</h2><ul>
+<li>DOM中的顶级对象：document ——页面中的顶级对象</li>
+<li>BOM中的顶级对象：window</li>
+<li>jQuery的顶级对象：jQuery——$</li>
+</ul>
+<h6 id="与-的区别"><a href="#与-的区别" class="headerlink" title="$与$()的区别"></a>$与$()的区别</h6><ul>
+<li>$是一个函数对象，包含很多静态方法，这种方法，一般的js也是可以使用。</li>
+<li>$（）是调用这个函数对象的一个实例，返回一个对象，一般是由$对象拓展的对象属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$().css();</span><br><span class="line">$().html();</span><br><span class="line"></span><br><span class="line">$.trim();</span><br><span class="line">$.proxy();</span><br></pre></td></tr></table></figure>
+
+<h6 id="常见属性方法"><a href="#常见属性方法" class="headerlink" title="$常见属性方法"></a>$常见属性方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">trim()			去除前后格</span><br><span class="line">makeArray()		类数组转为真数组</span><br><span class="line">inArray()		数组版indexOf</span><br><span class="line">merge()			合并数组</span><br><span class="line">grep()			过滤新数组</span><br><span class="line">map()			映射新数组</span><br><span class="line">guid			唯一标识符</span><br><span class="line">proxy()			改this指向</span><br><span class="line">access()		多功能操作值（内部）</span><br><span class="line">now()			当前时间</span><br><span class="line">swap()			CSS交换（内部）</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-js动画篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/17/js动画篇/" class="article-date">
+      <time datetime="2020-06-17T07:27:46.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/js动画篇/">js动画篇</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><h4 id="一-keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式"><a href="#一-keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式" class="headerlink" title="一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式"></a>一. @keyframes规则是创建动画，它指定一个css样式和动画将逐步从当前样式更改为新的样式</h4><p>当在keyframes创建动画时，把他绑定到一个选择器，否则动画不会有任何效果，至少指定这两个动画属性</p>
+<ul>
+<li>规定动画名称</li>
+<li>规定动画时长</li>
+<li>animation:  myfirst  5s;</li>
+</ul>
+<h4 id="二-animation属性"><a href="#二-animation属性" class="headerlink" title="二 . animation属性"></a>二 . animation属性</h4><p>语法：</p>
+<p>animation: name    duration    time-function    delay    iteration-count    direction;</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>animation-name</td>
+<td>规定需要绑定到选择器的keyframe名称</td>
+</tr>
+</tbody></table>
+<p>animation-duration    规定完成动画所花费的时间，以s/ms记</p>
+<p>animation-time-function    规定动画的速度曲线</p>
+<p>animation-iteration-count    规定动画应该播放的次数</p>
+<p>animation-direction    规定是否应该轮流方向播放动画</p>
+<p><strong>注意</strong>：请始终规定animation-duration属性，否则时长为0，就不会播放动画。</p>
+<h4 id="三-animation-delay属性"><a href="#三-animation-delay属性" class="headerlink" title="三  . animation-delay属性"></a>三  . animation-delay属性</h4><h5 id="1-定义动画什么时候开始（s-ms）"><a href="#1-定义动画什么时候开始（s-ms）" class="headerlink" title="1.定义动画什么时候开始（s/ms）"></a>1.定义动画什么时候开始（s/ms）</h5><ul>
+<li>可为负值，-2s使动画马上开始，但跳过2s进入动画</li>
+</ul>
+<h4 id="四-animation-direction属性"><a href="#四-animation-direction属性" class="headerlink" title="四 . animation-direction属性"></a>四 . animation-direction属性</h4><h5 id="1-animation-direction：属性控制如何在reverse或alternate周期播放动画。"><a href="#1-animation-direction：属性控制如何在reverse或alternate周期播放动画。" class="headerlink" title="1.animation-direction：属性控制如何在reverse或alternate周期播放动画。"></a>1.animation-direction：属性控制如何在<code>reverse</code>或<code>alternate</code>周期播放动画。</h5><p>如果 animation-direction 值是 “alternate”，则动画会在奇数次数（1、3、5 等等）正常播放，而在偶数次数（2、4、6 等等）向后播放。</p>
+<p>注释：如果把动画设置为只播放一次，则该属性没有效果。</p>
+<ul>
+<li>属性值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>以正常的方式播放动画</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>以相反方向播放动画</td>
+</tr>
+<tr>
+<td>alternate</td>
+<td>播放动画作为正常每奇数时间（1,3,5等）和反方向每偶数时间（2,4,6，等…）</td>
+</tr>
+<tr>
+<td>alternate-reverse</td>
+<td>在每个奇数时间（1,3,5等）在相反方向上播放动画，并且在每个偶数时间（2,4,6等等）的正常方向上播放动画</td>
+</tr>
+</tbody></table>
+<h4 id="五-animation-duration属性"><a href="#五-animation-duration属性" class="headerlink" title="五 . animation-duration属性"></a>五 . animation-duration属性</h4><h5 id="1-定义完成一个动画需要的时间s-ms"><a href="#1-定义完成一个动画需要的时间s-ms" class="headerlink" title="1.定义完成一个动画需要的时间s/ms"></a>1.定义完成一个动画需要的时间s/ms</h5><p>animation-duration：time；</p>
+<h4 id="六-animation-fill-mode属性"><a href="#六-animation-fill-mode属性" class="headerlink" title="六 . animation-fill-mode属性"></a>六 . animation-fill-mode属性</h4><h5 id="1-设置样式以在动画不播放时应用元素"><a href="#1-设置样式以在动画不播放时应用元素" class="headerlink" title="1.设置样式以在动画不播放时应用元素"></a>1.设置样式以在动画不播放时应用元素</h5><ul>
+<li><p>animation-fill-mode:none | forwards | backwards |both |initial |inherit ;</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>默认值，无样式</td>
+</tr>
+</tbody></table>
+<p>forwards    动画结束后，使用元素的结束属性值</p>
+<p>backwards    使用元素的起始值</p>
+<p>both    动画遵循向前向后的规则</p>
+</li>
+</ul>
+<h4 id="七-animation-iteration-count属性"><a href="#七-animation-iteration-count属性" class="headerlink" title="七 . animation-iteration-count属性"></a>七 . animation-iteration-count属性</h4><h5 id="1-定义动画应该播放几次"><a href="#1-定义动画应该播放几次" class="headerlink" title="1 . 定义动画应该播放几次"></a>1 . 定义动画应该播放几次</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>n</em></td>
+<td>定义播放动画多少次。 默认值为1</td>
+</tr>
+<tr>
+<td>infinite</td>
+<td>指定动画应该播放无限次（永远）</td>
+</tr>
+</tbody></table>
+<h4 id="八-animation-name属性"><a href="#八-animation-name属性" class="headerlink" title="八 . animation-name属性"></a>八 . animation-name属性</h4><h5 id="1-animation-name属性为-keyframes动画规定名称"><a href="#1-animation-name属性为-keyframes动画规定名称" class="headerlink" title="1. animation-name属性为@keyframes动画规定名称"></a>1. animation-name属性为@keyframes动画规定名称</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>keyframename</td>
+<td>规定需要绑定到选择器的 keyframe 的名称。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>规定无动画效果（可用于覆盖来自级联的动画）。</td>
+</tr>
+</tbody></table>
+<h4 id="九-animation-play-state属性"><a href="#九-animation-play-state属性" class="headerlink" title="九 . animation-play-state属性"></a>九 . animation-play-state属性</h4><h5 id="1-设置是否运行或者暂停动画"><a href="#1-设置是否运行或者暂停动画" class="headerlink" title="1.设置是否运行或者暂停动画"></a>1.设置是否运行或者暂停动画</h5><p>你可以在js中使用该属性，这样就可以在播放过程中暂停动画</p>
+<p>animation-play-state：paused | running；</p>
+<h4 id="十-animation-timing-function属性"><a href="#十-animation-timing-function属性" class="headerlink" title="十 . animation-timing-function属性"></a>十 . animation-timing-function属性</h4><h5 id="1-指定动画速度曲线"><a href="#1-指定动画速度曲线" class="headerlink" title="1 . 指定动画速度曲线"></a>1 . 指定动画速度曲线</h5><p>​    速度曲线定义动画从一套CSS样式变为另一套所用的时间，速度曲线用于使变化更为平滑</p>
+<p>​    animation-timing-function : linear | ease | ease-in | ease-out | cubic-bezier(n,n,n,n);</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">linear</td>
+<td align="left">动画从开始到结束具有相同的速度。</td>
+</tr>
+<tr>
+<td align="left">ease</td>
+<td align="left">动画有一个缓慢的开始，然后快，结束慢。</td>
+</tr>
+<tr>
+<td align="left">ease-in</td>
+<td align="left">动画有一个缓慢的开始。</td>
+</tr>
+<tr>
+<td align="left">ease-out</td>
+<td align="left">动画结束缓慢。</td>
+</tr>
+<tr>
+<td align="left">ease-in-out</td>
+<td align="left">动画具有缓慢的开始和慢的结束。</td>
+</tr>
+<tr>
+<td align="left">cubic-bezier(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">在立方贝塞尔函数中定义速度函数。 可能的值是从0到1的数字值。</td>
+</tr>
+</tbody></table>
+<hr>
+
+<h1 id="转换transform"><a href="#转换transform" class="headerlink" title="转换transform"></a>转换transform</h1><h2 id="一-2D转换"><a href="#一-2D转换" class="headerlink" title="一 . 2D转换"></a>一 . 2D转换</h2><h5 id="1-旋转transform-rotate-30deg"><a href="#1-旋转transform-rotate-30deg" class="headerlink" title="1.旋转transform : rotate(30deg);"></a>1.旋转transform : rotate(30deg);</h5><p>在给定度数顺时针旋转的元素。负值表示逆时针deg表示度数。</p>
+<h5 id="2-移动-transform-translate-50px-100px"><a href="#2-移动-transform-translate-50px-100px" class="headerlink" title="2.移动 transform:translate(50px,100px);"></a>2.移动 transform:translate(50px,100px);</h5><p>往左往上为正</p>
+<h5 id="3-缩放-transform：scale（2，4）；"><a href="#3-缩放-transform：scale（2，4）；" class="headerlink" title="3.缩放 transform：scale（2，4）；"></a>3.缩放 transform：scale（2，4）；</h5><p>scale（2,4）转变宽度为原来的大小的2倍，和其原始大小4倍的高度。</p>
+<h5 id="4-倾斜-transform：skew（30deg，20deg）；"><a href="#4-倾斜-transform：skew（30deg，20deg）；" class="headerlink" title="4.倾斜 transform：skew（30deg，20deg）；"></a>4.倾斜 transform：skew（30deg，20deg）；</h5><p>包含两个参数值，分别表示X轴和Y轴倾斜的角度，如果第二个参数为空，则默认为0，参数为负表示向相反方向倾斜。</p>
+<ul>
+<li>skewX( );表示只在X轴(水平方向)倾斜。</li>
+</ul>
+<ul>
+<li>skewY( );表示只在Y轴(垂直方向)倾斜。 </li>
+<li>skew(30deg,20deg) 是元素在X轴和Y轴上倾斜20度30度。</li>
+</ul>
+<h2 id="总的语法"><a href="#总的语法" class="headerlink" title="总的语法"></a>总的语法</h2><p>transform: none|<em>transform-functions</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">定义不进行转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">matrix(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">定义 2D 转换，使用六个值的矩阵。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">matrix3d(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td align="left">定义 3D 转换，使用 16 个值的 4x4 矩阵。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translate(<em>x</em>,<em>y</em>)</td>
+<td align="left">定义 2D 转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translate3d(<em>x</em>,<em>y</em>,<em>z</em>)</td>
+<td align="left">定义 3D 转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateX(<em>x</em>)</td>
+<td align="left">定义转换，只是用 X 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateY(<em>y</em>)</td>
+<td align="left">定义转换，只是用 Y 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">translateZ(<em>z</em>)</td>
+<td align="left">定义 3D 转换，只是用 Z 轴的值。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scale(<em>x</em>[,<em>y</em>]?)</td>
+<td align="left">定义 2D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scale3d(<em>x</em>,<em>y</em>,<em>z</em>)</td>
+<td align="left">定义 3D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleX(<em>x</em>)</td>
+<td align="left">通过设置 X 轴的值来定义缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleY(<em>y</em>)</td>
+<td align="left">通过设置 Y 轴的值来定义缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">scaleZ(<em>z</em>)</td>
+<td align="left">通过设置 Z 轴的值来定义 3D 缩放转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotate(<em>angle</em>)</td>
+<td align="left">定义 2D 旋转，在参数中规定角度。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotate3d(<em>x</em>,<em>y</em>,<em>z</em>,<em>angle</em>)</td>
+<td align="left">定义 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateX(<em>angle</em>)</td>
+<td align="left">定义沿着 X 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateY(<em>angle</em>)</td>
+<td align="left">定义沿着 Y 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">rotateZ(<em>angle</em>)</td>
+<td align="left">定义沿着 Z 轴的 3D 旋转。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skew(<em>x-angle</em>,<em>y-angle</em>)</td>
+<td align="left">定义沿着 X 和 Y 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skewX(<em>angle</em>)</td>
+<td align="left">定义沿着 X 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">skewY(<em>angle</em>)</td>
+<td align="left">定义沿着 Y 轴的 2D 倾斜转换。</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">perspective(<em>n</em>)</td>
+<td align="left">为 3D 转换元素定义透视视图。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="二-transform-origin"><a href="#二-transform-origin" class="headerlink" title="二 . transform-origin"></a>二 . transform-origin</h4><h5 id="1-transform-Origin属性允许您更改转换元素的位置。"><a href="#1-transform-Origin属性允许您更改转换元素的位置。" class="headerlink" title="1.transform-Origin属性允许您更改转换元素的位置。"></a>1.transform-Origin属性允许您更改转换元素的位置。</h5><p>2D转换元素可以改变元素的X和Y轴。 3D转换元素，还可以更改元素的Z轴。</p>
+<p>transform-origin: <em>x-axis y-axis z-axis</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x-axis</td>
+<td align="left">定义视图被置于 X 轴的何处。left center right <em>length</em> <em>%</em></td>
+</tr>
+<tr>
+<td align="left">y-axis</td>
+<td align="left">定义视图被置于 Y 轴的何处。可能的值：top center bottom   <em>length</em>     <em>%</em></td>
+</tr>
+<tr>
+<td align="left">z-axis</td>
+<td align="left">定义视图被置于 Z 轴的何处。可能的值：<em>length</em></td>
+</tr>
+</tbody></table>
+<h5 id="2-transform-style属性指定嵌套元素是怎么在三维空间中呈现"><a href="#2-transform-style属性指定嵌套元素是怎么在三维空间中呈现" class="headerlink" title="2.transform-style属性指定嵌套元素是怎么在三维空间中呈现"></a>2.transform-style属性指定嵌套元素是怎么在三维空间中呈现</h5><ul>
+<li><p>transform-style: flat | preserve-3d;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">flat</td>
+<td align="left">子元素将不保留其 3D 位置。</td>
+</tr>
+<tr>
+<td align="left">preserve-3d</td>
+<td align="left">子元素将保留其 3D 位置。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p>让转换的子元素保留3D转换：</p>
+<p>div<br>{<br>transform: rotateY(60deg);<br>transform-style: preserve-3d;<br>-webkit-transform: rotateY(60deg); /* Safari and Chrome <em>/<br>-webkit-transform-style: preserve-3d; /</em> Safari and Chrome */<br>}</p>
+<h1 id="transition属性过渡"><a href="#transition属性过渡" class="headerlink" title="transition属性过渡"></a>transition属性过渡</h1><p>transition 属性是一个简写属性，用于设置四个过渡属性：</p>
+<ul>
+<li>transition-property</li>
+<li>transition-duration</li>
+<li>transition-timing-function</li>
+<li>transition-delay</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition: property duration timing-function delay;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>transition-property</td>
+<td>规定设置过渡效果的 CSS 属性的名称。</td>
+</tr>
+<tr>
+<td>transition-duration</td>
+<td>规定完成过渡效果需要多少秒或毫秒。</td>
+</tr>
+<tr>
+<td>transition-timing-function</td>
+<td>规定速度效果的速度曲线。</td>
+</tr>
+<tr>
+<td>transition-delay</td>
+<td>定义过渡效果何时开始。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>transition-property属性指定css属性的nametransition效果（transition效果时将会启动指定的css属性的变化。</p>
+</li>
+<li><p>一个转场效果通常发生在当鼠标悬停在一个元素上</p>
+</li>
+<li><p>始终指定transition-duration属性，否则持续时间为0，transition不会有效果默认值是all，多项改变要添加多个样式的变换效果，添加的属性由逗号分隔</p>
+<p>transition-property: none|all| <em>property</em>;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">没有属性会获得过渡效果。</td>
+</tr>
+<tr>
+<td align="left">all</td>
+<td align="left">所有属性都将获得过渡效果。</td>
+</tr>
+<tr>
+<td align="left"><em>property</em></td>
+<td align="left">定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="三-透视3D属性perspective"><a href="#三-透视3D属性perspective" class="headerlink" title="三 . 透视3D属性perspective"></a>三 . 透视3D属性perspective</h4><p>多少像素的3D元素是从视图的perspective属性定义。这个属性允许你改变3D元素是怎样查看透视图。perspective 属性只影响 3D 转换元素；定义时的perspective属性，它是一个元素的子元素，透视图，而不是元素本身。</p>
+<p>perspective: <em>number</em>|none;</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>number</em></td>
+<td align="left">元素距离视图的距离，以像素计。</td>
+</tr>
+<tr>
+<td align="left">none</td>
+<td align="left">默认值。与 0 相同。不设置透视。</td>
+</tr>
+</tbody></table>
+<p>一般跟perspective-origin属性配合使用，默认值都是50%</p>
+<h4 id="四-。-backface-visibility属性"><a href="#四-。-backface-visibility属性" class="headerlink" title="四 。 backface-visibility属性"></a>四 。 backface-visibility属性</h4><h5 id="1-backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见"><a href="#1-backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见" class="headerlink" title="1. backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见"></a>1. backface-visibility属性定义当元素不面向屏幕时是否可见，默认可见</h5><p>如果在旋转元素不希望看到其背面时，该属性很有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backface-visibility: visible|hidden;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>visible</td>
+<td>默认值。 背面是可见的。</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>背面是不可见的。</td>
+</tr>
+</tbody></table>
+<h4 id="五-盒阴影box-shadow"><a href="#五-盒阴影box-shadow" class="headerlink" title="五 . 盒阴影box-shadow"></a>五 . 盒阴影box-shadow</h4><p>box-shadow : 向左偏移量  向下偏移量  阴影半径  颜色；</p>
+<p><strong>注意</strong>：向右向下为正</p>
+<h4 id="六-边界图片border-image"><a href="#六-边界图片border-image" class="headerlink" title="六 . 边界图片border-image"></a>六 . 边界图片border-image</h4><p>border-image属性允许你指定一个图片作为边框！用于创建上文边框的原始图像</p>
+<p>border-image:url(border.png) 30 30 round; </p>
+<p>速记属性</p>
+<p>border-image：source    slice   width    outset   repeat；</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>border-image-source</em></td>
+<td align="left">用于指定要用于绘制边框的图像的位置</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-slice</em></td>
+<td align="left">图像边界向内偏移</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-width</em></td>
+<td align="left">图像边界的宽度</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-outset</em></td>
+<td align="left">用于指定在边框外部绘制 border-image-area 的量</td>
+</tr>
+<tr>
+<td align="left"><em>border-image-repeat</em></td>
+<td align="left">这个例子演示了如何创建一个border-image 属性的按钮。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>border-image-source: url(border.png);</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">none</td>
+<td align="left">没有图像被使用</td>
+</tr>
+<tr>
+<td align="left"><em>image</em></td>
+<td align="left">边框使用图像的路径</td>
+</tr>
+</tbody></table>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-image-outset: length|number（代表对应的border-width的倍数）;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注释：</strong>border-image-outset 属性规定边框图像超出边框盒的量。在上、右、下、左侧。如果忽略第四个值，则与第二个值相同。如果省略第三个值，则与第一个值相同。如果省略第二个值，则与第一个值相同。不允许任何负值作为 border-image-outset 值。</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-image-width: number|%|auto;</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>border-image -width的4个值指定用于把border图像区域分为九个部分。他们代表上，右，底部，左，两侧向内距离。如果第四个值被省略，它和第二个是相同的。如果也省略了第三个，它和第一个是相同的。如果也省略了第二个，它和第一个是相同的。负值是不允许的。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>number</em></td>
+<td>代表对应的 border-width 的倍数。</td>
+</tr>
+<tr>
+<td><em>%</em></td>
+<td>参考边框图像区域的尺寸：区域的高度影响水平偏移，宽度影响垂直偏移。</td>
+</tr>
+<tr>
+<td><em>auto</em></td>
+<td>如果规定该属性，则宽度为对应的图像切片的固有宽度。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="七-border-collapse-属性"><a href="#七-border-collapse-属性" class="headerlink" title="七 . border-collapse 属性"></a>七 . border-collapse 属性</h4><p>设置表格的边框是否被合并为一个单一的边框</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">collapse</td>
+<td align="left">如果可能，边框会合并为一个单一的边框。会忽略 border-spacing 和 empty-cells 属性</td>
+</tr>
+<tr>
+<td align="left">separate</td>
+<td align="left">默认值。边框会被分开。不会忽略 border-spacing 和 empty-cells 属性</td>
+</tr>
+<tr>
+<td align="left">inherit</td>
+<td align="left">规定应该从父元素继承 border-collapse 属性的值</td>
+</tr>
+</tbody></table>
+<h4 id="八-border-color-红，绿，蓝-粉红色"><a href="#八-border-color-红，绿，蓝-粉红色" class="headerlink" title="八 .border-color:红，绿，蓝,粉红色;"></a>八 .<strong>border-color:红，绿，蓝,粉红色;</strong></h4><ul>
+<li>上边框是红色</li>
+<li>右边框是绿色</li>
+<li>底部边框是蓝</li>
+<li>左边框是粉红色</li>
+</ul>
+<p><strong>border-color：红，绿，蓝;</strong></p>
+<ul>
+<li>上边框是红色</li>
+<li>左，右边框是绿色</li>
+<li>底部边框是蓝</li>
+</ul>
+<p><strong>border-color：红，绿;</strong></p>
+<ul>
+<li>顶部和底部边框是红色</li>
+<li>左右边框是绿色</li>
+</ul>
+<p><strong>border-color：红色;</strong></p>
+<ul>
+<li>所有四个边框是红色</li>
+</ul>
+<p>请始终把 border-style 属性声明到 border-color 属性之前。元素必须在您改变其颜色之前获得边框。</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>color</em></td>
+<td align="left">指定背景颜色。在CSS颜色值查找颜色值的完整列表</td>
+</tr>
+<tr>
+<td align="left">transparent</td>
+<td align="left">指定边框的颜色应该是透明的。这是默认</td>
+</tr>
+<tr>
+<td align="left">inherit</td>
+<td align="left">指定边框的颜色，应该从父元素继承</td>
+</tr>
+</tbody></table>
+<h1 id="颜色渐变"><a href="#颜色渐变" class="headerlink" title="颜色渐变"></a>颜色渐变</h1><h2 id="一-线性渐变（Linear-Gradients）"><a href="#一-线性渐变（Linear-Gradients）" class="headerlink" title="一 . 线性渐变（Linear Gradients）"></a>一 . 线性渐变（Linear Gradients）</h2><ul>
+<li>background: linear-gradient(direction, color-stop1, color-stop2, …);   <ul>
+<li>background: -webkit-linear-gradient(red, blue); /* Safari  */ </li>
+<li>background: -o-linear-gradient(red, blue); /* Opera **/ *</li>
+<li>background: -moz-linear-gradient(red, blue); /* Firefox  */ </li>
+<li>background: linear-gradient(red, blue); /* 标准的语法 */ </li>
+</ul>
+</li>
+</ul>
+<h2 id="二-径向渐变（Radial-Gradients）"><a href="#二-径向渐变（Radial-Gradients）" class="headerlink" title="二 . 径向渐变（Radial Gradients）"></a>二 . 径向渐变（Radial Gradients）</h2><ul>
+<li><p>默认情况下，渐变的中心是 center（表示在中心点），渐变的形状是 ellipse（表示椭圆形），渐变的大小是 farthest-corner（表示到最远的角落）。</p>
+</li>
+<li><p>background: radial-gradient(center, shape size, start-color, …, last-color);  </p>
+</li>
+<li><p><strong>径向渐变 - 颜色结点不均匀分布</strong></p>
+<ul>
+<li>background: -webkit-radial-gradient(red 5%, green 15%, blue 60%);</li>
+</ul>
+</li>
+<li><p>shape 参数定义了形状。它可以是值 circle 或 ellipse。其中，circle 表示圆形，ellipse 表示椭圆形。默认值是 ellipse。</p>
+<h5 id="不同尺寸大小关键字的使用"><a href="#不同尺寸大小关键字的使用" class="headerlink" title="不同尺寸大小关键字的使用"></a>不同尺寸大小关键字的使用</h5><p>size 参数定义了渐变的大小。它可以是以下四个值：</p>
+<ul>
+<li><strong>closest-side</strong></li>
+<li><strong>farthest-side</strong></li>
+<li><strong>closest-corner</strong></li>
+<li><strong>farthest-corner</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="三-透明度transparency"><a href="#三-透明度transparency" class="headerlink" title="三 . 透明度transparency"></a>三 . 透明度transparency</h3><ul>
+<li>用于创建减弱变淡的效果；为了添加透明度，我们使用 rgba() 函数来定义颜色结点。rgba() 函数中的最后一个参数可以是从 0 到 1 的值，它定义了颜色的透明度：0 表示完全透明，1 表示完全不透明。</li>
+<li>repeating-linear-gradient() 函数用于重复线性渐变：</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-js精研" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -3685,400 +4934,6 @@ return 123;
 <h6 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </span><br><span class="line">people = pd.read_execl(<span class="string">'path'</span>,header=<span class="literal">None</span>)  <span class="comment">#表示没有行头</span></span><br><span class="line">people.set_index(<span class="string">'ID'</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">print(people.shape)   <span class="comment">#打印出多少行多少列</span></span><br><span class="line">print(people.columns)  <span class="comment">#列</span></span><br><span class="line">print(people.head(<span class="number">3</span>))  <span class="comment">#打印出前3行，head不加参数默认为5行</span></span><br><span class="line">print(people.tail(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">df = pd.read_excel(<span class="string">'path'</span>,index_col=<span class="string">'ID'</span>)  <span class="comment">#后面的参数是为了不要将系统自动添加的索引加到新的表中</span></span><br><span class="line">df.to_excel(<span class="string">'path'</span>)</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HTML5和CSS3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/05/09/HTML5和CSS3/" class="article-date">
-      <time datetime="2020-05-09T14:12:59.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/09/HTML5和CSS3/">HTML5和CSS3</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ol>
-<li><p>contentEditable设置为true时，该元素就变成了可编辑的，且该元素可继承。</p>
-</li>
-<li><p>designMode属性用来指定整个页面是否可编辑。<code>document.designMode=&quot;on&quot;</code></p>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-爬虫" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/05/08/爬虫/" class="article-date">
-      <time datetime="2020-05-08T12:22:36.000Z" itemprop="datePublished">2020-05-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/08/爬虫/">爬虫</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="爬虫基础"><a href="#爬虫基础" class="headerlink" title="爬虫基础"></a>爬虫基础</h4><p>爬虫就是获取网页并提取和保存信息的自动化程序。</p>
-<p>Cookies里面保存了登录的凭证，有了它，只需在下次请求携带Cookies发送请求而不必重新输入用户名和密码。因此在爬虫中，有时候需要登录才能访问页面时，我们一般会直接将登录成功后截取的Cookies放在请求头里面直接请求，而不必重新模拟登录。</p>
-<h6 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h6><p>Accept：请求报文域，用于指定客户端可接受哪些类型的信息。</p>
-<p>Accept-Language：指定客户端可接受的语言类型。</p>
-<p>Accept-Encoding：指定客户端可接受的内容编码。</p>
-<p>Host：用于指定请求资源的主机IP和端口号，其内容为请求URL的原始服务器或网关的位置。从HTTP1.1版本开始，请求必须包含此内容。</p>
-<p>Cookie：也常用复数形式Cookies，这是网站为了辨别用户进行会话跟踪而存储在用户本地的数据。它的主要功能是维持当前会话。如：我们输入用户名和密码成功登陆到某个网站后，服务器会用会话保存登录状态信息，后面我们每次刷新或请求该站点的其他页面时，会发现都是登陆状态，这就是Cookies的功劳。Cookies里面有信息标识了我们所对应的服务器的会话，每次浏览器在请求该站点的页面时，都会在请求头中加上Cookies并将其发送给服务器，服务器通过Cookies识别出是我们自己，并且查出当前状态是登录状态，所以返回的是登陆后才能看到的网页内容。</p>
-<p>Referer：此内容用来标识这个请求是从哪个页面发过来的，服务器可以拿到这一信息并作相应的处理，如来源统计，防盗链处理等。</p>
-<p>User-Agent：简称UA，它是一个特殊的字符串头，可以是服务器识别客户使用的操作系统和版本，浏览器及版本等信息。在做爬虫的时候加上此信息可以伪装为浏览器；如果不加，很可能会被识别为爬虫。</p>
-<p>Content-Type：也叫互联网媒体类型或者MIME类型，在HTTP协议消息头中，它用来表示具体请求中的媒体类型信息。如：text/html表示HTML格式，image/gif表示GIF图片，application/json表示JSON类型。</p>
-<table>
-<thead>
-<tr>
-<th>Content-Type</th>
-<th>提交数据的方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>application/x-www-form-urlencoded</td>
-<td>表单数据</td>
-</tr>
-<tr>
-<td>multipart/form-data</td>
-<td>表单文件上传</td>
-</tr>
-<tr>
-<td>application/data</td>
-<td>序列化JSON数据</td>
-</tr>
-<tr>
-<td>text/xml</td>
-<td>XML数据</td>
-</tr>
-</tbody></table>
-<p>在爬虫中，若要构造POST请求，需要使用正确的Content-Type，并了解各种请求库的各个参数设置时使用的是哪种Content-Type，不然可能导致POST提交后无法正常响应。</p>
-<p>请求头是请求的重要组成部分，再写爬虫时大部分情况下都需要设定请求头。</p>
-<h6 id="请求主体"><a href="#请求主体" class="headerlink" title="请求主体"></a>请求主体</h6><p>请求体一般承载的内容是POST请求中的表单数据，而对于GET请求，请求体则为空。</p>
-<p>响应三部分：响应状态码，响应头，响应体。</p>
-<h6 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h6><p>Date：标识响应产生的时间。</p>
-<p>Last-Modified：指定资源的最后修改时间。</p>
-<p>Content-Encoding：指定响应内容的编码。</p>
-<p>Server：包含服务器的信息，比如名称和版本号等。</p>
-<p>Content-Type：文档类型，指定返回的数据类型是什么，如text/html代表返回的是HTML文档，application/x-javascript则代表返回JavaScript文件，image/jpeg则代表返回图片。</p>
-<p>Set-Cookie：设置Cookies，响应头中的Set-Cookie告诉浏览器需要将此内容放在Cookies中，下次请求携带Cookies请求。</p>
-<p>Expires：指定响应的过期时间，可以使代理服务器或浏览器将加载的内容更新到缓存中。如果再次访问时，就可以直接从缓存中加载，降低服务器负载，缩短加载时间。</p>
-<h6 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h6><p>响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的        HTML代码；请求一张图片时，它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的内容就是响应体。</p>
-<h6 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h6><p>在Web中，会话对象用来存储特定用户会话所需的属性及配置信息，这样，当用户在应用程序的Web页之间跳转时，存储在会话对象中的变量将不会丢失，而是在整个用户会话中一直村下去。当用户请求来自应用程序的Web页时，如果该用户还没有会话，则Web服务器将自动创建一个会话对象。当会话过期或放弃后，服务器将终止该会话。</p>
-<p><strong>会话维持</strong></p>
-<p>当客户端第一次请求服务器时，服务器会返回一个请求头中带有Set-Cookie字段的响应给客户端，用来标记是哪一个用户，客户端浏览器就会把此Cookies放到请求头一起提交给服务器，Cookies携带了会话ID信息，服务器检查该Cookies即可找到对应的会话是什么，然后再判断会话来以此来辨认用户状态。</p>
-<p>在成功登录某个网站时，服务器就会告诉客户端设置哪些Cookies信息，在后续访问页面时客户端会把Cookies发送给服务器，服务器再找到对应的会话加以判断。如果会话中某些设置登录状态的变量是有效的，那就证明用户处于登录状态，此时返回登陆之后才可以查看的网页内容，浏览器解析便可以看到了。</p>
-<p>反之，如果传给服务器的Cookies是无效的，或者会话已经过期了，我们将不能继续访问页面，此时可能会收到错误的响应或者跳转到登录页面重新登陆。</p>
-<p>所以，Cookies和会话需要配合，一个处于客户端，一个处于服务端，两者共同协作就实现会话控制。</p>
-<h6 id="会话Cookie与持久Cookie"><a href="#会话Cookie与持久Cookie" class="headerlink" title="会话Cookie与持久Cookie"></a>会话Cookie与持久Cookie</h6><p>从表面意思来说，会话Cookie就是把Cookie放在浏览器内存中，浏览器在关闭之后该Cookie即失效；持久Cookie则会保存到客户端的硬盘中，方便下一次使用，用于长久保持用户登录状态。</p>
-<p>因此一些持久化登陆的网站其实就是把Cookie的有效时间和会话有效期设置得较长，下次我们再访问页面时仍然携带之前的Cookie，就可以直接保持登录状态。</p>
-<h6 id="会话误区"><a href="#会话误区" class="headerlink" title="会话误区"></a>会话误区</h6><p>在谈论会话机制时，人们认为“只要关闭浏览器，会话就会消失”。可以想象一下会员卡的例子除非顾客主动对店家提出销卡，否则店家绝不会轻易删除顾客的资料。对会话来说，也是一样，除非程序通知服务器删除一个会话，否则服务器会一直保留。比如，程序一般都是在我们做注销操作时才去删除会话。</p>
-<p>但是当我们关闭浏览器时，浏览器不会主动在关闭之前通知服务器他将关闭，所以服务器根本不会有机会知道浏览器已经关闭。之所以会有这种错觉是因为大部分会话机制都使用会话Cookie来保存会话ID信息，而关闭浏览器后Cookies就消失了，再次连接服务器时，也就无法找到原来的会话了。如果服务器设置的Cookies保存到硬盘上，或者使用某种手段改写浏览器发出的HTTP请求头，把原来的Cookies发送给服务器，则再次打开浏览器能找到原来的会话ID，依旧还是可以保持登录状态的。</p>
-<p>而恰恰是由于关闭浏览器不会导致会话被删除，这就需要服务器为会话设置一个失效的时间，当距离客户端上一次使用会话的时间时，服务器就可以认为客户端已经停止了活动，才会把会话删除以节省存储空间。</p>
-<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><h6 id="代理的基本原理"><a href="#代理的基本原理" class="headerlink" title="代理的基本原理"></a>代理的基本原理</h6><p>我们在做爬虫时经常会遇到这种情况，最初爬虫正常运行，但过一会就报403Forbidden错误，可能会看到“您的IP访问频率太高”这样的提示，原因是网站采取了反爬虫措施。比如，服务器会检测某个IP在单位时间内的请求次数，如果超过了这个阈值就会直接拒绝服务，返回一些错误信息，这种情况称为封IP。这时就可以采用代理来实现IP伪装。</p>
-<p>代理实际是代理服务器，proxy server，功能是代理网络用户去取得网络信息，形象地说是网络信息的中转站，在我们正常请求一个网站时，是发送了请求给Web服务器，WEb服务器把响应传回给我们。如果设置了代理服务器，实际上就是在本机和服务器之间架一座桥，此时本机不是直接向Web服务器发起请求，而是向代理服务器发起请求，请求会发送给代理服务器，然后由代理服务器再发送给Web服务器，接着由代理服务器再把Web服务器返回的响应转发给本机，这样就可正常访问网页了，但这个过程中Web服务器识别出的真实IP就不再是我们本机的IP了，就成功实现了IP伪装，这就是代理的原理。</p>
-<p><strong>使用代理隐藏真实的IP，让服务器误以为是代理服务器在请求自己，这样在爬取过程中不断更换代理就不会被封锁，可达到很好的效果</strong>。</p>
-<h6 id="代理作用："><a href="#代理作用：" class="headerlink" title="代理作用："></a>代理作用：</h6><ol>
-<li><p>突破自身限制，访问一些平时不能访问的站点。</p>
-</li>
-<li><p>访问一些单位或团体内部资源：比如使用教育网内地址段访问免费代理服务器，就可以实现对教育网开放的各类FTP下载上传，以及各类资料查询共享等服务。</p>
-</li>
-<li><p>提高访问速度：通常代理服务器都设置了一个较大的硬盘缓存区，当有外界的信息通过时，同时也将其保存到缓存区中，当其他用户再访问相同的信息时，则直接由缓存区中取出信息，传给用户，以提高访问速度。</p>
-</li>
-<li><p>隐藏真实的IP:上网者也可以通过这种方法隐藏自己的IP免受攻击。对于爬虫来说，我们用代理就是为了隐藏自身IP，防止自身的IP被封锁。</p>
-</li>
-</ol>
-<h6 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h6><ol>
-<li><p>根据协议区分：</p>
-<p>FTP 代理服务器： 主要用于访问 TP 服务器， 般有上传 下载以及 存功能，端口一般为21 212</p>
-<p>HTTP 代理服务器： 主要用于访问网页，一般有内容过滤和缓存功能，端口 般为 80  8080 3128</p>
-<p>SSL LS 代理： 主要用于访问加密网站， 般有 SSL TLS 加密功能（最高支持 128 位加密强度），端口一般为 443</p>
-<p>RTSP 代理： 主要用于访问 Real 流媒体服务器， 般有缓存功能，端口 般为 554</p>
-<p>Telnet 代理： 主要用于 telnet 远程控制（黑客人侵计算机时常用于隐藏身份），端口 般为 23</p>
-<p>POP3/SMTP 代理： 主要用于 POP3 SMTP 方式收发邮件， 般有缓存功能，端口 般为 110 25</p>
-<p>SOCKS 代理： 只是单纯传递数据包，不关心具体协议和用法，所以速度快很 般有存功能，端口一般为 1080  SOCKS 代理协议又分为 SOCKS4 SOCKS5 ，前者只支持 TCP,而后者支持 TC UDP ，还支持各种身份验证机制、服务器端域名解析 简单来说，SOCKS4 能做到的 SOCKS5 都可以做到，但 SOCKS5 能做到的 SOCKS4 定能做到</p>
-</li>
-<li><p>根据匿名程度区分</p>
-<p>高度匿名代理： 会将数据包原封不动地转发，在服务端看来就好像真的是 个普通客户端访问，而记录的 IP 是代理服务器的 IP</p>
-<p>普通匿名代理： 会在数据包上做一些改动 服务端上有可能发现这是个代理服务器，也有一定几率追查到客户端的真实 代理服务器通常会加入的 Hπ？头有 HTTP VIA HTTP X FOR DED FOR</p>
-<p>透明代理： 不但改动了数据包 还会告诉服务器客户端的真实 IP 这种代理除了能用缓存技术提高浏览速度，能用内容过滤提高安全性之外，并无其他显著作用，最常见的例子是内网的硬件防火墙</p>
-<p>间谍代理： 指组织或个人创建的用于记录用户传输的数据，然后进行研究 监控 目的的代理服务器。</p>
-</li>
-</ol>
-<h4 id="基本库"><a href="#基本库" class="headerlink" title="基本库"></a>基本库</h4><h6 id="使用urllib"><a href="#使用urllib" class="headerlink" title="使用urllib"></a>使用urllib</h6><p>urllib库是Python内置的HTTP请求库，不需安装即可使用。包含4个模块：</p>
-<ol>
-<li>request：它是最基本的 HTTP 请求模块，可以用来模拟发送请求 就像在浏览器里输入网址然后回车一样，只需要给库方法传入 RL 及额外的 数，就可以模拟实现这个过程了</li>
-<li>error 异常处理模块，如果出现请求错误 可以捕获这些异常，然后进行重试或作以保证程序不会意外终止</li>
-<li>parse 个工具模块，提供了许多 URL 处理方法，比如拆分、解析 合并</li>
-<li>robot parser ：主要是用来识别网站的 robots.txt 文件，然后判断哪些网站可以爬，它其实用得 较少。</li>
-</ol>
-<h6 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h6><p>使用urllib的request模块方便实现请求的发送并得到响应。利用它可模拟浏览器的一个请求发起过程，同时他还带有处理授权验证（authentication），重定向（redirection），浏览器的Cookies以及其他内容。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">response = urllib.request.urlopen(<span class="string">'https://www.python.org'</span>)</span><br><span class="line">print(response);</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p>利用最基本的<code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault-False,context=None)</code>方法，可以完成最基本的简单网页的GET请求抓取。</p>
-</li>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">urllib</span>.<span class="title">request</span>.<span class="title">Request</span><span class="params">(url,data=None,headers=&#123;&#125;,origin_req_host=None,unveriable,method=Node)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>url为必传参数，data要传时必须传bytes（字节流）类型，若为字典，可用<code>urllib.parse</code>模块的<code>urlencode()</code>编码。</p>
-<p>headers是一个字典，它是一个请求头，我们可以在构造函数请求时通过headers参数直接构造，也可以通过调用请求实例的add_header()方法添加。添加请求头最常用的方法就是通过修改User-Agent来伪装浏览器，默认的User-Agent是Python-urllib，我们可以通过修改它来伪装浏览器。比如伪装成火狐浏览器，可将它设置为：<code>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0</code>。</p>
-<p>origin_req_host指的是请求方的host名称或者IP地址。</p>
-<p>unverifiable表示这个请求是否是无法通过验证的，默认是False，意思是说用户没有足够的权限来选择接受这个请求的结果。如：我们请求一个HTML文档中的图片，但是我们没有自动抓取图像的权限，这是unverifiable的值就是true。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request,parse</span><br><span class="line">url = <span class="string">'http://httpbin.org/post'</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0'</span>,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'httpbin.org'</span></span><br><span class="line">&#125;</span><br><span class="line">dict = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Germy'</span></span><br><span class="line">&#125;</span><br><span class="line">data = bytes(parse.urlencode(dict),encoding=<span class="string">'utf8'</span>)</span><br><span class="line">req = request.Request(url=url,data=data,headers=headers,method=<span class="string">'POST'</span>)</span><br><span class="line">response = request.urlopen(req)</span><br><span class="line">print(response.read().decode(<span class="string">'utf8'</span>))</span><br></pre></td></tr></table></figure>
-</li>
-<li></li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-python的学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/05/07/python的学习/" class="article-date">
-      <time datetime="2020-05-07T14:00:45.000Z" itemprop="datePublished">2020-05-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/07/python的学习/">python的学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>rmdir    删除目录</p>
-<p>ipconfig      查看IP地址</p>
-<p>ping         测试网络连接</p>
-<p>python       进入python环境</p>
-<p>exit()           退出环境</p>
-<p>cd   指定目录</p>
-<p>dir   浏览目录</p>
-<p>mkdir   创建新的目录</p>
-<h6 id="pip包管理命令"><a href="#pip包管理命令" class="headerlink" title="pip包管理命令"></a>pip包管理命令</h6><p>pip list     列出匹配管理的包有哪些</p>
-<p>pip install   包名      </p>
-<p>pip  install  redis == 3.0.2 </p>
-<p>pip   uninstall   包名        卸载</p>
-<p>pip  -v       查看版本</p>
-<p>pip  freeze &gt;  requirements.txt       将项目依赖的包输出到指定的requirements.txt中</p>
-<p>pip  install   -r   requirements.txt     使用pip安装requirements.txt中依赖的文件，其中<code>-r</code>指requirements.txt文件</p>
-<h6 id="安装requests"><a href="#安装requests" class="headerlink" title="安装requests"></a>安装requests</h6><p>requests是第三方库，python默认不会自带这个库。</p>
-<ol>
-<li>git clone https ://github.com/kennethreitz/requests</li>
-<li>cd  requests</li>
-<li>python  setup.py  install</li>
-</ol>
-<h6 id="安装Selenium"><a href="#安装Selenium" class="headerlink" title="安装Selenium"></a>安装Selenium</h6><p>Selenium是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击，下拉等操作。对于一些js渲染的页面来说，这种抓取方式很有效。</p>
-<h6 id="print"><a href="#print" class="headerlink" title="print"></a>print</h6><p>print(value, …, sep=’  ‘，end=’\n’, file=sys.stdout, flush=False)        </p>
-<p>sep默认的分隔符是空格</p>
-<h4 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h4><h6 id="数与表达式"><a href="#数与表达式" class="headerlink" title="数与表达式"></a>数与表达式</h6><p>乘方运算符的优先级比求负（单目减）高，因此<code>-3**2等价于-（3**2)</code>。如果要计算的是<code>(-3)**2</code>,必须明确指出。</p>
-<p>十六进制：0xAF</p>
-<p>八进制：010</p>
-<p>二进制：0b101011</p>
-<p>2 / 4          # 除法，得到一个浮点数</p>
-<p>2 // 4          # 除法，得到一个整数</p>
-<p>2 ** 5            # 乘方   32</p>
-<p>用a + bj,或者complex(a,b)表示复数。</p>
-<p><strong>注意</strong></p>
-<p>1、Python可以同时为多个变量赋值，如a, b = 1, 2。</p>
-<p>2、一个变量可以通过赋值指向不同类型的对象。</p>
-<p>3、数值的除法包含两个运算符：/ 返回一个浮点数，// 返回一个整数。</p>
-<p>4、在混合计算时，Python会把整型转换成为浮点数。</p>
-<h6 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h6><ul>
-<li>Number数字</li>
-<li>String字符串</li>
-<li>List列表</li>
-<li>Tuple元组</li>
-<li>Set集合</li>
-<li>Dictionary字典</li>
-</ul>
-<p>有四种数字类型</p>
-<ol>
-<li>int整数</li>
-<li>bool布尔</li>
-<li>float浮点数</li>
-<li>complex复数</li>
-</ol>
-<p><strong>判断类型</strong></p>
-<p>type（a） ：判断a的数据类型，不会认为子类是一种父类类型。</p>
-<p>isinstance（a,int）：判断a是否为int类型，会认为子类是一种父类类型。</p>
-<p>del  val_a, var_b      删除单个或多个对象。</p>
-<h6 id="字符串截取"><a href="#字符串截取" class="headerlink" title="字符串截取"></a>字符串截取</h6><p>str=’Runoob’  print(str)                 # 输出字符串 </p>
-<p>print(str[0:-1])           # 输出第一个到倒数第二个的所有字符 </p>
-<p>print(str[0])              # 输出字符串第一个字符 </p>
-<p>print(str[2:5])            # 输出从第三个开始到第五个的字符 </p>
-<p>print(str[2:])             # 输出从第三个开始后的所有字符 </p>
-<p>print(str * 2)             # 输出字符串两次 </p>
-<p>print(str + ‘你好’)        # 连接字符串</p>
-<p>print(‘hello\nrunoob’)      # 使用反斜杠()+n转义特殊字符 </p>
-<p>print(r’hello\nrunoob’)     # 在字符串前面添加一个 r，表示原始字符串，不会发生转义</p>
-<p>print 默认输出是换行的，如果要实现不换行需要在变量末尾加上 <strong>end=””</strong></p>
-<p>print(x)    # 换行输出</p>
-<p>print(x,end=” “)        # 不换行输出</p>
-<h6 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h6><p>import somemodule         导入整个模块</p>
-<p>from somemodule import firstfunc, secondfunc, thirdfunc        从某个模块中导入多个函数</p>
-<h6 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h6><p>不可用作任何标识符名称。Python的标准库提供了一个keyword模块，可输出当前版本的所有关键字。</p>
-<h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>单行以<code>#</code>开头，多行用三个单或双引号包裹。</p>
-<h4 id="urllib库"><a href="#urllib库" class="headerlink" title="urllib库"></a>urllib库</h4><p>python内置的HTTP请求库</p>
-<h6 id="request解析库"><a href="#request解析库" class="headerlink" title="request解析库"></a>request解析库</h6><p>urlopen：打开网址</p>
-<h6 id="bs4解析库"><a href="#bs4解析库" class="headerlink" title="bs4解析库"></a>bs4解析库</h6><p>bs4: BeautifulSoup</p>
-<p>用于解析网页，提取指定数据的。接口简单，较人性化，但bs4只能解析html格式的数据。</p>
-<p><strong>BeautifulSoup类</strong></p>
-<p>文件解析库：</p>
-<p>‘html.parser’：是python自带的一个文件解析库。</p>
-<p>‘lxml’：是一个第三方文件解析库，需安装。</p>
-<p>根据html标签查找信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content = soup.find(&apos;div&apos;,itemprop=&apos;acticleBody&apos;).text</span><br></pre></td></tr></table></figure>
-
-<p><strong>find()</strong> <strong>方法：返回第一个匹配的内容，为字符串类型</strong></p>
-<p>find(name,attrs,recursive,text,**kwargs)</p>
-<p>这五个参数都可以<strong>充当过滤器</strong>，提高匹配结果的精确度。</p>
-<p><strong>find_all()</strong> <strong>方法：返回所有匹配的项，为一个列表类型</strong></p>
-<p>find(name,attrs,recursive, text,<strong>limit</strong>,**kwargs)</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h6 id="二维码"><a href="#二维码" class="headerlink" title="二维码"></a>二维码</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install MyQR</span><br><span class="line"></span><br><span class="line">from MyQR Simport myqr</span><br><span class="line">words:  文本，链接地址或字符串</span><br><span class="line">picture：二维码的背景图片</span><br><span class="line">colorized：True，表示生成彩图</span><br><span class="line">save_name: 表示生成的二维码的名字</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from MyQR import myqr</span><br><span class="line">myqr.run(</span><br><span class="line">    words=&quot;https://www.icourse163.org/learn/NHDX-1449955168&quot;,</span><br><span class="line">    picture=&quot;1.png&quot;,</span><br><span class="line">    colorized=True,</span><br><span class="line">    save_name=&quot;ORMooc.png&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h6 id="个人名片"><a href="#个人名片" class="headerlink" title="个人名片"></a>个人名片</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pip install Segno</span><br><span class="line"></span><br><span class="line">from segno import helpers</span><br><span class="line">qr = helpers.make_mecard(</span><br><span class="line">    name=&apos;Erin&apos;,</span><br><span class="line">    city=&apos;湖南省衡阳市南华大学&apos;,</span><br><span class="line">    phone=&apos;1581529632&apos;,</span><br><span class="line">    email=&apos;3511564414@qq.com&apos;</span><br><span class="line">)</span><br><span class="line">qr.save(&apos;Erin名片.png&apos;,scale=10)</span><br></pre></td></tr></table></figure>
-
-<h6 id="爬取小说"><a href="#爬取小说" class="headerlink" title="爬取小说"></a>爬取小说</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line"></span><br><span class="line">response = urllib.request.urlopen(&apos;http://www.39shubao.com/&apos;)</span><br><span class="line">print(response.read().decode(&apos;utf-8&apos;))</span><br></pre></td></tr></table></figure>
-
-<p><strong>报错</strong>：<code>UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0x8b in position 1: invalid start byte</code></p>
-<p>所以去掉解码格式utf-8，<strong>输出的字节码可以看到它是以”b’\x1f\x8b\x08”开头的 ，说明它是gzip压缩过的数据，这也是报错的原因，所以我们需要对我们接收的字节码进行一个解码操作。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">from io import BytesIO</span><br><span class="line">import gzip</span><br><span class="line"></span><br><span class="line">response = urllib.request.urlopen(&apos;http://www.39shubao.com/&apos;)</span><br><span class="line">buff = BytesIO(response.read())</span><br><span class="line">f = gzip.GzipFile(fileobj=buff)</span><br><span class="line">htmls = f.read().decode(&apos;utf-8&apos;)</span><br><span class="line">print(htmls)</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决乱码问题</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://www.shuquge.com/txt/63542/9645082.html'</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-
-<p>通过response.text拿到的数据出现乱码是因为该网页对数据进行加密，所以直接拿到的数据乱码了。</p>
-<p>解决：</p>
-<p>方法一：使用较老的方法<code>response.encoding=&#39;utf-8&#39;</code>，只能解决utf-8的乱码，其他格式的不能解决。</p>
-<p>方法二：<code>response.encoding=response.apparent_encoding</code>，自动解决乱码格式，不仅utf-8格式的可解决，gbk格式的也可解决。</p>
-<p>未封装的爬一章小说</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"># 使用parsel来解析网页内容</span><br><span class="line">import parsel</span><br><span class="line">url = &apos;http://www.shuquge.com/txt/63542/9645082.html&apos;</span><br><span class="line">response = requests.get(url)</span><br><span class="line"># 自动解决乱码问题</span><br><span class="line">response.encoding = response.apparent_encoding</span><br><span class="line"># print(response.text)</span><br><span class="line"># 把网页数据结构化</span><br><span class="line">sel = parsel.Selector(response.text)</span><br><span class="line"># 根据css选择器提取标题</span><br><span class="line">title = sel.css(&apos;.content &gt; h1::text&apos;).get()</span><br><span class="line"># 根据css路径提取内容</span><br><span class="line">content = sel.css(&apos;#content::text&apos;).getall()</span><br><span class="line"># 根据xPath提取内容,getall是提取全部的内容，也有re方法，用于匹配正则里面的内容</span><br><span class="line"># print(sel.xpath(&apos;//div[@id=&quot;content&quot;]/text()&apos;).getall())</span><br><span class="line"># 保存数据</span><br><span class="line">with open(title + &apos;.txt&apos;,mode=&apos;w&apos;, encoding=&apos;utf-8&apos;) as f:</span><br><span class="line">    f.write(title)</span><br><span class="line">    # 用切片去掉最后三行</span><br><span class="line">    for con in content[:-3]:</span><br><span class="line">        # str使用replace去除空格</span><br><span class="line">        f.write(con.replace(&apos;\xa0&apos;,&apos;&apos;))</span><br><span class="line">        # f.write(con.strip(&apos;\xa0&apos;))</span><br></pre></td></tr></table></figure>
-
-<h6 id="动态爬取数据"><a href="#动态爬取数据" class="headerlink" title="动态爬取数据"></a>动态爬取数据</h6><p>数据信息不是存放在网页源代码中，它是一个动态更新的网站，需要实时更新的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">url = &apos;https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist&apos;</span><br><span class="line">response = requests.get(url)</span><br><span class="line">content = json.loads(response.text)</span><br><span class="line">print(content[&apos;data&apos;])</span><br><span class="line">df = pd.DataFrame(columns=[&apos;国家及地区&apos;,&apos;确诊人数&apos;,&apos;死亡病例&apos;,&apos;治愈病例&apos;])</span><br><span class="line">for i in range(len(content[&apos;data&apos;])):</span><br><span class="line">    df.loc[i + 1] = [content[&apos;data&apos;][i][&apos;name&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;confirm&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;dead&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;heal&apos;]]</span><br><span class="line">df.to_csv(&apos;F://data.csv&apos;,index=0,encoding=&apos;utf-8&apos;)</span><br><span class="line">print(&apos;爬取完成&apos;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2>
       
     </div>
     
