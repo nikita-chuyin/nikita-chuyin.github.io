@@ -268,6 +268,206 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-前端经验" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/04/前端经验/" class="article-date">
+      <time datetime="2020-06-04T06:01:42.000Z" itemprop="datePublished">2020-06-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/04/前端经验/">前端经验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="字体图标的使用"><a href="#字体图标的使用" class="headerlink" title="字体图标的使用"></a>字体图标的使用</h3><h6 id="字体图标的优势"><a href="#字体图标的优势" class="headerlink" title="字体图标的优势"></a>字体图标的优势</h6><ol>
+<li>性能好，可以减少http请求。</li>
+<li>解决图标放大失真问题。</li>
+<li>解决图片占用内存问题。</li>
+</ol>
+<h6 id="图片格式分类"><a href="#图片格式分类" class="headerlink" title="图片格式分类"></a>图片格式分类</h6><ol>
+<li>位图图片：bmp，jpg，gif，png。（大小改变时可能出现锯齿状）。</li>
+<li>矢量图图片：以svg格式为代表，可缩放矢量图形（Scalable Vector Graphics）。SVG是一种使用XML格式定义的图像。（颜色和字体可选范围较小）</li>
+</ol>
+<h6 id="字体图标出现的背景"><a href="#字体图标出现的背景" class="headerlink" title="字体图标出现的背景"></a>字体图标出现的背景</h6><p><strong>雪碧图处理图标</strong></p>
+<ul>
+<li>首先载入带有所有图标的图片。</li>
+<li>利用定位截取想要的图标。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.bgImg&#123;</span><br><span class="line">	background: url(img/logos.png);</span><br><span class="line">	display: block;</span><br><span class="line">	text-indent: -9999px;</span><br><span class="line">	overflow: hidden;</span><br><span class="line">	background-repeate: no-repeate;</span><br><span class="line">	width: 16px;</span><br><span class="line">	height: 16px;</span><br><span class="line">&#125;</span><br><span class="line">.help&#123;</span><br><span class="line">	background-position: -48px -150px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>优势：当有大量的小图标时，可减少请求次数，网页加载速度更快，减少阻塞网络的情况，用户体验不好。</p>
+<p>缺点：需要先设置背景图片，再通过精灵图中小图标的宽度和位置，设置对应的div宽高和背景定位坐标。设计人员后期的维护难度较大，编码也比较难（对定位精准性要求较大）。</p>
+<h6 id="字体图标的使用-1"><a href="#字体图标的使用-1" class="headerlink" title="字体图标的使用"></a>字体图标的使用</h6><ul>
+<li>一般会再建一个新的css文件来设置<code>font-family</code>和字体颜色，一来可以整体设置，二来当新字体图标覆盖时，文字的样式可以保持原先的状态。</li>
+</ul>
+<h3 id="星级评分"><a href="#星级评分" class="headerlink" title="星级评分"></a>星级评分</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-linux学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/22/linux学习/" class="article-date">
+      <time datetime="2020-05-22T01:12:25.000Z" itemprop="datePublished">2020-05-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/22/linux学习/">linux学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="linux基础"><a href="#linux基础" class="headerlink" title="linux基础"></a>linux基础</h4><h4 id="linux实战"><a href="#linux实战" class="headerlink" title="linux实战"></a>linux实战</h4><h6 id="远程登陆"><a href="#远程登陆" class="headerlink" title="远程登陆"></a>远程登陆</h6><p>xShell xFtp</p>
+<h6 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h6><h6 id="远程管理"><a href="#远程管理" class="headerlink" title="远程管理"></a>远程管理</h6><h6 id="vi和vim编译器"><a href="#vi和vim编译器" class="headerlink" title="vi和vim编译器"></a>vi和vim编译器</h6><h6 id="定时任务调度"><a href="#定时任务调度" class="headerlink" title="定时任务调度"></a>定时任务调度</h6><h6 id="RPM与YUM"><a href="#RPM与YUM" class="headerlink" title="RPM与YUM"></a>RPM与YUM</h6>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-pandas之excel" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/10/pandas之excel/" class="article-date">
+      <time datetime="2020-05-10T04:44:58.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/10/pandas之excel/">pandas之excel</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h4><h6 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">'ID'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],<span class="string">'Name'</span>:[<span class="string">'Tim'</span>,<span class="string">'Victor'</span>,<span class="string">'Nick'</span>]&#125;)</span><br><span class="line">df = df.set_index(<span class="string">'ID'</span>)</span><br><span class="line">df.to_excel(<span class="string">'F:/webProject/python/output.xlsx'</span>)</span><br><span class="line">print(<span class="string">'Done'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>遇到问题：</p>
+<ol>
+<li><p>NameError: name ‘pandas’ is not defined？</p>
+<p>这是没有pandas模块，这是因为python默认没有安装numpy和pandas，最直接的方法是在python的scripts中执行<code>pip install pandas</code>不过，据说用pip安装会损坏原文件。</p>
+</li>
+<li><p>或者在Spyder编辑器中安装<code>pip install pandas</code>,却报<code>Note: you may need to restart the kernel to use updated packages.</code>?</p>
+<p>在Terminal中更新<code>conda update spyder</code>。</p>
+</li>
+</ol>
+<h6 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </span><br><span class="line">people = pd.read_execl(<span class="string">'path'</span>,header=<span class="literal">None</span>)  <span class="comment">#表示没有行头</span></span><br><span class="line">people.set_index(<span class="string">'ID'</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">print(people.shape)   <span class="comment">#打印出多少行多少列</span></span><br><span class="line">print(people.columns)  <span class="comment">#列</span></span><br><span class="line">print(people.head(<span class="number">3</span>))  <span class="comment">#打印出前3行，head不加参数默认为5行</span></span><br><span class="line">print(people.tail(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">df = pd.read_excel(<span class="string">'path'</span>,index_col=<span class="string">'ID'</span>)  <span class="comment">#后面的参数是为了不要将系统自动添加的索引加到新的表中</span></span><br><span class="line">df.to_excel(<span class="string">'path'</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-HTML5和CSS3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -3070,599 +3270,9 @@
 
 
   
-    <article id="post-vue学习中的问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/28/vue学习中的问题/" class="article-date">
-      <time datetime="2020-04-28T04:47:51.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/vue学习中的问题/">vue学习中的问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h6 id="登陆切换input复用问题"><a href="#登陆切换input复用问题" class="headerlink" title="登陆切换input复用问题"></a>登陆切换input复用问题</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;span v-if=&quot;isUser&quot;&gt;</span><br><span class="line">            &lt;label for=&quot;userName&quot;&gt;用户账号&lt;/label&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; id=&quot;userName&quot; placeholder=&quot;用户账号&quot; key=&quot;name&quot;&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">        &lt;span v-else&gt;</span><br><span class="line">            &lt;label for=&quot;email&quot;&gt;用户账号&lt;/label&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; id=&quot;email&quot; placeholder=&quot;用户邮箱&quot; key=&quot;email&quot;&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">        &lt;button @click=&quot;isUser = !isUser&quot;&gt;切换&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果我们在输入内容的情况下切换了类型，我们会发现文字依然显示之前的输入内容。按道理来讲，我们应该切换到另外一个input元素中，在另外这个元素中，我们并没有输入内容，所以应该是空的才对？</p>
-<p>这是因为Vue在进行DOM渲染时，出于性能考虑，会尽可能的复用已经存在的元素，而不是重新创建新的元素。</p>
-<p>解决：</p>
-<p>给对应的input添加不同的key，当进行DOM渲染时，就会识别为不同的元素。</p>
-<h6 id="vue管道机制部署"><a href="#vue管道机制部署" class="headerlink" title="vue管道机制部署"></a>vue管道机制部署</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 即前一个函数的输出是后一个函数的输入</span><br><span class="line">const pipeline = (...func) =&gt; val =&gt; func.reduce((a,b) =&gt; b(a),val);</span><br></pre></td></tr></table></figure>
-
-<h6 id="尾调用解决递归"><a href="#尾调用解决递归" class="headerlink" title="尾调用解决递归"></a>尾调用解决递归</h6><p>函数调用自身称为递归。若尾调用自己就称为尾递归。</p>
-<p>递归非常耗内存，因为需要同时保存成千上百个调用帧，很容易发生“栈溢出”错误，但对于尾调用则不会。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 递归</span><br><span class="line">function factorial(n)&#123;</span><br><span class="line">	if(n === 1)  return 1;</span><br><span class="line">	return n*factorial(n - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 尾调用</span><br><span class="line">function factorial(n,total)&#123;</span><br><span class="line">	if(n === 1)  return total;</span><br><span class="line">	return factorial(n - 1, n * total);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>递归复杂度为O(n),尾递归的复杂度为O(1)。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-计算机网络" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/27/计算机网络/" class="article-date">
-      <time datetime="2020-04-27T12:38:05.000Z" itemprop="datePublished">2020-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/27/计算机网络/">计算机网络</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><h6 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h6><p>应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。</p>
-<p>协议有：HTTP   FTP   TFTP   SMTP    SNMP    DNS   TELNET   HTTPS    POP3     DHCP。</p>
-<p>应用层安全</p>
-<ol>
-<li>开发的应用程序没有漏洞。</li>
-</ol>
-<h6 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h6><p>表示层：在传输之前是否进行加密或压缩处理，以及数据在传输的时候是以ASCII码形式传输还是二进制形式传输。一般如果编码格式不对，页面就不能正常加载，会出现乱码现象。（如我传输过来的是utf-8，却以unicode格式来解析网页，势必会出现乱码现象）。</p>
-<p>格式有： JPEG       ASCII     EBCDIC       加密格式等。</p>
-<h6 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h6><p>cmd命令行中运行netstat -n可查看会话连接情况，状态为<code>ESTABISHED</code>表示已经建立的会话，<code>TIME_WAIT</code>表示这些会话快释放了。</p>
-<p>会话层可用于查木马（盗号木马，如qq被盗，别人就可以给你邮箱发一些东西。远程登录木马，就可以远程登录你的电脑），因为木马总是要和外面建立会话，故可以通过<code>netstat -nb</code>查看建立会话的程序是谁，如果是木马就可以发现了。</p>
-<p>建立，管理，终止会话，在五层模型中已经合并到应用层。</p>
-<p>对应主机进程，指本地主机与远程主机正在进行会话。</p>
-<h6 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h6><p>传输层可进行可靠或不可靠的传输，以及流量控制。定义传输数据的协议端口号，以及流控和差错校验。</p>
-<p>协议有：TCP,UDP，数据包一旦离开网卡即进入网络传输层。</p>
-<h6 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h6><p>网络层负责选择最佳路径以及规划IP地址（IPv4变为IPv6，只改变网络层）。划分局域段，这是网络层的升级。进行逻辑地址寻址，实现不同网络之间的路径选择。</p>
-<p>协议有：ICMP  IGMP  IP(IPv4   IPv4)。</p>
-<p>网络层故障：</p>
-<ol>
-<li>配置错误的IP地址，子网掩码。</li>
-<li>配置错误的网关（网关是网络的出口）。</li>
-<li>路由器没有配置到达目标网络的路由。</li>
-</ol>
-<p>网络层安全</p>
-<ol>
-<li>在路由器上使用ACL控制数据包流量。</li>
-</ol>
-<h6 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h6><p>数据链路层可以标识帧的开始和结尾（特殊符号标识开始和结尾），透明传输（如果中间内容有与标识结尾的标识符相同，会在该内容前加上某些字符告知交换机此处不是结尾），差错校验（会在后面加上一些字符作为校验位）。交换机中将光纤由百兆升级为千兆，这是数据链路层的知识。</p>
-<p>建立逻辑连接，进行硬件地址寻址，差错校验等功能，由底层网络定义协议。将比特组合成字节进而组合成帧，用MAC地址访问介质，错误发现但不能纠正。</p>
-<p>数据链路层故障：</p>
-<ol>
-<li>MAC地址冲突，我们知道一般MAC地址都是唯一的，电脑生产时就已经定义好每台电脑对应的MAC地址，但是我们设置电脑的MAC地址为某台电脑的MAC地址，这样就可能造成MAC地址冲突。</li>
-<li>当ADSL欠费，电信就会阻断通信。</li>
-<li>网速没办法协商也会出现，服务器规定网速为千兆，而电脑网速为百兆。</li>
-<li>计算机连接到错误的VLAN。</li>
-</ol>
-<p>网络安全</p>
-<ol>
-<li>ADSL需要输入账号密码。</li>
-<li>VLAN交换机端口绑定MAC地址。</li>
-</ol>
-<h6 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h6><p>规范了一些接口标准（比如各个公司生产的网卡固定了几根线），电器标准（例如0V代表低电平0，5V代表高电平1）以及规定如何在物理链路上传输更快的速度。更换通信介质，更换通信设备是物理层。</p>
-<p>建立，维护，断开物理连接，由底层网络定义协议。</p>
-<p>物理层故障，在控制面板——&gt; 所有控制面板项——&gt; 网络和共享中心——&gt; 找到已连接网络，点击查看WLAN状态，如果数据包发送不为0，但接收为0，表示是物理层故障，需要检查线是否完好，或重新接好线。</p>
-<h4 id="TCP-IP协议"><a href="#TCP-IP协议" class="headerlink" title="TCP/IP协议"></a>TCP/IP协议</h4><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%A8%A1%E5%9E%8B.png" alt="模型"></p>
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E4%BC%A0%E8%BE%93.PNG" alt="传输"></p>
-<p>FCS:校验位。</p>
-<h6 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h6><p>TCP提供了</p>
-<ol>
-<li>无差错的数据传输。</li>
-<li>按序传输（数据总是会按照发送的顺序到达）。</li>
-<li>未分段数据流（可以在任意时刻以任意尺寸将数据发送出去）。</li>
-<li></li>
-</ol>
-<h4 id="网络的性能"><a href="#网络的性能" class="headerlink" title="网络的性能"></a>网络的性能</h4><h6 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h6><p>连接在计算机网络上的主机在数字信道上传送数据位数的速率，也称为data rate或bit rate。单位是b/s,  kb/s,  Mb/s,  Gb/s。</p>
-<h6 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h6><p>数据通信领域中，数字信道所能传送的最高数据率。</p>
-<h6 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h6><p>在单位时间内通过某个网络的数据量。</p>
-<h6 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h6><ol>
-<li><p>发送时延</p>
-<p>发送时延 = 数据块长度（比特）/ 信道带宽（比特/秒）</p>
-</li>
-<li><p>传播时延</p>
-</li>
-<li><p>处理时延</p>
-</li>
-<li><p>排队时延</p>
-</li>
-</ol>
-<h6 id="时延带宽积"><a href="#时延带宽积" class="headerlink" title="时延带宽积"></a>时延带宽积</h6><h6 id="往返时间"><a href="#往返时间" class="headerlink" title="往返时间"></a>往返时间</h6><h6 id="利用率"><a href="#利用率" class="headerlink" title="利用率"></a>利用率</h6><ol>
-<li>信道利用率：有数据通过时间 / （有+无）数据通过时间</li>
-<li>网络利用率：信道利用率加权平均值</li>
-</ol>
-<p>D = D0 / 1-U</p>
-<p>D0 :表示网络空闲时的时延</p>
-<p>D：表示信道利用率</p>
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1.PNG" alt="数据通信"></p>
-<h4 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h4><h6 id="数据通信的术语"><a href="#数据通信的术语" class="headerlink" title="数据通信的术语"></a>数据通信的术语</h6><p>通信的目的是传送消息。</p>
-<p>数据（data）—— 运送消息的实体。</p>
-<p>信号（signal）——数据的消息或电磁的表现。</p>
-<p>“模拟信号” —— 代表消息的参数的取值是连续的。</p>
-<p>“数字信号” —— 代表消息的参数的取值是离散的。</p>
-<p>码元（code）—— 在使用时间域的波形表示数字信号时，则代表不同离散数值的基本波形就成为码元。</p>
-<p>在数字通信中常常使用时间间隔相同的符号来表示一个二进制数字，这样的时间间隔内的信号称为二进制码元。而这个间隔被称为码元长度。1码元可以携带nbit的信息量。</p>
-<h6 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h6><p>信道一般表示向一个方向传送信息的媒体，所以我们说平常的通信线路往往包含一条发送信息的信道和一条接收信息的通道。</p>
-<p><strong>单向通信</strong>（单工通信）——只能有一个方向的通信而没有反方向的交互。</p>
-<p><strong>双向交替通信</strong>（半双工通信）——通信双方都可以发送信息，但不能双方同时发送/接收。</p>
-<p><strong>双向同时通信</strong>（全双工通信）——通信双方可以同时发送或接收信息。</p>
-<h6 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h6><p><strong>基带信号</strong>（即基本频带信号）——来自信源的信号。像计算机输出的表示各种文字或图像文件的数据信号都属于基带信号，比如我们说话的声带就是基带信号。</p>
-<p><strong>带通信号</strong>——把基带信号经过载波调制后，把信号的频率范围搬移到较高的频段以便在信道中传输（即仅在一段频率范围内能够通过信道）。</p>
-<p>因此在传输距离较近时，计算机网络都采用基带传输方式，由于近距离范围内基带信号的衰减不大，从而信号内容不会发生变化，因此在传输距离较近时，计算机网络采用基带传输方式。如从计算机到监视器，打印机等外设的信号就是基带传输的。</p>
-<p><strong>调幅（AM）</strong>：载波的振幅随基带数字信号而变化。</p>
-<p><strong>调频（FM)</strong>：载波的频率随基带数字信号而变化。</p>
-<p><strong>调相（PM)</strong>:载波的初始相位随基带数字信号而变化。</p>
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E8%B0%83%E9%A2%91.PNG" alt="调频"></p>
-<h6 id="集线器"><a href="#集线器" class="headerlink" title="集线器"></a>集线器</h6><p>物理层设备集线器的工作特点是在网络中只起到信号放大和重发作用，其目的是扩大网络的传输范围，而不具备信号的定向传送能力。它是一个大的冲突域，因为当一台电脑发送给集线器后，集线器会把该内容转发给连接在集线器上的其他电脑，当其他电脑接收到内容后先对比该内容的MAC地址与自己电脑的MAC地址，相同则进行处理，不同者不做处理，但是我们可以把数据爬出来。</p>
-<h6 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h6><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8.PNG" alt="信道复用">**</p>
-<p><strong>频分复用技术FDM(Frequency  Division  Multiplexing)</strong>：用户在分配到一定的频带后在通信过程中自始自终都占用这个频带。频分复用的所有用户在相同时间内占用不同的带宽资源，请注意，这里的“带宽”是频率带宽而不是数据的发送速率。</p>
-<p><strong>时分复用技术TDM(Time Division Multiplexing)</strong>是将时间划分为一段段等长的时分复用帧，每一个时分复用的用户在每一个TDM帧中占用固定序号的时隙，在不同时间内占用相同的频带宽度。<img src="C:%5CUsers%5CCCY%5CDesktop%5C%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8.PNG" alt="时分复用"></p>
-<p>使用时分复用系统传送计算机数据时，由于计算机数据的突发性质，用户对分配到的子信道的利用率一般是不高的。</p>
-<p><strong>统计时分复用</strong>：通过标记是哪个VLAN。</p>
-<h6 id="宽带接入技术"><a href="#宽带接入技术" class="headerlink" title="宽带接入技术"></a>宽带接入技术</h6><p>xDSL(用数字技术对现有的模拟电话用户线进行改造)</p>
-<p>标准模拟电话信号的频带被限制在300<del>3400Hz的范围内，但用户线本身实际可通过的信号频率仍然超过1MHz。xDSL技术把0</del>4kHz低端频谱留给传统电话使用，而把原来没有被利用的高端频谱留给用户上网使用。</p>
-<h4 id="数据链路层-1"><a href="#数据链路层-1" class="headerlink" title="数据链路层"></a>数据链路层</h4><p>数据链路层使用的信道主要有以下两种类型：</p>
-<ol>
-<li>点对点信道。这种信道使用一对一的点对点通信方式。</li>
-<li>广播通信。这种信道使用一对多的广播通信方式，因此过程比较复杂。广播信道上连接的主机很多，因此必须使用专用的共享信道协议来协调这些主机的数据发送。</li>
-</ol>
-<h6 id="链路"><a href="#链路" class="headerlink" title="链路"></a>链路</h6><p>链路（link）是一条点到点的物理路线，中间没有任何其他的交换结点，一条链路只是一条通路的组成部分。</p>
-<p>数据链路（data  link）除了物理线路外，还必须有通信协议来控制这些数据的传输，若把实现这些协议的硬件和软件加到链路上，就构成了数据链路。</p>
-<p>现最常用的方法是使用适配器（即网卡）来实现这些协议的硬件和软件。</p>
-<p>一般的适配器都包括了数据链路层和物理层这两层的功能。</p>
-<h6 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h6><p><img src="C:%5CUsers%5CCCY%5CDesktop%5C%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93.PNG" alt="透明传输"></p>
-<h6 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h6><p>传输过程中可能会产生比特差错，1可能变成0而0也可能变成1.在一段时间内，传输错误的比特占所传输比特总数的比率称为误码率BER(Bit  Error  Rate)。</p>
-<p>误码率与信噪比有很大的关系，为了保证数据传输的可靠性，在计算机网络传输数据时，必须采取各种差错检测措施。</p>
-<h6 id="PPP协议"><a href="#PPP协议" class="headerlink" title="PPP协议"></a>PPP协议</h6><p>现在全世界使用最多的数据链路层协议是点对点协议PPP(Point-to-Point Protocol)。</p>
-<p>用户使用拨号电话线接入因特网时一般都是使用PPP协议。</p>
-<p>PPP协议应该满足的要求：</p>
-<ol>
-<li>简单——这是首要的要求</li>
-<li>封装成帧。</li>
-<li>透明性。</li>
-<li>多种网络层协议。</li>
-<li>差错检测。</li>
-<li>检测连接状态。</li>
-<li>最大传送单元。</li>
-<li>网络层地址协商。</li>
-<li>数据压缩协商。</li>
-</ol>
-<p>PPP协议不满足的要求：</p>
-<ol>
-<li>纠错。</li>
-<li>流量控制。</li>
-<li>序号。</li>
-<li>多点线路。</li>
-<li>半双工或单工链路。</li>
-</ol>
-<p><img src="C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200429135924281.png" alt="image-20200429135924281"></p>
-<p>7E是结束和开头标志，FCS用于差错校验。</p>
-<p><strong>PPP协议工作状态</strong>：当用户拨号接入ISP时，路由器的调制解调器对拨号做出确认，并建立一条物理连接。PC机向路由器发送一系列的LCP分组（封装成多个PPP帧），这些分组及其响应选择一些PPP参数，和进行网络层配置，NCP给新接入的PC机分配一个临时的IP地址，使PC机成为因特网上的一个主机。通信完毕时，NCP释放网络层连接，收回原来分配出去的IP地址。接着，LCP释放数据链路层连接，最后释放的是物理层的连接。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构与算法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/27/数据结构与算法/" class="article-date">
-      <time datetime="2020-04-27T12:36:59.000Z" itemprop="datePublished">2020-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/27/数据结构与算法/">数据结构与算法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6d6deb3a6f8f?imageView2/0/w/1280/h/960/ignore-error/1" alt="数组方法大全"></p>
-<h6 id="数组解构赋值应用"><a href="#数组解构赋值应用" class="headerlink" title="数组解构赋值应用"></a>数组解构赋值应用</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 交换变量</span><br><span class="line">[a, b] = [b, a]</span><br><span class="line">[o.a, o.b] = [o.b, o.a]</span><br><span class="line">// 生成剩余数组</span><br><span class="line">const [a, ...rest] = [...&apos;asdf&apos;] // a：&apos;a&apos;，rest: [&quot;s&quot;, &quot;d&quot;, &quot;f&quot;]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h6 id="数组浅拷贝"><a href="#数组浅拷贝" class="headerlink" title="数组浅拷贝"></a>数组浅拷贝</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2, 3]</span><br><span class="line">const arrClone = [...arr]</span><br><span class="line">// 对象也可以这样浅拷贝</span><br><span class="line">const obj = &#123; a: 1 &#125;</span><br><span class="line">const objClone = &#123; ...obj &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>浅拷贝方法有很多如<code>arr.slice(0, arr.length)/Arror.from(arr)</code>等，但是用了<code>...</code>操作符之后就不会再想用其他的了~</p>
-<h6 id="数组合并"><a href="#数组合并" class="headerlink" title="数组合并"></a>数组合并</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const arr1 = [1, 2, 3]</span><br><span class="line">const arr2 = [4, 5, 6]</span><br><span class="line">const arr3 = [7, 8, 9]</span><br><span class="line">const arr = [...arr1, ...arr2, ...arr3]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><code>arr1.concat(arr2, arr3)</code>同样可以实现合并，但是用了<code>...</code>操作符之后就不会再想用其他的了~</p>
-<h6 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 1, 2, 2, 3, 4, 5, 5]</span><br><span class="line">const newArr = [...new Set(arr)]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><code>new Set(arr)</code>接受一个数组参数并生成一个set结构的数据类型。set数据类型的元素不会重复且是<code>Array Iterator</code>，所以可以利用这个特性来去重。</p>
-<h6 id="数组取交集"><a href="#数组取交集" class="headerlink" title="数组取交集"></a>数组取交集</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const a = [0, 1, 2, 3, 4, 5]</span><br><span class="line">const b = [3, 4, 5, 6, 7, 8]</span><br><span class="line">const duplicatedValues = [...new Set(a)].filter(item =&gt; b.includes(item))</span><br><span class="line">duplicatedValues // [3, 4, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h6 id="数组取差集"><a href="#数组取差集" class="headerlink" title="数组取差集"></a>数组取差集</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const a = [0, 1, 2, 3, 4, 5]</span><br><span class="line">const b = [3, 4, 5, 6, 7, 8]</span><br><span class="line">const diffValues = [...new Set([...a, ...b])].filter(item =&gt; !b.includes(item) || !a.includes(item)) // [0, 1, 2, 6, 7, 8]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h6 id="数组转对象"><a href="#数组转对象" class="headerlink" title="数组转对象"></a>数组转对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2, 3, 4]</span><br><span class="line">const newObj = &#123;...arr&#125; // &#123;0: 1, 1: 2, 2: 3, 3: 4&#125;</span><br><span class="line">const obj = &#123;0: 0, 1: 1, 2: 2, length: 3&#125;</span><br><span class="line">// 对象转数组不能用展开操作符，因为展开操作符必须用在可迭代对象上</span><br><span class="line">let newArr = [...obj] // Uncaught TypeError: object is not iterable...</span><br><span class="line">// 可以使用Array.form()将类数组对象转为数组</span><br><span class="line">let newArr = Array.from(obj) // [0, 1, 2]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h6 id="数组摊平"><a href="#数组摊平" class="headerlink" title="数组摊平"></a>数组摊平</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;a: &apos;群主&apos;, b: &apos;男群友&apos;, c: &apos;女裙友&apos;, d: &apos;未知性别&apos;&#125;</span><br><span class="line">const getName = function (item) &#123; return item.includes(&apos;群&apos;)&#125;</span><br><span class="line">// 方法1</span><br><span class="line">const flatArr = Object.values(obj).flat().filter(item =&gt; getName(item))</span><br><span class="line">// 经大佬指点，更加简化（发现自己的抽象能力真的差~）</span><br><span class="line">const flatArr = Object.values(obj).flat().filter(getName)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>二维数组用<code>array.flat()</code>，三维及以上用<code>array.flatMap()</code>。</p>
-<h6 id="数组常用遍历"><a href="#数组常用遍历" class="headerlink" title="数组常用遍历"></a>数组常用遍历</h6><p>数组常用遍历有 <code>forEach、every、some、filter、map、reduce、reduceRight、find、findIndex</code> 等方法，很多方法都可以达到同样的效果。数组方法不仅要会用，而且要用好。要用好就要知道什么时候用什么方法。</p>
-<h6 id="遍历的混合使用"><a href="#遍历的混合使用" class="headerlink" title="遍历的混合使用"></a>遍历的混合使用</h6><p><code>filter</code>、<code>map</code>方法返回值仍旧是一个数组，所以可以搭配其他数组遍历方法混合使用。注意遍历越多效率越低~</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> value = arr</span><br><span class="line">    .map(<span class="function"><span class="params">item</span> =&gt;</span> item * <span class="number">3</span>)</span><br><span class="line">    .filter(<span class="function"><span class="params">item</span> =&gt;</span> item % <span class="number">2</span> === <span class="number">0</span>)</span><br><span class="line">    .map(<span class="function"><span class="params">item</span> =&gt;</span> item + <span class="number">1</span>)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">prev, curr</span>) =&gt;</span> prev + curr, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<h6 id="检测数组所有元素是否都符合判断条件"><a href="#检测数组所有元素是否都符合判断条件" class="headerlink" title="检测数组所有元素是否都符合判断条件"></a>检测数组所有元素是否都符合判断条件</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> isAllNum = arr.every(<span class="function"><span class="params">item</span> =&gt;</span> <span class="keyword">typeof</span> item === <span class="string">'number'</span>)</span><br></pre></td></tr></table></figure>
-
-<h6 id="检测数组是否有元素符合判断条件"><a href="#检测数组是否有元素符合判断条件" class="headerlink" title="检测数组是否有元素符合判断条件"></a>检测数组是否有元素符合判断条件</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> hasNum = arr.some(<span class="function"><span class="params">item</span> =&gt;</span> <span class="keyword">typeof</span> item === <span class="string">'number'</span>)</span><br></pre></td></tr></table></figure>
-
-<h6 id="找到第一个符合条件的元素-下标"><a href="#找到第一个符合条件的元素-下标" class="headerlink" title="找到第一个符合条件的元素/下标"></a>找到第一个符合条件的元素/下标</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> findItem = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="number">3</span>) <span class="comment">// 返回子项</span></span><br><span class="line"><span class="keyword">const</span> findIndex = arr.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="number">3</span>) <span class="comment">// 返回子项的下标</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> findIndex</span><br><span class="line">arr.find(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (item === <span class="number">3</span>) &#123;</span><br><span class="line">        findIndex = index</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h6 id="数组使用误区"><a href="#数组使用误区" class="headerlink" title="数组使用误区"></a>数组使用误区</h6><p>数组的方法很多，很多方法都可以达到同样的效果，所以在使用时要根据需求使用合适的方法。</p>
-<p>垃圾代码产生的很大原因就是数组常用方法使用不当，这里有以下需要注意的点：</p>
-<p><strong>array.includes() 和 array.indexOf()</strong></p>
-<p><code>array.includes()</code> 返回布尔值，<code>array.indexOf()</code> 返回数组子项的索引。<code>indexOf</code> 一定要在需要索引值的情况下使用。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用indexOf，需要用到索引值</span></span><br><span class="line"><span class="keyword">const</span> index = arr.indexOf(<span class="number">1</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">if</span> (~index) &#123; <span class="comment">// 若index === -1，~index得到0，判断不成立；若index不为-1，则~index得到非0，判断成立。</span></span><br><span class="line">    arr.spilce(index, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用includes，不需要用到索引值</span></span><br><span class="line"><span class="comment">// 此时若用indexOf会造成上下文上的阅读负担：到底其他地方有没有用到这个index?</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.includes(<span class="number">6</span>) <span class="comment">// true</span></span><br><span class="line"><span class="keyword">if</span> (!isExist) &#123;</span><br><span class="line">    arr.push(<span class="number">6</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外评论区大佬指出，<code>array.indexOf()</code>找 <code>NaN</code> 会找不到，返回<code>-1</code>，<code>array.includes()</code>能找到，返回<code>true</code>~</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="literal">NaN</span>].includes(<span class="literal">NaN</span>) <span class="comment">// true</span></span><br><span class="line">[<span class="literal">NaN</span>].indexOf(<span class="literal">NaN</span>) <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>array.find() 、 array.findIndex() 和 array.some()</strong></p>
-<p><code>array.find()</code>返回值是第一个符合条件的数组子项，<code>array.findIndex()</code> 返回第一个符合条件的数组子项的下标，<code>array.some()</code> 返回有无复合条件的子项，如有返回<code>true</code>，若无返回<code>false</code>。注意这三个都是短路操作，即找到符合条件的之后就不在继续遍历。</p>
-<p>在需要数组的子项的时候使用<code>array.find()</code> ；需要子项的索引值的时候使用 <code>array.findIndex()</code> ；而若只需要知道有无符合条件的子项，则用 <code>array.some()</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [&#123;<span class="attr">label</span>: <span class="string">'男'</span>, <span class="attr">value</span>: <span class="number">0</span>&#125;, &#123;<span class="attr">label</span>: <span class="string">'女'</span>, <span class="attr">value</span>: <span class="number">1</span>&#125;, &#123;<span class="attr">label</span>: <span class="string">'不男不女'</span>, <span class="attr">value</span>: <span class="number">2</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用some</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.some(<span class="function"><span class="params">item</span> =&gt;</span> item.value === <span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> (isExist) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'哈哈哈找到了'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用find</span></span><br><span class="line"><span class="keyword">const</span> item = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item.value === <span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> (item) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item.label)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用findIndex</span></span><br><span class="line"><span class="keyword">const</span> index = arr.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item.value === <span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> (~index) &#123;</span><br><span class="line">    <span class="keyword">const</span> delItem = arr[index]</span><br><span class="line">    arr.splice(index, <span class="number">1</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`你删除了<span class="subst">$&#123;delItem.label&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>建议在只需要布尔值的时候和数组子项是字符串或数字的时候使用 <code>array.some()</code>：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当子包含数字0的时候可能出错</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.some(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> (isExist) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'存在要找的子项，很舒服~'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> (isExist) &#123; <span class="comment">// isExist此时是0，隐式转换为布尔值后是false</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行不到这里~'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当子项包含空字符串的时候也可能出错</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="string">''</span>, <span class="string">'asdf'</span>, <span class="string">'qwer'</span>, <span class="string">'...'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.some(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="string">''</span>)</span><br><span class="line"><span class="keyword">if</span> (isExist) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'存在要找的子项，很舒服~'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">const</span> isExist = arr.find(<span class="function"><span class="params">item</span> =&gt;</span> item === <span class="string">''</span>)</span><br><span class="line"><span class="keyword">if</span> (isExist) &#123; <span class="comment">// isExist此时是''，隐式转换为布尔值后是false</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行不到这里~'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>array.find() 和 array.filter()</strong></p>
-<p>只需要知道 <code>array.filter()</code> 返回的是所有符合条件的子项组成的数组，会遍历所有数组；而 <code>array.find()</code> 只返回第一个符合条件的子项，是短路操作。</p>
-<h6 id="合理使用-Set-数据结构"><a href="#合理使用-Set-数据结构" class="headerlink" title="合理使用 Set 数据结构"></a>合理使用 Set 数据结构</h6><p>由于 es6 原生提供了 <code>Set</code> 数据结构，而 <code>Set</code> 可以保证子项不重复，且和数组转换十分方便，所以在一些可能会涉及重复添加的场景下可以直接使用 <code>Set</code> 代替 <code>Array</code>，避免了多个地方重复判断是否已经存在该子项。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">set</span> = new Set()</span><br><span class="line"><span class="keyword">set</span>.add(1)</span><br><span class="line"><span class="keyword">set</span>.add(1)</span><br><span class="line"><span class="keyword">set</span>.add(1)</span><br><span class="line"><span class="keyword">set</span>.size // 1</span><br><span class="line">const arr = [...<span class="keyword">set</span>] // arr: [1]</span><br></pre></td></tr></table></figure>
-
-<h6 id="强大的reduce"><a href="#强大的reduce" class="headerlink" title="强大的reduce"></a>强大的reduce</h6><p><code>array.reduce</code> 遍历并将当前次回调函数的返回值作为下一次回调函数执行的第一个参数。</p>
-<p>利用 <code>array.reduce</code> 替代一些需要多次遍历的场景，可以极大提高代码运行效率。</p>
-<ol>
-<li>利用<code>reduce</code> 输出一个数字/字符串</li>
-</ol>
-<p>假如有如下每个元素都由字母’s’加数字组成的数组<code>arr</code>，现在找出其中最大的数字：（<code>arr</code>不为空）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">'s0'</span>, <span class="string">'s4'</span>, <span class="string">'s1'</span>, <span class="string">'s2'</span>, <span class="string">'s8'</span>, <span class="string">'s3'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1  进行了多次遍历，低效</span></span><br><span class="line"><span class="keyword">const</span> newArr = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item.substring(<span class="number">1</span>)).map(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">Number</span>(item))</span><br><span class="line"><span class="keyword">const</span> maxS = <span class="built_in">Math</span>.max(...newArr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2  一次遍历</span></span><br><span class="line"><span class="keyword">const</span> maxS = arr.reduce(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> curIndex = <span class="built_in">Number</span>(cur.replace(<span class="string">'s'</span>, <span class="string">''</span>))</span><br><span class="line">  <span class="keyword">return</span> curIndex &gt; prev ? curIndex : prev</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>利用<code>reduce</code> 输出一个数组/对象</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 方法1  遍历了两次，效率低</span></span><br><span class="line"><span class="keyword">const</span> value = arr.filter(<span class="function"><span class="params">item</span> =&gt;</span> item % <span class="number">2</span> === <span class="number">0</span>).map(<span class="function"><span class="params">item</span> =&gt;</span> (&#123; <span class="attr">value</span>: item &#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1  一次遍历，效率高</span></span><br><span class="line"><span class="keyword">const</span> value = arr.reduce(<span class="function">(<span class="params">prev, curr</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> curr % <span class="number">2</span> === <span class="number">0</span> ? [...prev, curr] : prev</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
-
-<p>掌握了上面两种用法，结合实际需要，就可以用 <code>reduce/reduceRight</code> 实现各种奇巧淫技了。</p>
-<p>实例：利用 <code>reduce</code> 做下面这样的处理来生成想要的 html 字符串：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后端返回数据</span></span><br><span class="line"><span class="keyword">const</span> data = &#123;</span><br><span class="line">  <span class="string">'if _ then s9'</span>: [</span><br><span class="line">    <span class="string">'作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生'</span>,</span><br><span class="line">    <span class="string">'作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生'</span>,</span><br><span class="line">    <span class="string">'作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生'</span></span><br><span class="line">    ],</span><br><span class="line">  <span class="string">'if C then s4'</span>: [</span><br><span class="line">    <span class="string">'当有条件时时,结构构件满足要求,要求属于安全性、适用性和耐久性'</span>,</span><br><span class="line">    <span class="string">'当有条件时时,住宅结构满足要求,要求属于安全性、适用性和耐久性'</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ifthens = <span class="built_in">Object</span>.entries(data).reduce(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> values = cur[<span class="number">1</span>].reduce(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> <span class="string">`<span class="subst">$&#123;prev&#125;</span>&lt;p&gt;<span class="subst">$&#123;cur&#125;</span>&lt;/p&gt;`</span>, <span class="string">''</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;prev&#125;</span></span></span><br><span class="line"><span class="string">    &lt;li&gt;</span></span><br><span class="line"><span class="string">      &lt;p&gt;<span class="subst">$&#123;cur[<span class="number">0</span>]&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">      <span class="subst">$&#123;values&#125;</span></span></span><br><span class="line"><span class="string">    &lt;/li&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;, <span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> html = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;ul class="nlp-notify-body"&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;ifthens&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
-
-<p>生成的 html 结构如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"nlp-notify-body"</span>&gt;            </span><br><span class="line">  &lt;li&gt;</span><br><span class="line">    &lt;p&gt;<span class="keyword">if</span> _ then s9&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生&lt;/</span>p&gt;</span><br><span class="line">    &lt;p&gt;作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;作用属于各种,结构属于住宅,结构能承受作用,作用属于在正常建造和正常使用过程中可能发生&lt;/</span>p&gt;</span><br><span class="line">  &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;if C then s4&lt;/</span>p&gt;</span><br><span class="line">    &lt;p&gt;当有条件时时,结构构件满足要求,要求属于安全性、适用性和耐久性&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;当有条件时时,住宅结构满足要求,要求属于安全性、适用性和耐久性&lt;/</span>p&gt;</span><br><span class="line">  &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">&lt;/u</span>l&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这里还有一个替代 <code>reverse</code> 函数的技巧</p>
-<p>由于 <code>array.reverse()</code> 函数会改变原数组自身，这样就限制了一些使用场景。如果我想要一个不会改变数组自身的 <code>reverse</code> 函数呢？拿走！</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myReverse = <span class="function">(<span class="params">arr = []</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span>  arr.reduceRight(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> [...prev, cur], []) <span class="comment">// 也可以返回逗号表达式 (prev.push(cur), prev)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><h6 id="用JavaScript封装栈"><a href="#用JavaScript封装栈" class="headerlink" title="用JavaScript封装栈"></a>用JavaScript封装栈</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 封装栈</span><br><span class="line">   function Stack()&#123;</span><br><span class="line">       // 栈中的属性</span><br><span class="line">       this.items = [];</span><br><span class="line">       // 栈中的相关操作</span><br><span class="line">       // 1.将元素压入栈中</span><br><span class="line">       Stack.prototype.push = function(element)&#123;</span><br><span class="line">		this.items.push(element);</span><br><span class="line">       &#125;;</span><br><span class="line">       // 2.将元素弹出栈中</span><br><span class="line">       Stack.prototype.pop = function()&#123;</span><br><span class="line">		return	this.items.pop();</span><br><span class="line">       &#125;;</span><br><span class="line">       // 3.查看一下栈顶元素</span><br><span class="line">       Stack.prototype.check = function()&#123;</span><br><span class="line">		return this.items[this.items.length - 1];</span><br><span class="line">       &#125;;</span><br><span class="line">       // 4.判断栈中是否有元素</span><br><span class="line">       Stack.prototype.isEmpty = function()&#123;</span><br><span class="line">		return this.items.length == 0;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 5.获取栈中的元素的个数</span><br><span class="line">       Stack.prototype.size = function()&#123;</span><br><span class="line">		return this.items.length;</span><br><span class="line">       &#125;;</span><br><span class="line">       // 6.toString方法</span><br><span class="line">       Stack.prototype.toString = function()&#123;</span><br><span class="line">           // 方法一：</span><br><span class="line">           // var resultString = &apos;&apos;;</span><br><span class="line">           // for(var i = 0; i &lt; this.items.length; i ++)&#123;</span><br><span class="line">           // 	resultString += this.items[i] + &apos; &apos;;</span><br><span class="line">           // &#125;</span><br><span class="line">           // return resultString;</span><br><span class="line">           // 方法二：</span><br><span class="line">           return this.items.join(&apos; &apos;);</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>之所以不使用<code>this.push=function(){}</code>，而是采用原型的方法，是因为通过prototype原型的方法相当于给整个类添加了方法，而this.push方式则仅是给某个实例添加方法。</p>
-<h6 id="用栈将十进制转为二进制"><a href="#用栈将十进制转为二进制" class="headerlink" title="用栈将十进制转为二进制"></a>用栈将十进制转为二进制</h6><ul>
-<li>因为我们习惯使用十进制，而计算机里面的所有内容都是用二进制数字表示的（0和1）</li>
-<li>可采用对十进制的数字进行除二取余法，将十进制转为二进制。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//函数：将十进制转为二进制</span><br><span class="line">function dec2bin(decNumber)&#123;</span><br><span class="line">    // 1.定义栈对象</span><br><span class="line">    var stack = new Stack();</span><br><span class="line">    while(decNumber &gt; 0)&#123;</span><br><span class="line">        stack.push(decNumber % 2);</span><br><span class="line">        decNumber = Math.floor(decNumber / 2);</span><br><span class="line">        console.log(decNumber)</span><br><span class="line">    &#125;</span><br><span class="line">    var binaryString = &apos;&apos;;</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        binaryString += stack.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    return binaryString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><h6 id="队列结构"><a href="#队列结构" class="headerlink" title="队列结构"></a>队列结构</h6><ul>
-<li><p>队列是一种受限的数据结构，可解决某些特定的问题。它的受限之处在于他只允许在表的前端（font）进行删除操作，而在表的后端（rear）进行插入操作。</p>
-</li>
-<li><p>队列的实现和栈一样有两种方案：</p>
-<ul>
-<li>基于数组实现</li>
-<li>基于链表实现</li>
-</ul>
-</li>
-<li><p>队列常见的操作</p>
-<ul>
-<li>enqueue(element)：向队列尾部添加一个或多个新的项。</li>
-<li>dequeue（）：移除队列的第一（即排在队列最前面的）项，并返回移除的元素；</li>
-<li>front（）：返回队列中第一个元素。</li>
-<li>isEmpty（）：判断队列中是否含有元素。</li>
-<li>size（）：返回队列中的元素个数。</li>
-<li>toString（）：将队列中的内容转为字符串形式</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 用数组封装队列</span><br><span class="line">function Queue()&#123;</span><br><span class="line">this.item = [];</span><br><span class="line"></span><br><span class="line">// 1.添加元素</span><br><span class="line">Queue.prototype.enqueue = function(element)&#123;</span><br><span class="line">    this.item.push(element);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">// 2.移除元素</span><br><span class="line">Queue.prototype.dequeue = function()&#123;</span><br><span class="line">    return this.item.shift();</span><br><span class="line">&#125;;</span><br><span class="line">// 3.查看队列中第一个元素</span><br><span class="line">Queue.prototype.front = function()&#123;</span><br><span class="line">    return this.item[0];</span><br><span class="line">&#125;;</span><br><span class="line">// 4.判断元素是否为空</span><br><span class="line">Queue.prototype.isEmpty = function()&#123;</span><br><span class="line">    return this.item.length == 0;</span><br><span class="line">&#125;;</span><br><span class="line">// 5.队列中的元素个数</span><br><span class="line">Queue.prototype.size = function()&#123;</span><br><span class="line">    return this.item.length;</span><br><span class="line">&#125;;</span><br><span class="line">// 6.将队列中的内容转为字符串</span><br><span class="line">Queue.prototype.toString = function()&#123;</span><br><span class="line">    return this.item.join(&apos; &apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="队列击鼓传花"><a href="#队列击鼓传花" class="headerlink" title="队列击鼓传花"></a>队列击鼓传花</h6><ul>
-<li>参数：所有参与人的性名，基于此的数字</li>
-<li>结果：最终剩下的一人的姓名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> // 击鼓传花</span><br><span class="line">    function passGame(nameList, num) &#123;</span><br><span class="line">        //创建一个队列</span><br><span class="line">        var queue = new Queue();</span><br><span class="line">        // 将所有人加入队列中</span><br><span class="line">        for(var i = 0; i &lt; nameList.length; i++)&#123;</span><br><span class="line">            queue.enqueue(nameList[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        // 不是num，重新加入队列末尾</span><br><span class="line">        // 是num时，从队列中删除并把不是num的值重新放入队列中</span><br><span class="line">        // 当队列中只剩下一人退出循环</span><br><span class="line">        while (queue.size() &gt; 1) &#123;</span><br><span class="line">            for (var i = 0; i &lt; num - 1; i++) &#123;</span><br><span class="line">                queue.enqueue(queue.dequeue());</span><br><span class="line">            &#125;</span><br><span class="line">            queue.dequeue();</span><br><span class="line">        &#125;</span><br><span class="line">        var index = nameList.indexOf(queue.front());</span><br><span class="line">        return queue.front();</span><br><span class="line">    &#125;// 击鼓传花</span><br><span class="line">function passGame(nameList, num) &#123;</span><br><span class="line">    //创建一个队列</span><br><span class="line">    var queue = new Queue();</span><br><span class="line">    // 将所有人加入队列中</span><br><span class="line">    for(var i = 0; i &lt; nameList.length; i++)&#123;</span><br><span class="line">        queue.enqueue(nameList[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    // 不是num，重新加入队列末尾</span><br><span class="line">    // 是num时，从队列中删除并把不是num的值重新放入队列中</span><br><span class="line">    // 当队列中只剩下一人退出循环</span><br><span class="line">    while (queue.size() &gt; 1) &#123;</span><br><span class="line">        for (var i = 0; i &lt; num - 1; i++) &#123;</span><br><span class="line">            queue.enqueue(queue.dequeue());</span><br><span class="line">        &#125;</span><br><span class="line">        queue.dequeue();</span><br><span class="line">    &#125;</span><br><span class="line">    var index = nameList.indexOf(queue.front());</span><br><span class="line">    return queue.front();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h6><ul>
-<li>普通的队列插入一个元素，数据就会被放入后端，并且需要前面的所有元素处理完后才会处理前面的数据。但是优先级队列，在插入一个元素的的时候会考虑该数据的优先级。</li>
-<li>和其他数据优先级进行比较，比较完成后可得出这个元素在队列中正确的位置。</li>
-<li>优先级队列主要考虑的问题：<ul>
-<li>每个元素不再只是一个数据，且包含数据的优先级。</li>
-<li>在添加方式中，根据优先级放入正确的位置。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">// 封装优先级队列</span><br><span class="line">function PriorityQueue() &#123;</span><br><span class="line">    // 内部类</span><br><span class="line">    function QueueElement(element, priority) &#123;</span><br><span class="line">        this.element = element;</span><br><span class="line">        this.priority = priority;</span><br><span class="line">    &#125;</span><br><span class="line">    // 封装属性</span><br><span class="line">    this.item = [];</span><br><span class="line">    // 实现插入方法</span><br><span class="line">    PriorityQueue.prototype.enqueue = function (element, priority) &#123;</span><br><span class="line">        // 创建QueueElement对象</span><br><span class="line">        var queueElement = new QueueElement(element, priority);</span><br><span class="line">        if (this.item.length == 0) &#123;</span><br><span class="line">            this.item.push(queueElement);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            let flag = false;</span><br><span class="line">            for (let i = 0; i &lt; this.item.length; i++) &#123;</span><br><span class="line">                if (queueElement.priority &lt; this.item[i].priority) &#123;</span><br><span class="line">                    this.item.splice(i, 0, queueElement);</span><br><span class="line">                    flag = true;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (!flag) &#123;</span><br><span class="line">                this.item.push(queueElement);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 2.移除元素</span><br><span class="line">    PriorityQueue.prototype.dequeue = function () &#123;</span><br><span class="line">        return this.item.shift();</span><br><span class="line">    &#125;;</span><br><span class="line">    // 3.查看队列中第一个元素</span><br><span class="line">    PriorityQueue.prototype.front = function () &#123;</span><br><span class="line">        return this.item[0];</span><br><span class="line">    &#125;;</span><br><span class="line">    // 4.判断元素是否为空</span><br><span class="line">    PriorityQueue.prototype.isEmpty = function () &#123;</span><br><span class="line">        return this.item.length == 0;</span><br><span class="line">    &#125;;</span><br><span class="line">    // 5.队列中的元素个数</span><br><span class="line">    PriorityQueue.prototype.size = function () &#123;</span><br><span class="line">        return this.item.length;</span><br><span class="line">    &#125;;</span><br><span class="line">    // 6.将队列中的内容转为字符串</span><br><span class="line">    PriorityQueue.prototype.toString = function () &#123;</span><br><span class="line">       let result = &apos;&apos;;</span><br><span class="line">       for(let i = 0; i &lt; this.item.length; i++)&#123;</span><br><span class="line">           result += this.item[i].priority + &apos; &apos; + this.item[i].element + &apos; &apos;;</span><br><span class="line">       &#125;</span><br><span class="line">       return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var priorityQueue = new PriorityQueue();</span><br><span class="line">priorityQueue.enqueue(&apos;nikita&apos;,10);</span><br><span class="line">priorityQueue.enqueue(&apos;nikita1&apos;,110);</span><br><span class="line">priorityQueue.enqueue(&apos;nikit2a&apos;,101);</span><br><span class="line">priorityQueue.enqueue(&apos;nikitak&apos;,210);</span><br><span class="line">console.log(priorityQueue.toString());</span><br></pre></td></tr></table></figure>
-
-<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><h6 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h6><p>要存储多个元素，有两个选择：数组和链表。</p>
-<p>但不同于数组，链表中的元素在内存中不必是连续的空间，链表的每一个元素由一个存储元素本身的节点和指向下一个元素的引用（即指针）组成。</p>
-<p>相对于数组，链表优势：</p>
-<ol>
-<li>内存不必连续，可充分利用计算机的内存，实现灵活的内存动态管理。</li>
-<li>链表不必在创建时就确定大小，并且大小可以无限的延伸下去。</li>
-<li>链表在插入和删除操作时，时间复杂度可达O（1），相对数组效率高很多。</li>
-</ol>
-<p>劣势：</p>
-<ol>
-<li>链表访问任何一个位置的元素都必须从头开始。（无法跳过第一个元素访问任何一个元素）。</li>
-<li>无法通过下标直接访问元素，必须从头开始，直到找到元素。</li>
-</ol>
-<p>![1 (3)](C:\Users\CCY\Desktop\1 (3).png)</p>
-<p>常见操作：</p>
-<ol>
-<li>append（element）：向链表尾部添加一个新的项。</li>
-<li>insert（position,element）：向特定位置添加一个项</li>
-<li>get（position）</li>
-<li>indexOf（element）</li>
-<li>update（position）：修改某个位置的元素</li>
-<li>removeAt（position）</li>
-<li>remove（element）</li>
-<li>isEmpty()</li>
-<li>size()</li>
-<li>toString()</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">![4](C:\Users\CCY\Desktop\4.png)// 封装单向链表</span><br><span class="line">function LinkedList()&#123;</span><br><span class="line">    // 内部类，节点类</span><br><span class="line">    function Node(data)&#123;</span><br><span class="line">        this.data = data;</span><br><span class="line">        this.next = null;</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义属性</span><br><span class="line">    this.head = null;</span><br><span class="line">    this.length = 0;</span><br><span class="line"></span><br><span class="line">    // 追加append方法</span><br><span class="line">    LinkedList.prototype.append = function(data)&#123;</span><br><span class="line">        let newNode = new Node(data);</span><br><span class="line">        if(this.length == 0)&#123;</span><br><span class="line">            this.head = newNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let current = this.head;</span><br><span class="line">            while(current.next)&#123;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            current.next = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        this.length++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // toString方法</span><br><span class="line">    LinkedList.prototype.toString = function()&#123;</span><br><span class="line">        let resultString = &apos;&apos;;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        while(current)&#123;</span><br><span class="line">            resultString += current.data + &apos; &apos;;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return resultString;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在任意位置加元素</span><br><span class="line">    LinkedList.prototype.insert = function(position,data)&#123;</span><br><span class="line">        // 对position进行边界判断</span><br><span class="line">        if(position &lt; 0 || position &gt; this.length)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let newNode = new Node(data);</span><br><span class="line">            let index = 0;</span><br><span class="line">            let previous = null;</span><br><span class="line">            let current = this.head;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                previous = current;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            previous.next = newNode;</span><br><span class="line">            newNode.next = current;</span><br><span class="line">        &#125;</span><br><span class="line">        this.length++;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取对应位置的值</span><br><span class="line">    LinkedList.prototype.get = function(position)&#123;</span><br><span class="line">        // 对position边界判断</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let current = this.head;</span><br><span class="line">            let index = 0;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            return current.data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 返回元素索引值indexOf，没有返回-1</span><br><span class="line">    LinkedList.prototype.indexOf = function(value)&#123;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        let index = 0;</span><br><span class="line">        while(current)&#123;</span><br><span class="line">            if(current.data == value)&#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // update方法</span><br><span class="line">    LinkedList.prototype.update = function(position,value)&#123;</span><br><span class="line">        // 对position边界判断</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let current = this.head;</span><br><span class="line">            let index = 0;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            current.data = value;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在特定位置删除数据</span><br><span class="line">    LinkedList.prototype.removeAt = function(position)&#123;</span><br><span class="line">        // 方便后续返回里面的值</span><br><span class="line">        let current = this.head;</span><br><span class="line">        // 对position边界判断</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let index = 0;</span><br><span class="line">            let previous = null;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                previous = current;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            current.next = previous.next;</span><br><span class="line">        &#125;</span><br><span class="line">        this.length -= 1;</span><br><span class="line">        return current.data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在列表中删除某个值</span><br><span class="line">    LinkedList.prototype.remove = function(value)&#123;</span><br><span class="line">        // 获取data在列表中的位置</span><br><span class="line">        let position = this.indexOf(value);</span><br><span class="line"></span><br><span class="line">        return this.removeAt(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 是否为空</span><br><span class="line">    LinkedList.prototype.isEmpty = function()&#123;</span><br><span class="line">        return !this.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 元素个数</span><br><span class="line">    LinkedList.prototype.size = function()&#123;</span><br><span class="line">        return this.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h6><p>既可以从头遍历到尾，又可以从尾遍历到头。</p>
-<p>实现原理是：一个节点既有向前连接的引用，也有一个向后连接的引用。</p>
-<p>但有以下缺点：</p>
-<p>每次插入删除某个节点时，需要处理四个引用，而不是两个，也就是实现起来更困难一些。并且相当于单向链表，必然占用内存空间更大些。<img src="C:%5CUsers%5CCCY%5CDesktop%5C4.png" alt="4"></p>
-<p>特点：</p>
-<ol>
-<li>可以使用一个head和一个tail分别指向头部和尾部的节点。</li>
-<li>每个节点由三部分组成：前一个节点的指针（prev）/保存的元素（item）/后一个节点的指针（next）。</li>
-<li>双向链表的第一个节点的prev是null，最后一个节点的next为null。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line">// 封装双向链表</span><br><span class="line">function DoubleLinkedList()&#123;</span><br><span class="line">    // 内部节点类</span><br><span class="line">    function Node(data)&#123;</span><br><span class="line">        this.data = data;</span><br><span class="line">        this.prev = null;</span><br><span class="line">        this.next = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 内部属性</span><br><span class="line">    this.head = null;</span><br><span class="line">    this.tail = null;</span><br><span class="line">    this.length = 0;</span><br><span class="line"></span><br><span class="line">    // append追加方法</span><br><span class="line">    DoubleLinkedList.prototype.append = function(data)&#123;</span><br><span class="line">        let newNode = new Node(data);</span><br><span class="line">        if(this.length == 0)&#123;</span><br><span class="line">            this.head = newNode;</span><br><span class="line">            this.tail = newNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            newNode.prev = this.tail;</span><br><span class="line">            this.tail.next = newNode;</span><br><span class="line">            this.tail = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        this.length++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 任意位置插入值</span><br><span class="line">    DoubleLinkedList.prototype.insert = function(position,value)&#123;</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length) return false;</span><br><span class="line">        let newNode = new Node(value);</span><br><span class="line">        // 原链表为空</span><br><span class="line">        if(this.length == 0)&#123;</span><br><span class="line">            this.prev = newNode;</span><br><span class="line">            this.tail = newNode;</span><br><span class="line">        &#125;else if(position == 0)&#123;</span><br><span class="line">            this.head.prev = newNode;</span><br><span class="line">            newNode.next = this.head;</span><br><span class="line">            this.head = newNode;</span><br><span class="line">        &#125;else if(position == this.length)&#123;</span><br><span class="line">            newNode.prev = this.tail;</span><br><span class="line">            this.tail.next = newNode;</span><br><span class="line">            this.tail = newNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let index = 0;</span><br><span class="line">            let current = this.head;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            newNode.next = current;</span><br><span class="line">            newNode.prev = current.prev;</span><br><span class="line">            current.prev.next = newNode;</span><br><span class="line">            current.prev = newNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.length++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // get方法</span><br><span class="line">    DoubleLinkedList.prototype.get = function(position)&#123;</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length) return null;</span><br><span class="line">        let index = 0;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        while(index++ &lt; position)&#123;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return current.data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // indexOf方法</span><br><span class="line">    DoubleLinkedList.prototype.indexOf = function(value)&#123;</span><br><span class="line">        let index = 0;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        while(current)&#123;</span><br><span class="line">            if(current.data == value)&#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;</span><br><span class="line">            current = current.next;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // update方法</span><br><span class="line">    DoubleLinkedList.prototype.update = function(position,newValue)&#123;</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length) return false;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        let index = 0;</span><br><span class="line">        while(index++ &lt; position)&#123;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        current.data = newValue;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 移除数据</span><br><span class="line">    DoubleLinkedList.prototype.removeAt = function(position)&#123;</span><br><span class="line">        if(position &lt; 0 || position &gt;= this.length) return null;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        if(position == 0)&#123;</span><br><span class="line">            this.head.next.prev = null;</span><br><span class="line">            this.head = this.head.next;</span><br><span class="line">        &#125;else if(position == this.length - 1)&#123;</span><br><span class="line">            current = this.tail;</span><br><span class="line">            this.tail.prev.next = null;</span><br><span class="line">            this.tail = this.tail.prev;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let index = 0;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            current.prev.next = current.next;</span><br><span class="line">            current.next.prev = current.prev;</span><br><span class="line">        &#125;</span><br><span class="line">        this.length -= 1;</span><br><span class="line">        return current.data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // remove方法</span><br><span class="line">    DoubleLinkedList.prototype.remove = function(value)&#123;</span><br><span class="line">        let position = this.indexOf(value);</span><br><span class="line">        return this.removeAt(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // isEmpty方法</span><br><span class="line">    DoubleLinkedList.prototype.isEmpty = function()&#123;</span><br><span class="line">        return !this.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // size方法</span><br><span class="line">    DoubleLinkedList.prototype.size = function()&#123;</span><br><span class="line">        return this.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DoubleLinkedList.prototype.getHead = function()&#123;</span><br><span class="line">        return this.head.data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DoubleLinkedList.prototype.getTail = function()&#123;</span><br><span class="line">        return this.tail.data;</span><br><span class="line">    &#125;</span><br><span class="line">    // 将链表转成字符串</span><br><span class="line">    DoubleLinkedList.prototype.toString = function()&#123;</span><br><span class="line">        return this.backwardString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DoubleLinkedList.prototype.forwardString = function()&#123;</span><br><span class="line">        let current = this.tail;</span><br><span class="line">        let resultString = &apos;&apos;;</span><br><span class="line">        while(current)&#123;</span><br><span class="line">            resultString += current.data + &apos; &apos;;</span><br><span class="line">            current = current.prev;</span><br><span class="line">        &#125;</span><br><span class="line">        return resultString;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 从前向后遍历</span><br><span class="line">    DoubleLinkedList.prototype.backwardString = function()&#123;</span><br><span class="line">        let current = this.head;</span><br><span class="line">        let resultString = &apos;&apos;;</span><br><span class="line">        while(current)&#123;</span><br><span class="line">            resultString += current.data + &apos; &apos;;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return resultString;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>几乎每种编程语言中，都有集合结构，比较常见的实现方式是哈希表。</p>
-<p>集合通常是由一组<strong>无序的，不能重复的</strong>元素组成与数学中的集合不同，计算机中的集合表示的结构中元素是不允许重复的。ES6中的Set类就是一种集合类。</p>
-<h6 id="集合常见操作："><a href="#集合常见操作：" class="headerlink" title="集合常见操作："></a>集合常见操作：</h6><ol>
-<li>add（value）向集合添加一个新的项。</li>
-<li>remove（value）：从集合中一个数</li>
-<li>has（value）：值是否在集合中，有返回true，没有返回false</li>
-<li>clear（）：移除集合所有项。</li>
-<li>size（）：length属性</li>
-<li>values（）：返回所有值的数组。</li>
-</ol>
-<h6 id="集合间的操作"><a href="#集合间的操作" class="headerlink" title="集合间的操作"></a>集合间的操作</h6><p><strong>并集</strong></p>
-<p><strong>交集</strong></p>
-<p><strong>差集</strong></p>
-<p><strong>子集</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">// 封装集合</span><br><span class="line">function Set()&#123;</span><br><span class="line">    // 属性</span><br><span class="line">    this.item = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    // add方法</span><br><span class="line">    Set.prototype.add = function(value)&#123;</span><br><span class="line">        // 先判断是否有该值</span><br><span class="line">        if(this.has(value))&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.item[value] = value;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set.prototype.has = function(value)&#123;</span><br><span class="line">        return this.item.hasOwnProperty(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set.prototype.remove = function(value)&#123;</span><br><span class="line">        // 判断有无该值</span><br><span class="line">        if(!this.has(value))&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        delete this.item[value];</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set.prototype.clear = function()&#123;</span><br><span class="line">        this.item = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set.prototype.size = function()&#123;</span><br><span class="line">        return Object.keys(this.item).length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set.prototype.values = function()&#123;</span><br><span class="line">        return Object.keys(this.item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 并集</span><br><span class="line">    Set.prototype.union = function(otherSet)&#123;</span><br><span class="line">        // this: 集合对象A</span><br><span class="line">        // otherSet：集合对象B</span><br><span class="line">        let unionSet = new Set();</span><br><span class="line">        let value = this.values();</span><br><span class="line">        for(let i = 0; i &lt; value.length;i++)&#123;</span><br><span class="line">            unionSet.add(value[i])</span><br><span class="line">        &#125;</span><br><span class="line">        // 去除B集合中的元素，判断是否需要添加到新的集合</span><br><span class="line">        value = otherSet.values();</span><br><span class="line">        for(let i = 0; i &lt; value.length;i++)&#123;</span><br><span class="line">            unionSet.add(value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return unionSet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 交集</span><br><span class="line">    Set.prototype.intersection = function(otherSet)&#123;</span><br><span class="line">        let intersection = new Set();</span><br><span class="line">        let value = this.values();</span><br><span class="line">        for(let i = 0; i &lt; value.length;i++)&#123;</span><br><span class="line">            if(otherSet.has(value[i]))&#123;</span><br><span class="line">                intersection.add(value[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intersection;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 差集</span><br><span class="line">    Set.prototype.differce = function(otherSet)&#123;</span><br><span class="line">        let differce = new Set();</span><br><span class="line">        let value = this.values();</span><br><span class="line">        for(let i = 0; i &lt; value.length;i++)&#123;</span><br><span class="line">            if(!otherSet.has(value[i]))&#123;</span><br><span class="line">                differce.add(value[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return differce;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 子集：集合A是否为集合B的子集</span><br><span class="line">    Set.prototype.subSet = function(otherSet)&#123;</span><br><span class="line">        let value = this.values();</span><br><span class="line">        for(let i = 0; i &lt; value.length;i++)&#123;</span><br><span class="line">            if(!otherSet.has(value[i]))&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><p>哈希表无论多少条数据，插入删除值需要接近常量的时间：即O（1）的时间级。实际上，只需要几个机器指令即可完成。</p>
-<p>哈希表的速度比树快，基本可在瞬间找到想要的元素，且哈希表相对于树来说编码要容易得多。哈希表基于数组，但效率比数组高。</p>
-<p>哈希表相对于数组：</p>
-<ol>
-<li>哈希表中的数据没有顺序，所以不能以一种固定的方式，比如从小到大来遍历其中的元素。</li>
-<li>哈希表中的key不允许重复，不能放置相同的key用于保存不同的元素。</li>
-</ol>
-<h6 id="字母转数字"><a href="#字母转数字" class="headerlink" title="字母转数字"></a>字母转数字</h6><p>方案一：把数字相加求和产生的数组下标太少。</p>
-<p>方案二：与27的幂相乘求和产生的数组下标又太多。</p>
-<h6 id="哈希化"><a href="#哈希化" class="headerlink" title="哈希化"></a>哈希化</h6><p><strong>哈希化</strong>：将大数字转化为数组范围内下标的过程，我们称之为哈希化。</p>
-<p><strong>哈希函数</strong>：通常我们将单词转为大数字，大数字在进行哈希化的代码实现放在一个函数中，这就是哈希函数。</p>
-<p><strong>哈希表</strong>：最终将数据插入到这个数组，对整个结构的封装，我们就称之为哈希表。</p>
-<p>哈希化后的下标值仍可能会重复，解决方案有二：</p>
-<h6 id="1-链地址法"><a href="#1-链地址法" class="headerlink" title="1.链地址法"></a>1.链地址法</h6><p>链地址解决冲突的办法是每个数组单元中存放的不再是单个数据，而是一个链条（数组和链表），当发现重复时，便把重复的元素插入到链表的首端或末端即可。当查询时，先根据哈希化后的下标值找到对应的位置，再取出链表，依次查询寻找的数据。</p>
-<p>一般哈希化的index找出这个链表或数组时，通常就会使用线性查找，这时数组和链表的效率是差不多的。</p>
-<p>但若是需要将新插入的数据放在数组或链表的最前面，因为觉得新插入的数据用于取出的可能性更大，这种情况最好采用链表，因为数组在首位插入数据时需要其他项后移，链表则没有此问题。<img src="C:%5CUsers%5CCCY%5CDesktop%5C5.png" alt="5"></p>
-<h6 id="2-开放地址法"><a href="#2-开放地址法" class="headerlink" title="2.开放地址法"></a>2.开放地址法</h6><p>开放地址法的主要工作方式是寻找空白的单元格来添加重复的数据。</p>
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C6.png" alt="6"></p>
-<h6 id="线性探测"><a href="#线性探测" class="headerlink" title="线性探测"></a><strong>线性探测</strong></h6><p>线性的查找空白的单元。</p>
-<p>插值：当我们通过哈希化找到下标值时，发现该位置已经有值了，下标值就自加1开始一点一点查找合适的位置（空的位置）</p>
-<p>查询：首先经过哈希化得到下标值，比较该下标值的结果与查询的数值是否相同，相同则返回，不同则线性查找（下标值加1），查到空位置即停止。因为插值时不可能跳过空位置去其他位置。</p>
-<p>删除：删除一个数据项时，不可以将这个位置下标的内容设置为null，因为将它设置为null可能影响我们之后查询其他操作，所以通常删除一个位置的数据项时，需将其进行特殊处理（比如设置为-1）。</p>
-<p>当我们之后看到-1位置的数据项时就知道查询时要继续查询，但是插入该位置可放置数据。</p>
-<p>线性探测有一个较严重的问题就是聚集（连续填充单位），它会影响哈希表的性能，无论删除/插入/删除都会影响。</p>
-<h4 id="树"><a href="#树" class="headerlink" title="树"></a>树</h4><ol>
-<li>节点的度（degree）：节点的子树个数。</li>
-<li>树的度：树的所有节点中最大的度数。</li>
-<li>叶节点（leaf）：度为0的节点（也称为叶子节点）。</li>
-<li>父节点（parent）：有子树的节点是其树的根节点的父节点。</li>
-<li>子节点（child）</li>
-<li>兄弟节点路径和路径长度：一个节点序列的父节点，路径所包含的边的个数为路径的长度。</li>
-<li>节点的层次（level）：规定根节点在1层，其他节点的层数是其父节点的层数加1.</li>
-<li>树的深度（depth）：树中所有节点中的最大层次是这棵树的深度。</li>
-</ol>
-<h6 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h6><ol>
-<li>一个二叉树第i层的最大节点数为<code>2^(i-1),i&gt;=1</code>;</li>
-<li>深度为k的二叉树有最大的节点总数为：<code>2^k-1,k&gt;=1</code>;</li>
-<li>对任何非空二叉树T，若n0表示叶结点的个数，n2是度为2的非叶节点个数，则两者关系n0 = n2 + 1。</li>
-</ol>
-<h6 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h6><p>二叉搜索树（BST ,Binary Search Tree)，也称二叉排序树或二叉查找树。二叉搜索树是一颗二叉树，可以为空；二分查找法其实就是利用的二叉搜索树。</p>
-<p>如果不为空，满足以下性质：</p>
-<ol>
-<li>非空左子树的所有键值小于其根节点的键值。</li>
-<li>非空右节点的所有键值大于其根节点的键值。</li>
-<li>左，右子树本身也都是二叉树。</li>
-</ol>
-<p>常见操作：</p>
-<ol>
-<li><p>insert（key）：向树中插入一个新的键</p>
-</li>
-<li><p>search（key）：树中查找键</p>
-</li>
-<li><p>inOrderTraverse：通过中序遍历所有节点。</p>
-</li>
-<li><p>preOrderTraverse：先序</p>
-</li>
-<li><p>postOrderTraverse：后序</p>
-</li>
-<li><p>min</p>
-</li>
-<li><p>max</p>
-</li>
-<li><p>remove（key）</p>
-<p>如果我们要删除的节点current有两个子节点，甚至子节点还有子节点，这种情况下就需要从current下面所有节点中找到一个最接近current的节点来替换current。</p>
-<p>最接近curren的节点必定是比current小一点点的节点（它必是current左子树中的最大值，叫做<strong>前驱</strong>）和比current大一点点的节点（current右子树的最小值，叫做<strong>后继</strong>）</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br></pre></td><td class="code"><pre><span class="line">function BinarySearchTree() &#123;</span><br><span class="line">    function Node(key) &#123;</span><br><span class="line">        this.key = key;</span><br><span class="line">        this.left = null;</span><br><span class="line">        this.right = null;</span><br><span class="line">    &#125;</span><br><span class="line">    this.root = null;</span><br><span class="line">    // insert方法:对外给用户调用的方法</span><br><span class="line">    BinarySearchTree.prototype.insert = function (key) &#123;</span><br><span class="line">        // 根据key值创建节点</span><br><span class="line">        let newNode = new Node(key);</span><br><span class="line">        // 判断根节点是否为空，空节点直接将新节点赋给根节点</span><br><span class="line">        // 非空节点则调用内部insertNode方法</span><br><span class="line">        if (this.root == null) &#123;</span><br><span class="line">            this.root = newNode;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            this.insertNode(this.root, newNode);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BinarySearchTree.prototype.insertNode = function (node, newNode) &#123;</span><br><span class="line">        if (newNode.key &lt; node.key) &#123; //向左查找</span><br><span class="line">            if (node.left == null) &#123;</span><br><span class="line">                node.left = newNode;</span><br><span class="line">            &#125; else &#123; //向右查找</span><br><span class="line">                this.insertNode(node.left, newNode);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (node.right == null) &#123;</span><br><span class="line">                node.right = newNode;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                this.insertNode(node.right, newNode);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 树的遍历</span><br><span class="line">    // 1.先序遍历</span><br><span class="line">    BinarySearchTree.prototype.preOrderTraversal = function (handler) &#123;</span><br><span class="line">        this.preOrderTraversalNode(this.root, handler);</span><br><span class="line">    &#125;</span><br><span class="line">    BinarySearchTree.prototype.preOrderTraversalNode = function (node, handler) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            // 先序就是先处理遍历来的数</span><br><span class="line">            handler(node.key);</span><br><span class="line">            // 处理经过节点的左子节点</span><br><span class="line">            this.preOrderTraversalNode(node.left, handler);</span><br><span class="line">            // 处理经过节点的右子节点</span><br><span class="line">            this.preOrderTraversalNode(node.right, handler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 中序遍历</span><br><span class="line">    BinarySearchTree.prototype.midOrderTraversal = function (handler) &#123;</span><br><span class="line">        this.midOrderTraversalNode(this.root, handler);</span><br><span class="line">    &#125;</span><br><span class="line">    BinarySearchTree.prototype.midOrderTraversalNode = function (node, handler) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            this.midOrderTraversalNode(node.left, handler);</span><br><span class="line">            handler(node.key);</span><br><span class="line">            this.midOrderTraversalNode(node.right, handler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 右序遍历</span><br><span class="line">    BinarySearchTree.prototype.postOrderTraversal = function (handler) &#123;</span><br><span class="line">        this.postOrderTraversalNode(this.root, handler);</span><br><span class="line">    &#125;</span><br><span class="line">    BinarySearchTree.prototype.postOrderTraversalNode = function (node, handler) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            this.postOrderTraversalNode(node.left);</span><br><span class="line">            this.postOrderTraversalNode(node.right);</span><br><span class="line">            handler(node.key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     //层序遍历</span><br><span class="line">    BinarySearchTree.prototype.levelOrderTraversal = function()&#123;</span><br><span class="line">        if(!this.root) return false;   //头节点为空返回false</span><br><span class="line">        let result = [];   //创建一个数组存放结果</span><br><span class="line">        let tree = [];    //创建一个数组存放二叉树</span><br><span class="line">        tree.push(this.root);    //先传入头节点</span><br><span class="line">        while(tree.length)&#123;       //当tree数组长度不为空</span><br><span class="line">            let node = tree.shift();     //将数组中的第一个节点放到node中</span><br><span class="line">            result.push(node.key);         // 将node节点的值放入result中</span><br><span class="line">            if(node.left)&#123;                 //如果node的左节点不为空，就将左节点压入tree数组中</span><br><span class="line">                tree.push(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">            if(node.right)&#123;                //如果node的右节点不为空，就将左节点压入tree数组中</span><br><span class="line">                tree.push(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    // 找最小值，在最左边位置</span><br><span class="line">    BinarySearchTree.prototype.min = function () &#123;</span><br><span class="line">        let node = this.root;</span><br><span class="line">        while (node.left) &#123;</span><br><span class="line">            node = node.left;</span><br><span class="line">        &#125;</span><br><span class="line">        return node.key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // max</span><br><span class="line">    BinarySearchTree.prototype.max = function () &#123;</span><br><span class="line">        let node = this.root;</span><br><span class="line">        while (node.right) &#123;</span><br><span class="line">            node = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return node.key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // search搜索特定的值</span><br><span class="line">    // 递归搜索</span><br><span class="line">    // BinarySearchTree.prototype.search = function (key) &#123;</span><br><span class="line">    //     return this.searchNode(this.root, key);</span><br><span class="line">    // &#125;</span><br><span class="line">    // BinarySearchTree.prototype.searchNode = function (node, key) &#123;</span><br><span class="line">    //     if (node == null) &#123;</span><br><span class="line">    //         return false;</span><br><span class="line">    //     &#125;</span><br><span class="line">    //     if (key &lt; node.key) &#123;</span><br><span class="line">    //        return this.searchNode(node.left, key);</span><br><span class="line">    //     &#125; else if (key &gt; node.key) &#123;</span><br><span class="line">    //         return this.searchNode(node.right, key);</span><br><span class="line">    //     &#125; else &#123;</span><br><span class="line">    //         return true;</span><br><span class="line">    //     &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">    // 循环搜索</span><br><span class="line">    BinarySearchTree.prototype.search = function(key)&#123;</span><br><span class="line">        let node = this.root;</span><br><span class="line">        while(node)&#123;</span><br><span class="line">            if(key &lt; node.key)&#123;</span><br><span class="line">                node = node.left;</span><br><span class="line">            &#125;else if(key &gt; node.key)&#123;</span><br><span class="line">                node = node.right;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除节点</span><br><span class="line">    BinarySearchTree.prototype.remove = function(key)&#123;</span><br><span class="line">        // 寻找要删除的节点，定义变量，保存一些信息</span><br><span class="line">        let parent = null;</span><br><span class="line">        let current = this.root;</span><br><span class="line">        let isLeftChild = true;</span><br><span class="line"></span><br><span class="line">        // 开始寻找删除的节点</span><br><span class="line">        while(current.key != key)&#123;</span><br><span class="line">            parent = current;</span><br><span class="line">            if(key &lt; current.key)&#123;</span><br><span class="line">                isLeftChild = true;</span><br><span class="line">                current = current.left;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                isLeftChild = false;</span><br><span class="line">                current = current.right;</span><br><span class="line">            &#125;</span><br><span class="line">            // 若已经找到最后的节点，依然没找到等于key的节点</span><br><span class="line">            if(current == null)   return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 找到了要删除的节点</span><br><span class="line">        // 1.是一个叶节点</span><br><span class="line">        if(current.left == null &amp;&amp; current.right == null)&#123;</span><br><span class="line">            if(isLeftChild)&#123;</span><br><span class="line">                parent.left = null;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                parent.right = null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 2.删除节点有一个子节点</span><br><span class="line">        else if(current.right == null)&#123;</span><br><span class="line">            if(current == this.root)&#123;</span><br><span class="line">                this.root = current.left;</span><br><span class="line">            &#125;else if(isLeftChild)&#123;</span><br><span class="line">                parent.left = current.left;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                parent.right = current.left;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if(current.left == null)&#123;</span><br><span class="line">            if(current == this.root)&#123;</span><br><span class="line">                this.root = current.right;</span><br><span class="line">            &#125;else if(isLeftChild)&#123;</span><br><span class="line">                parent.left = current.right;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                parent.right = current.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 3.删除的节点上有两个节点</span><br><span class="line">        else&#123;</span><br><span class="line">            // 找到后继</span><br><span class="line">            let successor = this.getSuccessor(current);</span><br><span class="line">            if(current == this.root)&#123;</span><br><span class="line">                this.root = successor;</span><br><span class="line">            &#125;else if(isLeftChild)&#123;</span><br><span class="line">                parent.left = successor;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                parent.right = successor;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 将删除节点的左子树</span><br><span class="line">            successor.left = current.left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 找后继的方法</span><br><span class="line">    BinarySearchTree.prototype.getSuccessor = function(delNode)&#123;</span><br><span class="line">        // 定义变量，保存找到的后继</span><br><span class="line">        let successor = delNode;</span><br><span class="line">        let current = delNode.right;</span><br><span class="line">        let successorParent = delNode.parent;</span><br><span class="line"></span><br><span class="line">        // 循环查找</span><br><span class="line">        while(current != null)&#123;</span><br><span class="line">            successorParent = successor;</span><br><span class="line">            successor = current;</span><br><span class="line">            current = current.left;</span><br><span class="line">        &#125;</span><br><span class="line">        // 判断寻找的后继节点是否直接就是delNode的right节点</span><br><span class="line">        if(successor != delNode.right)&#123;</span><br><span class="line">            successorParent.left = successor.right;</span><br><span class="line">            successor.right = delNode.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return successor;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let bst = new BinarySearchTree();</span><br><span class="line">bst.insert(11);</span><br><span class="line">bst.insert(7);</span><br><span class="line">bst.insert(15);</span><br><span class="line">bst.insert(42);</span><br><span class="line">bst.insert(5);</span><br><span class="line">bst.insert(8);</span><br><span class="line">let resultStr = &apos;&apos;;</span><br><span class="line">bst.preOrderTraversal(function (key) &#123;</span><br><span class="line">    resultStr += key + &apos; &apos;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(resultStr);</span><br><span class="line">bst.remove(11);</span><br><span class="line">resultStr = &apos;&apos;;</span><br><span class="line">bst.midOrderTraversal(function (key) &#123;</span><br><span class="line">    resultStr += key + &apos; &apos;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(resultStr);</span><br></pre></td></tr></table></figure>
-
-<p>我们发现删除操作很棘手。实际上，因为它复杂，所以我们尽量避免删除操作。做法是在Node类中添加一个boolean的字段，比如isDeleted。要删除一个节点时就将该字段设为true。进行其他操作时，比如find（），在查找前会先判断这个节点是不是被标记为删除。这样比较简单，不会删除原来的树结构，但在二叉树存储中仍保留着本该被删除的节点，造成了很大的空间浪费。</p>
-<p>二叉搜索树可快速找到给定关键字的数据项，并且可快速插入和删除数据项。但是当插入的数据是有序的数据时，树的深度就会变得很大，变成非平衡二叉树。</p>
-<p>非平衡树：</p>
-<ol>
-<li>比较好的二叉搜索树数据项应该是左右分布均匀的，但是插入连续数据后，分布的不均匀即为非平衡树。</li>
-<li>对于一颗平衡二叉树来说，查找和插入等操作的效率是O（logN）。</li>
-<li>非平衡二叉树相当于编写了一个链表，查找效率变成了O（N）。</li>
-</ol>
-<p><strong>AVL树</strong></p>
-<p>AVL树是最早的一种平衡树，他有办法保持树的平衡（每个节点多存储了一个额外的数据），时间复杂度为O（logN），但每次删除插入操作不及红黑树，所以整体效率不如红黑树。</p>
-<h6 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h6><p>红黑树除了满足二叉搜索树的基本规则外，还有以下特性：</p>
-<ol>
-<li>节点都是黑色或红色。</li>
-<li>根节点是黑色。</li>
-<li>每个叶子节点都是黑色的空节点（Null节点）。</li>
-<li>每个红色节点的两个子节点都是黑色。（从每个叶子到根所有路径上不能有两个连续的红色节点）。</li>
-<li>从任意节点到其每个叶子的所有路径都包含相同数目的黑色节点。</li>
-</ol>
-<p>以上约束确保了红黑树的关键特性：</p>
-<ol>
-<li>从根到叶子的最长可能路径不会超过最短可能路径的两倍长。最短者的可能路径是都是黑色节点，最长的可能路径是红色和黑色交替。</li>
-<li>红黑树基本是平衡的，虽然没有做到绝对的平衡，但是可以保证在最坏的情况下依然是高效的。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

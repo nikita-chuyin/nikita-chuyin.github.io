@@ -268,6 +268,213 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-vue中的插槽slot" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/vue中的插槽slot/" class="article-date">
+      <time datetime="2020-07-25T12:06:41.000Z" itemprop="datePublished">2020-07-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/vue中的插槽slot/">vue中的插槽slot</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vue-config-js配置文件详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/19/vue-config-js配置文件详解/" class="article-date">
+      <time datetime="2020-07-19T13:08:51.000Z" itemprop="datePublished">2020-07-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/19/vue-config-js配置文件详解/">vue.config.js配置文件详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="vue-config-js配置文件"><a href="#vue-config-js配置文件" class="headerlink" title="vue.config.js配置文件"></a>vue.config.js配置文件</h2><p><strong>完整项目实例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');</span></span><br><span class="line"><span class="keyword">const</span> TerserPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> env = process.env.NODE_ENV;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  baseUrl: <span class="string">'./'</span>,</span><br><span class="line">  outputDir: <span class="string">'user-behavior-analysis'</span>,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    open: <span class="literal">true</span>,  <span class="comment">//设置自动打开</span></span><br><span class="line">    port: <span class="number">8080</span>,  <span class="comment">//设置8080端口打开</span></span><br><span class="line">    https: <span class="literal">false</span>,</span><br><span class="line">    hotOnly: <span class="literal">true</span>,</span><br><span class="line">    disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">    open: <span class="literal">true</span>,</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      <span class="string">'user-analysis-cms/'</span>: &#123;</span><br><span class="line">        target: <span class="string">'http://test.xx-motor.com/'</span>,</span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          <span class="string">'user-analysis-cms/'</span>: <span class="string">'user-analysis-cms/'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        cookieDomainRewrite: &#123;</span><br><span class="line">          <span class="string">'localhost:8080'</span>: <span class="string">'http://test.xx-motor.com/'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;</span><br><span class="line">    before: <span class="function">(<span class="params">app</span>) =&gt;</span> &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  configureWebpack: &#123;</span><br><span class="line">    optimization: &#123;</span><br><span class="line">      minimizer: [</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  chainWebpack: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 修复HMR</span></span><br><span class="line">    config.resolve.symlinks(<span class="literal">true</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="devServer配置"><a href="#devServer配置" class="headerlink" title="devServer配置"></a>devServer配置</h4><p>这里写你调用接口的基础路径来解决跨域，如果设置了代理，那你本地开发环境的axios的baseURL要写成空字符串。</p>
+<p>只有一个接口ip端口时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">// 部署生产环境和开发环境下的URL。</span></span><br><span class="line">    <span class="comment">// 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上</span></span><br><span class="line">    <span class="comment">//例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 baseUrl 为 /my-app/。</span></span><br><span class="line">    <span class="comment">//baseUrl 从 Vue CLI 3.3 起已弃用，请使用publicPath</span></span><br><span class="line">    <span class="comment">//baseUrl: process.env.NODE_ENV === "production" ? "./" : "/",</span></span><br><span class="line">    publicPath: process.env.NODE_ENV === <span class="string">"production"</span> ? <span class="string">"./"</span> : <span class="string">"/"</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和baseUrl的生产环境路径一致）</span></span><br><span class="line">    outputDir: <span class="string">"mycli3"</span>,</span><br><span class="line">    <span class="comment">//用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）</span></span><br><span class="line">    assetsDir: <span class="string">"assets"</span>,</span><br><span class="line">    <span class="comment">//指定生成的 index.html 的输出路径 (打包之后，改变系统默认的index.html的文件名)</span></span><br><span class="line">    <span class="comment">// indexPath: "myIndex.html",</span></span><br><span class="line">    <span class="comment">//默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。你可以通过将这个选项设为 false 来关闭文件名哈希。(false的时候就是让原来的文件名不改变)</span></span><br><span class="line">    filenameHashing: <span class="literal">false</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// lintOnSave：&#123; type:Boolean default:true &#125; 问你是否使用eslint</span></span><br><span class="line">    lintOnSave: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">//如果你想要在生产构建时禁用 eslint-loader，你可以用如下配置</span></span><br><span class="line">    <span class="comment">// lintOnSave: process.env.NODE_ENV !== 'production',</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//是否使用包含运行时编译器的 Vue 构建版本。设置为 true 后你就可以在 Vue 组件中使用 template 选项了，但是这会让你的应用额外增加 10kb 左右。(默认false)</span></span><br><span class="line">    <span class="comment">// runtimeCompiler: false,</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。</span></span><br><span class="line"><span class="comment">    * 打包之后发现map文件过大，项目文件体积很大，设置为false就可以不输出map文件</span></span><br><span class="line"><span class="comment">    * map文件的作用在于：项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错。</span></span><br><span class="line"><span class="comment">    * 有了map就可以像未加密的代码一样，准确的输出是哪一行哪一列有错。</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 它支持webPack-dev-server的所有选项</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">    host: <span class="string">"0.0.0.0"</span>,</span><br><span class="line">    port: <span class="number">8080</span>, <span class="comment">// 端口号</span></span><br><span class="line">    https: <span class="literal">false</span>, <span class="comment">// https:&#123;type:Boolean&#125;</span></span><br><span class="line">    open: <span class="literal">true</span>, <span class="comment">//配置自动启动浏览器</span></span><br><span class="line">    <span class="comment">// proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 配置多个代理</span></span><br><span class="line">    proxy: &#123;</span><br><span class="line">    <span class="string">"/api"</span>: &#123;</span><br><span class="line">    target: <span class="string">"http://192.168.x.xxx:8090"</span>, <span class="comment">// 要访问的接口域名</span></span><br><span class="line">    ws: <span class="literal">true</span>, <span class="comment">// 是否启用websockets</span></span><br><span class="line">    changeOrigin: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">    pathRewrite: &#123;</span><br><span class="line">    <span class="string">"^/api"</span>: <span class="string">""</span> <span class="comment">//这里理解成用'/api'代替target里面的地址,比如我要调用'http://40.00.100.100:3002/user/add'，直接写'/api/user/add'即可</span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决跨域原理"><a href="#解决跨域原理" class="headerlink" title="解决跨域原理"></a>解决跨域原理</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                changeOrigin: <span class="literal">true</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>changeOrigin默认为false，请求头中的host仍然是浏览器发送过来的host 。如果设置为true，请求头中的host会设置成target，且本地会虚拟一个服务器接受你的请求并代你发送该请求。</p>
+<h4 id="outputDir构建输出目录"><a href="#outputDir构建输出目录" class="headerlink" title="outputDir构建输出目录"></a>outputDir构建输出目录</h4><p>当运行vue-cli-server build时生成的生产环境构建文件的目录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	outputDir: <span class="string">'dist'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*输出到dist目录中*/</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>错误案例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	publicPath: <span class="string">'./'</span>,</span><br><span class="line">	outputDir: <span class="string">'aaa'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 这样设置后打包生成的的文件夹依然是dist*/</span></span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>vue.config.js文件必须放在与<code>package.json</code>同级。</li>
+<li>publicPath： <code>./</code>是针对hash路径的，<code>/</code>是history的。</li>
+</ol>
+<h4 id="单路径代理"><a href="#单路径代理" class="headerlink" title="单路径代理"></a>单路径代理</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: <span class="string">'http://localhost:3000'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>请求到 <code>/api/xxx</code> 现在会被代理到请求 <code>http://localhost:3000/api/xxx</code>, 例如 <code>/api/user</code> 现在会被代理到请求 <code>http://localhost:3000/api/user</code></p>
+<h4 id="多路径代理"><a href="#多路径代理" class="headerlink" title="多路径代理"></a>多路径代理</h4><p>如果你想要代码多个路径代理到同一个target下, 你可以使用由一个或多个「具有 context 属性的对象」构成的数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: [&#123;</span><br><span class="line">            context: [<span class="string">'/auth'</span>, <span class="string">'/api'</span>],</span><br><span class="line">            target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="路径重写"><a href="#路径重写" class="headerlink" title="路径重写"></a>路径重写</h4><p>如果你不想始终传递 /api ，则需要重写路径：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                pathRewrite: &#123;<span class="string">'^/api'</span> : <span class="string">''</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>请求到 /api/xxx 现在会被代理到请求 <code>http://localhost:3000/xxx</code>, 例如 /api/user 现在会被代理到请求 <code>http://localhost:3000/user</code></p>
+<h4 id="使用无效证书的服务器"><a href="#使用无效证书的服务器" class="headerlink" title="使用无效证书的服务器"></a>使用无效证书的服务器</h4><p>默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器。如果你想要接受，只要设置 <code>secure: false</code> 就行。修改配置如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'https://other-server.example.com'</span>,</span><br><span class="line">                secure: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="跳过代理"><a href="#跳过代理" class="headerlink" title="跳过代理"></a>跳过代理</h4><p>有时你不想代理所有的请求。可以基于一个函数的返回值绕过代理。<br>在函数中你可以访问请求体、响应体和代理选项。必须返回 false 或路径，来跳过代理请求。</p>
+<p>例如：对于浏览器请求，你想要提供一个 HTML 页面，但是对于 API 请求则保持代理。你可以这样做：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                bypass: <span class="function"><span class="keyword">function</span>(<span class="params">req, res, proxyOptions</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (req.headers.accept.indexOf(<span class="string">'html'</span>) !== <span class="number">-1</span>) &#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'Skipping proxy for browser request.'</span>);</span><br><span class="line">                        <span class="keyword">return</span> <span class="string">'/index.html'</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-cli中proxyTable配置接口地址代理实例"><a href="#vue-cli中proxyTable配置接口地址代理实例" class="headerlink" title="vue-cli中proxyTable配置接口地址代理实例"></a>vue-cli中proxyTable配置接口地址代理实例</h2><p>修改<code>config/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    dev: &#123;</span><br><span class="line">    <span class="comment">// 静态资源文件夹</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// 发布路径</span></span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 代理配置表，在这里可以配置特定的请求代理到对应的API接口</span></span><br><span class="line">    <span class="comment">// 使用方法：https://vuejs-templates.github.io/webpack/proxy.html</span></span><br><span class="line">    proxyTable: &#123;</span><br><span class="line">        <span class="comment">// 例如将'localhost:8080/api/xxx'代理到'https://wangyaxing.cn/api/xxx'</span></span><br><span class="line">        <span class="string">'/api'</span>: &#123;</span><br><span class="line">            target: <span class="string">'https://wangyaxing.cn'</span>, <span class="comment">// 接口的域名</span></span><br><span class="line">            secure: <span class="literal">false</span>,  <span class="comment">// 如果是https接口，需要配置这个参数</span></span><br><span class="line">            changeOrigin: <span class="literal">true</span>, <span class="comment">// 如果接口跨域，需要进行这个参数配置</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 例如将'localhost:8080/img/xxx'代理到'https://cdn.wangyaxing.cn/xxx'</span></span><br><span class="line">        <span class="string">'/img'</span>: &#123;</span><br><span class="line">            target: <span class="string">'https://cdn.wangyaxing.cn'</span>, <span class="comment">// 接口的域名</span></span><br><span class="line">            secure: <span class="literal">false</span>,  <span class="comment">// 如果是https接口，需要配置这个参数</span></span><br><span class="line">            changeOrigin: <span class="literal">true</span>, <span class="comment">// 如果接口跨域，需要进行这个参数配置</span></span><br><span class="line">            pathRewrite: &#123;<span class="string">'^/img'</span>: <span class="string">''</span>&#125;  <span class="comment">// pathRewrite 来重写地址，将前缀 '/api' 转为 '/'。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// Various Dev Server settings</span></span><br><span class="line">    host: <span class="string">'localhost'</span>, <span class="comment">// can be overwritten by process.env.HOST</span></span><br><span class="line">    port: <span class="number">4200</span>, <span class="comment">// can be overwritten by process.env.PORT, if port is in use, a free one will be determined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-代理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/10/代理/" class="article-date">
+      <time datetime="2020-07-10T12:29:30.000Z" itemprop="datePublished">2020-07-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/10/代理/">代理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>proxy代理作用：扩展对象的一些功能。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-浏览器发请求的几种方式" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -297,18 +504,41 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="Ajax请求"><a href="#Ajax请求" class="headerlink" title="Ajax请求"></a>Ajax请求</h4><p>传统的请求方式，不可异步请求。</p>
+        <h2 id="Ajax请求"><a href="#Ajax请求" class="headerlink" title="Ajax请求"></a>Ajax请求</h2><p>传统的请求方式，不可异步请求。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(url);</span><br><span class="line">xhr.send();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="fetch请求"><a href="#fetch请求" class="headerlink" title="fetch请求"></a>fetch请求</h4><p>这是浏览器新增的且是浏览器内置的请求方式，默认为异步的promise请求。</p>
+<h2 id="fetch请求"><a href="#fetch请求" class="headerlink" title="fetch请求"></a>fetch请求</h2><p>这是浏览器新增的且是浏览器内置的请求方式，默认为异步的promise请求。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch([url,options]).then(res = &gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
 
-<h4 id="axios请求"><a href="#axios请求" class="headerlink" title="axios请求"></a>axios请求</h4><p>别人封装的基于promise的异步请求。</p>
+<h2 id="axios请求"><a href="#axios请求" class="headerlink" title="axios请求"></a>axios请求</h2><p>别人封装的基于promise的异步请求。</p>
 <p>一般会封装为http.js文件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http.js文件</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>; <span class="comment">//请求格式的转换第三方库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack中可配置在什么模式下对应的地址，生产模式有两种，默认为生产环境</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	根据环境变量区分接口的默认地址</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">switch</span>(process.env.NODE_ENV)&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"production"</span>:</span><br><span class="line">		axios.default.baseURL = <span class="string">"上线地址"</span>;     <span class="comment">//在路径前面统一加上该基本地址</span></span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"test"</span>:</span><br><span class="line">		axios.default.baseURL = <span class="string">"公司给的测试地址"</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	defalut:</span><br><span class="line">		axios.default.baseURL = <span class="string">"localhost:8080"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	设置超时时间和跨域是否允许携带凭证，如果不能携带，则你的登录校验走不了session，cookie路径</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.timeout = <span class="number">10000</span>;</span><br><span class="line">axios.defaults.withCredentials = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">	设置请求传递的数据格式,有后端决定，因为get请求是这种数据格式（xxx=xxx&amp;&amp;sss=sss），所以数据格式类型设置为x-www-form-urlencoded</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.headers[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded'</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	以下这种请求格式的转换一般适用于post请求</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.transformRequest = <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    qs.stringify(data);  <span class="comment">//将数据格式转为aaa=xxx的格式</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设置请求拦截器</span></span><br><span class="line"><span class="comment">	客户端发送请求-&gt;[请求拦截器]-&gt;服务器</span></span><br><span class="line"><span class="comment">	TOKEN校验【JWT】，接收服务器返回的TOKEN，存储到vuex/本地存储中，每次向服务器发起请求，我们都需要吧token带上</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="params">config</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取本地的token，有者带上本地token发给后端</span></span><br><span class="line">    <span class="keyword">let</span> token = localStorage.getItem(<span class="string">'token'</span>);</span><br><span class="line">    token &amp;&amp; (config.headers.Aythorization = token);</span><br><span class="line">    <span class="comment">//必须返回配置项，否则根本更改不了发给后端的头权限</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">&#125;,err =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	响应拦截器</span></span><br><span class="line"><span class="comment">	服务器返回信息 -&gt; 【拦截的统一处理】 -&gt; 客户端js获取到信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.validateStatus = <span class="function"><span class="params">status</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//自定义响应成功的HTTP状态码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^(2|3)\d&#123;2&#125;$/</span>.test(status);</span><br><span class="line">&#125;;</span><br><span class="line">axios.interceptors.response.use( <span class="function"><span class="params">res</span> =&gt;</span> &#123;&#125;,err ==&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>TOKEN校验【JWT】</p>
 <p>当我们第一次向服务器发起请求时，服务器会通过某种算法生成用于权限验证的TOKEN并发给客户端，随后服务器要求客户端每次向服务器发起请求时都需要将TOKEN带上，服务器收到客户端的TOKEN后，会比较是否符合之前服务器生成TOKEN时的规则，符合则将请求结果返回给客户端，不符告诉客户端这是非法访问并拒绝客户端的请求。同时TOKEN有日期限制，过期者需要重新发起请求。</p>
+<h4 id="API的分类"><a href="#API的分类" class="headerlink" title="API的分类"></a>API的分类</h4><ol>
+<li>REST API: restful<ul>
+<li>发送请求进行CRUD哪个操作由请求方式来决定。</li>
+<li>同一个请求路径可以进行多个操作。</li>
+<li>请求方式会用到GET/POST/PUT/DELETE。</li>
+</ul>
+</li>
+<li>非REST API:    restless<ul>
+<li>请求方式不决定请求的CRUD操作。</li>
+<li>一个请求路径只对应2一个操作。</li>
+<li>一般只有GET/POST请求。</li>
+</ul>
+</li>
+</ol>
+<h4 id="json-server创建接口"><a href="#json-server创建接口" class="headerlink" title="json-server创建接口"></a>json-server创建接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm i -g json-server</span><br></pre></td></tr></table></figure>
+
+<p>在根目录下创建<code>db.json</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"posts"</span>: [</span><br><span class="line">      &#123; <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"title"</span>: <span class="string">"json-server"</span>, <span class="string">"author"</span>: <span class="string">"typicode"</span> &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"comments"</span>: [</span><br><span class="line">      &#123; <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"body"</span>: <span class="string">"some comment"</span>, <span class="string">"postId"</span>: <span class="number">1</span> &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"profile"</span>: &#123; <span class="string">"name"</span>: <span class="string">"typicode"</span> &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>json-server --watch db.json</code>即可启动并更改时自动刷新。</p>
+<p>封装axios函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"testGet()"</span>&gt;</span>get请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;button onclick="testPost()"&gt;post请求&lt;/button&gt;</span></span><br><span class="line"><span class="comment">    &lt;button onclick="testPut()"&gt;put请求&lt;/button&gt;</span></span><br><span class="line"><span class="comment">    &lt;button onclick="testDelete()"&gt;delete请求&lt;/button&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">testGet</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line">            axios(&#123;</span><br><span class="line"><span class="javascript">                url: <span class="string">'http://localhost:3000/posts'</span>,</span></span><br><span class="line"><span class="javascript">                method: <span class="string">'POST'</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    <span class="string">"title"</span>: <span class="string">"json-server----"</span>,</span></span><br><span class="line"><span class="javascript">                    <span class="string">"author"</span>: <span class="string">"typicode----"</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).then(</span><br><span class="line">                response =&gt; &#123;</span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(response);</span></span><br><span class="line">                &#125;,</span><br><span class="line">                error =&gt; &#123;</span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(error.message);</span></span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">axios</span>(<span class="params">&#123;</span></span></span></span><br><span class="line">            url,</span><br><span class="line"><span class="javascript">            method=<span class="string">"GET"</span>,</span></span><br><span class="line">            params=&#123;&#125;,</span><br><span class="line">            data=&#123;&#125;</span><br><span class="line">        &#125;)&#123;</span><br><span class="line"><span class="javascript">            <span class="comment">// 返回一个promise对象</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">//处理query参数（拼接到url） id=1&amp;xxx=abc</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> queryString = <span class="string">''</span>;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">Object</span>.keys(params).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    queryString += <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;params[key]&#125;</span>&amp;`</span>;</span></span><br><span class="line">                &#125;)</span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(queryString)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 如果queryString有值，去除最后的&amp;</span></span></span><br><span class="line">                    queryString = queryString.substring(0,queryString.length);</span><br><span class="line"><span class="javascript">                    <span class="comment">// 拼接到url</span></span></span><br><span class="line"><span class="javascript">                    url += <span class="string">'?'</span> + queryString;</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">// 绑定状态改变的监听，放在请求send前面比较容易理解，放在后面也可以，因为请求是异步请求的，send之后立即执行onreadystatechange同步函数</span></span></span><br><span class="line"><span class="javascript">                request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">//如果请求没有完成，直接结束</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(request.readyState != <span class="number">4</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">return</span></span></span><br><span class="line">                    &#125;</span><br><span class="line"><span class="javascript">                    <span class="comment">//如果响应状态码在[200,299]之间代表成功,否则失败</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">const</span> &#123;status,statusText&#125; = request</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 如果请求成功了调用resolve()</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(status &gt;= <span class="number">200</span> &amp;&amp; status &lt;= <span class="number">299</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">const</span> response = &#123;</span></span><br><span class="line"><span class="javascript">                            data: <span class="built_in">JSON</span>.parse(request.response),</span></span><br><span class="line">                            status,</span><br><span class="line">                            statusText</span><br><span class="line">                        &#125;</span><br><span class="line">                        resolve(response)</span><br><span class="line"><span class="javascript">                    &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'request error status is'</span> + status));</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">// 异步执行ajax请求</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">const</span> request = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">                request.open(method,url,<span class="literal">true</span>);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(method == <span class="string">"GET"</span>)&#123;</span></span><br><span class="line">                    request.send();</span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(method == <span class="string">"POST"</span>)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 设置请求头</span></span></span><br><span class="line"><span class="javascript">                    request.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/json;charset=utf-8'</span>)</span></span><br><span class="line"><span class="javascript">                    request.send(<span class="built_in">JSON</span>.stringify(data));   <span class="comment">//发送json格式请求参数</span></span></span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1320,390 +1550,9 @@ i 从头开始遍历原字符串
 
 
   
-    <article id="post-vue的面试" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/06/20/vue的面试/" class="article-date">
-      <time datetime="2020-06-20T13:32:45.000Z" itemprop="datePublished">2020-06-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/20/vue的面试/">vue的面试</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-学习vuex" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/06/18/学习vuex/" class="article-date">
-      <time datetime="2020-06-18T07:05:19.000Z" itemprop="datePublished">2020-06-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/18/学习vuex/">学习vuex</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="Vuex概述"><a href="#Vuex概述" class="headerlink" title="Vuex概述"></a>Vuex概述</h4><p>Vuex实现组件全局状态（数据）管理的一种机制，可以方便的实现组件间的数据共享。</p>
-<h6 id="组件间共享数据的方式"><a href="#组件间共享数据的方式" class="headerlink" title="组件间共享数据的方式"></a>组件间共享数据的方式</h6><p>父向子传值：v-bind属性绑定</p>
-<p>子向父传值：v-on事件绑定</p>
-<p>兄弟组件间共享数据：EventBus</p>
-<ul>
-<li>$on   接受数据的那个组件</li>
-<li>$emit       发送数据的那个组件</li>
-</ul>
-<h6 id="vuex的优点"><a href="#vuex的优点" class="headerlink" title="vuex的优点"></a>vuex的优点</h6><ol>
-<li>能够在vuex中集中管理共享的数据，易于开发和后期维护。</li>
-<li>能够高效的实现组件间的数据共享，提高开发效率。</li>
-<li>存储在vuex中的数据都是响应式的，能够实时保持数据与页面的同步。</li>
-</ol>
-<h6 id="vuex的使用"><a href="#vuex的使用" class="headerlink" title="vuex的使用"></a>vuex的使用</h6><ol>
-<li><p>安装</p>
-<p><code>cnpm i vuex --save</code></p>
-</li>
-<li><p>导入vuex包</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建store对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  <span class="comment">// state 中存放的就是全局共享的数据</span></span><br><span class="line">  state: &#123; <span class="attr">count</span>: <span class="number">0</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将store对象挂载到vue实例中。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(app),</span><br><span class="line">  router,</span><br><span class="line">  <span class="comment">// 所有组件都可以从store中获取全局的数据了</span></span><br><span class="line">  store</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>另一种方式</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store.js文件</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js文件</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在组件中通过<code>this.$store.state</code>操作数据。</p>
-<h6 id="State"><a href="#State" class="headerlink" title="State"></a>State</h6><p>State提供唯一的公共资源，所有共享的数据都要统一放到Store的State中进行存储。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建store数据源，提供唯一的公共数据</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	state: &#123; <span class="attr">count</span>: <span class="number">0</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>组件访问State中数据的第一种方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$store.state.全局数据名称</span><br></pre></td></tr></table></figure>
-
-<p>组建访问State中的数据的第二种方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从vuex中按需导入mapState函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br></pre></td></tr></table></figure>
-
-<p>通过刚才导入的mapState函数，将当前组件需要的全局数据，映射为当前组件的computed计算属性：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.将全局数据映射为当前组件的计算属性</span></span><br><span class="line">computed: &#123;</span><br><span class="line">	...mapState([<span class="string">'count'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="Mutation"><a href="#Mutation" class="headerlink" title="Mutation"></a>Mutation</h6><p>vuex不推荐直接在组件中通过$store修改state里面的值，推荐使用mutation变更Store中的数据。</p>
-<p>通过这种方式虽然操作起来繁琐一些，但是可以集中监控所有数据的变化。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义Mutation</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	state: &#123;</span><br><span class="line">		count: <span class="number">0</span></span><br><span class="line">	&#125;,</span><br><span class="line">	mutations: &#123;</span><br><span class="line">		add(state,step)&#123;</span><br><span class="line">			<span class="comment">//变更状态</span></span><br><span class="line">			state.count += step;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触发mutation</span></span><br><span class="line">methods: &#123;</span><br><span class="line">	handle()&#123;</span><br><span class="line">        <span class="comment">// commit的作用是触发mutation中的函数</span></span><br><span class="line">		<span class="comment">//触发mutation的第一种方式,携带数值3的参数</span></span><br><span class="line">		<span class="keyword">this</span>.$store.commit(<span class="string">'add'</span>,<span class="number">3</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>触发mutations的第二种方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从vuex中按需导入mapMutations函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; mapMutations &#125; <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br></pre></td></tr></table></figure>
-
-<p>通过刚才导入的mapMutations函数，将需要的mutations函数映射为当前组件的methods方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.将指定的mutations函数映射为当前组件的methods函数</span></span><br><span class="line">methods: &#123;</span><br><span class="line">	...mapMutations([<span class="string">'add'</span>,<span class="string">'addN'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：<strong>在mutations中不能使用异步函数，否则页面的数据变化了，vuex中的调试器中的数据没变。</strong></p>
-<h6 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h6><p>Action用于处理异步任务。</p>
-<p>如果通过异步操作变更数据必须通过Action，而不能使用Mutation，但是在Action中还是需要通过触发Mutation的方式间接变更数据。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义Action</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	mutations: &#123;</span><br><span class="line">		add(state)&#123;</span><br><span class="line">			state.count++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	actions: &#123;</span><br><span class="line">		addAsync(context)&#123;</span><br><span class="line">			setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">				context.commit(<span class="string">'add'</span>)</span><br><span class="line">			&#125;,<span class="number">10000</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过dispatch触发actions的函数</span></span><br><span class="line">methods: &#123;</span><br><span class="line">	handler()&#123;</span><br><span class="line">		<span class="keyword">this</span>.$store.dispatch(<span class="string">'addAsync'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="Getter"><a href="#Getter" class="headerlink" title="Getter"></a>Getter</h6><p>Getter用于对Store中的数据进行加工处理形成新的数据。</p>
-<ol>
-<li>Getter可以对Store中已有的数据加工处理之后处理之后形成新的数据，类似Vue的计算属性。</li>
-<li>Store中数据发生变化，Getter的数据也会跟着变化。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 定义Getter</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state: &#123;</span><br><span class="line">		count: 0</span><br><span class="line">	&#125;,</span><br><span class="line">	getters: &#123;</span><br><span class="line">		showNum: state =&gt; &#123;</span><br><span class="line">			return &apos;当前最新的数量是【&apos;  + state.count +&apos;】&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>使用getters的第一种方式：</p>
-<p><code>this.$store.getters.名称</code></p>
-<p>使用getters的第二种方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">computed: &#123;</span><br><span class="line">	...mapGetters([<span class="string">'showNum'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>getter不会修改state中的数据，只进行包装作用。</strong></p>
-<h4 id="vuex小项目"><a href="#vuex小项目" class="headerlink" title="vuex小项目"></a>vuex小项目</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vue create vuex-todo</span><br><span class="line">cnpm i vuex axios ant-design-vue -S</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-同源策略" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/06/17/同源策略/" class="article-date">
-      <time datetime="2020-06-17T07:41:35.000Z" itemprop="datePublished">2020-06-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/同源策略/">同源策略</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="跨域方式实现原理"><a href="#跨域方式实现原理" class="headerlink" title="跨域方式实现原理"></a>跨域方式实现原理</h2><p>前后端请求经常需要跨域，拿什么是跨域，什么是同域？</p>
-<h4 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h4><p>同源策略是跨越问题的源头，在客户端编程语言中，如javascript和ActionScript，同源策略是一个很重要的安全理念，他的目的是为了保证用户信息的安全，防止恶意的网站窃取数据。如：A网站是一家银行，用户登录后又去浏览其他网站，若其他网站可读取A网站的Cookie，信息可能会泄露。若Cookie包含隐私（比如存款总额），这些可能会泄露。更可怕的是，Cookie往往用来保存用户的登录状态，如果用户没有退出登录，其他网站就可以冒充用户，为所欲为。因为浏览器同时还规定，提交表单不受同源策略的限制。由此可见，“同源策略”是必须的，否则Cookie可以共享，互联网就毫无安全可言。</p>
-<p>同源策略是一种约定，他是浏览器最核心也是最基本的安全功能，如果缺少同源策略，则浏览器的正常功能可能都会受到影响。可以说web是创建在同源策略基础上的。浏览器只是针对同源策略的一种实现。</p>
-<p>所谓同源是指，域名，协议，端口号都相同。</p>
-<p>当一个浏览器的两个tab页中分别打开百度和谷歌的页面，若浏览器的百度tab执行一个脚本时检查出这个脚本是同源时才会被执行。若非同源，那么在请求数据时，浏览器会在控制台中报一个异常，提示拒绝访问。</p>
-<p>同源策略是浏览器的行为，是为了保护本地数据不被JavaScript代码获取回来的数据污染，因此拦截的是客户端发出的请求回来的数据接收，即请求发送了，服务器响应了，但是无法被浏览器接收。</p>
-<h4 id="非同源"><a href="#非同源" class="headerlink" title="非同源"></a>非同源</h4><p><img src="https://user-gold-cdn.xitu.io/2018/5/23/1638b3579d9eeb32?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="url的组成"></p>
-<p><img src="https://segmentfault.com/img/bVEa3w?w=731&h=421" alt="图片描述"></p>
-<p><strong>同源策略限制内容有：</strong></p>
-<ul>
-<li>Cookie、LocalStorage、IndexedDB 等存储性内容</li>
-<li>DOM 节点</li>
-<li>AJAX 请求发送后，结果被浏览器拦截了</li>
-</ul>
-<p>补充：同源策略还应该对一些特殊情况做处理，比如限制file协议下脚本的访问权限。本地的HTML文件在浏览器中是通过file协议打开的，如果脚本能通过file协议访问到硬盘上其它任意文件，就会出现安全隐患，目前IE8还有这样的隐患。</p>
-<p>但是有三个标签是允许跨域加载资源：</p>
-<ul>
-<li><code>&lt;img src=XXX&gt;</code></li>
-<li><code>&lt;link href=XXX&gt;</code></li>
-<li><code>&lt;script src=XXX&gt;</code></li>
-</ul>
-<p>特别说明两点：</p>
-<p>第一：如果是协议和端口造成的跨域问题“前台”是无能为力的。</p>
-<p>第二：在跨域问题上，仅仅是通过“URL的首部”来识别而不会根据域名对应的IP地址是否相同来判断。“URL的首部”可以理解为“协议, 域名和端口必须匹配”。</p>
-<p><strong>跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览器拦截了</strong>。<strong>你可能会疑问明明通过表单的方式可以发起跨域请求，为什么 Ajax 就不会?因为归根结底，跨域是为了阻止用户读取到另一个域名下的内容，Ajax 可以获取响应，浏览器认为这不安全，所以拦截了响应。但是表单并不会获取新的内容，所以可以发起跨域请求。同时也说明了跨域并不能完全阻止 CSRF，因为请求毕竟是发出去了。</strong></p>
-<p>作者：浪里行舟<br>链接：<a href="https://juejin.im/post/5c23993de51d457b8c1f4ee1" target="_blank" rel="noopener">https://juejin.im/post/5c23993de51d457b8c1f4ee1</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h2 id="跨域方式"><a href="#跨域方式" class="headerlink" title="跨域方式"></a>跨域方式</h2><h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p>JSONP是JSON  with Padding的简写，是应用JSON实现服务器与客户端跨域通信常用的方法，最大特点是简单实用，老式浏览器全部支持，服务器改造非常小。但是只支持get方法，且易遭受XSS攻击。</p>
-<p>它的基本思想是，网页通过添加一个<script>元素，向服务器请求JSON数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。<br>JSOP包含两部分：回调函数和数据，回调函数是在响应到来时应该调用的函数，一般通过查询字符串添加；数据就是传入回调函数中的JSON数据，确切的说，是一个JSON对象，可以直接访问。所以JSONP请求一定要对方的服务器支持才行。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.html</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">&#123; url, params, callback &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line">    <span class="built_in">window</span>[callback] = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">      resolve(data)</span><br><span class="line">      <span class="built_in">document</span>.body.removeChild(script)</span><br><span class="line">    &#125;</span><br><span class="line">    params = &#123; ...params, callback &#125; <span class="comment">// wd=b&amp;callback=show</span></span><br><span class="line">    <span class="keyword">let</span> arrs = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> params) &#123;</span><br><span class="line">      arrs.push(<span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;params[key]&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    script.src = <span class="string">`<span class="subst">$&#123;url&#125;</span>?<span class="subst">$&#123;arrs.join(<span class="string">'&amp;'</span>)&#125;</span>`</span></span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">jsonp(&#123;</span><br><span class="line">  url: <span class="string">'http://localhost:3000/say'</span>,</span><br><span class="line">  params: &#123; <span class="attr">wd</span>: <span class="string">'Iloveyou'</span> &#125;,</span><br><span class="line">  callback: <span class="string">'show'</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>上面这段代码相当于向<code>http://localhost:3000/say?wd=Iloveyou&amp;callback=show</code>这个地址请求数据，然后后台返回<code>show(&#39;我不爱你&#39;)</code>，最后会运行show()这个函数，打印出'我不爱你'</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server.js</span></span><br><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">let</span> app = express()</span><br><span class="line">app.get(<span class="string">'/say'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; wd, callback &#125; = req.query</span><br><span class="line">  <span class="built_in">console</span>.log(wd) <span class="comment">// Iloveyou</span></span><br><span class="line">  <span class="built_in">console</span>.log(callback) <span class="comment">// show</span></span><br><span class="line">  res.end(<span class="string">`<span class="subst">$&#123;callback&#125;</span>('我不爱你')`</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<h6 id="jQuery的jsonp形式"><a href="#jQuery的jsonp形式" class="headerlink" title="jQuery的jsonp形式"></a>jQuery的jsonp形式</h6><p><strong>JSONP都是GET和异步请求的，不存在其他的请求方式和同步请求，且jQuery默认就会给JSONP的请求清除缓存。</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">url:<span class="string">"http://crossdomain.com/jsonServerResponse"</span>,</span><br><span class="line">dataType:<span class="string">"jsonp"</span>,</span><br><span class="line">type:<span class="string">"get"</span>,<span class="comment">//可以省略</span></span><br><span class="line">jsonpCallback:<span class="string">"show"</span>,<span class="comment">//-&gt;自定义传递给服务器的函数名，而不是使用jQuery自动生成的，可省略</span></span><br><span class="line">jsonp:<span class="string">"callback"</span>,<span class="comment">//-&gt;把传递函数名的那个形参callback，可省略</span></span><br><span class="line">success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(data);&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p><strong>CORS，即Cross-Origin Resource Sharing</strong>，跨域资源共享，定义了在必须跨域访问资源时，浏览器怎样和服务器交互。基本思想就是使用自定义的HTTP头部让浏览器和服务器进行沟通，从而决定响应的成功与失败。他需要浏览器和后端同时支持，IE8和9需要通过XDomainRequest来实现。</p>
-<p>浏览器会自动进行 CORS 通信，实现 CORS 通信的关键是后端。只要后端实现了 CORS，就实现了跨域。</p>
-<p>服务端设置 Access-Control-Allow-Origin 就可以开启 CORS。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。</p>
-<p>虽然设置 CORS 和前端没什么关系，但是通过这种方式解决跨域问题的话，会在发送请求时出现两种情况，分别为<strong>简单请求</strong>和<strong>复杂请求</strong>。</p>
-<h6 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h6><p>只要同时满足以下两大条件，就属于简单请求</p>
-<p>条件1：使用下列方法之一：</p>
-<ul>
-<li>GET</li>
-<li>HEAD</li>
-<li>POST</li>
-</ul>
-<p>条件2：Content-Type 的值仅限于下列三者之一：</p>
-<ul>
-<li>text/plain</li>
-<li>multipart/form-data</li>
-<li>application/x-www-form-urlencoded</li>
-</ul>
-<p>请求中的任意 XMLHttpRequestUpload 对象均没有注册任何事件监听器； XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。</p>
-<h6 id="复杂请求"><a href="#复杂请求" class="headerlink" title="复杂请求"></a>复杂请求</h6><p>不符合以上条件的请求就肯定是复杂请求了。 复杂请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。</p>
-<p>我们用<code>PUT</code>向后台请求时，属于复杂请求，后台需做如下配置：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许哪个方法访问我</span></span><br><span class="line">res.setHeader(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'PUT'</span>)</span><br><span class="line"><span class="comment">// 预检的存活时间</span></span><br><span class="line">res.setHeader(<span class="string">'Access-Control-Max-Age'</span>, <span class="number">6</span>)</span><br><span class="line"><span class="comment">// OPTIONS请求不做任何处理</span></span><br><span class="line"><span class="keyword">if</span> (req.method === <span class="string">'OPTIONS'</span>) &#123;</span><br><span class="line">  res.end() </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义后台返回的内容</span></span><br><span class="line">app.put(<span class="string">'/getData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers)</span><br><span class="line">  res.end(<span class="string">'我不爱你'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>接下来我们看下一个完整复杂请求的例子，并且介绍下CORS请求相关的字段</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.html</span></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'name=xiamen'</span> <span class="comment">// cookie不能跨域</span></span><br><span class="line">xhr.withCredentials = <span class="literal">true</span> <span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">xhr.open(<span class="string">'PUT'</span>, <span class="string">'http://localhost:4000/getData'</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.setRequestHeader(<span class="string">'name'</span>, <span class="string">'xiamen'</span>)</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status === <span class="number">304</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(xhr.response)</span><br><span class="line">      <span class="comment">//得到响应头，后台需设置Access-Control-Expose-Headers</span></span><br><span class="line">      <span class="built_in">console</span>.log(xhr.getResponseHeader(<span class="string">'name'</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//server1.js</span></span><br><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line">app.use(express.static(__dirname));</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//server2.js</span></span><br><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">let</span> app = express()</span><br><span class="line"><span class="keyword">let</span> whitList = [<span class="string">'http://localhost:3000'</span>] <span class="comment">//设置白名单</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> origin = req.headers.origin</span><br><span class="line">  <span class="keyword">if</span> (whitList.includes(origin)) &#123;</span><br><span class="line">    <span class="comment">// 设置哪个源可以访问我</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, origin)</span><br><span class="line">    <span class="comment">// 允许携带哪个头访问我</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Headers'</span>, <span class="string">'name'</span>)</span><br><span class="line">    <span class="comment">// 允许哪个方法访问我</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'PUT'</span>)</span><br><span class="line">    <span class="comment">// 允许携带cookie</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Credentials'</span>, <span class="literal">true</span>)</span><br><span class="line">    <span class="comment">// 预检的存活时间</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Max-Age'</span>, <span class="number">6</span>)</span><br><span class="line">    <span class="comment">// 允许返回的头</span></span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Expose-Headers'</span>, <span class="string">'name'</span>)</span><br><span class="line">    <span class="keyword">if</span> (req.method === <span class="string">'OPTIONS'</span>) &#123;</span><br><span class="line">      res.end() <span class="comment">// OPTIONS请求不做任何处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br><span class="line">app.put(<span class="string">'/getData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers)</span><br><span class="line">  res.setHeader(<span class="string">'name'</span>, <span class="string">'nikita'</span>) <span class="comment">//返回一个响应头，后台需设置</span></span><br><span class="line">  res.end(<span class="string">'我不爱你'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.get(<span class="string">'/getData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers)</span><br><span class="line">  res.end(<span class="string">'我不爱你'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.use(express.static(__dirname))</span><br><span class="line">app.listen(<span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码由<code>http://localhost:3000/index.html</code>向<code>http://localhost:4000/</code>跨域请求，正如我们上面所说的，后端是实现 CORS 通信的关键。</p>
-<h4 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h4><p>postMessage是HTML5 XMLHttpRequest Level 2中的API，且是为数不多可以跨域操作的window属性之一，它可用于解决以下方面的问题：</p>
-<ul>
-<li>页面和其打开的新窗口的数据传递</li>
-<li>多窗口之间消息传递</li>
-<li>页面与嵌套的iframe消息传递</li>
-<li>上面三个场景的跨域数据传递</li>
-</ul>
-<p><strong>postMessage()方法允许来自不同源的脚本采用异步方式进行有限的通信，可以实现跨文本档、多窗口、跨域消息传递</strong>。</p>
-<blockquote>
-<p>otherWindow.postMessage(message, targetOrigin, [transfer]);</p>
-</blockquote>
-<p>message: 将要发送到其他 window的数据。</p>
-<p>targetOrigin:通过窗口的origin属性来指定哪些窗口能接收到消息事件，其值可以是字符串"*"（表示无限制）或者一个URI。在发送消息的时候，如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配targetOrigin提供的值，那么消息就不会被发送；只有三者完全匹配，消息才会被发送。</p>
-<p>transfer(可选)：是一串和message 同时传递的 Transferable 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。</p>
-<h4 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h4><p>Websocket是HTML5的一个持久化的协议，它实现了浏览器与服务器的全双工通信，同时也是跨域的一种解决方案。WebSocket和HTTP都是应用层协议，都基于 TCP 协议。但是 <strong>WebSocket 是一种双向通信协议，在建立连接之后，WebSocket 的 server 与 client 都能主动向对方发送或接收数据</strong>。同时，WebSocket 在建立连接时需要借助 HTTP 协议，连接建立好了之后 client 与 server 之间的双向通信就与 HTTP 无关了。</p>
-<p>原生WebSocket API使用起来不太方便，我们使用<code>Socket.io</code>，它很好地封装了webSocket接口，提供了更简单、灵活的接口，也对不支持webSocket的浏览器提供了向下兼容。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// socket.html</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://localhost:3000'</span>);</span><br><span class="line">    socket.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      socket.send(<span class="string">'我不爱你'</span>);<span class="comment">//向服务器发送数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    socket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(e.data);<span class="comment">//接收服务器返回的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server.js</span></span><br><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"><span class="keyword">let</span> WebSocket = <span class="built_in">require</span>(<span class="string">'ws'</span>);<span class="comment">//记得安装ws</span></span><br><span class="line"><span class="keyword">let</span> wss = <span class="keyword">new</span> WebSocket.Server(&#123;<span class="attr">port</span>:<span class="number">3000</span>&#125;);</span><br><span class="line">wss.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">ws</span>) </span>&#123;</span><br><span class="line">  ws.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    ws.send(<span class="string">'我不爱你'</span>)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="Node中间件代理-两次跨域"><a href="#Node中间件代理-两次跨域" class="headerlink" title="Node中间件代理(两次跨域)"></a>Node中间件代理(两次跨域)</h4><p>实现原理：<strong>同源策略是浏览器需要遵循的标准，而如果是服务器向服务器请求就无需遵循同源策略。</strong> 代理服务器，需要做以下几个步骤：</p>
-<ul>
-<li>接受客户端请求 。</li>
-<li>将请求 转发给服务器。</li>
-<li>拿到服务器 响应 数据。</li>
-<li>将 响应 转发给客户端。</li>
-</ul>
-<p><img src="https://user-gold-cdn.xitu.io/2019/1/17/1685c5bed77e7788?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
-<p>本地文件index.html文件，通过代理服务器<code>http://localhost:3000</code>向目标服务器<code>http://localhost:4000</code>请求数据。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.html(http://127.0.0.1:5500)</span></span><br><span class="line"> &lt;script src=<span class="string">"https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">        type: <span class="string">'post'</span>,</span><br><span class="line">        data: &#123; <span class="attr">name</span>: <span class="string">'xiamen'</span>, <span class="attr">password</span>: <span class="string">'123456'</span> &#125;,</span><br><span class="line">        contentType: <span class="string">'application/json;charset=utf-8'</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(result) <span class="comment">// &#123;"title":"fontend","password":"123456"&#125;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        error: <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(msg)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">     &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server1.js 代理服务器(http://localhost:3000)</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="comment">// 第一步：接受客户端请求</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 代理服务器，直接和浏览器直接交互，需要设置CORS 的首部字段</span></span><br><span class="line">  response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Allow-Methods'</span>: <span class="string">'*'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Allow-Headers'</span>: <span class="string">'Content-Type'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 第二步：将请求转发给服务器</span></span><br><span class="line">  <span class="keyword">const</span> proxyRequest = http</span><br><span class="line">    .request(</span><br><span class="line">      &#123;</span><br><span class="line">        host: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">        port: <span class="number">4000</span>,</span><br><span class="line">        url: <span class="string">'/'</span>,</span><br><span class="line">        method: request.method,</span><br><span class="line">        headers: request.headers</span><br><span class="line">      &#125;,</span><br><span class="line">      serverResponse =&gt; &#123;</span><br><span class="line">        <span class="comment">// 第三步：收到服务器的响应</span></span><br><span class="line">        <span class="keyword">var</span> body = <span class="string">''</span></span><br><span class="line">        serverResponse.on(<span class="string">'data'</span>, chunk =&gt; &#123;</span><br><span class="line">          body += chunk</span><br><span class="line">        &#125;)</span><br><span class="line">        serverResponse.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'The data is '</span> + body)</span><br><span class="line">          <span class="comment">// 第四步：将响应结果转发给浏览器</span></span><br><span class="line">          response.end(body)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line">    .end()</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The proxyServer is running at http://localhost:3000'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server2.js(http://localhost:4000)</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">title</span>: <span class="string">'fontend'</span>, <span class="attr">password</span>: <span class="string">'123456'</span> &#125;</span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (request.url === <span class="string">'/'</span>) &#123;</span><br><span class="line">    response.end(<span class="built_in">JSON</span>.stringify(data))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">4000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The server is running at http://localhost:4000'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码经过两次跨域，值得注意的是浏览器向代理服务器发送请求，也遵循同源策略，最后在index.html文件打印出<code>{&quot;title&quot;:&quot;fontend&quot;,&quot;password&quot;:&quot;123456&quot;}</code></p>
-<h4 id="nginx反向代理"><a href="#nginx反向代理" class="headerlink" title="nginx反向代理"></a>nginx反向代理</h4><p>实现原理类似于Node中间件代理，需要你搭建一个中转nginx服务器，用于转发请求。</p>
-<p>使用nginx反向代理实现跨域，是最简单的跨域方式。只需要修改nginx的配置即可解决跨域问题，支持所有浏览器，支持session，不需要修改任何代码，并且不会影响服务器性能。</p>
-<p>实现思路：通过nginx配置一个代理服务器（域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域登录。</p>
-<p>先下载<a href="http://nginx.org/en/download.html">nginx</a>，然后将nginx目录下的nginx.conf修改如下:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// proxy服务器</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">81</span>;</span><br><span class="line">    server_name  www.domain1.com;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass   http:<span class="comment">//www.domain2.com:8080;  #反向代理</span></span><br><span class="line">        proxy_cookie_domain www.domain2.com www.domain1.com; #修改cookie里域名</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line"></span><br><span class="line">        # 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用</span><br><span class="line">        add_header Access-Control-Allow-Origin http:<span class="comment">//www.domain1.com;  #当前端只跨域不带cookie时，可为*</span></span><br><span class="line">        add_header Access-Control-Allow-Credentials <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后通过命令行<code>nginx -s reload</code>启动nginx</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.html</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">// 前端开关：浏览器是否读写cookie</span></span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 访问nginx中的代理服务器</span></span><br><span class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'http://www.domain1.com:81/?user=admin'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server.js</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"><span class="keyword">var</span> qs = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span><br><span class="line">server.on(<span class="string">'request'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> params = qs.parse(req.url.substring(<span class="number">2</span>));</span><br><span class="line">    <span class="comment">// 向前台写cookie</span></span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">        <span class="string">'Set-Cookie'</span>: <span class="string">'l=a123456;Path=/;Domain=www.domain2.com;HttpOnly'</span>   <span class="comment">// HttpOnly:脚本无法读取</span></span><br><span class="line">    &#125;);</span><br><span class="line">    res.write(<span class="built_in">JSON</span>.stringify(params));</span><br><span class="line">    res.end();</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(<span class="string">'8080'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Server is running at port 8080...'</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="window-name-iframe"><a href="#window-name-iframe" class="headerlink" title="window.name + iframe"></a>window.name + iframe</h4><p>window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）。</p>
-<p>其中a.html和b.html是同域的，都是<code>http://localhost:3000</code>;而c.html是<code>http://localhost:4000</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.html(http://localhost:3000/b.html)</span></span><br><span class="line">  &lt;iframe src=<span class="string">"http://localhost:4000/c.html"</span> frameborder=<span class="string">"0"</span> onload=<span class="string">"load()"</span> id=<span class="string">"iframe"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> first = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// onload事件会触发2次，第1次加载跨域页，并留存数据于window.name</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">load</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(first)&#123;</span><br><span class="line">      <span class="comment">// 第1次onload(跨域页)成功后，切换到同域代理页面</span></span><br><span class="line">        <span class="keyword">let</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line">        iframe.src = <span class="string">'http://localhost:3000/b.html'</span>;</span><br><span class="line">        first = <span class="literal">false</span>;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="comment">// 第2次onload(同域b.html页)成功后，读取同域window.name中数据</span></span><br><span class="line">        <span class="built_in">console</span>.log(iframe.contentWindow.name);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>b.html为中间代理页，与a.html同域，内容为空。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c.html(http://localhost:4000/c.html)</span></span><br><span class="line"> &lt;script&gt;</span><br><span class="line">   <span class="built_in">window</span>.name = <span class="string">'我不爱你'</span>  </span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>总结：通过iframe的src属性由外域转向本地域，跨域数据即由iframe的window.name从外域传递到本地域。这个就巧妙地绕过了浏览器的跨域访问限制，但同时它又是安全操作。</p>
-<h4 id="location-hash-iframe"><a href="#location-hash-iframe" class="headerlink" title="location.hash +  iframe"></a>location.hash +  iframe</h4><p>实现原理： a.html欲与c.html跨域相互通信，通过中间页b.html来实现。 三个页面，不同域之间利用iframe的location.hash传值，相同域之间直接js访问来通信。</p>
-<p>具体实现步骤：一开始a.html给c.html传一个hash值，然后c.html收到hash值后，再把hash值传递给b.html，最后b.html将结果放到a.html的hash值中。 同样的，a.html和b.html是同域的，都是<code>http://localhost:3000</code>;而c.html是`<a href="http://localhost:4000">http://localhost:4000</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.html</span></span><br><span class="line"> &lt;iframe src=<span class="string">"http://localhost:4000/c.html#iloveyou"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span><br><span class="line"> &lt;script&gt;</span><br><span class="line">   <span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">//检测hash的变化</span></span><br><span class="line">     <span class="built_in">console</span>.log(location.hash);</span><br><span class="line">   &#125;</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ b.html</span></span><br><span class="line"><span class="regexp"> &lt;script&gt;</span></span><br><span class="line"><span class="regexp">   window.parent.parent.location.hash = location.hash </span></span><br><span class="line"><span class="regexp">   /</span><span class="regexp">/b.html将结果放到a.html的hash值中，b.html可通过parent.parent访问a.html页面</span></span><br><span class="line"><span class="regexp"> &lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// c.html</span></span><br><span class="line"><span class="built_in">console</span>.log(location.hash);</span><br><span class="line"> <span class="keyword">let</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</span><br><span class="line"> iframe.src = <span class="string">'http://localhost:3000/b.html#idontloveyou'</span>;</span><br><span class="line"> <span class="built_in">document</span>.body.appendChild(iframe);</span><br></pre></td></tr></table></figure>
-
-<h4 id="document-domain-iframe"><a href="#document-domain-iframe" class="headerlink" title="document.domain + iframe"></a>document.domain + iframe</h4><p><strong>该方式只能用于二级域名相同的情况下，比如 <code>a.test.com</code> 和 <code>b.test.com</code> 适用于该方式</strong>。 只需要给页面添加 <code>document.domain =&#39;test.com&#39;</code> 表示二级域名都相同就可以实现跨域。</p>
-<p>实现原理：两个页面都通过js强制设置document.domain为基础主域，就实现了同域。</p>
-<p>我们看个例子：页面<code>a.zf1.cn:3000/a.html</code>获取页面<code>b.zf1.cn:3000/b.html</code>中a的值</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// a.html</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> helloa</span><br><span class="line">  <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"http://b.zf1.cn:3000/b.html"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">onload</span>=<span class="string">"load()"</span> <span class="attr">id</span>=<span class="string">"frame"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.domain = <span class="string">'zf1.cn'</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">load</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(frame.contentWindow.a);</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// b.html</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">   hellob</span><br><span class="line">   <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">     <span class="built_in">document</span>.domain = <span class="string">'zf1.cn'</span></span></span><br><span class="line"><span class="javascript">     <span class="keyword">var</span> a = <span class="number">100</span>;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>CORS支持所有类型的HTTP请求，是跨域HTTP请求的根本解决方案</li>
-<li>JSONP只支持GET请求，JSONP的优势在于支持老式浏览器，以及可以向不支持CORS的网站请求数据。</li>
-<li>不管是Node中间件代理还是nginx反向代理，主要是通过同源策略对服务器不加限制。</li>
-<li>日常工作中，用得比较多的跨域方案是cors和nginx反向代理</li>
-</ul>
-</script></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
