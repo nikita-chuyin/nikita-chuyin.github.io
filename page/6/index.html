@@ -268,6 +268,178 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-js中callee和caller" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/10/js中callee和caller/" class="article-date">
+      <time datetime="2020-03-10T01:47:31.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/10/js中callee和caller/">js中callee和caller</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h6 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h6><ol>
+<li><p>函数fun的caller返回调用fun的函数对象，即fun的执行环境，如果fun的执行环境为window则返回null；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">	console.log(argument.callee.caller);</span><br><span class="line">	//argument.callee.caller必须写在fun中，</span><br><span class="line">	//因为argument，caller只在执行时才有效。</span><br><span class="line">&#125;</span><br><span class="line">fun(); </span><br><span class="line">//结果为null</span><br><span class="line"></span><br><span class="line">function a()&#123;</span><br><span class="line">    fun();</span><br><span class="line">    function fun()&#123;</span><br><span class="line">        console.log(fun.caller)//这里必须写在fun里面，因为caller只有函数执行过程中才有效</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+
+<p>结果为: a函数<br><img src="https://img-blog.csdn.net/20160918153045501" alt="这里写图片描述"></p>
+<h6 id="js中callee关键字的作用"><a href="#js中callee关键字的作用" class="headerlink" title="js中callee关键字的作用"></a>js中callee关键字的作用</h6><ol>
+<li><p>callee关键字的定义：在函数内部使用，代表当前函数的引用（名字）。</p>
+</li>
+<li><p>作用：降低代码的耦合度。</p>
+</li>
+<li><p>耦合度的定义：一处代码的修改会导致其他代码也要发生改变(耦合度高)在项目里边要开发低耦合度的代码(一处代码修改尽量少地引起其他代码的变化)。</p>
+</li>
+<li><p>语法结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;arguments.callee();&#125;</span><br><span class="line">f1();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function jiecheng(n)&#123;</span><br><span class="line">            if(n==1)&#123;</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">            //return n * jiecheng(n-1);</span><br><span class="line">            //callee可以保证外部名称的变化，不会引起内部代码的修改，代码耦合度降低</span><br><span class="line">            return n * arguments.callee(n-1);</span><br><span class="line">        &#125;</span><br><span class="line">        //要把jiecheng名称换成其他的名字进行使用</span><br><span class="line"></span><br><span class="line">        var jc = jiecheng; //对象赋值，其为引用传递</span><br><span class="line"></span><br><span class="line">        jiecheng = null;  //销毁jiecheng函数对象，后期不使用了</span><br><span class="line">        console.log(jc(4)); //输出24</span><br><span class="line">        var jd = jc;</span><br><span class="line">        jc = null;</span><br><span class="line">        console.log(jd(6)); //输出720</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>callee返回正在执行的函数本身的引用。callee是arguments的一个属性，这个属性是一个指针，指向这个拥有arguments对象的函数，（arguments是调用函数，那么这个callee就是调用函数的啦）</p>
+<h6 id="完整项目实例："><a href="#完整项目实例：" class="headerlink" title="完整项目实例："></a>完整项目实例：</h6><p><a href="https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/" target="_blank" rel="noopener">https://nikita-chuyin.github.io/2020/03/09/canvas%E7%BB%98%E5%88%B6%E7%A2%B0%E6%92%9E%E7%90%83%E5%8A%A8%E7%94%BB/</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-行内元素存在间距问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/10/行内元素存在间距问题/" class="article-date">
+      <time datetime="2020-03-10T01:42:10.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/10/行内元素存在间距问题/">行内元素存在间距问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="行内元素之间存在间距的问题"><a href="#行内元素之间存在间距的问题" class="headerlink" title="行内元素之间存在间距的问题"></a>行内元素之间存在间距的问题</h4><h6 id="行内元素不换行"><a href="#行内元素不换行" class="headerlink" title="行内元素不换行"></a>行内元素不换行</h6><p>刚在做项目的时候，发现发现，display:inline-block；的元素（即行内元素）之间存在一些间距。我查看之后发现没有margin,padding这种东西。即使我使用通配符也不能消除内外边距，究其原因是行内元素的回车换行符引起的。看看以下实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input /&gt;</span><br><span class="line">&lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;input type=&quot;text&quot;&gt;&lt;input type=&quot;submit&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C932$0W~%5B9J$8B%KDTI%7D%5BY%60K.png" alt="img"></p>
+<p>可以看出相邻行内元素间当换行写时有间隔，不换行写时没有间隔。元素间留白间距出现的原因就是标签段之间的空格，因此，去掉HTML中的空格，自然间距就木有了。</p>
+<p>故解决方法之一是行内元素在编辑器中不换行。但考虑到代码可读性，显然连成一行的写法是不可取的。</p>
+<h6 id="使用margin负值"><a href="#使用margin负值" class="headerlink" title="使用margin负值"></a>使用margin负值</h6><p>我们还可以使用margin负值，但是margin负值的大小与上下文的字体和文字大小相关。</p>
+<p>例如，对于12像素大小的上下文，Arial字体的<code>margin</code>负值为<code>-3</code>像素，Tahoma和Verdana就是<code>-4</code>像素，而Geneva为<code>-6</code>像素。</p>
+<p>由于外部环境的不确定性，以及最后一个元素多出的父margin值等问题，这个方法不适合大规模使用。</p>
+<h6 id="不写闭合标签"><a href="#不写闭合标签" class="headerlink" title="不写闭合标签"></a>不写闭合标签</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;space&quot;&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;惆怅&lt;/a&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;淡定&lt;/a&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;热血&lt;/a&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;div class=&quot;space&quot;&gt;</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;惆怅</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;淡定</span><br><span class="line">       &lt;a href=&quot;##&quot;&gt;热血&lt;/a&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   /*为了兼容IE6/IE7的浏览器，最后一个列表的标签的结束（闭合）标签不能丢。*/</span><br></pre></td></tr></table></figure>
+
+<p><img src="file:///C:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTencent%5CUsers%5C3511564414%5CQQ%5CWinTemp%5CRichOle%5C9%5D$V0J_KVL$_FSTPS38OGT9.png" alt="img"></p>
+<h6 id="设置font-size为0；"><a href="#设置font-size为0；" class="headerlink" title="设置font-size为0；"></a>设置font-size为0；</h6><p>添加样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    font-size: 0;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法，基本上可以解决大部分浏览器下inline-block元素之间的间距(IE7等浏览器有时候会有1像素的间距)。但是随之而来的问题就是这个盒子里不能有文字了，其子元素可以设置字体需多嵌套一层。</p>
+<h6 id="使用letter-spacing"><a href="#使用letter-spacing" class="headerlink" title="使用letter-spacing"></a>使用letter-spacing</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    letter-spacing: -5px;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    letter-spacing: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该方法可以搞定基本上所有浏览器。</p>
+<h6 id="使用word-spacing"><a href="#使用word-spacing" class="headerlink" title="使用word-spacing"></a>使用word-spacing</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.space &#123;</span><br><span class="line">    word-spacing: -5px;</span><br><span class="line">&#125;</span><br><span class="line">.space a &#123;</span><br><span class="line">    word-spacing: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个是字符间距(<code>letter-spacing</code>)一个是单词间距(<code>word-spacing</code>)，大同小异。</p>
+<h6 id="使用浮动"><a href="#使用浮动" class="headerlink" title="使用浮动"></a>使用浮动</h6><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>行内元素之间存在间距的问题解决方法：</p>
+<ol>
+<li>行内元素不换行，但这样页面不够美观。</li>
+<li>使用margin负值，这个得结合字体大小调整，不是特别建议使用。</li>
+<li>不写闭合标签。</li>
+<li>使用font-size:0px;这样也可以使间距消失，但是随之而来的问题就是这个盒子里不能有文字了，其子元素可以设置字体需多嵌套一层。</li>
+<li>使用letter-spacing或word-spaing。</li>
+<li>最后一个flot，flot:left。不建议使用，使用时注意清除浮动。</li>
+</ol>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><p>最近还在用canvas绘图，想要实现设置画布宽高为屏幕宽高，但是页面出现了滚动条，而这也是行内元素的杰作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> var w = window.innerWidth,</span><br><span class="line">     h = window.innerHeight;</span><br><span class="line">var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">   canvas.width = w;</span><br><span class="line">   canvas.height = h;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<p>既然是行内元素引起的，那我就将元素设置为块级元素。同时去除默认边距。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">          margin: 0;</span><br><span class="line">          padding: 0;</span><br><span class="line">      &#125;</span><br><span class="line">      #canvas&#123;</span><br><span class="line">          background-color: red;</span><br><span class="line">          display: block;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-canvas绘制碰撞球动画" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1540,235 +1712,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// new一个Boolean对象</span><br><span class="line">var newBool = new Boolean(true);</span><br><span class="line">// valueOf()返回的是true，两者的值相等</span><br><span class="line">console.log(newBool.valueOf() == newBool);   // true</span><br><span class="line">// 但是不全等，两者类型不相等，前者是boolean类型，后者是object类型</span><br><span class="line">console.log(newBool.valueOf() === newBool);   // false</span><br></pre></td></tr></table></figure>
 
 <h6 id="Object-seal-prop"><a href="#Object-seal-prop" class="headerlink" title="Object.seal(prop)"></a>Object.seal(prop)</h6><p><code>**Object.seal()**</code>方法封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要可写就可以改变。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-qq小程序天坑之旅" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/11/15/qq小程序天坑之旅/" class="article-date">
-      <time datetime="2019-11-15T13:18:47.000Z" itemprop="datePublished">2019-11-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/15/qq小程序天坑之旅/">qq小程序天坑之旅</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="qq小程序"><a href="#qq小程序" class="headerlink" title="qq小程序"></a>qq小程序</h4><h6 id="吐槽qq小程序开发者工具"><a href="#吐槽qq小程序开发者工具" class="headerlink" title="吐槽qq小程序开发者工具"></a>吐槽qq小程序开发者工具</h6><ul>
-<li>不能通过uni-app打开。</li>
-<li>项目文件间互相引用问题颇多。</li>
-<li>开发工具容易崩溃。</li>
-<li>文档不够详尽。</li>
-</ul>
-<h6 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h6><ul>
-<li>在组件qss中不应使用id，属性，标签选择器，最好用类选择器。</li>
-<li>qml文件标签名只能是小写字母，中划线，下划线的组合，所以自定义组件的标签名也只能包含这些字符。</li>
-<li>自定义组件也是可以引用自定义组件，引用方法类似于页面引用自定义组件的方式<code>usingComponent</code>字段</li>
-<li>自定义组件和页面所在项根目录名不能以qq-为前缀，否则会报错。</li>
-<li>是否在页面文件中使用 <code>usingComponents</code> 会使得页面的 <code>this</code> 对象的原型稍有差异，包括：<ul>
-<li>使用 <code>usingComponents</code> 页面的原型与不使用时不一致，即 <code>Object.getPrototypeOf(this)</code> 结果不同。</li>
-<li>使用 <code>usingComponents</code> 时会多一些方法，如 <code>selectComponent</code> 。</li>
-<li>出于性能考虑，使用 <code>usingComponents</code> 时， <code>setData</code> 内容不会被直接深复制，即 <code>this.setData({ field: obj })</code> 后 <code>this.data.field === obj</code>。（深复制会在这个值被组件间传递时发生。）</li>
-</ul>
-</li>
-<li><strong><em>直接修改this.data而不调用this.setData是无法改变页面的状态的，还会造成数据不一致</em></strong></li>
-<li>不要将data里的任何一项的value设为undefined，否则这一项将不被设置并可能会存在一些潜在问题。</li>
-<li><strong>navigateTo，redirectTo</strong>只能打开非tabBar页面，<strong>switchtab</strong>只能打开tabBar的页面。<strong>reLaunch</strong>可打开任意页面。调用页面路由带的参数可以在目标页面的onLoad中获取。</li>
-<li>通过全局函数getApp（）可以获取全局的应用实例，如果需要全局的数据可以在App（）中获取。</li>
-<li>require只支持相对路径，不支持绝对路径。</li>
-<li>约定以on开头的API用来监听某个时间是否发生，当事件触发时会调用这个回调函数并将相关数据以参数的形式传入。</li>
-<li>除继承样式外，app.qss中的样式，组将所在页面的样式对自定义组件无效。组件可以指定他所在节点的默认样式，使用:host选择器。</li>
-</ul>
-<h6 id="使用自定义组件"><a href="#使用自定义组件" class="headerlink" title="使用自定义组件"></a>使用自定义组件</h6><ol>
-<li>在自定义组件中的json文件定义<code>{&quot;component&quot;:true}</code></li>
-<li>在自定义组件中的qml编写组件模板（同index.qml写的相同），qss中加样式。（在组件qss中不应使用id，属性，标签选择器，最好用类选择器）</li>
-<li>在自定义组件的 <code>js</code> 文件中，需要使用 <code>Component()</code> 来注册组件，并提供组件的属性定义、内部数据和自定义方法。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  properties: &#123;</span><br><span class="line">    // 这里定义了innerText属性，属性值可以在组件使用时指定</span><br><span class="line">    innerText: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      value: &apos;default value&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    // 这里是一些组件内部数据</span><br><span class="line">    someData: &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    // 这里是一个自定义方法</span><br><span class="line">    customMethod() &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  externalClasses:[&apos;my-class&apos;]//从index页面中传过来的类</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>在index.json文件中引用声明。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;usingComponents&quot;: &#123;</span><br><span class="line">    &quot;component-tag-name&quot;: &quot;path/to/the/custom/component&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//路径是相对于index文件夹的</span><br><span class="line">//component-tag-name是在页面中使用的组件名</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>index页面中使用组件。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;!-- 以下是对一个自定义组件的引用 --&gt;</span><br><span class="line">  &lt;component-tag-name inner-text=&quot;Some text&quot; class=&quot;my-class&quot;&gt;&lt;/component-tag-name&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="父子组件间传值"><a href="#父子组件间传值" class="headerlink" title="父子组件间传值"></a>父子组件间传值</h6><p>注：设index页面是引用页面，component为组件，便于理解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;component-tag-name prop-a=&quot;&#123;&#123;dataFieldA&#125;&#125;&quot; prop-b=&quot;&#123;&#123;dataFieldB&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;!-- 这部分内容将被放置在组件 &lt;slot&gt; 的位置上 --&gt;</span><br><span class="line">    &lt;view&gt;这里是插入到组件slot中的内容&lt;/view&gt;</span><br><span class="line">  &lt;/component-tag-name&gt;</span><br><span class="line">&lt;/view&gt;</span><br><span class="line">&lt;!-- 在引用组件中的js文件中定义dataFiledA，并通过属性propA传给组件 --&gt;</span><br><span class="line">&lt;!-- 标签中中划线连接者，在组件中都需要将其转为驼峰式 --&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>在组件的js文件中通过properties进行接收</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">	properties:&#123;</span><br><span class="line">		propA:Object //注名类型</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>在组件的qml文件中引用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;view&gt;这是组件内部的节点&lt;/view&gt;</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">    &#123;&#123;propA.name&#125;&#125;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="组件中使用多slot"><a href="#组件中使用多slot" class="headerlink" title="组件中使用多slot"></a>组件中使用多slot</h6><ul>
-<li>默认情况下，一个组件只能使用一个slot。需要使用多slot时，可以在组件js中声明启用。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">	options:&#123;</span><br><span class="line">		multipleSlots:true</span><br><span class="line">	&#125;,</span><br><span class="line">	properties:&#123;&#125;,</span><br><span class="line">	data:&#123;&#125;,</span><br><span class="line">	methods:&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在组件模板component.qml使用多个slot，以不同name值区分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class=&quot;wrapper&quot;&gt;</span><br><span class="line">	&lt;slot name = &quot;before&quot;&gt;&lt;/slot&gt;</span><br><span class="line">	&lt;view&gt;这里是组件的内部细节&lt;/view&gt;</span><br><span class="line">	&lt;slot name=&quot;after&quot;&gt;&lt;/slot&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在index.qml中使用时，用 <code>slot</code> 属性来将节点插入到不同的slot上。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;before&quot;&gt; 的位置上 --&gt;</span><br><span class="line">    &lt;view slot=&quot;before&quot;&gt;这里是插入到组件slot name=&quot;before&quot;中的内容&lt;/view&gt;</span><br><span class="line">    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;after&quot;&gt; 的位置上 --&gt;</span><br><span class="line">    &lt;view slot=&quot;after&quot;&gt;这里是插入到组件slot name=&quot;after&quot;中的内容&lt;/view&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h6><ul>
-<li>定义模板template.qml及其样式文件template.qss</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- template.qml --&gt;</span><br><span class="line">&lt;template name=&quot;navigation&quot;&gt;</span><br><span class="line">    &lt;view class=&quot;navigation_grounp&quot;&gt;</span><br><span class="line">        &lt;view class=&quot;navigation&quot; hover-class=&quot;none&quot; hover-stop-propagation=&quot;false&quot;&gt;</span><br><span class="line">            &lt;block wx:if=&quot;&#123;&#123;true&#125;&#125;&quot;&gt;</span><br><span class="line">                &lt;text class=&quot;nav_search&quot;&gt;返回&lt;/text&gt;</span><br><span class="line">            &lt;/block&gt;</span><br><span class="line">            &lt;text class=&quot;nav_title&quot;&gt;nija&lt;/text&gt;</span><br><span class="line">        &lt;/view&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> /* template.qss */</span><br><span class="line">.navigation_grounp&#123;</span><br><span class="line">     position: flexed;</span><br><span class="line">     top: 0;</span><br><span class="line">     width: 100%;</span><br><span class="line"> &#125;</span><br><span class="line"> .navigation_grounp &gt; .navigation&#123;</span><br><span class="line">     display: flex;</span><br><span class="line">     align-items: center;</span><br><span class="line">     justify-content: center;</span><br><span class="line">     box-sizing: border-box;</span><br><span class="line">     padding: 0 15px;</span><br><span class="line">     background-color: green; </span><br><span class="line">     height: 44px;</span><br><span class="line">     color:red;</span><br><span class="line"> &#125;</span><br><span class="line"> .navigation .nav_search&#123;</span><br><span class="line">     width: 33.3%;</span><br><span class="line">     overflow: hidden;</span><br><span class="line"> &#125;</span><br><span class="line">  .navigation .nav_title&#123;</span><br><span class="line">        width: 33.3%;</span><br><span class="line">        text-align: center;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">        text-overflow:ellipsis;</span><br><span class="line">        white-space: nowrap;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在index文件中导入</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.qml --&gt;</span><br><span class="line">&lt;import src=&quot;./../template/template&quot; /&gt;</span><br><span class="line">&lt;template is=&quot;navigation&quot;&gt;&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* index.qss，没导入该文件，其样式不会在index中显示 */</span><br><span class="line">@import &apos;./../template/template.qss&apos;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-proto" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/27/proto/" class="article-date">
-      <time datetime="2019-10-27T05:45:18.000Z" itemprop="datePublished">2019-10-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/proto/">proto</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="类的prototype属性和-proto-属性"><a href="#类的prototype属性和-proto-属性" class="headerlink" title="类的prototype属性和__proto__属性"></a>类的prototype属性和<code>__proto__</code>属性</h4><ul>
-<li>每个对象都有<code>__proto__</code>属性，指向对应的构造函数的prototype属性。</li>
-<li><strong>子类的<code>__proto__</code>属性表示构造函数的继承，总是指向父类。</strong></li>
-<li><strong>子类的prototype属性的<code>__proto__</code>属性表示方法的继承，总是指向父类的prototype属性。</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">class B extends A&#123;&#125;</span><br><span class="line">B.__proto__ === A  //true</span><br><span class="line">B.prototype.__proto__  === A.prototype  //true</span><br><span class="line"></span><br><span class="line">//B的实例继承A的实例</span><br><span class="line">Object.setPrototypeOf(B.prototype,A.prototype);</span><br><span class="line">//B继承A的静态属性</span><br><span class="line">Object.setPrototypeOf(B,A);</span><br><span class="line"></span><br><span class="line">//Object.setPrototypeOf方法实现</span><br><span class="line">Object.setPrototypeOf = function(obj,proto)&#123;</span><br><span class="line">	obj.__proto__ = proto;</span><br><span class="line">	return obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这两条继承链，可以这样理解：作为一个对象，子类（<code>B</code>）的原型（<code>__proto__</code>属性）是父类（<code>A</code>）；作为一个构造函数，子类（<code>B</code>）的原型对象（<code>prototype</code>属性）是父类的原型对象（<code>prototype</code>属性）的实例。</p>
-<p>上面代码的<code>A</code>，只要是一个有<code>prototype</code>属性的函数，就能被<code>B</code>继承。由于函数都有<code>prototype</code>属性（除了<code>Function.prototype</code>函数），因此<code>A</code>可以是任意函数。</p>
-<h6 id="以下两种特殊情况"><a href="#以下两种特殊情况" class="headerlink" title="以下两种特殊情况"></a>以下两种特殊情况</h6><ul>
-<li>子类继承Object类</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class A extends Object&#123;&#125;</span><br><span class="line">A.__proto__ === Object  //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype  //true</span><br><span class="line">//A其实就是构造函数Object的复制，A的实例就是Object的实例</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不存在任何继承</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">A.__proto__ === Function.prototype   //true</span><br><span class="line">A.prototype.__proto__ === Object.prototype   //true</span><br></pre></td></tr></table></figure>
-
-<p>A作为一个基类，即不存在任何继承，就是一个普通函数，所以直接继承Function.prototype。但是，A调用后返回一个空对象即object实例，所以<code>A.prototype.__proto__</code>指向构造函数Object的prototype属性。</p>
-<h6 id="实例的-proto-属性"><a href="#实例的-proto-属性" class="headerlink" title="实例的 proto 属性"></a>实例的 <strong>proto</strong> 属性</h6><p>子类实例的<code>__proto__</code>属性的<code>__proto__</code>属性，指向父类实例的<code>__proto__</code>属性。也就是说，子类的原型的原型，是父类的原型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123; /* ... */ &#125;</span><br><span class="line">class ColorPoint extends Point &#123;</span><br><span class="line">  constructor(x, y, color) &#123;</span><br><span class="line">    super(x, y); // 调用父类的constructor(x, y)</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  toString() &#123;</span><br><span class="line">    return this.color + &apos; &apos; + super.toString(); // 调用父类的toString()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new Point(2, 3);</span><br><span class="line">var p2 = new ColorPoint(2, 3, &apos;red&apos;);</span><br><span class="line"></span><br><span class="line">p2.__proto__ === p1.__proto__ // false</span><br><span class="line">p2.__proto__.__proto__ === p1.__proto__ // true</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>ColorPoint</code>继承了<code>Point</code>，导致前者原型的原型是后者的原型。</p>
-<p>因此，通过子类实例的<code>__proto__.__proto__</code>属性，可以修改父类实例的行为。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p2.__proto__.__proto__.printName = function () &#123;</span><br><span class="line">  console.log(&apos;Ha&apos;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">p1.printName() // &quot;Ha&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="原生构造函数的继承"><a href="#原生构造函数的继承" class="headerlink" title="原生构造函数的继承"></a>原生构造函数的继承</h6><ul>
-<li><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。一般不能继承，有以下九种：</p>
-<p><code>Boolean(),Number(),String(),Array(),Date(),Function(),RegExp(),Error(),Object()</code></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function MyArray() &#123;</span><br><span class="line">  Array.apply(this, arguments);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyArray.prototype = Object.create(Array.prototype, &#123;</span><br><span class="line">  constructor: &#123;</span><br><span class="line">    value: MyArray,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true,</span><br><span class="line">    enumerable: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var colors = new MyArray();</span><br><span class="line">colors[0] = &quot;red&quot;;</span><br><span class="line">colors.length  // 0</span><br><span class="line"></span><br><span class="line">colors.length = 0;</span><br><span class="line">colors[0]  // &quot;red&quot;</span><br></pre></td></tr></table></figure>
-
-<p>之所以会发生这种情况，是因为子类无法获得原生构造函数的内部属性，通过<code>Array.apply()</code>或者分配给原型对象都不行。原生构造函数会忽略<code>apply</code>方法传入的<code>this</code>，也就是说，原生构造函数的<code>this</code>无法绑定，导致拿不到内部属性。</p>
-<p>ES5 是先新建子类的实例对象<code>this</code>，再将父类的属性添加到子类上，由于父类的内部属性无法获取，导致无法继承原生的构造函数。比如，<code>Array</code>构造函数有一个内部属性<code>[[DefineOwnProperty]]</code>，用来定义新属性时，更新<code>length</code>属性，这个内部属性无法在子类获取，导致子类的<code>length</code>属性行为不正常。</p>
-<p>ES6 允许继承原生构造函数定义子类，因为 ES6 是先新建父类的实例对象<code>this</code>，然后再用子类的构造函数修饰<code>this</code>，使得父类的所有行为都可以继承。下面是一个继承<code>Array</code>的例子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class MyArray extends Array &#123;</span><br><span class="line">  constructor(...args) &#123;</span><br><span class="line">    super(...args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = new MyArray();</span><br><span class="line">arr[0] = 12;</span><br><span class="line">arr.length // 1</span><br><span class="line"></span><br><span class="line">arr.length = 0;</span><br><span class="line">arr[0] // undefined</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
