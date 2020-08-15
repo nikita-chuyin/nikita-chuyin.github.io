@@ -268,6 +268,872 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/08/爬虫/" class="article-date">
+      <time datetime="2020-05-08T12:22:36.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/08/爬虫/">爬虫</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="爬虫基础"><a href="#爬虫基础" class="headerlink" title="爬虫基础"></a>爬虫基础</h4><p>爬虫就是获取网页并提取和保存信息的自动化程序。</p>
+<p>Cookies里面保存了登录的凭证，有了它，只需在下次请求携带Cookies发送请求而不必重新输入用户名和密码。因此在爬虫中，有时候需要登录才能访问页面时，我们一般会直接将登录成功后截取的Cookies放在请求头里面直接请求，而不必重新模拟登录。</p>
+<h6 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h6><p>Accept：请求报文域，用于指定客户端可接受哪些类型的信息。</p>
+<p>Accept-Language：指定客户端可接受的语言类型。</p>
+<p>Accept-Encoding：指定客户端可接受的内容编码。</p>
+<p>Host：用于指定请求资源的主机IP和端口号，其内容为请求URL的原始服务器或网关的位置。从HTTP1.1版本开始，请求必须包含此内容。</p>
+<p>Cookie：也常用复数形式Cookies，这是网站为了辨别用户进行会话跟踪而存储在用户本地的数据。它的主要功能是维持当前会话。如：我们输入用户名和密码成功登陆到某个网站后，服务器会用会话保存登录状态信息，后面我们每次刷新或请求该站点的其他页面时，会发现都是登陆状态，这就是Cookies的功劳。Cookies里面有信息标识了我们所对应的服务器的会话，每次浏览器在请求该站点的页面时，都会在请求头中加上Cookies并将其发送给服务器，服务器通过Cookies识别出是我们自己，并且查出当前状态是登录状态，所以返回的是登陆后才能看到的网页内容。</p>
+<p>Referer：此内容用来标识这个请求是从哪个页面发过来的，服务器可以拿到这一信息并作相应的处理，如来源统计，防盗链处理等。</p>
+<p>User-Agent：简称UA，它是一个特殊的字符串头，可以是服务器识别客户使用的操作系统和版本，浏览器及版本等信息。在做爬虫的时候加上此信息可以伪装为浏览器；如果不加，很可能会被识别为爬虫。</p>
+<p>Content-Type：也叫互联网媒体类型或者MIME类型，在HTTP协议消息头中，它用来表示具体请求中的媒体类型信息。如：text/html表示HTML格式，image/gif表示GIF图片，application/json表示JSON类型。</p>
+<table>
+<thead>
+<tr>
+<th>Content-Type</th>
+<th>提交数据的方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>application/x-www-form-urlencoded</td>
+<td>表单数据</td>
+</tr>
+<tr>
+<td>multipart/form-data</td>
+<td>表单文件上传</td>
+</tr>
+<tr>
+<td>application/data</td>
+<td>序列化JSON数据</td>
+</tr>
+<tr>
+<td>text/xml</td>
+<td>XML数据</td>
+</tr>
+</tbody></table>
+<p>在爬虫中，若要构造POST请求，需要使用正确的Content-Type，并了解各种请求库的各个参数设置时使用的是哪种Content-Type，不然可能导致POST提交后无法正常响应。</p>
+<p>请求头是请求的重要组成部分，再写爬虫时大部分情况下都需要设定请求头。</p>
+<h6 id="请求主体"><a href="#请求主体" class="headerlink" title="请求主体"></a>请求主体</h6><p>请求体一般承载的内容是POST请求中的表单数据，而对于GET请求，请求体则为空。</p>
+<p>响应三部分：响应状态码，响应头，响应体。</p>
+<h6 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h6><p>Date：标识响应产生的时间。</p>
+<p>Last-Modified：指定资源的最后修改时间。</p>
+<p>Content-Encoding：指定响应内容的编码。</p>
+<p>Server：包含服务器的信息，比如名称和版本号等。</p>
+<p>Content-Type：文档类型，指定返回的数据类型是什么，如text/html代表返回的是HTML文档，application/x-javascript则代表返回JavaScript文件，image/jpeg则代表返回图片。</p>
+<p>Set-Cookie：设置Cookies，响应头中的Set-Cookie告诉浏览器需要将此内容放在Cookies中，下次请求携带Cookies请求。</p>
+<p>Expires：指定响应的过期时间，可以使代理服务器或浏览器将加载的内容更新到缓存中。如果再次访问时，就可以直接从缓存中加载，降低服务器负载，缩短加载时间。</p>
+<h6 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h6><p>响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的        HTML代码；请求一张图片时，它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的内容就是响应体。</p>
+<h6 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h6><p>在Web中，会话对象用来存储特定用户会话所需的属性及配置信息，这样，当用户在应用程序的Web页之间跳转时，存储在会话对象中的变量将不会丢失，而是在整个用户会话中一直村下去。当用户请求来自应用程序的Web页时，如果该用户还没有会话，则Web服务器将自动创建一个会话对象。当会话过期或放弃后，服务器将终止该会话。</p>
+<p><strong>会话维持</strong></p>
+<p>当客户端第一次请求服务器时，服务器会返回一个请求头中带有Set-Cookie字段的响应给客户端，用来标记是哪一个用户，客户端浏览器就会把此Cookies放到请求头一起提交给服务器，Cookies携带了会话ID信息，服务器检查该Cookies即可找到对应的会话是什么，然后再判断会话来以此来辨认用户状态。</p>
+<p>在成功登录某个网站时，服务器就会告诉客户端设置哪些Cookies信息，在后续访问页面时客户端会把Cookies发送给服务器，服务器再找到对应的会话加以判断。如果会话中某些设置登录状态的变量是有效的，那就证明用户处于登录状态，此时返回登陆之后才可以查看的网页内容，浏览器解析便可以看到了。</p>
+<p>反之，如果传给服务器的Cookies是无效的，或者会话已经过期了，我们将不能继续访问页面，此时可能会收到错误的响应或者跳转到登录页面重新登陆。</p>
+<p>所以，Cookies和会话需要配合，一个处于客户端，一个处于服务端，两者共同协作就实现会话控制。</p>
+<h6 id="会话Cookie与持久Cookie"><a href="#会话Cookie与持久Cookie" class="headerlink" title="会话Cookie与持久Cookie"></a>会话Cookie与持久Cookie</h6><p>从表面意思来说，会话Cookie就是把Cookie放在浏览器内存中，浏览器在关闭之后该Cookie即失效；持久Cookie则会保存到客户端的硬盘中，方便下一次使用，用于长久保持用户登录状态。</p>
+<p>因此一些持久化登陆的网站其实就是把Cookie的有效时间和会话有效期设置得较长，下次我们再访问页面时仍然携带之前的Cookie，就可以直接保持登录状态。</p>
+<h6 id="会话误区"><a href="#会话误区" class="headerlink" title="会话误区"></a>会话误区</h6><p>在谈论会话机制时，人们认为“只要关闭浏览器，会话就会消失”。可以想象一下会员卡的例子除非顾客主动对店家提出销卡，否则店家绝不会轻易删除顾客的资料。对会话来说，也是一样，除非程序通知服务器删除一个会话，否则服务器会一直保留。比如，程序一般都是在我们做注销操作时才去删除会话。</p>
+<p>但是当我们关闭浏览器时，浏览器不会主动在关闭之前通知服务器他将关闭，所以服务器根本不会有机会知道浏览器已经关闭。之所以会有这种错觉是因为大部分会话机制都使用会话Cookie来保存会话ID信息，而关闭浏览器后Cookies就消失了，再次连接服务器时，也就无法找到原来的会话了。如果服务器设置的Cookies保存到硬盘上，或者使用某种手段改写浏览器发出的HTTP请求头，把原来的Cookies发送给服务器，则再次打开浏览器能找到原来的会话ID，依旧还是可以保持登录状态的。</p>
+<p>而恰恰是由于关闭浏览器不会导致会话被删除，这就需要服务器为会话设置一个失效的时间，当距离客户端上一次使用会话的时间时，服务器就可以认为客户端已经停止了活动，才会把会话删除以节省存储空间。</p>
+<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><h6 id="代理的基本原理"><a href="#代理的基本原理" class="headerlink" title="代理的基本原理"></a>代理的基本原理</h6><p>我们在做爬虫时经常会遇到这种情况，最初爬虫正常运行，但过一会就报403Forbidden错误，可能会看到“您的IP访问频率太高”这样的提示，原因是网站采取了反爬虫措施。比如，服务器会检测某个IP在单位时间内的请求次数，如果超过了这个阈值就会直接拒绝服务，返回一些错误信息，这种情况称为封IP。这时就可以采用代理来实现IP伪装。</p>
+<p>代理实际是代理服务器，proxy server，功能是代理网络用户去取得网络信息，形象地说是网络信息的中转站，在我们正常请求一个网站时，是发送了请求给Web服务器，WEb服务器把响应传回给我们。如果设置了代理服务器，实际上就是在本机和服务器之间架一座桥，此时本机不是直接向Web服务器发起请求，而是向代理服务器发起请求，请求会发送给代理服务器，然后由代理服务器再发送给Web服务器，接着由代理服务器再把Web服务器返回的响应转发给本机，这样就可正常访问网页了，但这个过程中Web服务器识别出的真实IP就不再是我们本机的IP了，就成功实现了IP伪装，这就是代理的原理。</p>
+<p><strong>使用代理隐藏真实的IP，让服务器误以为是代理服务器在请求自己，这样在爬取过程中不断更换代理就不会被封锁，可达到很好的效果</strong>。</p>
+<h6 id="代理作用："><a href="#代理作用：" class="headerlink" title="代理作用："></a>代理作用：</h6><ol>
+<li><p>突破自身限制，访问一些平时不能访问的站点。</p>
+</li>
+<li><p>访问一些单位或团体内部资源：比如使用教育网内地址段访问免费代理服务器，就可以实现对教育网开放的各类FTP下载上传，以及各类资料查询共享等服务。</p>
+</li>
+<li><p>提高访问速度：通常代理服务器都设置了一个较大的硬盘缓存区，当有外界的信息通过时，同时也将其保存到缓存区中，当其他用户再访问相同的信息时，则直接由缓存区中取出信息，传给用户，以提高访问速度。</p>
+</li>
+<li><p>隐藏真实的IP:上网者也可以通过这种方法隐藏自己的IP免受攻击。对于爬虫来说，我们用代理就是为了隐藏自身IP，防止自身的IP被封锁。</p>
+</li>
+</ol>
+<h6 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h6><ol>
+<li><p>根据协议区分：</p>
+<p>FTP 代理服务器： 主要用于访问 TP 服务器， 般有上传 下载以及 存功能，端口一般为21 212</p>
+<p>HTTP 代理服务器： 主要用于访问网页，一般有内容过滤和缓存功能，端口 般为 80  8080 3128</p>
+<p>SSL LS 代理： 主要用于访问加密网站， 般有 SSL TLS 加密功能（最高支持 128 位加密强度），端口一般为 443</p>
+<p>RTSP 代理： 主要用于访问 Real 流媒体服务器， 般有缓存功能，端口 般为 554</p>
+<p>Telnet 代理： 主要用于 telnet 远程控制（黑客人侵计算机时常用于隐藏身份），端口 般为 23</p>
+<p>POP3/SMTP 代理： 主要用于 POP3 SMTP 方式收发邮件， 般有缓存功能，端口 般为 110 25</p>
+<p>SOCKS 代理： 只是单纯传递数据包，不关心具体协议和用法，所以速度快很 般有存功能，端口一般为 1080  SOCKS 代理协议又分为 SOCKS4 SOCKS5 ，前者只支持 TCP,而后者支持 TC UDP ，还支持各种身份验证机制、服务器端域名解析 简单来说，SOCKS4 能做到的 SOCKS5 都可以做到，但 SOCKS5 能做到的 SOCKS4 定能做到</p>
+</li>
+<li><p>根据匿名程度区分</p>
+<p>高度匿名代理： 会将数据包原封不动地转发，在服务端看来就好像真的是 个普通客户端访问，而记录的 IP 是代理服务器的 IP</p>
+<p>普通匿名代理： 会在数据包上做一些改动 服务端上有可能发现这是个代理服务器，也有一定几率追查到客户端的真实 代理服务器通常会加入的 Hπ？头有 HTTP VIA HTTP X FOR DED FOR</p>
+<p>透明代理： 不但改动了数据包 还会告诉服务器客户端的真实 IP 这种代理除了能用缓存技术提高浏览速度，能用内容过滤提高安全性之外，并无其他显著作用，最常见的例子是内网的硬件防火墙</p>
+<p>间谍代理： 指组织或个人创建的用于记录用户传输的数据，然后进行研究 监控 目的的代理服务器。</p>
+</li>
+</ol>
+<h4 id="基本库"><a href="#基本库" class="headerlink" title="基本库"></a>基本库</h4><h6 id="使用urllib"><a href="#使用urllib" class="headerlink" title="使用urllib"></a>使用urllib</h6><p>urllib库是Python内置的HTTP请求库，不需安装即可使用。包含4个模块：</p>
+<ol>
+<li>request：它是最基本的 HTTP 请求模块，可以用来模拟发送请求 就像在浏览器里输入网址然后回车一样，只需要给库方法传入 RL 及额外的 数，就可以模拟实现这个过程了</li>
+<li>error 异常处理模块，如果出现请求错误 可以捕获这些异常，然后进行重试或作以保证程序不会意外终止</li>
+<li>parse 个工具模块，提供了许多 URL 处理方法，比如拆分、解析 合并</li>
+<li>robot parser ：主要是用来识别网站的 robots.txt 文件，然后判断哪些网站可以爬，它其实用得 较少。</li>
+</ol>
+<h6 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h6><p>使用urllib的request模块方便实现请求的发送并得到响应。利用它可模拟浏览器的一个请求发起过程，同时他还带有处理授权验证（authentication），重定向（redirection），浏览器的Cookies以及其他内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">response = urllib.request.urlopen(<span class="string">'https://www.python.org'</span>)</span><br><span class="line">print(response);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>利用最基本的<code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault-False,context=None)</code>方法，可以完成最基本的简单网页的GET请求抓取。</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">urllib</span>.<span class="title">request</span>.<span class="title">Request</span><span class="params">(url,data=None,headers=&#123;&#125;,origin_req_host=None,unveriable,method=Node)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>url为必传参数，data要传时必须传bytes（字节流）类型，若为字典，可用<code>urllib.parse</code>模块的<code>urlencode()</code>编码。</p>
+<p>headers是一个字典，它是一个请求头，我们可以在构造函数请求时通过headers参数直接构造，也可以通过调用请求实例的add_header()方法添加。添加请求头最常用的方法就是通过修改User-Agent来伪装浏览器，默认的User-Agent是Python-urllib，我们可以通过修改它来伪装浏览器。比如伪装成火狐浏览器，可将它设置为：<code>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0</code>。</p>
+<p>origin_req_host指的是请求方的host名称或者IP地址。</p>
+<p>unverifiable表示这个请求是否是无法通过验证的，默认是False，意思是说用户没有足够的权限来选择接受这个请求的结果。如：我们请求一个HTML文档中的图片，但是我们没有自动抓取图像的权限，这是unverifiable的值就是true。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request,parse</span><br><span class="line">url = <span class="string">'http://httpbin.org/post'</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0'</span>,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'httpbin.org'</span></span><br><span class="line">&#125;</span><br><span class="line">dict = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Germy'</span></span><br><span class="line">&#125;</span><br><span class="line">data = bytes(parse.urlencode(dict),encoding=<span class="string">'utf8'</span>)</span><br><span class="line">req = request.Request(url=url,data=data,headers=headers,method=<span class="string">'POST'</span>)</span><br><span class="line">response = request.urlopen(req)</span><br><span class="line">print(response.read().decode(<span class="string">'utf8'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-python的学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/07/python的学习/" class="article-date">
+      <time datetime="2020-05-07T14:00:45.000Z" itemprop="datePublished">2020-05-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/python的学习/">python的学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>rmdir    删除目录</p>
+<p>ipconfig      查看IP地址</p>
+<p>ping         测试网络连接</p>
+<p>python       进入python环境</p>
+<p>exit()           退出环境</p>
+<p>cd   指定目录</p>
+<p>dir   浏览目录</p>
+<p>mkdir   创建新的目录</p>
+<h6 id="pip包管理命令"><a href="#pip包管理命令" class="headerlink" title="pip包管理命令"></a>pip包管理命令</h6><p>pip list     列出匹配管理的包有哪些</p>
+<p>pip install   包名      </p>
+<p>pip  install  redis == 3.0.2 </p>
+<p>pip   uninstall   包名        卸载</p>
+<p>pip  -v       查看版本</p>
+<p>pip  freeze &gt;  requirements.txt       将项目依赖的包输出到指定的requirements.txt中</p>
+<p>pip  install   -r   requirements.txt     使用pip安装requirements.txt中依赖的文件，其中<code>-r</code>指requirements.txt文件</p>
+<h6 id="安装requests"><a href="#安装requests" class="headerlink" title="安装requests"></a>安装requests</h6><p>requests是第三方库，python默认不会自带这个库。</p>
+<ol>
+<li>git clone https ://github.com/kennethreitz/requests</li>
+<li>cd  requests</li>
+<li>python  setup.py  install</li>
+</ol>
+<h6 id="安装Selenium"><a href="#安装Selenium" class="headerlink" title="安装Selenium"></a>安装Selenium</h6><p>Selenium是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击，下拉等操作。对于一些js渲染的页面来说，这种抓取方式很有效。</p>
+<h6 id="print"><a href="#print" class="headerlink" title="print"></a>print</h6><p>print(value, …, sep=’  ‘，end=’\n’, file=sys.stdout, flush=False)        </p>
+<p>sep默认的分隔符是空格</p>
+<h4 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h4><h6 id="数与表达式"><a href="#数与表达式" class="headerlink" title="数与表达式"></a>数与表达式</h6><p>乘方运算符的优先级比求负（单目减）高，因此<code>-3**2等价于-（3**2)</code>。如果要计算的是<code>(-3)**2</code>,必须明确指出。</p>
+<p>十六进制：0xAF</p>
+<p>八进制：010</p>
+<p>二进制：0b101011</p>
+<p>2 / 4          # 除法，得到一个浮点数</p>
+<p>2 // 4          # 除法，得到一个整数</p>
+<p>2 ** 5            # 乘方   32</p>
+<p>用a + bj,或者complex(a,b)表示复数。</p>
+<p><strong>注意</strong></p>
+<p>1、Python可以同时为多个变量赋值，如a, b = 1, 2。</p>
+<p>2、一个变量可以通过赋值指向不同类型的对象。</p>
+<p>3、数值的除法包含两个运算符：/ 返回一个浮点数，// 返回一个整数。</p>
+<p>4、在混合计算时，Python会把整型转换成为浮点数。</p>
+<h6 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h6><ul>
+<li>Number数字</li>
+<li>String字符串</li>
+<li>List列表</li>
+<li>Tuple元组</li>
+<li>Set集合</li>
+<li>Dictionary字典</li>
+</ul>
+<p>有四种数字类型</p>
+<ol>
+<li>int整数</li>
+<li>bool布尔</li>
+<li>float浮点数</li>
+<li>complex复数</li>
+</ol>
+<p><strong>判断类型</strong></p>
+<p>type（a） ：判断a的数据类型，不会认为子类是一种父类类型。</p>
+<p>isinstance（a,int）：判断a是否为int类型，会认为子类是一种父类类型。</p>
+<p>del  val_a, var_b      删除单个或多个对象。</p>
+<h6 id="字符串截取"><a href="#字符串截取" class="headerlink" title="字符串截取"></a>字符串截取</h6><p>str=’Runoob’  print(str)                 # 输出字符串 </p>
+<p>print(str[0:-1])           # 输出第一个到倒数第二个的所有字符 </p>
+<p>print(str[0])              # 输出字符串第一个字符 </p>
+<p>print(str[2:5])            # 输出从第三个开始到第五个的字符 </p>
+<p>print(str[2:])             # 输出从第三个开始后的所有字符 </p>
+<p>print(str * 2)             # 输出字符串两次 </p>
+<p>print(str + ‘你好’)        # 连接字符串</p>
+<p>print(‘hello\nrunoob’)      # 使用反斜杠()+n转义特殊字符 </p>
+<p>print(r’hello\nrunoob’)     # 在字符串前面添加一个 r，表示原始字符串，不会发生转义</p>
+<p>print 默认输出是换行的，如果要实现不换行需要在变量末尾加上 <strong>end=””</strong></p>
+<p>print(x)    # 换行输出</p>
+<p>print(x,end=” “)        # 不换行输出</p>
+<h6 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h6><p>import somemodule         导入整个模块</p>
+<p>from somemodule import firstfunc, secondfunc, thirdfunc        从某个模块中导入多个函数</p>
+<h6 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h6><p>不可用作任何标识符名称。Python的标准库提供了一个keyword模块，可输出当前版本的所有关键字。</p>
+<h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>单行以<code>#</code>开头，多行用三个单或双引号包裹。</p>
+<h4 id="urllib库"><a href="#urllib库" class="headerlink" title="urllib库"></a>urllib库</h4><p>python内置的HTTP请求库</p>
+<h6 id="request解析库"><a href="#request解析库" class="headerlink" title="request解析库"></a>request解析库</h6><p>urlopen：打开网址</p>
+<h6 id="bs4解析库"><a href="#bs4解析库" class="headerlink" title="bs4解析库"></a>bs4解析库</h6><p>bs4: BeautifulSoup</p>
+<p>用于解析网页，提取指定数据的。接口简单，较人性化，但bs4只能解析html格式的数据。</p>
+<p><strong>BeautifulSoup类</strong></p>
+<p>文件解析库：</p>
+<p>‘html.parser’：是python自带的一个文件解析库。</p>
+<p>‘lxml’：是一个第三方文件解析库，需安装。</p>
+<p>根据html标签查找信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content = soup.find(&apos;div&apos;,itemprop=&apos;acticleBody&apos;).text</span><br></pre></td></tr></table></figure>
+
+<p><strong>find()</strong> <strong>方法：返回第一个匹配的内容，为字符串类型</strong></p>
+<p>find(name,attrs,recursive,text,**kwargs)</p>
+<p>这五个参数都可以<strong>充当过滤器</strong>，提高匹配结果的精确度。</p>
+<p><strong>find_all()</strong> <strong>方法：返回所有匹配的项，为一个列表类型</strong></p>
+<p>find(name,attrs,recursive, text,<strong>limit</strong>,**kwargs)</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h6 id="二维码"><a href="#二维码" class="headerlink" title="二维码"></a>二维码</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install MyQR</span><br><span class="line"></span><br><span class="line">from MyQR Simport myqr</span><br><span class="line">words:  文本，链接地址或字符串</span><br><span class="line">picture：二维码的背景图片</span><br><span class="line">colorized：True，表示生成彩图</span><br><span class="line">save_name: 表示生成的二维码的名字</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from MyQR import myqr</span><br><span class="line">myqr.run(</span><br><span class="line">    words=&quot;https://www.icourse163.org/learn/NHDX-1449955168&quot;,</span><br><span class="line">    picture=&quot;1.png&quot;,</span><br><span class="line">    colorized=True,</span><br><span class="line">    save_name=&quot;ORMooc.png&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h6 id="个人名片"><a href="#个人名片" class="headerlink" title="个人名片"></a>个人名片</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pip install Segno</span><br><span class="line"></span><br><span class="line">from segno import helpers</span><br><span class="line">qr = helpers.make_mecard(</span><br><span class="line">    name=&apos;Erin&apos;,</span><br><span class="line">    city=&apos;湖南省衡阳市南华大学&apos;,</span><br><span class="line">    phone=&apos;1581529632&apos;,</span><br><span class="line">    email=&apos;3511564414@qq.com&apos;</span><br><span class="line">)</span><br><span class="line">qr.save(&apos;Erin名片.png&apos;,scale=10)</span><br></pre></td></tr></table></figure>
+
+<h6 id="爬取小说"><a href="#爬取小说" class="headerlink" title="爬取小说"></a>爬取小说</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line"></span><br><span class="line">response = urllib.request.urlopen(&apos;http://www.39shubao.com/&apos;)</span><br><span class="line">print(response.read().decode(&apos;utf-8&apos;))</span><br></pre></td></tr></table></figure>
+
+<p><strong>报错</strong>：<code>UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0x8b in position 1: invalid start byte</code></p>
+<p>所以去掉解码格式utf-8，<strong>输出的字节码可以看到它是以”b’\x1f\x8b\x08”开头的 ，说明它是gzip压缩过的数据，这也是报错的原因，所以我们需要对我们接收的字节码进行一个解码操作。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">from io import BytesIO</span><br><span class="line">import gzip</span><br><span class="line"></span><br><span class="line">response = urllib.request.urlopen(&apos;http://www.39shubao.com/&apos;)</span><br><span class="line">buff = BytesIO(response.read())</span><br><span class="line">f = gzip.GzipFile(fileobj=buff)</span><br><span class="line">htmls = f.read().decode(&apos;utf-8&apos;)</span><br><span class="line">print(htmls)</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决乱码问题</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://www.shuquge.com/txt/63542/9645082.html'</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+
+<p>通过response.text拿到的数据出现乱码是因为该网页对数据进行加密，所以直接拿到的数据乱码了。</p>
+<p>解决：</p>
+<p>方法一：使用较老的方法<code>response.encoding=&#39;utf-8&#39;</code>，只能解决utf-8的乱码，其他格式的不能解决。</p>
+<p>方法二：<code>response.encoding=response.apparent_encoding</code>，自动解决乱码格式，不仅utf-8格式的可解决，gbk格式的也可解决。</p>
+<p>未封装的爬一章小说</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"># 使用parsel来解析网页内容</span><br><span class="line">import parsel</span><br><span class="line">url = &apos;http://www.shuquge.com/txt/63542/9645082.html&apos;</span><br><span class="line">response = requests.get(url)</span><br><span class="line"># 自动解决乱码问题</span><br><span class="line">response.encoding = response.apparent_encoding</span><br><span class="line"># print(response.text)</span><br><span class="line"># 把网页数据结构化</span><br><span class="line">sel = parsel.Selector(response.text)</span><br><span class="line"># 根据css选择器提取标题</span><br><span class="line">title = sel.css(&apos;.content &gt; h1::text&apos;).get()</span><br><span class="line"># 根据css路径提取内容</span><br><span class="line">content = sel.css(&apos;#content::text&apos;).getall()</span><br><span class="line"># 根据xPath提取内容,getall是提取全部的内容，也有re方法，用于匹配正则里面的内容</span><br><span class="line"># print(sel.xpath(&apos;//div[@id=&quot;content&quot;]/text()&apos;).getall())</span><br><span class="line"># 保存数据</span><br><span class="line">with open(title + &apos;.txt&apos;,mode=&apos;w&apos;, encoding=&apos;utf-8&apos;) as f:</span><br><span class="line">    f.write(title)</span><br><span class="line">    # 用切片去掉最后三行</span><br><span class="line">    for con in content[:-3]:</span><br><span class="line">        # str使用replace去除空格</span><br><span class="line">        f.write(con.replace(&apos;\xa0&apos;,&apos;&apos;))</span><br><span class="line">        # f.write(con.strip(&apos;\xa0&apos;))</span><br></pre></td></tr></table></figure>
+
+<h6 id="动态爬取数据"><a href="#动态爬取数据" class="headerlink" title="动态爬取数据"></a>动态爬取数据</h6><p>数据信息不是存放在网页源代码中，它是一个动态更新的网站，需要实时更新的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">url = &apos;https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist&apos;</span><br><span class="line">response = requests.get(url)</span><br><span class="line">content = json.loads(response.text)</span><br><span class="line">print(content[&apos;data&apos;])</span><br><span class="line">df = pd.DataFrame(columns=[&apos;国家及地区&apos;,&apos;确诊人数&apos;,&apos;死亡病例&apos;,&apos;治愈病例&apos;])</span><br><span class="line">for i in range(len(content[&apos;data&apos;])):</span><br><span class="line">    df.loc[i + 1] = [content[&apos;data&apos;][i][&apos;name&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;confirm&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;dead&apos;],</span><br><span class="line">                     content[&apos;data&apos;][i][&apos;heal&apos;]]</span><br><span class="line">df.to_csv(&apos;F://data.csv&apos;,index=0,encoding=&apos;utf-8&apos;)</span><br><span class="line">print(&apos;爬取完成&apos;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-AJAX学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/30/AJAX学习/" class="article-date">
+      <time datetime="2020-04-30T03:04:57.000Z" itemprop="datePublished">2020-04-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/30/AJAX学习/">AJAX学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h4><h6 id="传统网站存在的问题"><a href="#传统网站存在的问题" class="headerlink" title="传统网站存在的问题"></a>传统网站存在的问题</h6><ol>
+<li>网速慢的情况下，页面加载时间长，用户只能等待。</li>
+<li>表单提交后，如果一项内容不合格，需要重新填写所有表单内容。</li>
+<li>页面跳转，重新加载页面，造成资源浪费，增加用户等待时间。</li>
+</ol>
+<h6 id="Ajax概述"><a href="#Ajax概述" class="headerlink" title="Ajax概述"></a>Ajax概述</h6><p>它是浏览器提供的一套方法，可以实现页面无刷新更新数据，提高用户浏览网站应用的体验。</p>
+<h6 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h6><ol>
+<li>页面上拉加载更多数据，当下拉到底部并点击加载更多时才会向服务器发起请求并响应给用户。</li>
+<li>列表数据无刷新分页，当从第一页切换到第二页时，只有列表中的数据才会变，头部和底部是不会发生变化的。</li>
+<li>表单项离开焦点数据验证，当用户输入数据且该表单项失去焦点后，网页会自动将数据传给服务器进行验证，若已有该记录提示给用户。</li>
+<li>搜索框提示文字下拉列表。</li>
+</ol>
+<h6 id="AJAX优缺点"><a href="#AJAX优缺点" class="headerlink" title="AJAX优缺点"></a>AJAX优缺点</h6><p>浏览器可以从服务器同时请求多项内容，利用异步请求可以确保浏览器在后台工作，避免因完全页面刷新而中断用户的工作。</p>
+<p>浏览器请求返回的速度会快得多，只是在有些情况下如此而已，请求和响应的速度取决于服务器返回的内容。AJAX页面完全有可能比传统页面的速度更慢。</p>
+<p>不能够更真实的渲染颜色，因为颜色渲染由用户监视器控制而不是由用户支配。</p>
+<p>只有页面真正改变部分会得到更新。</p>
+<p>会减少服务器数据流量，利用AJAX可以建立更小更集中的请求。不过要当心……这也很容易导致建立更多的请求以至于增大数据流量，因为可能要一部建立所有这些请求。</p>
+<p>页面的不兼容问题会更严重，由于除了XHTML外，AJAX页面还依赖于其它一些技术，所以使用AJAX后的兼容性问题实际会更严重。</p>
+<h6 id="Ajax运行原理及实现"><a href="#Ajax运行原理及实现" class="headerlink" title="Ajax运行原理及实现"></a>Ajax运行原理及实现</h6><p><strong>原理</strong></p>
+<p>Ajax相当于浏览器发送请求与接收响应的代理人以实现在不影响用户浏览页面的情况下，局部更新数据，从而提高用户体验。</p>
+<p><strong>Ajax实现步骤</strong></p>
+<ol>
+<li><p>创建Ajax对象</p>
+<p><code>var xhr = new XMLHttpRequest();</code></p>
+</li>
+<li><p>告诉Ajax请求地址以及请求方式</p>
+<p><code>xhr.open(&#39;get&#39;,&#39;http://www.example.com&#39;)</code></p>
+</li>
+<li><p>发送请求</p>
+<p><code>xhr.send();</code></p>
+</li>
+<li><p>获取服务器端给与客户端的响应数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr.onload = function()&#123;</span><br><span class="line">	console.log(xhr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>为避免ajax跨域请求，故用express开启一个后端服务。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.js文件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 利用app.use拦截了所有请求，将请求交给express.static处理</span></span><br><span class="line"><span class="comment">// 也就是当网页请求该服务器时，请求全部转向public文件夹进行访问。</span></span><br><span class="line">app.use(express.static(path.join(__dirname,<span class="string">'public'</span>)));</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/first'</span>, (req,res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">'hello ajax'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务器启动成功'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public/index.html文件</span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">        xhr.open(<span class="string">'GET'</span>,<span class="string">'http://localhost:3000/first'</span>);</span></span><br><span class="line">        xhr.send();</span><br><span class="line"><span class="javascript">        xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(xhr.responseText);</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>服务器端相应的数据格式</strong></p>
+<p>在真实的项目中，服务器端大多数情况下会以JSON对象作为响应数据的格式。</p>
+<p>在http请求与响应过程中，无论是请求参数还是响应内容，如果是对象类型最终都会被转换为对象字符串进行传输。</p>
+<p><code>JSON.parse()   //将json字符串转换为json对象</code></p>
+<p><strong>请求参数传递</strong></p>
+<p>传统网站表单提交</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"get"</span> <span class="attr">action</span>=<span class="string">"http://www.example.com"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- http://www.example.com?username=zhangsan&amp;passwor=123456 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Ajax中的get请求</strong></p>
+<p><code>xhr.open(&#39;GET&#39;,&#39;http://www.example.com?name=zhangsan&amp;age=20&#39;);</code></p>
+<p><strong>post请求</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.setResquestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;)</span><br><span class="line">xhr.send(&apos;name=zhangsan&amp;age=20&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>application/json</p>
+<p>{name:’zhangsan’ , age: ‘20’ ,  sex: ‘男 ‘}</p>
+<p>在请求头中指定Content-Type属性的值是application/json，告诉服务器当前请求参数的格式是json。</p>
+<p><code>JSON.stringify()</code>    // 将json对象转换为json字符串</p>
+<h6 id="Ajax状态码"><a href="#Ajax状态码" class="headerlink" title="Ajax状态码"></a>Ajax状态码</h6><p>在创建ajax对象，配置ajax对象，发送请求以及接受完服务器端响应数据，这个过程中的每一个步骤都会对应一个数值，这个数值就是ajax状态码。</p>
+<p>0：请求未初始化，还没调用open（）</p>
+<p>1：请求已经建立，但是还没有发送（还没调用send（））</p>
+<p>2：请求已经发送</p>
+<p>3：请求正在处理中，通常响应中已经有部分数据可以用了。</p>
+<p>4：响应已经完成，可以获取并使用服务器的响应了。</p>
+<p><code>xhr.readyState    //获取ajax状态码</code></p>
+<p><code>onreadystatechange事件</code>，当ajax状态码发生变化时将自动触发该事件。不过推荐使用<code>xhr.onload</code>方法。</p>
+<h6 id="Ajax错误处理"><a href="#Ajax错误处理" class="headerlink" title="Ajax错误处理"></a>Ajax错误处理</h6><ol>
+<li><p>网络畅通，服务端能接收到请求，服务器返回的结果不是预期的结果。</p>
+<p>可以判断服务器端返回的状态码，分别进行处理。xhr.status获取http状态码。</p>
+</li>
+<li><p>网络畅通，服务器没有接收到请求，返回404状态码。</p>
+<p>检查请求地址是否错误。</p>
+</li>
+<li><p>网络畅通，服务器端能接受收到请求，服务器端返回500状态码。</p>
+<p>服务器端错误，找后端程序员进行沟通。</p>
+</li>
+<li><p>网络中断，请求无法发送到服务器端。（模拟断网，可在浏览器中的network中将offline勾选即可）</p>
+<p>会触发xhr对象下面的onerror事件，但不会会触发onload事件，在onerror事件处理函数中对错误进行处理。</p>
+</li>
+</ol>
+<h6 id="封装Ajax函数"><a href="#封装Ajax函数" class="headerlink" title="封装Ajax函数"></a>封装Ajax函数</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">options</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 存储的是默认值</span></span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">default</span> = &#123;</span><br><span class="line">        type: <span class="string">'get'</span>,</span><br><span class="line">        url: <span class="string">''</span>,</span><br><span class="line">        data: &#123;&#125;,</span><br><span class="line">        header: &#123;</span><br><span class="line">            <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">        error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">                 </span><br><span class="line">&#125;;</span><br><span class="line">	<span class="comment">// 使用options对象中的属性覆盖default对象中的属性</span></span><br><span class="line">	<span class="built_in">Object</span>.assign(<span class="keyword">default</span>,options);</span><br><span class="line">	<span class="comment">// 创建ajax对象</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    <span class="comment">// 拼接请求参数的变量</span></span><br><span class="line">    <span class="keyword">var</span> params = <span class="string">''</span>;</span><br><span class="line">    <span class="comment">// 循环用户传递进来的对象格式参数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> attr <span class="keyword">in</span> <span class="keyword">default</span>.data)&#123;</span><br><span class="line">        <span class="comment">// 将参数转换为字符串</span></span><br><span class="line">        params += attr + <span class="string">'='</span> + <span class="keyword">default</span>.data[attr] + <span class="string">'&amp;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将参数最后的&amp;截取掉</span></span><br><span class="line">    <span class="comment">// 将截取的结果重新赋值给params变量</span></span><br><span class="line">    params = params.substr(<span class="number">0</span>,params.length - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断请求方式</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">default</span>.type == <span class="string">'get'</span>)&#123;</span><br><span class="line">        <span class="keyword">default</span>.url = <span class="keyword">default</span>.url + <span class="string">'?'</span> + params;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 配置ajax对象</span></span><br><span class="line">	xhr.open(<span class="keyword">default</span>.type,<span class="keyword">default</span>.url);</span><br><span class="line">    <span class="comment">// 如果是post请求</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">default</span>.type == <span class="string">'post'</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> contentType = <span class="keyword">default</span>.header[<span class="string">'Content-Type'</span>];</span><br><span class="line">          <span class="comment">// 设置请求参数格式的类型</span></span><br><span class="line">        xhr.setRequestHeader(<span class="string">'Content-Type'</span>,contentType);</span><br><span class="line">        <span class="keyword">if</span>(contentType == <span class="string">'application/json'</span>)&#123;</span><br><span class="line">            xhr.send(<span class="built_in">JSON</span>.stringify(<span class="keyword">default</span>.data))</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            xhr.send(params);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 发送请求</span></span><br><span class="line">        xhr.send();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 监听xhr对象上的onload事件</span></span><br><span class="line">	<span class="comment">// 当xhr对象接收完响应数据后触发</span></span><br><span class="line">	xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 获取响应头中的数据</span></span><br><span class="line">        <span class="keyword">var</span> contentType = xhr.getResponseHeader(<span class="string">'Content-Type'</span>);</span><br><span class="line">        <span class="comment">// 服务器端返回的数据</span></span><br><span class="line">        <span class="keyword">var</span> responseText = xhr.responseText;</span><br><span class="line">        <span class="comment">// 如果响应类型中包含application/json</span></span><br><span class="line">        <span class="keyword">if</span>(contentType.includes(<span class="string">'application/json'</span>))&#123;</span><br><span class="line">            responseText = <span class="built_in">JSON</span>.parse(responseText);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">if</span>(xhr.status == <span class="number">200</span>)&#123;</span><br><span class="line">           <span class="keyword">default</span>.success(xhr.responseText,xhr);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">default</span>.error(xhr.responseText,xhr);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(&#123;</span><br><span class="line">	type: <span class="string">'get'</span>,</span><br><span class="line">	url: <span class="string">'http://lcalhost:3000/first'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      name: <span class="string">'zhangsan'</span>,</span><br><span class="line">        age:<span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    header:&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'json'</span></span><br><span class="line">    &#125;,</span><br><span class="line">	sucess: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data);</span><br><span class="line">	&#125;,</span><br><span class="line">    error:<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="验证邮箱地址的唯一性"><a href="#验证邮箱地址的唯一性" class="headerlink" title="验证邮箱地址的唯一性"></a>验证邮箱地址的唯一性</h6><ol>
+<li>获取文本框并为其添加离开焦点事件</li>
+<li>离开焦点时，检测用户输入的邮箱地址是否符合规则。</li>
+<li>如果不符合规则，组织程序向下执行并给出提示信息。</li>
+<li>向服务端发送请求，检测邮箱地址是否被别人注册。</li>
+<li>根据服务端返回值决定客户端显示何种提示信息。</li>
+</ol>
+<p><strong>常用元字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>匹配换行符以外的任意字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母或数字或下划线</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意的空白符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody></table>
+<p><strong>常用限定符</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码/语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>重复n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>重复n次或更多次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>重复n到m次</td>
+</tr>
+</tbody></table>
+<p>以此举个例子如邮箱：<a href="mailto:Yuan.Yiuri691@ningmeng.com.cn" target="_blank" rel="noopener">Yuan.Yiuri691@ningmeng.com.cn</a><br> 正则表达式为：<code>^[A-Za-z0-9-._]+@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)\*(\.[A-Za-z]{2,6})$</code></p>
+<p>创建过程：</p>
+<ol>
+<li>开头和结尾：^$;</li>
+<li>加入@：^@$;</li>
+<li>@前的内容匹配：[A-Za-z0-9-._]  大小写字母，数字,”.”,下划线 随机出现；”+” 号表示当前规则中的字符可以重复；</li>
+<li>@后的内容受顶级域名的限制，按点号分割后的规则略有不同：(.[A-Za-z]{2,6}) 必须是字母出现，比如.com，.cn等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-node进阶" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/30/node进阶/" class="article-date">
+      <time datetime="2020-04-30T02:30:22.000Z" itemprop="datePublished">2020-04-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/30/node进阶/">node进阶</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="单线程的弱点"><a href="#单线程的弱点" class="headerlink" title="单线程的弱点"></a>单线程的弱点</h4><ol>
+<li>无法利用多核CPU。</li>
+<li>错误会引起整个应用退出，应用的健壮性值得考虑。</li>
+<li>大量计算占用CPU导致无法继续调用异步I/O。</li>
+</ol>
+<p>像浏览器中JavaScript与UI共用一个线程一样，JavaScript长时间执行会导致UI渲染和响应被中断。在Node中，长时间的CPU占用也会导致后续异步I/O发不出调用，已完成的异步I/O的回调函数也会得不到及时执行。</p>
+<p>Node采用了与Web Workers相同的思路来解决单线程中大计算量的问题：child_process。</p>
+<p>子进程的出现，意味着Node可以从容地应对单线程在健壮性和无法利用多核CPU方面的问题。通过计算分发到各个子进程，可以将大量计算分解掉，然后再通过进程之间的事件消息来传递结果，这可以很好的保持应用模型的简单和地低依赖。通过Master-Worker的管理方式，也可以很好地管理各个工作进程，以达到更高的的健壮性。</p>
+<h4 id="node简介"><a href="#node简介" class="headerlink" title="node简介"></a>node简介</h4><ul>
+<li>Node.js是一个js运行环境，实际上它是对Google v8引擎的封装。V8引擎执行js的速度快，性能好。node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境上运行的更好。</li>
+<li>node.js是一个基于chrome javascript运行建立的平台，用于方便的搭建响应速度快，易于拓展的网络应用。node.js使用事件驱动，非阻塞I/O模型得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。</li>
+<li>node采用一系列“非阻塞”库来支持事件循环的方式。本质上就是为文件系统，数据库之类的资源提供接口。向文件系统发送一个请求时，无需等待硬盘（寻址并检索文件），硬盘准备好的时候非阻塞接口会通知node。该模型以可拓展的方式简化了对慢资源的访问，直观易懂。</li>
+<li>node.js可以在不新增额外线程的情况下，依然可以对任务进行并行处理——node.js是单线程的。它通过事件轮询（event loop）来实现并行操作，因此，我们应该要充分的利用这一点——尽可能地避免阻塞操作</li>
+</ul>
+<h4 id="node-js组成部分"><a href="#node-js组成部分" class="headerlink" title="node.js组成部分"></a>node.js组成部分</h4><ul>
+<li>引入required模块：我们可使用required指令载入node.js模块   var http = require(“http”);</li>
+<li>创建服务器：服务器可监听客户端请求，类似于Apache，Nginx等http服务器 。使用http.createServer()方法创建服务器，并使用listen方法绑定端口。</li>
+<li>接收请求和响应请求：服务器很容易创建，客户端可以使用浏览器或终端发送http请求，服务器接收请求并返回响应数据。使用request和response参数来接收和响应数据。</li>
+</ul>
+<h4 id="npm包管理器"><a href="#npm包管理器" class="headerlink" title="npm包管理器"></a>npm包管理器</h4><ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用</li>
+</ul>
+<h4 id="NPM常用命令"><a href="#NPM常用命令" class="headerlink" title="NPM常用命令"></a>NPM常用命令</h4><p>NPM提供了很多命令，例如install和publish，使用npm help可查看所有命令。</p>
+<ul>
+<li><p>NPM提供了很多命令，例如<code>install</code>和<code>publish</code>，使用<code>npm help</code>可查看所有命令。</p>
+</li>
+<li><p>使用<code>npm help &lt;command&gt;</code>可查看某条命令的详细帮助，例如<code>npm help install</code>。</p>
+</li>
+<li><p>在<code>package.json</code>所在目录下使用<code>npm install . -g</code>可先在本地安装当前命令行程序，可用于发布前的本地测试。</p>
+</li>
+<li><p>使用<code>npm update &lt;package&gt;</code>可以把当前目录下<code>node_modules</code>子目录里边的对应模块更新至最新版本。</p>
+</li>
+<li><p>使用<code>npm update &lt;package&gt; -g</code>可以把全局安装的对应命令行程序更新至最新版。</p>
+</li>
+<li><p>使用<code>npm cache clear</code>可以清空NPM本地缓存，用于对付使用相同版本号发布新版本代码的人。</p>
+</li>
+<li><p>使用<code>npm unpublish &lt;package&gt;@&lt;version&gt;</code>可以撤销发布自己发布过的某个版本代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm -v  						查看版本</span><br><span class="line">npm version  					查看所有模块的版本</span><br><span class="line">npm search 包名/部分包名			 搜索包</span><br><span class="line">npm init   						初始化package.json文件</span><br><span class="line">npm install/i 安装包     </span><br><span class="line">npm remove/r包名					删除包</span><br><span class="line">npm install/i 包名 --save 		安装包并添加到依赖中</span><br><span class="line">npm install 					根据package.json下载当前项目所依赖的包</span><br><span class="line">npm install 包名 -g				全局安装包，用于一些编译根据，比如：gulp，webpack</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>注意：如果想在页面中引入node_module中某个模块，优先从当前目录引入，如果没有，则从上一级目录中找，直到根目录。</li>
+</ul>
+<h4 id="REPL交互式解释器"><a href="#REPL交互式解释器" class="headerlink" title="REPL交互式解释器"></a>REPL交互式解释器</h4><ul>
+<li>REPL(Read Eval Print Loop:交互式解释器)表示一个电脑的环境，类似于终端，可接受系统的响应。node自带了交互式解释器，可执行以下任务<ul>
+<li>读取，读取用户输入，解析输入js数据结构并存储于内存中。</li>
+<li>执行，执行输入的数据结构。</li>
+<li>打印，输出结果。</li>
+<li>循环，循环操作以上步骤直到用户两次按下ctrl+c按钮退出。</li>
+</ul>
+</li>
+</ul>
+<h4 id="node知识"><a href="#node知识" class="headerlink" title="node知识"></a>node知识</h4><h6 id="node-js与其它语言的区别"><a href="#node-js与其它语言的区别" class="headerlink" title="node.js与其它语言的区别"></a>node.js与其它语言的区别</h6><ul>
+<li><p>node.js不是一门独立的语言。php，jsp即使语言，又是平台。node.js用js进行编程，运行平台是封装后的js引擎V8</p>
+</li>
+<li><p>轻量级架构</p>
+<ul>
+<li>java，php，net，需要运行在服务器上，apache，tomcat</li>
+<li>node.js不用架设在任何服务器软件之上。</li>
+<li>用最低的硬件成本，达到更高的开发，更优的处理函数。</li>
+</ul>
+</li>
+<li><p>node.js没有web容器，就是安装配置完成之后，没有根目录（php的根目录是www）</p>
+</li>
+</ul>
+<h6 id="node-js的特点（追求极致性能）"><a href="#node-js的特点（追求极致性能）" class="headerlink" title="node.js的特点（追求极致性能）"></a>node.js的特点（追求极致性能）</h6><ul>
+<li>单线程<ul>
+<li>优势：减少内存消耗（操作系统不再有创建线程，销毁线程的开销。<ul>
+<li>在php，jsp等服务器语言中，会为每个用户创建一个线程，而每个线程大约需要2M内存，每创建一个线程就要占用内存空间。</li>
+<li>当有客户链接时，就会触发一个内部事件，通过非阻塞I/O，事件驱动机制，让node.js宏观上是并发的。可同时处理4万用户的请求。即当张三连接着时，李四请求连接，引擎就会停止张三语法的执行，转而将李四加入到时间栈中。</li>
+<li>node.js不为每个用户创建一个线程，仅仅使用同一个线程。</li>
+</ul>
+</li>
+<li>劣势：<ul>
+<li>如果线程遭遇I/O阻塞，整个线程便阻塞了。</li>
+<li>如果有人将node.js搞崩溃了，则会全部奔溃。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非阻塞<ul>
+<li>node.js采用非阻塞I/O机制，因此在执行完访问数据库操作后，会立即执行后面的代码（其他非阻塞事件不会，他们会等数据库操作完毕并返回结果才执行后面的代码），把数据库的处理代码放入回调函数中，从而提高效率。</li>
+<li>当某个I/O执行完毕后，将以事件的形式通过执行I/O操作的线程，线程执行完这个事件的回调函数。为了处理异步I/O，线程必须有事件循环，不断检查有没有未处理的事件，并依次予以处理。</li>
+<li>阻塞模式下，一个线程只能处理一项任务，要想提高吞吐量必须通过多线程。而非阻塞模式下，一个线程永远执行计算操作，这个线程的CPU核心利用率永远是100%；</li>
+</ul>
+</li>
+<li>事件驱动<ul>
+<li>不管用户的请求，还是老用户的I/O完成，都将以事件的形式加入事件环，等待调度。</li>
+</ul>
+</li>
+<li>node.js的iI/O都是异步的，都是回调函数调回调函数</li>
+</ul>
+<h6 id="node事件触发"><a href="#node事件触发" class="headerlink" title="node事件触发"></a>node事件触发</h6><ul>
+<li>继承EventEmitter，大多数情况下不会直接使用EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。</li>
+<li>原因：<ul>
+<li>具有某个实体功能的对象实现时间符合语义，事件的监听和发射应该是一个对象的方法。</li>
+<li>js对象是基于原型的，支持多重继承，继承EventEmitter不会打乱对象原有的继承关系。</li>
+</ul>
+</li>
+</ul>
+<h6 id="node-js应用方向"><a href="#node-js应用方向" class="headerlink" title="node.js应用方向"></a>node.js应用方向</h6><ol>
+<li>特点<ul>
+<li>善于I/O，不善于计算。<ul>
+<li>因为node.js最擅长任务的调度，如果你的任务有很多CPU计算，实际上相当于这个计算阻塞了这个单线程，就不适合node开发。</li>
+<li>当应用程序需要处理大量并发的I/O，而在向客户端发出响应后，应用程序内部并不需要进行复杂的处理时，node也非常适合与websocket配合，开发长连接的实时交互应用程序。</li>
+</ul>
+</li>
+<li>天生异步<ul>
+<li>callback，trunk（参数的求值策略），promise，generator（es6的生成器，用于计算），asynac函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="node模块化"><a href="#node模块化" class="headerlink" title="node模块化"></a>node模块化</h4><ul>
+<li>CommonJS规范为JS能够在任何地方执行，这是一个愿景。</li>
+<li>从文件角度看，每个JS文件就是一个个模块，从结构上看，多个JS文件之间可以相互require共同实现一个功能，这整体功能就是一个模块。</li>
+<li>在node.js中，一个模块定义的变量只能在该文件中使用，当需要另一文件中的变量时，需使用exports进行暴漏，然后使用require引入。</li>
+<li>引入模块时，如果是非核心模块，且在同级目录时，require需要加上<code>./</code>，核心模块则不需要，直接写名字即可</li>
+</ul>
+<h6 id="node核心模块"><a href="#node核心模块" class="headerlink" title="node核心模块"></a>node核心模块</h6><ul>
+<li><p>全局变量是global。</p>
+</li>
+<li><p>每个node都在外面给我们套了一个函数。</p>
+<p><code>function(exports,require,module,_filename,_dirname){//里面是你写的内容}</code></p>
+<ul>
+<li>exports：该对象用来将函数内部的局部函数暴漏到外部函数中。</li>
+<li>require：用来引入外部模块。</li>
+<li>module：代表当前模块本身，exports就是module的属性。我们可以使用exports或modile.exports导出。</li>
+<li>_filename:当前模块的完整路径</li>
+<li>_dirname:当前模块所在的文件的完整路径。</li>
+</ul>
+</li>
+<li><p>exports与module.exports的区别</p>
+</li>
+<li><p>json文件不能加注释。</p>
+</li>
+</ul>
+<h4 id="Buffer缓存区"><a href="#Buffer缓存区" class="headerlink" title="Buffer缓存区"></a>Buffer缓存区</h4><ul>
+<li>可以理解为是一个存放二进制的容器，专门用于数据的存放。</li>
+<li>node自带的，不需要引入就可使用。一个字节占8bit</li>
+<li>8bit = 1B       1024B  = 1KB      1024KB = 1MKB      1GB=1024KB     1TB=1024GB</li>
+<li>Buffer.from(str,编码格式);</li>
+<li>Buffer.alloc(size[,fill[,encoding]])<ul>
+<li>size:新建的Buffer期望的长度，不能动态改变，溢出的数据不做处理。int值</li>
+<li>fill：用来预填充新建的Buffer的值，默认为0.     String   Buffer    int</li>
+<li>encoding:如果fill为字符串，则该值就是它的字符编码，默认为“utf-8”</li>
+</ul>
+</li>
+</ul>
+<h4 id="fs文件处理"><a href="#fs文件处理" class="headerlink" title="fs文件处理"></a>fs文件处理</h4><ul>
+<li><p>fs.open(path,flag[,mode],callback)打开文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//1.引入模块</span><br><span class="line">let fs = require(&apos;fs&apos;)</span><br><span class="line">//2.创建写入流，相当于在it666.txt与服务器之间建立一个通道，使数据可以源源不断从it666.txt中上传至服务器中</span><br><span class="line">let ws = fs.createWriteStream(&quot;it666.txt&quot;);</span><br><span class="line">//3.打开通道，监听打开事件，有on，once等方法，因只需监听一次，故用once</span><br><span class="line">stream.once(&apos;open&apos;,() =&gt; &#123;</span><br><span class="line">    console.log(&apos;通道已经打开&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">stream.once(&apos;close&apos;, ()=&gt; &#123;</span><br><span class="line">    console.log(&apos;通道已经关闭&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">//写入东西</span><br><span class="line">stream.write(&apos;dfsadc&apos;);</span><br><span class="line">stream.write(&apos;dfsadc&apos;);</span><br><span class="line">//关闭通道，当发现还有东西未写入时，不会关闭</span><br><span class="line">stream.end()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let fs = require(&apos;fs&apos;)</span><br><span class="line">let ws = fs.createWriteStream(&quot;it666.txt&quot;);</span><br><span class="line">let rs = fs.createReadStream(&quot;sp.mp4&quot;);</span><br><span class="line">//创建管道，该语句就会自动将数据存入sp.mp4中，同时监听打开关闭等事件</span><br><span class="line">rs.pipe(ws);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ul>
+<li>数据库就是按照一定的数据结构来组织，存储和管理数据的仓库。</li>
+<li>我们写的程序都是在计算机上运行的，一旦计算机断电或程序运行完毕，程序数据就会全部丢失，所以我们需要将一些程序运行的数据持久性保存到硬盘中，以确保数据的安全性。</li>
+<li>选择数据库的原因：<ul>
+<li>数据库是有结构的，数据与数据之间可以建立各种关系，类似于网状拓扑图。</li>
+<li>数据库提供各种接口，让各种操作（增删改查）变得快捷简单。</li>
+<li>给个种语言（php，jsp，java）提供了完善的接口。</li>
+</ul>
+</li>
+<li>数据库分类<ul>
+<li>RDBMS(关系型数据库)：MySQL，SQL Server，ORACLE,DB2….</li>
+<li>NoSQL（非关系型数据库 Not only SQL）:MongoDB,CouchDB,HBase,Redis…<ul>
+<li>没有行列的概念，用JSON来存储数据，集合就相当于“表”，文档就相当于“行”。</li>
+<li>非关系型数据库为非标准化的数据库。</li>
+<li>特征：键值存储数据库，列存储数据库，文档存储数据库，图形数据库。</li>
+</ul>
+</li>
+<li>两者区别：关系型数据库比较结构化，操作不是很灵活；非关系型数据库操作灵活，但不适合大型数据存储，比较适合微架构….两者相辅相成。</li>
+</ul>
+</li>
+</ul>
+<h6 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h6><ul>
+<li>MongoDB是为快速开发互联网Web应用而设计的数据库系统。他的数据类型是面向文档的，类似于JSON的结构。</li>
+<li>基本组成<ul>
+<li>数据库（database）：数据库是一个仓库，在仓库中可以存放集合。</li>
+<li>集合（collection）：集合类似于数组，在集合中可以存放文档。</li>
+<li>文档（document）：文档数据库中的最小单位，我们存储和操作的内容都是文档。</li>
+</ul>
+</li>
+<li>mongoDB的基本指令:<ul>
+<li>show dbs    ：显示当前所有的数据库</li>
+<li>use 数据库名        ：进入到指定的数据库中</li>
+<li>db     ：显示当前数据库</li>
+<li>show  collections        ：显示数据库中的所有集合</li>
+</ul>
+</li>
+<li>命令进行CRUD<ul>
+<li>插入：db.<collection>.insert(doc);      如：db.student.insert({id:001,name:’nikita’});</collection></li>
+<li>查询：db.<collection>.find();</collection></li>
+</ul>
+</li>
+</ul>
+<h4 id="同步与异步，阻塞与非阻塞"><a href="#同步与异步，阻塞与非阻塞" class="headerlink" title="同步与异步，阻塞与非阻塞"></a>同步与异步，阻塞与非阻塞</h4><ul>
+<li><p>同步，当发起一个调用时，在没有获取结果前，调用不会返回，直到获取结果。事一件一件做，做完一件在做一件。</p>
+</li>
+<li><p>异步：当发起一个调用时，在没有获取结果之前，调用就返回了，调用者并不会立即得到结果，而是被调用者通知调用调用者，通过回调函数处理结果。</p>
+</li>
+<li><p>阻塞，在等待结果时，不能干其他事，线程被挂起，直到结果返回。</p>
+</li>
+<li><p>非阻塞：在等待结果中，还能干其他事，线程不会被阻塞。</p>
+</li>
+</ul>
+<h4 id="url相关操作"><a href="#url相关操作" class="headerlink" title="url相关操作"></a>url相关操作</h4><ul>
+<li>将url解析为一个url对象：url.parse(urlString[,parseQueryString[,slashDenotHost]])</li>
+<li>将一个url对象反解析为一个url地址：url.format(urlObject)</li>
+<li>将部分url拼接为一个完整url地址url.resolve(from,to)</li>
+<li>response对象有一个方法：write可以用来给客户端发送响应数据。write可以使用多次，但最后需要用end来结束响应，否则客户端会一直等待</li>
+<li>req.url是地址栏中localhost后面的所有内容，除了hash的内容。</li>
+<li>querystring.parse将字符串转为一个对象。</li>
+</ul>
+<h4 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h4><h6 id="使用第三方插件"><a href="#使用第三方插件" class="headerlink" title="使用第三方插件"></a>使用第三方插件</h6><p>需要先安装formidable包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let http = require(&apos;http&apos;);</span><br><span class="line">let url = require(&apos;url&apos;);</span><br><span class="line">let formidable = require(&apos;formidable&apos;);</span><br><span class="line">let util = require(&apos;util&apos;);//用于将object转为字符串</span><br><span class="line"> http.createServer((req,res) =&gt; &#123;</span><br><span class="line"> 	if(req.url === &apos;/postmsg&apos; &amp;&amp; req.methods.tolowerCase() === &quot;post&quot;)&#123;</span><br><span class="line"> 		//实例化对象</span><br><span class="line"> 		let form = new formidable.IncomingForm();</span><br><span class="line"> 		//设置上传文件路径</span><br><span class="line"> 		form.uploadDir = &apos;./uploads&apos;;</span><br><span class="line"> 		//获取表单内容</span><br><span class="line"> 		form.parse(req,(err,fileds,files) =&gt; &#123;</span><br><span class="line"> 			res.writeHead(200,&#123;&quot;content-Type&quot;:&quot;text/plain;charset=UTF-8&quot;&#125;);</span><br><span class="line"> 			res.end(util.inspect(&#123;fields:fields,files:files&#125;));</span><br><span class="line"> 		&#125;)</span><br><span class="line"> 	&#125;</span><br><span class="line"> &#125;).listen(80,&apos;127.0.0.1&apos;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="模块编译"><a href="#模块编译" class="headerlink" title="模块编译"></a>模块编译</h4><p>在Node中，每个文件模块都是一个对象，它的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Module(id, parent)&#123;</span><br><span class="line">	this.id = id;</span><br><span class="line">	this.exports = &#123;&#125;;</span><br><span class="line">	this.parent = parent;</span><br><span class="line">	if(parent &amp;&amp; parent.children)&#123;</span><br><span class="line">		parent.children.push(this);</span><br><span class="line">	&#125;</span><br><span class="line">	this.filename = null;</span><br><span class="line">	this.loaded = false;</span><br><span class="line">	this.children = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译和执行是引入文件模块的最后一个阶段。定位到具体文件后，Node会新建一个模块对象，然后通过路径载入并编译。对于不同的文件扩展名，其载入的方式也有所不同，具体如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.js文件。通过fs模块同步读取文件后编译执行。</span><br><span class="line"></span><br><span class="line">.node文件。这是用C/C++编写的扩展文件，通过dlopen()方法加载最后的编译生成的文件。</span><br><span class="line"></span><br><span class="line">.json文件。通过fs模块同步读取文件后，用JSON.parse()解析返回结果。</span><br><span class="line"></span><br><span class="line">其余扩展名文件。它们都被当作.js文件解析。(因为node只能解析js文件，其他文件最后都会被转化成js文件，故当其余扩展名文件出现时，node无法识别，故将其认为是默认扩展名进行解析，即.js)</span><br></pre></td></tr></table></figure>
+
+<p>每一个编译成功的模块都会将文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能。</p>
+<p>根据不同文件扩展名，node会调用不同的读取方式，如：.json文件调用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Module._extensions[&apos;.json&apos;] = function(module,filename)&#123;</span><br><span class="line">	var content = NativeModule.require(&apos;fs&apos;).readFileSync(filename,&apos;utf8&apos;);</span><br><span class="line">	try&#123;</span><br><span class="line">		module.exports = JSON.parse(strinpBOM(cntent));</span><br><span class="line">	&#125;catch(err)&#123;</span><br><span class="line">		err.message = filename + &apos;:&apos; + err.message;</span><br><span class="line">		throw err;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，Module._extensions会被赋值给 require() 的extensions属性，所以通过在代码中访问require.extensions可知道系统中已有的加载方式。编写代码测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//新建index.js文件</span><br><span class="line">console.log(require.extensions);</span><br><span class="line">//运行node index.js,输出</span><br><span class="line">//[Object: null prototype] &#123; &apos;.js&apos;: [Function], &apos;.json&apos;: [Function], &apos;.node&apos;: [Function] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想对自定义的扩展名进行特殊的加载，可以通过类似require.extensions[‘.ext’]的方式实现。早期的CoffeeScript文件就是通过添加require.extensions[‘.coffee’]扩展方式来加载的。但是从v0.10.6版本开始，官方不鼓励通过这种方式进行自定义扩展名的加载，而是期望先将其它语言或文件先编译成js文件后再进行加载，这样做的好处是不将繁琐的编译加载等过程引入node的执行过程。</p>
+<p>在确定文件的扩展名后，node将调用具体的编译方式来将文件执行后返回给调用者。</p>
+<p>注：我们都知道CommonJS模块规范中，每个模块文件都存在<code>require、exports、module、_filename、_dirname</code>这5个变量却不知其从何而来。若是把直接定义模块的过程放在浏览器端，势必会存在污染全局变量的情况，故其不可能。</p>
+<p>事实上，在编译过程中，node会对获取的js文件内容进行包装，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function(require、exports、module、_filename、_dirname)&#123;</span><br><span class="line">	var math = require(&apos;math&apos;);</span><br><span class="line">	exports.area = function(radius)&#123;</span><br><span class="line">		return Math.PI * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样每个模块文件之间都进行了作用于隔离。包装之后的代码会通过vm原生模块的runInThisContext() 方法执行，类似于eval，只是具有明确上下文，不污染全局，返回一个体的function对象。最后，将当前模块对象的exports属性，require()方法，module(模块对象本身)，以及在文件定位中得到的完整文件路径和文件目录作为参数传递给这个function()执行。</p>
+<p>这就是为什么这些变量并没有在每个模块声明却可以使用的原因。在执行后，模块的exports属性被返回给了调用方。exports属性上的任何方法都可以被外部调用到，但是模块中的其余变量和属性则不可直接被调用。</p>
+<p>至此，require、exports、module的流程已经完整，这就是Node对CommonJS模块规范的实现。</p>
+<p><strong>JSON文件的编译</strong></p>
+<p>json文件的编译是三种编译方式中最简单的。Node利用fs模块同步读取JSON文件的内容之后，调用JSON.parse（）方法得到对象，然后将它赋给模块对象的exports，以供外部调用。</p>
+<p>JSON文件在用作项目的配置文件时比较有用。如果你定义了JSON文件作为配置，那就不用调用fs模块去异步读取和解析，直接调用require（）引入即可。此外，你还可以享受到模块缓存的便利，并且二次引入时也没有性能影响。</p>
+<p>这里我们提到的模块编译都是指文件编译，即用户自己编写的模块。</p>
+<h6 id="内建模块"><a href="#内建模块" class="headerlink" title="内建模块"></a>内建模块</h6><p>内建模块的优势在于：首先，他们本身由C/C++编写，性能上优于脚本语言；其次，其次，在进行文件编译时，他们会被编译进二进制文件。一旦node开始执行，他们会被直接加载进内存中，无需再次坐标识符定位、文件定位、编译等过程，直接就可执行。</p>
+<p>Node在启动时，会生成一个全局变量process，并提供Binding()方法来协助加载内建模块。</p>
+<p>在加载内建模块时，我们会先创建一个exports空对象，然后调用get_builtin_module（）方法取出内建模块对象，通过执行register_func()填充exports对象，最后将exports对象按模块名缓存，并返回给调用方完成导出。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-http进阶" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -4845,1097 +5711,6 @@
 </li>
 </ul>
 </script></li></ol></li></ul></li></ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-http的学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/04/06/http的学习/" class="article-date">
-      <time datetime="2020-04-06T02:47:35.000Z" itemprop="datePublished">2020-04-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/http的学习/">http的学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="HTTP无状态协议"><a href="#HTTP无状态协议" class="headerlink" title="HTTP无状态协议"></a>HTTP无状态协议</h4><p>HTTP无状态协议，是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
-<p>客户端与服务器进行动态交互的Web应用程序出现之后，HTTP无状态的特性严重阻碍了这些应用程序的实现，毕竟交互是需要承前启后的，简单的购物车程序也要知道用户到底在之前选择了什么商品。于是，两种用于保持HTTP连接状态的技术就应运而生了，一个是<a href="https://baike.baidu.com/item/Cookie" target="_blank" rel="noopener">Cookie</a>，而另一个则是<a href="https://baike.baidu.com/item/Session" target="_blank" rel="noopener">Session</a>。HTTP本身是一个无状态的<a href="https://baike.baidu.com/item/连接协议" target="_blank" rel="noopener">连接协议</a>，为了支持客户端与服务器之间的交互，我们就需要通过不同的技术为交互存储状态，而这些不同的技术就是Cookie和Session了。</p>
-<p>Cookie是通过客户端保持状态的<a href="https://baike.baidu.com/item/解决/32786" target="_blank" rel="noopener">解决</a>方案。从定义上来说，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。让我们说得更具体一些：当用户使用浏览器访问一个支持<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>的网站的时候，用户会提供包括用户名在内的个人信息并且提交至服务器；接着，服务器在向客户端回传相应的<a href="https://baike.baidu.com/item/超文本" target="_blank" rel="noopener">超文本</a>的同时也会发回这些个人信息，当然这些信息并不是存放在HTTP响应体（Response Body）中的，而是存放于HTTP响应头（Response Header）；当客户端浏览器接收到来自服务器的响应之后，浏览器会将这些信息存放在一个统一的位置，对于<a href="https://baike.baidu.com/item/Windows操作系统/852149" target="_blank" rel="noopener">Windows操作系统</a>而言，我们可以从： [<a href="https://baike.baidu.com/item/系统盘" target="_blank" rel="noopener">系统盘</a>]:\Documents and Settings[用户名]\Cookies目录中找到存储的Cookie；自此，客户端再向服务器发送请求的时候，都会把相应的<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>再次发回至服务器。而这次，Cookie信息则存放在<a href="https://baike.baidu.com/item/HTTP请求头/6623287" target="_blank" rel="noopener">HTTP请求头</a>（Request Header）了。</p>
-<p>有了Cookie这样的技术实现，服务器在接收到来自客户端浏览器的请求之后，就能够通过分析存放于请求头的Cookie得到客户端特有的信息，从而动态生成与该客户端相对应的内容。通常，我们可以从很多网站的登录界面中看到“请记住我”这样的选项，如果你勾选了它之后再登录，那么在下一次访问该网站的时候就不需要进行重复而繁琐的登录动作了，而这个功能就是通过Cookie实现的。</p>
-<p>与Cookie相对的一个解决方案是Session，它是通过服务器来保持状态的。由于<a href="https://baike.baidu.com/item/Session/479100" target="_blank" rel="noopener">Session</a>这个词汇包含的语义很多，因此需要在这里明确一下 Session的含义。首先，我们通常都会把Session翻译成会话，因此我们可以把客户端浏览器与服务器之间一系列交互的动作称为一个  Session。从这个语义出发，我们会提到Session持续的时间，会提到在Session过程中进行了什么操作等等；其次，Session指的是服务器端为客户端所开辟的存储空间，在其中保存的信息就是用于保持状态。从这个语义出发，我们则会提到往Session中存放什么内容，如何根据键值从 Session中获取匹配的内容等。</p>
-<p>要使用Session，第一步当然是创建Session了。那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法，而在<a href="https://baike.baidu.com/item/Java/85979" target="_blank" rel="noopener">Java</a>中是通过调用HttpServletRequest的getSession方法（使用true作为参数）创建的。在创建了<a href="https://baike.baidu.com/item/Session/479100" target="_blank" rel="noopener">Session</a>的同时，服务器会为该Session生成唯一的Session id，而这个Session  id在随后的请求中会被用来重新获得已经创建的Session；在Session被创建之后，就可以调用Session相关的方法往Session中增加内容了，而这些内容只会保存在服务器中，发到客户端的只有Session id；当客户端再次发送请求的时候，会将这个Session id带上，服务器接受到请求之后就会依据Session  id找到相应的Session，从而再次使用之。正是这样一个过程，用户的状态也就得以保持了。</p>
-<p>综上所述，HTTP本身是一个无状态的<a href="https://baike.baidu.com/item/连接协议/7768217" target="_blank" rel="noopener">连接协议</a>，为了支持客户端与服务器之间的交互，我们就需要通过不同的技术为交互存储状态，而这些不同的技术就是<a href="https://baike.baidu.com/item/Cookie/1119" target="_blank" rel="noopener">Cookie</a>和Session了。</p>
-<h4 id="cookie与session区别"><a href="#cookie与session区别" class="headerlink" title="cookie与session区别"></a>cookie与session区别</h4><p>​    1. cookie数据存放在客户的浏览器上，session数据放在服务器上。<br>​    2. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗。考虑到安全应当使用session。<br>​    3. session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能<br>​       考虑到减轻服务器性能方面，应当使用COOKIE。<br>​    4. 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</p>
-<h4 id="cookie的优缺点"><a href="#cookie的优缺点" class="headerlink" title="cookie的优缺点"></a>cookie的优缺点</h4><h6 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h6><p>​        1. 通过良好的编程习惯，控制保存在cookie中的session对象的大小。<br>​        2. 通过加密和安全传输技术，减少cookie被破解的可能性。<br>​        3. 只在cookie中存放不敏感数据，即使被盗也不会有重大损失。<br>​        4. 控制cookie的生命周期，使之不会永远有效。偷盗者可能拿到一个过期的cookie。<br>​        5.解决无状态问题。</p>
-<h6 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h6><p>​        1. cookie数量和长度的限制。每个域名最多有20条cookie，每个cookie长度不超过4KB，否则会被截掉。<br>​        2. 安全性问题。如果cookie被人拦截，那人就可以获取session信息。即使加密也于事无补，因为拦截者并不需要知道cookie的信息，他只要原样转发cookie就可达到目的。<br>​        3. 有些状态不可能保存在客户端。如，为了防止重复提交表单，我们需要在服务器保存一个计数器。如果我们把这个计数器保存在客户端就起不到任何作用。</p>
-<h4 id="常用的HTTP方法"><a href="#常用的HTTP方法" class="headerlink" title="常用的HTTP方法"></a>常用的HTTP方法</h4><ul>
-<li>GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器</li>
-<li>POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。</li>
-<li>PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。</li>
-<li>HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。</li>
-<li>DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。</li>
-<li>OPTIONS：查询相应URI支持的HTTP方法。</li>
-</ul>
-<h4 id="URL和URI区别"><a href="#URL和URI区别" class="headerlink" title="URL和URI区别"></a>URL和URI区别</h4><p><strong>URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</strong></p>
-<ul>
-<li>Web上可用的每种资源如HTML文档、图像、视频片段、程序等都是一个来URI来定位的</li>
-<li>URI一般由三部组成：</li>
-<li>①访问资源的命名机制</li>
-<li>②存放资源的主机名</li>
-<li>③资源自身的名称，由路径表示，着重强调于资源。</li>
-</ul>
-<p><strong>URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</strong></p>
-<ul>
-<li>URL是Internet上用来描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上，特别是著名的Mosaic。</li>
-<li>采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。URL一般由三部组成：</li>
-<li>①协议(或称为服务方式)</li>
-<li>②存有该资源的主机IP地址(有时也包括端口号)</li>
-<li>③主机资源的具体地址。如目录和文件名等</li>
-</ul>
-<h4 id="HTTP请求报文与响应报文格式"><a href="#HTTP请求报文与响应报文格式" class="headerlink" title="HTTP请求报文与响应报文格式"></a>HTTP请求报文与响应报文格式</h4><h6 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h6><p><img src="https://img-blog.csdn.net/20180213114347309" alt="img"></p>
-<ul>
-<li>a、请求行：包含请求方法、URI、HTTP版本信息</li>
-<li>b、请求首部字段</li>
-<li>c、请求内容实体</li>
-<li>d、空行</li>
-</ul>
-<h6 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h6><h6 id><a href="#" class="headerlink" title></a><img src="https://img-blog.csdn.net/20180213114358760" alt="img"></h6><ul>
-<li>a、状态行：包含HTTP版本、状态码、状态码的原因短语</li>
-<li>b、响应首部字段</li>
-<li>c、响应内容实体</li>
-<li>d、空行</li>
-</ul>
-<h6 id="常见的首部"><a href="#常见的首部" class="headerlink" title="常见的首部"></a>常见的首部</h6><ul>
-<li><strong>通用首部字段（请求报文与响应报文都会使用的首部字段）</strong><ul>
-<li>Date：创建报文时间</li>
-<li>Connection：连接的管理</li>
-<li>Cache-Control：缓存的控制</li>
-<li>Transfer-Encoding：报文主体的传输编码方式</li>
-</ul>
-</li>
-<li><strong>请求首部字段（请求报文会使用的首部字段）</strong><ul>
-<li>Host：请求资源所在服务器</li>
-<li>Accept：可处理的媒体类型</li>
-<li>Accept-Charset：可接收的字符集</li>
-<li>Accept-Encoding：可接受的内容编码</li>
-<li>Accept-Language：可接受的自然语言</li>
-</ul>
-</li>
-<li><strong>响应首部字段（响应报文会使用的首部字段）</strong><ul>
-<li>Accept-Ranges：可接受的字节范围</li>
-<li>Location：令客户端重新定向到的URI</li>
-<li>Server：HTTP服务器的安装信息</li>
-</ul>
-</li>
-<li><strong>实体首部字段（请求报文与响应报文的的实体部分使用的首部字段）</strong><ul>
-<li>Allow：资源可支持的HTTP方法</li>
-<li>Content-Type：实体主类的类型</li>
-<li>Content-Encoding：实体主体适用的编码方式</li>
-<li>Content-Language：实体主体的自然语言</li>
-<li>Content-Length：实体主体的的字节数</li>
-<li>Content-Range：实体主体的位置范围，一般用于发出部分请求时使用</li>
-</ul>
-</li>
-</ul>
-<h4 id="HTTPS工作原理"><a href="#HTTPS工作原理" class="headerlink" title="HTTPS工作原理"></a>HTTPS工作原理</h4><ul>
-<li>首先HTTP请求服务端生成证书，客户端对证书的有效期、合法性、域名是否与请求的域名一致、证书的公钥（RSA加密）等进行校验；</li>
-<li>客户端如果校验通过后，就根据证书的公钥的有效， 生成随机数，随机数使用公钥进行加密（RSA加密）；</li>
-<li>消息体产生的后，对它的摘要进行MD5（或者SHA1）算法加密，此时就得到了RSA签名；</li>
-<li>发送给服务端，此时只有服务端（RSA私钥）能解密。</li>
-<li>解密得到的随机数，再用AES加密，作为密钥（此时的密钥只有客户端和服务端知道）。</li>
-</ul>
-<h4 id="一次完整的HTTP请求所经历的7个步骤"><a href="#一次完整的HTTP请求所经历的7个步骤" class="headerlink" title="一次完整的HTTP请求所经历的7个步骤"></a>一次完整的HTTP请求所经历的7个步骤</h4><p>HTTP通信机制是在一次完整的HTTP通信过程中，Web浏览器与Web服务器之间将完成下列7个步骤：</p>
-<ul>
-<li>建立TCP连接</li>
-</ul>
-<p>在HTTP工作开始之前，Web浏览器首先要通过网络与Web服务器建立连接，该连接是通过TCP来完成的，该协议与IP协议共同构建 Internet，即著名的TCP/IP协议族，因此Internet又被称作是TCP/IP网络。<strong>HTTP是比TCP更高层次的应用层协议，根据规则， 只有低层协议建立之后才能进行更层协议的连接，因此，首先要建立TCP连接，一般TCP连接的端口号是80。</strong></p>
-<ul>
-<li>Web浏览器向Web服务器发送请求行</li>
-</ul>
-<p>一旦建立了TCP连接，<strong>Web浏览器就会向Web服务器发送请求命令</strong>。例如：GET /sample/hello.js HTTP/1.1。</p>
-<ul>
-<li>Web浏览器发送请求头<ul>
-<li>浏览器发送其请求命令之后，还要以头信息的形式向Web服务器发送一些别的信息，<strong>之后浏览器发送了一空白行来通知服务器</strong>，它已经结束了该头信息的发送。</li>
-</ul>
-</li>
-<li>Web服务器应答<ul>
-<li>客户机向服务器发出请求后，服务器会客户机回送应答， <strong>HTTP/1.1 200 OK ，应答的第一部分是协议的版本号和应答状态码。</strong></li>
-</ul>
-</li>
-<li>Web服务器发送应答头<ul>
-<li>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据及被请求的文档。</li>
-</ul>
-</li>
-<li>Web服务器向浏览器发送数据<ul>
-<li>Web服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此为结束，接着，<strong>它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据</strong>。</li>
-</ul>
-</li>
-<li>Web服务器关闭TCP连接<ul>
-<li>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码：</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br></pre></td></tr></table></figure>
-
-<p>TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</p>
-<p>建立TCP连接-&gt;发送请求行-&gt;发送请求头-&gt;（到达服务器）发送状态行-&gt;发送响应头-&gt;发送响应数据-&gt;断TCP连接</p>
-<h4 id="常见的HTTP相应状态码"><a href="#常见的HTTP相应状态码" class="headerlink" title="常见的HTTP相应状态码"></a>常见的HTTP相应状态码</h4><ul>
-<li>200：请求被正常处理</li>
-<li>204：请求被受理但没有资源可以返回</li>
-<li>206：客户端只是请求资源的一部分，服务器只对请求的部分资源执行GET方法，相应报文中通过Content-Range指定范围的资源。</li>
-<li>301：永久性重定向</li>
-<li>302：临时重定向</li>
-<li>303：与302状态码有相似功能，只是它希望客户端在请求一个URI的时候，能通过GET方法重定向到另一个URI上</li>
-<li>304：发送附带条件的请求时，条件不满足时返回，与重定向无关</li>
-<li>307：临时重定向，与302类似，只是强制要求使用POST方法</li>
-<li>400：请求报文语法有误，服务器无法识别</li>
-<li>401：请求需要认证</li>
-<li>403：请求的对应资源禁止被访问</li>
-<li>404：服务器无法找到对应资源</li>
-<li>500：服务器内部错误</li>
-<li>503：服务器正忙</li>
-</ul>
-<h4 id="HTTP1-1版本新特性"><a href="#HTTP1-1版本新特性" class="headerlink" title="HTTP1.1版本新特性"></a>HTTP1.1版本新特性</h4><ul>
-<li>a、<strong>默认持久连接节省通信量</strong>，只要客户端服务端任意一端没有明确提出断开TCP连接，就一直保持连接，可以发送多次HTTP请求</li>
-<li>b、<strong>管线化，客户端可以同时发出多个HTTP请求，而不用一个个等待响应</strong></li>
-<li>c、<strong>断点续传</strong><ul>
-<li><strong>实际上就是利用HTTP消息头使用分块传输编码，将实体主体分块传输。</strong></li>
-</ul>
-</li>
-</ul>
-<h6 id="HTTP优化方案"><a href="#HTTP优化方案" class="headerlink" title="HTTP优化方案"></a>HTTP优化方案</h6><ul>
-<li><strong>TCP复用：TCP连接复用是将多个客户端的HTTP请求复用到一个服务器端TCP连接上，而HTTP复用则是一个客户端的多个HTTP请求通过一个TCP连接进行处理。前者是负载均衡设备的独特功能；而后者是HTTP 1.1协议所支持的新功能，目前被大多数浏览器所支持。</strong></li>
-<li><strong>内容缓存：将经常用到的内容进行缓存起来，那么客户端就可以直接在内存中获取相应的数据了。</strong></li>
-<li><strong>压缩：将文本数据进行压缩，减少带宽</strong></li>
-<li><strong>SSL加速（SSL Acceleration）：使用SSL协议对HTTP协议进行加密，在通道内加密并加速</strong></li>
-<li><strong>TCP缓冲：通过采用TCP缓冲技术，可以提高服务器端响应时间和处理效率，减少由于通信链路问题给服务器造成的连接负担。</strong></li>
-</ul>
-<h4 id="Cache-control缓存控制"><a href="#Cache-control缓存控制" class="headerlink" title="Cache-control缓存控制"></a>Cache-control缓存控制</h4><p>网页的缓存是由HTTP消息头中的“Cache-control”来控制的，常见的取值有private、no-cache、max-age、must-revalidate等，默认为private。<br>其作用根据不同的重新浏览方式分为以下几种情况：<br>（1）  打开新窗口如果指定cache-control的值为private、no-cache、must-revalidate，那么打开新窗口访问时都会重新访问服务器。而如果指定了max-age值，那么在此值内的时间里就不会重新访问服务器，例如： Cache-control: max-age=5 表示当访问此网页后的5秒内再次访问不会去服务器。<br>（2） 在地址栏回车如果值为private或must-revalidate（和网上说的不一样），则只有第一次访问时会访问服务器，以后就不再访问。如果值为no-cache，那么每次都会访问。如果值为max-age，则在过期之前不会重复访问。<br>（3） 按后退按扭如果值为private、must-revalidate、max-age，则不会重访问，而如果为no-cache，则每次都重复访问。<br>（4） 按刷新按扭无论为何值，都会重复访问  当指定Cache-control值为“no-cache”时，访问此页面不会在Internet临时文章夹留下页面备份。另外，通过指定“Expires”值也会影响到缓存。例如，指定Expires值为一个早已过去的时间，那么访问此网时若重复在地址栏按回车，那么每次都会重复访问： Expires: Fri, 31 Dec 1999 16:00:00 GMT  在ASP中，可以通过Response对象的Expires、ExpiresAbsolute属性控制Expires值；通过Response对象的CacheControl属性控制Cache-control的值，例如： Response.ExpiresAbsolute = #2000-1-1# ‘  指定绝对的过期时间，这个时间用的是服务器当地时间，会被自动转换为GMT时间 Response.Expires = 20 ‘  指定相对的过期时间，以分钟为单位，表示从当前时间起过多少分钟过期。 Response.CacheControl = “no-cache”  Expires值是可以通过在Internet临时文件夹中查看临时文件的属性看到的。                                    </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-课程表制作" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/29/课程表制作/" class="article-date">
-      <time datetime="2020-03-29T00:09:28.000Z" itemprop="datePublished">2020-03-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/29/课程表制作/">课程表制作</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h5 id="课程表制作"><a href="#课程表制作" class="headerlink" title="课程表制作"></a>课程表制作</h5><p>使用微信小程序制作的课程表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//index.wxml文件</span><br><span class="line"></span><br><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;view class=&quot;top&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[&apos;一&apos;,&apos;二&apos;,&apos;三&apos;,&apos;四&apos;,&apos;五&apos;,&apos;六&apos;,&apos;日&apos;]&#125;&#125;&quot; class=&quot;top-text&quot;&gt;</span><br><span class="line">      周&#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br><span class="line">&lt;view style=&quot;display:flex;flex-direction:row;background:#D2E6B3&quot;&gt;</span><br><span class="line">  &lt;view style=&quot;color:#7cba23;&quot;&gt;</span><br><span class="line">    &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot; class=&quot;left&quot;&gt;</span><br><span class="line">      &#123;&#123;item&#125;&#125;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">  &lt;!-- &lt;view wx:for=&quot;&#123;&#123;[1,2,3,4,5,6,7,8,9,10]&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view style=&quot;width:750rpx;margin-top:&#123;&#123;(index+1)*100&#125;&#125;rpx;  position: absolute;border-bottom:1rpx solid &#123;&#123;index==3?&apos;red&apos;:&apos;lightgray&apos;&#125;&#125;;&quot;&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt; --&gt;</span><br><span class="line">  &lt;view wx:for=&quot;&#123;&#123;wlist&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;view class=&quot;flex-item kcb-item&quot; bindtap=&quot;showCardView&quot; data-statu=&quot;open&quot; data-index=&quot;&#123;&#123;index&#125;&#125;&quot; style=&quot;margin-left:&#123;&#123;(item.xqj-1)*100&#125;&#125;rpx;margin-top:&#123;&#123;(item.skjc-1)*100+10&#125;&#125;rpx;height:&#123;&#123;item.skcd*100-5&#125;&#125;rpx;background-color:&#123;&#123;colorArrays[index%9]&#125;&#125;&quot;&gt;</span><br><span class="line">      &lt;view class=&quot;smalltext&quot;&gt;&#123;&#123;item.kcmc&#125;&#125;&lt;/view&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
-
-<p>index.wxss</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">.top &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: row;</span><br><span class="line">  margin-left: 35rpx;</span><br><span class="line">  background-color: #d2e6b3;</span><br><span class="line">  color: #7cba23;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.top-text &#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 35rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  width: 35rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">  font-size: 9pt;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.flex-item &#123;</span><br><span class="line">  width: 95rpx;</span><br><span class="line">  height: 100px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.kcb-item &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.smalltext &#123;</span><br><span class="line">  font-size: 8pt;</span><br><span class="line">  color: #fff;</span><br><span class="line">  padding-left: 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.scroll &#123;</span><br><span class="line">  height: 1170rpx;</span><br><span class="line">  z-index: 101;</span><br><span class="line">  position: fixed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>index.js文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">//获取应用实例</span><br><span class="line">const app = getApp()</span><br><span class="line"></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    colorArrays: [&quot;#85B8CF&quot;, &quot;#C0C652&quot;, &quot;#D8AA5A&quot;, &quot;#FC9F9D&quot;, &quot;#0A9A84&quot;, &quot;#61BC69&quot;, &quot;#12AEF3&quot;, &quot;#E29AAD&quot;], </span><br><span class="line">    wlist: [</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 1, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 1, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 2, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 4, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 8, &quot;skcd&quot;: 1, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 3, &quot;skjc&quot;: 5, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 2, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 4, &quot;skjc&quot;: 8, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 5, &quot;skjc&quot;: 1, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 6, &quot;skjc&quot;: 3, &quot;skcd&quot;: 2, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">      &#123; &quot;xqj&quot;: 7, &quot;skjc&quot;: 5, &quot;skcd&quot;: 3, &quot;kcmc&quot;: &quot;高等数学@教A-301&quot; &#125;,</span><br><span class="line">    ],</span><br><span class="line">    motto: &apos;Hello World&apos;,</span><br><span class="line">    userInfo: &#123;&#125;,</span><br><span class="line">    hasUserInfo: false,</span><br><span class="line">    canIUse: wx.canIUse(&apos;button.open-type.getUserInfo&apos;)</span><br><span class="line">  &#125;,</span><br><span class="line">  //事件处理函数</span><br><span class="line">  bindViewTap: function() &#123;</span><br><span class="line">    wx.navigateTo(&#123;</span><br><span class="line">      url: &apos;../logs/logs&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad: function () &#123;</span><br><span class="line">    if (app.globalData.userInfo) &#123;</span><br><span class="line">      this.setData(&#123;</span><br><span class="line">        userInfo: app.globalData.userInfo,</span><br><span class="line">        hasUserInfo: true</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else if (this.data.canIUse)&#123;</span><br><span class="line">      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回</span><br><span class="line">      // 所以此处加入 callback 以防止这种情况</span><br><span class="line">      app.userInfoReadyCallback = res =&gt; &#123;</span><br><span class="line">        this.setData(&#123;</span><br><span class="line">          userInfo: res.userInfo,</span><br><span class="line">          hasUserInfo: true</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // 在没有 open-type=getUserInfo 版本的兼容处理</span><br><span class="line">      wx.getUserInfo(&#123;</span><br><span class="line">        success: res =&gt; &#123;</span><br><span class="line">          app.globalData.userInfo = res.userInfo</span><br><span class="line">          this.setData(&#123;</span><br><span class="line">            userInfo: res.userInfo,</span><br><span class="line">            hasUserInfo: true</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getUserInfo: function(e) &#123;</span><br><span class="line">    console.log(e)</span><br><span class="line">    app.globalData.userInfo = e.detail.userInfo</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      userInfo: e.detail.userInfo,</span><br><span class="line">      hasUserInfo: true</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:%5CUsers%5CCCY%5CDesktop%5C3.png" alt="3"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-CSS3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/26/CSS3/" class="article-date">
-      <time datetime="2020-03-26T03:48:03.000Z" itemprop="datePublished">2020-03-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/26/CSS3/">CSS3</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>CSS知识点</p>
-<h2 id="一-解决老的浏览器支持问题"><a href="#一-解决老的浏览器支持问题" class="headerlink" title="一 . 解决老的浏览器支持问题"></a>一 . 解决老的浏览器支持问题</h2><h5 id="1-加上相应的前缀即可"><a href="#1-加上相应的前缀即可" class="headerlink" title="1.加上相应的前缀即可"></a>1.加上相应的前缀即可</h5><table>
-<thead>
-<tr>
-<th>Chorme</th>
-<th>IE</th>
-<th>Firefox</th>
-<th>Safari</th>
-<th>Opera</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-webkit-</td>
-<td>-ms-</td>
-<td>-moz-</td>
-<td>-webkit-</td>
-<td>-o-或者-xv-</td>
-</tr>
-</tbody></table>
-<h4 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2.基本概念"></a>2.基本概念</h4><ul>
-<li>CSS3弹性盒子：<ul>
-<li>是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式；引入弹性布局的目的是提供更有效的方式来对一个容器中的子元素进行排列，对齐和分配空白空间。</li>
-<li>弹性容器通过设置display属性为flex或inline-flex将其定义为弹性盒子，弹性容器内包含了一个或多个弹性子元素； 弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。</li>
-<li>弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-选择器"><a href="#3-选择器" class="headerlink" title="3.选择器"></a>3.选择器</h4><table>
-<thead>
-<tr>
-<th>.intro</th>
-<th>选择所有class=”intro”的元素</th>
-<th>1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-id.html" target="_blank" rel="noopener">#<em>id</em></a></td>
-<td>#firstname</td>
-<td>选择所有id=”firstname”的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-all.html" target="_blank" rel="noopener">*</a></td>
-<td>*</td>
-<td>选择所有元素</td>
-</tr>
-<tr>
-<td><em>element</em></td>
-<td>p</td>
-<td>选择所有p元素</td>
-</tr>
-<tr>
-<td><em>element,element</em></td>
-<td>div,p</td>
-<td>选择所有元素和元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-element-element.html" target="_blank" rel="noopener"><em>element element</em></a></td>
-<td>div p</td>
-<td>选择元素内的所有元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-element-gt.html" target="_blank" rel="noopener"><em>element</em>&gt;<em>element</em></a></td>
-<td>div&gt;p</td>
-<td>选择所有父级是div元素的p元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-element-pluss.html" target="_blank" rel="noopener"><em>element</em>+<em>element</em></a></td>
-<td>div+p</td>
-<td>选择所有紧接着元素之后的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attribute.html" target="_blank" rel="noopener">[<em>attribute</em>]</a></td>
-<td>[target]</td>
-<td>选择所有带有target属性元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value.html" target="_blank" rel="noopener">[<em>attribute</em>=<em>value</em>]</a></td>
-<td>[target=-blank]</td>
-<td>选择所有使用target=”-blank”的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-contains.html" target="_blank" rel="noopener">[<em>attribute</em>~=<em>value</em>]</a></td>
-<td>[title~=flower]</td>
-<td>选择标题属性包含单词”flower”的所有元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attribute-value-lang.html" target="_blank" rel="noopener">[<em>attribute</em>|=<em>language</em>]</a></td>
-<td>[lang|=en]</td>
-<td>选择一个lang属性的起始值=”EN”的所有元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-link.html" target="_blank" rel="noopener">:link</a></td>
-<td>a:link</td>
-<td>选择所有未访问链接</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-visited.html" target="_blank" rel="noopener">:visited</a></td>
-<td>a:visited</td>
-<td>选择所有访问过的链接</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-active.html" target="_blank" rel="noopener">:active</a></td>
-<td>a:active</td>
-<td>选择活动链接</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-hover.html" target="_blank" rel="noopener">:hover</a></td>
-<td>a:hover</td>
-<td>选择鼠标在链接上面时</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-focus.html" target="_blank" rel="noopener">:focus</a></td>
-<td>input:focus</td>
-<td>选择具有焦点的输入元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-firstletter.html" target="_blank" rel="noopener">:first-letter</a></td>
-<td>p:first-letter</td>
-<td>选择每一个元素的第一个字母</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-firstline.html" target="_blank" rel="noopener">:first-line</a></td>
-<td>p:first-line</td>
-<td>选择每一个元素的第一行</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-firstchild.html" target="_blank" rel="noopener">:first-child</a></td>
-<td>p:first-child</td>
-<td>指定只有当元素是其父级的第一个子级的样式。</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-before.html" target="_blank" rel="noopener">:before</a></td>
-<td>p:before</td>
-<td>在每个元素之前插入内容</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-after.html" target="_blank" rel="noopener">:after</a></td>
-<td>p:after</td>
-<td>在每个元素之后插入内容</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-lang.html" target="_blank" rel="noopener">:lang(<em>language</em>)</a></td>
-<td>p:lang(it)</td>
-<td>选择一个lang属性的起始值=”it”的所有元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-gen-sibling.html" target="_blank" rel="noopener"><em>element1</em>~<em>element2</em></a></td>
-<td>p~ul</td>
-<td>选择p元素之后的每一个ul元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attr-begin.html" target="_blank" rel="noopener">[<em>attribute</em>^=<em>value</em>]</a></td>
-<td>a[src^=”https”]</td>
-<td>选择每一个src属性的值以”https”开头的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attr-end.html" target="_blank" rel="noopener">[<em>attribute</em>$=<em>value</em>]</a></td>
-<td>a[src$=”.pdf”]</td>
-<td>选择每一个src属性的值以”.pdf”结尾的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-attr-contain.html" target="_blank" rel="noopener">[<em>attribute*</em>=<em>value</em>]</a></td>
-<td>a[src*=”44lan”]</td>
-<td>选择每一个src属性的值包含子字符串”44lan”的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-first-of-type.html" target="_blank" rel="noopener">:first-of-type</a></td>
-<td>p:first-of-type</td>
-<td>选择每个p元素是其父级的第一个p元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-last-of-type.html" target="_blank" rel="noopener">:last-of-type</a></td>
-<td>p:last-of-type</td>
-<td>选择每个p元素是其父级的最后一个p元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-only-of-type.html" target="_blank" rel="noopener">:only-of-type</a></td>
-<td>p:only-of-type</td>
-<td>选择每个p元素是其父级的唯一p元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-only-child.html" target="_blank" rel="noopener">:only-child</a></td>
-<td>p:only-child</td>
-<td>选择每个p元素是其父级的唯一子元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-nth-child.html" target="_blank" rel="noopener">:nth-child(<em>n</em>)</a></td>
-<td>p:nth-child(2)</td>
-<td>选择每个p元素是其父级的第二个子元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-child.html" target="_blank" rel="noopener">:nth-last-child(<em>n</em>)</a></td>
-<td>p:nth-last-child(2)</td>
-<td>选择每个p元素的是其父级的第二个子元素，从最后一个子项计数</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-nth-of-type.html" target="_blank" rel="noopener">:nth-of-type(<em>n</em>)</a></td>
-<td>p:nth-of-type(2)</td>
-<td>选择每个p元素是其父级的第二个p元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-nth-last-of-type.html" target="_blank" rel="noopener">:nth-last-of-type(<em>n</em>)</a></td>
-<td>p:nth-last-of-type(2)</td>
-<td>选择每个p元素的是其父级的第二个p元素，从最后一个子项计数</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-last-child.html" target="_blank" rel="noopener">:last-child</a></td>
-<td>p:last-child</td>
-<td>选择每个p元素是其父级的最后一个子级。</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-root.html" target="_blank" rel="noopener">:root</a></td>
-<td>:root</td>
-<td>选择文档的根元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-empty.html" target="_blank" rel="noopener">:empty</a></td>
-<td>p:empty</td>
-<td>选择每个没有任何子级的p元素（包括文本节点）</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-target.html" target="_blank" rel="noopener">:target</a></td>
-<td>#news:target</td>
-<td>选择当前活动的#news元素（包含该锚名称的点击的URL）</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-enabled.html" target="_blank" rel="noopener">:enabled</a></td>
-<td>input:enabled</td>
-<td>选择每一个已启用的输入元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-disabled.html" target="_blank" rel="noopener">:disabled</a></td>
-<td>input:disabled</td>
-<td>选择每一个禁用的输入元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-checked.html" target="_blank" rel="noopener">:checked</a></td>
-<td>input:checked</td>
-<td>选择每个选中的输入元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-not.html" target="_blank" rel="noopener">:not(<em>selector</em>)</a></td>
-<td>:not(p)</td>
-<td>选择每个并非p元素的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-selection.html" target="_blank" rel="noopener">::selection</a></td>
-<td>::selection</td>
-<td>匹配元素中被用户选中或处于高亮状态的部分</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-out-of-range.html" target="_blank" rel="noopener">:out-of-range</a></td>
-<td>:out-of-range</td>
-<td>匹配值在指定区间之外的input元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-in-range.html" target="_blank" rel="noopener">:in-range</a></td>
-<td>:in-range</td>
-<td>匹配值在指定区间之内的input元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-read-write.html" target="_blank" rel="noopener">:read-write</a></td>
-<td>:read-write</td>
-<td>用于匹配可读及可写的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-read-only.html" target="_blank" rel="noopener">:read-only</a></td>
-<td>:read-only</td>
-<td>用于匹配设置 “readonly”（只读） 属性的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-optional.html" target="_blank" rel="noopener">:optional</a></td>
-<td>:optional</td>
-<td>用于匹配可选的输入元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-required.html" target="_blank" rel="noopener">:required</a></td>
-<td>:required</td>
-<td>用于匹配设置了 “required” 属性的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-valid.html" target="_blank" rel="noopener">:valid</a></td>
-<td>:valid</td>
-<td>用于匹配输入值为合法的元素</td>
-</tr>
-<tr>
-<td><a href="https://www.w3cschool.cn/cssref/sel-invalid.html" target="_blank" rel="noopener">:invalid</a></td>
-<td>:invalid</td>
-<td>用于匹配输入值为非法的元素</td>
-</tr>
-</tbody></table>
-<h2 id="二-多重样式优先级深入概念"><a href="#二-多重样式优先级深入概念" class="headerlink" title="二 . 多重样式优先级深入概念"></a>二 . 多重样式优先级深入概念</h2><p>优先级是浏览器是通过判断哪些属性值与元素最相关以决定并应用到该元素上的。优先级仅由选择器组成的匹配规则决定的。</p>
-<p>优先级就是分配给指定的CSS声明的一个权重，它由匹配的选择器中的每一种选择器类型的数值决定。</p>
-<h3 id="优先级顺序"><a href="#优先级顺序" class="headerlink" title="优先级顺序"></a>优先级顺序</h3><p>下列是一份优先级逐级增加的选择器列表：</p>
-<ul>
-<li>通用选择器（*）</li>
-<li>元素(类型)选择器</li>
-<li>类选择器</li>
-<li>属性选择器</li>
-<li>伪类</li>
-<li>ID 选择器</li>
-<li>内联样式</li>
-</ul>
-<h3 id="important-规则例外"><a href="#important-规则例外" class="headerlink" title="!important 规则例外"></a>!important 规则例外</h3><p>当 !important 规则被应用在一个样式声明中时,该样式声明会覆盖CSS中任何其他的声明, 无论它处在声明列表中的哪里. 尽管如此, !important规则还是与优先级毫无关系.使用 !important 不是一个好习惯，因为它改变了你样式表本来的级联规则，从而使其难以调试。</p>
-<p>一些经验法则：</p>
-<ul>
-<li><strong>Always</strong> 要优化考虑使用样式规则的优先级来解决问题而不是 <code>!important</code></li>
-<li><strong>Only</strong> 只在需要覆盖全站或外部 css（例如引用的 ExtJs 或者 YUI ）的特定页面中使用 <code>!important</code></li>
-<li><strong>Never</strong> 永远不要在全站范围的 css 上使用<code>!important</code></li>
-<li><strong>Never</strong> 永远不要在你的插件中使用 <code>!important</code></li>
-<li><ul>
-<li>内联样式表的权值最高 1000；</li>
-<li>ID 选择器的权值为 100</li>
-<li>Class 类选择器的权值为 10</li>
-<li>HTML 标签选择器的权值为 1</li>
-</ul>
-</li>
-<li>id属性不要以数字开头，数字开头的id在Mozilla/Firefox浏览器不起作用</li>
-<li>创建样式表<ul>
-<li>外部样式表</li>
-<li>内部样式表</li>
-<li>内联样式表</li>
-<li>多重样式表</li>
-</ul>
-</li>
-</ul>
-<h3 id="CSS-优先级法则："><a href="#CSS-优先级法则：" class="headerlink" title="CSS 优先级法则："></a>CSS 优先级法则：</h3><ul>
-<li>A 选择器都有一个权值，权值越大越优先；</li>
-<li>B 当权值相等时，后出现的样式表设置要优于先出现的样式表设置；</li>
-<li>C 创作者的规则高于浏览者：即网页编写者设置的CSS 样式的优先权高于浏览器所设置的样式；</li>
-<li>D 继承的CSS 样式不如后来指定的CSS 样式；</li>
-<li>E 在同一组属性设置中标有“!important”规则的优先级最大；</li>
-</ul>
-<h4 id="目标选择器"><a href="#目标选择器" class="headerlink" title="目标选择器"></a>目标选择器</h4><ul>
-<li>：target{ }当目标被选中时就会执行该样式</li>
-</ul>
-<h2 id="三-CSS属性"><a href="#三-CSS属性" class="headerlink" title="三 . CSS属性"></a>三 . CSS属性</h2><h4 id="1-align-content"><a href="#1-align-content" class="headerlink" title="1.align-content"></a>1.align-content</h4><ul>
-<li><p>align-content属性在弹性容器内的各项没有占用交叉轴上所有可用的空间时对齐容器内的各项（垂直）</p>
-</li>
-<li><p><strong>提示：</strong>使用 justify-content 属性对齐主轴上的各项（水平）</p>
-<p><strong>注意：</strong>容器内必须有多行的项目，该属性才能渲染出效果。</p>
-<h2 id="CSS-语法"><a href="#CSS-语法" class="headerlink" title="CSS 语法"></a>CSS 语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: stretch|center|flex-start|flex-end|space-between|space-around|initial|inherit;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>属性值</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>stretch</td>
-<td>默认值。项目被拉伸以适应容器</td>
-</tr>
-<tr>
-<td>center</td>
-<td>项目位于容器的中心。</td>
-</tr>
-<tr>
-<td>flex-start</td>
-<td>项目位于容器的开头。</td>
-</tr>
-<tr>
-<td>flex-end</td>
-<td>项目位于容器的结尾。</td>
-</tr>
-<tr>
-<td>space-between</td>
-<td>项目位于各行之间留有空白的容器内。</td>
-</tr>
-<tr>
-<td>space-around</td>
-<td>项目位于各行之前、之间、之后都留有空白的容器内。</td>
-</tr>
-<tr>
-<td>initial</td>
-<td>设置该属性为它的默认值。</td>
-</tr>
-<tr>
-<td>inherit</td>
-<td>从父元素继承该属性。</td>
-</tr>
-</tbody></table>
-<p>#main { width: 70px; height: 300px; border: 1px solid #c3c3c3; display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; -webkit-align-content: center; align-content: center;}</p>
-</li>
-</ul>
-<h4 id="2-align-items属性"><a href="#2-align-items属性" class="headerlink" title="2.align-items属性"></a>2.align-items属性</h4><ul>
-<li>设置flex容器的对齐方式，使用每个flex对象元素的 align-self 属性可重写 align-items 属性。</li>
-<li>语法<ul>
-<li>align-items: stretch|center|flex-start|flex-end|baseline（位置元素在容器的基线）|initial（设为默认值）|inherit;</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-背景属性background"><a href="#3-背景属性background" class="headerlink" title="3.背景属性background"></a>3.背景属性background</h5><ul>
-<li>当使用简写属性时，属性值的顺序为：:<ul>
-<li>background-color</li>
-<li>background-image</li>
-<li>background-repeat</li>
-<li>background-attachment</li>
-<li>background-position</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>background</td>
-<td>简写属性，作用是将背景属性设置在一个声明中。</td>
-</tr>
-<tr>
-<td>background-attachment</td>
-<td>背景图像是否固定或者随着页面的其余部分滚动。</td>
-</tr>
-<tr>
-<td>background-color</td>
-<td>设置元素的背景颜色。</td>
-</tr>
-<tr>
-<td>background-image</td>
-<td>把图像设置为背景。</td>
-</tr>
-<tr>
-<td>background-position</td>
-<td>设置背景图像的起始位置。</td>
-</tr>
-<tr>
-<td>background-repeat</td>
-<td>设置背景图像是否及如何重复。</td>
-</tr>
-</tbody></table>
-<h5 id="四-文本格式"><a href="#四-文本格式" class="headerlink" title="四 . 文本格式"></a>四 . 文本格式</h5><ul>
-<li>文本颜色color</li>
-<li>文本对齐方式：text-align</li>
-<li>文本修饰：text-decoration</li>
-<li>文本转换：text-transform</li>
-<li>文本缩进（指定第一行缩进）：text-indent</li>
-<li>指定字符间的距离：letter-spacing（可正可负）</li>
-<li>指定一个段落中行之间的空间：line-height</li>
-<li>指定单词间的间距：word-spacing</li>
-</ul>
-<h2 id="一-CSS3的基本概念"><a href="#一-CSS3的基本概念" class="headerlink" title="一 . CSS3的基本概念"></a>一 . CSS3的基本概念</h2><ul>
-<li>CSS 用于控制网页的样式和布局。而CSS3是CSS技术的升级版本，CSS3语言开发是朝着模块化发展的。</li>
-<li>CSS3使用了层叠样式表技术，可以对网页布局、字体、颜色、背景灯效果做出控制。css3作为css的进阶版，拆分和增加了盒子模型、列表模块、语言模块 、背景边框 、文字特效 、多栏布局等等。CSS3的改变有很多，增加了文字特效，丰富了下划线样式，加入了圈重点的功能。在边框方面，有了更多的灵活性，可以更加轻松地操控渐变效果和动态效果等等。在文字效果方面，特意增加了投影。CSS3在兼容上做了很大的功夫，并且网络浏览器也还将继续支持CSS2，因此原来的代码不需要做太多的改变，只会变得更加地轻松。</li>
-<li>css是指层叠样式表，解决内容与表现分离的问题</li>
-<li>id选择器可为特有的id的html元素指定特定的样式，ID属性不要以数字开头，数字开头的ID在 Mozilla/Firefox 浏览器中不起作用。</li>
-<li><em>不要在属性值与单位之间留有空格（如：”margin-left: 20 px” ），正确的写法是 “margin-left: 20px” 。</em></li>
-</ul>
-<h2 id="二-CSS3的新属性"><a href="#二-CSS3的新属性" class="headerlink" title="二 . CSS3的新属性"></a>二 . CSS3的新属性</h2><h4 id="1-边框border"><a href="#1-边框border" class="headerlink" title="1.边框border"></a>1.边框border</h4><ul>
-<li>圆角边框：border-radius<ul>
-<li>border-radius：左上 右上 右下 左下；</li>
-</ul>
-</li>
-<li>阴影边框：border-shadow<ul>
-<li>box-shadow: 右偏移量 下偏移量 模糊距离 阴影尺寸  颜色 内外阴影；(可同时加多个)</li>
-<li><ul>
-<li>h-shadow：必需，水平阴影的位置。允许负值</li>
-<li>v-shadow：必需。垂直阴影的位置。允许负值。</li>
-<li>blur：可选，模糊距离</li>
-<li>spread：可选，阴影尺寸</li>
-<li>color：颜色</li>
-<li>insert：可选，将外部阴影（outset）改为内部阴影，外部阴影是默认值（不允许写）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>图像边框（IE浏览器不支持）：border-image</li>
-<li>对于 border-image，Safari 5 以及更老的版本需要前缀 -webkit-。Opera 支持 border-radius 和 box-shadow 属性，但是对于 border-image 需要前缀 -o-。</li>
-</ul>
-<h4 id="2-图片滤镜filter属性"><a href="#2-图片滤镜filter属性" class="headerlink" title="2.图片滤镜filter属性"></a>2.图片滤镜filter属性</h4><ul>
-<li>为元素添加可视效果（如饱和度与模糊度）</li>
-<li>img{ filter:grayscale(100%); //修改所有图片的颜色为100%灰度}</li>
-<li>常用属性值<ul>
-<li>filter:none | biur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity()| saturate() | sepia() | url();</li>
-</ul>
-</li>
-</ul>
-<p><strong>提示:</strong> 使用空格分隔多个滤镜。</p>
-<h2 id="Filter-函数"><a href="#Filter-函数" class="headerlink" title="Filter 函数"></a>Filter 函数</h2><p><strong>注意:</strong> 滤镜通常使用百分比 (如：75%), 当然也可以使用小数来表示 (如：0.75)。</p>
-<table>
-<thead>
-<tr>
-<th>Filter</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>none</td>
-<td>默认值，没有效果。</td>
-</tr>
-<tr>
-<td>blur(<em>px</em>)</td>
-<td>给图像设置高斯模糊。”radius”一值设定高斯函数的标准差，或者是屏幕上以多少像素融在一起， 所以值越大越模糊； 如果没有设定值，则默认是0；这个参数可设置css长度值，但不接受百分比值。</td>
-</tr>
-<tr>
-<td>brightness(<em>%</em>)</td>
-<td>给图片应用一种线性乘法，使其看起来更亮或更暗。如果值是0%，图像会全黑。值是100%，则图像无变化。其他的值对应线性乘数效果。值超过100%也是可以的，图像会比原来更亮。如果没有设定值，默认是1。</td>
-</tr>
-<tr>
-<td>contrast(<em>%</em>)</td>
-<td>调整图像的对比度。值是0%的话，图像会全黑。值是100%，图像不变。值可以超过100%，意味着会运用更低的对比。若没有设置值，默认是1。</td>
-</tr>
-<tr>
-<td>drop-shadow(<em>h-shadow v-shadow blur spread color</em>)</td>
-<td>给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受<shadow>(在CSS3背景中定义)类型的值，除了”inset”关键字是不允许的。该函数与已有的box-shadow box-shadow属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速。<code>&lt;shadow&gt;参数如下：```**&lt;offset-x&gt; &lt;offset-y&gt;** (必须)这是设置阴影偏移量的两个 &lt;length&gt;值. **&lt;offset-x&gt;** 设定水平方向距离. 负值会使阴影出现在元素左边. **&lt;offset-y&gt;**设定垂直距离.负值会使阴影出现在元素上方。查看**&lt;length&gt;**可能的单位. **如果两个值都是0**, 则阴影出现在元素正后面 (如果设置了</code><blur-radius> and/or <spread-radius>，会有模糊效果).``<strong><blur-radius></blur-radius></strong> (可选)这是第三个code&gt;<length>值. 值越大，越模糊，则阴影会变得更大更淡.不允许负值 若未设定，默认是0 (则阴影的边界很锐利).<strong><spread-radius></spread-radius></strong> (可选)这是第四个 <length>值. 正值会使阴影扩张和变大，负值会是阴影缩小.若未设定，默认是0 (阴影会与元素一样大小). 注意: Webkit, 以及一些其他浏览器 不支持第四个长度，如果加了也不会渲染。 <strong><color></color></strong> (可选)查看 <color>该值可能的关键字和标记。若未设定，颜色值基于浏览器。在Gecko (Firefox), Presto (Opera)和Trident (Internet Explorer)中， 会应用color<strong>color</strong>属性的值。另外, 如果颜色值省略，WebKit中阴影是透明的。`</color></length></length></spread-radius></blur-radius></shadow></td>
-</tr>
-<tr>
-<td>grayscale(<em>%</em>)</td>
-<td>将图像转换为灰度图像。值定义转换的比例。值为100%则完全转为灰度图像，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
-</tr>
-<tr>
-<td>hue-rotate(<em>deg</em>)</td>
-<td>给图像应用色相旋转。”angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</td>
-</tr>
-<tr>
-<td>invert(<em>%</em>)</td>
-<td>反转输入图像。值定义转换的比例。100%的价值是完全反转。值为0%则图像无变化。值在0%和100%之间，则是效果的线性乘子。 若值未设置，值默认是0。</td>
-</tr>
-<tr>
-<td>opacity(<em>%</em>)</td>
-<td>转化图像的透明程度。值定义转换的比例。值为0%则是完全透明，值为100%则图像无变化。值在0%和100%之间，则是效果的线性乘子，也相当于图像样本乘以数量。 若值未设置，值默认是1。该函数与已有的opacity属性很相似，不同之处在于通过filter，一些浏览器为了提升性能会提供硬件加速。</td>
-</tr>
-<tr>
-<td>saturate(<em>%</em>)</td>
-<td>转换图像饱和度。值定义转换的比例。值为0%则是完全不饱和，值为100%则图像无变化。其他值，则是效果的线性乘子。超过100%的值是允许的，则有更高的饱和度。 若值未设置，值默认是1。</td>
-</tr>
-<tr>
-<td>sepia(<em>%</em>)</td>
-<td>将图像转换为深褐色。值定义转换的比例。值为100%则完全是深褐色的，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</td>
-</tr>
-<tr>
-<td>url()</td>
-<td>URL函数接受一个XML文件，该文件设置了 一个SVG滤镜，且可以包含一个锚点来指定一个具体的滤镜元素。例如：<code>filter: url(svg-url#element-id)</code></td>
-</tr>
-<tr>
-<td>initial</td>
-<td>设置属性为默认值，可参阅： <a href="https://www.w3cschool.cn/cssref/css-initial.html" target="_blank" rel="noopener">CSS initial 关键字</a></td>
-</tr>
-<tr>
-<td>inherit</td>
-<td>从父元素继承该属性，可参阅：<a href="https://www.w3cschool.cn/cssref/css-inherit.html" target="_blank" rel="noopener">CSS inherit 关键字</a></td>
-</tr>
-</tbody></table>
-<h2 id="三-常见模型和样式表"><a href="#三-常见模型和样式表" class="headerlink" title="三 . 常见模型和样式表"></a>三 . 常见模型和样式表</h2><p><strong>行内元素只有左右边距，没有上下边距，指定padding值可能有bug</strong></p>
-<h4 id="1-居中对齐汇总"><a href="#1-居中对齐汇总" class="headerlink" title="1.居中对齐汇总"></a>1.居中对齐汇总</h4><h5 id="1-1-水平居中对齐"><a href="#1-1-水平居中对齐" class="headerlink" title="1-1 . 水平居中对齐"></a>1-1 . 水平居中对齐</h5><h5 id="margin-0-auto"><a href="#margin-0-auto" class="headerlink" title="margin:0 auto;"></a>margin:0 auto;</h5><p>必须是块级元素，且给定了宽度</p>
-<h5 id="text-align-center"><a href="#text-align-center" class="headerlink" title="text-align:center;"></a>text-align:center;</h5><p>父级元素是块级元素，自身是行内元素或者行内块元素</p>
-<p><strong>width:内容宽；height：内容高；padding：盒宽减去内容宽再除以2；background-clip：content-box；</strong></p>
-<p>利用padding和background-clip配合实现div的水平居中</p>
-<p>.parent{margin:0 auto;width:200px;height:200px;background-color:red;}.children {width: 100px;height: 100px;padding: 50px;background-color: black;background-clip:content-box;/<em>居中的关键</em>/</p>
-<h4 id="2-垂直居中"><a href="#2-垂直居中" class="headerlink" title="2 . 垂直居中"></a>2 . 垂直居中</h4><p><strong>line-height:盒子高</strong></p>
-<p>自身或者父级元素必须有具体行高</p>
-<p>position加translate（-50%，-50%），百分比以自身为基准,适合没固定大小的内容（min-width,max-height,overflow:scroll)</p>
-<style> #ex3_container{ width:200px; height:200px; background-color:yellow; position:relative; } #ex3_content{ left:50%; top:50%; transform:translate(-50%,-50%); -webkit-transform:translate(-50%,-50%); background-color:gray; color:white; position:absolute; } </style>
-
-<p><strong>绝对定位</strong></p>
-<p>祖先容器：position：relative；</p>
-<p>自身：height：***；position：absolute；margin：auto；top：0；left：0；</p>
-<p><em>高度必须给出，建议加overflow：auto；防止内容溢出</em></p>
-<h5 id="内容元素：position-fixed，z-index-999，记住父容器元素position-relative"><a href="#内容元素：position-fixed，z-index-999，记住父容器元素position-relative" class="headerlink" title="内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **"></a>内容元素：position: fixed，z-index: 999，记住父容器元素position: relative **</h5><p>.Absolute-Center.is-Fixed { width: 50%; height: 50%; overflow: auto; margin: auto; position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 999;}</p>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><h5 id="1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"><a href="#1-相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准" class="headerlink" title="1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准"></a>1.相邻的垂直块级盒子，外边距会合并，且以最大的外边距为准</h5><h4 id="2-嵌套块元素垂直外边距的合并"><a href="#2-嵌套块元素垂直外边距的合并" class="headerlink" title="2.嵌套块元素垂直外边距的合并"></a>2.嵌套块元素垂直外边距的合并</h4><p>对于两个嵌套关系的块级元素，如果父级元素没有上内边距及边框，则父元素的上边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会合并</p>
-<p>解决方法：</p>
-<ul>
-<li>可以为父级盒子加上1px的上边框或上内边距</li>
-<li>可以为父元素添加overflow：hidden；</li>
-</ul>
-<h4 id="3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"><a href="#3-宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）" class="headerlink" title="3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）"></a>3.宽度属性width和高度属性仅适用于块级元素，对行内元素无效（img标签和input除外）</h4><p>计算盒子模型总高度时，还应考虑上下两个盒子外边框合并问题</p>
-<p>如果一个盒子没有给定宽度/高度或者继承父亲的宽度/高度，则padding不会影响本盒子的大小</p>
-<p>内盒尺寸（元素实际大小）=width/height+padding+border</p>
-<h4 id="4-盒子模型布局稳定性"><a href="#4-盒子模型布局稳定性" class="headerlink" title="4.盒子模型布局稳定性"></a>4.盒子模型布局稳定性</h4><p>按照优先使用宽度（width），内边距（padding）外边距（margin）</p>
-<p>width &gt; padding &gt; margin</p>
-<p>原因：</p>
-<ul>
-<li>margin会有外边距合并问题还有ie下面的margin加倍的bug，所以最后使用</li>
-<li>padding 会影响盒子的大小，需要进行加减计算，比较麻烦，其次使用</li>
-<li>width没有什么问题</li>
-</ul>
-<h4 id="5-CSS盒模型"><a href="#5-CSS盒模型" class="headerlink" title="5. CSS盒模型"></a>5. CSS盒模型</h4><p>CSS3中可以通过box-sizing来指定盒模型，即指定为content-box，border-box，这样我们在计算盒子大小的方式就发生了变化</p>
-<p>可分为以下两种情况：</p>
-<ul>
-<li><p>box-sizing : content-box ;盒子大小为 width+padding +border，content-border指事默认值，其让元素维持W3C的标准Box Mode</p>
-</li>
-<li><p>box-sizing ： border-box；盒子大小就是width，即padding和border是包含在width里面的，新添属性</p>
-<p><strong>注意</strong>：上面的标注的width指的是CSS属性里设置的width：length；content的值会自动调整的</p>
-</li>
-</ul>
-<h4 id="6-CSS层叠样式"><a href="#6-CSS层叠样式" class="headerlink" title="6 . CSS层叠样式"></a>6 . CSS层叠样式</h4><ul>
-<li>样式冲突，遵循就近原则。哪个样式离结构近，就执行哪个样式</li>
-<li>样式不冲突不会层叠</li>
-</ul>
-<h4 id="7-CSS继承性"><a href="#7-CSS继承性" class="headerlink" title="7.CSS继承性"></a>7.CSS继承性</h4><p>恰当地使用继承可以简化代码，子元素可以继承父元素的样式（text-，font-，line-，这些元素开头的都可以继承，以及color属性）</p>
-<h4 id="8-CSS优先级"><a href="#8-CSS优先级" class="headerlink" title="8.CSS优先级"></a>8.CSS优先级</h4><p>定义css样式时，经常出现两个或更多规则应用在同一元素上，这时就出现优先级问题</p>
-<p>继承样式的权重为0.即在嵌套结构中，不管父元素权重多大，被子元素继承时，他的权重都为0，也就是说子元素定义的样式会覆盖继承来的样式，行内样式优先，应用style属性的元素，其行内样式的权重非常高，远大于100.</p>
-<p>权重相同时遵循就近原则。！important拥有最大的权重</p>
-<h4 id="9-浮动Float"><a href="#9-浮动Float" class="headerlink" title="9.浮动Float"></a>9.浮动Float</h4><ul>
-<li><p>浮动首先包含块的概念（包裹）。也就是说，浮动的元素总是找离他最近的父级元素对齐，但是不会超过内边距的范围</p>
-</li>
-<li><p>浮动元素排列元素，跟上一个元素（块级）有关。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</p>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Grid布局" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/26/Grid布局/" class="article-date">
-      <time datetime="2020-03-26T03:26:54.000Z" itemprop="datePublished">2020-03-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/26/Grid布局/">Grid布局</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="一-Grid布局"><a href="#一-Grid布局" class="headerlink" title="一 . Grid布局"></a>一 . Grid布局</h2><ul>
-<li>CSS Grid 布局是CSS中最强大的布局系统，是一个二维布局系统（flexbox是一维布局系统），也就意味着它可以同时处理行和列</li>
-<li>grid的目标是完全改变我们基于网格的用户界面的布局方式</li>
-<li>Grid布局由两个核心组成部分是wrapper（父元素）和item（子元素）。wrapper是实际的grid（网格），items是grid（网格内的内容）</li>
-</ul>
-<h4 id="1-网格容器"><a href="#1-网格容器" class="headerlink" title="1 . 网格容器"></a><strong>1 . 网格容器</strong></h4><ul>
-<li>要把wrapper元素变成grid，只要简单将其display设置为grid即可。应用 <code>display: grid</code> 的元素。这是所有 网格项（grid item）的直接父级元素。</li>
-<li>属性<ul>
-<li>display：将网格定义为网格容器，并为其内容建立新的网格格式上下文。grid （生成一个块级网格） ；inline-grid （内联网格）</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-网格项"><a href="#2-网格项" class="headerlink" title="2 .网格项"></a>2 .<strong>网格项</strong></h4><ul>
-<li>是网格容器的直接子元素（注意：通过嵌套元素（也称为子网格，即 subgrid ）向下传递网格参数的能力已移至 CSS Grid 规范的 Level 2 版本(详情访问 <a href="https://www.w3.org/TR/css-grid-2/#subgrids" target="_blank" rel="noopener">https://www.w3.org/TR/css-grid-2/#subgrids</a>）</li>
-</ul>
-<h4 id="3-网格线"><a href="#3-网格线" class="headerlink" title="3.网格线"></a>3.<strong>网格线</strong></h4><ul>
-<li>构成网格结构的分界线。它们既可以是垂直的（“列网格线(column grid lines)”），也可以是水平的（“行网格线(row grid lines)”），并位于行或列的任一侧。例如，这里的黄线就是一条列网格线。</li>
-<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-line.svg" alt="网格线(Grid Line)"></li>
-</ul>
-<h4 id="4-网格轨道"><a href="#4-网格轨道" class="headerlink" title="4.网格轨道"></a>4.<strong>网格轨道</strong></h4><ul>
-<li>两条相邻网格线之间的空间。你可以把它们想象成网格的列或行。下图是第二条和第三条 行网格线 之间的 网格轨道(Grid Track)。</li>
-<li><img src="https://www.html.cn/newimg88/2018/12/terms-grid-track.svg" alt="网格轨道(Grid Track)"></li>
-</ul>
-<h4 id="5-网格单元格"><a href="#5-网格单元格" class="headerlink" title="5.网格单元格"></a>5.<strong>网格单元格</strong></h4><ul>
-<li>两个相邻的行和两个相邻的列网格线之间的空间。这是 Grid(网格) 系统的一个“单元”。</li>
-</ul>
-<h4 id="6-网格区域-grid-template-areas"><a href="#6-网格区域-grid-template-areas" class="headerlink" title="6 .网格区域(grid-template-areas)"></a>6 .<strong>网格区域</strong>(grid-template-areas)</h4><ul>
-<li><p>4条网格线包围的总空间。一个 网格区域(Grid Area) 可以由任意数量的 网格单元格(Grid Cell) 组成。</p>
-</li>
-<li><p>网格单元格可以认为是网格线行为1和2，以及列网格线1和2之间的网格区域</p>
-</li>
-<li><p>通过引用grid-area属性指定的网格区域名称来定义网格模板，重复网格区域的名称导致内容跨越这些单元格。一个点号（.）代表空单元格。这个语法本身可视作网格的可视化结构。</p>
-<ul>
-<li><p><grid-area-name>:由网格项的grid-area指定网格区域名称</grid-area-name></p>
-</li>
-<li><p>none：不定义网格区域</p>
-</li>
-<li><p>.container{  grid-template-columns: 50px 50px 50px 50px;  grid-template-rows: auto;  grid-template-areas:     “header header header header”    “main main . sidebar”    “footer footer footer footer”; }</p>
-</li>
-<li><p><img src="https://www.html.cn/newimg88/2018/12/dddgrid-template-areas.svg" alt="网格区域名称模板"></p>
-</li>
-<li><h5 id="注意你不能-用这个语法来命名网格线，只是命名-网格区域"><a href="#注意你不能-用这个语法来命名网格线，只是命名-网格区域" class="headerlink" title="注意你不能 用这个语法来命名网格线，只是命名 网格区域"></a><strong>注意你不能 用这个语法来命名网格线，只是命名 网格区域</strong></h5><ul>
-<li>当你使用这种语法时，区域两端的网格线实际上会自动命名。如果你的网格区域的名字是 <strong>foo</strong>，该区域的起始行网格线 和 起始列网格线 的名称将为 <strong>foo-start</strong>，而最后一条行网格线 和 最后一条列网格线 的名称将为 <strong>foo-end</strong>。这意味着某些网格线可能有多个名字，如上例中最左边的网格线，它将有三个名称：header-start，main-start 和 footer-start 。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>columns（列）和rows（行）</p>
-<ul>
-<li><p>为了使其成为网格的二维容器，需要定义行和列。</p>
-</li>
-<li><p>要定位和调整items（子元素）大小，我们将使用grid-column和grid-row属性来设置。使用空格分隔的值列表，用来定义网格的列和行。这些值表示 网格轨道(Grid Track) 大小，它们之间的空格表示网格线。</p>
-<ul>
-<li><p>track-size： 可以是长度值，百分比，或者等份网格容器中可用空间（使用 <code>fr</code> 单位）     line-name`：你可以选择的任意名称</p>
-</li>
-<li><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br><span class="line"> grid-template-rows: &lt;track-size&gt; ... | &lt;line-name&gt; &lt;track-size&gt; ...;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义100px宽的3列  grid-template-columns ：100px  100px  100px;</p>
-</li>
-<li><p>定义50px高的两行   grid-template-rows : 50px  50px；</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 40px 50px auto 50px 40px;</span><br><span class="line"> grid-template-rows: 25% 100px auto;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><img src="https://www.html.cn/newimg88/2018/12/template-columns-rows-01.svg" alt="网格线名称"></p>
-</li>
-<li><p>.wrapper{display: grid；grid-template-columns: 100px 100px 100px;grid-template-rows: 100px 100px 100px；}</p>
-</li>
-<li><p>如果你的定义包含多个重复值，则可以使用 <code>repeat()</code> 表示法来简化定义：  grid-template-columns:repeate(3,20px [col-start]);</p>
-</li>
-<li><p>你也可以明确的指定网格线(Grid Line)名称   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];</span><br><span class="line">  grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果多行共享相同的名称，则可通过网格线名称和计数来引用它们 grid-template-start: col-start 2;</p>
-</li>
-<li><p>fr单元允许你用等分网格容器剩余可用空间来设置 网格轨道(Grid Track) 的大小 。例如grid-temp-columns : 1fr  1fr  1fr ;该代码会将每个网格项设置为网格容器宽度的三分之一：</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>放置items（子元素）</p>
-<ul>
-<li>设置子元素的大小可通过网格线来设置</li>
-<li><ul>
-<li>.item1{grid-column-start :1;grid-column-end :4;}</li>
-<li>简写式 .item1{grid-column: 1 / 4 ;}</li>
-<li>表示item1占据从第一条网格线开始，到第四条网格线结束（<strong>注意</strong>：3列有4条网格线）<img src="https://www.html.cn/newimg88/2017/12/1_l-adYpQCGve7W6DWY949pw.png" alt="Grid 布局，列网格线"></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.item1 &#123;</span><br><span class="line">    grid-column-start: 1;</span><br><span class="line">    grid-column-end: 3;</span><br><span class="line">&#125;</span><br><span class="line">.item3 &#123;</span><br><span class="line">    grid-row-start: 2;</span><br><span class="line">    grid-row-end: 4;</span><br><span class="line">&#125;</span><br><span class="line">.item4 &#123;</span><br><span class="line">    grid-column-start: 2;</span><br><span class="line">    grid-column-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://www.html.cn/newimg88/2017/12/1_QDSybpxjXSat6UtoHgUapQ.png" alt="Grid 布局"></p>
-<h4 id="7-简写属性grid-template"><a href="#7-简写属性grid-template" class="headerlink" title="7. 简写属性grid-template"></a>7. 简写属性grid-template</h4><ul>
-<li>用于定义rows , columns , areas 简写属性   grid-template: none | <grid-template-rows> / <grid-template-columns>;</grid-template-columns></grid-template-rows></li>
-<li><code>none</code>：将所有三个属性设置为其初始值</li>
-<li><code>&lt;grid-template-rows&gt; / &lt;grid-template-columns&gt;</code>：将 grid-template-columns 和 grid-template-rows`设置为相应地特定的值，并且设置grid-template-areas为none</li>
-</ul>
-<p>游戏：</p>
-<p>如果你觉得同时输入<code>grid-column</code>和<code>grid-row</code>也很复杂，我们还有另一种缩写。<code>grid-area</code>属性接受4个由’/‘分开的值：<code>grid-row-start</code>, <code>grid-column-start</code>, <code>grid-row-end</code>, 最后是<code>grid-column-end</code>。</p>
-<p>举个例子如下所示：<code>grid-area: 1 / 1 / 3 / 6;</code>。</p>
-<p>如果我们有很多个网格项呢？你可以任意覆盖它们不用有任何担心。用<code>grid-area</code>定义第二个网格项为所有未浇水的胡萝卜浇水。</p>
-
       
     </div>
     
