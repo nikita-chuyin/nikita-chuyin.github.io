@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta name="description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie是一段不超过4KB的小型文本数据，由一个名称name，一个值value和其他几个控">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端cookie解读">
 <meta property="og:url" content="http://yoursite.com/2020/06/11/前端cookie解读/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta property="og:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie是一段不超过4KB的小型文本数据，由一个名称name，一个值value和其他几个控">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-08T07:44:19.886Z">
+<meta property="og:updated_time" content="2020-08-15T13:29:56.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端cookie解读">
-<meta name="twitter:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie的简介cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它">
+<meta name="twitter:description" content="Cookie补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。 Cookie的引入当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。 Cookie是一段不超过4KB的小型文本数据，由一个名称name，一个值value和其他几个控">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -300,6 +300,15 @@
           
         <h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>补充：当关闭浏览器或关机后重新打开，存放在硬盘上的数据不会消失，而存放在内存中的数据会消失。</p>
 <h6 id="Cookie的引入"><a href="#Cookie的引入" class="headerlink" title="Cookie的引入"></a>Cookie的引入</h6><p>当用户在未登录状态下在京东购物网站向购物车中添加某些商品后将浏览器关闭，然后再打开浏览器访问京东，此时查看购物车会发现，购物车中仍然有刚才添加的商品，这其实就是cookie的功劳。</p>
+<p>Cookie是一段不超过4KB的小型文本数据，由一个名称name，一个值value和其他几个控制Cookie有效期，安全性，使用范围的可选属性组成。</p>
+<ol>
+<li>name/value：设置Cookie的名称及相应的值，对于认证的Cookie，value值包括Web服务器所提供的访问令牌。</li>
+<li>expires属性：设置Cookie的生命周期。有两种存储类型的Cookie：会话性和持久性。Expires属性缺省时，为会话性Cookie，仅保留在客户端内存中，并在用户关闭浏览器时失效；持久性Cookie会保存在用户的硬盘中，直至生存期或用户直接在网页中单击注销等按钮结束会话时才会失效。</li>
+<li>path属性：定义了Web站点上可以访问该Cookie的目录。</li>
+<li>Domain属性：指定了可以访问该Cookie的Web站点或域。Cookie机制并未遵循严格的同源策略，允许一个子域可以设置或获取其父域的Cookie。当需要实现单点登陆方案时，Cookie的上述特性非常有用，然而也增加了Cookie受攻击的危险，比如攻击者可以借此发动会话定置攻击。因而，浏览器禁止在Domain属性上设置<code>.org、.com</code>等顶级域名，以及在国家级及地区顶级域下注册的二级域名，以减少攻击的范围。</li>
+<li>Secure属性：指定是否使用<a href="https://baike.baidu.com/item/HTTPS/285356" target="_blank" rel="noopener">HTTPS</a>安全协议发送Cookie。使用HTTPS安全协议，可以保护Cookie在浏览器和Web服务器间的传输过程中不被窃取和篡改。该方法也可用于Web站点的身份鉴别，即在HTTPS的连接建立阶段，浏览器会检查Web网站的<a href="https://baike.baidu.com/item/SSL/320778" target="_blank" rel="noopener">SSL</a>证书的有效性。但是基于兼容性的原因（比如有些网站使用自签署的证书）在检测到SSL证书无效时，浏览器并不会立即终止用户的连接请求，而是显示安全风险信息，用户仍可以选择继续访问该站点。由于许多用户缺乏安全意识，因而仍可能连接到Pharming攻击所伪造的网站。</li>
+<li>HTTPOnly 属性 ：用于防止客户端脚本通过document.cookie属性访问Cookie，有助于保护Cookie不被跨站脚本攻击窃取或篡改。但是，HTTPOnly的应用仍存在局限性，一些浏览器可以阻止客户端脚本对Cookie的读操作，但允许写操作；此外大多数浏览器仍允许通过<a href="https://baike.baidu.com/item/XMLHTTP/481421" target="_blank" rel="noopener">XMLHTTP</a>对象读取<a href="https://baike.baidu.com/item/HTTP/243074" target="_blank" rel="noopener">HTTP</a>响应中的Set-Cookie头</li>
+</ol>
 <h6 id="Cookie的简介"><a href="#Cookie的简介" class="headerlink" title="Cookie的简介"></a>Cookie的简介</h6><p>cookie是属于web开发的技术，由若干键值对构成，且键值对均为字符串。它是所有web开发语言据支持的技术。它是一种进行网络会话状态跟踪的技术。</p>
 <p>会话（当用户打开浏览器，从发出第一次请求开始，一直到最终关闭浏览器就表示一次会话的完成）则是由一组请求和响应组成，是围绕看一件相关事情所进行的请求和响应，所以这些请求和响应之间必须有数据传递，即进行会话状态跟踪。但http协议是一种无状态协议，在不同请求间无法进行数据传递。此时就需要一种可以进行请求间数据传递的会话跟踪技术，而cookie就是这样一种技术。</p>
 <p>Cookie是由服务器生成，保存在客户端的一种信息载体。这个载体中存放着用户访问该站点的会话状态信息。只要cookie没有被清空，或cookie没有生效，那么保存在其中的会话状态就有效。用户在提交第一次请求后，由服务器生成cookie并将其封装到响应头中，以响应的形式发送给客户端，客户端接收到这个响应后，将cookie保存到客户端。当客户端再发起同类的请求（资源路径路径相同）后，在请求中会携带保存在客户端的cookie数据，发送给服务器，由服务器对会话进行跟踪。</p>
@@ -323,6 +332,7 @@
 <h6 id="congsession列表中查找"><a href="#congsession列表中查找" class="headerlink" title="congsession列表中查找"></a>congsession列表中查找</h6><p>服务端从请求中读取到从客户端发来的cookie，并根据cookie的JSESSIONID的值，从Map中查找相应key所对应的value，即session对象。然后对该session对象的域属性进行读写操作。</p>
 <h6 id="session的失效"><a href="#session的失效" class="headerlink" title="session的失效"></a>session的失效</h6><p>web开发中引入的session超时的概念，session的失效就是指session的超时。若某个session在指定的时间范围内一直未被访问，那session将超时，即将失效。</p>
 <p>服务器针对不同的会话找到不同的session，是因为cookie完成了会话的跟踪。但是，若客户端浏览器将cookie禁用，则服务器每提交一次请求，服务器在给出的响应中都会包含名称为JSESSIONID的cookie，只不过这个cookie值每次都不同，也就是说客户端所提交的请求中没有包含JSESSIONID，服务器就会认为这是一次新的会话的开始，就会为其生成一个<code>Map.Entry</code>对象，所以也就无法实现会话跟踪了。</p>
+<h4 id="安全威胁"><a href="#安全威胁" class="headerlink" title="安全威胁"></a>安全威胁</h4><p><a href="https://baike.baidu.com/item/cookie/1119#reference-[3]-5062332-wrap" target="_blank" rel="noopener">https://baike.baidu.com/item/cookie/1119#reference-[3]-5062332-wrap</a></p>
 
       
     </div>
@@ -334,7 +344,7 @@
         <p><span>本文标题:</span><a href="/2020/06/11/前端cookie解读/">前端cookie解读</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-06-11, 15:33:30</p>
-        <p><span>最后更新:</span>2020-08-08, 15:44:19</p>
+        <p><span>最后更新:</span>2020-08-15, 21:29:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/06/11/前端cookie解读/" title="前端cookie解读">http://yoursite.com/2020/06/11/前端cookie解读/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/11/前端cookie解读/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -370,7 +380,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的引入"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cookie的引入</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的简介"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cookie的简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#cookie是什么"><span class="toc-number">1.0.3.</span> <span class="toc-text">cookie是什么</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置Cookie的失效时间："><span class="toc-number">1.0.4.</span> <span class="toc-text">设置Cookie的失效时间：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">2.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#服务端生成session"><span class="toc-number">2.0.1.</span> <span class="toc-text">服务端生成session</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务器生成并发送cookie"><span class="toc-number">2.0.2.</span> <span class="toc-text">服务器生成并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#客户端接收并发送cookie"><span class="toc-number">2.0.3.</span> <span class="toc-text">客户端接收并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#congsession列表中查找"><span class="toc-number">2.0.4.</span> <span class="toc-text">congsession列表中查找</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#session的失效"><span class="toc-number">2.0.5.</span> <span class="toc-text">session的失效</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的引入"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cookie的引入</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Cookie的简介"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cookie的简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#cookie是什么"><span class="toc-number">1.0.3.</span> <span class="toc-text">cookie是什么</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置Cookie的失效时间："><span class="toc-number">1.0.4.</span> <span class="toc-text">设置Cookie的失效时间：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">2.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#服务端生成session"><span class="toc-number">2.0.1.</span> <span class="toc-text">服务端生成session</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务器生成并发送cookie"><span class="toc-number">2.0.2.</span> <span class="toc-text">服务器生成并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#客户端接收并发送cookie"><span class="toc-number">2.0.3.</span> <span class="toc-text">客户端接收并发送cookie</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#congsession列表中查找"><span class="toc-number">2.0.4.</span> <span class="toc-text">congsession列表中查找</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#session的失效"><span class="toc-number">2.0.5.</span> <span class="toc-text">session的失效</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安全威胁"><span class="toc-number">3.</span> <span class="toc-text">安全威胁</span></a></li></ol>
         
     </div>
     <style>

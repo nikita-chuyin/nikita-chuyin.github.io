@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201806/bg2018061803.png">
 <meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201806/bg2018061805.png">
-<meta property="og:updated_time" content="2019-09-15T01:30:24.811Z">
+<meta property="og:updated_time" content="2020-08-15T13:02:10.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解js中的this">
 <meta name="twitter:description" content="深入理解js中的this学过javascript的同学想必都听过对this指向的描述，谁调用就指向谁，但究竟是怎么回事，欢迎往下看。 先来看看以下例子： 12345678var obj = &amp;#123;    bar:1,    foo:function()&amp;#123;console.log(this.bar);&amp;#125;&amp;#125;;var foo = obj.foo;var bar = 2;">
@@ -401,6 +401,11 @@
 <h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>对于普通函数（包括匿名函数），this指向的是直接调用者，在非严格状态下，如果没有直接调用者，this指向window。在严格状态下，如果没有直接调用者，this为undefined。</p>
 <p>箭头函数没有自己的作用域，在他内部使用的this是有它的宿主环境决定。</p>
 <p>使用call，apply，bind绑定的，this指向绑定的对象。</p>
+<h2 id="this绑定的优先级"><a href="#this绑定的优先级" class="headerlink" title="this绑定的优先级"></a>this绑定的优先级</h2><p>this绑定的优先级：</p>
+<p>new  &gt;   bind   &gt;   call(apply)   &gt;   obj.func()    &gt;  默认绑定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.log = <span class="built_in">console</span>.log;</span><br><span class="line">obj.log.call(<span class="built_in">console</span>,<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">// 输出window</span></span><br></pre></td></tr></table></figure>
+
+<p><code>obj.log = console.log</code>  为obj对象创建了一个函数（即console.log）的引用log，因为这是个函数的引用，所以想要执行有两种方法，一种是直接加上()，另一种如上转变this指向。而<code>obj.log.call(console,this)</code>中的第二个参数是从外部传进去的，和函数内的this对象无任何关系。</p>
 
       
     </div>
@@ -412,7 +417,7 @@
         <p><span>本文标题:</span><a href="/2019/09/12/深入理解js中的this/">深入理解js中的this</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2019-09-12, 20:41:06</p>
-        <p><span>最后更新:</span>2019-09-15, 09:30:24</p>
+        <p><span>最后更新:</span>2020-08-15, 21:02:10</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/09/12/深入理解js中的this/" title="深入理解js中的this">http://yoursite.com/2019/09/12/深入理解js中的this/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/12/深入理解js中的this/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -448,7 +453,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解js中的this"><span class="toc-number">1.</span> <span class="toc-text">深入理解js中的this</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内存的数据结构"><span class="toc-number">1.0.1.</span> <span class="toc-text">内存的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#若属性的值是一个函数呢"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">若属性的值是一个函数呢</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this的实例讲解"><span class="toc-number">1.0.2.</span> <span class="toc-text">this的实例讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#当this遇上return时"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">当this遇上return时</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#创建一个空对象"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">创建一个空对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置原型链"><span class="toc-number">1.0.2.0.3.</span> <span class="toc-text">设置原型链</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#让Func中的this指向obj，并执行Func的函数体。"><span class="toc-number">1.0.2.0.4.</span> <span class="toc-text">让Func中的this指向obj，并执行Func的函数体。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#判断Func的返回值类型"><span class="toc-number">1.0.2.0.5.</span> <span class="toc-text">判断Func的返回值类型</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue中的this及其作用域"><span class="toc-number">2.</span> <span class="toc-text">vue中的this及其作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#箭头函数中的this"><span class="toc-number">2.0.1.</span> <span class="toc-text">箭头函数中的this</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绑定vue实例到this的方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">绑定vue实例到this的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-number">2.0.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解js中的this"><span class="toc-number">1.</span> <span class="toc-text">深入理解js中的this</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内存的数据结构"><span class="toc-number">1.0.1.</span> <span class="toc-text">内存的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#若属性的值是一个函数呢"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">若属性的值是一个函数呢</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this的实例讲解"><span class="toc-number">1.0.2.</span> <span class="toc-text">this的实例讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#当this遇上return时"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">当this遇上return时</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#创建一个空对象"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">创建一个空对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置原型链"><span class="toc-number">1.0.2.0.3.</span> <span class="toc-text">设置原型链</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#让Func中的this指向obj，并执行Func的函数体。"><span class="toc-number">1.0.2.0.4.</span> <span class="toc-text">让Func中的this指向obj，并执行Func的函数体。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#判断Func的返回值类型"><span class="toc-number">1.0.2.0.5.</span> <span class="toc-text">判断Func的返回值类型</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue中的this及其作用域"><span class="toc-number">2.</span> <span class="toc-text">vue中的this及其作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#箭头函数中的this"><span class="toc-number">2.0.1.</span> <span class="toc-text">箭头函数中的this</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绑定vue实例到this的方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">绑定vue实例到this的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-number">2.0.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this绑定的优先级"><span class="toc-number">3.</span> <span class="toc-text">this绑定的优先级</span></a></li></ol>
         
     </div>
     <style>

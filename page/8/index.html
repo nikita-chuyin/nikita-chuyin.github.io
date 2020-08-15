@@ -775,6 +775,11 @@
 <h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>对于普通函数（包括匿名函数），this指向的是直接调用者，在非严格状态下，如果没有直接调用者，this指向window。在严格状态下，如果没有直接调用者，this为undefined。</p>
 <p>箭头函数没有自己的作用域，在他内部使用的this是有它的宿主环境决定。</p>
 <p>使用call，apply，bind绑定的，this指向绑定的对象。</p>
+<h2 id="this绑定的优先级"><a href="#this绑定的优先级" class="headerlink" title="this绑定的优先级"></a>this绑定的优先级</h2><p>this绑定的优先级：</p>
+<p>new  &gt;   bind   &gt;   call(apply)   &gt;   obj.func()    &gt;  默认绑定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.log = <span class="built_in">console</span>.log;</span><br><span class="line">obj.log.call(<span class="built_in">console</span>,<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">// 输出window</span></span><br></pre></td></tr></table></figure>
+
+<p><code>obj.log = console.log</code>  为obj对象创建了一个函数（即console.log）的引用log，因为这是个函数的引用，所以想要执行有两种方法，一种是直接加上()，另一种如上转变this指向。而<code>obj.log.call(console,this)</code>中的第二个参数是从外部传进去的，和函数内的this对象无任何关系。</p>
 
       
     </div>
