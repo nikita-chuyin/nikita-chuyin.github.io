@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Nikita">
 <meta property="og:description" content="export default与export的区别 export与export default均可用于导出常量，函数，文件，模块等。 在一个文件或模块中，export，import可以有多个，export default只能有有一个。 通过export方式导出，在导入时要加上{}，export default则不需要。 输出单个值，可使用export default。输出多个值时，要使用export">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-11T13:33:05.046Z">
+<meta property="og:updated_time" content="2020-08-16T12:33:33.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="export default与export的区别">
 <meta name="twitter:description" content="export default与export的区别 export与export default均可用于导出常量，函数，文件，模块等。 在一个文件或模块中，export，import可以有多个，export default只能有有一个。 通过export方式导出，在导入时要加上{}，export default则不需要。 输出单个值，可使用export default。输出多个值时，要使用export">
@@ -304,6 +304,38 @@
 <li>通过export方式导出，在导入时要加上{}，export default则不需要。</li>
 <li>输出单个值，可使用export default。输出多个值时，要使用export，两个不要同时使用。</li>
 </ol>
+<h4 id="module-export"><a href="#module-export" class="headerlink" title="module.export"></a>module.export</h4><p>module.exports对象是由模块系统创建的，在我们自己写模块时，需要在模块最后写好模块接口，声明这个模块对外暴露什么内容。module.exports提供了暴露接口的方法。</p>
+<ol>
+<li><p>返回JSON Object</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = &#123;</span><br><span class="line">    name: <span class="string">'app'</span>,</span><br><span class="line">    version: <span class="string">'1.0.0'</span>,</span><br><span class="line">    sayName: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = app;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法可以返回全局共享的变量或者方法。<br>调用方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'./app.js'</span>);</span><br><span class="line">app.sayName(<span class="string">'hello'</span>);<span class="comment">//hello</span></span><br></pre></td></tr></table></figure>
+
+<p>或者可这么用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exports.function1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>导入方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> functions = <span class="built_in">require</span>(<span class="string">'./function.js'</span>);</span><br><span class="line">functions.function1()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回一个构造函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// class类</span></span><br><span class="line"><span class="keyword">var</span> CLASS = <span class="function"><span class="keyword">function</span>(<span class="params">args</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.args = args;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = CLASS;</span><br></pre></td></tr></table></figure>
+
+<p>调用方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> CLASS = <span class="built_in">require</span>(<span class="string">'./class.js'</span>);</span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> CLASS(<span class="string">'arguments'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回一个实例对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CLASS.js</span></span><br><span class="line"><span class="keyword">var</span> CLASS = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'class'</span>;</span><br><span class="line">&#125;</span><br><span class="line">CLASS.prototype.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">new</span> CLASS();</span><br></pre></td></tr></table></figure>
+
+<p>调用方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">require</span>(<span class="string">'./CALSS.js'</span>);</span><br><span class="line">c.func();   <span class="comment">//'class'</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
 
       
     </div>
@@ -315,7 +347,7 @@
         <p><span>本文标题:</span><a href="/2020/08/11/export-default与export的区别/">export default与export的区别</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-08-11, 21:28:07</p>
-        <p><span>最后更新:</span>2020-08-11, 21:33:05</p>
+        <p><span>最后更新:</span>2020-08-16, 20:33:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/08/11/export-default与export的区别/" title="export default与export的区别">http://yoursite.com/2020/08/11/export-default与export的区别/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/11/export-default与export的区别/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -351,7 +383,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#export-default与export的区别"><span class="toc-number">1.</span> <span class="toc-text">export default与export的区别</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#export-default与export的区别"><span class="toc-number">1.</span> <span class="toc-text">export default与export的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#module-export"><span class="toc-number"></span> <span class="toc-text">module.export</span></a>
         
     </div>
     <style>
