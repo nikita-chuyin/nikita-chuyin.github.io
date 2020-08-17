@@ -15,14 +15,17 @@
 
 
 
-<meta name="description" content="计算机网络OSI七层模型应用层应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。 协议有：HTTP   FTP   TFTP   SMTP    SNMP    DNS   TELNET   HTTPS    POP3     DHCP。 应用层安全  开发的应用程序没有漏洞。  表示层表示层：在传输之前是否进行加密或压缩处理，以及数据在传输的时候是以AS">
+<meta name="description" content="计算机网络基础 ICMP协议一个搭建好的网络往往需要先进行一个简单的测试来验证网络是否畅通；但是IP协议并不能提供可靠传输，如果丢包了，IP协议并不能通知传输层是否丢包以及丢包的原因，所以就需要一种协议来完成这样的功能——ICMP。 ICMP功能 确认IP包是否成功到达目标地址。 通知在发送过程中的IP包被丢弃的原因。   我们需要注意几点：   ICMP是基于IP协议工作的，但是它并不是传输层的">
 <meta name="keywords" content="write myBlog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络">
 <meta property="og:url" content="http://yoursite.com/2020/04/27/计算机网络/index.html">
 <meta property="og:site_name" content="Nikita">
-<meta property="og:description" content="计算机网络OSI七层模型应用层应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。 协议有：HTTP   FTP   TFTP   SMTP    SNMP    DNS   TELNET   HTTPS    POP3     DHCP。 应用层安全  开发的应用程序没有漏洞。  表示层表示层：在传输之前是否进行加密或压缩处理，以及数据在传输的时候是以AS">
+<meta property="og:description" content="计算机网络基础 ICMP协议一个搭建好的网络往往需要先进行一个简单的测试来验证网络是否畅通；但是IP协议并不能提供可靠传输，如果丢包了，IP协议并不能通知传输层是否丢包以及丢包的原因，所以就需要一种协议来完成这样的功能——ICMP。 ICMP功能 确认IP包是否成功到达目标地址。 通知在发送过程中的IP包被丢弃的原因。   我们需要注意几点：   ICMP是基于IP协议工作的，但是它并不是传输层的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iknow-pic.cdn.bcebos.com/c75c10385343fbf2012331c4be7eca8064388fce?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1">
+<meta property="og:image" content="https://img-blog.csdn.net/20180530175416942?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM3OTY0MDcx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/201805301801365?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM3OTY0MDcx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E4%BC%A0%E8%BE%93.PNG">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1.PNG">
@@ -31,11 +34,11 @@
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8.PNG">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93.PNG">
 <meta property="og:image" content="c:%5CUsers%5CCCY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200429135924281.png">
-<meta property="og:updated_time" content="2020-04-29T06:39:27.568Z">
+<meta property="og:updated_time" content="2020-08-17T13:01:37.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络">
-<meta name="twitter:description" content="计算机网络OSI七层模型应用层应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。 协议有：HTTP   FTP   TFTP   SMTP    SNMP    DNS   TELNET   HTTPS    POP3     DHCP。 应用层安全  开发的应用程序没有漏洞。  表示层表示层：在传输之前是否进行加密或压缩处理，以及数据在传输的时候是以AS">
-<meta name="twitter:image" content="c:%5CUsers%5CCCY%5CDesktop%5C%E6%A8%A1%E5%9E%8B.png">
+<meta name="twitter:description" content="计算机网络基础 ICMP协议一个搭建好的网络往往需要先进行一个简单的测试来验证网络是否畅通；但是IP协议并不能提供可靠传输，如果丢包了，IP协议并不能通知传输层是否丢包以及丢包的原因，所以就需要一种协议来完成这样的功能——ICMP。 ICMP功能 确认IP包是否成功到达目标地址。 通知在发送过程中的IP包被丢弃的原因。   我们需要注意几点：   ICMP是基于IP协议工作的，但是它并不是传输层的">
+<meta name="twitter:image" content="https://iknow-pic.cdn.bcebos.com/c75c10385343fbf2012331c4be7eca8064388fce?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -307,7 +310,104 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><h6 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h6><p>应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。</p>
+        <h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><p><img src="https://iknow-pic.cdn.bcebos.com/c75c10385343fbf2012331c4be7eca8064388fce?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1" alt="https://iknow-pic.cdn.bcebos.com/c75c10385343fbf2012331c4be7eca8064388fce?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1"></p>
+<h4 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h4><p>一个搭建好的网络往往需要先进行一个简单的测试来验证网络是否畅通；但是IP协议并不能提供可靠传输，如果丢包了，IP协议并不能通知传输层是否丢包以及丢包的原因，所以就需要一种协议来完成这样的功能——ICMP。</p>
+<h6 id="ICMP功能"><a href="#ICMP功能" class="headerlink" title="ICMP功能"></a>ICMP功能</h6><ol>
+<li>确认IP包是否成功到达目标地址。</li>
+<li>通知在发送过程中的IP包被丢弃的原因。</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20180530175416942?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM3OTY0MDcx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>我们需要注意几点： </p>
+<ol>
+<li><p>ICMP是基于IP协议工作的，但是它并不是传输层的功能，因此仍然把它归结为网络层协议 </p>
+</li>
+<li><p>ICMP只能搭配IPv4使用，如果是IPv6的情况下, 需要是用ICMPv6。</p>
+</li>
+</ol>
+<h6 id="ICMP的报文格式"><a href="#ICMP的报文格式" class="headerlink" title="ICMP的报文格式"></a>ICMP的报文格式</h6><p>ICMP报文包含在IP数据报中，IP报头在ICMP报文的最前面。一个ICMP报文包括IP报头（至少20字节）、ICMP报头（至少八字节）和ICMP报文（属于ICMP报文的数据部分）。当IP报头中的协议字段值为1时，就说明这是一个ICMP报文。ICMP报头如下图所示。 </p>
+<p><img src="https://img-blog.csdn.net/201805301801365?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM3OTY0MDcx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>占一字节，标识ICMP报文的类型，从类型值来看ICMP报文可以分为两大类。第一类是取值为1~127的差错报文，第2类是取值128以上的信息报文</td>
+</tr>
+<tr>
+<td>代码</td>
+<td>占一字节，标识对应ICMP报文的代码。它与类型字段一起共同标识了ICMP报文的详细类型</td>
+</tr>
+<tr>
+<td>校验和</td>
+<td>这是对包括ICMP报文数据部分在内的整个ICMP数据报的校验和，以检验报文在传输过程中是否出现了差错（其计算方法与在我们介绍IP报头中的校验和计算方法是一样的）</td>
+</tr>
+</tbody></table>
+<p>ICMP大概分为两类报文：<br> 一类是通知出错原因 ；一类是用于诊断查询<br> 类型及含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>类型（十进制）</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>回送应答</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标不可达</td>
+</tr>
+<tr>
+<td>4</td>
+<td>原点抑制</td>
+</tr>
+<tr>
+<td>5</td>
+<td>重定向或改变路由</td>
+</tr>
+<tr>
+<td>8</td>
+<td>回送请求</td>
+</tr>
+<tr>
+<td>9</td>
+<td>路由器公告</td>
+</tr>
+<tr>
+<td>10</td>
+<td>路由器请求</td>
+</tr>
+<tr>
+<td>11</td>
+<td>超时</td>
+</tr>
+<tr>
+<td>17</td>
+<td>地址子网请求</td>
+</tr>
+<tr>
+<td>18</td>
+<td>地址子网应答</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h6 id="常见的ICMP报文"><a href="#常见的ICMP报文" class="headerlink" title="常见的ICMP报文"></a>常见的ICMP报文</h6><p><strong>响应请求</strong></p>
+<p>我们用的ping操作中就包括了响应请求（类型字段值为8）和应答（类型字段值为0）ICMP报文。</p>
+<p>一台主机向一个节点发送一个类型字段值为8的ICMP报文，如果途中没有异常（如果没有被路由丢弃，目标不回应ICMP或者传输失败），则目标返回类型字段值为0的ICMP报文，说明这台主机存在。</p>
+<p><strong>目标不可达，源抑制和超时报文</strong></p>
+<p>这三种报文的格式是一样的。<br> （1）目标不可到达报文（类型值为3）在路由器或者主机不能传递数据时使用。<br> 例如：我们要连接对方一个不存在的系统端口（端口号小于1024）时，将返回类型字段值3、代码字段值为3的ICMP报文。<br> <strong>常见的不可到达类型还有网络不可到达（代码字段值为0）、主机不可达到（代码字段值为1）、协议不可到达（代码字段值为2）等等。</strong><br> （2）源抑制报文（类型字段值为4，代码字段值为0）则充当一个控制流量的角色，通知主机减少数据报流量。由于ICMP没有回复传输的报文，所以只要停止该报文，主机就会逐渐恢复传输速率。<br> （3）无连接方式网络的问题就是数据报会丢失，或者长时间在网络游荡而找不到目标，或者拥塞导致主机在规定的时间内无法重组数据报分段，这时就要触发ICMP超时报文的产生。<br> <strong>超时报文（类型字段值为11）的代码域有两种取值：代码字段值为0表示传输超时，代码字段值为1表示分段重组超时。</strong></p>
+<p><strong>时间戳请求</strong></p>
+<p>时间戳请求报文（类型值字段13）和时间戳应答报文（类型值字段14）用于测试两台主机之间数据报来回一次的传输时间。<br> 传输时，主机填充原始时间戳，接受方收到请求后填充接受时间戳后以类型值字段14的报文格式返回，发送方计算这个时间差。<br> (有些系统不响应这种报文)</p>
+<hr>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><h6 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h6><p>应用层：所有能产生网络流量的程序，如qq，需要联网才能正常操作，是网络服务与用户的一个接口。</p>
 <p>协议有：HTTP   FTP   TFTP   SMTP    SNMP    DNS   TELNET   HTTPS    POP3     DHCP。</p>
 <p>应用层安全</p>
 <ol>
@@ -456,7 +556,7 @@
         <p><span>本文标题:</span><a href="/2020/04/27/计算机网络/">计算机网络</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">陈楚吟</a></p>
         <p><span>发布时间:</span>2020-04-27, 20:38:05</p>
-        <p><span>最后更新:</span>2020-04-29, 14:39:27</p>
+        <p><span>最后更新:</span>2020-08-17, 21:01:37</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/27/计算机网络/" title="计算机网络">http://yoursite.com/2020/04/27/计算机网络/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/27/计算机网络/　　作者: 陈楚吟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -492,7 +592,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机网络"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">1.0.1.</span> <span class="toc-text">OSI七层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#应用层"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表示层"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">表示层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#会话层"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">会话层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#传输层"><span class="toc-number">1.0.1.0.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络层"><span class="toc-number">1.0.1.0.5.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数据链路层"><span class="toc-number">1.0.1.0.6.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#物理层"><span class="toc-number">1.0.1.0.7.</span> <span class="toc-text">物理层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-IP协议"><span class="toc-number">1.0.2.</span> <span class="toc-text">TCP/IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">TCP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络的性能"><span class="toc-number">1.0.3.</span> <span class="toc-text">网络的性能</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#速率"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">速率</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#带宽"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">带宽</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#吞吐量"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">吞吐量</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#时延"><span class="toc-number">1.0.3.0.4.</span> <span class="toc-text">时延</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#时延带宽积"><span class="toc-number">1.0.3.0.5.</span> <span class="toc-text">时延带宽积</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#往返时间"><span class="toc-number">1.0.3.0.6.</span> <span class="toc-text">往返时间</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#利用率"><span class="toc-number">1.0.3.0.7.</span> <span class="toc-text">利用率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#物理层-1"><span class="toc-number">1.0.4.</span> <span class="toc-text">物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据通信的术语"><span class="toc-number">1.0.4.0.1.</span> <span class="toc-text">数据通信的术语</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信道"><span class="toc-number">1.0.4.0.2.</span> <span class="toc-text">信道</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信号"><span class="toc-number">1.0.4.0.3.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#集线器"><span class="toc-number">1.0.4.0.4.</span> <span class="toc-text">集线器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信道复用技术"><span class="toc-number">1.0.4.0.5.</span> <span class="toc-text">信道复用技术</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#宽带接入技术"><span class="toc-number">1.0.4.0.6.</span> <span class="toc-text">宽带接入技术</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据链路层-1"><span class="toc-number">1.0.5.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#链路"><span class="toc-number">1.0.5.0.1.</span> <span class="toc-text">链路</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#透明传输"><span class="toc-number">1.0.5.0.2.</span> <span class="toc-text">透明传输</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#差错检测"><span class="toc-number">1.0.5.0.3.</span> <span class="toc-text">差错检测</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#PPP协议"><span class="toc-number">1.0.5.0.4.</span> <span class="toc-text">PPP协议</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机网络基础"><span class="toc-number">1.</span> <span class="toc-text">计算机网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ICMP协议"><span class="toc-number">1.0.1.</span> <span class="toc-text">ICMP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#ICMP功能"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">ICMP功能</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ICMP的报文格式"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">ICMP的报文格式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#常见的ICMP报文"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">常见的ICMP报文</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机网络"><span class="toc-number">2.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">2.0.1.</span> <span class="toc-text">OSI七层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#应用层"><span class="toc-number">2.0.1.0.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表示层"><span class="toc-number">2.0.1.0.2.</span> <span class="toc-text">表示层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#会话层"><span class="toc-number">2.0.1.0.3.</span> <span class="toc-text">会话层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#传输层"><span class="toc-number">2.0.1.0.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络层"><span class="toc-number">2.0.1.0.5.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数据链路层"><span class="toc-number">2.0.1.0.6.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#物理层"><span class="toc-number">2.0.1.0.7.</span> <span class="toc-text">物理层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-IP协议"><span class="toc-number">2.0.2.</span> <span class="toc-text">TCP/IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP"><span class="toc-number">2.0.2.0.1.</span> <span class="toc-text">TCP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络的性能"><span class="toc-number">2.0.3.</span> <span class="toc-text">网络的性能</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#速率"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">速率</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#带宽"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">带宽</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#吞吐量"><span class="toc-number">2.0.3.0.3.</span> <span class="toc-text">吞吐量</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#时延"><span class="toc-number">2.0.3.0.4.</span> <span class="toc-text">时延</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#时延带宽积"><span class="toc-number">2.0.3.0.5.</span> <span class="toc-text">时延带宽积</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#往返时间"><span class="toc-number">2.0.3.0.6.</span> <span class="toc-text">往返时间</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#利用率"><span class="toc-number">2.0.3.0.7.</span> <span class="toc-text">利用率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#物理层-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据通信的术语"><span class="toc-number">2.0.4.0.1.</span> <span class="toc-text">数据通信的术语</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信道"><span class="toc-number">2.0.4.0.2.</span> <span class="toc-text">信道</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信号"><span class="toc-number">2.0.4.0.3.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#集线器"><span class="toc-number">2.0.4.0.4.</span> <span class="toc-text">集线器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#信道复用技术"><span class="toc-number">2.0.4.0.5.</span> <span class="toc-text">信道复用技术</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#宽带接入技术"><span class="toc-number">2.0.4.0.6.</span> <span class="toc-text">宽带接入技术</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据链路层-1"><span class="toc-number">2.0.5.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#链路"><span class="toc-number">2.0.5.0.1.</span> <span class="toc-text">链路</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#透明传输"><span class="toc-number">2.0.5.0.2.</span> <span class="toc-text">透明传输</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#差错检测"><span class="toc-number">2.0.5.0.3.</span> <span class="toc-text">差错检测</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#PPP协议"><span class="toc-number">2.0.5.0.4.</span> <span class="toc-text">PPP协议</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
