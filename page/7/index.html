@@ -268,6 +268,138 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-深入理解包与NPM和package-json深入解读" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/17/深入理解包与NPM和package-json深入解读/" class="article-date">
+      <time datetime="2020-02-17T06:47:02.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/深入理解包与NPM和package-json深入解读/">深入理解包与NPMM,package.json深入解读</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="包与NPM"><a href="#包与NPM" class="headerlink" title="包与NPM"></a>包与NPM</h2><p>CommonJS的包规范的定义其实也十分简单，它由包结构和包描述文件两个部分组成，前者用于组织包中的各种文件，后者则用于描述包的相关信息，以供外部读取分析。</p>
+<h4 id="包结构"><a href="#包结构" class="headerlink" title="包结构"></a>包结构</h4><p>包实际上是一个存档文件，即一个目录直接打包为 .zip 或 tar.gz 格式的文件，安装后解压还原为目录。完全符合CommonJS规范的包目录应该包含如下文件。</p>
+<ol>
+<li>package.json： 包描述文件。</li>
+<li>bin：用于存放可执行二进制文件的目录。</li>
+<li>lib：用于存放JavaScript代码的目录。</li>
+<li>doc：用于存放文档的目录。</li>
+<li>test：用于存放单元测试用例的代码。</li>
+</ol>
+<p>可以看到，CommonJS包规范从文档、测试等方面都做过考虑。当一个包完成后向外公布时，用户可以看到单元测试和文档时，会给人一种踏实可靠的感觉。</p>
+<h4 id="包描述文件"><a href="#包描述文件" class="headerlink" title="包描述文件"></a>包描述文件</h4><p>包描述文件用于表达非代码相关的信息，它是一个JSON格式的文件——package.json，位于包的根目录下，是包的重要组成部分。而npm的所有行为都与包描述文件的字段息息相关。</p>
+<p>CommonJS为package.json文件定义一些必须的字段。</p>
+<ol>
+<li>name：包名。规范定义它需要小写字符和数字的组成，可以包含. \ _和 - ，但不允许出现空格。包名必须是唯一的，以免对外公布时产生重名冲突的误解。除此以外，NPM还建议不要在包名中附带上node或js来重复表示它是JavaScript或Node模块。</li>
+<li>description：包简介。</li>
+<li>version：版本号。</li>
+<li>keywords：关键词数组，NPM中主要用来做分类搜索。一个好的关键词数组有利于用户快速找到你编写的包。</li>
+<li>maintainers：包维护者列表，每个维护者由name、email和web这3个属性组成。</li>
+</ol>
+<p>NPM通过该属性进行权限认证。</p>
+<ol start="6">
+<li>contribuctors：贡献者列表。</li>
+<li>bugs：一个可以反馈bug的网页地址或邮箱地址。</li>
+<li>licenses：当前包所使用的许可证列表，表示这个包在哪些许可证下使用。</li>
+<li>repositories：托管源代码的位置列表，表明可以通过哪些方式和地址访问包的源代码。</li>
+<li>dependencies：使用当前包所依赖的包列表。这个属性非常重要，NPM会通过这个属性自动加载依赖的包。</li>
+</ol>
+<p>除了必选字段外，规范还定义了一部分可选的字段</p>
+<ol start="11">
+<li><p>homepage：当前包的网站地址。</p>
+</li>
+<li><p>os：操作系统支持的列表。这些操作系统的取值包括aix，freebsd，Linux，macos，solaris，vxworks，windows。如果设置了列表为空时，则不对操作系统做任何假设。</p>
+</li>
+<li><p>CPU：CPU架构的支持列表。</p>
+</li>
+<li><p>engine：支持的js引擎列表，有效的引擎列表取值包括ejs，flusspferd，gpsee，jsc，spidermonkey，narwhal，node，v8.</p>
+</li>
+<li><p>builtin：标志当前包是否是内建在底层系统的标准组件。</p>
+</li>
+<li><p>directories：包目录说明。</p>
+</li>
+<li><p>implements：实现规范的列表，标志当前包实现了CommonJS的那些规范。</p>
+</li>
+<li><p>scripts：脚本说明对象。它主要被包管理器用来安装，编译，测试和卸载包，为其提供钩子机制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//示例如下：</span><br><span class="line">&quot;scripts&quot;:&#123;</span><br><span class="line">	&quot;install&quot;:&quot;install.js&quot;,</span><br><span class="line">	&quot;uninstall&quot;:&quot;uninstall.js&quot;,</span><br><span class="line">	&quot;build&quot;:&quot;build.js&quot;,</span><br><span class="line">	&quot;test&quot;:&quot;test.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>包规范的定义可以帮助Node解决依赖包安装的问题，而NPM正是基于该规范进行了实现。最初，NPM工具是有Issac Z.Schlueter单独创建，提供给node服务的Node包管理器，需要单独安装。后来，在v6.3版本时集成进Node中作为默认包管理器，作为软件包的一部分一起安装。</p>
+<p>在包描述文件的规范中，NPM实际需要的字段主要有name，version，description，keywords，repositories，author，bin，main，scripts，engines，dependencies，devDependencies。</p>
+<p>与包规范的区别在于多了author，bin，main和devDependencies这4个字段。</p>
+<p>author：包作者。</p>
+<p>bin：一些包作者希望包可以作为命令行工具使用。配置好bin字段后，通过<code>npm install package_name -g</code>命令可以将脚本添加到执行路径中，之后可以在命令行中直接执行。通过-g命令安装的模块包称为全局模式。</p>
+<p>main：模块引入方法require（）在引入包时，会优先检查这个字段，并将其作为包中其余模块的入口。如果不存在这个字段，require（）方法会查找包目录下的 index.js , index.node  ,  index.json  文件作为默认入口。</p>
+<p>devDependencies：一些模块只在开发时需要依赖。配置这个属性，可以提示包的后续开发者安装依赖包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">//以下是node比较有名的框架express项目的package.json文件</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;express&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;Fast, unopinionated, minimalist web framework&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;4.17.1&quot;,</span><br><span class="line">  &quot;author&quot;: &quot;TJ Holowaychuk &lt;tj@vision-media.ca&gt;&quot;,</span><br><span class="line">  &quot;contributors&quot;: [</span><br><span class="line">    &quot;Aaron Heckmann &lt;aaron.heckmann+github@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Ciaran Jessup &lt;ciaranj@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Douglas Christopher Wilson &lt;doug@somethingdoug.com&gt;&quot;,</span><br><span class="line">    &quot;Guillermo Rauch &lt;rauchg@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Jonathan Ong &lt;me@jongleberry.com&gt;&quot;,</span><br><span class="line">    &quot;Roman Shtylman &lt;shtylman+expressjs@gmail.com&gt;&quot;,</span><br><span class="line">    &quot;Young Jae Sim &lt;hanul@hanul.me&gt;&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;license&quot;: &quot;MIT&quot;,</span><br><span class="line">  &quot;repository&quot;: &quot;expressjs/express&quot;,</span><br><span class="line">  &quot;homepage&quot;: &quot;http://expressjs.com/&quot;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;express&quot;,</span><br><span class="line">    &quot;framework&quot;,</span><br><span class="line">    &quot;sinatra&quot;,</span><br><span class="line">    &quot;web&quot;,</span><br><span class="line">    &quot;rest&quot;,</span><br><span class="line">    &quot;restful&quot;,</span><br><span class="line">    &quot;router&quot;,</span><br><span class="line">    &quot;app&quot;,</span><br><span class="line">    &quot;api&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;accepts&quot;: &quot;~1.3.7&quot;,</span><br><span class="line">    &quot;array-flatten&quot;: &quot;1.1.1&quot;,</span><br><span class="line">    &quot;body-parser&quot;: &quot;1.19.0&quot;,</span><br><span class="line">    &quot;content-disposition&quot;: &quot;0.5.3&quot;,</span><br><span class="line">    &quot;content-type&quot;: &quot;~1.0.4&quot;,</span><br><span class="line">    &quot;cookie&quot;: &quot;0.4.0&quot;,</span><br><span class="line">    &quot;cookie-signature&quot;: &quot;1.0.6&quot;,</span><br><span class="line">    &quot;debug&quot;: &quot;2.6.9&quot;,</span><br><span class="line">    &quot;depd&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;encodeurl&quot;: &quot;~1.0.2&quot;,</span><br><span class="line">    &quot;escape-html&quot;: &quot;~1.0.3&quot;,</span><br><span class="line">    &quot;etag&quot;: &quot;~1.8.1&quot;,</span><br><span class="line">    &quot;finalhandler&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;fresh&quot;: &quot;0.5.2&quot;,</span><br><span class="line">    &quot;merge-descriptors&quot;: &quot;1.0.1&quot;,</span><br><span class="line">    &quot;methods&quot;: &quot;~1.1.2&quot;,</span><br><span class="line">    &quot;on-finished&quot;: &quot;~2.3.0&quot;,</span><br><span class="line">    &quot;parseurl&quot;: &quot;~1.3.3&quot;,</span><br><span class="line">    &quot;path-to-regexp&quot;: &quot;0.1.7&quot;,</span><br><span class="line">    &quot;proxy-addr&quot;: &quot;~2.0.5&quot;,</span><br><span class="line">    &quot;qs&quot;: &quot;6.7.0&quot;,</span><br><span class="line">    &quot;range-parser&quot;: &quot;~1.2.1&quot;,</span><br><span class="line">    &quot;safe-buffer&quot;: &quot;5.1.2&quot;,</span><br><span class="line">    &quot;send&quot;: &quot;0.17.1&quot;,</span><br><span class="line">    &quot;serve-static&quot;: &quot;1.14.1&quot;,</span><br><span class="line">    &quot;setprototypeof&quot;: &quot;1.1.1&quot;,</span><br><span class="line">    &quot;statuses&quot;: &quot;~1.5.0&quot;,</span><br><span class="line">    &quot;type-is&quot;: &quot;~1.6.18&quot;,</span><br><span class="line">    &quot;utils-merge&quot;: &quot;1.0.1&quot;,</span><br><span class="line">    &quot;vary&quot;: &quot;~1.1.2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;after&quot;: &quot;0.8.2&quot;,</span><br><span class="line">    &quot;connect-redis&quot;: &quot;3.4.1&quot;,</span><br><span class="line">    &quot;cookie-parser&quot;: &quot;~1.4.4&quot;,</span><br><span class="line">    &quot;cookie-session&quot;: &quot;1.3.3&quot;,</span><br><span class="line">    &quot;ejs&quot;: &quot;2.6.1&quot;,</span><br><span class="line">    &quot;eslint&quot;: &quot;2.13.1&quot;,</span><br><span class="line">    &quot;express-session&quot;: &quot;1.16.1&quot;,</span><br><span class="line">    &quot;hbs&quot;: &quot;4.0.4&quot;,</span><br><span class="line">    &quot;istanbul&quot;: &quot;0.4.5&quot;,</span><br><span class="line">    &quot;marked&quot;: &quot;0.6.2&quot;,</span><br><span class="line">    &quot;method-override&quot;: &quot;3.0.0&quot;,</span><br><span class="line">    &quot;mocha&quot;: &quot;5.2.0&quot;,</span><br><span class="line">    &quot;morgan&quot;: &quot;1.9.1&quot;,</span><br><span class="line">    &quot;multiparty&quot;: &quot;4.2.1&quot;,</span><br><span class="line">    &quot;pbkdf2-password&quot;: &quot;1.2.1&quot;,</span><br><span class="line">    &quot;should&quot;: &quot;13.2.3&quot;,</span><br><span class="line">    &quot;supertest&quot;: &quot;3.3.0&quot;,</span><br><span class="line">    &quot;vhost&quot;: &quot;~3.0.2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;engines&quot;: &#123;</span><br><span class="line">    &quot;node&quot;: &quot;&gt;= 0.10.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;files&quot;: [</span><br><span class="line">    &quot;LICENSE&quot;,</span><br><span class="line">    &quot;History.md&quot;,</span><br><span class="line">    &quot;Readme.md&quot;,</span><br><span class="line">    &quot;index.js&quot;,</span><br><span class="line">    &quot;lib/&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;lint&quot;: &quot;eslint .&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-ci&quot;: &quot;istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-cov&quot;: &quot;istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/&quot;,</span><br><span class="line">    &quot;test-tap&quot;: &quot;mocha --require test/support/env --reporter tap --check-leaks test/ test/acceptance/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;__npminstall_done&quot;: &quot;Sun Feb 16 2020 11:22:54 GMT+0800 (GMT+08:00)&quot;,</span><br><span class="line">  &quot;_from&quot;: &quot;express@4.17.1&quot;,</span><br><span class="line">  &quot;_resolved&quot;: &quot;https://registry.npm.taobao.org/express/download/express-4.17.1.tgz&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NPM常用功能"><a href="#NPM常用功能" class="headerlink" title="NPM常用功能"></a>NPM常用功能</h4><p>CommonJS包规范是理论，NPM是其中的一种实践。对于Node而言，NPM帮助完成了第三方模块的发布，安装和依赖等。借助NPM，Node与第三方模块之间形成了很好地一个生态系统。</p>
+<h6 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h6><p>安装依赖包是NPM最常见的用法，它的执行语句是npm  install  express.。执行该命令后，NPM会在当前目录下创建node_module目录，然后在node_module目录下创建express目录，接着将包解压到这个目录下。</p>
+<p>安装好依赖包后，直接在代码中调用require(‘express’),即可引入该包，require（）方法在做路径分析时会通过，模块路径查找到express所在的位置。模块引入和包的安装是相辅相成的。</p>
+<h6 id="全局模式安装"><a href="#全局模式安装" class="headerlink" title="全局模式安装"></a>全局模式安装</h6><p>如果包含有命令行工具，那么需要执行<code>npm install express -g</code>命令进行全局安装。需要注意的是，全局模式并不是将一个模块包安装为一个全局包的意思，他并不意味着可以从任何地方通过require（）来引用到它。</p>
+<p>全局模式这个称谓其实并不精确，存在诸多误导。实际上，-g是将一个包安装为全局可用的可执行命令。他根据包描述文件中的bin字段配置，将实际脚本链接到与Node可执行文件相同的路径下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;bin&quot;:&#123;</span><br><span class="line">	&quot;express&quot;:&quot;./bin/express&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>事实上，通过全局模式安装的所有模块都被安装进一个统一的目录下，这个目录可以通过如下方式运算出来：</p>
+<p>path.resolve(process.execPath, ‘..’ , ‘lib’ , ‘node_modules’);</p>
+<p>如果Node可执行文件的位置是/user/local/bin/node，那么模块目录就是/user/local/lib/node_modules。最后，通过软链接的方式将bin字段配置的可执行文件链接到Node的可执行目录下。</p>
+<h6 id="从本地安装"><a href="#从本地安装" class="headerlink" title="从本地安装"></a>从本地安装</h6><p>对于一些没有发布到NPM上的包，或是因为网络原因导致无法直接安装的包，可通过将包下载到本地，然后本地安装。本地安装只需要为NPM指定package.json文件所在的位置即可：它可以是一个包含package.json的存档文件，也可以是一个URL地址，也可以是一个目录下有package.json文件的目录位置。具体参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;tarbar file&gt;</span><br><span class="line">npm install &lt;tarbar url&gt;</span><br><span class="line">npm install &lt;folder&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="从非官方源安装"><a href="#从非官方源安装" class="headerlink" title="从非官方源安装"></a>从非官方源安装</h6><p>如果不能通过官方源安装，可通过镜像安装。在执行命令时，添加 <code>--registry=http://registry.url</code>即可，实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm insatll underscore --registry=http://registry.yrl</span><br></pre></td></tr></table></figure>
+
+<p>如果使用过程几乎使用镜像源安装，可执行命令指定默认源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://registry.url</span><br></pre></td></tr></table></figure>
+
+<h4 id="NPM潜在问题"><a href="#NPM潜在问题" class="headerlink" title="NPM潜在问题"></a>NPM潜在问题</h4><p>作为为模块和包服务的工具，NPM十分便捷。它实质上已经是一个包共享平台，所有人都可以贡献并将其打包分享到这个平台上，也可以在许可证的允许下免费使用他们</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-JS中外部文件的优势-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1570,147 +1702,6 @@
 <p><strong>2. 可重用性</strong>。你可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</p>
 <p><strong>3. 独立开发</strong>。开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xaml代码。</p>
 <p><strong>4. 可测试</strong>。界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-js执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/09/15/js执行上下文/" class="article-date">
-      <time datetime="2019-09-15T12:36:10.000Z" itemprop="datePublished">2019-09-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/js执行上下文/">js执行上下文</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="js的执行上下文"><a href="#js的执行上下文" class="headerlink" title="js的执行上下文"></a>js的执行上下文</h2><p>执行上下文是当前js代码被解析和执行时所在的环境的抽象概念，js中的运行任何代码都是在执行上下文中运行。</p>
-<h4 id="执行上下文的的三种类型"><a href="#执行上下文的的三种类型" class="headerlink" title="执行上下文的的三种类型"></a>执行上下文的的三种类型</h4><p><strong>全局执行上下文</strong>：这是默认的，最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文。它做了两件事：</p>
-<ul>
-<li>创建一个全局对象，在浏览器中这个全局对象就是window对象。</li>
-<li>将this指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
-</ul>
-<p><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在被调用时才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，她都会按照特定的顺序执行一系列步骤。</p>
-<p><strong>Eval函数执行上下文</strong>：运行在eval函数中的代码也获得自己的执行上下文。</p>
-<h4 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h4><p>执行上下文的生命周期包括三个阶段：<strong>创建阶段——执行阶段——回收阶段</strong></p>
-<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>当函数被调用时，但未被执行其内部任意代码前，会做以下三件事：</p>
-<ol>
-<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
-<li>创建作用域链（scope chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，js始终从代码嵌套的最内层开始，如果最内层没有该变量，就往上一层父级作用域中找，直到找到变量。</li>
-<li>确定this指向</li>
-</ol>
-<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
-<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
-<p>以上过程实则为代码的预处理阶段，详细过程如下：</p>
-<ol>
-<li>读取分析整个源代码</li>
-<li>先扫描函数声明，之后扫描变量（var声明）<ul>
-<li>处理函数声明时有冲突，会覆盖。</li>
-<li>处理变量声明有冲突，会忽略。</li>
-</ul>
-</li>
-<li>将扫描到的函数和变量保存到一个对象中（全局的会保存在window对象中）</li>
-<li>变量的值是undefined，函数的值则是指向该函数（是一个函数字符串）<ul>
-<li>形式如：window = { x : undefined , f : ‘function(){console.log(1);}’ }</li>
-</ul>
-</li>
-</ol>
-<p><strong>注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
-<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
-<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>执行变量赋值、代码执行。</p>
-<p>该过程为：</p>
-<ol>
-<li><p>将变量的值从undefined改为给定值。</p>
-</li>
-<li><p>调用函数f（），以便函数得到执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">上面函数(f)内，代码的处理过程：</span><br><span class="line"></span><br><span class="line">    1、预处理阶段</span><br><span class="line"></span><br><span class="line">        a、将函数的参数添加到一个对象（暂定为：词法对象）</span><br><span class="line"></span><br><span class="line">        b、扫描函数声明，之后扫描变量(var声明)</span><br><span class="line"></span><br><span class="line">        d、将扫描到的函数和方法添加到词法对象里面</span><br><span class="line"></span><br><span class="line">        c、变量的值是undefined，函数的值则指向该函数（与全局的一样）</span><br><span class="line"></span><br><span class="line">    2、运行阶段</span><br><span class="line"></span><br><span class="line">        与全局的的运行原理一样</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h4><p>执行上下文出栈等待虚拟机回收执行上下文</p>
-<p>看看一下例子就知道变量提升是怎么回事了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    var arg = &apos;hello&apos;; // 3.var arg 变量声明被忽略， arg = &apos;hello&apos;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">	console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line">test(&apos;hi&apos;);</span><br><span class="line">/* 输出：</span><br><span class="line">function arg()&#123;</span><br><span class="line">    console.log(&apos;hello world&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">hello </span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
-<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
-<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。<strong>可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则</strong>。</p>
-<p>我们需要记住几个关键点：</p>
-<ul>
-<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
-<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
-<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
-<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
-<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
-</ul>
-<p>推荐：</p>
-<p><a href="https://www.cnblogs.com/lark-/p/7954047.html" target="_blank" rel="noopener">https://www.cnblogs.com/lark-/p/7954047.html</a></p>
-<h4 id="执行环境及作用域"><a href="#执行环境及作用域" class="headerlink" title="执行环境及作用域"></a>执行环境及作用域</h4><p>执行环境定义了变量或函数有权访问的其他函数，决定了各自的行为。每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。虽然我们编写的代码无法访问这个对象，但解析器在处理数据时会在后台使用它。</p>
-<p>全局执行环境时最外围的一个执行环境。根据ECMAScript实现所在的宿主环境不同，表示执行的对象也不一样，在Web浏览器中，全局执行环境被认为是window对象，因此所有全局变量和函数都是作为window对象的属性和方法创建的。某个执行环境中的所有代码执行完毕后，该环境就会被销毁，保存在其中的所有变量和函数定义也随之销毁（全局执行环境直到应用程序退出——例如关闭网页或浏览器时才会被销毁）。</p>
-<p>每个函数都有自己的执行环境。当执行流进入一个函数时，函数的环境就会被推入一个环境栈中。而在环境执行之后，栈将其环境弹出，把控制权发回给之前的执行环境。ECMAScript程序中的执行流正是由这个方便的机制控制着。</p>
-<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行代码所在环境的变量对象。如果这个环境是函数，则其活动对象作为变量对象。活动对象在最开始时只包含一个变量，即argument对象（这个对象在全局环境中是不存在的）。作用域链中的下一个变量对象来自外部环境，而在下一个变量对象则来自下一个包含环境。这样，一直延续到全局执行环境；全局执行环境的变量对象始终都是作用域链中的最后一个对象。</p>
-<p>标识符解析是沿着作用域链一级一级搜索标识符的过程，搜索过程始终从作用域链的前端开始，然后逐级向后回溯，直到找到标识符为止（如果找不到标识符，通常会导致错误发生）。</p>
-<h6 id="加长作用域链"><a href="#加长作用域链" class="headerlink" title="加长作用域链"></a>加长作用域链</h6><ol>
-<li>try-catch语句的catch块</li>
-<li>with语句</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">with(location)&#123;</span><br><span class="line">	var url = href + qs;</span><br><span class="line">&#125;</span><br><span class="line">// 相当于</span><br><span class="line">function ***(location)&#123;</span><br><span class="line">	var url = location.href + location.qs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h6><p>JavaScript具有自动垃圾回收机制，也就是说，执行环境会负责管理代码执行过程中的使用的内存。而在C和C++之类的语言中，开发人员的以像基本任务就是手工跟踪内存的使用情况，这是造成许多问题的一个根源。在编写JavaScript程序时，开发人员不再关心内存使用问题，所需内存的分配以及无用内存的回收完全实现了自动管理。这种垃圾回收机制的原理其实很简单：找出那些不在继续使用的变量，然后释放其占用的内存。为此，垃圾收集器会按照固定的时间间隔或代码执行中预定的收集时间周期性的执行这一操作。</p>
-<h6 id="局部变量的生命周期"><a href="#局部变量的生命周期" class="headerlink" title="局部变量的生命周期"></a>局部变量的生命周期</h6><p>局部变量只在函数执行过程中存在，而在这个过程中，会为局部变量在栈或堆内存上分配相应的空间，以便存储它们的值。然后再函数中使用这些变量，直至函数执行结束。此时，局部变量就没有存在的必要了，因此可以释放他们的内存以供将来使用。在这种情况下，很容易【判断变量是否还有存在的比亚；但并非所有情况下都这么容易就能得出结论。垃圾收集器必须跟踪哪个变量有用哪个没用，对于不再有用的变量打上标记以便将来回收其占用的内存。用于表示无用变量的策略可能也因实现而异，但具体到浏览器中的实现则通常由两个策略。</p>
-<ol>
-<li><p>标记清除</p>
-<p>垃圾收集器在运行时会给存储在内存中的所有变量加上标记。然后他会去掉环境中的变量以及被环境中的变量引用的变量标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些代表带标记的值并回收他们所占用的内存空间。</p>
-</li>
-<li><p>引用计数</p>
-<p>引用计数的含义是跟踪记录每个值被引用的次数。当这个值的引用次数变为0，则说明没法再访问这个值了，就会将其占用的内存空间回收。这样当垃圾收集器下次再运行时，他就会释放那些引用为0的值所占的空间</p>
-</li>
-</ol>
-<h6 id="管理内存"><a href="#管理内存" class="headerlink" title="管理内存"></a>管理内存</h6><p>分配给Web浏览器的可用内存数量通常要比分配给桌面应用程序的少。这样做的目的是出于安全方面考虑，目的是防止JavaScript的网页耗尽全部系统内存而导致系统崩溃。内存限制问题不仅会影响给变量分配内存，同时还会影响调用栈以及在一个线程中能够同时执行的语句数量。</p>
-<p>因此确保占用最少的内存可以让页面获得更好的性能。而优化内存占用的最佳方式是为执行中的代码只保存必要的数据，一旦数据不再有用，最好通过将其值设置为null来释放其引用——这种做法叫做结束引用。这一做法适用于大多数全局变量和全局变量的属性。局部变量会在它们离开执行环境时自动被解除引用。</p>
-<p>不过，解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h6 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h6><p>基本类型只在内存中占据固定大小的空间，因此会被保存在栈内存中，从一个变量向另一个变量复制，会创建该值的副本。</p>
-<p>引用类型的值是对象，保存在堆内存中，包含引用类型值的变量并非对象本身，而是一个指向该对象的指针。从一个变量向另一个变量复制引用类型的值，复制的其实是指针，因此两个变量最终都指向同一个对象。</p>
-<p>确定一个值是哪种基本类型可用typeof，而确定是哪种引用用类型使用instanceof。</p>
 
       
     </div>

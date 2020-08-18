@@ -268,6 +268,96 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-浏览器发请求的几种方式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/09/浏览器发请求的几种方式/" class="article-date">
+      <time datetime="2020-07-09T12:20:16.000Z" itemprop="datePublished">2020-07-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/09/浏览器发请求的几种方式/">浏览器发请求的几种方式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Ajax请求"><a href="#Ajax请求" class="headerlink" title="Ajax请求"></a>Ajax请求</h2><p>传统的请求方式，不可异步请求。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(url);</span><br><span class="line">xhr.send();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="fetch请求"><a href="#fetch请求" class="headerlink" title="fetch请求"></a>fetch请求</h2><p>这是浏览器新增的且是浏览器内置的请求方式，默认为异步的promise请求。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch([url,options]).then(res = &gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="axios请求"><a href="#axios请求" class="headerlink" title="axios请求"></a>axios请求</h2><p>别人封装的基于promise的异步请求。</p>
+<p>一般会封装为http.js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http.js文件</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>; <span class="comment">//请求格式的转换第三方库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack中可配置在什么模式下对应的地址，生产模式有两种，默认为生产环境</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	根据环境变量区分接口的默认地址</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">switch</span>(process.env.NODE_ENV)&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"production"</span>:</span><br><span class="line">		axios.default.baseURL = <span class="string">"上线地址"</span>;     <span class="comment">//在路径前面统一加上该基本地址</span></span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"test"</span>:</span><br><span class="line">		axios.default.baseURL = <span class="string">"公司给的测试地址"</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	defalut:</span><br><span class="line">		axios.default.baseURL = <span class="string">"localhost:8080"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	设置超时时间和跨域是否允许携带凭证，如果不能携带，则你的登录校验走不了session，cookie路径</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.timeout = <span class="number">10000</span>;</span><br><span class="line">axios.defaults.withCredentials = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">	设置请求传递的数据格式,有后端决定，因为get请求是这种数据格式（xxx=xxx&amp;&amp;sss=sss），所以数据格式类型设置为x-www-form-urlencoded</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.headers[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded'</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	以下这种请求格式的转换一般适用于post请求</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.transformRequest = <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    qs.stringify(data);  <span class="comment">//将数据格式转为aaa=xxx的格式</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设置请求拦截器</span></span><br><span class="line"><span class="comment">	客户端发送请求-&gt;[请求拦截器]-&gt;服务器</span></span><br><span class="line"><span class="comment">	TOKEN校验【JWT】，接收服务器返回的TOKEN，存储到vuex/本地存储中，每次向服务器发起请求，我们都需要吧token带上</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="params">config</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取本地的token，有者带上本地token发给后端</span></span><br><span class="line">    <span class="keyword">let</span> token = localStorage.getItem(<span class="string">'token'</span>);</span><br><span class="line">    token &amp;&amp; (config.headers.Aythorization = token);</span><br><span class="line">    <span class="comment">//必须返回配置项，否则根本更改不了发给后端的头权限</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">&#125;,err =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	响应拦截器</span></span><br><span class="line"><span class="comment">	服务器返回信息 -&gt; 【拦截的统一处理】 -&gt; 客户端js获取到信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">axios.defaults.validateStatus = <span class="function"><span class="params">status</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//自定义响应成功的HTTP状态码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^(2|3)\d&#123;2&#125;$/</span>.test(status);</span><br><span class="line">&#125;;</span><br><span class="line">axios.interceptors.response.use( <span class="function"><span class="params">res</span> =&gt;</span> &#123;&#125;,err ==&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>TOKEN校验【JWT】</p>
+<p>当我们第一次向服务器发起请求时，服务器会通过某种算法生成用于权限验证的TOKEN并发给客户端，随后服务器要求客户端每次向服务器发起请求时都需要将TOKEN带上，服务器收到客户端的TOKEN后，会比较是否符合之前服务器生成TOKEN时的规则，符合则将请求结果返回给客户端，不符告诉客户端这是非法访问并拒绝客户端的请求。同时TOKEN有日期限制，过期者需要重新发起请求。</p>
+<h4 id="API的分类"><a href="#API的分类" class="headerlink" title="API的分类"></a>API的分类</h4><ol>
+<li>REST API: restful<ul>
+<li>发送请求进行CRUD哪个操作由请求方式来决定。</li>
+<li>同一个请求路径可以进行多个操作。</li>
+<li>请求方式会用到GET/POST/PUT/DELETE。</li>
+</ul>
+</li>
+<li>非REST API:    restless<ul>
+<li>请求方式不决定请求的CRUD操作。</li>
+<li>一个请求路径只对应2一个操作。</li>
+<li>一般只有GET/POST请求。</li>
+</ul>
+</li>
+</ol>
+<h4 id="json-server创建接口"><a href="#json-server创建接口" class="headerlink" title="json-server创建接口"></a>json-server创建接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm i -g json-server</span><br></pre></td></tr></table></figure>
+
+<p>在根目录下创建<code>db.json</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"posts"</span>: [</span><br><span class="line">      &#123; <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"title"</span>: <span class="string">"json-server"</span>, <span class="string">"author"</span>: <span class="string">"typicode"</span> &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"comments"</span>: [</span><br><span class="line">      &#123; <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"body"</span>: <span class="string">"some comment"</span>, <span class="string">"postId"</span>: <span class="number">1</span> &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"profile"</span>: &#123; <span class="string">"name"</span>: <span class="string">"typicode"</span> &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>json-server --watch db.json</code>即可启动并更改时自动刷新。</p>
+<p>封装axios函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"testGet()"</span>&gt;</span>get请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;button onclick="testPost()"&gt;post请求&lt;/button&gt;</span></span><br><span class="line"><span class="comment">    &lt;button onclick="testPut()"&gt;put请求&lt;/button&gt;</span></span><br><span class="line"><span class="comment">    &lt;button onclick="testDelete()"&gt;delete请求&lt;/button&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">testGet</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line">            axios(&#123;</span><br><span class="line"><span class="javascript">                url: <span class="string">'http://localhost:3000/posts'</span>,</span></span><br><span class="line"><span class="javascript">                method: <span class="string">'POST'</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    <span class="string">"title"</span>: <span class="string">"json-server----"</span>,</span></span><br><span class="line"><span class="javascript">                    <span class="string">"author"</span>: <span class="string">"typicode----"</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).then(</span><br><span class="line">                response =&gt; &#123;</span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(response);</span></span><br><span class="line">                &#125;,</span><br><span class="line">                error =&gt; &#123;</span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(error.message);</span></span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">axios</span>(<span class="params">&#123;</span></span></span></span><br><span class="line">            url,</span><br><span class="line"><span class="javascript">            method=<span class="string">"GET"</span>,</span></span><br><span class="line">            params=&#123;&#125;,</span><br><span class="line">            data=&#123;&#125;</span><br><span class="line">        &#125;)&#123;</span><br><span class="line"><span class="javascript">            <span class="comment">// 返回一个promise对象</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">//处理query参数（拼接到url） id=1&amp;xxx=abc</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> queryString = <span class="string">''</span>;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">Object</span>.keys(params).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    queryString += <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;params[key]&#125;</span>&amp;`</span>;</span></span><br><span class="line">                &#125;)</span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(queryString)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 如果queryString有值，去除最后的&amp;</span></span></span><br><span class="line">                    queryString = queryString.substring(0,queryString.length);</span><br><span class="line"><span class="javascript">                    <span class="comment">// 拼接到url</span></span></span><br><span class="line"><span class="javascript">                    url += <span class="string">'?'</span> + queryString;</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">// 绑定状态改变的监听，放在请求send前面比较容易理解，放在后面也可以，因为请求是异步请求的，send之后立即执行onreadystatechange同步函数</span></span></span><br><span class="line"><span class="javascript">                request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">//如果请求没有完成，直接结束</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(request.readyState != <span class="number">4</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">return</span></span></span><br><span class="line">                    &#125;</span><br><span class="line"><span class="javascript">                    <span class="comment">//如果响应状态码在[200,299]之间代表成功,否则失败</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">const</span> &#123;status,statusText&#125; = request</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 如果请求成功了调用resolve()</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(status &gt;= <span class="number">200</span> &amp;&amp; status &lt;= <span class="number">299</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">const</span> response = &#123;</span></span><br><span class="line"><span class="javascript">                            data: <span class="built_in">JSON</span>.parse(request.response),</span></span><br><span class="line">                            status,</span><br><span class="line">                            statusText</span><br><span class="line">                        &#125;</span><br><span class="line">                        resolve(response)</span><br><span class="line"><span class="javascript">                    &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'request error status is'</span> + status));</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">                <span class="comment">// 异步执行ajax请求</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">const</span> request = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">                request.open(method,url,<span class="literal">true</span>);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(method == <span class="string">"GET"</span>)&#123;</span></span><br><span class="line">                    request.send();</span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(method == <span class="string">"POST"</span>)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="comment">// 设置请求头</span></span></span><br><span class="line"><span class="javascript">                    request.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/json;charset=utf-8'</span>)</span></span><br><span class="line"><span class="javascript">                    request.send(<span class="built_in">JSON</span>.stringify(data));   <span class="comment">//发送json格式请求参数</span></span></span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-html技巧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1617,131 +1707,6 @@ i 从头开始遍历原字符串
 <li>日常工作中，用得比较多的跨域方案是cors和nginx反向代理</li>
 </ul>
 </script></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-typescript" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/06/17/typescript/" class="article-date">
-      <time datetime="2020-06-17T07:35:59.000Z" itemprop="datePublished">2020-06-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/typescript/">typescript</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="ts基础"><a href="#ts基础" class="headerlink" title="ts基础"></a>ts基础</h4><h6 id="vscode配置自动编译ts"><a href="#vscode配置自动编译ts" class="headerlink" title="vscode配置自动编译ts"></a>vscode配置自动编译ts</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tsc --init  //生成tsconfig.json文件</span><br><span class="line">//在tsconfig.json文件 改 &quot;outDir&quot;: &quot;./js&quot;</span><br><span class="line">在导航栏找到  任务--&gt; 监视 tsconfig.json</span><br></pre></td></tr></table></figure>
-
-<h6 id="hbuild配置自动编译ts"><a href="#hbuild配置自动编译ts" class="headerlink" title="hbuild配置自动编译ts"></a>hbuild配置自动编译ts</h6><ol>
-<li>在最上面菜单栏，点击工具——插件安装。</li>
-<li>点击下方浏览Eclipse插件市场，搜索typescript插件进行安装</li>
-<li>安装完后重启编译器，点击菜单栏工具——选项，选择编译ts文件</li>
-<li>在你的项目上右键点击——配置——Enable TypeScript Builder，之后你再保存</li>
-<li>.ts文件时会自动保存在当前目录编译出对应的.js文件</li>
-</ol>
-<h6 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h6><p>布尔类型(boolean)</p>
-<p>数字类型(number)</p>
-<p>字符串类型(string)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str:string = &apos;hello&apos;;</span><br></pre></td></tr></table></figure>
-
-<p>数组类型(array)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr:Array&lt;number&gt; = [11,22,33];  //全是数字的数组</span><br><span class="line">var arr:number[] = [11,22,33];</span><br></pre></td></tr></table></figure>
-
-<p>元组类型(tuple)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//元组类型属于数组类型用于给数组中每个位置指定类型</span><br><span class="line">let arr:[number,string] = [123,&apos;this is ts&apos;];</span><br></pre></td></tr></table></figure>
-
-<p>枚举类型(enum)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enum 枚举名&#123;</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">	...</span><br><span class="line">	标识符[=整型常数]，</span><br><span class="line">&#125;;</span><br><span class="line">enum Flag &#123; success=1,error=2 &#125;;</span><br><span class="line">let s:Flag = Flag.success;</span><br><span class="line">console.log(s);   //1</span><br><span class="line">//如果标识符没有赋值，它的值就是下标。</span><br></pre></td></tr></table></figure>
-
-<p>任意类型(any)</p>
-<p>null 和 undefined</p>
-<p>void类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一般用于定义方法没有返回值</span><br><span class="line">function run():void&#123;</span><br><span class="line">	console.log(&apos;ksdkl&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>never类型</p>
-<ul>
-<li>never类型是其他类型（包括null和undefined）的子类型，代表从不会出现的值。这意味着声明never的变量只能被never类型所赋值。</li>
-</ul>
-<h6 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function run():string&#123;</span><br><span class="line">	//必须返回string类型的值</span><br><span class="line">&#125;</span><br><span class="line">//匿名函数</span><br><span class="line">let fun2 = function():number&#123;</span><br><span class="line">	//返回数字类型的值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>es5里面方法的实参和形参可以不一样，但是ts中必须一样，如果不一样就需要配置可选参数。（加个 ? )</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string,age?:number):string&#123;</span><br><span class="line">	if(age)&#123;</span><br><span class="line">		return `$&#123;name&#125; --- $&#123;age&#125;`;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return `$&#123;name&#125; --- 年龄保密`</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">alert(getInfo(&apos;zhangsan&apos;));   //zhangsan --- 年龄保密</span><br></pre></td></tr></table></figure>
-
-<h6 id="ts的重载"><a href="#ts的重载" class="headerlink" title="ts的重载"></a>ts的重载</h6><ul>
-<li>java中的方法的重载，重载指的是两个或两个以上同名函数，但他们的参数不一样，这时会出现函数重载的情况。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function getInfo(name:string):string;</span><br><span class="line">function getInfo(age:number):string;</span><br><span class="line">function getInfo(str:any):any&#123;</span><br><span class="line">	if(typeof str === &apos;string&apos;)&#123;</span><br><span class="line">		return &quot;我叫：&quot; + str;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return &quot;我的年龄是&quot; + str;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="对象继承"><a href="#对象继承" class="headerlink" title="对象继承"></a>对象继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//es5的类</span><br><span class="line">function Person()&#123;</span><br><span class="line">	this.name = &apos;张三&apos;;</span><br><span class="line">	this.age = 20;</span><br><span class="line">	this.run = function()&#123;</span><br><span class="line">		alert(this.name);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sex = &apos;男&apos;;</span><br><span class="line">Person.prototype.work = function()&#123;</span><br><span class="line">	alert(this.name);</span><br><span class="line">&#125;</span><br><span class="line">//web类继承Person类 原型链 + 对象冒充的组合继承模式</span><br><span class="line">function Web()&#123;</span><br><span class="line">	Person.call(this);  //对象冒充实现继承</span><br><span class="line">&#125;</span><br><span class="line">let w = new Web();</span><br><span class="line">w.run();  //对象冒充可以继承构造函数里面的属性和方法</span><br><span class="line">w.work();   //报错，对象冒充不可以继承原型链上的属性和方法</span><br><span class="line"></span><br><span class="line">function Web()&#123;&#125;</span><br><span class="line">Web.prototype = new Person();  //原型链实现继承</span><br><span class="line">let w = new Web();</span><br><span class="line">//原型链实现继承：可以继承构造函数里面的属性和方法，也可以继承原型链上的属性和方法。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//es6的类</span><br><span class="line">class Person&#123;</span><br><span class="line">	name:string;  //属性 前面省略了public关键字</span><br><span class="line">	constructor(a:string)&#123; </span><br><span class="line">		this.name = n;</span><br><span class="line">	&#125;</span><br><span class="line">	run():void&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let p = new Person(&apos;张三&apos;);</span><br><span class="line">p.run();</span><br></pre></td></tr></table></figure>
-
-<h6 id="ts接口"><a href="#ts接口" class="headerlink" title="ts接口"></a>ts接口</h6><ul>
-<li>接口的作用：在面向对象编程中，接口是一种规范的定义，它定义了行为和动作的规范</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//封装请求的接口</span><br><span class="line">interface Config&#123;</span><br><span class="line">	type:string;</span><br><span class="line">	url: string;</span><br><span class="line">	data?: string;</span><br><span class="line">	dataType: string;</span><br><span class="line">&#125;</span><br><span class="line">function ajax(config:Config)&#123;</span><br><span class="line">	let xml = new XMLHttpResquest();</span><br><span class="line">	xhr.open(config.type,config.url,true);   //true表示异步请求</span><br><span class="line">	xhr.send(config.data);</span><br><span class="line">	xhr.onreadystatechange = function()&#123;</span><br><span class="line">		if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)&#123;</span><br><span class="line">			console.log(&apos;success&apos;);</span><br><span class="line">			if(config.dataType == &apos;json&apos;)&#123;</span><br><span class="line">				JSON.parse(xhr.responseText);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				console.log(xhr.responseText);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(&#123;</span><br><span class="line">	type: &apos;get&apos;,</span><br><span class="line">	data: &apos;name=zhangsan&apos;,</span><br><span class="line">	url: &apos;http://a.itying.com/api/productlist&apos;,</span><br><span class="line">	dataType: &apos;json&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>函数类型接口</strong></p>
-<ul>
-<li>对方法传入的参数以及返回值进行约束。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//加密的函数类型接口</span><br><span class="line">interface encrypt&#123;</span><br><span class="line">	(key:string,value:string):string;</span><br><span class="line">&#125;</span><br><span class="line">let md5:encrypt = function(key:string,value:string):string&#123;</span><br><span class="line">	return key + value;</span><br><span class="line">&#125;</span><br><span class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</span><br></pre></td></tr></table></figure>
-
-<h6 id="ts的实现和继承"><a href="#ts的实现和继承" class="headerlink" title="ts的实现和继承"></a>ts的实现和继承</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface Animal&#123;</span><br><span class="line">	eat():void;</span><br><span class="line">&#125;</span><br><span class="line">interface Person extends Animal&#123;</span><br><span class="line">	work():void;</span><br><span class="line">&#125;</span><br><span class="line">class Web implements Person&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//web继承programmer，实现person</span><br><span class="line">class Programmer&#123;</span><br><span class="line">	public name:string;</span><br><span class="line">	constructor(name:string)&#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	coding(code:string)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Programmer implements Person&#123;</span><br><span class="line">	constructor(name:string)&#123;&#125;</span><br><span class="line">	eat()&#123;&#125;</span><br><span class="line">	work()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="ts泛型"><a href="#ts泛型" class="headerlink" title="ts泛型"></a>ts泛型</h6><ul>
-<li>泛型：在软件工程中，我们不仅要创建一致的良好的API，也要考虑其可重用性，组件不仅能够支持大哥钱的数据类型，同时也能能支持未来的数据类型，这在创建大型系统时为你提供灵活的功能。</li>
-<li>在像C#和java这样的语言中，可以使用泛型来创建可重用地组件，一个组件支持多种类型的数据，这样用户就可以以自己的数据来使用组件。</li>
-<li>泛型就是解决类 接口 方法的复用性，以及对不特定数据类型的支持。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//使用any相当于放弃了数据类型检查</span><br><span class="line">function getData(value:any):any&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">//T表示泛型，具体什么类型是调用这个方法时决定的，可支持不特定类型的数据类型。可支持传入参数与返回参数的类型一致。</span><br><span class="line">function getData&lt;T&gt;(value:T):T&#123;</span><br><span class="line">	return value;</span><br><span class="line">&#125;</span><br><span class="line">getDate&lt;number&gt;(123);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//操作数据库的泛型类</span><br><span class="line">class Mysql&lt;T&gt;&#123;</span><br><span class="line">	add(info:T):boolean&#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class ArticleCate&#123;</span><br><span class="line">	title: string|undefined;</span><br><span class="line">	desc: string|undefined;</span><br><span class="line">	status: number|undefined;</span><br><span class="line">	constructor(params:&#123;</span><br><span class="line">		title: string|undefined;</span><br><span class="line">		desc: string|undefined;</span><br><span class="line">		status?: number|undefined;</span><br><span class="line">	&#125;)&#123;</span><br><span class="line">		this.title = params.title</span><br><span class="line">		this.deac = params.desc;</span><br><span class="line">		this.status = params.status;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var a = new ArticleCate(&#123;</span><br><span class="line">	title: &apos;分类&apos;,</span><br><span class="line">	desc: &apos;111&apos;,</span><br><span class="line">	status: 1</span><br><span class="line">&#125;)</span><br><span class="line">//类当作参数的泛型类</span><br><span class="line">var Db = new MySqlDb&lt;ArticleCate&gt;();</span><br><span class="line">Db.add(a);</span><br></pre></td></tr></table></figure>
-
-
       
     </div>
     
